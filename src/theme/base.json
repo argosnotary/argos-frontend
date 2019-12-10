@@ -1,0 +1,11 @@
+{
+  "fontFamily": "'Fira Sans'",
+  "fontFile": "fonts/fira-sans-v10-latin-regular",
+  "button": {
+    "bgColor": "#1779ba",
+    "textColor": "#fff"
+  },
+  "loginPage": {
+    "bgColor": "#cecece"
+  }
+}
