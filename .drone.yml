@@ -1,0 +1,10 @@
+---
+kind: pipeline
+name: argos-frontend-build
+type: docker
+
+steps:
+  - name: build front-end image
+    image: plugins/docker
+    settings:
+      repo: rabobanknl/argos-frontend-image
