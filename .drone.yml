@@ -8,3 +8,9 @@ steps:
     image: plugins/docker
     settings:
       repo: rabobanknl/argos-frontend
+      
+trigger:
+  event:
+    - push
+    - pull_request
+
