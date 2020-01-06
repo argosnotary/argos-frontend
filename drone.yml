@@ -8,6 +8,11 @@ steps:
     image: plugins/docker
     settings:
       repo: rabobanknl/argos-frontend
+      tags: ${DRONE_BRANCH}
+      username:
+        from_secret: docker_login_user
+      password:
+        from_secret: docker_login_token
       
 trigger:
   event:
