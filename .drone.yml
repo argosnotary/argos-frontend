@@ -7,4 +7,4 @@ steps:
   - name: build front-end image
     image: plugins/docker
     settings:
-      repo: rabobanknl/argos-frontend-image
+      repo: rabobanknl/argos-frontend
