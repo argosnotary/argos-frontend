@@ -22,7 +22,23 @@
     "start": "craco start",
     "build": "craco build",
     "test": "CI=true craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "licensecheck": "license-check"
+  },
+  "license-check-config": {
+    "src": [
+      "**/*.tsx",
+      "**/*.jsx",
+      "**/*.ts",
+      "**/*.js",
+      "!**/*.html",
+      "!./node_modules/**/*",
+      "!./build/**/*"
+    ],
+    "path": "lic/header.template",
+    "blocking": true,
+    "logInfo": false,
+    "logError": true
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "license-check": "^1.1.5",
     "prettier": "1.19.1",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",

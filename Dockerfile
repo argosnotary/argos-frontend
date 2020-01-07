@@ -22,6 +22,8 @@ RUN npm install
 
 RUN npm test 
 
+RUN npm run licensecheck
+
 RUN npm run build
 
 FROM nginx:1.17.6 as run-server-stage
