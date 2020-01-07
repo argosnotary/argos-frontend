@@ -1,0 +1,630 @@
+#
+# Copyright (C) 2019 - 2020 Rabobank Nederland
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Argos Service
+  license:
+    name: Apache License 2.0
+servers:
+  - url: /api
+paths:
+  /supplychain:
+    post:
+      summary: create a supplychain
+      operationId: createSupplyChain
+      tags:
+        - supplychain
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSupplyChainCommand"
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplyChainItem"
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: location where the created supplychain can be found
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/Error'
+
+    get:
+      summary: search a supplychain
+      operationId: searchSupplyChains
+      tags:
+        - supplychain
+      parameters:
+        - name: name
+          in: query
+          description: name of the supplychain
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: array of supply chain items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SupplyChainItem"
+        '500':
+          $ref: '#/components/responses/Error'
+
+  /supplychain/{supplyChainId}:
+    get:
+      summary: get a supplychain item
+      operationId: getSupplyChain
+      tags:
+        - supplychain
+      parameters:
+        - name: supplyChainId
+          in: path
+          description: supply chain id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the supply chain item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplyChainItem"
+        '500':
+          $ref: '#/components/responses/Error'
+
+  /supplychain/{supplyChainId}/link:
+    get:
+      summary: find link
+      operationId: findLink
+      tags:
+        - link
+      parameters:
+        - name: supplyChainId
+          in: path
+          description: supply chain id
+          required: true
+          schema:
+            type: string
+        - name: hash
+          in: query
+          description: hash of product or material
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: array of links
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LinkMetaBlock"
+        '500':
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Create a link
+      operationId: createLink
+      tags:
+        - link
+      parameters:
+        - name: supplyChainId
+          in: path
+          description: supply chain id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LinkMetaBlock"
+      responses:
+        '204':
+          description: no content
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/Error'
+  /key:
+    post:
+      summary: stores a public and private key pair
+      operationId: storeKey
+      tags:
+        - key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KeyPair"
+      responses:
+        '204':
+          description: no content
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/Error'
+  /key/{keyId}:
+    get:
+      summary: get a key pair by id
+      operationId: getKey
+      tags:
+        - key
+      parameters:
+        - name: keyId
+          in: path
+          description: key pair id
+          required: true
+          schema:
+            type: string
+            minLength: 64
+            maxLength: 64
+            pattern: '^[0-9a-f]*$'
+      responses:
+        '200':
+          description: Key pair
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KeyPair"
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/Error'
+  /supplychain/{supplyChainId}/layout:
+    get:
+      summary: get layout
+      operationId: findLayout
+      tags:
+        - layout
+      parameters:
+        - name: supplyChainId
+          in: path
+          description: supply chain id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: array of layouts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LayoutMetaBlock"
+        '500':
+          $ref: '#/components/responses/Error'
+    post:
+      summary: Create a layout
+      operationId: createLayout
+      tags:
+        - layout
+      parameters:
+        - name: supplyChainId
+          in: path
+          description: supply chain id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LayoutMetaBlock"
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoutMetaBlock"
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: location where the created layout metablock can be found
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/Error'
+
+  /supplychain/{supplyChainId}/layout/{layoutId}:
+    get:
+      summary: get layout
+      operationId: getLayout
+      tags:
+        - layout
+      parameters:
+        - name: supplyChainId
+          in: path
+          description: supply chain id
+          required: true
+          schema:
+            type: string
+        - name: layoutId
+          in: path
+          description: layout id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: layouts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoutMetaBlock"
+        '500':
+          $ref: '#/components/responses/Error'
+    put:
+      summary: update a layout
+      operationId: updateLayout
+      tags:
+        - layout
+      parameters:
+        - name: supplyChainId
+          in: path
+          description: supply chain id
+          required: true
+          schema:
+            type: string
+        - name: layoutId
+          in: path
+          description: layout id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LayoutMetaBlock"
+      responses:
+        '200':
+          description: updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoutMetaBlock"
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/Error'
+
+  /supplychain/{supplyChainId}/verification:
+    post:
+      summary: creates a verification run
+      operationId: performVerification
+      tags:
+        - verification
+      parameters:
+        - name: supplyChainId
+          in: path
+          description: supply chain id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyCommand"
+      responses:
+        '200':
+          description: VerificationResult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResult'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/Error'
+components:
+  responses:
+    ValidationError:
+      description: validation error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Error:
+      description: server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    VerifyCommand:
+      type: object
+      required:
+        - productsToVerify
+      properties:
+        expectedProducts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Artifact"
+
+    VerificationResult:
+      type: object
+      required:
+        - runIsValid
+      properties:
+        runIsValid:
+          type: boolean
+
+    LinkMetaBlock:
+      type: object
+      required:
+        - signature
+        - link
+      properties:
+        signature:
+          $ref: "#/components/schemas/Signature"
+        link:
+          $ref: "#/components/schemas/Link"
+    Signature:
+      type: object
+      required:
+        - keyId
+        - signature
+      properties:
+        keyId:
+          $ref: '#/components/schemas/KeyId'
+        signature:
+          type: string
+          minLength: 512
+          maxLength: 1024
+          pattern: '^[0-9a-f]*$'
+    Link:
+      type: object
+      required:
+        - runId
+        - layoutSegmentName
+        - stepName
+        - command
+        - materials
+        - products
+      properties:
+        runId:
+          type: string
+        stepName:
+          type: string
+        layoutSegmentName:
+          type: string
+        command:
+          type: array
+          items:
+            type: string
+            pattern: '^[0-9a-f]*$'
+        materials:
+          type: array
+          items:
+            $ref: "#/components/schemas/Artifact"
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/Artifact"
+    Artifact:
+      type: object
+      required:
+        - uri
+        - hash
+      properties:
+        uri:
+          type: string
+          maxLength: 1024
+          pattern: '^(?!.*\\).*$'
+        hash:
+          type: string
+          minLength: 64
+          maxLength: 64
+          pattern: '^[0-9a-f]*$'
+    KeyPair:
+      type: object
+      required:
+        - keyId
+        - publicKey
+      properties:
+        keyId:
+          $ref: '#/components/schemas/KeyId'
+        publicKey:
+          type: string
+          format: byte
+        encryptedPrivateKey:
+          type: string
+          format: byte
+    CreateSupplyChainCommand:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          maxLength: 256
+          description: name of the supply chain must be unique
+    SupplyChainItem:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          maxLength: 36
+        name:
+          type: string
+          maxLength: 256
+    LayoutMetaBlock:
+      type: object
+      required:
+        - signatures
+        - layout
+      properties:
+        id:
+          type: string
+        signatures:
+          type: array
+          items:
+            $ref: "#/components/schemas/Signature"
+        layout:
+          $ref: "#/components/schemas/Layout"
+    Layout:
+      type: object
+      required:
+        - authorizedKeyIds
+        - expectedEndProducts
+        - layoutSegments
+      properties:
+        authorizedKeyIds:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/KeyId'
+        expectedEndProducts:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/MatchRule'
+        layoutSegments:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/LayoutSegment"
+    LayoutSegment:
+      type: object
+      required:
+        - name
+        - steps
+      properties:
+        name:
+          type: string
+        steps:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/Step"
+    MatchRule:
+      type: object
+      required:
+        - pattern
+        - destinationType
+        - destinationSegmentName
+        - destinationStepName
+      properties:
+        pattern:
+          type: string
+        destinationType:
+          type: string
+          enum:
+            - PRODUCTS
+            - MATERIALS
+        destinationSegmentName:
+          type: string
+        destinationStepName:
+          type: string
+    Step:
+      type: object
+      required:
+        - name
+        - requiredSignatures
+        - authorizedKeyIds
+        - expectedMaterials
+        - expectedProducts
+        - expectedCommand
+      properties:
+        name:
+          type: string
+        authorizedKeyIds:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/KeyId'
+        requiredNumberOfLinks:
+          type: integer
+          format: int32
+          minimum: 1
+        expectedCommand:
+          type: array
+          items:
+            type: string
+            pattern: '^[0-9a-f]*$'
+        expectedMaterials:
+          type: array
+          items:
+            $ref: "#/components/schemas/Rule"
+        expectedProducts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Rule"
+    KeyId:
+      type: string
+      description: key id is a hash of the public key
+      minLength: 64
+      maxLength: 64
+      pattern: '^[0-9a-f]*$'
+    Rule:
+      type: object
+      required:
+        - ruleType
+        - pattern
+      properties:
+        ruleType:
+          type: string
+          enum:
+            - ALLOW
+            - CREATE
+            - DELETE
+            - DISALLOW
+            - MATCH
+            - MODIFY
+            - REQUIRE
+        pattern:
+          type: string
+        sourcePathPrefix:
+          type: string
+        destinationPathPrefix:
+          type: string
+        destinationType:
+          type: string
+          enum:
+            - PRODUCTS
+            - MATERIALS
+        destinationStepName:
+          type: string
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string

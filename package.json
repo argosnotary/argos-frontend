@@ -23,7 +23,8 @@
     "build": "craco build",
     "test": "CI=true craco test",
     "eject": "react-scripts eject",
-    "licensecheck": "license-check"
+    "licensecheck": "license-check",
+    "generate": "openapi-generator generate -i argos-service-api/api.yml -g typescript-fetch -o generated-sources/openapi --additional-properties=\"supportsES6=true,typescriptThreePlus=true\""
   },
   "license-check-config": {
     "src": [
@@ -52,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^1.0.8-4.2.2",
     "license-check": "^1.1.5",
     "prettier": "1.19.1",
     "tslint": "^5.20.1",
