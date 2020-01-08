@@ -14,6 +14,7 @@
 
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/Home";
 import LoginPage from "../pages/Login";
 
@@ -25,6 +26,9 @@ const Routes: React.FC = () => (
       </Route>
       <Route path="/login">
         <LoginPage />
+      </Route>
+      <Route path="/dashboard">
+        <DashboardPage />
       </Route>
     </Switch>
   </Router>

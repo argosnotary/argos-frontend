@@ -14,21 +14,21 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import HomeNavbar from '../organisms/HomeNavbar';
+import DashboardNavbar from '../organisms/DashboardNavbar';
 
-const HomePageContainer = styled.section`
+const DashboardPageContainer = styled.section`
   position: fixed;
   height: 100%;
   width: 100%;
   background-color: ${props => props.theme.homePage.bgColor};
 `;
 
-const HomePage = () => (
-  <HomePageContainer>
+const DashboardPage = () => (
+  <DashboardPageContainer>
     <main>
-      <HomeNavbar />
+      <DashboardNavbar />
     </main>
-  </HomePageContainer>
+  </DashboardPageContainer>
 );
 
-export default HomePage;
+export default DashboardPage;

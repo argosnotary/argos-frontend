@@ -23,6 +23,19 @@
       }
     }
   },
+  "dashboardPage": {
+    "avatar": {
+      "borderColor": "#1779ba"
+    },
+    "contextMenu": {
+      "bgColor": "#fff",
+      "borderColor": "#e5e5e5",
+      "menuItemTextColor": "#2e2e2e",
+      "menuItemBgColor": "#fff",
+      "menuItemHoverBgColor": "#eee",
+      "dividerBgColor": "#dfdfdf"
+    }
+  },
   "loginPage": {
     "bgColor": "#cecece"
   }
