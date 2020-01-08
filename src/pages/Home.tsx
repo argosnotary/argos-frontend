@@ -12,22 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomePage from "../pages/Home";
-import LoginPage from "../pages/Login";
+import React from 'react';
+import styled from 'styled-components';
+import Navbar from '../molecules/Navbar';
 
-const Routes: React.FC = () => (
-  <Router>
-    <Switch>
-      <Route exact={true} path="/">
-        <HomePage />
-      </Route>
-      <Route path="/login">
-        <LoginPage />
-      </Route>
-    </Switch>
-  </Router>
+const HomePageContainer = styled.section`
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: ${props => props.theme.homePage.bgColor};
+`;
+
+const HomePage = () => (
+  <HomePageContainer>
+    <main>
+      <Navbar />
+    </main>
+  </HomePageContainer>
 );
 
-export default Routes;
+export default HomePage;
