@@ -5,6 +5,24 @@
     "bgColor": "#1779ba",
     "textColor": "#fff"
   },
+  "homePage": {
+    "bgColor": "#cecece",
+    "navigation": {
+      "bgColor": "#fff",
+      "loginButton": {
+        "default": {
+          "loginButtonBgColor": "#fff",
+          "loginButtonTextColor": "#1779ba",
+          "loginButtonBorderColor": "#1779ba"
+        },
+        "hover": {
+          "loginButtonBgColor": "#1779ba",
+          "loginButtonTextColor": "#fff",
+          "loginButtonBorderColor": "#1779ba"
+        }
+      }
+    }
+  },
   "loginPage": {
     "bgColor": "#cecece"
   }

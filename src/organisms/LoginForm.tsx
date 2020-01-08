@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React from "react";
-import styled from "styled-components";
-import Button from "../atoms/Button";
-import FormInput from "../molecules/FormInput";
+import React from 'react';
+import styled from 'styled-components';
+import Button from '../atoms/Button';
+import FormInput from '../molecules/FormInput';
 
 const LoginFormContainer = styled.div`
   background-color: #fff;
@@ -25,10 +25,11 @@ const LoginFormContainer = styled.div`
   padding: 1.75rem 2rem 2rem;
 `;
 
-const LoginFormHeader = styled.h1`
-  font-size: 2.75rem;
-  margin: 0.5rem 2rem 2rem;
-  text-align: center;
+const LoginFormHeader = styled.img`
+  height: 4.25rem;
+  margin: 2rem auto 4rem;
+  display: flex;
+  max-width: 100%;
 `;
 
 const LoginButton = styled(Button)`
@@ -39,17 +40,17 @@ const LoginButton = styled(Button)`
 
 const LoginForm: React.FC = () => (
   <LoginFormContainer>
-    <LoginFormHeader>Argos</LoginFormHeader>
+    <LoginFormHeader src="images/logo.svg" />
     <form>
       <FormInput
-        labelValue={"Username"}
-        placeHolder={"Username"}
-        formType={"text"}
+        labelValue={'Username'}
+        placeHolder={'Username'}
+        formType={'text'}
       />
       <FormInput
-        labelValue={"Password"}
-        placeHolder={"Password"}
-        formType={"password"}
+        labelValue={'Password'}
+        placeHolder={'Password'}
+        formType={'password'}
       />
       <LoginButton>Login</LoginButton>
     </form>
