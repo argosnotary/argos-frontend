@@ -41,7 +41,7 @@ const LoginButton = styled(Button)`
 const LoginForm: React.FC = () => (
   <LoginFormContainer>
     <LoginFormHeader src="images/logo.svg" />
-    <form>
+    <form action="/dashboard">
       <FormInput
         labelValue={'Username'}
         placeHolder={'Username'}

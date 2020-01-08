@@ -12,16 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React from 'react';
-import styled from 'styled-components';
+import React, { FunctionComponent } from "react";
+import styled from "styled-components";
 
 const Header = styled.header`
   display: flex;
   flex-direction: row;
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
   justify-content: space-between;
   align-items: center;
   background-color: ${props => props.theme.homePage.navigation.bgColor};
+  min-height: 50px;
+  box-sizing: border-box;
 `;
 
 const Ul = styled.ul`
@@ -34,41 +36,11 @@ const Brand = styled.img`
   height: 2rem;
 `;
 
-const ButtonLink = styled.a`
-  background-color: ${props =>
-    props.theme.homePage.navigation.loginButton.default.loginButtonBgColor};
-  border: 1px solid
-    ${props =>
-      props.theme.homePage.navigation.loginButton.default.loginButtonBorderColor};
-  color: ${props =>
-    props.theme.homePage.navigation.loginButton.default.loginButtonTextColor};
-  text-decoration: none;
-  padding: 0.5rem 1.5rem;
-  display: flex;
-  transition: background-color 0.25s ease-out, color 0.25s ease-out;
-
-  &:hover {
-    background-color: ${props =>
-      props.theme.homePage.navigation.loginButton.hover.loginButtonBgColor};
-    border: 1px solid
-      ${props =>
-        props.theme.homePage.navigation.loginButton.hover
-          .loginButtonBorderColor};
-    color: ${props =>
-      props.theme.homePage.navigation.loginButton.hover
-        .loginButtonTextColor};
-  }
-`;
-
-const Navbar = () => (
+const Navbar: FunctionComponent = props => (
   <Header>
     <Brand src="images/logo.svg" />
     <nav>
-      <Ul>
-        <li>
-          <ButtonLink href="/login">Sign in</ButtonLink>
-        </li>
-      </Ul>
+      <Ul>{props.children}</Ul>
     </nav>
   </Header>
 );
