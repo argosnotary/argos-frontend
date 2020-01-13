@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import React from 'react';
+
 import styled from 'styled-components';
 import Button from '../atoms/Button';
 import FormInput from '../molecules/FormInput';
@@ -38,23 +39,25 @@ const LoginButton = styled(Button)`
   font-size: 1rem;
 `;
 
-const LoginForm: React.FC = () => (
-  <LoginFormContainer>
-    <LoginFormHeader src="images/logo.svg" />
-    <form action="/dashboard">
-      <FormInput
-        labelValue={'Username'}
-        placeHolder={'Username'}
-        formType={'text'}
-      />
-      <FormInput
-        labelValue={'Password'}
-        placeHolder={'Password'}
-        formType={'password'}
-      />
-      <LoginButton>Login</LoginButton>
-    </form>
-  </LoginFormContainer>
-);
+const LoginForm: React.FC = () => {
+  return (
+    <LoginFormContainer>
+      <LoginFormHeader src="images/logo.svg" />
+      <form action="/dashboard">
+        <FormInput
+          labelValue={'Username'}
+          placeHolder={'Username'}
+          formType={'text'}
+        />
+        <FormInput
+          labelValue={'Password'}
+          placeHolder={'Password'}
+          formType={'password'}
+        />
+        <LoginButton >Login</LoginButton>
+      </form>
+    </LoginFormContainer>
+  );
+};
 
 export default LoginForm;

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "plugins": [{ "name": "typescript-tslint-plugin" }],
+    "plugins": [{"name": "typescript-tslint-plugin"}],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

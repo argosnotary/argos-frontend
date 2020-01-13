@@ -10,9 +10,10 @@
     "@types/react-dom": "16.9.4",
     "@types/react-router-dom": "^5.1.3",
     "@types/styled-components": "^4.4.0",
+    "axios": "^0.19.1",
     "polished": "^3.4.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "styled-components": "^4.4.1",
@@ -21,7 +22,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "CI=true craco test",
+    "test": "CI=true craco test --verbose --colors",
     "eject": "react-scripts eject",
     "licensecheck": "license-check"
   },
@@ -52,8 +53,11 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.2.1",
+    "axios-mock-adapter": "^1.17.0",
     "license-check": "^1.1.5",
     "prettier": "1.19.1",
+    "react-test-renderer": "16.12.0",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-loader": "^3.5.4",
