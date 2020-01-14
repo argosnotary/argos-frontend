@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {act, renderHook}  from '@testing-library/react-hooks';
+import {act, renderHook} from '@testing-library/react-hooks';
 import axios from 'axios';
 
 import MockAdapter from 'axios-mock-adapter';
@@ -44,14 +44,15 @@ const dataFetchReducer = (state: IState, action: Action) => {
   }
 };
 
+const mock = new MockAdapter(axios);
+const mockUrl = 'http://mock';
+
 describe('useDataApi hook', () => {
-  it('fetches data on mount when url is specified at hook initialization', async () => {
-    const mock = new MockAdapter(axios);
-    const mockUrl = 'http://mock';
+ it('fetches data on mount when url is specified at hook initialization', async () => {
     const dataRequest: DataRequest = {
       method: 'get',
       token: 'my_token',
-      url: mockUrl
+      url: mockUrl,
     };
 
     mock.onGet(mockUrl).reply(200, {
@@ -78,12 +79,10 @@ describe('useDataApi hook', () => {
   });
 
   it('fetches data when new url is set', async () => {
-    const mock = new MockAdapter(axios);
-    const mockUrl = 'http://mock';
     const dataRequest: DataRequest = {
       method: 'get',
       token: 'my_token',
-      url: mockUrl
+      url: mockUrl,
     };
 
     mock.onGet(mockUrl).reply(200, {
@@ -96,22 +95,20 @@ describe('useDataApi hook', () => {
 
     act(() => {
       result.current[1](dataRequest);
-    })
+    });
     await waitForNextUpdate();
 
     expect(result.current[0].data).toEqual({
       message: 'Hello World',
     });
   });
-  
+
   it('posts data when post method is specified', async () => {
-    const mock = new MockAdapter(axios);
-    const mockUrl = 'http://mock';
     const dataRequest: DataRequest = {
       data: {id: 1},
       method: 'post',
       token: 'my_token',
-      url: mockUrl
+      url: mockUrl,
     };
 
     mock.onPost(mockUrl).reply(200, {
@@ -124,7 +121,7 @@ describe('useDataApi hook', () => {
 
     act(() => {
       result.current[1](dataRequest);
-    })
+    });
 
     await waitForNextUpdate();
 
