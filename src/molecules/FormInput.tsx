@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-import React from "react";
-import styled from "styled-components";
-import Input from "../atoms/Input";
-import InputLabel from "../atoms/InputLabel";
+import React from 'react';
+import styled from 'styled-components';
+import Input from '../atoms/Input';
+import InputLabel from '../atoms/InputLabel';
 
 interface IFormInputProps {
   labelValue: string;
   placeHolder: string;
+  name: string;
+  value: string;
+  onBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   formType: string;
 }
 
@@ -33,11 +37,22 @@ const FormInputContainer = styled.div`
 const FormInput: React.FC<IFormInputProps> = ({
   labelValue,
   placeHolder,
-  formType
+  value,
+  onBlur,
+  onChange,
+  name,
+  formType,
 }) => (
   <FormInputContainer>
     <InputLabel>{labelValue}</InputLabel>
-    <Input placeholder={placeHolder} type={formType} />
+    <Input
+      name={name}
+      onBlur={onBlur}
+      onChange={onChange}
+      defaultValue={value}
+      placeholder={placeHolder}
+      type={formType}
+    />
   </FormInputContainer>
 );
 
