@@ -1,57 +1,59 @@
-// Copyright 2020 Rabobank Nederland
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import axios, {AxiosRequestConfig} from 'axios';
-import {Reducer, useEffect, useReducer, useState} from 'react';
+import axios, { AxiosRequestConfig } from "axios";
+import { Reducer, useEffect, useReducer, useState } from "react";
 
-import IState from '../interfaces/IState';
-import Action from '../types/Action';
-import DataRequest from '../types/DataRequest';
+import IState from "../interfaces/IState";
+import Action from "../types/Action";
+import DataRequest from "../types/DataRequest";
 
 const useDataApi = (
   reducer: Reducer<IState, Action>,
-  initialDataRequest?: DataRequest,
+  initialDataRequest?: DataRequest
 ): [IState, (initialDataRequest: DataRequest) => void] => {
   const [dataRequest, setDataRequest] = useState<DataRequest | undefined>(
-    initialDataRequest,
+    initialDataRequest
   );
-  const [state, dispatch] = useReducer(reducer, {isLoading: false});
+  const [state, dispatch] = useReducer(reducer, { isLoading: false });
 
   useEffect(() => {
     if (dataRequest) {
       const fetchData = async () => {
-        dispatch({type: 'FETCH_INIT', isLoading: true});
+        dispatch({ type: "FETCH_INIT", isLoading: true });
         try {
           const authorizationHeader = {
             Authorization: `Bearer ${dataRequest.token}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json"
           };
 
           const requestConfig: AxiosRequestConfig = {
-            headers: authorizationHeader,
+            headers: authorizationHeader
           };
 
           switch (dataRequest.method) {
-            case 'get': {
-              const methodKey = 'method';
-              requestConfig[methodKey] = 'get';
+            case "get": {
+              const methodKey = "method";
+              requestConfig[methodKey] = "get";
               break;
             }
-            case 'post': {
-              const methodKey = 'method';
-              const dataKey = 'data';
-              requestConfig[methodKey] = 'post';
+            case "post": {
+              const methodKey = "method";
+              const dataKey = "data";
+              requestConfig[methodKey] = "post";
               requestConfig[dataKey] = dataRequest.data;
               break;
             }
@@ -61,16 +63,16 @@ const useDataApi = (
           dispatch({
             isLoading: false,
             results: result.data,
-            type: 'FETCH_SUCCESS',
+            type: "FETCH_SUCCESS"
           });
         } catch (error) {
-          dispatch({type: 'FETCH_FAILURE', isLoading: false, error});
+          dispatch({ type: "FETCH_FAILURE", isLoading: false, error });
         }
       };
 
       fetchData();
     }
- }, [dataRequest]);
+  }, [dataRequest]);
 
   return [state, setDataRequest];
 };

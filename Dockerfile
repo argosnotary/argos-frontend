@@ -12,6 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+FROM maven:3.6.3 as license-check-stage
+
+WORKDIR /app
+
+COPY ./  /app/
+
+RUN mvn license:check 
+
 FROM node:12.13.1-alpine as build-stage
 
 WORKDIR /app
@@ -21,8 +29,6 @@ COPY ./  /app/
 RUN npm install 
 
 RUN npm test 
-
-RUN npm run licensecheck
 
 RUN npm run build
 
