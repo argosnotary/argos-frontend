@@ -38,6 +38,8 @@
             <exclude>**/*.swo</exclude>
             <exclude>**/*.woff2</exclude>
             <exclude>.dockerignore</exclude>
+            <exclude>drone.yml</exclude>
+            <exclude>target/**</exclude>
             <exclude>LICENSE</exclude>
             <exclude>Dockerfile</exclude>
             <exclude>public/robots.txt</exclude>
