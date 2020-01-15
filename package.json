@@ -24,23 +24,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "CI=true craco test --verbose --colors",
-    "eject": "react-scripts eject",
-    "licensecheck": "license-check"
-  },
-  "license-check-config": {
-    "src": [
-      "**/*.tsx",
-      "**/*.jsx",
-      "**/*.ts",
-      "**/*.js",
-      "!**/*.html",
-      "!./node_modules/**/*",
-      "!./build/**/*"
-    ],
-    "path": "lic/header.template",
-    "blocking": true,
-    "logInfo": false,
-    "logError": true
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -56,7 +40,6 @@
   "devDependencies": {
     "@testing-library/react-hooks": "^3.2.1",
     "axios-mock-adapter": "^1.17.0",
-    "license-check": "^1.1.5",
     "prettier": "1.19.1",
     "react-test-renderer": "16.12.0",
     "tslint": "^5.20.1",
