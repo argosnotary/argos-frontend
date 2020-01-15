@@ -18,7 +18,7 @@ WORKDIR /app
 
 COPY ./  /app/
 
-RUN mvn install -q 
+RUN mvn license:check 
 
 FROM node:12.13.1-alpine as build-stage
 
