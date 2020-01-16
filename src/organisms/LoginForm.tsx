@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-import React from "react";
+import {useFormik} from 'formik';
+import React from 'react';
+import { useHistory  } from "react-router-dom";
 
-import styled from "styled-components";
-import Button from "../atoms/Button";
-import FormInput from "../molecules/FormInput";
+import styled from 'styled-components';
+import Button from '../atoms/Button';
+import InputErrorLabel from '../atoms/InputErrorLabel';
+import FormInput from '../molecules/FormInput';
+import {validateEmail} from '../validation/utils';
 
 const LoginFormContainer = styled.div`
   background-color: #fff;
@@ -41,22 +45,71 @@ const LoginButton = styled(Button)`
   font-size: 1rem;
 `;
 
+interface ILoginFormValues {
+  email: string;
+  password: string;
+}
+
+const validate = (values: ILoginFormValues) => {
+  const emailError = 'Please fill in a valid email';
+  const errors = {} as any;
+
+  if (!values.email) {
+    errors.email = emailError;
+  } else if (!validateEmail(values.email)) {
+    errors.email = emailError; 
+  }
+
+  if (!values.password) {
+    errors.password = 'Please fill in a password';
+  }
+
+  return errors;
+};
+
 const LoginForm: React.FC = () => {
+  const history = useHistory();  
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: values => {
+      history.push('/dashboard');    
+    },
+    validate,
+  });
+
   return (
     <LoginFormContainer>
       <LoginFormHeader src="images/logo.svg" />
-      <form action="/dashboard">
+      <form onSubmit={formik.handleSubmit}>
         <FormInput
-          labelValue={"Username"}
-          placeHolder={"Username"}
-          formType={"text"}
+          labelValue={'Username'}
+          placeHolder={'Username'}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+          name="email"
+          formType={'text'}
         />
-        <FormInput
-          labelValue={"Password"}
-          placeHolder={"Password"}
-          formType={"password"}
+        {formik.touched.email && formik.errors.email ? (
+          <InputErrorLabel>{formik.errors.email}</InputErrorLabel>
+        ) : null}
+         <FormInput
+          labelValue={'Password'}
+          placeHolder={'Password'}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          name="password"
+          formType={'password'}
         />
-        <LoginButton>Login</LoginButton>
+        {formik.touched.password && formik.errors.password ? (
+          <InputErrorLabel disableMargin={true}>{formik.errors.password}</InputErrorLabel>
+        ) : null}
+        <LoginButton type="submit">Login</LoginButton>
       </form>
     </LoginFormContainer>
   );
