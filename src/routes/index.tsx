@@ -19,6 +19,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/Home";
 import LoginPage from "../pages/Login";
+import UserSettingsPage from '../pages/UserSettings';
 
 const Routes: React.FC = () => (
   <Router>
@@ -31,6 +32,9 @@ const Routes: React.FC = () => (
       </Route>
       <Route path="/dashboard">
         <DashboardPage />
+      </Route>
+      <Route path="/settings">
+        <UserSettingsPage />
       </Route>
     </Switch>
   </Router>

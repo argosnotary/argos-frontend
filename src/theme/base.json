@@ -6,7 +6,7 @@
     "textColor": "#fff"
   },
   "homePage": {
-    "bgColor": "#cecece",
+    "bgColor": "#eee",
     "navigation": {
       "bgColor": "#fff",
       "loginButton": {
@@ -37,6 +37,17 @@
     }
   },
   "loginPage": {
-    "bgColor": "#cecece"
+    "bgColor": "#eee"
+  },
+  "userSettingsPage": {
+    "bgColor": "#eee",
+    "sidePanel": {
+      "bgColor": "#e0e0e0",
+      "sidePanelItem": {
+        "bgColor": "#c7c7c7",
+        "highlightColor": "#1779ba",
+        "fontColor": "#2E2E30"
+      }
+    }
   }
 }
