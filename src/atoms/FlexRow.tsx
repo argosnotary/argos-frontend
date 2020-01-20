@@ -13,38 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import React from 'react';
+import styled from 'styled-components';
 
-import React, { FunctionComponent } from "react";
-import styled from "styled-components";
+interface IFlexRowProps {
+  disableWrap?: boolean;
+}
 
-const Header = styled.header`
+const FlexRow = styled.div<IFlexRowProps>`
   display: flex;
   flex-direction: row;
-  padding: 0.5rem 0.75rem;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${props => props.theme.homePage.navigation.bgColor};
-  min-height: 50px;
-  box-sizing: border-box;
+  flex-wrap: ${props => props.disableWrap ? 'no-wrap': 'wrap'};
 `;
 
-const Ul = styled.ul`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Brand = styled.img`
-  height: 2rem;
-`;
-
-const Navbar: FunctionComponent = props => (
-  <Header>
-    <Brand src="/images/logo.svg" />
-    <nav>
-      <Ul>{props.children}</Ul>
-    </nav>
-  </Header>
-);
-
-export default Navbar;
+export default FlexRow; 

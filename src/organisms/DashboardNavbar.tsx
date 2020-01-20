@@ -16,8 +16,8 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import ContextMenu from "../molecules/ContextMenu";
 import Navbar from "../molecules/Navbar";
+import NavbarContextMenu from "../molecules/NavbarContextMenu";
 
 const AvatarContainer = styled.li`
   position: relative;
@@ -28,7 +28,7 @@ const Avatar = styled.div`
   border: 1px solid ${props => props.theme.dashboardPage.avatar.borderColor};
   height: 2rem;
   width: 2rem;
-  background: url("images/user.svg");
+  background: url("/images/user.svg");
   padding: 0.2rem;
   box-sizing: border-box;
 `;
@@ -59,7 +59,7 @@ const DashboardNavbar = () => {
           <TransparentOverlay onClick={disableContextMenuDisplay} />
         ) : null}
         <Avatar onClick={enableContextMenuDisplay} />
-        <ContextMenu displayContextMenu={displayContextMenu} />
+        <NavbarContextMenu displayContextMenu={displayContextMenu} />
       </AvatarContainer>
     </Navbar>
   );
