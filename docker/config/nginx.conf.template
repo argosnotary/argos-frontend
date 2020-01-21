@@ -36,12 +36,4 @@ server {
     location /api/ {
         proxy_pass ${BACKEND_URL};
     }
-    
-    location /oauth2/callback {
-        proxy_pass ${BACKEND_URL};
-    }
-    
-    location /oauth2/authorize {
-        proxy_pass ${BACKEND_URL};
-    }
 }
