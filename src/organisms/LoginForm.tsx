@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* tslint:disable */
+import React from "react";
 
-import {useFormik} from 'formik';
-import React from 'react';
-import { useHistory  } from "react-router-dom";
-
-import styled from 'styled-components';
-import Button from '../atoms/Button';
-import InputErrorLabel from '../atoms/InputErrorLabel';
-import FormInput from '../molecules/FormInput';
-import {validateEmail} from '../validation/utils';
+import styled from "styled-components";
+import { AnchorButton } from "../atoms/Button";
 
 const LoginFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   margin: 10% auto;
   width: 20rem;
@@ -39,10 +36,14 @@ const LoginFormHeader = styled.img`
   max-width: 100%;
 `;
 
-const LoginButton = styled(Button)`
+const LoginButton = styled(AnchorButton)`
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
   width: 100%;
   margin: 1rem 0;
   font-size: 1rem;
+  text-decoration: none;
 `;
 
 interface ILoginFormValues {
@@ -50,67 +51,20 @@ interface ILoginFormValues {
   password: string;
 }
 
-const validate = (values: ILoginFormValues) => {
-  const emailError = 'Please fill in a valid email';
-  const errors = {} as any;
-
-  if (!values.email) {
-    errors.email = emailError;
-  } else if (!validateEmail(values.email)) {
-    errors.email = emailError; 
-  }
-
-  if (!values.password) {
-    errors.password = 'Please fill in a password';
-  }
-
-  return errors;
-};
+// keymanagement -> login (waar kom ik vandaan ) ->  waar ik vandaan kom
+// / -> login -> dashboard
 
 const LoginForm: React.FC = () => {
-  const history = useHistory();  
-
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: ''
-    },
-    onSubmit: values => {
-      history.push('/dashboard');    
-    },
-    validate,
-  });
-
   return (
     <LoginFormContainer>
       <LoginFormHeader src="images/logo.svg" />
-      <form onSubmit={formik.handleSubmit}>
-        <FormInput
-          labelValue={'Username'}
-          placeHolder={'Username'}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          name="email"
-          formType={'text'}
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <InputErrorLabel>{formik.errors.email}</InputErrorLabel>
-        ) : null}
-         <FormInput
-          labelValue={'Password'}
-          placeHolder={'Password'}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          name="password"
-          formType={'password'}
-        />
-        {formik.touched.password && formik.errors.password ? (
-          <InputErrorLabel disableMargin={true}>{formik.errors.password}</InputErrorLabel>
-        ) : null}
-        <LoginButton type="submit">Login</LoginButton>
-      </form>
+      <LoginButton
+        href={
+          "http://localhost:8080/oauth2/authorize/azure?redirect_uri=http://localhost:3000/authenticated"
+        }
+      >
+        Login with Azure
+      </LoginButton>
     </LoginFormContainer>
   );
 };

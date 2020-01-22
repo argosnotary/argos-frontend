@@ -13,31 +13,72 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+/* tslint:disable */
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+  useLocation
+} from "react-router-dom";
 import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/Home";
 import LoginPage from "../pages/Login";
-import UserSettingsPage from '../pages/UserSettings';
+import UserSettingsPage from "../pages/UserSettings";
 
-const Routes: React.FC = () => (
-  <Router>
-    <Switch>
-      <Route exact={true} path="/">
-        <HomePage />
-      </Route>
-      <Route path="/login">
-        <LoginPage />
-      </Route>
-      <Route path="/dashboard">
-        <DashboardPage />
-      </Route>
-      <Route path="/settings">
-        <UserSettingsPage />
-      </Route>
-    </Switch>
-  </Router>
-);
+interface IAuthenticationForwarderProps {
+  setToken: (token: string) => void;
+}
+
+const AuthenticationForwarder: React.FC<IAuthenticationForwarderProps> = ({
+  setToken
+}) => {
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const query = useQuery();
+
+  useEffect(() => {
+    const queryToken = query.get("token");
+
+    if (queryToken) {
+      localStorage.setItem("token", queryToken);
+      setToken(queryToken);
+    }
+  });
+
+  return <Redirect to="/dashboard" />;
+};
+
+const Routes: React.FC = () => {
+  const [token, setToken] = useState("");
+
+  return (
+    <Router>
+      <Switch>
+        <Route exact={true} path="/">
+          <HomePage />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <Route path="/authenticated">
+          <AuthenticationForwarder setToken={setToken} />
+        </Route>
+        {token.length > 0 ? (
+          <>
+            <Route path="/dashboard">
+              <DashboardPage />
+            </Route>
+            <Route path="/settings">
+              <UserSettingsPage />
+            </Route>
+          </>
+        ) : (
+          <Redirect to={"/login"} />
+        )}
+      </Switch>
+    </Router>
+  );
+};
 
 export default Routes;
