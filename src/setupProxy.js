@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from 'styled-components';
+const proxy = require('http-proxy-middleware');
 
-const PageHeader = styled.h1`
-  border-bottom: 1px solid #bbb;
-  padding: 1rem 0 1.25rem;
-  font-size: 2rem;
-`;
-
-export default PageHeader;
+module.exports = function(app) {
+  app.use(
+    '/api',
+    proxy({
+      target: 'http://localhost:8080',
+      changeOrigin: true,
+    }),
+  );
+};

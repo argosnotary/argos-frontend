@@ -118,6 +118,11 @@ const SplitLayout = styled(FlexRow)`
   height: 100%;
 `;
 
+const ContentColumn = styled(FlexColumn)`
+  flex-grow: 1;
+  padding: 1rem 2rem;
+`;
+
 const UserSettingsPage = () => {
   const match = useRouteMatch();
 
@@ -145,13 +150,13 @@ const UserSettingsPage = () => {
             </li>
           </ul>
         </SidePanel>
-        <FlexColumn>
+        <ContentColumn>
           <Switch>
             <Route path={`${match.path}/profile`} component={ProfilePage} />
             <Route path={`${match.path}/key`} component={KeyManagementPage} />
             <Redirect to={`${match.path}/profile`} />
           </Switch>
-        </FlexColumn>
+        </ContentColumn>
       </SplitLayout>
     </UserSettingsPageContainer>
   );

@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface IFlexRowProps {
   disableWrap?: boolean;
@@ -23,7 +22,7 @@ interface IFlexRowProps {
 const FlexRow = styled.div<IFlexRowProps>`
   display: flex;
   flex-direction: row;
-  flex-wrap: ${props => props.disableWrap ? 'no-wrap': 'wrap'};
+  flex-wrap: ${props => (props.disableWrap ? "no-wrap" : "wrap")};
 `;
 
-export default FlexRow; 
+export default FlexRow;

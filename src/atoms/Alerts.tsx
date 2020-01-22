@@ -13,12 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import React from 'react';
 import styled from 'styled-components';
 
-const PageHeader = styled.h1`
-  border-bottom: 1px solid #bbb;
-  padding: 1rem 0 1.25rem;
-  font-size: 2rem;
+import {WarningIcon} from './Icons';
+
+interface IAlertProps {
+  message: string;
+}
+
+const WarningContainer = styled.section`
+  display: flex;
+  align-items: center;
+  border: 1px solid red;
+  margin: 1rem 0;
+  padding: 1rem;
+  width: 100%;
 `;
 
-export default PageHeader;
+const WarningMessage = styled.p`
+  color: red;
+`;
+
+const IconWrapper = styled.div`
+  margin: 0 2rem 0 0;
+`;
+
+const Warning: React.FC<IAlertProps> = ({message}) => (
+  <WarningContainer>
+    <IconWrapper>
+      <WarningIcon size={48} color={'red'} />
+    </IconWrapper>
+    <WarningMessage>{message}</WarningMessage>
+  </WarningContainer>
+);
+
+export {Warning};
