@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface IContextMenu {
   displayContextMenu: boolean;
 }
 
-const Nav = styled.nav<{displayContextMenu: boolean}>`
-  display: ${props => (props.displayContextMenu ? 'flex' : 'none')};
+const Nav = styled.nav<{ displayContextMenu: boolean }>`
+  display: ${props => (props.displayContextMenu ? "flex" : "none")};
   position: absolute;
   background: ${props => props.theme.dashboardPage.contextMenu.bgColor};
   right: 0;
@@ -64,13 +64,13 @@ const MenuDivider = styled.li`
 const NavbarContextMenu: React.FC<IContextMenu> = props => (
   <Nav displayContextMenu={props.displayContextMenu}>
     <ul>
-      <MenuItem>
-        <A href="/settings">Settings</A>
-      </MenuItem>
+      <A href="/settings">
+        <MenuItem>Settings</MenuItem>
+      </A>
       <MenuDivider />
-      <MenuItem>
-        <A href="/">Log out</A>
-      </MenuItem>
+      <A href="/">
+        <MenuItem>Log out</MenuItem>
+      </A>
     </ul>
   </Nav>
 );

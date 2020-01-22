@@ -51,9 +51,6 @@ interface ILoginFormValues {
   password: string;
 }
 
-// keymanagement -> login (waar kom ik vandaan ) ->  waar ik vandaan kom
-// / -> login -> dashboard
-
 const LoginForm: React.FC = () => {
   return (
     <LoginFormContainer>

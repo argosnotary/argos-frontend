@@ -28,6 +28,7 @@ import LoginPage from "../pages/Login";
 import UserSettingsPage from "../pages/UserSettings";
 
 interface IAuthenticationForwarderProps {
+  token: string;
   setToken: (token: string) => void;
 }
 
@@ -49,6 +50,15 @@ const AuthenticationForwarder: React.FC<IAuthenticationForwarderProps> = ({
   return <Redirect to="/dashboard" />;
 };
 
+const Logout: React.FC<IAuthenticationForwarderProps> = ({ setToken }) => {
+  useEffect(() => {
+    localStorage.removeItem("token");
+    setToken("");
+  });
+
+  return <Redirect to="/login" />;
+};
+
 const Routes: React.FC = () => {
   const [token, setToken] = useState("");
 
@@ -61,10 +71,13 @@ const Routes: React.FC = () => {
         <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path="/authenticated">
-          <AuthenticationForwarder setToken={setToken} />
+        <Route path="/logout">
+          <Logout token={token} setToken={setToken} />
         </Route>
-        {token.length > 0 ? (
+        <Route path="/authenticated">
+          <AuthenticationForwarder token={token} setToken={setToken} />
+        </Route>
+        {localStorage.getItem("token") ? (
           <>
             <Route path="/dashboard">
               <DashboardPage />

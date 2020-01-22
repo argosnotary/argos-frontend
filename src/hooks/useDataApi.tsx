@@ -17,14 +17,12 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { Reducer, useEffect, useReducer, useState } from "react";
 
-import IState from "../interfaces/IState";
-import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
 
 const useDataApi = (
-  reducer: Reducer<IState, Action>,
+  reducer: Reducer<any, any>,
   initialDataRequest?: DataRequest
-): [IState, (initialDataRequest: DataRequest) => void] => {
+): [any, (initialDataRequest: DataRequest) => void] => {
   const [dataRequest, setDataRequest] = useState<DataRequest | undefined>(
     initialDataRequest
   );
