@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* tslint:disable */
 import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -35,10 +34,10 @@ interface IAuthenticationForwarderProps {
 const AuthenticationForwarder: React.FC<IAuthenticationForwarderProps> = ({
   setToken
 }) => {
-  const useQuery = () => new URLSearchParams(useLocation().search);
-  const query = useQuery();
+  const location = useLocation();
 
   useEffect(() => {
+    const query = new URLSearchParams(location.search);
     const queryToken = query.get("token");
 
     if (queryToken) {
@@ -48,15 +47,6 @@ const AuthenticationForwarder: React.FC<IAuthenticationForwarderProps> = ({
   });
 
   return <Redirect to="/dashboard" />;
-};
-
-const Logout: React.FC<IAuthenticationForwarderProps> = ({ setToken }) => {
-  useEffect(() => {
-    localStorage.removeItem("token");
-    setToken("");
-  });
-
-  return <Redirect to="/login" />;
 };
 
 const Routes: React.FC = () => {
@@ -70,9 +60,6 @@ const Routes: React.FC = () => {
         </Route>
         <Route path="/login">
           <LoginPage />
-        </Route>
-        <Route path="/logout">
-          <Logout token={token} setToken={setToken} />
         </Route>
         <Route path="/authenticated">
           <AuthenticationForwarder token={token} setToken={setToken} />

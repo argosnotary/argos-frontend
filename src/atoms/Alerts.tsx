@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
-import {WarningIcon} from './Icons';
+import { WarningIcon } from "./Icons";
 
 interface IAlertProps {
   message: string;
@@ -25,27 +25,31 @@ interface IAlertProps {
 const WarningContainer = styled.section`
   display: flex;
   align-items: center;
-  border: 1px solid red;
+  border: 1px solid ${props => props.theme.alerts.warning.color};
   margin: 1rem 0;
   padding: 1rem;
   width: 100%;
 `;
 
 const WarningMessage = styled.p`
-  color: red;
+  color: ${props => props.theme.alerts.warning.color};
 `;
 
 const IconWrapper = styled.div`
   margin: 0 2rem 0 0;
 `;
 
-const Warning: React.FC<IAlertProps> = ({message}) => (
-  <WarningContainer>
-    <IconWrapper>
-      <WarningIcon size={48} color={'red'} />
-    </IconWrapper>
-    <WarningMessage>{message}</WarningMessage>
-  </WarningContainer>
-);
+const Warning: React.FC<IAlertProps> = ({ message }) => {
+  const theme = useContext(ThemeContext);
 
-export {Warning};
+  return (
+    <WarningContainer>
+      <IconWrapper>
+        <WarningIcon size={48} color={theme.alerts.warning.color} />
+      </IconWrapper>
+      <WarningMessage>{message}</WarningMessage>
+    </WarningContainer>
+  );
+};
+
+export { Warning };

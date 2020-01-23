@@ -19,7 +19,7 @@ import styled from "styled-components";
 import FlexColumn from "../atoms/FlexColumn";
 
 const Modal = styled.section`
-  background: white;
+  background: ${props => props.theme.modal.bgColor};
   padding: 1rem 2rem;
   width: 30rem;
   position: absolute;
@@ -52,11 +52,11 @@ const ModalButton = styled.button`
   margin: 0 2rem 0.5rem;
   background: none;
   border: 0;
-  color: #1779ba;
+  color: ${props => props.theme.modal.button.default.color};
   font-size: 1rem;
 
   &:hover {
-    color: ${darken(0.1, "#1779ba")}
+    color: ${props => darken(0.1, props.theme.modal.button.hover.color)};
     text-decoration: underline;
     cursor: pointer;
   }

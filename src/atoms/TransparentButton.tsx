@@ -23,10 +23,9 @@ const TransparentButton = styled.button`
   background-color: transparent;
   border: 1px solid
     ${props =>
-      props.theme.homePage.navigation.loginButton.default
-        .loginButtonBorderColor};
+      props.theme.transparentButton.default.transparentButtonBorderColor};
   color: ${props =>
-    props.theme.homePage.navigation.loginButton.default.loginButtonTextColor};
+    props.theme.transparentButton.default.transparentButtonTextColor};
   text-decoration: none;
   padding: 0.5rem 0.75rem;
   display: flex;
@@ -35,13 +34,12 @@ const TransparentButton = styled.button`
   &:hover {
     cursor: pointer;
     background-color: ${props =>
-      props.theme.homePage.navigation.loginButton.hover.loginButtonBgColor};
+      props.theme.transparentButton.hover.transparentButtonBgColor};
     border: 1px solid
       ${props =>
-        props.theme.homePage.navigation.loginButton.hover
-          .loginButtonBorderColor};
+        props.theme.transparentButton.hover.transparentButtonBorderColor};
     color: ${props =>
-      props.theme.homePage.navigation.loginButton.hover.loginButtonTextColor};
+      props.theme.transparentButton.hover.transparentButtonTextColor};
 
     > svg > path {
       fill: #fff;

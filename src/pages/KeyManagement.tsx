@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/* tslint:disable */
-import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 import { generateKey } from "../security";
 
 import { Warning } from "../atoms/Alerts";
-import PageHeader from "../atoms/PageHeader";
-import { KeyIcon, LoaderIcon, PlusIcon } from "../atoms/Icons";
 import FlexColumn from "../atoms/FlexColumn";
 import FlexRow from "../atoms/FlexRow";
+import { KeyIcon, LoaderIcon, PlusIcon } from "../atoms/Icons";
 import {
   Modal,
   ModalBody,
@@ -32,12 +29,13 @@ import {
   ModalFlexColumWrapper,
   ModalFooter
 } from "../atoms/Modal";
+import PageHeader from "../atoms/PageHeader";
 import TransparentButton from "../atoms/TransparentButton";
 
+import useDataApi from "../hooks/useDataApi";
 import IState from "../interfaces/IState";
 import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
-import useDataApi from "../hooks/useDataApi";
 
 const dataFetchReducer = (state: IState, action: Action) => {
   switch (action.type) {
@@ -62,28 +60,29 @@ const dataFetchReducer = (state: IState, action: Action) => {
 };
 
 const CreateKeyButton = styled(TransparentButton)`
-  margin: 2rem 0;
+  margin: 1.3rem 0;
 `;
 
 const PasswordDisplay = styled.section`
   display: flex;
   align-items: center;
-  border: 1px solid orange;
+  border: 1px solid ${props => props.theme.keyManagementPage.passwordColor};
   margin: 1rem 0;
   padding: 1.25rem 1.5rem;
   width: 100%;
 `;
 
 const PasswordCopy = styled.p`
-  color: orange;
+  color: ${props => props.theme.keyManagementPage.passwordColor};
 `;
 
 const Password = styled.input`
   margin: 0.75rem 1rem;
-  color: orange;
+  color: ${props => props.theme.keyManagementPage.passwordColor};
   font-size: 2rem;
   border: none;
   outline: none;
+  max-width: 20rem;
 `;
 
 const PasswordContainer = styled(FlexRow)`
@@ -118,6 +117,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [response, setDataRequest] = useDataApi(dataFetchReducer);
   const passwordInputRef = useRef<HTMLInputElement>(null);
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     if (response.hasOwnProperty("data") && !response.isLoading) {
@@ -146,13 +146,34 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
     setDataRequest(dataRequest);
   };
 
-  const getModalContent = (wizardState: number) => {
-    switch (wizardState) {
+  const getModalContent = (currentWizardState: number) => {
+    const disableModal = () => {
+      setDisplayModal(false);
+      setWizardState(WizardStates.KeyOverrideWarning);
+    };
+
+    const copyPasswordToClipboard = () => {
+      if (passwordInputRef.current) {
+        passwordInputRef.current.select();
+        passwordInputRef.current.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        document.getSelection()!.removeAllRanges();
+
+        const oldPassword = generatedPassword;
+        setGeneratedPassword("Copied");
+
+        setTimeout(() => {
+          setGeneratedPassword(oldPassword);
+        }, 1000);
+      }
+    };
+
+    switch (currentWizardState) {
       case WizardStates.Loading:
         return (
           <>
             <ModalBody>
-              <LoaderIcon color={"#1779ba"} size={64} />
+              <LoaderIcon color={theme.loaderIcon.color} size={64} />
             </ModalBody>
           </>
         );
@@ -167,20 +188,8 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
               />
             </ModalBody>
             <ModalFooter>
-              <ModalButton
-                onClick={() => {
-                  setDisplayModal(false);
-                }}
-              >
-                No
-              </ModalButton>
-              <ModalButton
-                onClick={() => {
-                  postKeyData();
-                }}
-              >
-                Continue
-              </ModalButton>
+              <ModalButton onClick={disableModal}>No</ModalButton>
+              <ModalButton onClick={postKeyData}>Continue</ModalButton>
             </ModalFooter>
           </>
         );
@@ -193,14 +202,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
               />
             </ModalBody>
             <ModalFooter>
-              <ModalButton
-                onClick={() => {
-                  setDisplayModal(false);
-                  setWizardState(WizardStates.KeyOverrideWarning);
-                }}
-              >
-                Close
-              </ModalButton>
+              <ModalButton onClick={disableModal}>Close</ModalButton>
             </ModalFooter>
           </>
         );
@@ -215,10 +217,13 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
                   </PasswordCopy>
                   <PasswordContainer>
                     <PasswordIconWrapper>
-                      <KeyIcon color={"orange"} size={40} />
+                      <KeyIcon
+                        color={theme.keyManagementPage.passwordColor}
+                        size={40}
+                      />
                     </PasswordIconWrapper>
                     <Password
-                      readOnly
+                      readOnly={true}
                       value={generatedPassword}
                       ref={passwordInputRef}
                     />
@@ -231,26 +236,10 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
               </PasswordDisplay>
             </ModalBody>
             <ModalFooter>
-              <ModalButton
-                onClick={() => {
-                  if (passwordInputRef.current) {
-                    passwordInputRef.current.select();
-                    passwordInputRef.current.setSelectionRange(0, 99999);
-                    document.execCommand("copy");
-                    document.getSelection()!.removeAllRanges();
-                  }
-                }}
-              >
+              <ModalButton onClick={copyPasswordToClipboard}>
                 Copy to clipboard
               </ModalButton>
-              <ModalButton
-                onClick={() => {
-                  setDisplayModal(false);
-                  setWizardState(WizardStates.KeyOverrideWarning);
-                }}
-              >
-                Close
-              </ModalButton>
+              <ModalButton onClick={disableModal}>Close</ModalButton>
             </ModalFooter>
           </>
         );
@@ -268,6 +257,12 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
 
 const KeyManagement = () => {
   const [displayModal, setDisplayModal] = useState(false);
+  const theme = useContext(ThemeContext);
+
+  const enableModal = () => {
+    setDisplayModal(true);
+  };
+
   return (
     <>
       <PageHeader>Key management</PageHeader>
@@ -277,8 +272,8 @@ const KeyManagement = () => {
           setDisplayModal={setDisplayModal}
         />
       ) : (
-        <CreateKeyButton onClick={() => setDisplayModal(true)}>
-          <PlusIcon size={32} color={"#1779ba"} />
+        <CreateKeyButton onClick={enableModal}>
+          <PlusIcon size={32} color={theme.keyManagementPage.iconColor} />
           Create new key
         </CreateKeyButton>
       )}
