@@ -20,6 +20,8 @@ steps:
     settings:
       repo: rabobanknl/argos-frontend
       auto_tag: true
+      build_args:
+        - VERSION=${DRONE_TAG}
       username:
         from_secret: docker_login_user
       password:
