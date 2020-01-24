@@ -7,15 +7,36 @@ steps:
   - name: build front-end image
     image: plugins/docker
     settings:
-      repo: rabobanknl/argos-frontend
+      repo: rabobanknl/argos-frontend-snapshot
       tags: ${DRONE_BRANCH/\//_}
       username:
         from_secret: docker_login_user
       password:
         from_secret: docker_login_token
+    when:
+      event:
+        - push
+        - pull_request
+        
+  - name: build and release front-end image
+    image: plugins/docker
+    settings:
+      repo: rabobanknl/argos-frontend
+      auto_tag: true
+      username:
+        from_secret: docker_login_user
+      password:
+        from_secret: docker_login_token
+    when:
+      branch:
+        - master
+      event:
+        - tag
+     
       
 trigger:
   event:
     - push
     - pull_request
+    - tag
 
