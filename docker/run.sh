@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Copyright (C) 2019 - 2020 Rabobank Nederland
 #
@@ -14,22 +15,18 @@
 # limitations under the License.
 #
 
-server {
-  listen 80;
-  
-  error_log  /var/log/nginx/argos_frontend_error.log;
 
-  gzip on;
-  gzip_proxied any;
-  gzip_types text/plain text/xml text/css application/x-javascript;
-  gzip_vary on;
-  gzip_disable “MSIE [1-6]\.(?!.*SV1)”;
-
-  location / {
-    root /usr/share/nginx/html;
-    index index.html index.htm;
-    try_files $uri $uri/ /index.html =404;
-  }
-  
-  include /etc/nginx/extra-conf.d/*.conf;
-}
+if [ -z "$@" ]; then
+    # Substitute env vars
+    ENV_VARS='$BACKEND_URL'
+    envsubst "$ENV_VARS" < /nginx.conf.template >  /etc/nginx/conf.d/default.conf
+    
+	# Start server
+    nginx -g 'daemon off;'
+else
+	if [ "$1" = "version" ]; then
+		echo ${ARGOS_VERSION:-"no version"}
+	else
+		$@
+	fi
+fi
