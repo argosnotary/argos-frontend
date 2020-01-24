@@ -9,10 +9,7 @@ steps:
     settings:
       repo: rabobanknl/argos-frontend-snapshot
       tags: ${DRONE_BRANCH/\//_}
-      username:
-        from_secret: docker_login_user
-      password:
-        from_secret: docker_login_token
+      dry_run: true
     when:
       event:
         - push
