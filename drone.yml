@@ -9,11 +9,13 @@ steps:
     settings:
       repo: rabobanknl/argos-frontend-snapshot
       tags: ${DRONE_BRANCH/\//_}
-      dry_run: true
+      username:
+        from_secret: docker_login_user
+      password:
+        from_secret: docker_login_token
     when:
       event:
         - push
-        - pull_request
         
   - name: build and release front-end image
     image: plugins/docker
@@ -36,6 +38,5 @@ steps:
 trigger:
   event:
     - push
-    - pull_request
     - tag
 
