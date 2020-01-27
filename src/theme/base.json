@@ -36,6 +36,9 @@
       "color": "red"
     }
   },
+  "PageHeader": {
+    "bottomBorderColor": "#bbb"
+  },
   "homePage": {
     "bgColor": "#eee",
     "navigation": {

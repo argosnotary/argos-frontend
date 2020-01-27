@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
-import styled from "styled-components";
+const useToken = (): [string, (tokenArg: string) => void, () => void] => {
+  const token = localStorage.getItem("token") || "no token in local storage";
 
-import HomeNavbar from "../organisms/HomeNavbar";
+  const setToken = (tokenArg: string) => {
+    localStorage.setItem("token", tokenArg);
+  };
 
-const HomePageContainer = styled.section`
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  background-color: ${props => props.theme.homePage.bgColor};
-`;
+  const removeToken = () => {
+    localStorage.removeItem("token");
+  };
 
-const HomePage = () => (
-  <HomePageContainer>
-    <main>
-      <HomeNavbar />
-    </main>
-  </HomePageContainer>
-);
+  return [token, setToken, removeToken];
+};
 
-export default HomePage;
+export default useToken;

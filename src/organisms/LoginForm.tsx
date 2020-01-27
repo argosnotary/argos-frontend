@@ -15,8 +15,8 @@
  */
 import React from "react";
 
-import styled from "styled-components";
 import { AnchorButton } from "../atoms/Button";
+import styled from "styled-components";
 
 const LoginFormContainer = styled.div`
   display: flex;
@@ -55,9 +55,7 @@ const LoginForm: React.FC = () => {
     <LoginFormContainer>
       <LoginFormHeader src="images/logo.svg" />
       <LoginButton
-        href={
-          "http://localhost:8080/oauth2/authorize/azure?redirect_uri=http://localhost:3000/authenticated"
-        }
+        href={"/api/oauth2/authorize/azure?redirect_uri=/authenticated"}
       >
         Login with Azure
       </LoginButton>

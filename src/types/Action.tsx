@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-import IState from "../interfaces/IState";
-
-type Action =
+type Action<T> =
   | {
       type: "FETCH_INIT";
       isLoading: boolean;
     }
-  | { type: "FETCH_SUCCESS"; isLoading: boolean; results: IState }
+  | { type: "FETCH_SUCCESS"; isLoading: boolean; results: T }
   | { type: "FETCH_FAILURE"; isLoading: boolean; error: string };
 
 export default Action;

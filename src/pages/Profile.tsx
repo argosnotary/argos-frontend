@@ -18,9 +18,11 @@ import styled from "styled-components";
 
 import PageHeader from "../atoms/PageHeader";
 
-import useDataApi from "../hooks/useDataApi";
-import IState from "../interfaces/IState";
+import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
+import IState from "../interfaces/IState";
+import useDataApi from "../hooks/useDataApi";
+import useToken from "../hooks/useToken";
 
 interface IProfile extends IState {
   data: {
@@ -29,15 +31,7 @@ interface IProfile extends IState {
   };
 }
 
-type Action =
-  | {
-      type: "FETCH_INIT";
-      isLoading: boolean;
-    }
-  | { type: "FETCH_SUCCESS"; isLoading: boolean; results: IProfile }
-  | { type: "FETCH_FAILURE"; isLoading: boolean; error: string };
-
-const dataFetchReducer = (state: IProfile, action: Action) => {
+const dataFetchReducer = (state: IProfile, action: Action<IProfile>) => {
   switch (action.type) {
     case "FETCH_INIT":
       return {
@@ -64,9 +58,11 @@ const ProfileListItem = styled.li`
 `;
 
 const ProfilePage = () => {
+  const [token] = useToken();
+
   const dataRequest: DataRequest = {
     method: "get",
-    token: localStorage.getItem("token"),
+    token,
     url: "/api/user/me"
   };
 

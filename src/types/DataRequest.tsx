@@ -16,7 +16,7 @@
 
 type DataRequest =
   | {
-      token: string | null;
+      token: string;
       url: string;
       method: "get";
     }

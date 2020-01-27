@@ -19,12 +19,12 @@ import axios from "axios";
 
 import MockAdapter from "axios-mock-adapter";
 
-import IState from "../interfaces/IState";
 import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
+import IState from "../interfaces/IState";
 import useDataApi from "./useDataApi";
 
-const dataFetchReducer = (state: IState, action: Action) => {
+const dataFetchReducer = (state: IState, action: Action<IState>) => {
   switch (action.type) {
     case "FETCH_INIT":
       return {

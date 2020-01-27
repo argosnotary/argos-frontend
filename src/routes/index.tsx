@@ -21,10 +21,13 @@ import {
   Switch,
   useLocation
 } from "react-router-dom";
+
 import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/Home";
 import LoginPage from "../pages/Login";
+import PrivateRoute from "./PrivateRoute";
 import UserSettingsPage from "../pages/UserSettings";
+import useToken from "../hooks/useToken";
 
 interface IAuthenticationForwarderProps {
   token: string;
@@ -35,13 +38,14 @@ const AuthenticationForwarder: React.FC<IAuthenticationForwarderProps> = ({
   setToken
 }) => {
   const location = useLocation();
+  const [_token, setLocalStorageToken] = useToken();
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
     const queryToken = query.get("token");
 
     if (queryToken) {
-      localStorage.setItem("token", queryToken);
+      setLocalStorageToken(queryToken);
       setToken(queryToken);
     }
   });
@@ -64,18 +68,12 @@ const Routes: React.FC = () => {
         <Route path="/authenticated">
           <AuthenticationForwarder token={token} setToken={setToken} />
         </Route>
-        {localStorage.getItem("token") ? (
-          <>
-            <Route path="/dashboard">
-              <DashboardPage />
-            </Route>
-            <Route path="/settings">
-              <UserSettingsPage />
-            </Route>
-          </>
-        ) : (
-          <Redirect to={"/login"} />
-        )}
+        <PrivateRoute path="/dashboard">
+          <DashboardPage />
+        </PrivateRoute>
+        <PrivateRoute path="/settings">
+          <UserSettingsPage />
+        </PrivateRoute>
       </Switch>
     </Router>
   );

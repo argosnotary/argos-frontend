@@ -16,7 +16,7 @@
 import styled from "styled-components";
 
 const PageHeader = styled.h1`
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid ${props => props.theme.PageHeader.bottomBorderColor};
   padding: 1rem 0 1.25rem;
   margin: 0 0 0.6rem;
   font-size: 2rem;

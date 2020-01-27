@@ -32,12 +32,13 @@ import {
 import PageHeader from "../atoms/PageHeader";
 import TransparentButton from "../atoms/TransparentButton";
 
-import useDataApi from "../hooks/useDataApi";
-import IState from "../interfaces/IState";
 import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
+import IState from "../interfaces/IState";
+import useDataApi from "../hooks/useDataApi";
+import useToken from "../hooks/useToken";
 
-const dataFetchReducer = (state: IState, action: Action) => {
+const dataFetchReducer = (state: IState, action: Action<IState>) => {
   switch (action.type) {
     case "FETCH_INIT":
       return {
@@ -118,6 +119,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   const [response, setDataRequest] = useDataApi(dataFetchReducer);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const theme = useContext(ThemeContext);
+  const [localStorageToken] = useToken();
 
   useEffect(() => {
     if (response.hasOwnProperty("data") && !response.isLoading) {
@@ -138,7 +140,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
     const dataRequest: DataRequest = {
       data: generatedKeys.keys,
       method: "post",
-      token: "my_token",
+      token: localStorageToken,
       url: "/api/key"
     };
 

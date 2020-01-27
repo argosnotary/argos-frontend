@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const proxy = require('http-proxy-middleware');
+const proxy = require("http-proxy-middleware");
 
 module.exports = function(app) {
   app.use(
-    '/api',
+    "/api",
     proxy({
-      target: 'http://localhost:8080',
-      changeOrigin: true,
-    }),
+      target: "http://localhost:8080",
+      changeOrigin: true
+    })
   );
 };

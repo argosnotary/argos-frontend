@@ -24,9 +24,9 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 
+import DashboardNavbar from "../organisms/DashboardNavbar";
 import FlexColumn from "../atoms/FlexColumn";
 import FlexRow from "../atoms/FlexRow";
-import DashboardNavbar from "../organisms/DashboardNavbar";
 import KeyManagementPage from "../pages/KeyManagement";
 import ProfilePage from "../pages/Profile";
 
