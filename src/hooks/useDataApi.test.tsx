@@ -24,6 +24,13 @@ import DataRequest from "../types/DataRequest";
 import IState from "../interfaces/IState";
 import useDataApi from "./useDataApi";
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useHistory: () => ({
+    push: jest.fn()
+  })
+}));
+
 const dataFetchReducer = (state: IState, action: Action<IState>) => {
   switch (action.type) {
     case "FETCH_INIT":

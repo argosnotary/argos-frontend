@@ -39,7 +39,7 @@ const useDataApi = (
 
   useEffect(() => {
     if (dataRequest) {
-      const fetchData = async () => {
+      const fetchData = () => {
         dispatch({ type: "FETCH_INIT", isLoading: true });
         try {
           const authorizationHeader = {
@@ -66,11 +66,12 @@ const useDataApi = (
             }
           }
 
-          const result = await axios(dataRequest.url, requestConfig);
-          dispatch({
-            isLoading: false,
-            results: result.data,
-            type: "FETCH_SUCCESS"
+          axios(dataRequest.url, requestConfig).then(result => {
+            dispatch({
+              isLoading: false,
+              results: result.data,
+              type: "FETCH_SUCCESS"
+            });
           });
         } catch (error) {
           if (error.response.status === 401) {
@@ -84,7 +85,7 @@ const useDataApi = (
 
       fetchData();
     }
-  }, [dataRequest, history, removeLocalStorageToken]);
+  }, [dataRequest]);
 
   return [state, setDataRequest];
 };
