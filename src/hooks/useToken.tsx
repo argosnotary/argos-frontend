@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 const useToken = (): [string, (tokenArg: string) => void, () => void] => {
-  const token = localStorage.getItem("token") || "no token in local storage";
+  const token = localStorage.getItem("token") || "";
 
   const setToken = (tokenArg: string) => {
     localStorage.setItem("token", tokenArg);

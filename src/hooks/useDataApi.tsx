@@ -16,9 +16,11 @@
 
 import axios, { AxiosRequestConfig } from "axios";
 import { Reducer, useEffect, useReducer, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
+import useToken from "../hooks/useToken";
 
 const useDataApi = (
   reducer: Reducer<any, Action<any>>,
@@ -28,6 +30,12 @@ const useDataApi = (
     initialDataRequest
   );
   const [state, dispatch] = useReducer(reducer, { isLoading: false });
+  const [
+    _localStorageToken,
+    _setLocalStorageToken,
+    removeLocalStorageToken
+  ] = useToken();
+  const history = useHistory();
 
   useEffect(() => {
     if (dataRequest) {
@@ -65,13 +73,18 @@ const useDataApi = (
             type: "FETCH_SUCCESS"
           });
         } catch (error) {
+          if (error.response.status === 401) {
+            removeLocalStorageToken();
+            history.push("/login");
+          }
+
           dispatch({ type: "FETCH_FAILURE", isLoading: false, error });
         }
       };
 
       fetchData();
     }
-  }, [dataRequest]);
+  }, [dataRequest, history, removeLocalStorageToken]);
 
   return [state, setDataRequest];
 };

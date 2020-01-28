@@ -23,7 +23,7 @@ interface IPrivateRouteProps {
 }
 
 const PrivateRoute = ({ children, ...rest }: IPrivateRouteProps) => {
-  const token = useToken();
+  const [token] = useToken();
 
   return (
     <Route

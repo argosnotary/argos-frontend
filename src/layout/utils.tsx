@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const sizes:any = {
-  md: '768px',
-  sm: '576px'
+const sizes: any = {
+  md: "768px",
+  sm: "576px"
 };
 
-const generateMediaQuery = (widthType: string, size: string, cssTemplateLiteral: string) => {
-   return `@media(${widthType}: ${sizes[size]}){
+const generateMediaQuery = (
+  widthType: string,
+  size: string,
+  cssTemplateLiteral: string
+): string => {
+  return `@media(${widthType}: ${sizes[size]}){
       ${cssTemplateLiteral};
     }`;
 };

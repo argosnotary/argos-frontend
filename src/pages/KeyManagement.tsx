@@ -122,7 +122,10 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   const [localStorageToken] = useToken();
 
   useEffect(() => {
-    if (response.hasOwnProperty("data") && !response.isLoading) {
+    if (
+      Object.prototype.hasOwnProperty.call(response, "data") &&
+      !response.isLoading
+    ) {
       setWizardState(WizardStates.CopyKey);
     }
 
@@ -158,8 +161,9 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
       if (passwordInputRef.current) {
         passwordInputRef.current.select();
         passwordInputRef.current.setSelectionRange(0, 99999);
+        const document: any = window.document || {};
         document.execCommand("copy");
-        document.getSelection()!.removeAllRanges();
+        document.getSelection().removeAllRanges();
 
         const oldPassword = generatedPassword;
         setGeneratedPassword("Copied");
