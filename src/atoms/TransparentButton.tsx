@@ -13,44 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import React from "react";
 import styled from "styled-components";
 
-import Navbar from "../molecules/Navbar";
-
-const ButtonLink = styled.a`
-  background-color: ${props =>
-    props.theme.homePage.navigation.loginButton.default.loginButtonBgColor};
+const TransparentButton = styled.button`
+  display: flex;
+  align-items: center;
+  max-width: 11.5rem;
+  font-size: 1rem;
+  background-color: transparent;
   border: 1px solid
     ${props =>
-      props.theme.homePage.navigation.loginButton.default
-        .loginButtonBorderColor};
+      props.theme.transparentButton.default.transparentButtonBorderColor};
   color: ${props =>
-    props.theme.homePage.navigation.loginButton.default.loginButtonTextColor};
+    props.theme.transparentButton.default.transparentButtonTextColor};
   text-decoration: none;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.75rem;
   display: flex;
   transition: background-color 0.25s ease-out, color 0.25s ease-out;
 
   &:hover {
+    cursor: pointer;
     background-color: ${props =>
-      props.theme.homePage.navigation.loginButton.hover.loginButtonBgColor};
+      props.theme.transparentButton.hover.transparentButtonBgColor};
     border: 1px solid
       ${props =>
-        props.theme.homePage.navigation.loginButton.hover
-          .loginButtonBorderColor};
+        props.theme.transparentButton.hover.transparentButtonBorderColor};
     color: ${props =>
-      props.theme.homePage.navigation.loginButton.hover.loginButtonTextColor};
+      props.theme.transparentButton.hover.transparentButtonTextColor};
+
+    > svg > path {
+      fill: #fff;
+    }
+  }
+
+  > svg {
+    max-width: 1.25rem;
+    margin: 0 1rem 0 0;
   }
 `;
 
-const HomeNavbar = () => (
-  <Navbar>
-    <li>
-      <ButtonLink href="/login">Sign in</ButtonLink>
-    </li>
-  </Navbar>
-);
-
-export default HomeNavbar;
+export default TransparentButton;

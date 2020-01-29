@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import styled from 'styled-components';
+import React, { SyntheticEvent } from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 interface IContextMenu {
   displayContextMenu: boolean;
 }
 
-const Nav = styled.nav<{displayContextMenu: boolean}>`
-  display: ${props => (props.displayContextMenu ? 'flex' : 'none')};
+const Nav = styled.nav<{ displayContextMenu: boolean }>`
+  display: ${props => (props.displayContextMenu ? "flex" : "none")};
   position: absolute;
   background: ${props => props.theme.dashboardPage.contextMenu.bgColor};
   right: 0;
@@ -61,18 +62,28 @@ const MenuDivider = styled.li`
     props.theme.dashboardPage.contextMenu.dividerBgColor};
 `;
 
-const NavbarContextMenu: React.FC<IContextMenu> = props => (
-  <Nav displayContextMenu={props.displayContextMenu}>
-    <ul>
-      <MenuItem>
-        <A href="/settings">Settings</A>
-      </MenuItem>
-      <MenuDivider />
-      <MenuItem>
-        <A href="/">Log out</A>
-      </MenuItem>
-    </ul>
-  </Nav>
-);
+const NavbarContextMenu: React.FC<IContextMenu> = props => {
+  const history = useHistory();
+
+  const logoutUser = (e: SyntheticEvent) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    history.push("/login");
+  };
+
+  return (
+    <Nav displayContextMenu={props.displayContextMenu}>
+      <ul>
+        <A href="/settings">
+          <MenuItem>Settings</MenuItem>
+        </A>
+        <MenuDivider />
+        <A href="/logout">
+          <MenuItem onClick={logoutUser}>Log out</MenuItem>
+        </A>
+      </ul>
+    </Nav>
+  );
+};
 
 export default NavbarContextMenu;

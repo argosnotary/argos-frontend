@@ -15,7 +15,6 @@
 # limitations under the License.
 #
 
-
 if [ -z "$@" ]; then
     # Substitute env vars
     ENV_VARS='$BACKEND_URL'

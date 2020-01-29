@@ -13,24 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
-import styled from "styled-components";
-
-import HomeNavbar from "../organisms/HomeNavbar";
-
-const HomePageContainer = styled.section`
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  background-color: ${props => props.theme.homePage.bgColor};
-`;
-
-const HomePage = () => (
-  <HomePageContainer>
-    <main>
-      <HomeNavbar />
-    </main>
-  </HomePageContainer>
-);
-
-export default HomePage;
+declare module 'pkijs';

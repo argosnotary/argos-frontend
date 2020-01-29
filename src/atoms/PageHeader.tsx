@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const PageHeader = styled.h1`
-  margin: 1rem 2rem;
+  border-bottom: 1px solid ${props => props.theme.PageHeader.bottomBorderColor};
+  padding: 1rem 0 1.25rem;
+  margin: 0 0 0.6rem;
   font-size: 2rem;
 `;
 

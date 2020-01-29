@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {lighten} from 'polished';
-import React from 'react';
-import {NavLink, Redirect, Route, Switch, useRouteMatch} from 'react-router-dom';
-import styled from 'styled-components';
+import { lighten } from "polished";
+import React from "react";
+import {
+  NavLink,
+  Redirect,
+  Route,
+  Switch,
+  useRouteMatch
+} from "react-router-dom";
+import styled from "styled-components";
 
-import FlexColumn from '../atoms/FlexColumn';
-import FlexRow from '../atoms/FlexRow';
-import DashboardNavbar from '../organisms/DashboardNavbar';
-import KeyManagementPage from '../pages/KeyManagement';
-import ProfilePage from '../pages/Profile';
+import DashboardNavbar from "../organisms/DashboardNavbar";
+import FlexColumn from "../atoms/FlexColumn";
+import FlexRow from "../atoms/FlexRow";
+import KeyManagementPage from "../pages/KeyManagement";
+import ProfilePage from "../pages/Profile";
 
-import {generateMediaQuery} from '../layout/utils';
+import { generateMediaQuery } from "../layout/utils";
 
 const UserSettingsPageContainer = styled.section`
   position: fixed;
@@ -41,12 +47,12 @@ const SidePanel = styled(FlexColumn)`
   transition: flex-basis 500ms ease-in-out;
 
   ${generateMediaQuery(
-    'max-width',
-    'md',
+    "max-width",
+    "md",
     `
     flex-basis: 1rem;
     padding: 0;
-    `,
+    `
   )};
 `;
 
@@ -58,7 +64,7 @@ const SidePanelHeader = styled.li`
   font-size: 1rem;
   margin: 0.25rem 0.75rem 1.25rem;
 
-  ${generateMediaQuery('max-width', 'md', `margin: 1rem`)}
+  ${generateMediaQuery("max-width", "md", `margin: 1rem`)}
 `;
 
 const SidePanelLink = styled(NavLink)`
@@ -69,14 +75,14 @@ const SidePanelLink = styled(NavLink)`
     props.theme.userSettingsPage.sidePanel.sidePanelItem.fontColor};
   padding: 0.9rem 0.75rem;
   font-size: 0.9rem;
-  border-left: 'none';
+  border-left: "none";
 
   &:hover {
     cursor: pointer;
     background-color: ${props =>
       lighten(
         0.05,
-        props.theme.userSettingsPage.sidePanel.sidePanelItem.bgColor,
+        props.theme.userSettingsPage.sidePanel.sidePanelItem.bgColor
       )};
   }
 
@@ -100,22 +106,27 @@ const SidePanelItemIcon = styled.img`
   width: 1.1rem;
   margin: 0 0.75rem 0 0;
 
-  ${generateMediaQuery('max-width', 'md', `margin: 0`)};
+  ${generateMediaQuery("max-width", "md", `margin: 0; width: 1.5rem;`)};
 `;
 
 const SidePanelHeaderIcon = styled.img`
   width: 1.1rem;
   margin: 0 0.8rem 0 0.3rem;
 
-  ${generateMediaQuery('max-width', 'md', `margin: 0`)};
+  ${generateMediaQuery("max-width", "md", `margin: 0; width: 1.5rem;`)};
 `;
 
 const SidePanelItemLabel = styled.span`
-  ${generateMediaQuery('max-width', 'md', `display: none`)};
+  ${generateMediaQuery("max-width", "md", `display: none`)};
 `;
 
 const SplitLayout = styled(FlexRow)`
   height: 100%;
+`;
+
+const ContentColumn = styled(FlexColumn)`
+  flex-grow: 1;
+  padding: 1rem 2rem;
 `;
 
 const UserSettingsPage = () => {
@@ -129,7 +140,7 @@ const UserSettingsPage = () => {
           <ul>
             <SidePanelHeader>
               <SidePanelHeaderIcon src="/images/cogs.svg" />
-              <SidePanelItemLabel>User settings</SidePanelItemLabel>{' '}
+              <SidePanelItemLabel>User settings</SidePanelItemLabel>{" "}
             </SidePanelHeader>
             <li>
               <SidePanelLink to={`${match.url}/profile`}>
@@ -145,13 +156,13 @@ const UserSettingsPage = () => {
             </li>
           </ul>
         </SidePanel>
-        <FlexColumn>
+        <ContentColumn>
           <Switch>
             <Route path={`${match.path}/profile`} component={ProfilePage} />
             <Route path={`${match.path}/key`} component={KeyManagementPage} />
             <Redirect to={`${match.path}/profile`} />
           </Switch>
-        </FlexColumn>
+        </ContentColumn>
       </SplitLayout>
     </UserSettingsPageContainer>
   );

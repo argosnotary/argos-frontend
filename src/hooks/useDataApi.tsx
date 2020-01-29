@@ -16,23 +16,30 @@
 
 import axios, { AxiosRequestConfig } from "axios";
 import { Reducer, useEffect, useReducer, useState } from "react";
+import { useHistory } from "react-router-dom";
 
-import IState from "../interfaces/IState";
 import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
+import useToken from "../hooks/useToken";
 
 const useDataApi = (
-  reducer: Reducer<IState, Action>,
+  reducer: Reducer<any, Action<any>>,
   initialDataRequest?: DataRequest
-): [IState, (initialDataRequest: DataRequest) => void] => {
+): [any, (initialDataRequest: DataRequest) => void] => {
   const [dataRequest, setDataRequest] = useState<DataRequest | undefined>(
     initialDataRequest
   );
   const [state, dispatch] = useReducer(reducer, { isLoading: false });
+  const [
+    _localStorageToken,
+    _setLocalStorageToken,
+    removeLocalStorageToken
+  ] = useToken();
+  const history = useHistory();
 
   useEffect(() => {
     if (dataRequest) {
-      const fetchData = async () => {
+      const fetchData = () => {
         dispatch({ type: "FETCH_INIT", isLoading: true });
         try {
           const authorizationHeader = {
@@ -59,13 +66,19 @@ const useDataApi = (
             }
           }
 
-          const result = await axios(dataRequest.url, requestConfig);
-          dispatch({
-            isLoading: false,
-            results: result.data,
-            type: "FETCH_SUCCESS"
+          axios(dataRequest.url, requestConfig).then(result => {
+            dispatch({
+              isLoading: false,
+              results: result.data,
+              type: "FETCH_SUCCESS"
+            });
           });
         } catch (error) {
+          if (error.response.status === 401) {
+            removeLocalStorageToken();
+            history.push("/login");
+          }
+
           dispatch({ type: "FETCH_FAILURE", isLoading: false, error });
         }
       };

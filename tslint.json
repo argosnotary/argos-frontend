@@ -1,7 +1,0 @@
-{
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
-  "rules": {
-    "no-submodule-imports": [true, "@testing-library/react-hooks"],
-    "no-implicit-dependencies": [true, "dev"]
-  }
-}

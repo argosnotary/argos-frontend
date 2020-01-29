@@ -54,6 +54,7 @@
             <ts>SLASHSTAR_STYLE</ts>
             <tsx>SLASHSTAR_STYLE</tsx>
             <conf>SCRIPT_STYLE</conf>
+            <template>SCRIPT_STYLE</template>
           </mapping>
         </configuration>
         <executions>

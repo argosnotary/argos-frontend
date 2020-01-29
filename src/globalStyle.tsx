@@ -158,6 +158,10 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     html {
         font-family: ${props => props.theme.fontFamily};
     }
+
+    body {
+        line-height: 1.5rem;
+    }
 `;
 
 export default GlobalStyle;

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import styled from 'styled-components';
-import Input from '../atoms/Input';
-import InputLabel from '../atoms/InputLabel';
+import React from "react";
+import styled from "styled-components";
+
+import Input from "../atoms/Input";
+import InputLabel from "../atoms/InputLabel";
 
 interface IFormInputProps {
   labelValue: string;
@@ -41,7 +42,7 @@ const FormInput: React.FC<IFormInputProps> = ({
   onBlur,
   onChange,
   name,
-  formType,
+  formType
 }) => (
   <FormInputContainer>
     <InputLabel>{labelValue}</InputLabel>

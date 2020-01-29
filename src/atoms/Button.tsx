@@ -15,9 +15,9 @@
  */
 
 import { darken } from "polished";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const Button = styled.button`
+const BaseButtonStyle = css`
   margin: 0 0 1rem 0;
   padding: 0.85rem 1rem;
   border: 1px solid transparent;
@@ -35,4 +35,12 @@ const Button = styled.button`
   }
 `;
 
-export default Button;
+const Button = styled.button`
+  ${BaseButtonStyle}
+`;
+
+const AnchorButton = styled.a`
+  ${BaseButtonStyle}
+`;
+
+export { AnchorButton, Button };

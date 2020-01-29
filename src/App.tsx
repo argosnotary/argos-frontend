@@ -16,9 +16,9 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 
+import theme from "./theme/base.json";
 import GlobalStyle from "./globalStyle";
 import Routes from "./routes";
-import theme from "./theme/base.json";
 
 const AppContainer = styled.main``;
 

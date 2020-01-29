@@ -13,26 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+const { ESLINT_MODES } = require("@craco/craco");
 
 module.exports = {
-  webpack: {
-    alias: {},
-    plugins: [],
-    configure: (webpackConfig, {env, paths}) => {
-      webpackConfig.module.rules.push({
-        test: /\.ts$|\.tsx$/,
-        enforce: 'pre',
-        use: [
-          {
-            loader: 'tslint-loader',
-            options: {
-              emitErrors: true,
-            },
-          },
-        ],
-      });
-
-      return webpackConfig;
-    },
-  },
+  eslint: {
+    mode: ESLINT_MODES.file
+  }
 };
