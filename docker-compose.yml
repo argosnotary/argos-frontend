@@ -37,7 +37,7 @@ services:
       spring.security.oauth2.client.provider.azure.userInfoUri: http://oauth-stub:8080/v1.0/me
       jwt.token.secret: Z2LcVpgCuGtpb5rBDNIIWGe8RXqYGWDpWFjWhYQUS2Z8rjE2/GTJlu0s6BRYG0Mn0kV8StC9cFE83Jkl68RCkw==
       auth.frontendRedirectBasePath: http://localhost
-      spring.security.oauth2.client.registration.azure.redirectUri: http://localhost/api/oauth2/callback/azure
+      server.use-forward-headers: 'true'
     ports:
       - 8080:8080
       
