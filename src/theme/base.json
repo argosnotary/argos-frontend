@@ -1,0 +1,91 @@
+{
+  "fontFamily": "'Fira Sans'",
+  "fontFile": "/fonts/fira-sans-v10-latin-regular",
+  "button": {
+    "bgColor": "#1779ba",
+    "textColor": "#fff"
+  },
+  "transparentButton": {
+    "default": {
+      "transparentButtonBgColor": "#fff",
+      "transparentButtonTextColor": "#1779ba",
+      "transparentButtonBorderColor": "#1779ba"
+    },
+    "hover": {
+      "transparentButtonBgColor": "#1779ba",
+      "transparentButtonTextColor": "#fff",
+      "transparentButtonBorderColor": "#1779ba"
+    }
+  },
+  "loaderIcon": {
+    "color": "#1779ba"
+  },
+  "modal": {
+    "bgColor": "#fff",
+    "button": {
+      "default": {
+        "color": "#1779ba"
+      },
+      "hover": {
+        "color": "#1779ba"
+      }
+    }
+  },
+  "alerts": {
+    "warning": {
+      "color": "red"
+    }
+  },
+  "PageHeader": {
+    "bottomBorderColor": "#bbb"
+  },
+  "homePage": {
+    "bgColor": "#eee",
+    "navigation": {
+      "bgColor": "#fff",
+      "loginButton": {
+        "default": {
+          "loginButtonBgColor": "#fff",
+          "loginButtonTextColor": "#1779ba",
+          "loginButtonBorderColor": "#1779ba"
+        },
+        "hover": {
+          "loginButtonBgColor": "#1779ba",
+          "loginButtonTextColor": "#fff",
+          "loginButtonBorderColor": "#1779ba"
+        }
+      }
+    }
+  },
+  "dashboardPage": {
+    "avatar": {
+      "borderColor": "#1779ba"
+    },
+    "contextMenu": {
+      "bgColor": "#fff",
+      "borderColor": "#e5e5e5",
+      "menuItemTextColor": "#2e2e2e",
+      "menuItemBgColor": "#fff",
+      "menuItemHoverBgColor": "#eee",
+      "dividerBgColor": "#dfdfdf"
+    }
+  },
+  "loginPage": {
+    "bgColor": "#eee"
+  },
+  "userSettingsPage": {
+    "bgColor": "#eee",
+    "sidePanel": {
+      "bgColor": "#e0e0e0",
+      "sidePanelItem": {
+        "bgColor": "#c7c7c7",
+        "highlightColor": "#1779ba",
+        "fontColor": "#2E2E30"
+      }
+    }
+  },
+  "keyManagementPage": {
+    "iconColor": "#1779ba",
+    "passwordColor": "orange"
+  }
+}
