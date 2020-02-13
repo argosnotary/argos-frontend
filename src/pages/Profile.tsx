@@ -63,7 +63,7 @@ const ProfilePage = () => {
   const dataRequest: DataRequest = {
     method: "get",
     token,
-    url: "/api/user/me"
+    url: "/api/personalaccount/me"
   };
 
   const [result] = useDataApi(dataFetchReducer, dataRequest);
