@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface IInputErrorLabelProps {
   disableMargin?: boolean;
 }
 
-const InputErrorLabel =
-  styled.p <
-  IInputErrorLabelProps >
-  `
+const InputErrorLabel = styled.p<IInputErrorLabelProps>`
   color: red;
   font-weight: bold;
   font-size: 0.875rem;
-  margin: ${props => (props.disableMargin ? '0' : '0 0 0.75rem')};
+  margin: ${props => (props.disableMargin ? "0" : "0 0 0.75rem")};
 `;
 
 export default InputErrorLabel;

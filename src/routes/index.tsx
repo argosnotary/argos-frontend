@@ -22,12 +22,15 @@ import {
   useLocation
 } from "react-router-dom";
 
+import DashboardLayout from "../layout/DashboardLayout";
 import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/Home";
+import LayoutEditorPage from "../pages/LayoutEditor";
 import LoginPage from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import UserSettingsPage from "../pages/UserSettings";
 import useToken from "../hooks/useToken";
+import { RequestErrorStoreProvider } from "../stores/requestErrorStore";
 
 interface IAuthenticationForwarderProps {
   token: string;
@@ -68,12 +71,23 @@ const Routes: React.FC = () => {
         <Route path="/authenticated">
           <AuthenticationForwarder token={token} setToken={setToken} />
         </Route>
-        <PrivateRoute path="/dashboard">
-          <DashboardPage />
-        </PrivateRoute>
-        <PrivateRoute path="/settings">
-          <UserSettingsPage />
-        </PrivateRoute>
+        <RequestErrorStoreProvider>
+          <PrivateRoute path="/dashboard">
+            <DashboardLayout>
+              <DashboardPage />
+            </DashboardLayout>
+          </PrivateRoute>
+          <PrivateRoute path="/settings">
+            <DashboardLayout>
+              <UserSettingsPage />
+            </DashboardLayout>
+          </PrivateRoute>
+          <PrivateRoute path="/edit/layout">
+            <DashboardLayout>
+              <LayoutEditorPage />
+            </DashboardLayout>
+          </PrivateRoute>
+        </RequestErrorStoreProvider>
       </Switch>
     </Router>
   );

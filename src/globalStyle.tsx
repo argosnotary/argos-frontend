@@ -157,6 +157,11 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
         
     html {
         font-family: ${props => props.theme.fontFamily};
+        box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit;
     }
 
     body {

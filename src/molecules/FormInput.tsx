@@ -22,11 +22,11 @@ import InputLabel from "../atoms/InputLabel";
 
 interface IFormInputProps {
   labelValue: string;
-  placeHolder: string;
+  placeHolder?: string;
   name: string;
-  value: string;
-  onBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   formType: string;
 }
 
@@ -48,10 +48,10 @@ const FormInput: React.FC<IFormInputProps> = ({
     <InputLabel>{labelValue}</InputLabel>
     <Input
       name={name}
-      onBlur={onBlur}
-      onChange={onChange}
-      defaultValue={value}
-      placeholder={placeHolder}
+      {...onBlur ? {onBlur} : ''}
+      {...onChange ? {onChange}: ''}
+      {...value ? {defaultValue: value} : ''}
+      {...placeHolder ? {placeholder: placeHolder} : ''}
       type={formType}
     />
   </FormInputContainer>
