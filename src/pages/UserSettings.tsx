@@ -91,13 +91,15 @@ const SidePanelLink = styled(NavLink)`
   }
 
   &.active {
+    background-color: ${props =>
+      props.theme.userSettingsPage.sidePanel.sidePanelItem.activeBgColor};
     border-left: 0.25rem solid
       ${props =>
         props.theme.userSettingsPage.sidePanel.sidePanelItem.highlightColor};
 
     &:hover {
       background-color: ${props =>
-        props.theme.userSettingsPage.sidePanel.sidePanelItem.bgColor};
+        props.theme.userSettingsPage.sidePanel.sidePanelItem.activeBgColor};
     }
   }
 `;

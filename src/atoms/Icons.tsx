@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
+import React from "react";
 
 interface IIconProps {
   color: string;
   size: number;
+  transform?: string;
 }
 
-const KeyIcon: React.FC<IIconProps> = ({color, size}) => (
+const KeyIcon: React.FC<IIconProps> = ({ color, size }) => (
   <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}
-    viewBox="0 0 32 32">
+    viewBox="0 0 32 32"
+  >
     <title>key</title>
     <path
       fill={color}
@@ -35,13 +37,29 @@ const KeyIcon: React.FC<IIconProps> = ({color, size}) => (
   </svg>
 );
 
-const PlusIcon: React.FC<IIconProps> = ({color, size}) => (
+const AltPlusIcon: React.FC<IIconProps> = ({ color, size }) => (
   <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}
-    viewBox="0 0 32 32">
+    viewBox="0 0 32 32"
+  >
+    <path
+      fill={color}
+      d="M16 0c-8.836 0-16 7.164-16 16s7.164 16 16 16 16-7.164 16-16-7.164-16-16-16zM24 18h-6v6h-4v-6h-6v-4h6v-6h4v6h6v4z"
+    />
+  </svg>
+);
+
+const PlusIcon: React.FC<IIconProps> = ({ color, size }) => (
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 32 32"
+  >
     <title>plus</title>
     <path
       fill={color}
@@ -50,22 +68,23 @@ const PlusIcon: React.FC<IIconProps> = ({color, size}) => (
   </svg>
 );
 
-const WarningIcon: React.FC<IIconProps> = ({color, size}) => (
+const WarningIcon: React.FC<IIconProps> = ({ color, size }) => (
   <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}
-    viewBox="0 0 32 32">
+    viewBox="0 0 32 32"
+  >
     <title>warning</title>
     <path
       fill={color}
       d="M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"
-    />{' '}
+    />{" "}
     <path
       fill={color}
       d="M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
-    />{' '}
+    />{" "}
     <path
       fill={color}
       d="M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"
@@ -73,13 +92,14 @@ const WarningIcon: React.FC<IIconProps> = ({color, size}) => (
   </svg>
 );
 
-const LoaderIcon: React.FC<IIconProps> = ({color, size}) => (
+const LoaderIcon: React.FC<IIconProps> = ({ color, size }) => (
   <svg
     width={size}
     height={size}
     viewBox="0 0 38 38"
     xmlns="http://www.w3.org/2000/svg"
-    stroke={color}>
+    stroke={color}
+  >
     <g fill="none" fillRule="evenodd">
       <g transform="translate(1 1)" strokeWidth="2">
         <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
@@ -97,4 +117,33 @@ const LoaderIcon: React.FC<IIconProps> = ({color, size}) => (
     </g>
   </svg>
 );
-export {KeyIcon, LoaderIcon, PlusIcon, WarningIcon};
+
+const TriangleIcon: React.FC<IIconProps> = ({ color, size, transform }) => (
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 32 32"
+    transform={transform}
+  >
+    <path fill={color} d="M6 4l20 12-20 12z" />
+  </svg>
+);
+
+const LabelIcon: React.FC<IIconProps> = ({ color, size }) => (
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 32 32"
+  >
+    <path
+      fill={color}
+      d="M29 3h-11.3l-14.9 14.8 11.3 11.3 14.9-14.8v-11.3zM20 12v-4h4v4h-4z"
+    />{" "}
+  </svg>
+);
+
+export { AltPlusIcon, KeyIcon, LabelIcon, LoaderIcon, PlusIcon, TriangleIcon, WarningIcon };

@@ -18,8 +18,9 @@ import styled from "styled-components";
 const TransparentButton = styled.button`
   display: flex;
   align-items: center;
+  min-height: 2.5rem;
   max-width: 11.5rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
   background-color: transparent;
   border: 1px solid
     ${props =>
@@ -27,8 +28,7 @@ const TransparentButton = styled.button`
   color: ${props =>
     props.theme.transparentButton.default.transparentButtonTextColor};
   text-decoration: none;
-  padding: 0.5rem 0.75rem;
-  display: flex;
+  padding: 0 1rem 2px;
   transition: background-color 0.25s ease-out, color 0.25s ease-out;
 
   &:hover {

@@ -31,6 +31,20 @@
       }
     }
   },
+  "treeEditor": {
+    "loaders": {
+      "onPageLoad": {
+        "color": "#1779ba"
+      },
+      "onFetchChildren": {
+        "color": "#1779ba"
+      }
+    }
+  },
+  "connectionError": {
+    "textColor": "#fff",
+    "bgColor": "red"
+  },
   "alerts": {
     "warning": {
       "color": "red"
@@ -74,11 +88,12 @@
     "bgColor": "#eee"
   },
   "userSettingsPage": {
-    "bgColor": "#eee",
+    "bgColor": "#f1f1f1",
     "sidePanel": {
       "bgColor": "#e0e0e0",
       "sidePanelItem": {
         "bgColor": "#c7c7c7",
+        "activeBgColor": "#f1f1f1",
         "highlightColor": "#1779ba",
         "fontColor": "#2E2E30"
       }
@@ -87,5 +102,12 @@
   "keyManagementPage": {
     "iconColor": "#1779ba",
     "passwordColor": "orange"
+  },
+  "layoutPage": {
+    "panel": {
+      "bgColor": "#f1f1f1",
+      "borderColor": "#e0e0e0",
+      "contentSeparator": "#ccc"
+    }
   }
 }

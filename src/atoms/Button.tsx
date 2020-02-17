@@ -15,11 +15,17 @@
  */
 
 import { darken } from "polished";
+import React from 'react';
 import styled, { css } from "styled-components";
 
+import { LoaderIcon } from '../atoms/Icons';
+
 const BaseButtonStyle = css`
+  display: inline-block;
+  vertical-align: middle;
   margin: 0 0 1rem 0;
-  padding: 0.85rem 1rem;
+  line-height: 1;
+  padding: 0.8rem 1rem;
   border: 1px solid transparent;
   text-align: center;
   font-size: 0.9rem;
@@ -43,4 +49,16 @@ const AnchorButton = styled.a`
   ${BaseButtonStyle}
 `;
 
-export { AnchorButton, Button };
+
+interface ILoaderButtonProps {
+  children: string;
+  loading: boolean;
+  buttonType: "button" | "submit" | "reset";
+}
+
+const LoaderButton: React.FC<ILoaderButtonProps> = ({children, loading, buttonType}) => {
+  return <Button type={buttonType}>{loading ? <LoaderIcon size={18} color={'#fff'} /> : children}</Button>  
+};
+
+
+export { AnchorButton, Button, LoaderButton };

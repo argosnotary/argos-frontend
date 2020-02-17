@@ -21,6 +21,7 @@ import { useHistory } from "react-router-dom";
 import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
 import useToken from "../hooks/useToken";
+import { useRequestErrorStore } from "../stores/requestErrorStore";
 
 const useDataApi = (
   reducer: Reducer<any, Action<any>>,
@@ -36,51 +37,61 @@ const useDataApi = (
     removeLocalStorageToken
   ] = useToken();
   const history = useHistory();
+  const [_error, setError] = useRequestErrorStore();
 
   useEffect(() => {
     if (dataRequest) {
       const fetchData = () => {
         dispatch({ type: "FETCH_INIT", isLoading: true });
-        try {
-          const authorizationHeader = {
-            Authorization: `Bearer ${dataRequest.token}`,
-            "Content-Type": "application/json"
-          };
+        const authorizationHeader = {
+          Authorization: `Bearer ${dataRequest.token}`,
+          "Content-Type": "application/json"
+        };
 
-          const requestConfig: AxiosRequestConfig = {
-            headers: authorizationHeader
-          };
+        const requestConfig: AxiosRequestConfig = {
+          headers: authorizationHeader
+        };
 
-          switch (dataRequest.method) {
-            case "get": {
-              const methodKey = "method";
-              requestConfig[methodKey] = "get";
-              break;
+        switch (dataRequest.method) {
+          case "get": {
+            const methodKey = "method";
+            requestConfig[methodKey] = "get";
+
+            if (dataRequest.params) {
+              requestConfig["params"] = dataRequest.params;
             }
-            case "post": {
-              const methodKey = "method";
-              const dataKey = "data";
-              requestConfig[methodKey] = "post";
-              requestConfig[dataKey] = dataRequest.data;
-              break;
-            }
+            break;
           }
+          case "post": {
+            const methodKey = "method";
+            const dataKey = "data";
+            requestConfig[methodKey] = "post";
+            requestConfig[dataKey] = dataRequest.data;
+            break;
+          }
+        }
 
-          axios(dataRequest.url, requestConfig).then(result => {
+        axios(dataRequest.url, requestConfig)
+          .then(result => {
             dispatch({
               isLoading: false,
               results: result.data,
               type: "FETCH_SUCCESS"
             });
-          });
-        } catch (error) {
-          if (error.response.status === 401) {
-            removeLocalStorageToken();
-            history.push("/login");
-          }
 
-          dispatch({ type: "FETCH_FAILURE", isLoading: false, error });
-        }
+            if (dataRequest.cbSuccess) {
+              dataRequest.cbSuccess(result.data);
+            }
+          })
+          .catch(error => {
+            if (error.response.status === 401) {
+              removeLocalStorageToken();
+              history.push("/login");
+            }
+
+            dispatch({ type: "FETCH_FAILURE", isLoading: false, error });
+            setError(error);
+          });
       };
 
       fetchData();
