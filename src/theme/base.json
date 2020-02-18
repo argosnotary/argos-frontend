@@ -32,12 +32,50 @@
     }
   },
   "treeEditor": {
+    "textColor": "#2e2e2e",
+    "bgColor": "#f1f1f1",
+    "borderColor": "#e0e0e0",
     "loaders": {
       "onPageLoad": {
         "color": "#1779ba"
       },
       "onFetchChildren": {
         "color": "#1779ba"
+      }
+    },
+    "iconColors": {
+      "addRootNode": "#1779ba",
+      "expandNode": "#1779ba",
+      "label": "#8D99AE"
+    },
+    "treeHeadLabel": {
+      "bgColor": "#e8feff"
+    },
+    "nodeContextMenuContainer": {
+      "bgColor": "fff",
+      "borderColor": "#e5e5e5"
+    },
+    "nodeContextMenuItem": {
+      "bgColor": "#fff",
+      "hover": {
+        "bgColor": "#e8feff"
+      }
+    },
+    "breadCrumb": {
+      "textColor": "#1779ba"
+    },
+    "lastBreadCrumb": {
+      "textColor": "#000"
+    },
+    "nodeContextMenuItemSeparator": {
+      "borderColor": "#e5e5e5"
+    }
+  },
+  "dashboardNavBar": {
+    "link": {
+      "textColor": "#2e2e2e",
+      "hover": {
+        "bgColor": "#e8feff"
       }
     }
   },

@@ -1,0 +1,176 @@
+{
+  "sampleData": [
+    {
+      "name": "neo",
+      "type": "LABEL",
+      "referenceId": "d39996ec-3e1b-4b9e-b37b-4475416ec5e0",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "neoman",
+          "type": "LABEL",
+          "referenceId": "adb7610b-6f2a-4dc3-84d5-43c6b437fbee",
+          "hasChildren": false,
+          "children": []
+        },
+        {
+          "name": "trinity",
+          "type": "LABEL",
+          "referenceId": "ae83e8ee-5f66-496d-8ebd-6d713f815bbf",
+          "hasChildren": true,
+          "children": [
+            {
+              "name": "mimi",
+              "type": "LABEL",
+              "referenceId": "7d569bb0-7f2e-45c2-8b87-fbd441be5d03",
+              "hasChildren": true,
+              "children": [
+                {
+                  "name": "jojo",
+                  "type": "LABEL",
+                  "referenceId": "f7c7df34-68c4-4cf7-a27a-6a3adbeeab52",
+                  "hasChildren": true,
+                  "children": [
+                    {
+                      "name": "jojokido",
+                      "type": "LABEL",
+                      "referenceId": "7a9eb0f7-0162-45d1-81d7-4f54b241687c",
+                      "hasChildren": true,
+                      "children": [
+                        {
+                          "name": "jojogreatgrand",
+                          "type": "LABEL",
+                          "referenceId": "3f316771-211e-446f-a98c-a77c5148e640",
+                          "hasChildren": true,
+                          "children": [
+                            {
+                              "name": "evensmaller",
+                              "type": "LABEL",
+                              "referenceId": "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+                              "hasChildren": false,
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "mkid",
+                      "type": "LABEL",
+                      "referenceId": "52812899-d8b9-4f5a-9335-22022b9fb196",
+                      "hasChildren": false,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "morpheus",
+      "type": "LABEL",
+      "referenceId": "ad0e6313-b388-4481-80f4-955b3d1a5a51",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "bobo",
+          "type": "LABEL",
+          "referenceId": "c1013af3-fff2-473b-b7a9-4d5279221bd6",
+          "hasChildren": true,
+          "children": [
+            {
+              "name": "bobi",
+              "type": "LABEL",
+              "referenceId": "97311f2d-a70c-4380-8f5d-00a02fc3af04",
+              "hasChildren": false,
+              "children": []
+            },
+            {
+              "name": "lobo",
+              "type": "LABEL",
+              "referenceId": "81e0ad32-369b-477b-a399-5fb21295e9f3",
+              "hasChildren": true,
+              "children": [
+                {
+                  "name": "drobo",
+                  "type": "LABEL",
+                  "referenceId": "7b095c87-0329-4da8-b260-606e4eb7e332",
+                  "hasChildren": true,
+                  "children": [
+                    {
+                      "name": "klobo",
+                      "type": "LABEL",
+                      "referenceId": "e0114314-25f3-4a66-a615-f0c899f8b31c",
+                      "hasChildren": false,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "john",
+          "type": "LABEL",
+          "referenceId": "f36d281d-fbc1-4ecc-a894-7d2fdb3161cf",
+          "hasChildren": true,
+          "children": [
+            {
+              "name": "lobo",
+              "type": "LABEL",
+              "referenceId": "2e49270c-d7e3-48bb-9068-9a60f7de2790",
+              "hasChildren": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "morpheo",
+          "type": "LABEL",
+          "referenceId": "e083497c-4f0e-4771-b38c-49eb27e22959",
+          "hasChildren": false,
+          "children": []
+        },
+        {
+          "name": "randy",
+          "type": "LABEL",
+          "referenceId": "7b718a9d-9222-43fa-a493-e9a3e6bfa2d1",
+          "hasChildren": false,
+          "children": []
+        },
+        {
+          "name": "smith",
+          "type": "LABEL",
+          "referenceId": "a225d777-effd-4875-b41e-4cb5596dbc2e",
+          "hasChildren": true,
+          "children": []
+        },
+        {
+          "name": "star",
+          "type": "LABEL",
+          "referenceId": "ea0206af-5660-4daa-a1fa-194044c3ca8f",
+          "hasChildren": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "popix",
+      "type": "LABEL",
+      "referenceId": "78097283-d181-48cd-9647-373dbab3f3b7",
+      "hasChildren": true,
+      "children": []
+    },
+    {
+      "name": "newlabel",
+      "type": "LABEL",
+      "referenceId": "ac1be3f3-0465-4d49-863f-59c35d1df431",
+      "hasChildren": false,
+      "children": []
+    }
+  ]
+}

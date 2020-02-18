@@ -25,7 +25,7 @@ import {
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/Home";
-import LayoutEditorPage from "../pages/LayoutEditor";
+import LayoutEditorPage from "../pages/LayoutEditor/LayoutEditor";
 import LoginPage from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import UserSettingsPage from "../pages/UserSettings";
