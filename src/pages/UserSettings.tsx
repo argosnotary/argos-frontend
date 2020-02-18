@@ -24,7 +24,6 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 
-import DashboardNavbar from "../organisms/DashboardNavbar";
 import FlexColumn from "../atoms/FlexColumn";
 import FlexRow from "../atoms/FlexRow";
 import KeyManagementPage from "../pages/KeyManagement";
@@ -136,7 +135,6 @@ const UserSettingsPage = () => {
 
   return (
     <UserSettingsPageContainer>
-      <DashboardNavbar />
       <SplitLayout>
         <SidePanel>
           <ul>

@@ -13,9 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ITreeContextMenuItem from "./ITreeContextMenuItem";
+import React from "react";
 
-export default interface ITreeContextMenuEntry {
-  type: string;
-  menuitems: Array<ITreeContextMenuItem>;
-}
+import TreeEditor from "./TreeEditor";
+
+import json from "./sampleData.json";
+
+export default {
+  title: "TreeEditor"
+};
+
+export const labelEditor = () => <TreeEditor data={json.sampleData} />;

@@ -17,8 +17,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import DashboardNavbar from "../organisms/DashboardNavbar";
-
 const DashboardPageContainer = styled.section`
   position: fixed;
   height: 100%;
@@ -26,12 +24,6 @@ const DashboardPageContainer = styled.section`
   background-color: ${props => props.theme.homePage.bgColor};
 `;
 
-const DashboardPage = () => (
-  <DashboardPageContainer>
-    <main>
-      <DashboardNavbar />
-    </main>
-  </DashboardPageContainer>
-);
+const DashboardPage = () => <DashboardPageContainer />;
 
 export default DashboardPage;

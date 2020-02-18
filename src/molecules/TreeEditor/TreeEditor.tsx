@@ -1,16 +1,34 @@
+/*
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import React, { Dispatch, useContext, useEffect, useState } from "react";
 import styled, { ThemeContext } from "styled-components";
 
-import ITreeNode from "../interfaces/ITreeNode";
+import ITreeNode from "../../interfaces/ITreeNode";
 import {
   AltPlusIcon,
   LabelIcon,
   TriangleIcon,
   LoaderIcon
-} from "../atoms/Icons";
-import { TreeStateContext, TreeReducerAction } from "../stores/TreeEditorStore";
-import ITreeContextMenuItem from "../interfaces/ITreeContextMenuItem";
-import FlexColumn from "../atoms/FlexColumn";
+} from "../../atoms/Icons";
+import {
+  TreeStateContext,
+  TreeReducerAction
+} from "../../stores/treeEditorStore";
+import ITreeContextMenuItem from "../../interfaces/ITreeContextMenuItem";
+import FlexColumn from "../../atoms/FlexColumn";
 
 interface ITreeEditorProps {
   data: Array<ITreeNode>;
@@ -61,22 +79,24 @@ const TreeHead = styled.button`
 
 const TreeHeadLabel = styled.span<ITreeHeadLabelProps>`
   user-select: none;
-  color: #000;
   cursor: pointer;
   padding: 0.1rem 0.4rem;
   border: 1px solid transparent;
-  background-color: ${props => (props.selected ? "#e8feff" : "transparent")}
+  background-color: ${props =>
+    props.selected
+      ? props.theme.treeEditor.treeHeadLabel.bgColor
+      : "transparent"};
 
   &:hover {
-    background-color: #E8FEFF;
+    background-color: ${props => props.theme.treeEditor.treeHeadLabel.bgColor};
     border-radius: 2px;
   }
 `;
 
-const renderTypeIcon = (type: string) => {
+const renderTypeIcon = (theme: any, type: string) => {
   switch (type) {
     case "LABEL":
-      return <LabelIcon color={"#8D99AE"} size={14} />;
+      return <LabelIcon color={theme.treeEditor.iconColors.label} size={14} />;
   }
 };
 
@@ -92,31 +112,37 @@ const TypeIconContainer = styled.div<ITypeIconContainerProps>`
 const NodeContextMenuContainer = styled.ul<INodeContextContainerProps>`
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: ${props =>
+    props.theme.treeEditor.nodeContextMenuContainer.bgColor};
   position: fixed;
   top: ${props => props.y}px;
   left: ${props => props.x}px;
   display: flex;
-  border: 1px solid #e5e5e5;
+  border: 1px solid
+    ${props => props.theme.treeEditor.nodeContextMenuContainer.borderColor};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-width: 10rem;
   z-index: 4;
 `;
 
 const NodeContextMenuItem = styled.li`
+  background-color: ${props =>
+    props.theme.treeEditor.nodeContextMenuItem.bgColor};
   font-size: 0.9rem;
   padding: 0.25rem 0.75rem;
   cursor: pointer;
   width: 100%;
 
   &:hover {
-    background-color: #e8feff;
+    background-color: ${props =>
+      props.theme.treeEditor.nodeContextMenuItem.hover.bgColor};
   }
 `;
 
 const NodeContextMenuItemSeparator = styled.hr`
   border: 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid
+    ${props => props.theme.treeEditor.nodeContextMenuItemSeparator.borderColor};
   margin: 0;
 `;
 
@@ -187,7 +213,8 @@ const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
     _contextmenu,
     _cbCreateRootNode,
     cbGetNodeChildren,
-    isFetchingNodesData
+    isFetchingNodesData,
+    selectedNodeReferenceId
   ] = useContext(TreeStateContext);
 
   useEffect(() => {
@@ -225,7 +252,7 @@ const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
             />
           ) : (
             <TreeIcon
-              color={"#1779ba"}
+              color={theme.treeEditor.iconColors.expandNode}
               size={12}
               {...(displayNode ? { transform: "rotate(35)" } : "")}
             />
@@ -233,10 +260,13 @@ const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
         </TreeHead>
       ) : null}
       <TypeIconContainer hasChildren={node.hasChildren}>
-        {renderTypeIcon(node.type)}
+        {renderTypeIcon(theme, node.type)}
       </TypeIconContainer>
       <TreeHeadLabel
-        selected={state.contextMenu.id === node.referenceId}
+        selected={
+          state.contextMenu.id === node.referenceId ||
+          selectedNodeReferenceId === node.referenceId
+        }
         onContextMenu={e => {
           const { clientX, clientY } = e;
           e.preventDefault();
@@ -284,10 +314,15 @@ const AddAdditionalRootNodes = () => {
     cbCreateRootNode
   ] = useContext(TreeStateContext);
 
+  const theme = useContext(ThemeContext);
+
   return (
     <TreeNodeContainer depth={1}>
       <IconContainer>
-        <AltPlusIcon size={12} color={"#1779ba"} />
+        <AltPlusIcon
+          size={12}
+          color={theme.treeEditor.iconColors.addRootNode}
+        />
       </IconContainer>
       <TreeHeadLabel selected={false} onClick={cbCreateRootNode}>
         {stringlist.createrootnode}
@@ -297,8 +332,9 @@ const AddAdditionalRootNodes = () => {
 };
 
 const TreeEditorContainer = styled.aside`
-  border: 1rem solid #e0e0e0;
-  background-color: #f1f1f1;
+  border: 1rem solid ${props => props.theme.treeEditor.borderColor};
+  color: ${props => props.theme.treeEditor.textColor};
+  background-color: ${props => props.theme.treeEditor.bgColor};
   height: 100vh;
   width: 25vw;
   padding: 1rem;

@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ITreeContextMenuItem from "./ITreeContextMenuItem";
-
-export default interface ITreeContextMenuEntry {
-  type: string;
-  menuitems: Array<ITreeContextMenuItem>;
+export default interface ILabelPostResponse {
+  id: string;
+  name: string;
+  parentLabelId?: string;
 }
