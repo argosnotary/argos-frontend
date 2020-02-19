@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 import React, { Dispatch } from "react";
+import ILabelPostResponse from "../interfaces/ILabelPostResponse";
 
 interface ILayoutEditorState {
-  nodeReferenceId?: string;
+  nodeReferenceId: string;
   firstPanelView: string;
   breadcrumb: string;
   selectedNodeName: string;
+  data?: any;
+  dataAction?: string;
 }
 
 export type LayoutEditorAction =
@@ -29,7 +32,15 @@ export type LayoutEditorAction =
       breadcrumb: string;
       selectedNodeName: string;
     }
-  | { type: "resetpane" };
+  | {
+      type: "updatelabel";
+      nodeReferenceId: string;
+      breadcrumb: string;
+      selectedNodeName: string;
+    }
+  | { type: "resetpane" }
+  | { type: "postnewlabel"; label: ILabelPostResponse }
+  | { type: "putlabel"; label: ILabelPostResponse };
 
 const editorReducer = (
   state: ILayoutEditorState,
@@ -44,12 +55,33 @@ const editorReducer = (
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
+    case "updatelabel":
+      return {
+        ...state,
+        firstPanelView: "updatelabel",
+        nodeReferenceId: action.nodeReferenceId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName
+      };
     case "resetpane":
       return {
         ...state,
         firstPanelView: "",
         nodeReferenceId: ""
       };
+    case "postnewlabel":
+      return {
+        ...state,
+        dataAction: "postnewlabel",
+        data: action.label
+      };
+    case "putlabel": {
+      return {
+        ...state,
+        dataAction: "putlabel",
+        data: action.label
+      };
+    }
   }
 };
 

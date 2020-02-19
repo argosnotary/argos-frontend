@@ -69,6 +69,14 @@ const useDataApi = (
             requestConfig[dataKey] = dataRequest.data;
             break;
           }
+
+          case "put": {
+            const methodKey = "method";
+            const dataKey = "data";
+            requestConfig[methodKey] = "put";
+            requestConfig[dataKey] = dataRequest.data;
+            break;
+          }
         }
 
         axios(dataRequest.url, requestConfig)
