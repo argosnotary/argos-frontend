@@ -75,4 +75,17 @@ const appendNewLabelToTree = (
   });
 };
 
-export { appendNewLabelToTree, appendLabelChildrenToTree };
+const updateLabelInTree = (
+  treeState: ITreeReducerState,
+  treeDispatch: (msg: TreeReducerAction) => void,
+  stateDispatch: (msg: LayoutEditorAction) => void,
+  label: ILabelPostResponse
+) => {
+  console.log(treeDispatch, treeState, stateDispatch, label);
+
+  stateDispatch({
+    type: "resetpane"
+  });
+};
+
+export { appendNewLabelToTree, appendLabelChildrenToTree, updateLabelInTree };

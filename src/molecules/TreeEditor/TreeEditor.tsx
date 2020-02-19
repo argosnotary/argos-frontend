@@ -160,18 +160,20 @@ const renderContextMenu = (
   menuitems: Array<ITreeContextMenuItem>
 ) => {
   return menuitems.map((item, index) => (
-    <NodeContextMenuItem
-      key={index}
-      onClick={() => {
-        item.callback(node);
-        dispatch({ type: "hidecontextmenu" });
-      }}
-    >
-      {item.label}
-      {menuitems.length > 1 && index < menuitems.length ? (
+    <React.Fragment key={index}>
+      <NodeContextMenuItem
+        key={index}
+        onClick={() => {
+          item.callback(node);
+          dispatch({ type: "hidecontextmenu" });
+        }}
+      >
+        {item.label}
+      </NodeContextMenuItem>
+      {menuitems.length > 1 && index < menuitems.length - 1 ? (
         <NodeContextMenuItemSeparator />
       ) : null}
-    </NodeContextMenuItem>
+    </React.Fragment>
   ));
 };
 

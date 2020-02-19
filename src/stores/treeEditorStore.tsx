@@ -36,6 +36,11 @@ export type TreeReducerAction =
   | { type: "showcontextmenu"; id: string; clientX: number; clientY: number }
   | { type: "hidecontextmenu" };
 
+type TreeStateContextType = {
+  treeState: ITreeReducerState;
+  treeStateDispatch: Dispatch<TreeReducerAction>;
+};
+
 export const TreeStateContext = React.createContext<
   [
     ITreeReducerState,

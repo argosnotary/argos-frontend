@@ -57,7 +57,12 @@ const ConnectionError: React.FC<IConnectionErrorProps> = ({ error }) => {
 
   useEffect(() => {
     if (error && error.response) {
-      if (error.response.status === 404 || error.response.status === 504) {
+      if (
+        error.response.status === 400 ||
+        error.response.status === 404 ||
+        error.response.status === 405 ||
+        error.response.status === 504
+      ) {
         setDisplayError(true);
       }
     }
