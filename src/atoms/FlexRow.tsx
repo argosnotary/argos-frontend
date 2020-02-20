@@ -22,7 +22,7 @@ interface IFlexRowProps {
 const FlexRow = styled.div<IFlexRowProps>`
   display: flex;
   flex-direction: row;
-  flex-wrap: ${props => (props.disableWrap ? "no-wrap" : "wrap")};
+  flex-wrap: ${props => (props.disableWrap ? "nowrap" : "wrap")};
 `;
 
 export default FlexRow;
