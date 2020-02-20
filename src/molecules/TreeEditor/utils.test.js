@@ -18,7 +18,8 @@ import {
   getNearestParent,
   buildNodeTrail,
   updateSingleNode,
-  appendSingleNode
+  appendSingleNode,
+  appendNodeChildrenToParent
 } from "./utils";
 
 import json from "./sampleData.json";
@@ -112,6 +113,38 @@ describe("TreeEditor utils", () => {
       );
 
       expect(res.name).toBe("evensmallerx");
+    });
+  });
+  describe("appendNodeChildrenToParent", () => {
+    it("appends child nodes in the parent node of the provided tree state, and returns immutable copy of tree state", () => {
+      const existingData = {
+        name: "neo",
+        type: "LABEL",
+        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+        hasChildren: false,
+        children: []
+      };
+
+      const newNodeData = [
+        {
+          name: "trinity",
+          type: "LABEL",
+          referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a22222",
+          hasChildren: false,
+          children: []
+        }
+      ];
+
+      const newStateProducer = appendNodeChildrenToParent(
+        existingData,
+        newNodeData
+      );
+
+      const treeState = {
+        data: [existingData]
+      };
+
+      expect(newStateProducer(treeState).data[0].children).toEqual(newNodeData);
     });
   });
   describe("getNearestParent", () => {
