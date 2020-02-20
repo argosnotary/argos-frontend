@@ -72,6 +72,10 @@ const ManageLabel = () => {
       data.labelId = state.nodeReferenceId;
     }
 
+    if (state.nodeParentId !== "") {
+      data.parentLabelId = state.nodeParentId;
+    }
+
     const dataRequest: DataRequest = {
       data,
       method: "put",

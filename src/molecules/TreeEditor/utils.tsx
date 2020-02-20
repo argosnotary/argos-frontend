@@ -97,10 +97,18 @@ const appendNodeChildrenToParent = (
   });
 };
 
+const updateSingleNode = (node: ITreeNode) => {
+  return produce((draftState: ITreeReducerState) => {
+    const matchNode = findNode(draftState.data, node.referenceId);
+    Object.assign(matchNode, node);
+  });
+};
+
 export {
   appendSingleNode,
   appendNodeChildrenToParent,
   findNode,
   getNearestParent,
-  buildNodeTrail
+  buildNodeTrail,
+  updateSingleNode
 };

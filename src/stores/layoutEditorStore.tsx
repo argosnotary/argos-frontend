@@ -17,6 +17,7 @@ import React, { Dispatch } from "react";
 import ILabelPostResponse from "../interfaces/ILabelPostResponse";
 
 interface ILayoutEditorState {
+  nodeParentId: string;
   nodeReferenceId: string;
   firstPanelView: string;
   breadcrumb: string;
@@ -35,6 +36,7 @@ export type LayoutEditorAction =
   | {
       type: "updatelabel";
       nodeReferenceId: string;
+      nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
     }
@@ -60,6 +62,7 @@ const editorReducer = (
         ...state,
         firstPanelView: "updatelabel",
         nodeReferenceId: action.nodeReferenceId,
+        nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
@@ -67,7 +70,8 @@ const editorReducer = (
       return {
         ...state,
         firstPanelView: "",
-        nodeReferenceId: ""
+        nodeReferenceId: "",
+        dataAction: ""
       };
     case "postnewlabel":
       return {

@@ -13,7 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { findNode, getNearestParent, buildNodeTrail } from "./utils";
+import {
+  findNode,
+  getNearestParent,
+  buildNodeTrail,
+  updateSingleNode,
+  appendSingleNode
+} from "./utils";
 
 import json from "./sampleData.json";
 
@@ -34,6 +40,78 @@ describe("TreeEditor utils", () => {
       };
 
       expect(res).toEqual(expectedNode);
+    });
+  });
+  describe("appendSingleNode", () => {
+    it("append a single node in provided tree state at root level, and returns immutable copy of tree state", () => {
+      const newNodeData = {
+        name: "neo",
+        type: "LABEL",
+        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+        hasChildren: false,
+        children: []
+      };
+
+      const newStateProducer = appendSingleNode(newNodeData);
+      const treeState = {
+        data: []
+      };
+
+      expect(newStateProducer(treeState).data).toContain(newNodeData);
+    });
+
+    it("append a single node in provided tree state to parent, and returns immutable copy of tree state", () => {
+      const existingData = {
+        name: "neo",
+        type: "LABEL",
+        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+        hasChildren: false,
+        children: []
+      };
+
+      const newNodeData = {
+        name: "trinity",
+        type: "LABEL",
+        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a22222",
+        hasChildren: false,
+        children: []
+      };
+
+      const newStateProducer = appendSingleNode(
+        newNodeData,
+        existingData.referenceId
+      );
+
+      const treeState = {
+        data: [existingData]
+      };
+
+      expect(newStateProducer(treeState).data[0].children).toContain(
+        newNodeData
+      );
+    });
+  });
+  describe("updateSingleNode", () => {
+    it("finds, updates a node in provided tree state, and returns immutable copy of tree state", () => {
+      const newNodeData = {
+        name: "evensmallerx",
+        type: "LABEL",
+        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+        hasChildren: false,
+        children: []
+      };
+
+      const newStateProducer = updateSingleNode(newNodeData);
+      const treeState = {
+        data: json.sampleData
+      };
+
+      const res = findNode(
+        newStateProducer(treeState).data,
+        "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1"
+      );
+
+      expect(res.name).toBe("evensmallerx");
     });
   });
   describe("getNearestParent", () => {

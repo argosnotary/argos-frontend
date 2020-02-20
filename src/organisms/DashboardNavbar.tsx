@@ -73,7 +73,7 @@ const DashboardNavbar = () => {
   return (
     <Navbar>
       <LinkContainer>
-        <Link to={"/edit/layout"}>Layout editor</Link>
+        <Link to={"/edit/layout"}>Supply chains</Link>
       </LinkContainer>
       <AvatarContainer>
         {displayContextMenu ? (
