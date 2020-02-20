@@ -140,11 +140,12 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
 
   const postKeyData = async () => {
     const generatedKeys = await generateKey();
+
     const dataRequest: DataRequest = {
       data: generatedKeys.keys,
       method: "post",
       token: localStorageToken,
-      url: "/api/key"
+      url: "/api/personalaccount/me/key"
     };
 
     setGeneratedPassword(generatedKeys.password);
