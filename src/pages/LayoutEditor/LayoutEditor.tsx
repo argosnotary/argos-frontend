@@ -16,13 +16,11 @@
 import React, { useReducer, useEffect } from "react";
 import styled from "styled-components";
 
-import Action from "../../types/Action";
 import DataRequest from "../../types/DataRequest";
 import FlexColumn from "../../atoms/FlexColumn";
 import FlexRow from "../../atoms/FlexRow";
 
 import ITreeNode from "../../interfaces/ITreeNode";
-import IState from "../../interfaces/IState";
 import TreeEditor from "../../molecules/TreeEditor/TreeEditor";
 import useDataApi from "../../hooks/useDataApi";
 import useToken from "../../hooks/useToken";
@@ -41,6 +39,7 @@ import {
   updateLabelInTree
 } from "./utils";
 import ManageLabel from "./Panels/ManageLabel";
+import genericDataFetchReducer from "../../stores/genericDataFetchReducer";
 
 const PanelsContainer = styled.section`
   width: 75vw;
@@ -61,32 +60,11 @@ const SecondPanel = styled(Panel)`
   height: 100vh;
 `;
 
-const dataFetchReducer = (state: IState, action: Action<IState>) => {
-  switch (action.type) {
-    case "FETCH_INIT":
-      return {
-        ...state,
-        isLoading: true
-      };
-    case "FETCH_SUCCESS":
-      return {
-        ...state,
-        data: action.results,
-        isLoading: false
-      };
-    case "FETCH_FAILURE":
-      return {
-        ...state,
-        error: action.error,
-        isLoading: false
-      };
-  }
-};
-
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(editorReducer, {
     firstPanelView: "",
     nodeReferenceId: "",
+    nodeParentId: "",
     breadcrumb: "",
     selectedNodeName: ""
   });
@@ -98,13 +76,13 @@ const LayoutEditor = () => {
   };
 
   const [treeDataState, _setTreeDataRequest] = useDataApi(
-    dataFetchReducer,
+    genericDataFetchReducer,
     getTreeDataRequest
   );
 
   const [treeState, treeDispatch] = useReducer(treeReducer, initialTreeState);
   const [treeChildrenFetchState, setTreeChildrenFetchRequest] = useDataApi(
-    dataFetchReducer
+    genericDataFetchReducer
   );
 
   const treeStringList = {
@@ -144,6 +122,8 @@ const LayoutEditor = () => {
             dispatch({
               type: "updatelabel",
               nodeReferenceId: node.referenceId,
+              nodeParentId:
+                trail.length > 1 ? trail[trail.length - 2].referenceId : "",
               breadcrumb,
               selectedNodeName
             });
@@ -189,7 +169,7 @@ const LayoutEditor = () => {
   };
 
   useEffect(() => {
-    if (state.dataAction && state.dataAction === "createnewlabel") {
+    if (state.dataAction && state.dataAction === "postnewlabel") {
       appendNewLabelToTree(treeState, treeDispatch, dispatch, state.data);
     }
 
@@ -200,7 +180,7 @@ const LayoutEditor = () => {
 
   return (
     <FlexColumn>
-      <FlexRow>
+      <FlexRow disableWrap={true}>
         <StateContext.Provider value={[state, dispatch]}>
           <TreeStateContext.Provider
             value={[

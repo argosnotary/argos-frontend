@@ -15,7 +15,9 @@
  */
 import {
   appendSingleNode,
-  appendNodeChildrenToParent
+  appendNodeChildrenToParent,
+  updateSingleNode,
+  findNode
 } from "../../molecules/TreeEditor/utils";
 import {
   ITreeReducerState,
@@ -81,7 +83,16 @@ const updateLabelInTree = (
   stateDispatch: (msg: LayoutEditorAction) => void,
   label: ILabelPostResponse
 ) => {
-  console.log(treeDispatch, treeState, stateDispatch, label);
+  const currentNode = findNode(treeState.data, label.id);
+  const parsedNode = Object.assign({}, currentNode);
+  parsedNode.name = label.name;
+
+  const newState = updateSingleNode(parsedNode);
+
+  treeDispatch({
+    type: "storedata",
+    data: newState(treeState).data
+  });
 
   stateDispatch({
     type: "resetpane"
