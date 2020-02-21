@@ -32,7 +32,11 @@ import {
 
 import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 
-import { editorReducer, StateContext } from "../../stores/layoutEditorStore";
+import {
+  editorReducer,
+  StateContext,
+  LayoutEditorActionTypes
+} from "../../stores/layoutEditorStore";
 import {
   appendNewLabelToTree,
   appendLabelChildrenToTree,
@@ -62,7 +66,7 @@ const SecondPanel = styled(Panel)`
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(editorReducer, {
-    firstPanelView: "",
+    firstPanelView: LayoutEditorActionTypes.NONE,
     nodeReferenceId: "",
     nodeParentId: "",
     breadcrumb: "",
@@ -103,7 +107,7 @@ const LayoutEditor = () => {
             const selectedNodeName = Array.from(trail.slice(-1))[0].name;
 
             dispatch({
-              type: "addlabel",
+              type: LayoutEditorActionTypes.ADDLABEL,
               nodeReferenceId: node.referenceId,
               breadcrumb,
               selectedNodeName
@@ -120,7 +124,7 @@ const LayoutEditor = () => {
             const selectedNodeName = Array.from(trail.slice(-1))[0].name;
 
             dispatch({
-              type: "updatelabel",
+              type: LayoutEditorActionTypes.UPDATELABEL,
               nodeReferenceId: node.referenceId,
               nodeParentId:
                 trail.length > 1 ? trail[trail.length - 2].referenceId : "",
@@ -135,7 +139,7 @@ const LayoutEditor = () => {
 
   const cbCreateRootNode = () => {
     dispatch({
-      type: "addlabel",
+      type: LayoutEditorActionTypes.ADDLABEL,
       nodeReferenceId: "",
       breadcrumb: "",
       selectedNodeName: ""
@@ -160,8 +164,8 @@ const LayoutEditor = () => {
 
   const renderPanel = (panelView: string) => {
     switch (panelView) {
-      case "addlabel":
-      case "updatelabel":
+      case LayoutEditorActionTypes.ADDLABEL:
+      case LayoutEditorActionTypes.UPDATELABEL:
         return <ManageLabel />;
       default:
         return null;
@@ -169,11 +173,17 @@ const LayoutEditor = () => {
   };
 
   useEffect(() => {
-    if (state.dataAction && state.dataAction === "postnewlabel") {
+    if (
+      state.dataAction &&
+      state.dataAction === LayoutEditorActionTypes.POSTNEWLABEL
+    ) {
       appendNewLabelToTree(treeState, treeDispatch, dispatch, state.data);
     }
 
-    if (state.dataAction && state.dataAction === "putlabel") {
+    if (
+      state.dataAction &&
+      state.dataAction === LayoutEditorActionTypes.PUTLABEL
+    ) {
       updateLabelInTree(treeState, treeDispatch, dispatch, state.data);
     }
   }, [state.data, state.dataAction]);

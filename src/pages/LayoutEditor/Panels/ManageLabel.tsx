@@ -9,7 +9,10 @@ import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
 import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
 import FormInput from "../../../molecules/FormInput";
-import { StateContext } from "../../../stores/layoutEditorStore";
+import {
+  StateContext,
+  LayoutEditorActionTypes
+} from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 
@@ -53,7 +56,7 @@ const ManageLabel = () => {
       url: "/api/label",
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
-          type: "postnewlabel",
+          type: LayoutEditorActionTypes.POSTNEWLABEL,
           label
         });
         formik.resetForm();
@@ -83,7 +86,7 @@ const ManageLabel = () => {
       url: `/api/label/${state.nodeReferenceId}`,
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
-          type: "putlabel",
+          type: LayoutEditorActionTypes.PUTLABEL,
           label
         });
         formik.resetForm();
@@ -98,11 +101,11 @@ const ManageLabel = () => {
       labelname: ""
     },
     onSubmit: values => {
-      if (state.firstPanelView === "addlabel") {
+      if (state.firstPanelView === LayoutEditorActionTypes.ADDLABEL) {
         postNewLabel(values);
       }
 
-      if (state.firstPanelView === "updatelabel") {
+      if (state.firstPanelView === LayoutEditorActionTypes.UPDATELABEL) {
         updateLabel(values);
       }
     },
@@ -123,7 +126,7 @@ const ManageLabel = () => {
           <ContentSeparator />
         </>
       ) : null}
-      {state.firstPanelView === "updatelabel" ? (
+      {state.firstPanelView === LayoutEditorActionTypes.UPDATELABEL ? (
         <>
           <FormInput
             labelValue="Label name*"
@@ -142,7 +145,7 @@ const ManageLabel = () => {
           </LoaderButton>
         </>
       ) : null}
-      {state.firstPanelView === "addlabel" ? (
+      {state.firstPanelView === LayoutEditorActionTypes.ADDLABEL ? (
         <>
           <FormInput
             labelValue="Label name*"

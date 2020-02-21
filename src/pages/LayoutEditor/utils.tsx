@@ -25,7 +25,10 @@ import {
 } from "../../stores/treeEditorStore";
 import ITreeNode from "../../interfaces/ITreeNode";
 import ILabelPostResponse from "../../interfaces/ILabelPostResponse";
-import { LayoutEditorAction } from "../../stores/layoutEditorStore";
+import {
+  LayoutEditorAction,
+  LayoutEditorActionTypes
+} from "../../stores/layoutEditorStore";
 
 const appendLabelChildrenToTree = (
   treeState: ITreeReducerState,
@@ -73,7 +76,7 @@ const appendNewLabelToTree = (
   });
 
   stateDispatch({
-    type: "resetpane"
+    type: LayoutEditorActionTypes.RESETPANE
   });
 };
 
@@ -95,7 +98,7 @@ const updateLabelInTree = (
   });
 
   stateDispatch({
-    type: "resetpane"
+    type: LayoutEditorActionTypes.RESETPANE
   });
 };
 

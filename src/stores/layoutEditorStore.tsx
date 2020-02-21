@@ -26,63 +26,72 @@ interface ILayoutEditorState {
   dataAction?: string;
 }
 
+export enum LayoutEditorActionTypes {
+  NONE = "",
+  POSTNEWLABEL = "postnewlabel",
+  PUTLABEL = "putlabel",
+  ADDLABEL = "addlabel",
+  UPDATELABEL = "updatelabel",
+  RESETPANE = "resetpane"
+}
+
 export type LayoutEditorAction =
   | {
-      type: "addlabel";
+      type: LayoutEditorActionTypes.ADDLABEL;
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
     }
   | {
-      type: "updatelabel";
+      type: LayoutEditorActionTypes.UPDATELABEL;
       nodeReferenceId: string;
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
     }
-  | { type: "resetpane" }
-  | { type: "postnewlabel"; label: ILabelPostResponse }
-  | { type: "putlabel"; label: ILabelPostResponse };
+  | { type: LayoutEditorActionTypes.RESETPANE }
+  | { type: LayoutEditorActionTypes.POSTNEWLABEL; label: ILabelPostResponse }
+  | { type: LayoutEditorActionTypes.PUTLABEL; label: ILabelPostResponse };
 
 const editorReducer = (
   state: ILayoutEditorState,
   action: LayoutEditorAction
 ) => {
   switch (action.type) {
-    case "addlabel":
+    case LayoutEditorActionTypes.ADDLABEL:
       return {
         ...state,
-        firstPanelView: "addlabel",
+        firstPanelView: LayoutEditorActionTypes.ADDLABEL,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
-    case "updatelabel":
+    case LayoutEditorActionTypes.UPDATELABEL:
       return {
         ...state,
-        firstPanelView: "updatelabel",
+        firstPanelView: LayoutEditorActionTypes.UPDATELABEL,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
-    case "resetpane":
+    case LayoutEditorActionTypes.RESETPANE:
       return {
         ...state,
         firstPanelView: "",
         nodeReferenceId: "",
         dataAction: ""
       };
-    case "postnewlabel":
+    case LayoutEditorActionTypes.POSTNEWLABEL:
       return {
         ...state,
-        dataAction: "postnewlabel",
+        dataAction: LayoutEditorActionTypes.POSTNEWLABEL,
         data: action.label
       };
-    case "putlabel": {
+    case LayoutEditorActionTypes.PUTLABEL: {
       return {
         ...state,
-        dataAction: "putlabel",
+        dataAction: LayoutEditorActionTypes.PUTLABEL,
         data: action.label
       };
     }

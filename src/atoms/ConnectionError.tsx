@@ -48,7 +48,7 @@ const ConnectionErrorMessage = styled.p`
 `;
 
 interface IConnectionErrorProps {
-  error: AxiosError;
+  error: AxiosError | undefined;
 }
 
 const ConnectionError: React.FC<IConnectionErrorProps> = ({ error }) => {
@@ -56,6 +56,10 @@ const ConnectionError: React.FC<IConnectionErrorProps> = ({ error }) => {
   const [_requestError, setRequestError] = useRequestErrorStore();
 
   useEffect(() => {
+    if (error && !error.response) {
+      setDisplayError(true);
+    }
+
     if (error && error.response) {
       if (
         error.response.status === 400 ||
@@ -68,7 +72,7 @@ const ConnectionError: React.FC<IConnectionErrorProps> = ({ error }) => {
     }
 
     const timeOutHandle = setTimeout(() => {
-      setRequestError({} as AxiosError);
+      setRequestError(undefined);
       setDisplayError(false);
     }, animationSeconds * 1000);
 

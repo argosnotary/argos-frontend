@@ -22,8 +22,10 @@ import React, {
   useState
 } from "react";
 
-const StoreContext = createContext<[AxiosError, Dispatch<AxiosError>]>([
-  {} as AxiosError,
+const StoreContext = createContext<
+  [AxiosError | undefined, Dispatch<AxiosError | undefined>]
+>([
+  undefined,
   () => {
     return;
   }
@@ -36,7 +38,7 @@ interface IRequestErrorStoreProviderProps {
 export const RequestErrorStoreProvider: React.FC<IRequestErrorStoreProviderProps> = ({
   children
 }) => {
-  const [state, setState] = useState();
+  const [state, setState] = useState<AxiosError | undefined>(undefined);
 
   return (
     <StoreContext.Provider value={[state, setState]}>
