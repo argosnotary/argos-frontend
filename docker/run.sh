@@ -17,7 +17,7 @@
 
 if [ -z "$@" ]; then
     # Substitute env vars
-    ENV_VARS='$BACKEND_URL'
+    ENV_VARS='${SERVER_NAME} ${BACKEND_URL}'
     envsubst "$ENV_VARS" < /nginx.conf.template >  /etc/nginx/conf.d/default.conf
     
 	# Start server

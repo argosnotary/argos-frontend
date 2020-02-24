@@ -20,6 +20,8 @@ server {
     access_log /dev/stdout;
     error_log /dev/stderr;
     
+    server_name ${SERVER_NAME}
+    
     server_tokens off;
     add_header 'strict-transport-security' 'max-age=157680000 ; includeSubDomains' always;
     add_header 'X-Frame-Options' 'SAMEORIGIN' always;
@@ -40,3 +42,4 @@ server {
         proxy_set_header Host $host;
     }
 }
+
