@@ -35,15 +35,18 @@ import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 import {
   editorReducer,
   StateContext,
-  LayoutEditorActionTypes
+  LayoutEditorDataActionTypes,
+  LayoutEditorPaneActionTypes,
+  LayoutEditorPaneActionType
 } from "../../stores/layoutEditorStore";
 import {
-  appendNewLabelToTree,
+  appendObjectToTree,
   appendLabelChildrenToTree,
-  updateLabelInTree
+  updateObjectInTree
 } from "./utils";
 import ManageLabel from "./Panels/ManageLabel";
 import genericDataFetchReducer from "../../stores/genericDataFetchReducer";
+import ManageSupplyChain from "./Panels/ManageSupplyChain";
 
 const PanelsContainer = styled.section`
   width: 75vw;
@@ -66,7 +69,7 @@ const SecondPanel = styled(Panel)`
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(editorReducer, {
-    firstPanelView: LayoutEditorActionTypes.NONE,
+    firstPanelView: LayoutEditorPaneActionTypes.NONE,
     nodeReferenceId: "",
     nodeParentId: "",
     breadcrumb: "",
@@ -79,7 +82,7 @@ const LayoutEditor = () => {
     url: "/api/hierarchy"
   };
 
-  const [treeDataState, _setTreeDataRequest] = useDataApi(
+  const [treeDataState] = useDataApi(
     genericDataFetchReducer,
     getTreeDataRequest
   );
@@ -93,6 +96,23 @@ const LayoutEditor = () => {
     createrootnode: "Create base label..."
   };
 
+  const treeContextMenuCb = (
+    type: LayoutEditorPaneActionType,
+    node: ITreeNode
+  ) => {
+    const trail = buildNodeTrail([], treeState.data, node.referenceId);
+    const breadcrumb = Array.from(trail.slice(0, -1), t => t.name).join(" / ");
+    const selectedNodeName = Array.from(trail.slice(-1))[0].name;
+
+    dispatch({
+      type,
+      nodeReferenceId: node.referenceId,
+      nodeParentId: trail.length > 1 ? trail[trail.length - 2].referenceId : "",
+      breadcrumb,
+      selectedNodeName
+    });
+  };
+
   const treeContextMenu = [
     {
       type: "LABEL",
@@ -100,37 +120,42 @@ const LayoutEditor = () => {
         {
           label: "Add label",
           callback: (node: ITreeNode) => {
-            const trail = buildNodeTrail([], treeState.data, node.referenceId);
-            const breadcrumb = Array.from(trail.slice(0, -1), t => t.name).join(
-              " / "
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
+              node
             );
-            const selectedNodeName = Array.from(trail.slice(-1))[0].name;
-
-            dispatch({
-              type: LayoutEditorActionTypes.ADDLABEL,
-              nodeReferenceId: node.referenceId,
-              breadcrumb,
-              selectedNodeName
-            });
           }
         },
         {
           label: "Update label",
           callback: (node: ITreeNode) => {
-            const trail = buildNodeTrail([], treeState.data, node.referenceId);
-            const breadcrumb = Array.from(trail.slice(0, -1), t => t.name).join(
-              " / "
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
+              node
             );
-            const selectedNodeName = Array.from(trail.slice(-1))[0].name;
-
-            dispatch({
-              type: LayoutEditorActionTypes.UPDATELABEL,
-              nodeReferenceId: node.referenceId,
-              nodeParentId:
-                trail.length > 1 ? trail[trail.length - 2].referenceId : "",
-              breadcrumb,
-              selectedNodeName
-            });
+          }
+        },
+        {
+          label: "Add supply chain",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
+              node
+            );
+          }
+        }
+      ]
+    },
+    {
+      type: "SUPPLY_CHAIN",
+      menuitems: [
+        {
+          label: "Update supply chain",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
+              node
+            );
           }
         }
       ]
@@ -139,8 +164,9 @@ const LayoutEditor = () => {
 
   const cbCreateRootNode = () => {
     dispatch({
-      type: LayoutEditorActionTypes.ADDLABEL,
+      type: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
       nodeReferenceId: "",
+      nodeParentId: "",
       breadcrumb: "",
       selectedNodeName: ""
     });
@@ -164,9 +190,12 @@ const LayoutEditor = () => {
 
   const renderPanel = (panelView: string) => {
     switch (panelView) {
-      case LayoutEditorActionTypes.ADDLABEL:
-      case LayoutEditorActionTypes.UPDATELABEL:
+      case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
         return <ManageLabel />;
+      case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
+        return <ManageSupplyChain />;
       default:
         return null;
     }
@@ -175,16 +204,36 @@ const LayoutEditor = () => {
   useEffect(() => {
     if (
       state.dataAction &&
-      state.dataAction === LayoutEditorActionTypes.POSTNEWLABEL
+      state.dataAction === LayoutEditorDataActionTypes.POST_NEW_LABEL
     ) {
-      appendNewLabelToTree(treeState, treeDispatch, dispatch, state.data);
+      appendObjectToTree(
+        treeState,
+        treeDispatch,
+        dispatch,
+        state.data,
+        "LABEL"
+      );
     }
 
     if (
       state.dataAction &&
-      state.dataAction === LayoutEditorActionTypes.PUTLABEL
+      state.dataAction === LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
     ) {
-      updateLabelInTree(treeState, treeDispatch, dispatch, state.data);
+      appendObjectToTree(
+        treeState,
+        treeDispatch,
+        dispatch,
+        state.data,
+        "SUPPLY_CHAIN"
+      );
+    }
+
+    if (
+      state.dataAction &&
+      (state.dataAction === LayoutEditorDataActionTypes.PUT_LABEL ||
+        state.dataAction === LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN)
+    ) {
+      updateObjectInTree(treeState, treeDispatch, dispatch, state.data);
     }
   }, [state.data, state.dataAction]);
 

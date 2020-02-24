@@ -15,6 +15,7 @@
  */
 import React, { Dispatch } from "react";
 import ILabelPostResponse from "../interfaces/ILabelPostResponse";
+import ISupplyChainApiResponse from "../interfaces/ISupplyChainApiResponse";
 
 interface ILayoutEditorState {
   nodeParentId: string;
@@ -26,82 +27,152 @@ interface ILayoutEditorState {
   dataAction?: string;
 }
 
-export enum LayoutEditorActionTypes {
+export enum LayoutEditorDataActionTypes {
   NONE = "",
-  POSTNEWLABEL = "postnewlabel",
-  PUTLABEL = "putlabel",
-  ADDLABEL = "addlabel",
-  UPDATELABEL = "updatelabel",
-  RESETPANE = "resetpane"
+  POST_NEW_LABEL = "POST_NEW_LABEL",
+  PUT_LABEL = "PUT_LABEL",
+  POST_SUPPLY_CHAIN = "POST_SUPPLY_CHAIN",
+  PUT_SUPPLY_CHAIN = "PUT_SUPPLY_CHAIN"
 }
 
-export type LayoutEditorAction =
+export enum LayoutEditorPaneActionTypes {
+  NONE = "",
+  SHOW_ADD_LABEL_PANE = "SHOW_ADD_LABEL_PANE",
+  SHOW_UPDATE_LABEL_PANE = "SHOW_UPDATE_LABEL_PANE",
+  SHOW_ADD_SUPPLY_CHAIN_PANE = "SHOW_ADD_SUPPLY_CHAIN_PANE",
+  SHOW_UPDATE_SUPPLY_CHAIN_PANE = "SHOW_UPDATE_SUPPLY_CHAIN_PANE",
+  RESET_PANE = "RESET_PANE"
+}
+
+export type LayoutEditorPaneActionType =
+  | LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+  | LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
+  | LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+  | LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
+  | LayoutEditorPaneActionTypes.RESET_PANE;
+
+export type LayoutEditorPaneAction =
   | {
-      type: LayoutEditorActionTypes.ADDLABEL;
+      type: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE;
+      nodeParentId: string;
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
     }
   | {
-      type: LayoutEditorActionTypes.UPDATELABEL;
+      type: LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
       nodeReferenceId: string;
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
     }
-  | { type: LayoutEditorActionTypes.RESETPANE }
-  | { type: LayoutEditorActionTypes.POSTNEWLABEL; label: ILabelPostResponse }
-  | { type: LayoutEditorActionTypes.PUTLABEL; label: ILabelPostResponse };
+  | {
+      type: LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE;
+      nodeReferenceId: string;
+      breadcrumb: string;
+      selectedNodeName: string;
+      nodeParentId: string;
+    }
+  | {
+      type: LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
+      nodeReferenceId: string;
+      nodeParentId: string;
+      breadcrumb: string;
+      selectedNodeName: string;
+    }
+  | { type: LayoutEditorPaneActionTypes.RESET_PANE };
+
+export type LayoutEditorDataAction =
+  | {
+      type: LayoutEditorDataActionTypes.POST_NEW_LABEL;
+      label: ILabelPostResponse;
+    }
+  | { type: LayoutEditorDataActionTypes.PUT_LABEL; label: ILabelPostResponse }
+  | {
+      type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN;
+      supplyChain: ISupplyChainApiResponse;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN;
+      supplyChain: ISupplyChainApiResponse;
+    };
+
+type LayoutEditorAction = LayoutEditorPaneAction | LayoutEditorDataAction;
 
 const editorReducer = (
   state: ILayoutEditorState,
   action: LayoutEditorAction
 ) => {
   switch (action.type) {
-    case LayoutEditorActionTypes.ADDLABEL:
+    case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
       return {
         ...state,
-        firstPanelView: LayoutEditorActionTypes.ADDLABEL,
+        firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
-    case LayoutEditorActionTypes.UPDATELABEL:
+    case LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
       return {
         ...state,
-        firstPanelView: LayoutEditorActionTypes.UPDATELABEL,
+        firstPanelView: LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
-    case LayoutEditorActionTypes.RESETPANE:
+    case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
+      return {
+        ...state,
+        firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
+        nodeReferenceId: action.nodeReferenceId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName
+      };
+    case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
+      return {
+        ...state,
+        firstPanelView:
+          LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
+        nodeReferenceId: action.nodeReferenceId,
+        nodeParentId: action.nodeParentId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName
+      };
+    case LayoutEditorPaneActionTypes.RESET_PANE:
       return {
         ...state,
         firstPanelView: "",
         nodeReferenceId: "",
         dataAction: ""
       };
-    case LayoutEditorActionTypes.POSTNEWLABEL:
+    case LayoutEditorDataActionTypes.POST_NEW_LABEL:
       return {
         ...state,
-        dataAction: LayoutEditorActionTypes.POSTNEWLABEL,
+        dataAction: LayoutEditorDataActionTypes.POST_NEW_LABEL,
         data: action.label
       };
-    case LayoutEditorActionTypes.PUTLABEL: {
+    case LayoutEditorDataActionTypes.PUT_LABEL: {
       return {
         ...state,
-        dataAction: LayoutEditorActionTypes.PUTLABEL,
+        dataAction: LayoutEditorDataActionTypes.PUT_LABEL,
         data: action.label
       };
     }
+    case LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN:
+      return {
+        ...state,
+        dataAction: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
+        data: action.supplyChain
+      };
+    case LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN:
+      return {
+        ...state,
+        dataAction: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
+        data: action.supplyChain
+      };
   }
 };
-
-interface IContextProps {
-  state: ILayoutEditorState;
-  dispatch: Dispatch<LayoutEditorAction>;
-}
 
 const StateContext = React.createContext<
   [ILayoutEditorState, Dispatch<LayoutEditorAction>]

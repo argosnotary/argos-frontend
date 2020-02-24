@@ -30,11 +30,23 @@ export interface ITreeReducerState {
   };
 }
 
+export enum TreeReducerActionTypes {
+  STOREDATA = "storedata",
+  UPDATETOGGLEDNODES = "updatetogglednodes",
+  SHOWCONTEXTMENU = "showcontextmenu",
+  HIDECONTEXTMENU = "hidecontextmenu"
+}
+
 export type TreeReducerAction =
-  | { type: "storedata"; data: Array<ITreeNode> }
-  | { type: "updatetogglednodes"; id: string }
-  | { type: "showcontextmenu"; id: string; clientX: number; clientY: number }
-  | { type: "hidecontextmenu" };
+  | { type: TreeReducerActionTypes.STOREDATA; data: Array<ITreeNode> }
+  | { type: TreeReducerActionTypes.UPDATETOGGLEDNODES; id: string }
+  | {
+      type: TreeReducerActionTypes.SHOWCONTEXTMENU;
+      id: string;
+      clientX: number;
+      clientY: number;
+    }
+  | { type: TreeReducerActionTypes.HIDECONTEXTMENU };
 
 type TreeStateContextType = {
   treeState: ITreeReducerState;
@@ -85,7 +97,7 @@ export const treeReducer = (
   action: TreeReducerAction
 ) => {
   switch (action.type) {
-    case "hidecontextmenu":
+    case TreeReducerActionTypes.HIDECONTEXTMENU:
       return {
         ...state,
         contextMenu: {
@@ -95,7 +107,7 @@ export const treeReducer = (
           y: 0
         }
       };
-    case "showcontextmenu":
+    case TreeReducerActionTypes.SHOWCONTEXTMENU:
       return {
         ...state,
         contextMenu: {
@@ -105,12 +117,12 @@ export const treeReducer = (
           y: action.clientY
         }
       };
-    case "storedata":
+    case TreeReducerActionTypes.STOREDATA:
       return {
         ...state,
         data: action.data
       };
-    case "updatetogglednodes":
+    case TreeReducerActionTypes.UPDATETOGGLEDNODES:
       if (state.toggledNodes.find(node => node === action.id)) {
         return {
           ...state,

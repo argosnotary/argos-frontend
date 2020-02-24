@@ -48,10 +48,10 @@ const FormInput: React.FC<IFormInputProps> = ({
     <InputLabel>{labelValue}</InputLabel>
     <Input
       name={name}
-      {...onBlur ? {onBlur} : ''}
-      {...onChange ? {onChange}: ''}
-      {...value ? {defaultValue: value} : ''}
-      {...placeHolder ? {placeholder: placeHolder} : ''}
+      {...(onBlur ? { onBlur } : "")}
+      {...(onChange ? { onChange } : "")}
+      value={value}
+      {...(placeHolder ? { placeholder: placeHolder } : "")}
       type={formType}
     />
   </FormInputContainer>

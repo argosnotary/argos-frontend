@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2019 - 2020 Rabobank Nederland
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import React, { useContext, useEffect } from "react";
 import { useFormik } from "formik";
 
@@ -22,7 +7,6 @@ import { LoaderButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
-import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
 import FormInput from "../../../molecules/FormInput";
 import {
   StateContext,
@@ -31,35 +15,36 @@ import {
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
+import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
 
-interface ILabelNameFormValues {
-  labelname: string;
+interface ISupplyChainNameFormValues {
+  supplychainname: string;
 }
 
-const validate = (values: ILabelNameFormValues) => {
+const validate = (values: ISupplyChainNameFormValues) => {
   const errors = {} as any;
 
-  if (!values.labelname) {
-    errors.labelname = "Please fill in a label name.";
-  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/i.test(values.labelname)) {
-    errors.labelname =
-      "Invalid label name (only alphanumeric characters and underscore allowed).";
+  if (!values.supplychainname) {
+    errors.supplychainname = "Please fill in a supply chain name.";
+  } else if (!/^([a-z]{1}[a-z0-9-]*)?$/i.test(values.supplychainname)) {
+    errors.supplychainname =
+      "Invalid supply chain name (only alphanumeric characters and hyphen is allowed).";
   }
 
   return errors;
 };
 
-const ManageLabel = () => {
+const ManageSupplyChain = () => {
   const [localStorageToken] = useToken();
   const [state, dispatch] = useContext(StateContext);
-  const [labelPostState, setLabelPostRequest] = useDataApi(
+  const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
     genericDataFetchReducer
   );
 
-  const postNewLabel = (values: ILabelNameFormValues) => {
+  const postSupplyChain = (values: ISupplyChainNameFormValues) => {
     const data: any = {};
 
-    data.name = values.labelname;
+    data.name = values.supplychainname;
 
     if (state.nodeReferenceId !== "") {
       data.parentLabelId = state.nodeReferenceId;
@@ -69,26 +54,26 @@ const ManageLabel = () => {
       data,
       method: "post",
       token: localStorageToken,
-      url: "/api/label",
-      cbSuccess: (label: ILabelPostResponse) => {
+      url: "/api/supplychain",
+      cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.POST_NEW_LABEL,
-          label
+          type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
+          supplyChain
         });
         formik.resetForm();
       }
     };
 
-    setLabelPostRequest(dataRequest);
+    setSupplyChainApiRequest(dataRequest);
   };
 
-  const updateLabel = (values: ILabelNameFormValues) => {
+  const updateSupplyChain = (values: ISupplyChainNameFormValues) => {
     const data: any = {};
 
-    data.name = values.labelname;
+    data.name = values.supplychainname;
 
     if (state.nodeReferenceId !== "") {
-      data.labelId = state.nodeReferenceId;
+      data.supplyChainId = state.nodeReferenceId;
     }
 
     if (state.nodeParentId !== "") {
@@ -99,35 +84,36 @@ const ManageLabel = () => {
       data,
       method: "put",
       token: localStorageToken,
-      url: `/api/label/${state.nodeReferenceId}`,
-      cbSuccess: (label: ILabelPostResponse) => {
+      url: `/api/supplychain/${state.nodeReferenceId}`,
+      cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.PUT_LABEL,
-          label
+          type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
+          supplyChain
         });
         formik.resetForm();
       }
     };
 
-    setLabelPostRequest(dataRequest);
+    setSupplyChainApiRequest(dataRequest);
   };
 
   const formik = useFormik({
     initialValues: {
-      labelname: ""
+      supplychainname: ""
     },
     onSubmit: values => {
       if (
-        state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+        state.firstPanelView ===
+        LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
       ) {
-        postNewLabel(values);
+        postSupplyChain(values);
       }
 
       if (
         state.firstPanelView ===
-        LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+        LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
       ) {
-        updateLabel(values);
+        updateSupplyChain(values);
       }
     },
     validate
@@ -136,15 +122,16 @@ const ManageLabel = () => {
   useEffect(() => {
     if (
       state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+      LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
     ) {
-      formik.setValues({ labelname: state.selectedNodeName });
+      formik.setValues({ supplychainname: state.selectedNodeName });
     }
 
     if (
-      state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+      state.firstPanelView ===
+      LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
     ) {
-      formik.setValues({ labelname: "" });
+      formik.setValues({ supplychainname: "" });
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
@@ -163,22 +150,25 @@ const ManageLabel = () => {
         </>
       ) : null}
       <FormInput
-        labelValue="Label name*"
-        name="labelname"
+        labelValue="Supply chain name*"
+        name="supplychainname"
         formType="text"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values.labelname}
+        value={formik.values.supplychainname}
       />
-      {formik.touched.labelname && formik.errors.labelname ? (
-        <InputErrorLabel>{formik.errors.labelname}</InputErrorLabel>
+      {formik.touched.supplychainname && formik.errors.supplychainname ? (
+        <InputErrorLabel>{formik.errors.supplychainname}</InputErrorLabel>
       ) : null}
       <ContentSeparator />
-      <LoaderButton buttonType="submit" loading={labelPostState.isLoading}>
-        Add label
+      <LoaderButton
+        buttonType="submit"
+        loading={supplyChainApiResponseState.isLoading}
+      >
+        Add supply chain
       </LoaderButton>
     </form>
   );
 };
 
-export default ManageLabel;
+export default ManageSupplyChain;

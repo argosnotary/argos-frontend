@@ -21,11 +21,13 @@ import {
   AltPlusIcon,
   LabelIcon,
   TriangleIcon,
-  LoaderIcon
+  LoaderIcon,
+  ChainIcon
 } from "../../atoms/Icons";
 import {
   TreeStateContext,
-  TreeReducerAction
+  TreeReducerAction,
+  TreeReducerActionTypes
 } from "../../stores/treeEditorStore";
 import ITreeContextMenuItem from "../../interfaces/ITreeContextMenuItem";
 import FlexColumn from "../../atoms/FlexColumn";
@@ -97,6 +99,8 @@ const renderTypeIcon = (theme: any, type: string) => {
   switch (type) {
     case "LABEL":
       return <LabelIcon color={theme.treeEditor.iconColors.label} size={14} />;
+    case "SUPPLY_CHAIN":
+      return <ChainIcon color={theme.treeEditor.iconColors.chain} size={14} />;
   }
 };
 
@@ -165,7 +169,7 @@ const renderContextMenu = (
         key={index}
         onClick={() => {
           item.callback(node);
-          dispatch({ type: "hidecontextmenu" });
+          dispatch({ type: TreeReducerActionTypes.HIDECONTEXTMENU });
         }}
       >
         {item.label}
@@ -185,7 +189,9 @@ const NodeContextMenu: React.FC<INodeContextMenu> = ({ node }) => {
   return (
     <>
       <NodeContextMenuClickCatcher
-        onClick={() => dispatch({ type: "hidecontextmenu" })}
+        onClick={() =>
+          dispatch({ type: TreeReducerActionTypes.HIDECONTEXTMENU })
+        }
       />
       <NodeContextMenuContainer x={state.contextMenu.x} y={state.contextMenu.y}>
         {contextmenu.map(item =>
@@ -236,7 +242,7 @@ const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
           onClick={() => {
             setDisplayNode(!displayNode);
             dispatch({
-              type: "updatetogglednodes",
+              type: TreeReducerActionTypes.UPDATETOGGLEDNODES,
               id: node.referenceId
             });
 
@@ -273,7 +279,7 @@ const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
           const { clientX, clientY } = e;
           e.preventDefault();
           dispatch({
-            type: "showcontextmenu",
+            type: TreeReducerActionTypes.SHOWCONTEXTMENU,
             id: node.referenceId,
             clientX,
             clientY
@@ -363,7 +369,7 @@ const TreeEditor: React.FC<ITreeEditorProps> = ({ data, loading }) => {
   useEffect(() => {
     if (data && data.length > 0) {
       dispatch({
-        type: "storedata",
+        type: TreeReducerActionTypes.STOREDATA,
         data
       });
     }

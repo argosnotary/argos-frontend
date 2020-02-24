@@ -21,14 +21,16 @@ import {
 } from "../../molecules/TreeEditor/utils";
 import {
   ITreeReducerState,
-  TreeReducerAction
+  TreeReducerAction,
+  TreeReducerActionTypes
 } from "../../stores/treeEditorStore";
 import ITreeNode from "../../interfaces/ITreeNode";
 import ILabelPostResponse from "../../interfaces/ILabelPostResponse";
 import {
-  LayoutEditorAction,
-  LayoutEditorActionTypes
+  LayoutEditorPaneAction,
+  LayoutEditorPaneActionTypes
 } from "../../stores/layoutEditorStore";
+import ISupplyChainApiResponse from "../../interfaces/ISupplyChainApiResponse";
 
 const appendLabelChildrenToTree = (
   treeState: ITreeReducerState,
@@ -42,64 +44,65 @@ const appendLabelChildrenToTree = (
     );
 
     treeDispatch({
-      type: "storedata",
+      type: TreeReducerActionTypes.STOREDATA,
       data: newState(treeState).data
     });
   }
 };
 
-const appendNewLabelToTree = (
+const appendObjectToTree = (
   treeState: ITreeReducerState,
   treeDispatch: (msg: TreeReducerAction) => void,
-  stateDispatch: (msg: LayoutEditorAction) => void,
-  label: ILabelPostResponse
+  stateDispatch: (msg: LayoutEditorPaneAction) => void,
+  object: ILabelPostResponse | ISupplyChainApiResponse,
+  type: "LABEL" | "SUPPLY_CHAIN"
 ) => {
   const parsedNode: ITreeNode = {
     hasChildren: false,
-    referenceId: label.id,
-    name: label.name,
-    type: "LABEL"
+    referenceId: object.id,
+    name: object.name,
+    type
   };
 
-  const newState = label.parentLabelId
-    ? appendSingleNode(parsedNode, label.parentLabelId)
+  const newState = object.parentLabelId
+    ? appendSingleNode(parsedNode, object.parentLabelId)
     : appendSingleNode(parsedNode);
 
   treeDispatch({
-    type: "storedata",
+    type: TreeReducerActionTypes.STOREDATA,
     data: newState(treeState).data
   });
 
   treeDispatch({
-    type: "updatetogglednodes",
-    id: label.parentLabelId || ""
+    type: TreeReducerActionTypes.UPDATETOGGLEDNODES,
+    id: object.parentLabelId || ""
   });
 
   stateDispatch({
-    type: LayoutEditorActionTypes.RESETPANE
+    type: LayoutEditorPaneActionTypes.RESET_PANE
   });
 };
 
-const updateLabelInTree = (
+const updateObjectInTree = (
   treeState: ITreeReducerState,
   treeDispatch: (msg: TreeReducerAction) => void,
-  stateDispatch: (msg: LayoutEditorAction) => void,
-  label: ILabelPostResponse
+  stateDispatch: (msg: LayoutEditorPaneAction) => void,
+  object: ILabelPostResponse | ISupplyChainApiResponse
 ) => {
-  const currentNode = findNode(treeState.data, label.id);
+  const currentNode = findNode(treeState.data, object.id);
   const parsedNode = Object.assign({}, currentNode);
-  parsedNode.name = label.name;
+  parsedNode.name = object.name;
 
   const newState = updateSingleNode(parsedNode);
 
   treeDispatch({
-    type: "storedata",
+    type: TreeReducerActionTypes.STOREDATA,
     data: newState(treeState).data
   });
 
   stateDispatch({
-    type: LayoutEditorActionTypes.RESETPANE
+    type: LayoutEditorPaneActionTypes.RESET_PANE
   });
 };
 
-export { appendNewLabelToTree, appendLabelChildrenToTree, updateLabelInTree };
+export { appendObjectToTree, appendLabelChildrenToTree, updateObjectInTree };

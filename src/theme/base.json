@@ -46,7 +46,8 @@
     "iconColors": {
       "addRootNode": "#1779ba",
       "expandNode": "#1779ba",
-      "label": "#8D99AE"
+      "label": "#8D99AE",
+      "chain": "#8D99AE"
     },
     "treeHeadLabel": {
       "bgColor": "#e8feff"
