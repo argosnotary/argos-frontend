@@ -16,6 +16,7 @@
 
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Header = styled.header`
   display: flex;
@@ -40,7 +41,9 @@ const Brand = styled.img`
 
 const Navbar: FunctionComponent = props => (
   <Header>
-    <Brand src="/images/logo.svg" />
+    <Link to="/" style={{ display: "flex" }}>
+      <Brand src="/images/logo.svg" />
+    </Link>
     <nav>
       <Ul>{props.children}</Ul>
     </nav>

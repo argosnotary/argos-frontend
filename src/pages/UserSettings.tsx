@@ -24,7 +24,6 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 
-import DashboardNavbar from "../organisms/DashboardNavbar";
 import FlexColumn from "../atoms/FlexColumn";
 import FlexRow from "../atoms/FlexRow";
 import KeyManagementPage from "../pages/KeyManagement";
@@ -91,13 +90,15 @@ const SidePanelLink = styled(NavLink)`
   }
 
   &.active {
+    background-color: ${props =>
+      props.theme.userSettingsPage.sidePanel.sidePanelItem.activeBgColor};
     border-left: 0.25rem solid
       ${props =>
         props.theme.userSettingsPage.sidePanel.sidePanelItem.highlightColor};
 
     &:hover {
       background-color: ${props =>
-        props.theme.userSettingsPage.sidePanel.sidePanelItem.bgColor};
+        props.theme.userSettingsPage.sidePanel.sidePanelItem.activeBgColor};
     }
   }
 `;
@@ -134,7 +135,6 @@ const UserSettingsPage = () => {
 
   return (
     <UserSettingsPageContainer>
-      <DashboardNavbar />
       <SplitLayout>
         <SidePanel>
           <ul>

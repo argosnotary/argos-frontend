@@ -5,6 +5,16 @@
     "bgColor": "#1779ba",
     "textColor": "#fff"
   },
+  "cancelButton": {
+    "bgColor": "transparent",
+    "textColor": "#8D99AE",
+    "borderColor": "#8D99AE",
+    "hover": {
+      "bgColor": "#8D99AE",
+      "textColor": "#fff",
+      "borderColor": "transparent"
+    }
+  },
   "transparentButton": {
     "default": {
       "transparentButtonBgColor": "#fff",
@@ -30,6 +40,59 @@
         "color": "#1779ba"
       }
     }
+  },
+  "treeEditor": {
+    "textColor": "#2e2e2e",
+    "bgColor": "#f1f1f1",
+    "borderColor": "#e0e0e0",
+    "loaders": {
+      "onPageLoad": {
+        "color": "#1779ba"
+      },
+      "onFetchChildren": {
+        "color": "#1779ba"
+      }
+    },
+    "iconColors": {
+      "addRootNode": "#1779ba",
+      "expandNode": "#1779ba",
+      "label": "#8D99AE",
+      "chain": "#8D99AE"
+    },
+    "treeHeadLabel": {
+      "bgColor": "#e8feff"
+    },
+    "nodeContextMenuContainer": {
+      "bgColor": "fff",
+      "borderColor": "#e5e5e5"
+    },
+    "nodeContextMenuItem": {
+      "bgColor": "#fff",
+      "hover": {
+        "bgColor": "#e8feff"
+      }
+    },
+    "breadCrumb": {
+      "textColor": "#1779ba"
+    },
+    "lastBreadCrumb": {
+      "textColor": "#000"
+    },
+    "nodeContextMenuItemSeparator": {
+      "borderColor": "#e5e5e5"
+    }
+  },
+  "dashboardNavBar": {
+    "link": {
+      "textColor": "#2e2e2e",
+      "hover": {
+        "bgColor": "#e8feff"
+      }
+    }
+  },
+  "connectionError": {
+    "textColor": "#fff",
+    "bgColor": "red"
   },
   "alerts": {
     "warning": {
@@ -74,11 +137,12 @@
     "bgColor": "#eee"
   },
   "userSettingsPage": {
-    "bgColor": "#eee",
+    "bgColor": "#f1f1f1",
     "sidePanel": {
       "bgColor": "#e0e0e0",
       "sidePanelItem": {
         "bgColor": "#c7c7c7",
+        "activeBgColor": "#f1f1f1",
         "highlightColor": "#1779ba",
         "fontColor": "#2E2E30"
       }
@@ -87,5 +151,12 @@
   "keyManagementPage": {
     "iconColor": "#1779ba",
     "passwordColor": "orange"
+  },
+  "layoutPage": {
+    "panel": {
+      "bgColor": "#f1f1f1",
+      "borderColor": "#e0e0e0",
+      "contentSeparator": "#ccc"
+    }
   }
 }

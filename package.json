@@ -14,13 +14,16 @@
     "asn1js": "^2.0.26",
     "axios": "^0.19.1",
     "formik": "^2.1.2",
+    "immer": "^5.3.5",
     "password-generator": "^2.2.3",
     "pkijs": "^2.1.83",
     "polished": "^3.4.2",
     "react": "16.12.0",
+    "react-app-polyfill": "^1.0.6",
     "react-dom": "16.12.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.4.0",
+    "react-treebeard": "^3.2.4",
     "styled-components": "^4.4.1",
     "typescript": "3.7.2"
   },
@@ -29,7 +32,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "CI=true craco test --verbose --colors",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -44,13 +49,18 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.9",
+    "@storybook/addon-links": "^5.3.9",
+    "@storybook/addons": "^5.3.9",
+    "@storybook/preset-create-react-app": "^1.5.2",
+    "@storybook/react": "^5.3.9",
     "@testing-library/react-hooks": "^3.2.1",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "axios-mock-adapter": "^1.17.0",
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.3",
-    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-react": "^7.18.3",
     "http-proxy-middleware": "^0.20.0",
     "prettier": "1.19.1",
     "react-test-renderer": "16.12.0"

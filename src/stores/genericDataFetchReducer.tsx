@@ -13,16 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from "styled-components";
+import IState from "../interfaces/IState";
+import Action from "../types/Action";
 
-interface IFlexRowProps {
-  disableWrap?: boolean;
-}
+const genericDataFetchReducer = (state: IState, action: Action<IState>) => {
+  switch (action.type) {
+    case "FETCH_INIT":
+      return {
+        ...state,
+        isLoading: true
+      };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        data: action.results,
+        isLoading: false
+      };
+    case "FETCH_FAILURE":
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false
+      };
+  }
+};
 
-const FlexRow = styled.div<IFlexRowProps>`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: ${props => (props.disableWrap ? "nowrap" : "wrap")};
-`;
-
-export default FlexRow;
+export default genericDataFetchReducer;

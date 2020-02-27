@@ -15,14 +15,12 @@
  */
 import styled from "styled-components";
 
-interface IFlexRowProps {
-  disableWrap?: boolean;
-}
-
-const FlexRow = styled.div<IFlexRowProps>`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: ${props => (props.disableWrap ? "nowrap" : "wrap")};
+const ContentSeparator = styled.hr`
+  padding: 0;
+  margin: 0 0 1rem;
+  border: 0;
+  border-bottom: 1px solid
+    ${props => props.theme.layoutPage.panel.contentSeparator};
 `;
 
-export default FlexRow;
+export default ContentSeparator;

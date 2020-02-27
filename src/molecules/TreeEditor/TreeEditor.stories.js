@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from "styled-components";
+import React from "react";
 
-interface IFlexRowProps {
-  disableWrap?: boolean;
-}
+import TreeEditor from "./TreeEditor";
 
-const FlexRow = styled.div<IFlexRowProps>`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: ${props => (props.disableWrap ? "nowrap" : "wrap")};
-`;
+import json from "./sampleData.json";
 
-export default FlexRow;
+export default {
+  title: "TreeEditor"
+};
+
+export const labelEditor = () => <TreeEditor data={json.sampleData} />;

@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from "styled-components";
+import React from 'react';
+import { addDecorator } from '@storybook/react';
+import styled, { ThemeProvider } from "styled-components";
 
-interface IFlexRowProps {
-  disableWrap?: boolean;
-}
+import theme from "../src/theme/base.json";
+import GlobalStyle from "../src/globalStyle";
 
-const FlexRow = styled.div<IFlexRowProps>`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: ${props => (props.disableWrap ? "nowrap" : "wrap")};
-`;
+addDecorator(storyFn => <ThemeProvider theme={theme}><GlobalStyle />{storyFn()}</ThemeProvider>);
 
-export default FlexRow;

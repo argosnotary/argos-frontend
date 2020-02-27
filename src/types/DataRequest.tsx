@@ -19,7 +19,15 @@ type DataRequest =
       token: string;
       url: string;
       method: "get";
+      params?: {};
+      cbSuccess?: (arg: any) => void;
     }
-  | { token: string; url: string; method: "post" | "put"; data: {} };
+  | {
+      token: string;
+      url: string;
+      method: "post" | "put";
+      data: {};
+      cbSuccess?: (arg: any) => void;
+    };
 
 export default DataRequest;

@@ -19,6 +19,7 @@ import styled from "styled-components";
 
 import Navbar from "../molecules/Navbar";
 import NavbarContextMenu from "../molecules/NavbarContextMenu";
+import { Link } from "react-router-dom";
 
 const AvatarContainer = styled.li`
   position: relative;
@@ -43,6 +44,22 @@ const TransparentOverlay = styled.div`
   height: 100%;
 `;
 
+const LinkContainer = styled.li`
+  margin: 0 1rem;
+
+  a {
+    color: ${props => props.theme.dashboardNavBar.link.textColor};
+    padding: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover {
+      background-color: ${props =>
+        props.theme.dashboardNavBar.link.hover.bgColor};
+    }
+  }
+`;
+
 const DashboardNavbar = () => {
   const [displayContextMenu, setDisplayContextMenu] = useState(false);
   const enableContextMenuDisplay = () => {
@@ -55,6 +72,9 @@ const DashboardNavbar = () => {
 
   return (
     <Navbar>
+      <LinkContainer>
+        <Link to={"/edit/layout"}>Supply chains</Link>
+      </LinkContainer>
       <AvatarContainer>
         {displayContextMenu ? (
           <TransparentOverlay onClick={disableContextMenuDisplay} />

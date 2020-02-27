@@ -13,16 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from "styled-components";
+import ITreeNode from "./ITreeNode";
 
-interface IFlexRowProps {
-  disableWrap?: boolean;
+export default interface ITreeContextMenuItem {
+  label: string;
+  callback: (node: ITreeNode) => void;
 }
-
-const FlexRow = styled.div<IFlexRowProps>`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: ${props => (props.disableWrap ? "nowrap" : "wrap")};
-`;
-
-export default FlexRow;
