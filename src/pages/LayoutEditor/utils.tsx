@@ -31,6 +31,7 @@ import {
   LayoutEditorPaneActionTypes
 } from "../../stores/layoutEditorStore";
 import ISupplyChainApiResponse from "../../interfaces/ISupplyChainApiResponse";
+import { TreeNodeType } from '../../types/TreeNodeType';
 
 const appendLabelChildrenToTree = (
   treeState: ITreeReducerState,
@@ -55,7 +56,7 @@ const appendObjectToTree = (
   treeDispatch: (msg: TreeReducerAction) => void,
   stateDispatch: (msg: LayoutEditorPaneAction) => void,
   object: ILabelPostResponse | ISupplyChainApiResponse,
-  type: "LABEL" | "SUPPLY_CHAIN"
+  type: TreeNodeType
 ) => {
   const parsedNode: ITreeNode = {
     hasChildren: false,

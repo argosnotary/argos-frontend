@@ -19,9 +19,7 @@ import styled, { ThemeContext } from "styled-components";
 import { generateKey } from "../security";
 
 import { Warning } from "../atoms/Alerts";
-import FlexColumn from "../atoms/FlexColumn";
-import FlexRow from "../atoms/FlexRow";
-import { KeyIcon, LoaderIcon, PlusIcon } from "../atoms/Icons";
+import { LoaderIcon, PlusIcon } from "../atoms/Icons";
 import {
   Modal,
   ModalBody,
@@ -32,69 +30,14 @@ import {
 import PageHeader from "../atoms/PageHeader";
 import TransparentButton from "../atoms/TransparentButton";
 
-import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
-import IState from "../interfaces/IState";
 import useDataApi from "../hooks/useDataApi";
 import useToken from "../hooks/useToken";
-
-const dataFetchReducer = (state: IState, action: Action<IState>) => {
-  switch (action.type) {
-    case "FETCH_INIT":
-      return {
-        ...state,
-        isLoading: true
-      };
-    case "FETCH_SUCCESS":
-      return {
-        ...state,
-        data: action.results,
-        isLoading: false
-      };
-    case "FETCH_FAILURE":
-      return {
-        ...state,
-        error: action.error,
-        isLoading: false
-      };
-  }
-};
+import genericDataFetchReducer from "../stores/genericDataFetchReducer";
+import PasswordView from "../atoms/PasswordView";
 
 const CreateKeyButton = styled(TransparentButton)`
   margin: 1.3rem 0;
-`;
-
-const PasswordDisplay = styled.section`
-  display: flex;
-  align-items: center;
-  border: 1px solid ${props => props.theme.keyManagementPage.passwordColor};
-  margin: 1rem 0;
-  padding: 1.25rem 1.5rem;
-  width: 100%;
-`;
-
-const PasswordCopy = styled.p`
-  color: ${props => props.theme.keyManagementPage.passwordColor};
-`;
-
-const Password = styled.input`
-  margin: 0.75rem 1rem;
-  color: ${props => props.theme.keyManagementPage.passwordColor};
-  font-size: 2rem;
-  border: none;
-  outline: none;
-  max-width: 20rem;
-`;
-
-const PasswordContainer = styled(FlexRow)`
-  margin: 1rem 0;
-  align-items: center;
-`;
-
-const PasswordIconWrapper = styled.div`
-  position: relative;
-  top: 3px;
-  margin: 0 0 0 1rem;
 `;
 
 enum WizardStates {
@@ -116,7 +59,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
     WizardStates.KeyOverrideWarning
   );
   const [generatedPassword, setGeneratedPassword] = useState("");
-  const [response, setDataRequest] = useDataApi(dataFetchReducer);
+  const [response, setDataRequest] = useDataApi(genericDataFetchReducer);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const theme = useContext(ThemeContext);
   const [localStorageToken] = useToken();
@@ -217,30 +160,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
         return (
           <>
             <ModalBody>
-              <PasswordDisplay>
-                <FlexColumn>
-                  <PasswordCopy>
-                    Your key has been generated with the following passphrase:
-                  </PasswordCopy>
-                  <PasswordContainer>
-                    <PasswordIconWrapper>
-                      <KeyIcon
-                        color={theme.keyManagementPage.passwordColor}
-                        size={40}
-                      />
-                    </PasswordIconWrapper>
-                    <Password
-                      readOnly={true}
-                      value={generatedPassword}
-                      ref={passwordInputRef}
-                    />
-                  </PasswordContainer>
-                  <PasswordCopy>
-                    Do not forget to copy your passphrase before closing this
-                    window.
-                  </PasswordCopy>
-                </FlexColumn>
-              </PasswordDisplay>
+              <PasswordView password={generatedPassword} />
             </ModalBody>
             <ModalFooter>
               <ModalButton onClick={copyPasswordToClipboard}>

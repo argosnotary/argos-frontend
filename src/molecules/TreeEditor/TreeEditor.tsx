@@ -19,10 +19,11 @@ import styled, { ThemeContext } from "styled-components";
 import ITreeNode from "../../interfaces/ITreeNode";
 import {
   AltPlusIcon,
-  LabelIcon,
   TriangleIcon,
   LoaderIcon,
-  ChainIcon
+  ChainIcon,
+  LabelIcon,
+  RobotIcon
 } from "../../atoms/Icons";
 import {
   TreeStateContext,
@@ -101,6 +102,8 @@ const renderTypeIcon = (theme: any, type: string) => {
       return <LabelIcon color={theme.treeEditor.iconColors.label} size={14} />;
     case "SUPPLY_CHAIN":
       return <ChainIcon color={theme.treeEditor.iconColors.chain} size={14} />;
+    case "NON_PERSONAL_ACCOUNT":
+      return <RobotIcon color={theme.treeEditor.iconColors.robot} size={14} />;
   }
 };
 
@@ -340,13 +343,9 @@ const AddAdditionalRootNodes = () => {
 };
 
 const TreeEditorContainer = styled.aside`
-  border: 1rem solid ${props => props.theme.treeEditor.borderColor};
-  color: ${props => props.theme.treeEditor.textColor};
-  background-color: ${props => props.theme.treeEditor.bgColor};
   height: 100vh;
-  width: 25vw;
-  padding: 1rem;
-  overflow: scroll;
+  color: ${props => props.theme.treeEditor.textColor};
+  overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -41,9 +41,9 @@ const validate = (values: ISupplyChainNameFormValues) => {
 
   if (!values.supplychainname) {
     errors.supplychainname = "Please fill in a supply chain name.";
-  } else if (!/^([a-z]{1}[a-z0-9-]*)?$/i.test(values.supplychainname)) {
+  } else if (!/^([a-z]{1}[a-z0-9-]*)?$/.test(values.supplychainname)) {
     errors.supplychainname =
-      "Invalid supply chain name (only alphanumeric characters and hyphen is allowed).";
+      "Invalid supply chain name (only lowercase alphanumeric characters and hyphen is allowed).";
   }
 
   return errors;
@@ -150,6 +150,10 @@ const ManageSupplyChain = () => {
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
+  const updateMode =
+    state.firstPanelView ===
+    LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
+
   return (
     <form onSubmit={formik.handleSubmit}>
       {state.selectedNodeName !== "" ? (
@@ -180,7 +184,7 @@ const ManageSupplyChain = () => {
         buttonType="submit"
         loading={supplyChainApiResponseState.isLoading}
       >
-        Add supply chain
+        {updateMode ? "Update supply chain" : "Add supply chain"}
       </LoaderButton>
       <CancelButton
         onClick={() =>

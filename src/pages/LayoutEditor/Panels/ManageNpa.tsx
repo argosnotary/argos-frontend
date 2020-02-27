@@ -18,11 +18,10 @@ import { useFormik } from "formik";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import InputErrorLabel from "../../../atoms/InputErrorLabel";
-import { LoaderButton, CancelButton } from "../../../atoms/Button";
+import { LoaderButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
-import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
 import FormInput from "../../../molecules/FormInput";
 import {
   StateContext,
@@ -31,35 +30,37 @@ import {
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
+import INpaApiResponse from "../../../interfaces/INpaApiResponse";
+import PasswordView from "../../../atoms/PasswordView";
 
-interface ILabelNameFormValues {
-  labelname: string;
+interface INpaFormValues {
+  npaname: string;
 }
 
-const validate = (values: ILabelNameFormValues) => {
+const validate = (values: INpaFormValues) => {
   const errors = {} as any;
 
-  if (!values.labelname) {
-    errors.labelname = "Please fill in a label name.";
-  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.labelname)) {
-    errors.labelname =
-      "Invalid label name (only lowercase alphanumeric characters and underscore allowed).";
+  if (!values.npaname) {
+    errors.npaname = "Please fill in a npa name.";
+  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.npaname)) {
+    errors.npaname =
+      "Invalid npa name (only lowercase alphanumeric characters and underscore allowed).";
   }
 
   return errors;
 };
 
-const ManageLabel = () => {
+const ManageNpa = () => {
   const [localStorageToken] = useToken();
   const [state, dispatch] = useContext(StateContext);
   const [labelPostState, setLabelPostRequest] = useDataApi(
     genericDataFetchReducer
   );
 
-  const postNewLabel = (values: ILabelNameFormValues) => {
+  const postNewNpa = (values: INpaFormValues) => {
     const data: any = {};
 
-    data.name = values.labelname;
+    data.name = values.npaname;
 
     if (state.nodeReferenceId !== "") {
       data.parentLabelId = state.nodeReferenceId;
@@ -69,11 +70,11 @@ const ManageLabel = () => {
       data,
       method: "post",
       token: localStorageToken,
-      url: "/api/label",
-      cbSuccess: (label: ILabelPostResponse) => {
+      url: "/api/nonpersonalaccount",
+      cbSuccess: (npa: INpaApiResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.POST_NEW_LABEL,
-          label
+          type: LayoutEditorDataActionTypes.POST_NEW_NPA,
+          npa
         });
         formik.resetForm();
       }
@@ -82,13 +83,13 @@ const ManageLabel = () => {
     setLabelPostRequest(dataRequest);
   };
 
-  const updateLabel = (values: ILabelNameFormValues) => {
+  const updateNpa = (values: INpaFormValues) => {
     const data: any = {};
 
-    data.name = values.labelname;
+    data.name = values.npaname;
 
     if (state.nodeReferenceId !== "") {
-      data.labelId = state.nodeReferenceId;
+      data.nonPersonalAccountId = state.nodeReferenceId;
     }
 
     if (state.nodeParentId !== "") {
@@ -99,11 +100,11 @@ const ManageLabel = () => {
       data,
       method: "put",
       token: localStorageToken,
-      url: `/api/label/${state.nodeReferenceId}`,
-      cbSuccess: (label: ILabelPostResponse) => {
+      url: `/api/nonpersonalaccount/${state.nodeReferenceId}`,
+      cbSuccess: (npa: INpaApiResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.PUT_LABEL,
-          label
+          type: LayoutEditorDataActionTypes.PUT_NPA,
+          npa
         });
         formik.resetForm();
       }
@@ -114,20 +115,20 @@ const ManageLabel = () => {
 
   const formik = useFormik({
     initialValues: {
-      labelname: ""
+      npaname: ""
     },
     onSubmit: values => {
       if (
-        state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+        state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
       ) {
-        postNewLabel(values);
+        postNewNpa(values);
       }
 
       if (
         state.firstPanelView ===
-        LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+        LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
       ) {
-        updateLabel(values);
+        updateNpa(values);
       }
     },
     validate
@@ -135,21 +136,51 @@ const ManageLabel = () => {
 
   useEffect(() => {
     if (
-      state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+      state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
     ) {
-      formik.setValues({ labelname: state.selectedNodeName });
+      formik.setValues({ npaname: state.selectedNodeName });
     }
 
     if (
-      state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+      state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
     ) {
-      formik.setValues({ labelname: "" });
+      formik.setValues({ npaname: "" });
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
   const updateMode =
-    state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
+    state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
+
+  const renderPanelState = (state: string) => {
+    switch (state) {
+      case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+        return (
+          <>
+            <FormInput
+              labelValue="Non personal account name*"
+              name="npaname"
+              formType="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.npaname}
+            />
+            {formik.touched.npaname && formik.errors.npaname ? (
+              <InputErrorLabel>{formik.errors.npaname}</InputErrorLabel>
+            ) : null}
+            <ContentSeparator />
+            <LoaderButton
+              buttonType="submit"
+              loading={labelPostState.isLoading}
+            >
+              {updateMode ? "Update NPA" : "Add NPA"}
+            </LoaderButton>
+          </>
+        );
+      case LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE:
+        return <PasswordView password={"S712hjasd71j"} />;
+    }
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -165,32 +196,9 @@ const ManageLabel = () => {
           <ContentSeparator />
         </>
       ) : null}
-      <FormInput
-        labelValue="Label name*"
-        name="labelname"
-        formType="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.labelname}
-      />
-      {formik.touched.labelname && formik.errors.labelname ? (
-        <InputErrorLabel>{formik.errors.labelname}</InputErrorLabel>
-      ) : null}
-      <ContentSeparator />
-      <LoaderButton buttonType="submit" loading={labelPostState.isLoading}>
-        {!updateMode ? "Add label" : "Update label"}
-      </LoaderButton>
-      <CancelButton
-        onClick={() =>
-          dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
-          })
-        }
-      >
-        Cancel
-      </CancelButton>
+      {renderPanelState(state.firstPanelView)}
     </form>
   );
 };
 
-export default ManageLabel;
+export default ManageNpa;

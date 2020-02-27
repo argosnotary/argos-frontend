@@ -16,6 +16,7 @@
 import React, { Dispatch } from "react";
 import ILabelPostResponse from "../interfaces/ILabelPostResponse";
 import ISupplyChainApiResponse from "../interfaces/ISupplyChainApiResponse";
+import INpaApiResponse from "../interfaces/INpaApiResponse";
 
 interface ILayoutEditorState {
   nodeParentId: string;
@@ -32,7 +33,9 @@ export enum LayoutEditorDataActionTypes {
   POST_NEW_LABEL = "POST_NEW_LABEL",
   PUT_LABEL = "PUT_LABEL",
   POST_SUPPLY_CHAIN = "POST_SUPPLY_CHAIN",
-  PUT_SUPPLY_CHAIN = "PUT_SUPPLY_CHAIN"
+  PUT_SUPPLY_CHAIN = "PUT_SUPPLY_CHAIN",
+  POST_NEW_NPA = "POST_NEW_NPA",
+  PUT_NPA = "PUT_NPA"
 }
 
 export enum LayoutEditorPaneActionTypes {
@@ -41,6 +44,9 @@ export enum LayoutEditorPaneActionTypes {
   SHOW_UPDATE_LABEL_PANE = "SHOW_UPDATE_LABEL_PANE",
   SHOW_ADD_SUPPLY_CHAIN_PANE = "SHOW_ADD_SUPPLY_CHAIN_PANE",
   SHOW_UPDATE_SUPPLY_CHAIN_PANE = "SHOW_UPDATE_SUPPLY_CHAIN_PANE",
+  SHOW_ADD_NPA_PANE = "SHOW_ADD_NPA_PANE",
+  SHOW_UPDATE_NPA_PANE = "SHOW_UPDATE_NPA_PANE",
+  SHOW_NPA_PASSPHRASE = "SHOW_NPA_PASSPHRASE",
   RESET_PANE = "RESET_PANE"
 }
 
@@ -49,7 +55,18 @@ export type LayoutEditorPaneActionType =
   | LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
   | LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
   | LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
+  | LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
+  | LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
+  | LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
   | LayoutEditorPaneActionTypes.RESET_PANE;
+
+export type LayoutEditorDataActionType =
+  | LayoutEditorDataActionTypes.POST_NEW_LABEL
+  | LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
+  | LayoutEditorDataActionTypes.POST_NEW_NPA
+  | LayoutEditorDataActionTypes.PUT_LABEL
+  | LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN
+  | LayoutEditorDataActionTypes.PUT_NPA;
 
 export type LayoutEditorPaneAction =
   | {
@@ -80,6 +97,21 @@ export type LayoutEditorPaneAction =
       breadcrumb: string;
       selectedNodeName: string;
     }
+  | {
+      type: LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE;
+      nodeReferenceId: string;
+      breadcrumb: string;
+      selectedNodeName: string;
+      nodeParentId: string;
+    }
+  | {
+      type: LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
+      nodeReferenceId: string;
+      nodeParentId: string;
+      breadcrumb: string;
+      selectedNodeName: string;
+    }
+  | { type: LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE }
   | { type: LayoutEditorPaneActionTypes.RESET_PANE };
 
 export type LayoutEditorDataAction =
@@ -95,6 +127,14 @@ export type LayoutEditorDataAction =
   | {
       type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN;
       supplyChain: ISupplyChainApiResponse;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.POST_NEW_NPA;
+      npa: INpaApiResponse;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.PUT_NPA;
+      npa: INpaApiResponse;
     };
 
 type LayoutEditorAction = LayoutEditorPaneAction | LayoutEditorDataAction;
@@ -139,6 +179,29 @@ const editorReducer = (
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
+    case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+      return {
+        ...state,
+        firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
+        nodeReferenceId: action.nodeReferenceId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName
+      };
+    case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+      return {
+        ...state,
+        firstPanelView: LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
+        nodeReferenceId: action.nodeReferenceId,
+        nodeParentId: action.nodeParentId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName
+      };
+
+    case LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE:
+      return {
+        ...state,
+        firstPanelView: LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
+      };
     case LayoutEditorPaneActionTypes.RESET_PANE:
       return {
         ...state,
@@ -170,6 +233,18 @@ const editorReducer = (
         ...state,
         dataAction: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
         data: action.supplyChain
+      };
+    case LayoutEditorDataActionTypes.POST_NEW_NPA:
+      return {
+        ...state,
+        dataAction: LayoutEditorDataActionTypes.POST_NEW_NPA,
+        data: action.npa
+      };
+    case LayoutEditorDataActionTypes.PUT_NPA:
+      return {
+        ...state,
+        dataAction: LayoutEditorDataActionTypes.PUT_NPA,
+        data: action.npa
       };
   }
 };

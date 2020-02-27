@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import React, { useReducer, useEffect } from "react";
-import styled from "styled-components";
 
 import DataRequest from "../../types/DataRequest";
 import FlexColumn from "../../atoms/FlexColumn";
@@ -37,7 +36,8 @@ import {
   StateContext,
   LayoutEditorDataActionTypes,
   LayoutEditorPaneActionTypes,
-  LayoutEditorPaneActionType
+  LayoutEditorPaneActionType,
+  LayoutEditorDataActionType
 } from "../../stores/layoutEditorStore";
 import {
   appendObjectToTree,
@@ -47,25 +47,9 @@ import {
 import ManageLabel from "./Panels/ManageLabel";
 import genericDataFetchReducer from "../../stores/genericDataFetchReducer";
 import ManageSupplyChain from "./Panels/ManageSupplyChain";
-
-const PanelsContainer = styled.section`
-  width: 75vw;
-`;
-
-const Panel = styled.section`
-  background-color: ${props => props.theme.layoutPage.panel.bgColor};
-  border: 1rem solid ${props => props.theme.layoutPage.panel.borderColor};
-  border-left-width: 0;
-  padding: 1rem;
-  height: 100vh;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const SecondPanel = styled(Panel)`
-  height: 100vh;
-`;
+import ManageNpa from "./Panels/ManageNpa";
+import { TreeNodeTypes } from "../../types/TreeNodeType";
+import { PanelsContainer, Panel } from "../../molecules/Panel";
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(editorReducer, {
@@ -118,7 +102,7 @@ const LayoutEditor = () => {
       type: "LABEL",
       menuitems: [
         {
-          label: "Add label",
+          label: "Add child label",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
               LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
@@ -127,7 +111,7 @@ const LayoutEditor = () => {
           }
         },
         {
-          label: "Update label",
+          label: "Update selected label",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
               LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
@@ -143,6 +127,15 @@ const LayoutEditor = () => {
               node
             );
           }
+        },
+        {
+          label: "Add npa",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
+              node
+            );
+          }
         }
       ]
     },
@@ -154,6 +147,20 @@ const LayoutEditor = () => {
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
               LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
+              node
+            );
+          }
+        }
+      ]
+    },
+    {
+      type: "NON_PERSONAL_ACCOUNT",
+      menuitems: [
+        {
+          label: "Update npa",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
               node
             );
           }
@@ -196,44 +203,73 @@ const LayoutEditor = () => {
       case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
       case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
         return <ManageSupplyChain />;
+      case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+        return <ManageNpa />;
       default:
         return null;
     }
   };
 
-  useEffect(() => {
-    if (
-      state.dataAction &&
-      state.dataAction === LayoutEditorDataActionTypes.POST_NEW_LABEL
-    ) {
-      appendObjectToTree(
-        treeState,
-        treeDispatch,
-        dispatch,
-        state.data,
-        "LABEL"
-      );
+  const getNodeTypeFromAction = (action: LayoutEditorDataActionType) => {
+    switch (action) {
+      case LayoutEditorDataActionTypes.POST_NEW_LABEL:
+        return TreeNodeTypes.LABEL;
+      case LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN:
+        return TreeNodeTypes.SUPPLY_CHAIN;
+      case LayoutEditorDataActionTypes.POST_NEW_NPA:
+        return TreeNodeTypes.NON_PERSONAL_ACCOUNT;
+      default:
+        return TreeNodeTypes.UNSPECIFIED;
+    }
+  };
+
+  const getPanelTitleFromState = (pane: string): string => {
+    switch (pane) {
+      case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
+        return "Add child label to selected label";
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
+        return "Update selected label";
+      case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
+        return "Add supply chain to label";
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
+        return "Update selected supply chain";
+      case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+        return "Add non personal account to label";
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+        return "Update selected non personal account";
     }
 
-    if (
-      state.dataAction &&
-      state.dataAction === LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
-    ) {
+    return "";
+  };
+
+  useEffect(() => {
+    if (state.dataAction) {
       appendObjectToTree(
         treeState,
         treeDispatch,
         dispatch,
         state.data,
-        "SUPPLY_CHAIN"
+        getNodeTypeFromAction(state.dataAction as LayoutEditorDataActionType)
       );
     }
 
     if (
       state.dataAction &&
       (state.dataAction === LayoutEditorDataActionTypes.PUT_LABEL ||
-        state.dataAction === LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN)
+        state.dataAction === LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN ||
+        state.dataAction === LayoutEditorDataActionTypes.PUT_NPA)
     ) {
       updateObjectInTree(treeState, treeDispatch, dispatch, state.data);
+    }
+
+    if (
+      state.dataAction === LayoutEditorDataActionTypes.POST_NEW_NPA ||
+      state.dataAction === LayoutEditorDataActionTypes.PUT_NPA
+    ) {
+      dispatch({
+        type: LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
+      });
     }
   }, [state.data, state.dataAction]);
 
@@ -241,27 +277,41 @@ const LayoutEditor = () => {
     <FlexColumn>
       <FlexRow disableWrap={true}>
         <StateContext.Provider value={[state, dispatch]}>
-          <TreeStateContext.Provider
-            value={[
-              treeState,
-              treeDispatch,
-              treeStringList,
-              treeContextMenu,
-              cbCreateRootNode,
-              cbGetNodeChildren,
-              treeChildrenFetchState.isLoading,
-              state.nodeReferenceId
-            ]}
-          >
-            <TreeEditor
-              data={treeDataState.data}
-              loading={treeDataState.isLoading}
-            />
-          </TreeStateContext.Provider>
           <PanelsContainer>
-            <FlexRow>
-              <Panel>{renderPanel(state.firstPanelView)}</Panel>
-              <SecondPanel>&nbsp;</SecondPanel>
+            <FlexRow disableWrap={true}>
+              <Panel
+                width={"25vw"}
+                title={"Hierarchy"}
+                disableFlexGrow={true}
+                resizable={true}
+              >
+                <TreeStateContext.Provider
+                  value={[
+                    treeState,
+                    treeDispatch,
+                    treeStringList,
+                    treeContextMenu,
+                    cbCreateRootNode,
+                    cbGetNodeChildren,
+                    treeChildrenFetchState.isLoading,
+                    state.nodeReferenceId
+                  ]}
+                >
+                  <TreeEditor
+                    data={treeDataState.data}
+                    loading={treeDataState.isLoading}
+                  />
+                </TreeStateContext.Provider>
+              </Panel>
+              <Panel
+                width={"37.5vw"}
+                title={getPanelTitleFromState(state.firstPanelView)}
+              >
+                {renderPanel(state.firstPanelView)}
+              </Panel>
+              <Panel width={"37.5vw"} last={true}>
+                &nbsp;
+              </Panel>
             </FlexRow>
           </PanelsContainer>
         </StateContext.Provider>
