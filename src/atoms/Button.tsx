@@ -15,10 +15,10 @@
  */
 
 import { darken } from "polished";
-import React from 'react';
+import React from "react";
 import styled, { css } from "styled-components";
 
-import { LoaderIcon } from '../atoms/Icons';
+import { LoaderIcon } from "../atoms/Icons";
 
 const BaseButtonStyle = css`
   display: inline-block;
@@ -49,16 +49,36 @@ const AnchorButton = styled.a`
   ${BaseButtonStyle}
 `;
 
-
 interface ILoaderButtonProps {
   children: string;
   loading: boolean;
   buttonType: "button" | "submit" | "reset";
 }
 
-const LoaderButton: React.FC<ILoaderButtonProps> = ({children, loading, buttonType}) => {
-  return <Button type={buttonType}>{loading ? <LoaderIcon size={18} color={'#fff'} /> : children}</Button>  
+const LoaderButton: React.FC<ILoaderButtonProps> = ({
+  children,
+  loading,
+  buttonType
+}) => {
+  return (
+    <Button type={buttonType}>
+      {loading ? <LoaderIcon size={18} color={"#fff"} /> : children}
+    </Button>
+  );
 };
 
+const CancelButton = styled(Button)`
+  margin-left: 1rem;
+  background-color: ${props => props.theme.cancelButton.bgColor};
+  color: ${props => props.theme.cancelButton.textColor};
+  border: 1px solid ${props => props.theme.cancelButton.borderColor};
 
-export { AnchorButton, Button, LoaderButton };
+  &:hover {
+    background-color: ${props => props.theme.cancelButton.hover.bgColor};
+    color: ${props => props.theme.cancelButton.hover.textColor};
+    border: 1px solid ${props => props.theme.cancelButton.hover.borderColor};
+    cursor: pointer;
+  }
+`;
+
+export { AnchorButton, CancelButton, Button, LoaderButton };

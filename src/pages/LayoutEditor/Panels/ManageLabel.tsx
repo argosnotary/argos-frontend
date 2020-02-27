@@ -18,7 +18,7 @@ import { useFormik } from "formik";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import InputErrorLabel from "../../../atoms/InputErrorLabel";
-import { LoaderButton } from "../../../atoms/Button";
+import { LoaderButton, CancelButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
@@ -177,6 +177,15 @@ const ManageLabel = () => {
       <LoaderButton buttonType="submit" loading={labelPostState.isLoading}>
         Add label
       </LoaderButton>
+      <CancelButton
+        onClick={() =>
+          dispatch({
+            type: LayoutEditorPaneActionTypes.RESET_PANE
+          })
+        }
+      >
+        Cancel
+      </CancelButton>
     </form>
   );
 };

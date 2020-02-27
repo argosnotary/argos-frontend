@@ -5,6 +5,16 @@
     "bgColor": "#1779ba",
     "textColor": "#fff"
   },
+  "cancelButton": {
+    "bgColor": "transparent",
+    "textColor": "#8D99AE",
+    "borderColor": "#8D99AE",
+    "hover": {
+      "bgColor": "#8D99AE",
+      "textColor": "#fff",
+      "borderColor": "transparent"
+    }
+  },
   "transparentButton": {
     "default": {
       "transparentButtonBgColor": "#fff",
