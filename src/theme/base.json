@@ -41,6 +41,12 @@
       }
     }
   },
+  "passwordView": {
+    "clipboardIcon": {
+      "color": "#8D99AE",
+      "hoverBgColor": "#e8feff"
+    }
+  },
   "treeEditor": {
     "textColor": "#2e2e2e",
     "bgColor": "#f1f1f1",

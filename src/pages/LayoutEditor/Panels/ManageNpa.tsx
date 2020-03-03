@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFormik } from "formik";
+import styled from "styled-components";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import InputErrorLabel from "../../../atoms/InputErrorLabel";
-import { LoaderButton } from "../../../atoms/Button";
+import { CancelButton, LoaderButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
@@ -32,10 +33,28 @@ import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import INpaApiResponse from "../../../interfaces/INpaApiResponse";
 import PasswordView from "../../../atoms/PasswordView";
+import FlexRow from "../../../atoms/FlexRow";
+import { generateKey } from "../../../security";
+import { Warning } from "../../../atoms/Alerts";
+import {
+  ModalBody,
+  ModalFlexColumWrapper,
+  ModalFooter,
+  ModalButton,
+  Modal
+} from "../../../atoms/Modal";
 
 interface INpaFormValues {
   npaname: string;
 }
+
+enum WizardStates {
+  KEY_OVERRIDE_WARNING
+}
+
+const CloseButton = styled(CancelButton)`
+  margin: 0;
+`;
 
 const validate = (values: INpaFormValues) => {
   const errors = {} as any;
@@ -53,9 +72,13 @@ const validate = (values: INpaFormValues) => {
 const ManageNpa = () => {
   const [localStorageToken] = useToken();
   const [state, dispatch] = useContext(StateContext);
-  const [labelPostState, setLabelPostRequest] = useDataApi(
-    genericDataFetchReducer
+  const [npaPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
+  const [generatedPassword, setGeneratedPassword] = useState("");
+  const [wizardState, _setWizardState] = useState(
+    WizardStates.KEY_OVERRIDE_WARNING
   );
+
+  const [displayModal, setDisplayModal] = useState(false);
 
   const postNewNpa = (values: INpaFormValues) => {
     const data: any = {};
@@ -71,16 +94,29 @@ const ManageNpa = () => {
       method: "post",
       token: localStorageToken,
       url: "/api/nonpersonalaccount",
-      cbSuccess: (npa: INpaApiResponse) => {
-        dispatch({
-          type: LayoutEditorDataActionTypes.POST_NEW_NPA,
-          npa
-        });
-        formik.resetForm();
+      cbSuccess: async (npa: INpaApiResponse) => {
+        const generatedKeys = await generateKey(true);
+
+        const dataRequest: DataRequest = {
+          data: generatedKeys.keys,
+          method: "post",
+          token: localStorageToken,
+          url: `/api/nonpersonalaccount/${npa.id}/key`,
+          cbSuccess: () => {
+            setGeneratedPassword(generatedKeys.password);
+
+            dispatch({
+              type: LayoutEditorDataActionTypes.POST_NEW_NPA,
+              npa
+            });
+          }
+        };
+
+        setNpaPostRequest(dataRequest);
       }
     };
 
-    setLabelPostRequest(dataRequest);
+    setNpaPostRequest(dataRequest);
   };
 
   const updateNpa = (values: INpaFormValues) => {
@@ -110,7 +146,7 @@ const ManageNpa = () => {
       }
     };
 
-    setLabelPostRequest(dataRequest);
+    setNpaPostRequest(dataRequest);
   };
 
   const formik = useFormik({
@@ -135,6 +171,8 @@ const ManageNpa = () => {
   });
 
   useEffect(() => {
+    console.log("GETTING IN HERE", state.firstPanelView);
+
     if (
       state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
     ) {
@@ -146,41 +184,103 @@ const ManageNpa = () => {
     ) {
       formik.setValues({ npaname: "" });
     }
+
+    if (
+      state.firstPanelView ===
+      LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
+    ) {
+      setDisplayModal(true);
+    }
   }, [state.selectedNodeName, state.firstPanelView]);
 
   const updateMode =
     state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
 
-  const renderPanelState = (state: string) => {
-    switch (state) {
-      case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+  if (state.dataAction === LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED) {
+    return (
+      <>
+        <NodesBreadCrumb>
+          Selected: {state.breadcrumb}
+          <LastBreadCrumb>
+            {state.breadcrumb.length > 0 ? " / " : ""}
+            {state.selectedNodeName}
+          </LastBreadCrumb>
+        </NodesBreadCrumb>
+        <ContentSeparator />
+        <PasswordView password={generatedPassword} margin={"0 0 1rem"} />
+        <FlexRow>
+          <CloseButton
+            onClick={() =>
+              dispatch({
+                type: LayoutEditorPaneActionTypes.RESET_PANE
+              })
+            }
+          >
+            Close
+          </CloseButton>
+        </FlexRow>
+      </>
+    );
+  }
+
+  const getModalContent = (currentWizardState: number) => {
+    const cancelHandler = () => {
+      dispatch({ type: LayoutEditorPaneActionTypes.RESET_PANE });
+    };
+
+    const continueHandler = async () => {
+      const generatedKeys = await generateKey(true);
+
+      const dataRequest: DataRequest = {
+        data: generatedKeys.keys,
+        method: "post",
+        token: localStorageToken,
+        url: `/api/nonpersonalaccount/${state.nodeReferenceId}/key`,
+        cbSuccess: () => {
+          setGeneratedPassword(generatedKeys.password);
+
+          dispatch({
+            type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED
+          });
+        }
+      };
+
+      setNpaPostRequest(dataRequest);
+    };
+
+    switch (currentWizardState) {
+      case WizardStates.KEY_OVERRIDE_WARNING:
         return (
           <>
-            <FormInput
-              labelValue="Non personal account name*"
-              name="npaname"
-              formType="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.npaname}
-            />
-            {formik.touched.npaname && formik.errors.npaname ? (
-              <InputErrorLabel>{formik.errors.npaname}</InputErrorLabel>
-            ) : null}
-            <ContentSeparator />
-            <LoaderButton
-              buttonType="submit"
-              loading={labelPostState.isLoading}
-            >
-              {updateMode ? "Update NPA" : "Add NPA"}
-            </LoaderButton>
+            <ModalBody>
+              <Warning
+                message={
+                  "Existing key will be deactivated. Are you sure you want to continue?"
+                }
+              />
+            </ModalBody>
+            <ModalFooter>
+              <ModalButton onClick={cancelHandler}>No</ModalButton>
+              <ModalButton onClick={continueHandler}>Continue</ModalButton>
+            </ModalFooter>
           </>
         );
-      case LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE:
-        return <PasswordView password={"S712hjasd71j"} />;
     }
   };
+
+  if (
+    state.firstPanelView ===
+      LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL &&
+    displayModal
+  ) {
+    return (
+      <Modal>
+        <ModalFlexColumWrapper>
+          {getModalContent(wizardState)}
+        </ModalFlexColumWrapper>
+      </Modal>
+    );
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -196,7 +296,21 @@ const ManageNpa = () => {
           <ContentSeparator />
         </>
       ) : null}
-      {renderPanelState(state.firstPanelView)}
+      <FormInput
+        labelValue="Non personal account name*"
+        name="npaname"
+        formType="text"
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.npaname}
+      />
+      {formik.touched.npaname && formik.errors.npaname ? (
+        <InputErrorLabel>{formik.errors.npaname}</InputErrorLabel>
+      ) : null}
+      <ContentSeparator />
+      <LoaderButton buttonType="submit" loading={npaPostState.isLoading}>
+        {updateMode ? "Update NPA" : "Add NPA"}
+      </LoaderButton>
     </form>
   );
 };

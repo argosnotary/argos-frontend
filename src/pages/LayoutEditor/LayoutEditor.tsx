@@ -89,6 +89,10 @@ const LayoutEditor = () => {
     const selectedNodeName = Array.from(trail.slice(-1))[0].name;
 
     dispatch({
+      type: LayoutEditorPaneActionTypes.RESET_PANE
+    });
+
+    dispatch({
       type,
       nodeReferenceId: node.referenceId,
       nodeParentId: trail.length > 1 ? trail[trail.length - 2].referenceId : "",
@@ -96,6 +100,15 @@ const LayoutEditor = () => {
       selectedNodeName
     });
   };
+
+  // const treeClickHandler = [
+  //   {
+  //     type: "NON_PERSONAL_ACCOUNT",
+  //     callback: (node: ITreeNode) => {
+  //       console.log(node);
+  //     }
+  //   }
+  // ];
 
   const treeContextMenu = [
     {
@@ -164,6 +177,16 @@ const LayoutEditor = () => {
               node
             );
           }
+        },
+        {
+          label: "Generate new key for npa",
+          callback: (node: ITreeNode) => {
+            console.log("generating new key");
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
+              node
+            );
+          }
         }
       ]
     }
@@ -205,6 +228,7 @@ const LayoutEditor = () => {
         return <ManageSupplyChain />;
       case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
       case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
         return <ManageNpa />;
       default:
         return null;
@@ -212,6 +236,7 @@ const LayoutEditor = () => {
   };
 
   const getNodeTypeFromAction = (action: LayoutEditorDataActionType) => {
+    console.log(action);
     switch (action) {
       case LayoutEditorDataActionTypes.POST_NEW_LABEL:
         return TreeNodeTypes.LABEL;
@@ -236,6 +261,8 @@ const LayoutEditor = () => {
         return "Update selected supply chain";
       case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
         return "Add non personal account to label";
+      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
+        return "Generate new key for npa";
       case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
         return "Update selected non personal account";
     }
@@ -244,7 +271,12 @@ const LayoutEditor = () => {
   };
 
   useEffect(() => {
-    if (state.dataAction) {
+    if (
+      (state.dataAction &&
+        state.dataAction === LayoutEditorDataActionTypes.POST_NEW_LABEL) ||
+      state.dataAction === LayoutEditorDataActionTypes.POST_NEW_NPA ||
+      state.dataAction === LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
+    ) {
       appendObjectToTree(
         treeState,
         treeDispatch,
@@ -262,16 +294,18 @@ const LayoutEditor = () => {
     ) {
       updateObjectInTree(treeState, treeDispatch, dispatch, state.data);
     }
-
-    if (
-      state.dataAction === LayoutEditorDataActionTypes.POST_NEW_NPA ||
-      state.dataAction === LayoutEditorDataActionTypes.PUT_NPA
-    ) {
-      dispatch({
-        type: LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
-      });
-    }
   }, [state.data, state.dataAction]);
+
+  // const treeStateConfig  = {
+  //   treeState,
+  //   treeDispatch,
+  //   treeStringList,
+  //   treeContextMenu,
+  //   cbCreateRootNode,
+  //   cbGetNodeChildren,
+  //   isLoading: treeChildrenFetchState.isLoading,
+  //   nodeReferenceId: state.nodeReferenceId
+  // }
 
   return (
     <FlexColumn>

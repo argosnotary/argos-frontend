@@ -54,6 +54,7 @@ const ModalButton = styled.button`
   border: 0;
   color: ${props => props.theme.modal.button.default.color};
   font-size: 1rem;
+  outline: 0;
 
   &:hover {
     color: ${props => darken(0.1, props.theme.modal.button.hover.color)};

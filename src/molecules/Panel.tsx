@@ -90,13 +90,15 @@ export const Panel: React.FC<IPanelProps> = ({
       <PanelHeader last={last}>
         {resizable ? (
           <>
-            <PanelTitle>{title}</PanelTitle>
             {!shrink ? (
-              <ShrinkIcon
-                size={16}
-                color={"#1779ba"}
-                onClick={() => setShrinkState(!shrink)}
-              />
+              <>
+                <PanelTitle>{title}</PanelTitle>
+                <ShrinkIcon
+                  size={16}
+                  color={"#1779ba"}
+                  onClick={() => setShrinkState(!shrink)}
+                />
+              </>
             ) : (
               <EnlargeIcon
                 size={16}

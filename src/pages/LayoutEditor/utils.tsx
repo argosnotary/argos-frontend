@@ -27,11 +27,11 @@ import {
 import ITreeNode from "../../interfaces/ITreeNode";
 import ILabelPostResponse from "../../interfaces/ILabelPostResponse";
 import {
-  LayoutEditorPaneAction,
-  LayoutEditorPaneActionTypes
+  LayoutEditorDataActionTypes,
+  LayoutEditorAction
 } from "../../stores/layoutEditorStore";
 import ISupplyChainApiResponse from "../../interfaces/ISupplyChainApiResponse";
-import { TreeNodeType } from '../../types/TreeNodeType';
+import { TreeNodeType } from "../../types/TreeNodeType";
 
 const appendLabelChildrenToTree = (
   treeState: ITreeReducerState,
@@ -54,7 +54,7 @@ const appendLabelChildrenToTree = (
 const appendObjectToTree = (
   treeState: ITreeReducerState,
   treeDispatch: (msg: TreeReducerAction) => void,
-  stateDispatch: (msg: LayoutEditorPaneAction) => void,
+  stateDispatch: (msg: LayoutEditorAction) => void,
   object: ILabelPostResponse | ISupplyChainApiResponse,
   type: TreeNodeType
 ) => {
@@ -80,14 +80,14 @@ const appendObjectToTree = (
   });
 
   stateDispatch({
-    type: LayoutEditorPaneActionTypes.RESET_PANE
+    type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED
   });
 };
 
 const updateObjectInTree = (
   treeState: ITreeReducerState,
   treeDispatch: (msg: TreeReducerAction) => void,
-  stateDispatch: (msg: LayoutEditorPaneAction) => void,
+  stateDispatch: (msg: LayoutEditorAction) => void,
   object: ILabelPostResponse | ISupplyChainApiResponse
 ) => {
   const currentNode = findNode(treeState.data, object.id);
@@ -102,7 +102,7 @@ const updateObjectInTree = (
   });
 
   stateDispatch({
-    type: LayoutEditorPaneActionTypes.RESET_PANE
+    type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED
   });
 };
 

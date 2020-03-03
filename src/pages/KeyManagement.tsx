@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled, { ThemeContext } from "styled-components";
 
 import { generateKey } from "../security";
@@ -60,7 +60,6 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   );
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [response, setDataRequest] = useDataApi(genericDataFetchReducer);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
   const theme = useContext(ThemeContext);
   const [localStorageToken] = useToken();
 
@@ -99,23 +98,6 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
     const disableModal = () => {
       setDisplayModal(false);
       setWizardState(WizardStates.KeyOverrideWarning);
-    };
-
-    const copyPasswordToClipboard = () => {
-      if (passwordInputRef.current) {
-        passwordInputRef.current.select();
-        passwordInputRef.current.setSelectionRange(0, 99999);
-        const document: any = window.document || {};
-        document.execCommand("copy");
-        document.getSelection().removeAllRanges();
-
-        const oldPassword = generatedPassword;
-        setGeneratedPassword("Copied");
-
-        setTimeout(() => {
-          setGeneratedPassword(oldPassword);
-        }, 1000);
-      }
     };
 
     switch (currentWizardState) {
@@ -163,9 +145,6 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
               <PasswordView password={generatedPassword} />
             </ModalBody>
             <ModalFooter>
-              <ModalButton onClick={copyPasswordToClipboard}>
-                Copy to clipboard
-              </ModalButton>
               <ModalButton onClick={disableModal}>Close</ModalButton>
             </ModalFooter>
           </>

@@ -82,7 +82,17 @@ const generateEncryptePrivateKey = async (
   return encKeyBinary;
 };
 
-const generateKey = async () => {
+interface IKey {
+  keys: {
+    encryptedPrivateKey: string;
+    keyId: string;
+    publicKey: string;
+    hashedKeyPassphrase?: string;
+  };
+  password: string;
+}
+
+const generateKey = async (hashKeyPassphrase = false) => {
   const keyPair = await generateKeyPair();
   const exportedPublicKey = await crypto.subtle.exportKey(
     "spki",
@@ -99,7 +109,7 @@ const generateKey = async () => {
     exportedPublicKey
   );
 
-  return {
+  const keyObj: IKey = {
     keys: {
       encryptedPrivateKey: arrayBufferToBase64(encryptedPrivateKey),
       keyId: arrayBufferToHex(digestedPublicKey),
@@ -107,6 +117,21 @@ const generateKey = async () => {
     },
     password
   };
+
+  if (hashKeyPassphrase) {
+    const hashedKeyPassphrase = await crypto.subtle.digest(
+      "SHA-512",
+      new TextEncoder().encode(password)
+    );
+
+    const hashArray = Array.from(new Uint8Array(hashedKeyPassphrase));
+
+    keyObj["keys"]["hashedKeyPassphrase"] = hashArray
+      .map(b => b.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  return keyObj;
 };
 
 export { generateEncryptePrivateKey, generateKeyPair, generateKey };
