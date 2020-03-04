@@ -127,10 +127,13 @@ export type LayoutEditorPaneAction =
     }
   | { type: LayoutEditorPaneActionTypes.RESET_PANE };
 
+interface IDataActionCompleted {
+  type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED;
+  data: any;
+}
+
 export type LayoutEditorDataAction =
-  | {
-      type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED;
-    }
+  | IDataActionCompleted
   | {
       type: LayoutEditorDataActionTypes.POST_NEW_LABEL;
       label: ILabelPostResponse;
@@ -252,7 +255,8 @@ const editorReducer = (
     case LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED: {
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED
+        dataAction: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+        data: action.data
       };
     }
     case LayoutEditorDataActionTypes.PUT_LABEL: {

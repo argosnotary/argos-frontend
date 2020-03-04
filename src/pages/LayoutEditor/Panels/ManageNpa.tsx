@@ -15,7 +15,11 @@
  */
 import React, { useContext, useEffect, useState } from "react";
 import { useFormik } from "formik";
-import styled from "styled-components";
+import styled, {
+  css,
+  FlattenInterpolation,
+  ThemeProps
+} from "styled-components";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import InputErrorLabel from "../../../atoms/InputErrorLabel";
@@ -43,6 +47,7 @@ import {
   ModalButton,
   Modal
 } from "../../../atoms/Modal";
+import CopyInput from "../../../atoms/CopyInput";
 
 interface INpaFormValues {
   npaname: string;
@@ -69,10 +74,62 @@ const validate = (values: INpaFormValues) => {
   return errors;
 };
 
+const copyInputCss = css`
+  border: 0;
+  outline: 0;
+  background: none;
+  font-size: 0.8rem;
+`;
+
+const clipboardWrapperCss = css`
+  padding: 0.4rem;
+  margin: 0 1rem;
+  height: 1.8rem;
+`;
+
+const CopyInputWrapper = styled.div`
+  margin: 0 0 1rem;
+`;
+
+interface IKeyId {
+  npaKeyId: string;
+  clipboardIconSize: number;
+  inputCss: FlattenInterpolation<ThemeProps<any>>;
+  clipboardWrapperCss: FlattenInterpolation<ThemeProps<any>>;
+}
+
+const KeyIdLabel = styled.span`
+  font-size: 0.875rem;
+`;
+
+const KeyId: React.FC<IKeyId> = ({
+  npaKeyId,
+  inputCss,
+  clipboardIconSize,
+  clipboardWrapperCss
+}) => (
+  <>
+    <KeyIdLabel>Key id</KeyIdLabel>
+    <CopyInputWrapper>
+      <CopyInput
+        value={npaKeyId}
+        clipboardIconSize={clipboardIconSize}
+        inputCss={inputCss}
+        clipboardWrapperCss={clipboardWrapperCss}
+      />
+    </CopyInputWrapper>
+  </>
+);
+
 const ManageNpa = () => {
   const [localStorageToken] = useToken();
   const [state, dispatch] = useContext(StateContext);
   const [npaPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
+  const [_npaGetRequestState, setNpaGetRequest] = useDataApi(
+    genericDataFetchReducer
+  );
+
+  const [npaKeyId, setNpaKeyId] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, _setWizardState] = useState(
     WizardStates.KEY_OVERRIDE_WARNING
@@ -107,7 +164,7 @@ const ManageNpa = () => {
 
             dispatch({
               type: LayoutEditorDataActionTypes.POST_NEW_NPA,
-              npa
+              npa: { ...npa, keyId: generatedKeys.keys.keyId }
             });
           }
         };
@@ -149,6 +206,19 @@ const ManageNpa = () => {
     setNpaPostRequest(dataRequest);
   };
 
+  const getKeyId = (id: string) => {
+    const dataRequest: DataRequest = {
+      method: "get",
+      token: localStorageToken,
+      url: `/api/nonpersonalaccount/${id}/key`,
+      cbSuccess: (n: any) => {
+        setNpaKeyId(n.keyId);
+      }
+    };
+
+    setNpaGetRequest(dataRequest);
+  };
+
   const formik = useFormik({
     initialValues: {
       npaname: ""
@@ -171,12 +241,11 @@ const ManageNpa = () => {
   });
 
   useEffect(() => {
-    console.log("GETTING IN HERE", state.firstPanelView);
-
     if (
       state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
     ) {
       formik.setValues({ npaname: state.selectedNodeName });
+      getKeyId(state.nodeReferenceId);
     }
 
     if (
@@ -207,9 +276,17 @@ const ManageNpa = () => {
           </LastBreadCrumb>
         </NodesBreadCrumb>
         <ContentSeparator />
+        <KeyId
+          npaKeyId={state.data.keyId}
+          clipboardIconSize={16}
+          clipboardWrapperCss={clipboardWrapperCss}
+          inputCss={copyInputCss}
+        />
+        <ContentSeparator />
         <PasswordView password={generatedPassword} margin={"0 0 1rem"} />
         <FlexRow>
           <CloseButton
+            buttonType={"button"}
             onClick={() =>
               dispatch({
                 type: LayoutEditorPaneActionTypes.RESET_PANE
@@ -240,7 +317,8 @@ const ManageNpa = () => {
           setGeneratedPassword(generatedKeys.password);
 
           dispatch({
-            type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED
+            type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+            data: { keyId: generatedKeys.keys.keyId }
           });
         }
       };
@@ -283,7 +361,7 @@ const ManageNpa = () => {
   }
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <>
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -296,22 +374,45 @@ const ManageNpa = () => {
           <ContentSeparator />
         </>
       ) : null}
-      <FormInput
-        labelValue="Non personal account name*"
-        name="npaname"
-        formType="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.npaname}
-      />
-      {formik.touched.npaname && formik.errors.npaname ? (
-        <InputErrorLabel>{formik.errors.npaname}</InputErrorLabel>
+      {npaKeyId ? (
+        <>
+          <KeyId
+            npaKeyId={npaKeyId}
+            clipboardIconSize={16}
+            clipboardWrapperCss={clipboardWrapperCss}
+            inputCss={copyInputCss}
+          />
+          <ContentSeparator />
+        </>
       ) : null}
-      <ContentSeparator />
-      <LoaderButton buttonType="submit" loading={npaPostState.isLoading}>
-        {updateMode ? "Update NPA" : "Add NPA"}
-      </LoaderButton>
-    </form>
+      <form onSubmit={formik.handleSubmit}>
+        <FormInput
+          labelValue="Non personal account name*"
+          name="npaname"
+          formType="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.npaname}
+        />
+        {formik.touched.npaname && formik.errors.npaname ? (
+          <InputErrorLabel>{formik.errors.npaname}</InputErrorLabel>
+        ) : null}
+        <ContentSeparator />
+        <LoaderButton buttonType="submit" loading={npaPostState.isLoading}>
+          {updateMode ? "Update NPA" : "Add NPA"}
+        </LoaderButton>
+        <CancelButton
+          buttonType="button"
+          onClick={() =>
+            dispatch({
+              type: LayoutEditorPaneActionTypes.RESET_PANE
+            })
+          }
+        >
+          Cancel
+        </CancelButton>
+      </form>
+    </>
   );
 };
 

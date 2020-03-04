@@ -187,6 +187,7 @@ const ManageSupplyChain = () => {
         {updateMode ? "Update supply chain" : "Add supply chain"}
       </LoaderButton>
       <CancelButton
+        buttonType={"button"}
         onClick={() =>
           dispatch({
             type: LayoutEditorPaneActionTypes.RESET_PANE

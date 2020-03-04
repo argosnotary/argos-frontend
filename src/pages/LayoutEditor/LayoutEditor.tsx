@@ -23,11 +23,7 @@ import ITreeNode from "../../interfaces/ITreeNode";
 import TreeEditor from "../../molecules/TreeEditor/TreeEditor";
 import useDataApi from "../../hooks/useDataApi";
 import useToken from "../../hooks/useToken";
-import {
-  initialTreeState,
-  TreeStateContext,
-  treeReducer
-} from "../../stores/treeEditorStore";
+import { initialTreeState, treeReducer } from "../../stores/treeEditorStore";
 
 import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 
@@ -101,14 +97,35 @@ const LayoutEditor = () => {
     });
   };
 
-  // const treeClickHandler = [
-  //   {
-  //     type: "NON_PERSONAL_ACCOUNT",
-  //     callback: (node: ITreeNode) => {
-  //       console.log(node);
-  //     }
-  //   }
-  // ];
+  const treeClickHandlers = [
+    {
+      type: "LABEL",
+      callback: (node: ITreeNode) => {
+        treeContextMenuCb(
+          LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
+          node
+        );
+      }
+    },
+    {
+      type: "SUPPLY_CHAIN",
+      callback: (node: ITreeNode) => {
+        treeContextMenuCb(
+          LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
+          node
+        );
+      }
+    },
+    {
+      type: "NON_PERSONAL_ACCOUNT",
+      callback: (node: ITreeNode) => {
+        treeContextMenuCb(
+          LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
+          node
+        );
+      }
+    }
+  ];
 
   const treeContextMenu = [
     {
@@ -119,15 +136,6 @@ const LayoutEditor = () => {
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
               LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
-              node
-            );
-          }
-        },
-        {
-          label: "Update selected label",
-          callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
               node
             );
           }
@@ -153,35 +161,11 @@ const LayoutEditor = () => {
       ]
     },
     {
-      type: "SUPPLY_CHAIN",
-      menuitems: [
-        {
-          label: "Update supply chain",
-          callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
-              node
-            );
-          }
-        }
-      ]
-    },
-    {
       type: "NON_PERSONAL_ACCOUNT",
       menuitems: [
         {
-          label: "Update npa",
-          callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
-              node
-            );
-          }
-        },
-        {
           label: "Generate new key for npa",
           callback: (node: ITreeNode) => {
-            console.log("generating new key");
             treeContextMenuCb(
               LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
               node
@@ -236,7 +220,6 @@ const LayoutEditor = () => {
   };
 
   const getNodeTypeFromAction = (action: LayoutEditorDataActionType) => {
-    console.log(action);
     switch (action) {
       case LayoutEditorDataActionTypes.POST_NEW_LABEL:
         return TreeNodeTypes.LABEL;
@@ -296,16 +279,17 @@ const LayoutEditor = () => {
     }
   }, [state.data, state.dataAction]);
 
-  // const treeStateConfig  = {
-  //   treeState,
-  //   treeDispatch,
-  //   treeStringList,
-  //   treeContextMenu,
-  //   cbCreateRootNode,
-  //   cbGetNodeChildren,
-  //   isLoading: treeChildrenFetchState.isLoading,
-  //   nodeReferenceId: state.nodeReferenceId
-  // }
+  const treeContext = {
+    treeState,
+    treeDispatch,
+    treeStringList,
+    treeContextMenu,
+    treeClickHandlers,
+    cbCreateRootNode,
+    cbGetNodeChildren,
+    isLoading: treeChildrenFetchState.isLoading,
+    selectedNodeReferenceId: state.nodeReferenceId
+  };
 
   return (
     <FlexColumn>
@@ -319,23 +303,11 @@ const LayoutEditor = () => {
                 disableFlexGrow={true}
                 resizable={true}
               >
-                <TreeStateContext.Provider
-                  value={[
-                    treeState,
-                    treeDispatch,
-                    treeStringList,
-                    treeContextMenu,
-                    cbCreateRootNode,
-                    cbGetNodeChildren,
-                    treeChildrenFetchState.isLoading,
-                    state.nodeReferenceId
-                  ]}
-                >
-                  <TreeEditor
-                    data={treeDataState.data}
-                    loading={treeDataState.isLoading}
-                  />
-                </TreeStateContext.Provider>
+                <TreeEditor
+                  data={treeDataState.data}
+                  loading={treeDataState.isLoading}
+                  context={treeContext}
+                />
               </Panel>
               <Panel
                 width={"37.5vw"}

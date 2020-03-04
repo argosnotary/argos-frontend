@@ -17,4 +17,5 @@ export default interface INpaApiResponse {
   id: string;
   name: string;
   parentLabelId: string;
+  keyId?: string;
 }

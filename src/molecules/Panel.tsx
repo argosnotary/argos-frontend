@@ -1,5 +1,20 @@
-import React from "react";
-import styled from "styled-components";
+/*
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 import { EnlargeIcon, ShrinkIcon } from "../atoms/Icons";
 import useShrinkToggle from "../hooks/useShrinkToggle";
@@ -22,7 +37,7 @@ interface IPanelBodyProps {
 }
 
 const PanelBody = styled.main<IPanelBodyProps>`
-  height: 100vh;
+  height: calc(100vh - 7.7rem);
   background-color: ${props => props.theme.layoutPage.panel.bgColor};
   margin: ${props => (!props.last ? "0 0 1rem 1rem" : "0 1rem 0 1rem")};
   padding: 1rem;
@@ -30,7 +45,7 @@ const PanelBody = styled.main<IPanelBodyProps>`
   flex-direction: column;
 
   > * {
-    display: ${props => (props.shrink ? "none" : "initial")};
+    display: ${props => (props.shrink ? "none" : "")};
   }
 `;
 
@@ -80,6 +95,7 @@ export const Panel: React.FC<IPanelProps> = ({
   resizable
 }) => {
   const [shrink, setShrinkState] = useShrinkToggle();
+  const theme = useContext(ThemeContext);
 
   return (
     <SinglePanelContainer
@@ -95,14 +111,14 @@ export const Panel: React.FC<IPanelProps> = ({
                 <PanelTitle>{title}</PanelTitle>
                 <ShrinkIcon
                   size={16}
-                  color={"#1779ba"}
+                  color={theme.panel.icons.shrinkIcon.color}
                   onClick={() => setShrinkState(!shrink)}
                 />
               </>
             ) : (
               <EnlargeIcon
                 size={16}
-                color={"#1779ba"}
+                color={theme.panel.icons.enlargeIcon.color}
                 onClick={() => setShrinkState(!shrink)}
               />
             )}

@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import React, { useRef, useContext, useState } from "react";
 import styled, {
   ThemeContext,
@@ -6,11 +21,19 @@ import styled, {
 } from "styled-components";
 import ClipboardIcon from "./Icons/ClipboardIcon";
 import { darken } from "polished";
+import FlexRow from "./FlexRow";
 
-interface IInputProps {
+interface IInputDisplayProps {
   inputCss: FlattenInterpolation<ThemeProps<any>>;
 }
-const Input = styled.input<IInputProps>`
+const Input = styled.input`
+  position: absolute;
+  left: -100%;
+`;
+
+const InputDisplay = styled.p<IInputDisplayProps>`
+  word-break: break-all;
+  white-space: normal;
   ${props => props.inputCss}
 `;
 
@@ -36,6 +59,11 @@ const ClipboardWrapper = styled.button<IClipboardWrapperProps>`
   }
 
   ${props => props.clipboardWrapperCss}
+`;
+
+const ModifiedFlexRow = styled(FlexRow)`
+  align-items: center;
+  justify-content: space-between;
 `;
 
 interface ICopyInputProps {
@@ -74,21 +102,26 @@ const CopyInput: React.FC<ICopyInputProps> = ({
   return (
     <>
       <Input
-        inputCss={inputCss}
         readOnly={true}
         value={tempMessage.length > 0 ? tempMessage : value}
         ref={inputRef}
       />
-      <ClipboardWrapper
-        clipboardWrapperCss={clipboardWrapperCss}
-        title="Copy value to clipboard"
-        onClick={copyInputToClipboard}
-      >
-        <ClipboardIcon
-          size={clipboardIconSize}
-          color={theme.passwordView.clipboardIcon.color}
-        />
-      </ClipboardWrapper>
+      <ModifiedFlexRow disableWrap={true}>
+        <InputDisplay inputCss={inputCss}>
+          {tempMessage.length > 0 ? tempMessage : value}
+        </InputDisplay>
+
+        <ClipboardWrapper
+          clipboardWrapperCss={clipboardWrapperCss}
+          title="Copy value to clipboard"
+          onClick={copyInputToClipboard}
+        >
+          <ClipboardIcon
+            size={clipboardIconSize}
+            color={theme.passwordView.clipboardIcon.color}
+          />
+        </ClipboardWrapper>
+      </ModifiedFlexRow>
     </>
   );
 };

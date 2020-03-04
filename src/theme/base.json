@@ -30,6 +30,19 @@
   "loaderIcon": {
     "color": "#1779ba"
   },
+  "loaderButton": {
+    "loadingColor": "#fff"
+  },
+  "panel": {
+    "icons": {
+      "shrinkIcon": {
+        "color": "#1779ba"
+      },
+      "enlargeIcon": {
+        "color": "#1779ba"
+      }
+    }
+  },
   "modal": {
     "bgColor": "#fff",
     "button": {

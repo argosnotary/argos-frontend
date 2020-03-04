@@ -13,12 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { useState } from "react";
+import ITreeNode from "./ITreeNode";
 
-const useShrinkToggle = (): [boolean, (shrink: boolean) => void] => {
-  const [shrink, setShrinkState] = useState(false);
-
-  return [shrink, setShrinkState];
-};
-
-export default useShrinkToggle;
+export default interface ITreeClickHandler {
+  type: string;
+  callback: (node: ITreeNode) => void;
+}

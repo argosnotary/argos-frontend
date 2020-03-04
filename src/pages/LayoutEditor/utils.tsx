@@ -28,7 +28,8 @@ import ITreeNode from "../../interfaces/ITreeNode";
 import ILabelPostResponse from "../../interfaces/ILabelPostResponse";
 import {
   LayoutEditorDataActionTypes,
-  LayoutEditorAction
+  LayoutEditorAction,
+  LayoutEditorPaneActionTypes
 } from "../../stores/layoutEditorStore";
 import ISupplyChainApiResponse from "../../interfaces/ISupplyChainApiResponse";
 import { TreeNodeType } from "../../types/TreeNodeType";
@@ -80,7 +81,8 @@ const appendObjectToTree = (
   });
 
   stateDispatch({
-    type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED
+    type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+    data: object
   });
 };
 
@@ -102,7 +104,7 @@ const updateObjectInTree = (
   });
 
   stateDispatch({
-    type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED
+    type: LayoutEditorPaneActionTypes.RESET_PANE
   });
 };
 

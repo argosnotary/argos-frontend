@@ -27,7 +27,7 @@
         <artifactId>license-maven-plugin</artifactId>
         <version>3.0</version>
         <configuration>
-          <header>https://raw.github.com/rabobank/argos/develop/docs/header.txt</header>
+          <header>https://raw.github.com/rabobank/argos/master/docs/header.txt</header>
           <properties>
             <owner>Mycila</owner>
             <email>mathieu.carbou@gmail.com</email>

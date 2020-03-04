@@ -181,6 +181,7 @@ const ManageLabel = () => {
         {!updateMode ? "Add label" : "Update label"}
       </LoaderButton>
       <CancelButton
+        buttonType={"button"}
         onClick={() =>
           dispatch({
             type: LayoutEditorPaneActionTypes.RESET_PANE
