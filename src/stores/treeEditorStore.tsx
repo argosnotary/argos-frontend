@@ -18,6 +18,7 @@ import React, { Dispatch } from "react";
 import ITreeNode from "../interfaces/ITreeNode";
 import IStringList from "../interfaces/IStringList";
 import ITreeContextMenuEntry from "../interfaces/ITreeContextMenuEntry";
+import ITreeClickHandler from "../interfaces/ITreeClickHandler";
 
 export interface ITreeReducerState {
   toggledNodes: Array<string>;
@@ -53,33 +54,21 @@ type TreeStateContextType = {
   treeStateDispatch: Dispatch<TreeReducerAction>;
 };
 
-export const TreeStateContext = React.createContext<
-  [
-    ITreeReducerState,
-    Dispatch<TreeReducerAction>,
-    IStringList,
-    Array<ITreeContextMenuEntry>,
-    () => void,
-    (parentId: string) => void,
-    boolean,
-    string
-  ]
->([
-  {} as ITreeReducerState,
-  () => {
-    return;
-  },
-  {} as IStringList,
-  [],
-  () => {
-    return;
-  },
-  () => {
-    return;
-  },
-  false,
-  ""
-]);
+export interface ITreeStateContext {
+  treeState: ITreeReducerState;
+  treeDispatch: Dispatch<TreeReducerAction>;
+  treeStringList: IStringList;
+  treeContextMenu: Array<ITreeContextMenuEntry>;
+  treeClickHandlers: Array<ITreeClickHandler>;
+  cbCreateRootNode: () => void;
+  cbGetNodeChildren: (parentId: string) => void;
+  isLoading: boolean;
+  selectedNodeReferenceId: string;
+}
+
+export const TreeStateContext = React.createContext<ITreeStateContext>(
+  {} as ITreeStateContext
+);
 
 export const initialTreeState: ITreeReducerState = {
   toggledNodes: [],

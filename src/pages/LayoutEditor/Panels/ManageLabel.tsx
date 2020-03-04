@@ -41,9 +41,9 @@ const validate = (values: ILabelNameFormValues) => {
 
   if (!values.labelname) {
     errors.labelname = "Please fill in a label name.";
-  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/i.test(values.labelname)) {
+  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.labelname)) {
     errors.labelname =
-      "Invalid label name (only alphanumeric characters and underscore allowed).";
+      "Invalid label name (only lowercase alphanumeric characters and underscore allowed).";
   }
 
   return errors;
@@ -148,6 +148,9 @@ const ManageLabel = () => {
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
+  const updateMode =
+    state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
+
   return (
     <form onSubmit={formik.handleSubmit}>
       {state.selectedNodeName !== "" ? (
@@ -175,9 +178,10 @@ const ManageLabel = () => {
       ) : null}
       <ContentSeparator />
       <LoaderButton buttonType="submit" loading={labelPostState.isLoading}>
-        Add label
+        {!updateMode ? "Add label" : "Update label"}
       </LoaderButton>
       <CancelButton
+        buttonType={"button"}
         onClick={() =>
           dispatch({
             type: LayoutEditorPaneActionTypes.RESET_PANE

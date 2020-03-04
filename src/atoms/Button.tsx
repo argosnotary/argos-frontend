@@ -15,8 +15,8 @@
  */
 
 import { darken } from "polished";
-import React from "react";
-import styled, { css } from "styled-components";
+import React, { useContext } from "react";
+import styled, { css, ThemeContext } from "styled-components";
 
 import { LoaderIcon } from "../atoms/Icons";
 
@@ -55,19 +55,32 @@ interface ILoaderButtonProps {
   buttonType: "button" | "submit" | "reset";
 }
 
+const LoaderIconButton = styled(Button)`
+  padding: 0.58rem 1rem;
+`;
+
 const LoaderButton: React.FC<ILoaderButtonProps> = ({
   children,
   loading,
   buttonType
 }) => {
-  return (
-    <Button type={buttonType}>
-      {loading ? <LoaderIcon size={18} color={"#fff"} /> : children}
-    </Button>
-  );
+  const theme = useContext(ThemeContext);
+
+  if (loading) {
+    return (
+      <LoaderIconButton type={buttonType}>
+        <LoaderIcon size={18} color={theme.loaderButton.loadingColor} />
+      </LoaderIconButton>
+    );
+  }
+  return <Button type={buttonType}>{children}</Button>;
 };
 
-const CancelButton = styled(Button)`
+interface ICancelButtonProps {
+  buttonType: "button" | "submit" | "reset";
+}
+
+const CancelButton = styled(Button)<ICancelButtonProps>`
   margin-left: 1rem;
   background-color: ${props => props.theme.cancelButton.bgColor};
   color: ${props => props.theme.cancelButton.textColor};

@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export default interface ISupplyChainApiResponse {
+export default interface INpaApiResponse {
   id: string;
   name: string;
   parentLabelId: string;
+  keyId?: string;
 }

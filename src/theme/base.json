@@ -30,6 +30,19 @@
   "loaderIcon": {
     "color": "#1779ba"
   },
+  "loaderButton": {
+    "loadingColor": "#fff"
+  },
+  "panel": {
+    "icons": {
+      "shrinkIcon": {
+        "color": "#1779ba"
+      },
+      "enlargeIcon": {
+        "color": "#1779ba"
+      }
+    }
+  },
   "modal": {
     "bgColor": "#fff",
     "button": {
@@ -39,6 +52,12 @@
       "hover": {
         "color": "#1779ba"
       }
+    }
+  },
+  "passwordView": {
+    "clipboardIcon": {
+      "color": "#8D99AE",
+      "hoverBgColor": "#e8feff"
     }
   },
   "treeEditor": {
@@ -57,7 +76,8 @@
       "addRootNode": "#1779ba",
       "expandNode": "#1779ba",
       "label": "#8D99AE",
-      "chain": "#8D99AE"
+      "chain": "#8D99AE",
+      "robot": "#8D99AE"
     },
     "treeHeadLabel": {
       "bgColor": "#e8feff"

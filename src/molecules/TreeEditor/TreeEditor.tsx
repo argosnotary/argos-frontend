@@ -19,15 +19,17 @@ import styled, { ThemeContext } from "styled-components";
 import ITreeNode from "../../interfaces/ITreeNode";
 import {
   AltPlusIcon,
-  LabelIcon,
   TriangleIcon,
   LoaderIcon,
-  ChainIcon
+  ChainIcon,
+  LabelIcon,
+  RobotIcon
 } from "../../atoms/Icons";
 import {
   TreeStateContext,
   TreeReducerAction,
-  TreeReducerActionTypes
+  TreeReducerActionTypes,
+  ITreeStateContext
 } from "../../stores/treeEditorStore";
 import ITreeContextMenuItem from "../../interfaces/ITreeContextMenuItem";
 import FlexColumn from "../../atoms/FlexColumn";
@@ -35,6 +37,7 @@ import FlexColumn from "../../atoms/FlexColumn";
 interface ITreeEditorProps {
   data: Array<ITreeNode>;
   loading: boolean;
+  context: ITreeStateContext;
 }
 
 interface ITreeNodeContainerProps {
@@ -63,6 +66,7 @@ const TreeNodeContainer = styled.li<ITreeNodeContainerProps>`
   margin: 0.2rem 0;
   position: relative;
   left: ${props => 0.5 + props.depth * 0.2}rem;
+  width: 100%;
 `;
 
 const TreeIcon = styled(TriangleIcon)``;
@@ -101,6 +105,8 @@ const renderTypeIcon = (theme: any, type: string) => {
       return <LabelIcon color={theme.treeEditor.iconColors.label} size={14} />;
     case "SUPPLY_CHAIN":
       return <ChainIcon color={theme.treeEditor.iconColors.chain} size={14} />;
+    case "NON_PERSONAL_ACCOUNT":
+      return <RobotIcon color={theme.treeEditor.iconColors.robot} size={14} />;
   }
 };
 
@@ -182,21 +188,24 @@ const renderContextMenu = (
 };
 
 const NodeContextMenu: React.FC<INodeContextMenu> = ({ node }) => {
-  const [state, dispatch, _stringlist, contextmenu] = useContext(
-    TreeStateContext
-  );
+  const treeContext = useContext(TreeStateContext);
 
   return (
     <>
       <NodeContextMenuClickCatcher
         onClick={() =>
-          dispatch({ type: TreeReducerActionTypes.HIDECONTEXTMENU })
+          treeContext.treeDispatch({
+            type: TreeReducerActionTypes.HIDECONTEXTMENU
+          })
         }
       />
-      <NodeContextMenuContainer x={state.contextMenu.x} y={state.contextMenu.y}>
-        {contextmenu.map(item =>
+      <NodeContextMenuContainer
+        x={treeContext.treeState.contextMenu.x}
+        y={treeContext.treeState.contextMenu.y}
+      >
+        {treeContext.treeContextMenu.map(item =>
           item.type === node.type
-            ? renderContextMenu(node, dispatch, item.menuitems)
+            ? renderContextMenu(node, treeContext.treeDispatch, item.menuitems)
             : null
         )}
       </NodeContextMenuContainer>
@@ -214,26 +223,17 @@ const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
   const [displayNode, setDisplayNode] = useState(false);
   const theme = useContext(ThemeContext);
 
-  const [
-    state,
-    dispatch,
-    _stringlist,
-    _contextmenu,
-    _cbCreateRootNode,
-    cbGetNodeChildren,
-    isFetchingNodesData,
-    selectedNodeReferenceId
-  ] = useContext(TreeStateContext);
+  const treeContext = useContext(TreeStateContext);
 
   useEffect(() => {
-    const nodeShouldBeExpanded = state.toggledNodes.find(
+    const nodeShouldBeExpanded = treeContext.treeState.toggledNodes.find(
       (toggledNode: string) => toggledNode === node.referenceId
     );
 
     if (nodeShouldBeExpanded) {
       setDisplayNode(true);
     }
-  }, [state.toggledNodes, node.referenceId, displayNode]);
+  }, [treeContext.treeState.toggledNodes, node.referenceId, displayNode]);
 
   return (
     <TreeNodeContainer depth={depth}>
@@ -241,19 +241,21 @@ const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
         <TreeHead
           onClick={() => {
             setDisplayNode(!displayNode);
-            dispatch({
+            treeContext.treeDispatch({
               type: TreeReducerActionTypes.UPDATETOGGLEDNODES,
               id: node.referenceId
             });
 
             if (node.children && node.children.length === 0) {
-              cbGetNodeChildren(node.referenceId);
+              treeContext.cbGetNodeChildren(node.referenceId);
             }
           }}
         >
-          {isFetchingNodesData &&
+          {treeContext.isLoading &&
           node.referenceId ===
-            state.toggledNodes[state.toggledNodes.length - 1] ? (
+            treeContext.treeState.toggledNodes[
+              treeContext.treeState.toggledNodes.length - 1
+            ] ? (
             <LoaderIcon
               size={12}
               color={theme.treeEditor.loaders.onFetchChildren.color}
@@ -272,23 +274,39 @@ const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
       </TypeIconContainer>
       <TreeHeadLabel
         selected={
-          state.contextMenu.id === node.referenceId ||
-          selectedNodeReferenceId === node.referenceId
+          treeContext.treeState.contextMenu.id === node.referenceId ||
+          treeContext.selectedNodeReferenceId === node.referenceId
         }
         onContextMenu={e => {
-          const { clientX, clientY } = e;
-          e.preventDefault();
-          dispatch({
-            type: TreeReducerActionTypes.SHOWCONTEXTMENU,
-            id: node.referenceId,
-            clientX,
-            clientY
-          });
+          const hasContextMenu = treeContext.treeContextMenu.find(
+            entry => entry.type === node.type
+          );
+
+          if (hasContextMenu) {
+            const { clientX, clientY } = e;
+            e.preventDefault();
+            treeContext.treeDispatch({
+              type: TreeReducerActionTypes.SHOWCONTEXTMENU,
+              id: node.referenceId,
+              clientX,
+              clientY
+            });
+          }
+        }}
+        onClick={() => {
+          const typeClickHandler = treeContext.treeClickHandlers.find(
+            handler => handler.type === node.type
+          );
+
+          if (typeClickHandler) {
+            typeClickHandler.callback(node);
+          }
         }}
       >
         {node.name}
       </TreeHeadLabel>
-      {state.contextMenu.show && state.contextMenu.id === node.referenceId ? (
+      {treeContext.treeState.contextMenu.show &&
+      treeContext.treeState.contextMenu.id === node.referenceId ? (
         <NodeContextMenu node={node} />
       ) : null}
       {node.children && node.children.length > 0 && displayNode
@@ -314,14 +332,7 @@ const IconContainer = styled.div`
 `;
 
 const AddAdditionalRootNodes = () => {
-  const [
-    _state,
-    _dispatch,
-    stringlist,
-    _contextmenu,
-    cbCreateRootNode
-  ] = useContext(TreeStateContext);
-
+  const treeContext = useContext(TreeStateContext);
   const theme = useContext(ThemeContext);
 
   return (
@@ -332,21 +343,17 @@ const AddAdditionalRootNodes = () => {
           color={theme.treeEditor.iconColors.addRootNode}
         />
       </IconContainer>
-      <TreeHeadLabel selected={false} onClick={cbCreateRootNode}>
-        {stringlist.createrootnode}
+      <TreeHeadLabel selected={false} onClick={treeContext.cbCreateRootNode}>
+        {treeContext.treeStringList.createrootnode}
       </TreeHeadLabel>
     </TreeNodeContainer>
   );
 };
 
 const TreeEditorContainer = styled.aside`
-  border: 1rem solid ${props => props.theme.treeEditor.borderColor};
-  color: ${props => props.theme.treeEditor.textColor};
-  background-color: ${props => props.theme.treeEditor.bgColor};
   height: 100vh;
-  width: 25vw;
-  padding: 1rem;
-  overflow: scroll;
+  color: ${props => props.theme.treeEditor.textColor};
+  overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -362,13 +369,12 @@ const OnInitializeLoaderMessage = styled.p`
   align-self: center;
 `;
 
-const TreeEditor: React.FC<ITreeEditorProps> = ({ data, loading }) => {
-  const [state, dispatch] = useContext(TreeStateContext);
+const TreeEditor: React.FC<ITreeEditorProps> = ({ data, loading, context }) => {
   const theme = useContext(ThemeContext);
 
   useEffect(() => {
     if (data && data.length > 0) {
-      dispatch({
+      context.treeDispatch({
         type: TreeReducerActionTypes.STOREDATA,
         data
       });
@@ -376,29 +382,31 @@ const TreeEditor: React.FC<ITreeEditorProps> = ({ data, loading }) => {
   }, [data]);
 
   return (
-    <TreeEditorContainer>
-      {loading ? (
-        <FlexColumn>
-          <OnInitializeLoaderContainer>
-            <LoaderIcon
-              color={theme.treeEditor.loaders.onPageLoad.color}
-              size={48}
-            />
-          </OnInitializeLoaderContainer>
+    <TreeStateContext.Provider value={context}>
+      <TreeEditorContainer>
+        {loading ? (
+          <FlexColumn>
+            <OnInitializeLoaderContainer>
+              <LoaderIcon
+                color={theme.treeEditor.loaders.onPageLoad.color}
+                size={48}
+              />
+            </OnInitializeLoaderContainer>
 
-          <OnInitializeLoaderMessage>
-            Loading hierarchy...
-          </OnInitializeLoaderMessage>
-        </FlexColumn>
-      ) : (
-        <NodesFlexContainer>
-          <AddAdditionalRootNodes />
-          {state.data.map((rootNode, index) => (
-            <ParentNode key={index} depth={1} node={rootNode} />
-          ))}
-        </NodesFlexContainer>
-      )}
-    </TreeEditorContainer>
+            <OnInitializeLoaderMessage>
+              Loading hierarchy...
+            </OnInitializeLoaderMessage>
+          </FlexColumn>
+        ) : (
+          <NodesFlexContainer>
+            <AddAdditionalRootNodes />
+            {context.treeState.data.map((rootNode, index) => (
+              <ParentNode key={index} depth={1} node={rootNode} />
+            ))}
+          </NodesFlexContainer>
+        )}
+      </TreeEditorContainer>
+    </TreeStateContext.Provider>
   );
 };
 

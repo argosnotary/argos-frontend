@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export default interface ISupplyChainApiResponse {
-  id: string;
-  name: string;
-  parentLabelId: string;
+export enum TreeNodeTypes {
+  UNSPECIFIED = "",
+  LABEL = "LABEL",
+  SUPPLY_CHAIN = "SUPPLY_CHAIN",
+  NON_PERSONAL_ACCOUNT = "NON_PERSONAL_ACCOUNT"
 }
+
+export type TreeNodeType = TreeNodeTypes.UNSPECIFIED | TreeNodeTypes.LABEL | TreeNodeTypes.SUPPLY_CHAIN | TreeNodeTypes.NON_PERSONAL_ACCOUNT

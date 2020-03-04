@@ -13,8 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export default interface ISupplyChainApiResponse {
-  id: string;
-  name: string;
-  parentLabelId: string;
-}
+
+import AltPlusIcon from "./AltPlusIcon";
+import KeyIcon from "./KeyIcon";
+import LabelIcon from "./LabelIcon";
+import LoaderIcon from "./LoaderIcon";
+import PlusIcon from "./PlusIcon";
+import TriangleIcon from "./TriangleIcon";
+import WarningIcon from "./WarningIcon";
+import ChainIcon from "./ChainIcon";
+import RobotIcon from "./RobotIcon";
+import ShrinkIcon from "./ShrinkIcon";
+import EnlargeIcon from "./EnlargeIcon";
+
+export {
+  AltPlusIcon,
+  KeyIcon,
+  LabelIcon,
+  LoaderIcon,
+  PlusIcon,
+  TriangleIcon,
+  WarningIcon,
+  ChainIcon,
+  RobotIcon,
+  ShrinkIcon,
+  EnlargeIcon
+};

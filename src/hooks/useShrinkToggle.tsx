@@ -13,8 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export default interface ISupplyChainApiResponse {
-  id: string;
-  name: string;
-  parentLabelId: string;
-}
+import { useState } from "react";
+
+const useShrinkToggle = (): [boolean, (shrink: boolean) => void] => {
+  const [shrink, setShrinkState] = useState(false);
+
+  return [shrink, setShrinkState];
+};
+
+export default useShrinkToggle;
