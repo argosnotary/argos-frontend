@@ -29,8 +29,6 @@ steps:
       password:
         from_secret: docker_login_token
     when:
-      branch:
-        - master
       event:
         - tag
      
