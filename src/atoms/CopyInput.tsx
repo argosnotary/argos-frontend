@@ -28,7 +28,7 @@ interface IInputDisplayProps {
 }
 const Input = styled.input`
   position: absolute;
-  left: -100%;
+  left: -1000%;
 `;
 
 const InputDisplay = styled.p<IInputDisplayProps>`
