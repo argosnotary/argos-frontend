@@ -29,7 +29,9 @@ import useToken from "../../../hooks/useToken";
 
 const ManageLabelPermissions = () => {
   const [state, dispatch] = useContext(StateContext);
-  const [results, getResultsRequest] = useDataApi(genericDataFetchReducer);
+  const [serverResponse, setServerRequest] = useDataApi(
+    genericDataFetchReducer
+  );
   const [localStorageToken] = useToken();
 
   return (
@@ -43,26 +45,26 @@ const ManageLabelPermissions = () => {
       </NodesBreadCrumb>
       <ContentSeparator />
       <SearchInput
-        results={results.data}
-        onSelect={(res: ISearchResult) => {
+        results={serverResponse.data}
+        onSelect={(selectedSearchResult: ISearchResult) => {
           dispatch({
             type: LayoutEditorDataActionTypes.STORE_SEARCHED_USER,
-            user: res
+            user: selectedSearchResult
           });
         }}
-        fetchData={(q: string) => {
+        fetchData={(searchQuery: string) => {
           const dataRequest: DataRequest = {
             method: "get",
             params: {
-              name: q.toLowerCase()
+              name: searchQuery
             },
             token: localStorageToken,
             url: `/api/personalaccount`
           };
 
-          getResultsRequest(dataRequest);
+          setServerRequest(dataRequest);
         }}
-        isLoading={results.isLoading}
+        isLoading={serverResponse.isLoading}
         displayProperty={"name"}
       />
       <p>Content below</p>

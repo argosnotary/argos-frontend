@@ -34,7 +34,7 @@ const SearchResults = styled.ul`
   overflow-y: auto;
   position: absolute;
   width: 100%;
-  background: #${props => props.theme.searchInput.searchResultsBgColor};
+  background: ${props => props.theme.searchInput.searchResultsBgColor};
   box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.1),
     inset 0px 2px 3px 0px rgba(10, 10, 10, 0.1);
 `;
@@ -70,7 +70,7 @@ const SelectionContainer = styled(FlexRow)`
 interface ISearchInputProps {
   results: Array<ISearchResult>;
   onSelect: (res: ISearchResult) => void;
-  fetchData: (q: string) => void;
+  fetchData: (searchQuery: string) => void;
   displayProperty: string;
   isLoading: boolean;
 }
