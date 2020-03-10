@@ -1,1 +1,1 @@
-{"authenticationToken": "Bearer my_token", "apiUrl": "/api", "port": "3001"}
+{ "authenticationToken": "Bearer my_token", "apiUrl": "/api", "port": "8080" }

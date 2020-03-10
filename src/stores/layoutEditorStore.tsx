@@ -17,6 +17,7 @@ import React, { Dispatch } from "react";
 import ILabelPostResponse from "../interfaces/ILabelPostResponse";
 import ISupplyChainApiResponse from "../interfaces/ISupplyChainApiResponse";
 import INpaApiResponse from "../interfaces/INpaApiResponse";
+import ISearchResult from "../interfaces/ISearchResult";
 
 interface ILayoutEditorState {
   nodeParentId: string;
@@ -26,6 +27,7 @@ interface ILayoutEditorState {
   selectedNodeName: string;
   data?: any;
   dataAction?: string;
+  user?: any;
 }
 
 export enum LayoutEditorDataActionTypes {
@@ -37,13 +39,15 @@ export enum LayoutEditorDataActionTypes {
   POST_NEW_NPA = "POST_NEW_NPA",
   POST_NEW_NPA_KEY = "POST_NEW_NPA_KEY",
   PUT_NPA = "PUT_NPA",
-  DATA_ACTION_COMPLETED = "DATA_ACTION_COMPLETED"
+  DATA_ACTION_COMPLETED = "DATA_ACTION_COMPLETED",
+  STORE_SEARCHED_USER = "STORE_SEARCHED_USER"
 }
 
 export enum LayoutEditorPaneActionTypes {
   NONE = "",
   SHOW_ADD_LABEL_PANE = "SHOW_ADD_LABEL_PANE",
   SHOW_UPDATE_LABEL_PANE = "SHOW_UPDATE_LABEL_PANE",
+  SHOW_MANAGE_LABEL_PERMISSIONS = "SHOW_MANAGE_LABEL_PERMISSIONS",
   SHOW_ADD_SUPPLY_CHAIN_PANE = "SHOW_ADD_SUPPLY_CHAIN_PANE",
   SHOW_UPDATE_SUPPLY_CHAIN_PANE = "SHOW_UPDATE_SUPPLY_CHAIN_PANE",
   SHOW_ADD_NPA_PANE = "SHOW_ADD_NPA_PANE",
@@ -55,6 +59,7 @@ export enum LayoutEditorPaneActionTypes {
 
 export type LayoutEditorPaneActionType =
   | LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+  | LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS
   | LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
   | LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
   | LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
@@ -72,11 +77,19 @@ export type LayoutEditorDataActionType =
   | LayoutEditorDataActionTypes.POST_NEW_NPA_KEY
   | LayoutEditorDataActionTypes.PUT_LABEL
   | LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN
-  | LayoutEditorDataActionTypes.PUT_NPA;
+  | LayoutEditorDataActionTypes.PUT_NPA
+  | LayoutEditorDataActionTypes.STORE_SEARCHED_USER;
 
 export type LayoutEditorPaneAction =
   | {
       type: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE;
+      nodeParentId: string;
+      nodeReferenceId: string;
+      breadcrumb: string;
+      selectedNodeName: string;
+    }
+  | {
+      type: LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS;
       nodeParentId: string;
       nodeReferenceId: string;
       breadcrumb: string;
@@ -157,6 +170,10 @@ export type LayoutEditorDataAction =
   | {
       type: LayoutEditorDataActionTypes.PUT_NPA;
       npa: INpaApiResponse;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.STORE_SEARCHED_USER;
+      user: ISearchResult;
     };
 
 export type LayoutEditorAction =
@@ -172,6 +189,15 @@ const editorReducer = (
       return {
         ...state,
         firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
+        nodeReferenceId: action.nodeReferenceId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName
+      };
+    case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
+      return {
+        ...state,
+        firstPanelView:
+          LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
@@ -289,6 +315,11 @@ const editorReducer = (
         ...state,
         dataAction: LayoutEditorDataActionTypes.PUT_NPA,
         data: action.npa
+      };
+    case LayoutEditorDataActionTypes.STORE_SEARCHED_USER:
+      return {
+        ...state,
+        user: action.user
       };
   }
 };

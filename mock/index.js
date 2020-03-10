@@ -14,32 +14,64 @@
  * limitations under the License.
  */
 
-const express = require('express');
+const express = require("express");
 const app = express();
-const config = require('./config.json');
+const config = require("./config.json");
 
-const cors = require('cors');
+const cors = require("cors");
 app.use(cors());
-
-const authenticationMiddleware = (req, res, next) => {
-  const authenticationError = JSON.stringify({error: 'Unauthorized'});
-
-  if (
-    !req.headers.hasOwnProperty('authorization') ||
-    req.headers['authorization'] !== config.authenticationToken
-  ) {
-    res.status(401);
-    return next(authenticationError);
-  }
-
-  next();
-};
-app.use(authenticationMiddleware);
 
 app.get(config.apiUrl, (_req, res) => {
   res.send({});
 });
 
+const dummyPersonalAccounts = [
+  {
+    name: "Henk",
+    id: "12sj2a"
+  },
+  {
+    name: "Henk-Jan",
+    id: "12sj1a"
+  },
+  {
+    name: "Hans",
+    id: "12sj3a"
+  },
+  {
+    name: "Jan",
+    id: "12sj4a"
+  },
+  {
+    name: "Jan Pieter",
+    id: "12sj5a"
+  }
+];
+
+app.get(`${config.apiUrl}/personalaccount`, (req, res) => {
+  const accounts = dummyPersonalAccounts.filter(account => {
+    if (account.name.toLowerCase().indexOf(req.query.name) > -1) {
+      return account;
+    }
+  });
+
+  res.send(accounts);
+});
+
+const dummyHierarchy = [
+  {
+    name: "neo",
+    type: "LABEL",
+    referenceId: "ed6ad0ee-6741-47f6-aa95-c647ff999641",
+    hasChildren: false,
+    children: []
+  }
+];
+
+app.get(`${config.apiUrl}/hierarchy`, (_req, res) => {
+  res.send(dummyHierarchy);
+});
+
 app.listen(parseInt(config.port), () =>
-  console.log(`app is listening on port ${config.port}`),
+  console.log(`app is listening on port ${config.port}`)
 );
