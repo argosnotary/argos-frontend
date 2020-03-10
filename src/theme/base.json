@@ -33,6 +33,13 @@
   "loaderButton": {
     "loadingColor": "#fff"
   },
+  "searchInput": {
+    "searchResultsBgColor": "#fff",
+    "searchResultEntryHoverBg": "#e8feff",
+    "selectedEntryBorderColor": "#e0e0e0",
+    "searchResultsBorderColor": "#e0e0e0",
+    "loaderIconColor": "#1779ba"
+  },
   "panel": {
     "icons": {
       "shrinkIcon": {

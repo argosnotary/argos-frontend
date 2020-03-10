@@ -46,6 +46,7 @@ import ManageSupplyChain from "./Panels/ManageSupplyChain";
 import ManageNpa from "./Panels/ManageNpa";
 import { TreeNodeTypes } from "../../types/TreeNodeType";
 import { PanelsContainer, Panel } from "../../molecules/Panel";
+import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(editorReducer, {
@@ -157,6 +158,15 @@ const LayoutEditor = () => {
               node
             );
           }
+        },
+        {
+          label: "Manage permissions",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
+              node
+            );
+          }
         }
       ]
     },
@@ -214,6 +224,8 @@ const LayoutEditor = () => {
       case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
       case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
         return <ManageNpa />;
+      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
+        return <ManageLabelPermissions />;
       default:
         return null;
     }
@@ -248,6 +260,8 @@ const LayoutEditor = () => {
         return "Generate new key for npa";
       case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
         return "Update selected non personal account";
+      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
+        return "Manage label permissions";
     }
 
     return "";

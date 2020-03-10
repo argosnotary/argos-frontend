@@ -24,6 +24,7 @@ interface IFormInputProps {
   labelValue: string;
   placeHolder?: string;
   name: string;
+  defaultValue?: string;
   value?: string;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -42,7 +43,8 @@ const FormInput: React.FC<IFormInputProps> = ({
   onBlur,
   onChange,
   name,
-  formType
+  formType,
+  defaultValue
 }) => (
   <FormInputContainer>
     <InputLabel>{labelValue}</InputLabel>
@@ -51,6 +53,7 @@ const FormInput: React.FC<IFormInputProps> = ({
       {...(onBlur ? { onBlur } : "")}
       {...(onChange ? { onChange } : "")}
       value={value}
+      defaultValue={defaultValue}
       {...(placeHolder ? { placeholder: placeHolder } : "")}
       type={formType}
     />
