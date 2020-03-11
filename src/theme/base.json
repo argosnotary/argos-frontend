@@ -40,6 +40,11 @@
     "searchResultsBorderColor": "#e0e0e0",
     "loaderIconColor": "#1779ba"
   },
+  "collapsibleContainer": {
+    "iconColor": "gray",
+    "headerBgColor": "#e0e0e0",
+    "bodyBorderColor": "#e0e0e0"
+  },
   "panel": {
     "icons": {
       "shrinkIcon": {

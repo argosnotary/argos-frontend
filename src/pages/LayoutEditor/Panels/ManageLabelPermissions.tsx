@@ -26,6 +26,7 @@ import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
+import CollapsibleContainerComponent from "../../../atoms/CollapsibleContainer";
 
 const ManageLabelPermissions = () => {
   const [state, dispatch] = useContext(StateContext);
@@ -67,7 +68,10 @@ const ManageLabelPermissions = () => {
         isLoading={serverResponse.isLoading}
         displayProperty={"name"}
       />
-      <p>Content below</p>
+      <ContentSeparator />
+      <CollapsibleContainerComponent collapsedByDefault={true}>
+        <p>...</p>
+      </CollapsibleContainerComponent>
     </div>
   );
 };
