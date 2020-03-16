@@ -28,7 +28,7 @@ import { initialTreeState, treeReducer } from "../../stores/treeEditorStore";
 import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 
 import {
-  editorReducer,
+  layoutEditorReducer,
   StateContext,
   LayoutEditorDataActionTypes,
   LayoutEditorPaneActionTypes,
@@ -49,7 +49,7 @@ import { PanelsContainer, Panel } from "../../molecules/Panel";
 import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 
 const LayoutEditor = () => {
-  const [state, dispatch] = useReducer(editorReducer, {
+  const [state, dispatch] = useReducer(layoutEditorReducer, {
     firstPanelView: LayoutEditorPaneActionTypes.NONE,
     nodeReferenceId: "",
     nodeParentId: "",

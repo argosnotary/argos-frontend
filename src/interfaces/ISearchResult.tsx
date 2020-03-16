@@ -15,5 +15,5 @@
  */
 export default interface ISearchResult {
   id: string;
-  [index: string]: any;
+  displayLabel: string;
 }

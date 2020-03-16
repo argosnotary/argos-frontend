@@ -17,7 +17,6 @@ import React, { Dispatch } from "react";
 import ILabelPostResponse from "../interfaces/ILabelPostResponse";
 import ISupplyChainApiResponse from "../interfaces/ISupplyChainApiResponse";
 import INpaApiResponse from "../interfaces/INpaApiResponse";
-import ISearchResult from "../interfaces/ISearchResult";
 
 interface ILayoutEditorState {
   nodeParentId: string;
@@ -40,7 +39,8 @@ export enum LayoutEditorDataActionTypes {
   POST_NEW_NPA_KEY = "POST_NEW_NPA_KEY",
   PUT_NPA = "PUT_NPA",
   DATA_ACTION_COMPLETED = "DATA_ACTION_COMPLETED",
-  STORE_SEARCHED_USER = "STORE_SEARCHED_USER"
+  STORE_SEARCHED_USER = "STORE_SEARCHED_USER",
+  REMOVE_SEARCHED_USER = "DELETE_SEARCHED_USER"
 }
 
 export enum LayoutEditorPaneActionTypes {
@@ -145,6 +145,11 @@ interface IDataActionCompleted {
   data: any;
 }
 
+interface IStoredSearchedUser {
+  id: string;
+  name: string;
+}
+
 export type LayoutEditorDataAction =
   | IDataActionCompleted
   | {
@@ -173,14 +178,17 @@ export type LayoutEditorDataAction =
     }
   | {
       type: LayoutEditorDataActionTypes.STORE_SEARCHED_USER;
-      user: ISearchResult;
+      user: IStoredSearchedUser;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.REMOVE_SEARCHED_USER;
     };
 
 export type LayoutEditorAction =
   | LayoutEditorPaneAction
   | LayoutEditorDataAction;
 
-const editorReducer = (
+const layoutEditorReducer = (
   state: ILayoutEditorState,
   action: LayoutEditorAction
 ) => {
@@ -321,6 +329,12 @@ const editorReducer = (
         ...state,
         user: action.user
       };
+    case LayoutEditorDataActionTypes.REMOVE_SEARCHED_USER: {
+      const stateCopy = Object.assign({}, state);
+      delete stateCopy["user"];
+
+      return stateCopy;
+    }
   }
 };
 
@@ -333,4 +347,4 @@ const StateContext = React.createContext<
   }
 ]);
 
-export { editorReducer, StateContext };
+export { layoutEditorReducer, StateContext };
