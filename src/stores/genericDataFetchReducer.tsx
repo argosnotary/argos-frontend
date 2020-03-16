@@ -16,7 +16,10 @@
 import IState from "../interfaces/IState";
 import Action from "../types/Action";
 
-export function newGenericDataFetchReducer<S, T>(state: S, action: Action<T>) {
+export function customGenericDataFetchReducer<S, T>(
+  state: S,
+  action: Action<T>
+) {
   switch (action.type) {
     case "FETCH_INIT":
       return {
@@ -43,12 +46,14 @@ const genericDataFetchReducer = (state: IState, action: Action<IState>) => {
     case "FETCH_INIT":
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        error: ""
       };
     case "FETCH_SUCCESS":
       return {
         ...state,
         data: action.results,
+        error: "",
         isLoading: false
       };
     case "FETCH_FAILURE":

@@ -18,40 +18,20 @@ import styled from "styled-components";
 
 import PageHeader from "../atoms/PageHeader";
 
-import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
-import IState from "../interfaces/IState";
 import useDataApi from "../hooks/useDataApi";
 import useToken from "../hooks/useToken";
+import { customGenericDataFetchReducer } from "../stores/genericDataFetchReducer";
 
-interface IProfile extends IState {
-  data: {
-    name: string;
-    email: string;
-  };
+interface IProfile {
+  name: string;
+  email: string;
 }
 
-const dataFetchReducer = (state: IProfile, action: Action<IProfile>) => {
-  switch (action.type) {
-    case "FETCH_INIT":
-      return {
-        ...state,
-        isLoading: true
-      };
-    case "FETCH_SUCCESS":
-      return {
-        ...state,
-        data: action.results,
-        isLoading: false
-      };
-    case "FETCH_FAILURE":
-      return {
-        ...state,
-        error: action.error,
-        isLoading: false
-      };
-  }
-};
+interface IProfileApiReponse {
+  isLoading: boolean;
+  data: IProfile;
+}
 
 const ProfileListItem = styled.li`
   margin: 1rem 0;
@@ -66,14 +46,19 @@ const ProfilePage = () => {
     url: "/api/personalaccount/me"
   };
 
-  const [result] = useDataApi(dataFetchReducer, dataRequest);
+  const [profileApiResponse] = useDataApi<IProfileApiReponse, IProfile>(
+    customGenericDataFetchReducer,
+    dataRequest
+  );
 
   return (
     <>
       <PageHeader>Profile</PageHeader>
       <ul>
-        <ProfileListItem>Name: {result.data?.name}</ProfileListItem>
-        <ProfileListItem>Email: {result.data?.email}</ProfileListItem>
+        <ProfileListItem>Name: {profileApiResponse.data?.name}</ProfileListItem>
+        <ProfileListItem>
+          Email: {profileApiResponse.data?.email}
+        </ProfileListItem>
       </ul>
     </>
   );

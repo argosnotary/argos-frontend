@@ -19,9 +19,9 @@ import { StateContext } from "../../../stores/layoutEditorStore";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import ISearchResult from "../../../interfaces/ISearchResult";
 import SearchInput from "../../../atoms/SearchInput";
-import useDataApi, { newUseDataApi } from "../../../hooks/useDataApi";
+import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer, {
-  newGenericDataFetchReducer
+  customGenericDataFetchReducer
 } from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
@@ -54,14 +54,36 @@ interface IPermissionsComponentProps {
   collapsedByDefault: boolean;
 }
 
-const permissionTypes = [
-  { id: "LAYOUT_ADD", label: "add a layout" },
-  { id: "LINK_ADD", label: "add a link" },
-  { id: "LOCAL_PERMISSION_EDIT", label: "change permissions" },
-  { id: "TREE_EDIT", label: "change tree" },
-  { id: "READ", label: "read" },
-  { id: "VERIFY", label: "verify supply chains" }
-];
+interface IEditSearchedUserPermissionsProps {
+  selectedLabelId: string;
+}
+
+interface IUser {
+  id: string;
+  name: string;
+}
+
+interface IKnownUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface IAllKnownUsersApiResponse {
+  isLoading: boolean;
+  data: Array<IKnownUser>;
+}
+
+interface ISearchApiUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface ISearchUserApiResponse {
+  isLoading: boolean;
+  data: Array<ISearchApiUser>;
+}
 
 interface IPermissionsApiState {
   isLoading: boolean;
@@ -78,6 +100,15 @@ interface IUserPermissions {
   permissions: Array<string>;
 }
 
+const permissionTypes = [
+  { id: "LAYOUT_ADD", label: "add a layout" },
+  { id: "LINK_ADD", label: "add a link" },
+  { id: "LOCAL_PERMISSION_EDIT", label: "change permissions" },
+  { id: "TREE_EDIT", label: "change tree" },
+  { id: "READ", label: "read" },
+  { id: "VERIFY", label: "verify supply chains" }
+];
+
 const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({
   labelId,
   accountId,
@@ -89,10 +120,10 @@ const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({
     setUpdatePermissionApiRequest
   ] = useDataApi(genericDataFetchReducer);
 
-  const [permissionsApiResponse, setPermissionsApiRequest] = newUseDataApi<
+  const [permissionsApiResponse, setPermissionsApiRequest] = useDataApi<
     IPermissionsApiState,
     IUserPermissions
-  >(newGenericDataFetchReducer);
+  >(customGenericDataFetchReducer);
 
   const [localStorageToken] = useToken();
 
@@ -182,33 +213,22 @@ const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({
   );
 };
 
-interface IUserSearchApiResponse {
-  id: string;
-  name: string;
-  email: string;
-}
-
-interface IEditSearchedUserPermissionsProps {
-  selectedLabelId: string;
-}
-
-interface IUser {
-  id: string;
-  name: string;
-}
-
 const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
   selectedLabelId
 }) => {
   const [localStorageToken] = useToken();
   const [user, setUser] = useState({} as IUser);
 
-  const [searchUserApiResponse, setSearchUserApiRequest] = useDataApi(
-    genericDataFetchReducer
-  );
+  const [searchUserApiResponse, setSearchUserApiRequest] = useDataApi<
+    ISearchUserApiResponse,
+    Array<ISearchApiUser>
+  >(customGenericDataFetchReducer);
 
-  const [allKnownLabelUsers, setAllKnownLabelUsersApiRequest] = useDataApi(
-    genericDataFetchReducer
+  const [
+    allKnownUsersApiResponse,
+    setAllKnownLabelUsersApiRequest
+  ] = useDataApi<IAllKnownUsersApiResponse, Array<IKnownUser>>(
+    customGenericDataFetchReducer
   );
 
   useEffect(() => {
@@ -225,7 +245,7 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
   }, [selectedLabelId]);
 
   const parseSearchInputResults = (
-    apiResponse: Array<IUserSearchApiResponse>
+    apiResponse: Array<ISearchApiUser>
   ): Array<ISearchResult> => {
     if (apiResponse && apiResponse.length > 0) {
       const searchInputResults: Array<ISearchResult> = apiResponse.map(
@@ -242,15 +262,15 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
     return [];
   };
 
-  const renderKnownUsers = () => {
-    if (allKnownLabelUsers && allKnownLabelUsers.data) {
+  const renderKnownUsers = (allKnownUsers: Array<IKnownUser>) => {
+    if (allKnownUsers) {
       return (
         <>
-          {allKnownLabelUsers.data.filter((entry: any) => entry.id !== user.id)
-            .length > 1 ? (
+          {allKnownUsers.filter((entry: any) => entry.id !== user.id).length >
+          1 ? (
             <ContentSeparator />
           ) : null}
-          {allKnownLabelUsers.data
+          {allKnownUsers
             .filter((entry: any) => entry.id !== user.id)
             .map((knownUser: any) => (
               <PermissionsComponent
@@ -305,7 +325,7 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
           />
         </>
       ) : null}
-      {renderKnownUsers()}
+      {renderKnownUsers(allKnownUsersApiResponse.data)}
     </>
   );
 };
