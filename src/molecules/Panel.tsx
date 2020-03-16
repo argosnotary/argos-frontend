@@ -37,6 +37,7 @@ interface IPanelBodyProps {
 }
 
 const PanelBody = styled.main<IPanelBodyProps>`
+  overflow-y: auto;
   height: calc(100vh - 7.7rem);
   background-color: ${props => props.theme.layoutPage.panel.bgColor};
   margin: ${props => (!props.last ? "0 0 1rem 1rem" : "0 1rem 0 1rem")};

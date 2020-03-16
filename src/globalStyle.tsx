@@ -167,6 +167,9 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
     body {
         line-height: 1.5rem;
     }
+
+    *:focus, *:visited, *:active, *:hover  { outline:0 !important;}
+    *::-moz-focus-inner {border:0;}
 `;
 
 export default GlobalStyle;
