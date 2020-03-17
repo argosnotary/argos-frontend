@@ -208,7 +208,9 @@ const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({
                       onChange={e =>
                         e.currentTarget
                           .closest("form")
-                          ?.dispatchEvent(new Event("submit"))
+                          ?.dispatchEvent(
+                            new Event("submit", { cancelable: true })
+                          )
                       }
                     />
                     {permission.label}
