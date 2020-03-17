@@ -26,18 +26,14 @@ import genericDataFetchReducer, {
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
 import CollapsibleContainerComponent from "../../../atoms/CollapsibleContainer";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
+import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
+import DataCheckbox from "../../../atoms/DataCheckbox";
 
 const PermissionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-const PermissionCheckbox = styled.input`
-  position: relative;
-  top: 1px;
-  margin: 0 1rem 0 0;
 `;
 
 const PermissionLabel = styled.label`
@@ -116,7 +112,7 @@ const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({
   collapsedByDefault
 }) => {
   const [
-    _updatePermissionApiResponse,
+    updatePermissionApiResponse,
     setUpdatePermissionApiRequest
   ] = useDataApi(genericDataFetchReducer);
 
@@ -127,7 +123,13 @@ const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({
 
   const [localStorageToken] = useToken();
 
+  const theme = useContext(ThemeContext);
+
   const shouldBeChecked = (permission: IPermission): boolean => {
+    if (!permissionsApiResponse.data.permissions) {
+      return false;
+    }
+
     return (
       permissionsApiResponse.data.permissions.findIndex(
         (entry: any) => entry === permission.id
@@ -186,21 +188,28 @@ const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({
             setUpdatePermissionApiRequest(dataRequest);
           }}
         >
+          {permissionsApiResponse.isLoading ? (
+            <AlternateLoader size={32} color={theme.alternateLoader.color} />
+          ) : null}
           {Object.prototype.hasOwnProperty.call(permissionsApiResponse, "data")
             ? permissionTypes.map(permission => {
                 return (
                   <PermissionLabel htmlFor={permission.id} key={permission.id}>
-                    <PermissionCheckbox
-                      defaultChecked={shouldBeChecked(permission)}
+                    <DataCheckbox
+                      initialCheckedValue={shouldBeChecked(permission)}
                       type="checkbox"
                       name={permission.id}
                       value={permission.id}
                       id={permission.id}
-                      onChange={e => {
+                      parentIsLoading={updatePermissionApiResponse.isLoading}
+                      parentPutError={
+                        updatePermissionApiResponse.error ? true : false
+                      }
+                      onChange={e =>
                         e.currentTarget
                           .closest("form")
-                          ?.dispatchEvent(new Event("submit"));
-                      }}
+                          ?.dispatchEvent(new Event("submit"))
+                      }
                     />
                     {permission.label}
                   </PermissionLabel>
@@ -230,6 +239,8 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
   ] = useDataApi<IAllKnownUsersApiResponse, Array<IKnownUser>>(
     customGenericDataFetchReducer
   );
+
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     const dataRequest: DataRequest = {
@@ -324,6 +335,9 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
             collapsedByDefault={false}
           />
         </>
+      ) : null}
+      {allKnownUsersApiResponse.isLoading ? (
+        <AlternateLoader size={32} color={theme.alternateLoader.color} />
       ) : null}
       {renderKnownUsers(allKnownUsersApiResponse.data)}
     </>

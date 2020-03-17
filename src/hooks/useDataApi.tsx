@@ -26,7 +26,7 @@ import { useRequestErrorStore } from "../stores/requestErrorStore";
 function useDataApi<S, T>(
   reducer: Reducer<S, Action<T>>,
   initialDataRequest?: DataRequest
-): [S, (initialDataRequest: DataRequest) => void] {
+): [S, (initialDataRequest: DataRequest) => void, DataRequest | undefined] {
   const [dataRequest, setDataRequest] = useState<DataRequest | undefined>(
     initialDataRequest
   );
@@ -106,7 +106,7 @@ function useDataApi<S, T>(
     }
   }, [dataRequest]);
 
-  return [state, setDataRequest];
+  return [state, setDataRequest, dataRequest];
 }
 
 export default useDataApi;
