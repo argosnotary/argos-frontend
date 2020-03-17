@@ -37,6 +37,7 @@
             <exclude>**/*.swp</exclude>
             <exclude>**/*.swo</exclude>
             <exclude>**/*.woff2</exclude>
+            <exclude>**/*.snap</exclude>
             <exclude>.dockerignore</exclude>
             <exclude>drone.yml</exclude>
             <exclude>target/**</exclude>
