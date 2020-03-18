@@ -29,15 +29,22 @@ describe("TreeEditor utils", () => {
     it("returns nested node from data tree based on reference id", () => {
       const res = findNode(
         json.sampleData,
-        "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1"
+        "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
       );
 
       const expectedNode = {
-        name: "evensmaller",
+        name: "label_e",
         type: "LABEL",
-        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+        referenceId: "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
         hasChildren: false,
-        children: []
+        children: [],
+        permissions: [
+          "ASSIGN_ROLE",
+          "LOCAL_PERMISSION_EDIT",
+          "READ",
+          "TREE_EDIT",
+          "VERIFY"
+        ]
       };
 
       expect(res).toEqual(expectedNode);
@@ -95,11 +102,18 @@ describe("TreeEditor utils", () => {
   describe("updateSingleNode", () => {
     it("finds, updates a node in provided tree state, and returns immutable copy of tree state", () => {
       const newNodeData = {
-        name: "evensmallerx",
+        name: "label_eee",
         type: "LABEL",
-        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+        referenceId: "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
         hasChildren: false,
-        children: []
+        children: [],
+        permissions: [
+          "ASSIGN_ROLE",
+          "LOCAL_PERMISSION_EDIT",
+          "READ",
+          "TREE_EDIT",
+          "VERIFY"
+        ]
       };
 
       const newStateProducer = updateSingleNode(newNodeData);
@@ -109,10 +123,10 @@ describe("TreeEditor utils", () => {
 
       const res = findNode(
         newStateProducer(treeState).data,
-        "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1"
+        "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
       );
 
-      expect(res.name).toBe("evensmallerx");
+      expect(res.name).toBe("label_eee");
     });
   });
   describe("appendNodeChildrenToParent", () => {
@@ -152,33 +166,17 @@ describe("TreeEditor utils", () => {
       const parent = getNearestParent(
         [],
         json.sampleData,
-        "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1"
+        "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
       )[0];
 
-      const expectedParent = {
-        name: "jojogreatgrand",
-        type: "LABEL",
-        referenceId: "3f316771-211e-446f-a98c-a77c5148e640",
-        hasChildren: true,
-        children: [
-          {
-            name: "evensmaller",
-            type: "LABEL",
-            referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
-            hasChildren: false,
-            children: []
-          }
-        ]
-      };
-
-      expect(parent).toEqual(expectedParent);
+      expect(parent).toEqual(json.sampleData[1]);
     });
 
     it("returns empty node when there is no parent to be found (i.e. in case of a root node)", () => {
       const parent = getNearestParent(
         [],
         json.sampleData,
-        "ad0e6313-b388-4481-80f4-955b3d1a5a51"
+        "c1e7e2ad-6754-40c1-9c83-8e43c3772f18"
       )[0];
 
       expect(parent.length).toBe(0);
@@ -191,14 +189,12 @@ describe("TreeEditor utils", () => {
         buildNodeTrail(
           [],
           json.sampleData,
-          "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1"
+          "d3cca05f-3b17-4c7e-8a80-ea2382c55f11"
         ),
         t => t.name
       ).join(" / ");
 
-      expect(trail).toEqual(
-        "neo / trinity / mimi / jojo / jojokido / jojogreatgrand / evensmaller"
-      );
+      expect(trail).toEqual("label_a / label_c / label_d");
     });
   });
 });
