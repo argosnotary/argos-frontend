@@ -71,7 +71,7 @@ const TreeNodeContainer = styled.li<ITreeNodeContainerProps>`
 
 const TreeIcon = styled(TriangleIcon)``;
 
-const TreeHead = styled.button`
+export const TreeHead = styled.button`
   background: none;
   border: 0;
   outline: none;
@@ -83,7 +83,7 @@ const TreeHead = styled.button`
   }
 `;
 
-const TreeHeadLabel = styled.span<ITreeHeadLabelProps>`
+export const TreeHeadLabel = styled.span<ITreeHeadLabelProps>`
   user-select: none;
   cursor: pointer;
   padding: 0.1rem 0.4rem;
@@ -119,7 +119,7 @@ const TypeIconContainer = styled.div<ITypeIconContainerProps>`
   display: inline-flex;
 `;
 
-const NodeContextMenuContainer = styled.ul<INodeContextContainerProps>`
+export const NodeContextMenuContainer = styled.ul<INodeContextContainerProps>`
   display: flex;
   flex-direction: column;
   background: ${props =>
@@ -135,7 +135,7 @@ const NodeContextMenuContainer = styled.ul<INodeContextContainerProps>`
   z-index: 4;
 `;
 
-const NodeContextMenuItem = styled.li`
+export const NodeContextMenuItem = styled.li`
   background-color: ${props =>
     props.theme.treeEditor.nodeContextMenuItem.bgColor};
   font-size: 0.9rem;
@@ -219,7 +219,7 @@ const NodesFlexContainer = styled.ul`
   flex-direction: column;
 `;
 
-const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
+export const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
   const [displayNode, setDisplayNode] = useState(false);
   const theme = useContext(ThemeContext);
 
@@ -331,7 +331,7 @@ const IconContainer = styled.div`
   margin: 0 0.2rem 0;
 `;
 
-const AddAdditionalRootNodes = () => {
+export const AddAdditionalRootNodes = () => {
   const treeContext = useContext(TreeStateContext);
   const theme = useContext(ThemeContext);
 

@@ -71,16 +71,16 @@ const SelectionContainer = styled(FlexRow)`
 interface ISearchInputProps {
   results: Array<ISearchResult>;
   onSelect: (res: ISearchResult) => void;
+  onCancel: () => void;
   fetchData: (searchQuery: string) => void;
-  displayProperty: string;
   isLoading: boolean;
 }
 
 const SearchInput: React.FC<ISearchInputProps> = ({
   results,
   onSelect,
+  onCancel,
   fetchData,
-  displayProperty,
   isLoading
 }) => {
   const [displayResults, setDisplayResults] = useState(false);
@@ -103,6 +103,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
           <CancelButton
             onClick={() => {
               setSelected(false);
+              onCancel();
             }}
             buttonType={"button"}
           >
@@ -136,7 +137,9 @@ const SearchInput: React.FC<ISearchInputProps> = ({
     }, 250);
 
     const resultsFilter = (entry: any) => {
-      if (entry[displayProperty].toLowerCase().indexOf(inputValue) > -1) {
+      if (
+        entry.displayLabel.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+      ) {
         return entry;
       }
     };
@@ -172,12 +175,12 @@ const SearchInput: React.FC<ISearchInputProps> = ({
                         onClick={() => {
                           onSelect(res);
                           setSelected(true);
-                          setInputValue(res[displayProperty]);
+                          setInputValue(res.displayLabel);
                           setDisplayResults(false);
                         }}
                         key={res.id}
                       >
-                        {res[displayProperty]}
+                        {res.displayLabel}
                       </SearchResultEntry>
                     ))}
               </>

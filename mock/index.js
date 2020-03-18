@@ -27,28 +27,39 @@ app.get(config.apiUrl, (_req, res) => {
 
 const dummyPersonalAccounts = [
   {
-    name: "Henk",
-    id: "12sj2a"
+    id: "9199f4c3-6643-4a89-9daa-b84eb62aa186",
+    name: "Luke Skywalker",
+    email: "luke@skywalker.imp",
+    permissions: ["READ", "LAYOUT_ADD", "TREE_EDIT"]
   },
   {
-    name: "Henk-Jan",
-    id: "12sj1a"
+    id: "9199f4c3-6643-4a89-9daa-b84eb62aa187",
+    name: "Leah Organa",
+    email: "leah@organa.imp",
+    permissions: ["READ", "LAYOUT_ADD", "VERIFY"]
   },
   {
-    name: "Hans",
-    id: "12sj3a"
-  },
-  {
-    name: "Jan",
-    id: "12sj4a"
-  },
-  {
-    name: "Jan Pieter",
-    id: "12sj5a"
+    id: "9199f4c3-6643-4a89-9daa-b84eb62aa189",
+    name: "Han Solo",
+    email: "han@solo.imp",
+    permissions: ["LAYOUT_ADD"]
   }
 ];
 
+app.get(
+  `${config.apiUrl}/personalaccount/:accountId/localpermission/:labelId`,
+  (req, res) => {
+    res.send(
+      dummyPersonalAccounts.find(account => account.id === req.params.accountId)
+    );
+  }
+);
+
 app.get(`${config.apiUrl}/personalaccount`, (req, res) => {
+  if (req.query.localPermissionsLabelId) {
+    res.send(dummyPersonalAccounts);
+  }
+
   const accounts = dummyPersonalAccounts.filter(account => {
     if (account.name.toLowerCase().indexOf(req.query.name) > -1) {
       return account;

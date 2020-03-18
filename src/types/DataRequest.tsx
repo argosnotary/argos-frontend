@@ -27,6 +27,7 @@ type DataRequest =
       url: string;
       method: "post" | "put";
       data: {};
+      params?: {};
       cbSuccess?: (arg: any) => void;
     };
 

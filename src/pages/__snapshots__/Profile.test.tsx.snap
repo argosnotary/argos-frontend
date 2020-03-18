@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<ProfilePage>
+  <styled.h1>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "gTCAhk",
+            "rules": Array [
+              "
+  border-bottom: 1px solid ",
+              [Function],
+              ";
+  padding: 1rem 0 1.25rem;
+  margin: 0 0 0.6rem;
+  font-size: 2rem;
+",
+            ],
+          },
+          "displayName": "styled.h1",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "h1",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <h1
+        className="sc-bdVaJa gTCAhk"
+      >
+        Profile
+      </h1>
+    </StyledComponent>
+  </styled.h1>
+  <ul>
+    <styled.li>
+      <StyledComponent
+        forwardedComponent={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": false,
+              "lastClassName": "jRWVgw",
+              "rules": Array [
+                "
+  margin: 1rem 0;
+",
+              ],
+            },
+            "displayName": "styled.li",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "li",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          }
+        }
+        forwardedRef={null}
+      >
+        <li
+          className="sc-bwzfXH jRWVgw"
+        >
+          Name: 
+          Luke Skywalker
+        </li>
+      </StyledComponent>
+    </styled.li>
+    <styled.li>
+      <StyledComponent
+        forwardedComponent={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": false,
+              "lastClassName": "jRWVgw",
+              "rules": Array [
+                "
+  margin: 1rem 0;
+",
+              ],
+            },
+            "displayName": "styled.li",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "li",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          }
+        }
+        forwardedRef={null}
+      >
+        <li
+          className="sc-bwzfXH jRWVgw"
+        >
+          Email: 
+          luke@skywalker.imp
+        </li>
+      </StyledComponent>
+    </styled.li>
+  </ul>
+</ProfilePage>
+`;

@@ -28,7 +28,7 @@ import { initialTreeState, treeReducer } from "../../stores/treeEditorStore";
 import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 
 import {
-  editorReducer,
+  layoutEditorReducer,
   StateContext,
   LayoutEditorDataActionTypes,
   LayoutEditorPaneActionTypes,
@@ -41,7 +41,9 @@ import {
   updateObjectInTree
 } from "./utils";
 import ManageLabel from "./Panels/ManageLabel";
-import genericDataFetchReducer from "../../stores/genericDataFetchReducer";
+import genericDataFetchReducer, {
+  customGenericDataFetchReducer
+} from "../../stores/genericDataFetchReducer";
 import ManageSupplyChain from "./Panels/ManageSupplyChain";
 import ManageNpa from "./Panels/ManageNpa";
 import { TreeNodeTypes } from "../../types/TreeNodeType";
@@ -49,7 +51,7 @@ import { PanelsContainer, Panel } from "../../molecules/Panel";
 import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 
 const LayoutEditor = () => {
-  const [state, dispatch] = useReducer(editorReducer, {
+  const [state, dispatch] = useReducer(layoutEditorReducer, {
     firstPanelView: LayoutEditorPaneActionTypes.NONE,
     nodeReferenceId: "",
     nodeParentId: "",
@@ -63,13 +65,27 @@ const LayoutEditor = () => {
     url: "/api/hierarchy"
   };
 
-  const [treeDataState] = useDataApi(
-    genericDataFetchReducer,
+  interface ITreeDataStateNode {
+    name: string;
+    type: string;
+    referenceId: string;
+    hasChildren: boolean;
+    children: Array<ITreeDataStateNode>;
+    permissions: Array<string>;
+  }
+
+  interface ITreeDataState {
+    isLoading: boolean;
+    data: Array<ITreeDataStateNode>;
+  }
+
+  const [treeDataState] = useDataApi<ITreeDataState, Array<ITreeDataStateNode>>(
+    customGenericDataFetchReducer,
     getTreeDataRequest
   );
 
   const [treeState, treeDispatch] = useReducer(treeReducer, initialTreeState);
-  const [treeChildrenFetchState, setTreeChildrenFetchRequest] = useDataApi(
+  const [treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
     genericDataFetchReducer
   );
 
@@ -209,7 +225,7 @@ const LayoutEditor = () => {
       }
     };
 
-    setTreeChildrenFetchRequest(dataRequest);
+    setTreeChildrenApiRequest(dataRequest);
   };
 
   const renderPanel = (panelView: string) => {
@@ -301,7 +317,7 @@ const LayoutEditor = () => {
     treeClickHandlers,
     cbCreateRootNode,
     cbGetNodeChildren,
-    isLoading: treeChildrenFetchState.isLoading,
+    isLoading: treeChildrenApiResponse.isLoading,
     selectedNodeReferenceId: state.nodeReferenceId
   };
 

@@ -23,14 +23,14 @@ import DataRequest from "../types/DataRequest";
 import useToken from "../hooks/useToken";
 import { useRequestErrorStore } from "../stores/requestErrorStore";
 
-const useDataApi = (
-  reducer: Reducer<any, Action<any>>,
+function useDataApi<S, T>(
+  reducer: Reducer<S, Action<T>>,
   initialDataRequest?: DataRequest
-): [any, (initialDataRequest: DataRequest) => void] => {
+): [S, (initialDataRequest: DataRequest) => void, DataRequest | undefined] {
   const [dataRequest, setDataRequest] = useState<DataRequest | undefined>(
     initialDataRequest
   );
-  const [state, dispatch] = useReducer(reducer, { isLoading: false });
+  const [state, dispatch] = useReducer(reducer, {} as S);
   const [
     _localStorageToken,
     _setLocalStorageToken,
@@ -52,14 +52,14 @@ const useDataApi = (
           headers: authorizationHeader
         };
 
+        if (dataRequest.params) {
+          requestConfig["params"] = dataRequest.params;
+        }
+
         switch (dataRequest.method) {
           case "get": {
             const methodKey = "method";
             requestConfig[methodKey] = "get";
-
-            if (dataRequest.params) {
-              requestConfig["params"] = dataRequest.params;
-            }
             break;
           }
           case "post": {
@@ -106,7 +106,7 @@ const useDataApi = (
     }
   }, [dataRequest]);
 
-  return [state, setDataRequest];
-};
+  return [state, setDataRequest, dataRequest];
+}
 
 export default useDataApi;

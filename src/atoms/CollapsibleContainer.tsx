@@ -37,7 +37,7 @@ const CollapsibleContainerBody = styled.main<ICollapsibleContainerBodyProps>`
       ? "none"
       : `1px solid ${props.theme.collapsibleContainer.bodyBorderColor}`};
   padding: ${props => (props.collapsed ? "0 1rem" : "1rem")};
-  max-height: ${props => (props.collapsed ? 0 : "10rem")};
+  max-height: ${props => (props.collapsed ? 0 : "none")};
   overflow: hidden;
   transition: max-height, padding 0.2s ease-out;
 `;
@@ -55,11 +55,15 @@ const CollapseButton = styled.button`
 interface ICollapseContainerComponentProps {
   children: React.ReactNode;
   collapsedByDefault: boolean;
+  title: string;
+  onCollapse?: () => void;
 }
 
 const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> = ({
   children,
-  collapsedByDefault
+  collapsedByDefault,
+  onCollapse,
+  title
 }) => {
   const [toggled, setToggled] = useState(collapsedByDefault);
   const theme = useContext(ThemeContext);
@@ -67,9 +71,13 @@ const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> 
   return (
     <CollapsibleContainer>
       <CollapsibleContainerHeader>
-        Permissions
+        {title}
         <CollapseButton
           onClick={() => {
+            if (onCollapse) {
+              onCollapse();
+            }
+
             setToggled(!toggled);
           }}
         >

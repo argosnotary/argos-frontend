@@ -1,0 +1,1600 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TreeEditor onContextMenu node with context options, contextmenu must be rendered 1`] = `
+<styled.ul>
+  <StyledComponent
+    forwardedComponent={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bZQynM",
+          "isStatic": false,
+          "lastClassName": "axFUn",
+          "rules": Array [
+            "
+  display: flex;
+  flex-direction: column;
+  background: ",
+            [Function],
+            ";
+  position: fixed;
+  top: ",
+            [Function],
+            "px;
+  left: ",
+            [Function],
+            "px;
+  display: flex;
+  border: 1px solid
+    ",
+            [Function],
+            ";
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 10rem;
+  z-index: 4;
+",
+          ],
+        },
+        "displayName": "styled.ul",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bZQynM",
+        "target": "ul",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      }
+    }
+    forwardedRef={null}
+  >
+    <ul
+      className="sc-bZQynM axFUn"
+    >
+      <styled.li
+        key="0"
+        onClick={[Function]}
+      >
+        <StyledComponent
+          forwardedComponent={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-gzVnrw",
+                "isStatic": false,
+                "lastClassName": "kUkUh",
+                "rules": Array [
+                  "
+  background-color: ",
+                  [Function],
+                  ";
+  font-size: 0.9rem;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  width: 100%;
+
+  &:hover {
+    background-color: ",
+                  [Function],
+                  ";
+  }
+",
+                ],
+              },
+              "displayName": "styled.li",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-gzVnrw",
+              "target": "li",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            }
+          }
+          forwardedRef={null}
+          onClick={[Function]}
+        >
+          <li
+            className="sc-gzVnrw kUkUh"
+            onClick={[Function]}
+          >
+            Add child label
+          </li>
+        </StyledComponent>
+      </styled.li>
+    </ul>
+  </StyledComponent>
+</styled.ul>
+`;
+
+exports[`TreeEditor renders initial data correctly 1`] = `
+<TreeEditor
+  context={
+    Object {
+      "cbCreateRootNode": [MockFunction],
+      "cbGetNodeChildren": [MockFunction],
+      "isLoading": false,
+      "selectedNodeReferenceId": "",
+      "treeClickHandlers": Array [
+        Object {
+          "callback": [MockFunction],
+          "type": "LABEL",
+        },
+      ],
+      "treeContextMenu": Array [
+        Object {
+          "menuitems": Array [
+            Object {
+              "callback": [MockFunction],
+              "label": "Add child label",
+            },
+          ],
+          "type": "LABEL",
+        },
+      ],
+      "treeDispatch": [Function],
+      "treeState": Object {
+        "contextMenu": Object {
+          "id": "",
+          "show": false,
+          "x": 0,
+          "y": 0,
+        },
+        "data": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "jenkins",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                        "type": "NON_PERSONAL_ACCOUNT",
+                      },
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "myfirstsupplychain",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                        "type": "SUPPLY_CHAIN",
+                      },
+                    ],
+                    "hasChildren": true,
+                    "name": "label_d",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                    "type": "LABEL",
+                  },
+                ],
+                "hasChildren": true,
+                "name": "label_c",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                "type": "LABEL",
+              },
+            ],
+            "hasChildren": true,
+            "name": "label_a",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+            "type": "LABEL",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "hasChildren": false,
+                "name": "label_e",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                "type": "LABEL",
+              },
+              Object {
+                "children": Array [],
+                "hasChildren": false,
+                "name": "mysecondsupplychain",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                "type": "SUPPLY_CHAIN",
+              },
+              Object {
+                "children": Array [],
+                "hasChildren": false,
+                "name": "xl_deploy",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                "type": "NON_PERSONAL_ACCOUNT",
+              },
+            ],
+            "hasChildren": true,
+            "name": "label_b",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+            "type": "LABEL",
+          },
+          Object {
+            "children": Array [],
+            "hasChildren": true,
+            "name": "label_y",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+            "type": "LABEL",
+          },
+        ],
+        "toggledNodes": Array [],
+      },
+      "treeStringList": Object {
+        "createrootnode": "Create base label...",
+      },
+    }
+  }
+  data={
+    Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "hasChildren": false,
+                    "name": "jenkins",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                    "type": "NON_PERSONAL_ACCOUNT",
+                  },
+                  Object {
+                    "children": Array [],
+                    "hasChildren": false,
+                    "name": "myfirstsupplychain",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                    "type": "SUPPLY_CHAIN",
+                  },
+                ],
+                "hasChildren": true,
+                "name": "label_d",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                "type": "LABEL",
+              },
+            ],
+            "hasChildren": true,
+            "name": "label_c",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+            "type": "LABEL",
+          },
+        ],
+        "hasChildren": true,
+        "name": "label_a",
+        "permissions": Array [
+          "ASSIGN_ROLE",
+          "LOCAL_PERMISSION_EDIT",
+          "READ",
+          "TREE_EDIT",
+          "VERIFY",
+        ],
+        "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+        "type": "LABEL",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "hasChildren": false,
+            "name": "label_e",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+            "type": "LABEL",
+          },
+          Object {
+            "children": Array [],
+            "hasChildren": false,
+            "name": "mysecondsupplychain",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+            "type": "SUPPLY_CHAIN",
+          },
+          Object {
+            "children": Array [],
+            "hasChildren": false,
+            "name": "xl_deploy",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+            "type": "NON_PERSONAL_ACCOUNT",
+          },
+        ],
+        "hasChildren": true,
+        "name": "label_b",
+        "permissions": Array [
+          "ASSIGN_ROLE",
+          "LOCAL_PERMISSION_EDIT",
+          "READ",
+          "TREE_EDIT",
+          "VERIFY",
+        ],
+        "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+        "type": "LABEL",
+      },
+      Object {
+        "children": Array [],
+        "hasChildren": true,
+        "name": "label_y",
+        "permissions": Array [
+          "ASSIGN_ROLE",
+          "LOCAL_PERMISSION_EDIT",
+          "READ",
+          "TREE_EDIT",
+          "VERIFY",
+        ],
+        "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+        "type": "LABEL",
+      },
+    ]
+  }
+  loading={false}
+>
+  <styled.aside>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-gqjmRU",
+            "isStatic": false,
+            "lastClassName": "kkNkaN",
+            "rules": Array [
+              "
+  height: 100vh;
+  color: ",
+              [Function],
+              ";
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+",
+            ],
+          },
+          "displayName": "styled.aside",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-gqjmRU",
+          "target": "aside",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <aside
+        className="sc-gqjmRU kkNkaN"
+      >
+        <styled.ul>
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-iwsKbI",
+                  "isStatic": false,
+                  "lastClassName": "kGIsiM",
+                  "rules": Array [
+                    "
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+",
+                  ],
+                },
+                "displayName": "styled.ul",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-iwsKbI",
+                "target": "ul",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+          >
+            <ul
+              className="sc-iwsKbI kGIsiM"
+            >
+              <AddAdditionalRootNodes>
+                <styled.li
+                  depth={1}
+                >
+                  <StyledComponent
+                    depth={1}
+                    forwardedComponent={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bwzfXH",
+                          "isStatic": false,
+                          "lastClassName": "cTmbmN",
+                          "rules": Array [
+                            "
+  margin: 0.2rem 0;
+  position: relative;
+  left: ",
+                            [Function],
+                            "rem;
+  width: 100%;
+",
+                          ],
+                        },
+                        "displayName": "styled.li",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bwzfXH",
+                        "target": "li",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      }
+                    }
+                    forwardedRef={null}
+                  >
+                    <li
+                      className="sc-bwzfXH cTmbmN"
+                    >
+                      <styled.div>
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-gZMcBi",
+                                "isStatic": false,
+                                "lastClassName": "injDMq",
+                                "rules": Array [
+                                  "
+  display: inline-flex;
+  margin: 0 0.2rem 0;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-gZMcBi",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                        >
+                          <div
+                            className="sc-gZMcBi injDMq"
+                          >
+                            <AltPlusIcon
+                              color="#1779ba"
+                              size={12}
+                            >
+                              <svg
+                                height={12}
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width={12}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M16 0c-8.836 0-16 7.164-16 16s7.164 16 16 16 16-7.164 16-16-7.164-16-16-16zM24 18h-6v6h-4v-6h-6v-4h6v-6h4v6h6v4z"
+                                  fill="#1779ba"
+                                />
+                              </svg>
+                            </AltPlusIcon>
+                          </div>
+                        </StyledComponent>
+                      </styled.div>
+                      <styled.span
+                        onClick={[MockFunction]}
+                        selected={false}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-ifAKCX",
+                                "isStatic": false,
+                                "lastClassName": "dWozOz",
+                                "rules": Array [
+                                  "
+  user-select: none;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  background-color: ",
+                                  [Function],
+                                  ";
+
+  &:hover {
+    background-color: ",
+                                  [Function],
+                                  ";
+    border-radius: 2px;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.span",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-ifAKCX",
+                              "target": "span",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[MockFunction]}
+                          selected={false}
+                        >
+                          <span
+                            className="sc-ifAKCX dWozOz"
+                            onClick={[MockFunction]}
+                            selected={false}
+                          >
+                            Create base label...
+                          </span>
+                        </StyledComponent>
+                      </styled.span>
+                    </li>
+                  </StyledComponent>
+                </styled.li>
+              </AddAdditionalRootNodes>
+              <ParentNode
+                depth={1}
+                key="0"
+                node={
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [
+                          Object {
+                            "children": Array [
+                              Object {
+                                "children": Array [],
+                                "hasChildren": false,
+                                "name": "jenkins",
+                                "permissions": Array [
+                                  "ASSIGN_ROLE",
+                                  "LOCAL_PERMISSION_EDIT",
+                                  "READ",
+                                  "TREE_EDIT",
+                                  "VERIFY",
+                                ],
+                                "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                                "type": "NON_PERSONAL_ACCOUNT",
+                              },
+                              Object {
+                                "children": Array [],
+                                "hasChildren": false,
+                                "name": "myfirstsupplychain",
+                                "permissions": Array [
+                                  "ASSIGN_ROLE",
+                                  "LOCAL_PERMISSION_EDIT",
+                                  "READ",
+                                  "TREE_EDIT",
+                                  "VERIFY",
+                                ],
+                                "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                                "type": "SUPPLY_CHAIN",
+                              },
+                            ],
+                            "hasChildren": true,
+                            "name": "label_d",
+                            "permissions": Array [
+                              "ASSIGN_ROLE",
+                              "LOCAL_PERMISSION_EDIT",
+                              "READ",
+                              "TREE_EDIT",
+                              "VERIFY",
+                            ],
+                            "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                            "type": "LABEL",
+                          },
+                        ],
+                        "hasChildren": true,
+                        "name": "label_c",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                        "type": "LABEL",
+                      },
+                    ],
+                    "hasChildren": true,
+                    "name": "label_a",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+                    "type": "LABEL",
+                  }
+                }
+              >
+                <styled.li
+                  depth={1}
+                >
+                  <StyledComponent
+                    depth={1}
+                    forwardedComponent={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bwzfXH",
+                          "isStatic": false,
+                          "lastClassName": "cTmbmN",
+                          "rules": Array [
+                            "
+  margin: 0.2rem 0;
+  position: relative;
+  left: ",
+                            [Function],
+                            "rem;
+  width: 100%;
+",
+                          ],
+                        },
+                        "displayName": "styled.li",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bwzfXH",
+                        "target": "li",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      }
+                    }
+                    forwardedRef={null}
+                  >
+                    <li
+                      className="sc-bwzfXH cTmbmN"
+                    >
+                      <styled.button
+                        onClick={[Function]}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-bxivhb",
+                                "isStatic": false,
+                                "lastClassName": "hESsKH",
+                                "rules": Array [
+                                  "
+  background: none;
+  border: 0;
+  outline: none;
+  margin: 0 0.2rem;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.button",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-bxivhb",
+                              "target": "button",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                        >
+                          <button
+                            className="sc-bxivhb hESsKH"
+                            onClick={[Function]}
+                          >
+                            <Styled(TriangleIcon)
+                              color="#1779ba"
+                              size={12}
+                            >
+                              <StyledComponent
+                                color="#1779ba"
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-htpNat",
+                                      "isStatic": false,
+                                      "lastClassName": "KtFsv",
+                                      "rules": Array [],
+                                    },
+                                    "displayName": "Styled(TriangleIcon)",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-htpNat",
+                                    "target": [Function],
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                size={12}
+                              >
+                                <TriangleIcon
+                                  className="sc-htpNat KtFsv"
+                                  color="#1779ba"
+                                  size={12}
+                                >
+                                  <svg
+                                    height={12}
+                                    version="1.1"
+                                    viewBox="0 0 32 32"
+                                    width={12}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M6 4l20 12-20 12z"
+                                      fill="#1779ba"
+                                    />
+                                  </svg>
+                                </TriangleIcon>
+                              </StyledComponent>
+                            </Styled(TriangleIcon)>
+                          </button>
+                        </StyledComponent>
+                      </styled.button>
+                      <styled.div
+                        hasChildren={true}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-EHOje",
+                                "isStatic": false,
+                                "lastClassName": "jvlXLV",
+                                "rules": Array [
+                                  "
+  margin: ",
+                                  [Function],
+                                  ";
+  display: inline-flex;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-EHOje",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          hasChildren={true}
+                        >
+                          <div
+                            className="sc-EHOje jvlXLV"
+                          >
+                            <LabelIcon
+                              color="#8D99AE"
+                              size={14}
+                            >
+                              <svg
+                                height={14}
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width={14}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M29 3h-11.3l-14.9 14.8 11.3 11.3 14.9-14.8v-11.3zM20 12v-4h4v4h-4z"
+                                  fill="#8D99AE"
+                                />
+                                 
+                              </svg>
+                            </LabelIcon>
+                          </div>
+                        </StyledComponent>
+                      </styled.div>
+                      <styled.span
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        selected={false}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-ifAKCX",
+                                "isStatic": false,
+                                "lastClassName": "dWozOz",
+                                "rules": Array [
+                                  "
+  user-select: none;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  background-color: ",
+                                  [Function],
+                                  ";
+
+  &:hover {
+    background-color: ",
+                                  [Function],
+                                  ";
+    border-radius: 2px;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.span",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-ifAKCX",
+                              "target": "span",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          selected={false}
+                        >
+                          <span
+                            className="sc-ifAKCX dWozOz"
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            selected={false}
+                          >
+                            label_a
+                          </span>
+                        </StyledComponent>
+                      </styled.span>
+                    </li>
+                  </StyledComponent>
+                </styled.li>
+              </ParentNode>
+              <ParentNode
+                depth={1}
+                key="1"
+                node={
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "label_e",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                        "type": "LABEL",
+                      },
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "mysecondsupplychain",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                        "type": "SUPPLY_CHAIN",
+                      },
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "xl_deploy",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                        "type": "NON_PERSONAL_ACCOUNT",
+                      },
+                    ],
+                    "hasChildren": true,
+                    "name": "label_b",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                    "type": "LABEL",
+                  }
+                }
+              >
+                <styled.li
+                  depth={1}
+                >
+                  <StyledComponent
+                    depth={1}
+                    forwardedComponent={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bwzfXH",
+                          "isStatic": false,
+                          "lastClassName": "cTmbmN",
+                          "rules": Array [
+                            "
+  margin: 0.2rem 0;
+  position: relative;
+  left: ",
+                            [Function],
+                            "rem;
+  width: 100%;
+",
+                          ],
+                        },
+                        "displayName": "styled.li",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bwzfXH",
+                        "target": "li",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      }
+                    }
+                    forwardedRef={null}
+                  >
+                    <li
+                      className="sc-bwzfXH cTmbmN"
+                    >
+                      <styled.button
+                        onClick={[Function]}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-bxivhb",
+                                "isStatic": false,
+                                "lastClassName": "hESsKH",
+                                "rules": Array [
+                                  "
+  background: none;
+  border: 0;
+  outline: none;
+  margin: 0 0.2rem;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.button",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-bxivhb",
+                              "target": "button",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                        >
+                          <button
+                            className="sc-bxivhb hESsKH"
+                            onClick={[Function]}
+                          >
+                            <Styled(TriangleIcon)
+                              color="#1779ba"
+                              size={12}
+                            >
+                              <StyledComponent
+                                color="#1779ba"
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-htpNat",
+                                      "isStatic": false,
+                                      "lastClassName": "KtFsv",
+                                      "rules": Array [],
+                                    },
+                                    "displayName": "Styled(TriangleIcon)",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-htpNat",
+                                    "target": [Function],
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                size={12}
+                              >
+                                <TriangleIcon
+                                  className="sc-htpNat KtFsv"
+                                  color="#1779ba"
+                                  size={12}
+                                >
+                                  <svg
+                                    height={12}
+                                    version="1.1"
+                                    viewBox="0 0 32 32"
+                                    width={12}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M6 4l20 12-20 12z"
+                                      fill="#1779ba"
+                                    />
+                                  </svg>
+                                </TriangleIcon>
+                              </StyledComponent>
+                            </Styled(TriangleIcon)>
+                          </button>
+                        </StyledComponent>
+                      </styled.button>
+                      <styled.div
+                        hasChildren={true}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-EHOje",
+                                "isStatic": false,
+                                "lastClassName": "jvlXLV",
+                                "rules": Array [
+                                  "
+  margin: ",
+                                  [Function],
+                                  ";
+  display: inline-flex;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-EHOje",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          hasChildren={true}
+                        >
+                          <div
+                            className="sc-EHOje jvlXLV"
+                          >
+                            <LabelIcon
+                              color="#8D99AE"
+                              size={14}
+                            >
+                              <svg
+                                height={14}
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width={14}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M29 3h-11.3l-14.9 14.8 11.3 11.3 14.9-14.8v-11.3zM20 12v-4h4v4h-4z"
+                                  fill="#8D99AE"
+                                />
+                                 
+                              </svg>
+                            </LabelIcon>
+                          </div>
+                        </StyledComponent>
+                      </styled.div>
+                      <styled.span
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        selected={false}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-ifAKCX",
+                                "isStatic": false,
+                                "lastClassName": "dWozOz",
+                                "rules": Array [
+                                  "
+  user-select: none;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  background-color: ",
+                                  [Function],
+                                  ";
+
+  &:hover {
+    background-color: ",
+                                  [Function],
+                                  ";
+    border-radius: 2px;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.span",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-ifAKCX",
+                              "target": "span",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          selected={false}
+                        >
+                          <span
+                            className="sc-ifAKCX dWozOz"
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            selected={false}
+                          >
+                            label_b
+                          </span>
+                        </StyledComponent>
+                      </styled.span>
+                    </li>
+                  </StyledComponent>
+                </styled.li>
+              </ParentNode>
+              <ParentNode
+                depth={1}
+                key="2"
+                node={
+                  Object {
+                    "children": Array [],
+                    "hasChildren": true,
+                    "name": "label_y",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                    "type": "LABEL",
+                  }
+                }
+              >
+                <styled.li
+                  depth={1}
+                >
+                  <StyledComponent
+                    depth={1}
+                    forwardedComponent={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-bwzfXH",
+                          "isStatic": false,
+                          "lastClassName": "cTmbmN",
+                          "rules": Array [
+                            "
+  margin: 0.2rem 0;
+  position: relative;
+  left: ",
+                            [Function],
+                            "rem;
+  width: 100%;
+",
+                          ],
+                        },
+                        "displayName": "styled.li",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-bwzfXH",
+                        "target": "li",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      }
+                    }
+                    forwardedRef={null}
+                  >
+                    <li
+                      className="sc-bwzfXH cTmbmN"
+                    >
+                      <styled.button
+                        onClick={[Function]}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-bxivhb",
+                                "isStatic": false,
+                                "lastClassName": "hESsKH",
+                                "rules": Array [
+                                  "
+  background: none;
+  border: 0;
+  outline: none;
+  margin: 0 0.2rem;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.button",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-bxivhb",
+                              "target": "button",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                        >
+                          <button
+                            className="sc-bxivhb hESsKH"
+                            onClick={[Function]}
+                          >
+                            <Styled(TriangleIcon)
+                              color="#1779ba"
+                              size={12}
+                            >
+                              <StyledComponent
+                                color="#1779ba"
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-htpNat",
+                                      "isStatic": false,
+                                      "lastClassName": "KtFsv",
+                                      "rules": Array [],
+                                    },
+                                    "displayName": "Styled(TriangleIcon)",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-htpNat",
+                                    "target": [Function],
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                size={12}
+                              >
+                                <TriangleIcon
+                                  className="sc-htpNat KtFsv"
+                                  color="#1779ba"
+                                  size={12}
+                                >
+                                  <svg
+                                    height={12}
+                                    version="1.1"
+                                    viewBox="0 0 32 32"
+                                    width={12}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M6 4l20 12-20 12z"
+                                      fill="#1779ba"
+                                    />
+                                  </svg>
+                                </TriangleIcon>
+                              </StyledComponent>
+                            </Styled(TriangleIcon)>
+                          </button>
+                        </StyledComponent>
+                      </styled.button>
+                      <styled.div
+                        hasChildren={true}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-EHOje",
+                                "isStatic": false,
+                                "lastClassName": "jvlXLV",
+                                "rules": Array [
+                                  "
+  margin: ",
+                                  [Function],
+                                  ";
+  display: inline-flex;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-EHOje",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          hasChildren={true}
+                        >
+                          <div
+                            className="sc-EHOje jvlXLV"
+                          >
+                            <LabelIcon
+                              color="#8D99AE"
+                              size={14}
+                            >
+                              <svg
+                                height={14}
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width={14}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M29 3h-11.3l-14.9 14.8 11.3 11.3 14.9-14.8v-11.3zM20 12v-4h4v4h-4z"
+                                  fill="#8D99AE"
+                                />
+                                 
+                              </svg>
+                            </LabelIcon>
+                          </div>
+                        </StyledComponent>
+                      </styled.div>
+                      <styled.span
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        selected={false}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-ifAKCX",
+                                "isStatic": false,
+                                "lastClassName": "dWozOz",
+                                "rules": Array [
+                                  "
+  user-select: none;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  background-color: ",
+                                  [Function],
+                                  ";
+
+  &:hover {
+    background-color: ",
+                                  [Function],
+                                  ";
+    border-radius: 2px;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.span",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-ifAKCX",
+                              "target": "span",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          selected={false}
+                        >
+                          <span
+                            className="sc-ifAKCX dWozOz"
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            selected={false}
+                          >
+                            label_y
+                          </span>
+                        </StyledComponent>
+                      </styled.span>
+                    </li>
+                  </StyledComponent>
+                </styled.li>
+              </ParentNode>
+            </ul>
+          </StyledComponent>
+        </styled.ul>
+      </aside>
+    </StyledComponent>
+  </styled.aside>
+</TreeEditor>
+`;

@@ -27,11 +27,17 @@
       "transparentButtonBorderColor": "#1779ba"
     }
   },
+  "alternateLoader": {
+    "color": "#808080"
+  },
   "loaderIcon": {
     "color": "#1779ba"
   },
   "loaderButton": {
     "loadingColor": "#fff"
+  },
+  "dataCheckbox": {
+    "loaderColor": "#1779ba"
   },
   "searchInput": {
     "searchResultsBgColor": "#fff",

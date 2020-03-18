@@ -19,10 +19,9 @@ import axios from "axios";
 
 import MockAdapter from "axios-mock-adapter";
 
-import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
-import IState from "../interfaces/IState";
 import useDataApi from "./useDataApi";
+import { customGenericDataFetchReducer } from "../stores/genericDataFetchReducer";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -31,27 +30,14 @@ jest.mock("react-router-dom", () => ({
   })
 }));
 
-const dataFetchReducer = (state: IState, action: Action<IState>) => {
-  switch (action.type) {
-    case "FETCH_INIT":
-      return {
-        ...state,
-        isLoading: true
-      };
-    case "FETCH_SUCCESS":
-      return {
-        ...state,
-        data: action.results,
-        isLoading: false
-      };
-    case "FETCH_FAILURE":
-      return {
-        ...state,
-        error: action.error,
-        isLoading: false
-      };
-  }
-};
+interface ITestResponse {
+  message: string;
+}
+
+interface ITestState {
+  isLoading: boolean;
+  data: ITestResponse;
+}
 
 const mock = new MockAdapter(axios);
 const mockUrl = "http://mock";
@@ -69,7 +55,10 @@ describe("useDataApi hook", () => {
     });
 
     const { result, waitForNextUpdate } = renderHook(() =>
-      useDataApi(dataFetchReducer, dataRequest)
+      useDataApi<ITestState, ITestResponse>(
+        customGenericDataFetchReducer,
+        dataRequest
+      )
     );
 
     await waitForNextUpdate();
@@ -79,12 +68,12 @@ describe("useDataApi hook", () => {
     });
   });
 
-  it("fetch data when no url is specified at the time of hook initialization", () => {
-    const { result } = renderHook(() => useDataApi(dataFetchReducer));
+  it("fetch no data when no url is specified at the time of hook initialization", async () => {
+    const { result } = renderHook(() =>
+      useDataApi<ITestState, ITestResponse>(customGenericDataFetchReducer)
+    );
 
-    expect(result.current[0]).toEqual({
-      isLoading: false
-    });
+    expect(result.current[0]).toEqual({});
   });
 
   it("fetches data when new url is set", async () => {
@@ -99,7 +88,10 @@ describe("useDataApi hook", () => {
     });
 
     const { result, waitForNextUpdate } = renderHook(() =>
-      useDataApi(dataFetchReducer)
+      useDataApi<ITestState, ITestResponse>(
+        customGenericDataFetchReducer,
+        dataRequest
+      )
     );
 
     act(() => {
@@ -125,7 +117,10 @@ describe("useDataApi hook", () => {
     });
 
     const { result, waitForNextUpdate } = renderHook(() =>
-      useDataApi(dataFetchReducer, dataRequest)
+      useDataApi<ITestState, ITestResponse>(
+        customGenericDataFetchReducer,
+        dataRequest
+      )
     );
 
     act(() => {

@@ -13,7 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export default interface ISearchResult {
-  id: string;
-  displayLabel: string;
-}
+
+import React from "react";
+import { mount } from "enzyme";
+
+import DashboardLayout from "./DashboardLayout";
+import { ThemeProvider } from "styled-components";
+import theme from "../theme/base.json";
+import { BrowserRouter as Router } from "react-router-dom";
+
+it("renders correctly", async () => {
+  const root = mount(
+    <Router>
+      <ThemeProvider theme={theme}>
+        <DashboardLayout />
+      </ThemeProvider>
+    </Router>
+  );
+
+  expect(root.find(DashboardLayout)).toMatchSnapshot();
+});

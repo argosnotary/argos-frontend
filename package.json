@@ -5,6 +5,7 @@
   "dependencies": {
     "@craco/craco": "^5.6.2",
     "@types/asn1js": "0.0.1",
+    "@types/enzyme": "^3.10.5",
     "@types/jest": "24.0.23",
     "@types/lodash": "^4.14.149",
     "@types/node": "12.12.14",
@@ -14,6 +15,8 @@
     "@types/styled-components": "^4.4.0",
     "asn1js": "^2.0.26",
     "axios": "^0.19.1",
+    "custom-event-polyfill": "^1.0.7",
+    "element-closest-polyfill": "^1.0.0",
     "formik": "^2.1.2",
     "immer": "^5.3.5",
     "lodash": "^4.17.15",
@@ -34,6 +37,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "CI=true craco test --verbose --colors",
+    "updatesnapshots": "CI=true craco test --verbose --colors -u",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
@@ -50,6 +54,11 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.9",
     "@storybook/addon-links": "^5.3.9",
@@ -60,6 +69,9 @@
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "axios-mock-adapter": "^1.17.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-react": "^7.18.3",
