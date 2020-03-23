@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { Dispatch, useContext, useEffect, useState } from "react";
-import styled, { ThemeContext } from "styled-components";
+import React, {Dispatch, useContext, useEffect, useState} from "react";
+import styled, {ThemeContext} from "styled-components";
 
 import ITreeNode from "../../interfaces/ITreeNode";
+import {AltPlusIcon, ChainIcon, LabelIcon, LoaderIcon, RobotIcon, TriangleIcon} from "../../atoms/Icons";
 import {
-  AltPlusIcon,
-  TriangleIcon,
-  LoaderIcon,
-  ChainIcon,
-  LabelIcon,
-  RobotIcon
-} from "../../atoms/Icons";
-import {
-  TreeStateContext,
-  TreeReducerAction,
-  TreeReducerActionTypes,
-  ITreeStateContext
+    ITreeStateContext,
+    TreeReducerAction,
+    TreeReducerActionTypes,
+    TreeStateContext
 } from "../../stores/treeEditorStore";
 import ITreeContextMenuItem from "../../interfaces/ITreeContextMenuItem";
 import FlexColumn from "../../atoms/FlexColumn";
@@ -169,17 +162,17 @@ const renderContextMenu = (
   dispatch: Dispatch<TreeReducerAction>,
   menuitems: Array<ITreeContextMenuItem>
 ) => {
-  return menuitems.map((item, index) => (
-    <React.Fragment key={index}>
-      <NodeContextMenuItem
-        key={index}
-        onClick={() => {
-          item.callback(node);
-          dispatch({ type: TreeReducerActionTypes.HIDECONTEXTMENU });
-        }}
-      >
-        {item.label}
-      </NodeContextMenuItem>
+    return menuitems.filter(item => item.visible(node)).map((item, index) => (
+        <React.Fragment key={index}>
+            <NodeContextMenuItem
+                key={index}
+                onClick={() => {
+                    item.callback(node);
+                    dispatch({type: TreeReducerActionTypes.HIDECONTEXTMENU});
+                }}
+            >
+                {item.label}
+            </NodeContextMenuItem>
       {menuitems.length > 1 && index < menuitems.length - 1 ? (
         <NodeContextMenuItemSeparator />
       ) : null}
@@ -278,20 +271,20 @@ export const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
           treeContext.selectedNodeReferenceId === node.referenceId
         }
         onContextMenu={e => {
-          const hasContextMenu = treeContext.treeContextMenu.find(
-            entry => entry.type === node.type
-          );
+            const contextMenu = treeContext.treeContextMenu.find(
+                entry => entry.type === node.type
+            );
 
-          if (hasContextMenu) {
-            const { clientX, clientY } = e;
-            e.preventDefault();
-            treeContext.treeDispatch({
-              type: TreeReducerActionTypes.SHOWCONTEXTMENU,
-              id: node.referenceId,
-              clientX,
-              clientY
-            });
-          }
+            if (contextMenu && contextMenu.menuitems.filter(item => item.visible(node)).length > 0) {
+                const {clientX, clientY} = e;
+                e.preventDefault();
+                treeContext.treeDispatch({
+                    type: TreeReducerActionTypes.SHOWCONTEXTMENU,
+                    id: node.referenceId,
+                    clientX,
+                    clientY
+                });
+            }
         }}
         onClick={() => {
           const typeClickHandler = treeContext.treeClickHandlers.find(

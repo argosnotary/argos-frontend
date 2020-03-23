@@ -14,25 +14,21 @@
  * limitations under the License.
  */
 import {
-  appendSingleNode,
   appendNodeChildrenToParent,
-  updateSingleNode,
-  findNode
+  appendSingleNode,
+  findNode,
+  updateSingleNode
 } from "../../molecules/TreeEditor/utils";
-import {
-  ITreeReducerState,
-  TreeReducerAction,
-  TreeReducerActionTypes
-} from "../../stores/treeEditorStore";
+import {ITreeReducerState, TreeReducerAction, TreeReducerActionTypes} from "../../stores/treeEditorStore";
 import ITreeNode from "../../interfaces/ITreeNode";
 import ILabelPostResponse from "../../interfaces/ILabelPostResponse";
 import {
-  LayoutEditorDataActionTypes,
   LayoutEditorAction,
+  LayoutEditorDataActionTypes,
   LayoutEditorPaneActionTypes
 } from "../../stores/layoutEditorStore";
 import ISupplyChainApiResponse from "../../interfaces/ISupplyChainApiResponse";
-import { TreeNodeType } from "../../types/TreeNodeType";
+import {TreeNodeType} from "../../types/TreeNodeType";
 
 const appendLabelChildrenToTree = (
   treeState: ITreeReducerState,
@@ -63,7 +59,8 @@ const appendObjectToTree = (
     hasChildren: false,
     referenceId: object.id,
     name: object.name,
-    type
+    type,
+    permissions: []
   };
 
   const newState = object.parentLabelId

@@ -15,7 +15,7 @@
  */
 import ITreeNode from "../../interfaces/ITreeNode";
 import produce from "immer";
-import { ITreeReducerState } from "../../stores/treeEditorStore";
+import {ITreeReducerState} from "../../stores/treeEditorStore";
 
 const findNode = (
   nodes: Array<ITreeNode>,
@@ -70,13 +70,15 @@ const buildNodeTrail = (
 const appendSingleNode = (node: ITreeNode, parentLabelId?: string) => {
   return produce((draftState: ITreeReducerState) => {
     if (parentLabelId) {
-      const matchNode = findNode(draftState.data, parentLabelId);
-
-      if (matchNode?.hasChildren && matchNode.children) {
-        matchNode.children.push(node);
-      } else if (matchNode) {
-        matchNode.children = [node];
-        matchNode.hasChildren = true;
+      const parentNode = findNode(draftState.data, parentLabelId);
+      if (parentNode) {
+        node.permissions = parentNode?.permissions;
+      }
+      if (parentNode?.hasChildren && parentNode.children) {
+        parentNode.children.push(node);
+      } else if (parentNode) {
+        parentNode.children = [node];
+        parentNode.hasChildren = true;
       }
     } else {
       draftState.data.push(node);
