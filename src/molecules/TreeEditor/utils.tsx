@@ -71,9 +71,6 @@ const appendSingleNode = (node: ITreeNode, parentLabelId?: string) => {
   return produce((draftState: ITreeReducerState) => {
     if (parentLabelId) {
       const parentNode = findNode(draftState.data, parentLabelId);
-      if (parentNode) {
-        node.permissions = parentNode?.permissions;
-      }
       if (parentNode?.hasChildren && parentNode.children) {
         parentNode.children.push(node);
       } else if (parentNode) {

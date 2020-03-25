@@ -13,41 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect, useState } from "react";
-import { useFormik } from "formik";
-import styled, {
-  css,
-  FlattenInterpolation,
-  ThemeProps
-} from "styled-components";
+import React, {useContext, useEffect, useState} from "react";
+import {useFormik} from "formik";
+import styled, {css, FlattenInterpolation, ThemeProps} from "styled-components";
 
-import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
+import {LastBreadCrumb, NodesBreadCrumb} from "../../../atoms/Breadcrumbs";
 import InputErrorLabel from "../../../atoms/InputErrorLabel";
-import { CancelButton, LoaderButton } from "../../../atoms/Button";
+import {CancelButton, LoaderButton} from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
 import FormInput from "../../../molecules/FormInput";
 import {
-  StateContext,
   LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes
+  LayoutEditorPaneActionTypes,
+  StateContext
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import INpaApiResponse from "../../../interfaces/INpaApiResponse";
 import PasswordView from "../../../atoms/PasswordView";
 import FlexRow from "../../../atoms/FlexRow";
-import { generateKey } from "../../../security";
-import { Warning } from "../../../atoms/Alerts";
-import {
-  ModalBody,
-  ModalFlexColumWrapper,
-  ModalFooter,
-  ModalButton,
-  Modal
-} from "../../../atoms/Modal";
+import {generateKey} from "../../../security";
+import {Warning} from "../../../atoms/Alerts";
+import {Modal, ModalBody, ModalButton, ModalFlexColumWrapper, ModalFooter} from "../../../atoms/Modal";
 import CopyInput from "../../../atoms/CopyInput";
+import {updateNewTreeNode} from "./utils";
 
 interface INpaFormValues {
   npaname: string;
@@ -126,13 +117,17 @@ const ManageNpa = () => {
   const [state, dispatch] = useContext(StateContext);
   const [npaPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
   const [_npaGetRequestState, setNpaGetRequest] = useDataApi(
-    genericDataFetchReducer
+      genericDataFetchReducer
+  );
+
+  const [treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
+      genericDataFetchReducer
   );
 
   const [npaKeyId, setNpaKeyId] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, _setWizardState] = useState(
-    WizardStates.KEY_OVERRIDE_WARNING
+      WizardStates.KEY_OVERRIDE_WARNING
   );
 
   const [displayModal, setDisplayModal] = useState(false);
@@ -161,11 +156,13 @@ const ManageNpa = () => {
           url: `/api/nonpersonalaccount/${npa.id}/key`,
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
-
-            dispatch({
-              type: LayoutEditorDataActionTypes.POST_NEW_NPA,
-              npa: { ...npa, keyId: generatedKeys.keys.keyId }
-            });
+            setTreeChildrenApiRequest(updateNewTreeNode(npa.id, node => {
+              dispatch({
+                type: LayoutEditorDataActionTypes.ADD_NODE,
+                node: {...node, parentLabelId: npa.parentLabelId}
+              });
+              formik.resetForm()
+            }));
           }
         };
 
@@ -397,17 +394,17 @@ const ManageNpa = () => {
         {formik.touched.npaname && formik.errors.npaname ? (
           <InputErrorLabel>{formik.errors.npaname}</InputErrorLabel>
         ) : null}
-        <ContentSeparator />
-        <LoaderButton buttonType="submit" loading={npaPostState.isLoading}>
+        <ContentSeparator/>
+        <LoaderButton buttonType="submit" loading={npaPostState.isLoading || treeChildrenApiResponse.isLoading}>
           {updateMode ? "Update NPA" : "Add NPA"}
         </LoaderButton>
         <CancelButton
-          buttonType="button"
-          onClick={() =>
-            dispatch({
-              type: LayoutEditorPaneActionTypes.RESET_PANE
-            })
-          }
+            buttonType="button"
+            onClick={() =>
+                dispatch({
+                  type: LayoutEditorPaneActionTypes.RESET_PANE
+                })
+            }
         >
           Cancel
         </CancelButton>

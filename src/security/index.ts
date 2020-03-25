@@ -15,7 +15,7 @@
  */
 import * as asn1js from "asn1js";
 import generatePassword from "password-generator";
-import { PKCS8ShroudedKeyBag, PrivateKeyInfo } from "pkijs";
+import {PKCS8ShroudedKeyBag, PrivateKeyInfo} from "pkijs";
 
 const arrayBufferToHex = (buffer: ArrayBuffer) => {
   return Array.from(new Uint8Array(buffer))
@@ -136,8 +136,6 @@ const generateKey = async (hashKeyPassphrase = false) => {
       "SHA-512",
       new TextEncoder().encode(password)
     );
-
-    console.log(hashedPassphrase);
 
     const encodedKeyId = new TextEncoder().encode(keyObj.keys.keyId);
     const hashedCombination = await crypto.subtle.digest(

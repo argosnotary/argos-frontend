@@ -28,7 +28,6 @@ import {initialTreeState, ITreeStateContext, treeReducer} from "../../stores/tre
 import {buildNodeTrail} from "../../molecules/TreeEditor/utils";
 
 import {
-  LayoutEditorDataActionType,
   LayoutEditorDataActionTypes,
   LayoutEditorPaneActionType,
   LayoutEditorPaneActionTypes,
@@ -40,7 +39,6 @@ import ManageLabel from "./Panels/ManageLabel";
 import genericDataFetchReducer, {customGenericDataFetchReducer} from "../../stores/genericDataFetchReducer";
 import ManageSupplyChain from "./Panels/ManageSupplyChain";
 import ManageNpa from "./Panels/ManageNpa";
-import {TreeNodeTypes} from "../../types/TreeNodeType";
 import {Panel, PanelsContainer} from "../../molecules/Panel";
 import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
@@ -139,7 +137,6 @@ const LayoutEditor = () => {
         {
           label: "Add child label",
           callback: (node: ITreeNode) => {
-            console.log(node);
             treeContextMenuCb(
                 LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
                 node
@@ -251,19 +248,6 @@ const LayoutEditor = () => {
     }
   };
 
-  const getNodeTypeFromAction = (action: LayoutEditorDataActionType) => {
-    switch (action) {
-      case LayoutEditorDataActionTypes.POST_NEW_LABEL:
-        return TreeNodeTypes.LABEL;
-      case LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN:
-        return TreeNodeTypes.SUPPLY_CHAIN;
-      case LayoutEditorDataActionTypes.POST_NEW_NPA:
-        return TreeNodeTypes.NON_PERSONAL_ACCOUNT;
-      default:
-        return TreeNodeTypes.UNSPECIFIED;
-    }
-  };
-
   const getPanelTitleFromState = (pane: string): string => {
     switch (pane) {
       case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
@@ -290,16 +274,14 @@ const LayoutEditor = () => {
   useEffect(() => {
     if (
       (state.dataAction &&
-        state.dataAction === LayoutEditorDataActionTypes.POST_NEW_LABEL) ||
-      state.dataAction === LayoutEditorDataActionTypes.POST_NEW_NPA ||
-      state.dataAction === LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
+          state.dataAction === LayoutEditorDataActionTypes.ADD_NODE)
     ) {
       appendObjectToTree(
         treeState,
         treeDispatch,
         dispatch,
         state.data,
-        getNodeTypeFromAction(state.dataAction as LayoutEditorDataActionType)
+          state.data.parentLabelId
       );
     }
 
