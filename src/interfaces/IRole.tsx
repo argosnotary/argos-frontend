@@ -13,20 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const sizes: any = {
-  lg: "992px",
-  md: "768px",
-  sm: "576px"
-};
+interface IRole {
+  id: string;
+  name: string;
+  permissions: Array<string>;
+}
 
-const generateMediaQuery = (
-  widthType: string,
-  size: string,
-  cssTemplateLiteral: string
-): string => {
-  return `@media(${widthType}: ${sizes[size]}){
-      ${cssTemplateLiteral};
-    }`;
-};
-
-export { sizes, generateMediaQuery };
+export default IRole;

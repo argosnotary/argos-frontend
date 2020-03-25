@@ -30,6 +30,7 @@ import KeyManagementPage from "../pages/KeyManagement";
 import ProfilePage from "../pages/Profile";
 
 import { generateMediaQuery } from "../layout/utils";
+import ManageRoles from "./ManageRoles";
 
 const UserSettingsPageContainer = styled.section`
   position: fixed;
@@ -140,7 +141,7 @@ const UserSettingsPage = () => {
           <ul>
             <SidePanelHeader>
               <SidePanelHeaderIcon src="/images/cogs.svg" />
-              <SidePanelItemLabel>User settings</SidePanelItemLabel>{" "}
+              <SidePanelItemLabel>Settings</SidePanelItemLabel>{" "}
             </SidePanelHeader>
             <li>
               <SidePanelLink to={`${match.url}/profile`}>
@@ -154,12 +155,23 @@ const UserSettingsPage = () => {
                 <SidePanelItemLabel>Key management </SidePanelItemLabel>
               </SidePanelLink>
             </li>
+            <li>
+              <SidePanelLink to={`${match.url}/manage-roles`}>
+                <SidePanelItemIcon src="/images/lock-stripes.svg" />
+                <SidePanelItemLabel>Manage Roles</SidePanelItemLabel>
+              </SidePanelLink>
+            </li>
           </ul>
         </SidePanel>
         <ContentColumn>
           <Switch>
             <Route path={`${match.path}/profile`} component={ProfilePage} />
             <Route path={`${match.path}/key`} component={KeyManagementPage} />
+            <Route
+              path={`${match.path}/manage-roles`}
+              component={ManageRoles}
+            />
+
             <Redirect to={`${match.path}/profile`} />
           </Switch>
         </ContentColumn>

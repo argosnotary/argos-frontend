@@ -13,20 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const sizes: any = {
-  lg: "992px",
-  md: "768px",
-  sm: "576px"
-};
+import IRole from "./IRole";
 
-const generateMediaQuery = (
-  widthType: string,
-  size: string,
-  cssTemplateLiteral: string
-): string => {
-  return `@media(${widthType}: ${sizes[size]}){
-      ${cssTemplateLiteral};
-    }`;
-};
+interface IPersonalAccount {
+  id: string;
+  name: string;
+  email: string;
+  roles: Array<IRole>;
+}
 
-export { sizes, generateMediaQuery };
+export default IPersonalAccount;

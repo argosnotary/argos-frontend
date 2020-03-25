@@ -40,7 +40,7 @@ const SearchResults = styled.ul`
   z-index: 4;
 `;
 
-const SearchResultEntry = styled.li`
+export const SearchResultEntry = styled.li`
   padding: 1rem;
 
   &:hover {
@@ -49,7 +49,7 @@ const SearchResultEntry = styled.li`
   }
 `;
 
-const NoResultsFound = styled.li`
+export const NoResultsFound = styled.li`
   padding: 1rem;
 `;
 
@@ -68,7 +68,7 @@ const SelectionContainer = styled(FlexRow)`
   justify-content: space-between;
 `;
 
-const CustomCancelButton = styled(CancelButton)`
+export const CustomCancelButton = styled(CancelButton)`
   margin-left: 1rem;
 `;
 
@@ -158,7 +158,9 @@ const SearchInput: React.FC<ISearchInputProps> = ({
           formType={"text"}
           labelValue={defaultLabel}
           name="searchinput"
-          onChange={e => onChange(e.target.value)}
+          onChange={e => {
+            onChange(e.target.value);
+          }}
         />
         {displayResults ? (
           <SearchResults>
