@@ -68,12 +68,18 @@ const SelectionContainer = styled(FlexRow)`
   justify-content: space-between;
 `;
 
+const CustomCancelButton = styled(CancelButton)`
+  margin-left: 1rem;
+`;
+
 interface ISearchInputProps {
   results: Array<ISearchResult>;
   onSelect: (res: ISearchResult) => void;
   onCancel: () => void;
   fetchData: (searchQuery: string) => void;
   isLoading: boolean;
+  onSelectLabel: string;
+  defaultLabel: string;
 }
 
 const SearchInput: React.FC<ISearchInputProps> = ({
@@ -81,7 +87,9 @@ const SearchInput: React.FC<ISearchInputProps> = ({
   onSelect,
   onCancel,
   fetchData,
-  isLoading
+  isLoading,
+  onSelectLabel,
+  defaultLabel
 }) => {
   const [displayResults, setDisplayResults] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -97,10 +105,10 @@ const SearchInput: React.FC<ISearchInputProps> = ({
   const renderSelection = () => {
     return (
       <FlexColumn>
-        <InputLabel>{"Selected user"}</InputLabel>
+        <InputLabel>{onSelectLabel}</InputLabel>
         <SelectionContainer>
           <SelectedEntry>{inputValue}</SelectedEntry>
-          <CancelButton
+          <CustomCancelButton
             onClick={() => {
               setSelected(false);
               onCancel();
@@ -108,7 +116,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
             buttonType={"button"}
           >
             Cancel
-          </CancelButton>
+          </CustomCancelButton>
         </SelectionContainer>
       </FlexColumn>
     );
@@ -148,8 +156,8 @@ const SearchInput: React.FC<ISearchInputProps> = ({
       <form autoComplete="off">
         <FormInput
           formType={"text"}
-          labelValue={"Search user"}
-          name="username"
+          labelValue={defaultLabel}
+          name="searchinput"
           onChange={e => onChange(e.target.value)}
         />
         {displayResults ? (

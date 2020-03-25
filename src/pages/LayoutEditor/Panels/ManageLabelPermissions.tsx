@@ -327,6 +327,8 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
           setSearchUserApiRequest(dataRequest);
         }}
         isLoading={searchUserApiResponse.isLoading}
+        defaultLabel={"Search user"}
+        onSelectLabel={"Selected user"}
       />
       {Object.keys(user).length > 0 ? (
         <>

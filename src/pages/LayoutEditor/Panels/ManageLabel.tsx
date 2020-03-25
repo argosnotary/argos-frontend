@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect } from "react";
+import styled from "styled-components";
 import { useFormik } from "formik";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
@@ -31,6 +32,10 @@ import {
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
+
+const CustomCancelButton = styled(CancelButton)`
+  margin-left: 1rem;
+`;
 
 interface ILabelNameFormValues {
   labelname: string;
@@ -180,7 +185,7 @@ const ManageLabel = () => {
       <LoaderButton buttonType="submit" loading={labelPostState.isLoading}>
         {!updateMode ? "Add label" : "Update label"}
       </LoaderButton>
-      <CancelButton
+      <CustomCancelButton
         buttonType={"button"}
         onClick={() =>
           dispatch({
@@ -189,7 +194,7 @@ const ManageLabel = () => {
         }
       >
         Cancel
-      </CancelButton>
+      </CustomCancelButton>
     </form>
   );
 };

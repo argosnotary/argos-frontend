@@ -13,14 +13,70 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
+import React, { useReducer } from "react";
 
 import TreeEditor from "./TreeEditor";
 
 import json from "./sampleData.json";
+import { treeReducer, initialTreeState } from "../../stores/treeEditorStore";
 
 export default {
   title: "TreeEditor"
 };
 
-export const labelEditor = () => <TreeEditor data={json.sampleData} />;
+const treeStringList = {
+  createrootnode: "Create base label..."
+};
+
+const treeClickHandlers = [
+  {
+    type: "LABEL",
+    callback: () => {
+      alert("click");
+    }
+  }
+];
+
+const treeContextMenu = [
+  {
+    type: "LABEL",
+    menuitems: [
+      {
+        label: "Add child label",
+        callback: () => {
+          alert("adding child label");
+        }
+      }
+    ]
+  }
+];
+
+const cbCreateRootNode = () => {
+  alert("root node callback");
+};
+
+const cbGetNodeChildren = () => {
+  alert("get node children callback");
+};
+
+const DummyParent = () => {
+  const [treeState, treeDispatch] = useReducer(treeReducer, initialTreeState);
+
+  const treeContext = {
+    treeState,
+    treeDispatch,
+    treeStringList,
+    treeContextMenu,
+    treeClickHandlers,
+    cbCreateRootNode,
+    cbGetNodeChildren,
+    isLoading: false,
+    selectedNodeReferenceId: ""
+  };
+
+  return (
+    <TreeEditor data={json.sampleData} loading={false} context={treeContext} />
+  );
+};
+
+export const editor = () => <DummyParent />;
