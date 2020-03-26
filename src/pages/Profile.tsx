@@ -22,15 +22,11 @@ import DataRequest from "../types/DataRequest";
 import useDataApi from "../hooks/useDataApi";
 import useToken from "../hooks/useToken";
 import { customGenericDataFetchReducer } from "../stores/genericDataFetchReducer";
-
-interface IProfile {
-  name: string;
-  email: string;
-}
+import IPersonalAccount from "../interfaces/IPersonalAccount";
 
 interface IProfileApiReponse {
   isLoading: boolean;
-  data: IProfile;
+  data: IPersonalAccount;
 }
 
 const ProfileListItem = styled.li`
@@ -46,7 +42,7 @@ const ProfilePage = () => {
     url: "/api/personalaccount/me"
   };
 
-  const [profileApiResponse] = useDataApi<IProfileApiReponse, IProfile>(
+  const [profileApiResponse] = useDataApi<IProfileApiReponse, IPersonalAccount>(
     customGenericDataFetchReducer,
     dataRequest
   );
