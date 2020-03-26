@@ -1,0 +1,1790 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with admin only menu 1`] = `
+<UserSettingsPage>
+  <styled.section>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-jhAzac",
+            "isStatic": false,
+            "lastClassName": "iAdapl",
+            "rules": Array [
+              "
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: ",
+              [Function],
+              ";
+",
+            ],
+          },
+          "displayName": "styled.section",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-jhAzac",
+          "target": "section",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <section
+        className="sc-jhAzac iAdapl"
+      >
+        <Styled(styled.div)>
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-kjoXOD",
+                  "isStatic": false,
+                  "lastClassName": "cCHMEZ",
+                  "rules": Array [
+                    "
+  display: flex;
+  flex-direction: row;
+  flex-wrap: ",
+                    [Function],
+                    ";
+",
+                    "
+  height: 100%;
+",
+                  ],
+                },
+                "displayName": "Styled(styled.div)",
+                "foldedComponentIds": Array [
+                  "sc-bwzfXH",
+                ],
+                "render": [Function],
+                "styledComponentId": "sc-kjoXOD",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+          >
+            <div
+              className="sc-bwzfXH sc-kjoXOD cCHMEZ"
+            >
+              <Styled(styled.div)>
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-fMiknA",
+                        "isStatic": false,
+                        "lastClassName": "leGMwy",
+                        "rules": Array [
+                          "
+  display: flex;
+  flex-direction: column;
+",
+                          "
+  box-sizing: border-box;
+  padding: 1rem 0;
+  flex-basis: 14rem;
+  background-color: ",
+                          [Function],
+                          ";
+  transition: flex-basis 500ms ease-in-out;
+
+  ",
+                          "@media(max-width: 768px){
+      
+    flex-basis: 1rem;
+    padding: 0;
+    ;
+    }",
+                          ";
+",
+                        ],
+                      },
+                      "displayName": "Styled(styled.div)",
+                      "foldedComponentIds": Array [
+                        "sc-bdVaJa",
+                      ],
+                      "render": [Function],
+                      "styledComponentId": "sc-fMiknA",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                >
+                  <div
+                    className="sc-bdVaJa sc-fMiknA leGMwy"
+                  >
+                    <ul>
+                      <styled.li>
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-dVhcbM",
+                                "isStatic": false,
+                                "lastClassName": "jkRCFk",
+                                "rules": Array [
+                                  "
+  color: ",
+                                  [Function],
+                                  ";
+  align-items: center;
+  display: flex;
+  font-size: 1rem;
+  margin: 0.25rem 0.75rem 1.25rem;
+
+  ",
+                                  "@media(max-width: 768px){
+      margin: 1rem;
+    }",
+                                  "
+",
+                                ],
+                              },
+                              "displayName": "styled.li",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-dVhcbM",
+                              "target": "li",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                        >
+                          <li
+                            className="sc-dVhcbM jkRCFk"
+                          >
+                            <styled.img
+                              src="/images/cogs.svg"
+                            >
+                              <StyledComponent
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-caSCKo",
+                                      "isStatic": false,
+                                      "lastClassName": "hJNuUy",
+                                      "rules": Array [
+                                        "
+  width: 1.1rem;
+  margin: 0 0.8rem 0 0.3rem;
+
+  ",
+                                        "@media(max-width: 768px){
+      margin: 0; width: 1.5rem;;
+    }",
+                                        ";
+",
+                                      ],
+                                    },
+                                    "displayName": "styled.img",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-caSCKo",
+                                    "target": "img",
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                src="/images/cogs.svg"
+                              >
+                                <img
+                                  className="sc-caSCKo hJNuUy"
+                                  src="/images/cogs.svg"
+                                />
+                              </StyledComponent>
+                            </styled.img>
+                            <styled.span>
+                              <StyledComponent
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-gisBJw",
+                                      "isStatic": false,
+                                      "lastClassName": "ilbxug",
+                                      "rules": Array [
+                                        "
+  ",
+                                        "@media(max-width: 768px){
+      display: none;
+    }",
+                                        ";
+",
+                                      ],
+                                    },
+                                    "displayName": "styled.span",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-gisBJw",
+                                    "target": "span",
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                              >
+                                <span
+                                  className="sc-gisBJw ilbxug"
+                                >
+                                  Settings
+                                </span>
+                              </StyledComponent>
+                            </styled.span>
+                             
+                          </li>
+                        </StyledComponent>
+                      </styled.li>
+                      <li>
+                        <Styled(NavLink)
+                          to="//profile"
+                        >
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-eqIVtm",
+                                  "isStatic": false,
+                                  "lastClassName": "dHyZwZ",
+                                  "rules": Array [
+                                    "
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: ",
+                                    [Function],
+                                    ";
+  padding: 0.9rem 0.75rem;
+  font-size: 0.9rem;
+  border-left: \\"none\\";
+
+  &:hover {
+    cursor: pointer;
+    background-color: ",
+                                    [Function],
+                                    ";
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &.active {
+    background-color: ",
+                                    [Function],
+                                    ";
+    border-left: 0.25rem solid
+      ",
+                                    [Function],
+                                    ";
+
+    &:hover {
+      background-color: ",
+                                    [Function],
+                                    ";
+    }
+  }
+",
+                                  ],
+                                },
+                                "displayName": "Styled(NavLink)",
+                                "foldedComponentIds": Array [],
+                                "propTypes": Object {
+                                  "activeClassName": [Function],
+                                  "activeStyle": [Function],
+                                  "aria-current": [Function],
+                                  "className": [Function],
+                                  "exact": [Function],
+                                  "innerRef": [Function],
+                                  "isActive": [Function],
+                                  "location": [Function],
+                                  "onClick": [Function],
+                                  "replace": [Function],
+                                  "strict": [Function],
+                                  "style": [Function],
+                                  "target": [Function],
+                                  "to": [Function],
+                                },
+                                "render": [Function],
+                                "styledComponentId": "sc-eqIVtm",
+                                "target": Object {
+                                  "$$typeof": Symbol(react.forward_ref),
+                                  "displayName": "NavLink",
+                                  "propTypes": Object {
+                                    "activeClassName": [Function],
+                                    "activeStyle": [Function],
+                                    "aria-current": [Function],
+                                    "className": [Function],
+                                    "exact": [Function],
+                                    "innerRef": [Function],
+                                    "isActive": [Function],
+                                    "location": [Function],
+                                    "onClick": [Function],
+                                    "replace": [Function],
+                                    "strict": [Function],
+                                    "style": [Function],
+                                    "target": [Function],
+                                    "to": [Function],
+                                  },
+                                  "render": [Function],
+                                },
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            to="//profile"
+                          >
+                            <NavLink
+                              className="sc-eqIVtm dHyZwZ"
+                              to="//profile"
+                            >
+                              <Link
+                                aria-current={null}
+                                className="sc-eqIVtm dHyZwZ"
+                                to={
+                                  Object {
+                                    "hash": "",
+                                    "pathname": "//profile",
+                                    "search": "",
+                                    "state": null,
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  aria-current={null}
+                                  className="sc-eqIVtm dHyZwZ"
+                                  href="//profile"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    aria-current={null}
+                                    className="sc-eqIVtm dHyZwZ"
+                                    href="//profile"
+                                    onClick={[Function]}
+                                  >
+                                    <styled.img
+                                      src="/images/profile.svg"
+                                    >
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-fAjcbJ",
+                                              "isStatic": false,
+                                              "lastClassName": "eGxUws",
+                                              "rules": Array [
+                                                "
+  width: 1.1rem;
+  margin: 0 0.75rem 0 0;
+
+  ",
+                                                "@media(max-width: 768px){
+      margin: 0; width: 1.5rem;;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.img",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-fAjcbJ",
+                                            "target": "img",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                        src="/images/profile.svg"
+                                      >
+                                        <img
+                                          className="sc-fAjcbJ eGxUws"
+                                          src="/images/profile.svg"
+                                        />
+                                      </StyledComponent>
+                                    </styled.img>
+                                    <styled.span>
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-gisBJw",
+                                              "isStatic": false,
+                                              "lastClassName": "ilbxug",
+                                              "rules": Array [
+                                                "
+  ",
+                                                "@media(max-width: 768px){
+      display: none;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.span",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-gisBJw",
+                                            "target": "span",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                      >
+                                        <span
+                                          className="sc-gisBJw ilbxug"
+                                        >
+                                          Profile
+                                        </span>
+                                      </StyledComponent>
+                                    </styled.span>
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </NavLink>
+                          </StyledComponent>
+                        </Styled(NavLink)>
+                      </li>
+                      <li>
+                        <Styled(NavLink)
+                          to="//key"
+                        >
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-eqIVtm",
+                                  "isStatic": false,
+                                  "lastClassName": "dHyZwZ",
+                                  "rules": Array [
+                                    "
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: ",
+                                    [Function],
+                                    ";
+  padding: 0.9rem 0.75rem;
+  font-size: 0.9rem;
+  border-left: \\"none\\";
+
+  &:hover {
+    cursor: pointer;
+    background-color: ",
+                                    [Function],
+                                    ";
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &.active {
+    background-color: ",
+                                    [Function],
+                                    ";
+    border-left: 0.25rem solid
+      ",
+                                    [Function],
+                                    ";
+
+    &:hover {
+      background-color: ",
+                                    [Function],
+                                    ";
+    }
+  }
+",
+                                  ],
+                                },
+                                "displayName": "Styled(NavLink)",
+                                "foldedComponentIds": Array [],
+                                "propTypes": Object {
+                                  "activeClassName": [Function],
+                                  "activeStyle": [Function],
+                                  "aria-current": [Function],
+                                  "className": [Function],
+                                  "exact": [Function],
+                                  "innerRef": [Function],
+                                  "isActive": [Function],
+                                  "location": [Function],
+                                  "onClick": [Function],
+                                  "replace": [Function],
+                                  "strict": [Function],
+                                  "style": [Function],
+                                  "target": [Function],
+                                  "to": [Function],
+                                },
+                                "render": [Function],
+                                "styledComponentId": "sc-eqIVtm",
+                                "target": Object {
+                                  "$$typeof": Symbol(react.forward_ref),
+                                  "displayName": "NavLink",
+                                  "propTypes": Object {
+                                    "activeClassName": [Function],
+                                    "activeStyle": [Function],
+                                    "aria-current": [Function],
+                                    "className": [Function],
+                                    "exact": [Function],
+                                    "innerRef": [Function],
+                                    "isActive": [Function],
+                                    "location": [Function],
+                                    "onClick": [Function],
+                                    "replace": [Function],
+                                    "strict": [Function],
+                                    "style": [Function],
+                                    "target": [Function],
+                                    "to": [Function],
+                                  },
+                                  "render": [Function],
+                                },
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            to="//key"
+                          >
+                            <NavLink
+                              className="sc-eqIVtm dHyZwZ"
+                              to="//key"
+                            >
+                              <Link
+                                aria-current={null}
+                                className="sc-eqIVtm dHyZwZ"
+                                to={
+                                  Object {
+                                    "hash": "",
+                                    "pathname": "//key",
+                                    "search": "",
+                                    "state": null,
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  aria-current={null}
+                                  className="sc-eqIVtm dHyZwZ"
+                                  href="//key"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    aria-current={null}
+                                    className="sc-eqIVtm dHyZwZ"
+                                    href="//key"
+                                    onClick={[Function]}
+                                  >
+                                    <styled.img
+                                      src="/images/key.svg"
+                                    >
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-fAjcbJ",
+                                              "isStatic": false,
+                                              "lastClassName": "eGxUws",
+                                              "rules": Array [
+                                                "
+  width: 1.1rem;
+  margin: 0 0.75rem 0 0;
+
+  ",
+                                                "@media(max-width: 768px){
+      margin: 0; width: 1.5rem;;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.img",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-fAjcbJ",
+                                            "target": "img",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                        src="/images/key.svg"
+                                      >
+                                        <img
+                                          className="sc-fAjcbJ eGxUws"
+                                          src="/images/key.svg"
+                                        />
+                                      </StyledComponent>
+                                    </styled.img>
+                                    <styled.span>
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-gisBJw",
+                                              "isStatic": false,
+                                              "lastClassName": "ilbxug",
+                                              "rules": Array [
+                                                "
+  ",
+                                                "@media(max-width: 768px){
+      display: none;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.span",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-gisBJw",
+                                            "target": "span",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                      >
+                                        <span
+                                          className="sc-gisBJw ilbxug"
+                                        >
+                                          Key management 
+                                        </span>
+                                      </StyledComponent>
+                                    </styled.span>
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </NavLink>
+                          </StyledComponent>
+                        </Styled(NavLink)>
+                      </li>
+                      <li>
+                        <Styled(NavLink)
+                          to="//manage-roles"
+                        >
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-eqIVtm",
+                                  "isStatic": false,
+                                  "lastClassName": "dHyZwZ",
+                                  "rules": Array [
+                                    "
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: ",
+                                    [Function],
+                                    ";
+  padding: 0.9rem 0.75rem;
+  font-size: 0.9rem;
+  border-left: \\"none\\";
+
+  &:hover {
+    cursor: pointer;
+    background-color: ",
+                                    [Function],
+                                    ";
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &.active {
+    background-color: ",
+                                    [Function],
+                                    ";
+    border-left: 0.25rem solid
+      ",
+                                    [Function],
+                                    ";
+
+    &:hover {
+      background-color: ",
+                                    [Function],
+                                    ";
+    }
+  }
+",
+                                  ],
+                                },
+                                "displayName": "Styled(NavLink)",
+                                "foldedComponentIds": Array [],
+                                "propTypes": Object {
+                                  "activeClassName": [Function],
+                                  "activeStyle": [Function],
+                                  "aria-current": [Function],
+                                  "className": [Function],
+                                  "exact": [Function],
+                                  "innerRef": [Function],
+                                  "isActive": [Function],
+                                  "location": [Function],
+                                  "onClick": [Function],
+                                  "replace": [Function],
+                                  "strict": [Function],
+                                  "style": [Function],
+                                  "target": [Function],
+                                  "to": [Function],
+                                },
+                                "render": [Function],
+                                "styledComponentId": "sc-eqIVtm",
+                                "target": Object {
+                                  "$$typeof": Symbol(react.forward_ref),
+                                  "displayName": "NavLink",
+                                  "propTypes": Object {
+                                    "activeClassName": [Function],
+                                    "activeStyle": [Function],
+                                    "aria-current": [Function],
+                                    "className": [Function],
+                                    "exact": [Function],
+                                    "innerRef": [Function],
+                                    "isActive": [Function],
+                                    "location": [Function],
+                                    "onClick": [Function],
+                                    "replace": [Function],
+                                    "strict": [Function],
+                                    "style": [Function],
+                                    "target": [Function],
+                                    "to": [Function],
+                                  },
+                                  "render": [Function],
+                                },
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            to="//manage-roles"
+                          >
+                            <NavLink
+                              className="sc-eqIVtm dHyZwZ"
+                              to="//manage-roles"
+                            >
+                              <Link
+                                aria-current={null}
+                                className="sc-eqIVtm dHyZwZ"
+                                to={
+                                  Object {
+                                    "hash": "",
+                                    "pathname": "//manage-roles",
+                                    "search": "",
+                                    "state": null,
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  aria-current={null}
+                                  className="sc-eqIVtm dHyZwZ"
+                                  href="//manage-roles"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    aria-current={null}
+                                    className="sc-eqIVtm dHyZwZ"
+                                    href="//manage-roles"
+                                    onClick={[Function]}
+                                  >
+                                    <styled.img
+                                      src="/images/lock-stripes.svg"
+                                    >
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-fAjcbJ",
+                                              "isStatic": false,
+                                              "lastClassName": "eGxUws",
+                                              "rules": Array [
+                                                "
+  width: 1.1rem;
+  margin: 0 0.75rem 0 0;
+
+  ",
+                                                "@media(max-width: 768px){
+      margin: 0; width: 1.5rem;;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.img",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-fAjcbJ",
+                                            "target": "img",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                        src="/images/lock-stripes.svg"
+                                      >
+                                        <img
+                                          className="sc-fAjcbJ eGxUws"
+                                          src="/images/lock-stripes.svg"
+                                        />
+                                      </StyledComponent>
+                                    </styled.img>
+                                    <styled.span>
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-gisBJw",
+                                              "isStatic": false,
+                                              "lastClassName": "ilbxug",
+                                              "rules": Array [
+                                                "
+  ",
+                                                "@media(max-width: 768px){
+      display: none;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.span",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-gisBJw",
+                                            "target": "span",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                      >
+                                        <span
+                                          className="sc-gisBJw ilbxug"
+                                        >
+                                          Manage Roles
+                                        </span>
+                                      </StyledComponent>
+                                    </styled.span>
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </NavLink>
+                          </StyledComponent>
+                        </Styled(NavLink)>
+                      </li>
+                    </ul>
+                  </div>
+                </StyledComponent>
+              </Styled(styled.div)>
+              <Styled(styled.div)>
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-cHGsZl",
+                        "isStatic": false,
+                        "lastClassName": "jLiuni",
+                        "rules": Array [
+                          "
+  display: flex;
+  flex-direction: column;
+",
+                          "
+  flex-grow: 1;
+  padding: 1rem 2rem;
+",
+                        ],
+                      },
+                      "displayName": "Styled(styled.div)",
+                      "foldedComponentIds": Array [
+                        "sc-bdVaJa",
+                      ],
+                      "render": [Function],
+                      "styledComponentId": "sc-cHGsZl",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                >
+                  <div
+                    className="sc-bdVaJa sc-cHGsZl jLiuni"
+                  >
+                    <Switch>
+                      <Redirect
+                        computedMatch={
+                          Object {
+                            "isExact": false,
+                            "params": Object {},
+                            "path": "/",
+                            "url": "/",
+                          }
+                        }
+                        location={
+                          Object {
+                            "hash": "",
+                            "pathname": "/undefined/profile",
+                            "search": "",
+                            "state": undefined,
+                          }
+                        }
+                        to="undefined/profile"
+                      >
+                        <Lifecycle
+                          onMount={[Function]}
+                          onUpdate={[Function]}
+                          to="undefined/profile"
+                        />
+                      </Redirect>
+                    </Switch>
+                  </div>
+                </StyledComponent>
+              </Styled(styled.div)>
+            </div>
+          </StyledComponent>
+        </Styled(styled.div)>
+      </section>
+    </StyledComponent>
+  </styled.section>
+</UserSettingsPage>
+`;
+
+exports[`renders with public menu 1`] = `
+<UserSettingsPage>
+  <styled.section>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-jhAzac",
+            "isStatic": false,
+            "lastClassName": "iAdapl",
+            "rules": Array [
+              "
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: ",
+              [Function],
+              ";
+",
+            ],
+          },
+          "displayName": "styled.section",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-jhAzac",
+          "target": "section",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <section
+        className="sc-jhAzac iAdapl"
+      >
+        <Styled(styled.div)>
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-kjoXOD",
+                  "isStatic": false,
+                  "lastClassName": "cCHMEZ",
+                  "rules": Array [
+                    "
+  display: flex;
+  flex-direction: row;
+  flex-wrap: ",
+                    [Function],
+                    ";
+",
+                    "
+  height: 100%;
+",
+                  ],
+                },
+                "displayName": "Styled(styled.div)",
+                "foldedComponentIds": Array [
+                  "sc-bwzfXH",
+                ],
+                "render": [Function],
+                "styledComponentId": "sc-kjoXOD",
+                "target": "div",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+          >
+            <div
+              className="sc-bwzfXH sc-kjoXOD cCHMEZ"
+            >
+              <Styled(styled.div)>
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-fMiknA",
+                        "isStatic": false,
+                        "lastClassName": "leGMwy",
+                        "rules": Array [
+                          "
+  display: flex;
+  flex-direction: column;
+",
+                          "
+  box-sizing: border-box;
+  padding: 1rem 0;
+  flex-basis: 14rem;
+  background-color: ",
+                          [Function],
+                          ";
+  transition: flex-basis 500ms ease-in-out;
+
+  ",
+                          "@media(max-width: 768px){
+      
+    flex-basis: 1rem;
+    padding: 0;
+    ;
+    }",
+                          ";
+",
+                        ],
+                      },
+                      "displayName": "Styled(styled.div)",
+                      "foldedComponentIds": Array [
+                        "sc-bdVaJa",
+                      ],
+                      "render": [Function],
+                      "styledComponentId": "sc-fMiknA",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                >
+                  <div
+                    className="sc-bdVaJa sc-fMiknA leGMwy"
+                  >
+                    <ul>
+                      <styled.li>
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-dVhcbM",
+                                "isStatic": false,
+                                "lastClassName": "jkRCFk",
+                                "rules": Array [
+                                  "
+  color: ",
+                                  [Function],
+                                  ";
+  align-items: center;
+  display: flex;
+  font-size: 1rem;
+  margin: 0.25rem 0.75rem 1.25rem;
+
+  ",
+                                  "@media(max-width: 768px){
+      margin: 1rem;
+    }",
+                                  "
+",
+                                ],
+                              },
+                              "displayName": "styled.li",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-dVhcbM",
+                              "target": "li",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                        >
+                          <li
+                            className="sc-dVhcbM jkRCFk"
+                          >
+                            <styled.img
+                              src="/images/cogs.svg"
+                            >
+                              <StyledComponent
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-caSCKo",
+                                      "isStatic": false,
+                                      "lastClassName": "hJNuUy",
+                                      "rules": Array [
+                                        "
+  width: 1.1rem;
+  margin: 0 0.8rem 0 0.3rem;
+
+  ",
+                                        "@media(max-width: 768px){
+      margin: 0; width: 1.5rem;;
+    }",
+                                        ";
+",
+                                      ],
+                                    },
+                                    "displayName": "styled.img",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-caSCKo",
+                                    "target": "img",
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                src="/images/cogs.svg"
+                              >
+                                <img
+                                  className="sc-caSCKo hJNuUy"
+                                  src="/images/cogs.svg"
+                                />
+                              </StyledComponent>
+                            </styled.img>
+                            <styled.span>
+                              <StyledComponent
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-gisBJw",
+                                      "isStatic": false,
+                                      "lastClassName": "ilbxug",
+                                      "rules": Array [
+                                        "
+  ",
+                                        "@media(max-width: 768px){
+      display: none;
+    }",
+                                        ";
+",
+                                      ],
+                                    },
+                                    "displayName": "styled.span",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-gisBJw",
+                                    "target": "span",
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                              >
+                                <span
+                                  className="sc-gisBJw ilbxug"
+                                >
+                                  Settings
+                                </span>
+                              </StyledComponent>
+                            </styled.span>
+                             
+                          </li>
+                        </StyledComponent>
+                      </styled.li>
+                      <li>
+                        <Styled(NavLink)
+                          to="//profile"
+                        >
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-eqIVtm",
+                                  "isStatic": false,
+                                  "lastClassName": "dHyZwZ",
+                                  "rules": Array [
+                                    "
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: ",
+                                    [Function],
+                                    ";
+  padding: 0.9rem 0.75rem;
+  font-size: 0.9rem;
+  border-left: \\"none\\";
+
+  &:hover {
+    cursor: pointer;
+    background-color: ",
+                                    [Function],
+                                    ";
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &.active {
+    background-color: ",
+                                    [Function],
+                                    ";
+    border-left: 0.25rem solid
+      ",
+                                    [Function],
+                                    ";
+
+    &:hover {
+      background-color: ",
+                                    [Function],
+                                    ";
+    }
+  }
+",
+                                  ],
+                                },
+                                "displayName": "Styled(NavLink)",
+                                "foldedComponentIds": Array [],
+                                "propTypes": Object {
+                                  "activeClassName": [Function],
+                                  "activeStyle": [Function],
+                                  "aria-current": [Function],
+                                  "className": [Function],
+                                  "exact": [Function],
+                                  "innerRef": [Function],
+                                  "isActive": [Function],
+                                  "location": [Function],
+                                  "onClick": [Function],
+                                  "replace": [Function],
+                                  "strict": [Function],
+                                  "style": [Function],
+                                  "target": [Function],
+                                  "to": [Function],
+                                },
+                                "render": [Function],
+                                "styledComponentId": "sc-eqIVtm",
+                                "target": Object {
+                                  "$$typeof": Symbol(react.forward_ref),
+                                  "displayName": "NavLink",
+                                  "propTypes": Object {
+                                    "activeClassName": [Function],
+                                    "activeStyle": [Function],
+                                    "aria-current": [Function],
+                                    "className": [Function],
+                                    "exact": [Function],
+                                    "innerRef": [Function],
+                                    "isActive": [Function],
+                                    "location": [Function],
+                                    "onClick": [Function],
+                                    "replace": [Function],
+                                    "strict": [Function],
+                                    "style": [Function],
+                                    "target": [Function],
+                                    "to": [Function],
+                                  },
+                                  "render": [Function],
+                                },
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            to="//profile"
+                          >
+                            <NavLink
+                              className="sc-eqIVtm dHyZwZ"
+                              to="//profile"
+                            >
+                              <Link
+                                aria-current={null}
+                                className="sc-eqIVtm dHyZwZ"
+                                to={
+                                  Object {
+                                    "hash": "",
+                                    "pathname": "//profile",
+                                    "search": "",
+                                    "state": null,
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  aria-current={null}
+                                  className="sc-eqIVtm dHyZwZ"
+                                  href="//profile"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    aria-current={null}
+                                    className="sc-eqIVtm dHyZwZ"
+                                    href="//profile"
+                                    onClick={[Function]}
+                                  >
+                                    <styled.img
+                                      src="/images/profile.svg"
+                                    >
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-fAjcbJ",
+                                              "isStatic": false,
+                                              "lastClassName": "eGxUws",
+                                              "rules": Array [
+                                                "
+  width: 1.1rem;
+  margin: 0 0.75rem 0 0;
+
+  ",
+                                                "@media(max-width: 768px){
+      margin: 0; width: 1.5rem;;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.img",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-fAjcbJ",
+                                            "target": "img",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                        src="/images/profile.svg"
+                                      >
+                                        <img
+                                          className="sc-fAjcbJ eGxUws"
+                                          src="/images/profile.svg"
+                                        />
+                                      </StyledComponent>
+                                    </styled.img>
+                                    <styled.span>
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-gisBJw",
+                                              "isStatic": false,
+                                              "lastClassName": "ilbxug",
+                                              "rules": Array [
+                                                "
+  ",
+                                                "@media(max-width: 768px){
+      display: none;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.span",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-gisBJw",
+                                            "target": "span",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                      >
+                                        <span
+                                          className="sc-gisBJw ilbxug"
+                                        >
+                                          Profile
+                                        </span>
+                                      </StyledComponent>
+                                    </styled.span>
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </NavLink>
+                          </StyledComponent>
+                        </Styled(NavLink)>
+                      </li>
+                      <li>
+                        <Styled(NavLink)
+                          to="//key"
+                        >
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-eqIVtm",
+                                  "isStatic": false,
+                                  "lastClassName": "dHyZwZ",
+                                  "rules": Array [
+                                    "
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: ",
+                                    [Function],
+                                    ";
+  padding: 0.9rem 0.75rem;
+  font-size: 0.9rem;
+  border-left: \\"none\\";
+
+  &:hover {
+    cursor: pointer;
+    background-color: ",
+                                    [Function],
+                                    ";
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &.active {
+    background-color: ",
+                                    [Function],
+                                    ";
+    border-left: 0.25rem solid
+      ",
+                                    [Function],
+                                    ";
+
+    &:hover {
+      background-color: ",
+                                    [Function],
+                                    ";
+    }
+  }
+",
+                                  ],
+                                },
+                                "displayName": "Styled(NavLink)",
+                                "foldedComponentIds": Array [],
+                                "propTypes": Object {
+                                  "activeClassName": [Function],
+                                  "activeStyle": [Function],
+                                  "aria-current": [Function],
+                                  "className": [Function],
+                                  "exact": [Function],
+                                  "innerRef": [Function],
+                                  "isActive": [Function],
+                                  "location": [Function],
+                                  "onClick": [Function],
+                                  "replace": [Function],
+                                  "strict": [Function],
+                                  "style": [Function],
+                                  "target": [Function],
+                                  "to": [Function],
+                                },
+                                "render": [Function],
+                                "styledComponentId": "sc-eqIVtm",
+                                "target": Object {
+                                  "$$typeof": Symbol(react.forward_ref),
+                                  "displayName": "NavLink",
+                                  "propTypes": Object {
+                                    "activeClassName": [Function],
+                                    "activeStyle": [Function],
+                                    "aria-current": [Function],
+                                    "className": [Function],
+                                    "exact": [Function],
+                                    "innerRef": [Function],
+                                    "isActive": [Function],
+                                    "location": [Function],
+                                    "onClick": [Function],
+                                    "replace": [Function],
+                                    "strict": [Function],
+                                    "style": [Function],
+                                    "target": [Function],
+                                    "to": [Function],
+                                  },
+                                  "render": [Function],
+                                },
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            to="//key"
+                          >
+                            <NavLink
+                              className="sc-eqIVtm dHyZwZ"
+                              to="//key"
+                            >
+                              <Link
+                                aria-current={null}
+                                className="sc-eqIVtm dHyZwZ"
+                                to={
+                                  Object {
+                                    "hash": "",
+                                    "pathname": "//key",
+                                    "search": "",
+                                    "state": null,
+                                  }
+                                }
+                              >
+                                <LinkAnchor
+                                  aria-current={null}
+                                  className="sc-eqIVtm dHyZwZ"
+                                  href="//key"
+                                  navigate={[Function]}
+                                >
+                                  <a
+                                    aria-current={null}
+                                    className="sc-eqIVtm dHyZwZ"
+                                    href="//key"
+                                    onClick={[Function]}
+                                  >
+                                    <styled.img
+                                      src="/images/key.svg"
+                                    >
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-fAjcbJ",
+                                              "isStatic": false,
+                                              "lastClassName": "eGxUws",
+                                              "rules": Array [
+                                                "
+  width: 1.1rem;
+  margin: 0 0.75rem 0 0;
+
+  ",
+                                                "@media(max-width: 768px){
+      margin: 0; width: 1.5rem;;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.img",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-fAjcbJ",
+                                            "target": "img",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                        src="/images/key.svg"
+                                      >
+                                        <img
+                                          className="sc-fAjcbJ eGxUws"
+                                          src="/images/key.svg"
+                                        />
+                                      </StyledComponent>
+                                    </styled.img>
+                                    <styled.span>
+                                      <StyledComponent
+                                        forwardedComponent={
+                                          Object {
+                                            "$$typeof": Symbol(react.forward_ref),
+                                            "attrs": Array [],
+                                            "componentStyle": ComponentStyle {
+                                              "componentId": "sc-gisBJw",
+                                              "isStatic": false,
+                                              "lastClassName": "ilbxug",
+                                              "rules": Array [
+                                                "
+  ",
+                                                "@media(max-width: 768px){
+      display: none;
+    }",
+                                                ";
+",
+                                              ],
+                                            },
+                                            "displayName": "styled.span",
+                                            "foldedComponentIds": Array [],
+                                            "render": [Function],
+                                            "styledComponentId": "sc-gisBJw",
+                                            "target": "span",
+                                            "toString": [Function],
+                                            "warnTooManyClasses": [Function],
+                                            "withComponent": [Function],
+                                          }
+                                        }
+                                        forwardedRef={null}
+                                      >
+                                        <span
+                                          className="sc-gisBJw ilbxug"
+                                        >
+                                          Key management 
+                                        </span>
+                                      </StyledComponent>
+                                    </styled.span>
+                                  </a>
+                                </LinkAnchor>
+                              </Link>
+                            </NavLink>
+                          </StyledComponent>
+                        </Styled(NavLink)>
+                      </li>
+                    </ul>
+                  </div>
+                </StyledComponent>
+              </Styled(styled.div)>
+              <Styled(styled.div)>
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-cHGsZl",
+                        "isStatic": false,
+                        "lastClassName": "jLiuni",
+                        "rules": Array [
+                          "
+  display: flex;
+  flex-direction: column;
+",
+                          "
+  flex-grow: 1;
+  padding: 1rem 2rem;
+",
+                        ],
+                      },
+                      "displayName": "Styled(styled.div)",
+                      "foldedComponentIds": Array [
+                        "sc-bdVaJa",
+                      ],
+                      "render": [Function],
+                      "styledComponentId": "sc-cHGsZl",
+                      "target": "div",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                >
+                  <div
+                    className="sc-bdVaJa sc-cHGsZl jLiuni"
+                  >
+                    <Switch>
+                      <Redirect
+                        computedMatch={
+                          Object {
+                            "isExact": false,
+                            "params": Object {},
+                            "path": "/",
+                            "url": "/",
+                          }
+                        }
+                        location={
+                          Object {
+                            "hash": "",
+                            "pathname": "/undefined/profile",
+                            "search": "",
+                            "state": undefined,
+                          }
+                        }
+                        to="undefined/profile"
+                      >
+                        <Lifecycle
+                          onMount={[Function]}
+                          onUpdate={[Function]}
+                          to="undefined/profile"
+                        />
+                      </Redirect>
+                    </Switch>
+                  </div>
+                </StyledComponent>
+              </Styled(styled.div)>
+            </div>
+          </StyledComponent>
+        </Styled(styled.div)>
+      </section>
+    </StyledComponent>
+  </styled.section>
+</UserSettingsPage>
+`;

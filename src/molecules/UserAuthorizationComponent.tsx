@@ -196,7 +196,6 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
   }, [accountId]);
 
   const renderGlobalRoles = (rolesApiResponse: IRolesApiState) => {
-    console.log(rolesApiResponse);
     if (!rolesApiResponse.data) {
       return null;
     }

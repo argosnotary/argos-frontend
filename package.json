@@ -30,7 +30,7 @@
     "react-scripts": "^3.4.0",
     "react-treebeard": "^3.2.4",
     "styled-components": "^4.4.1",
-    "typescript": "3.7.2"
+    "typescript": "3.8.3"
   },
   "license": "Apache-2.0",
   "scripts": {
@@ -60,11 +60,13 @@
     ]
   },
   "devDependencies": {
+    "@sheerun/mutationobserver-shim": "^0.3.3",
     "@storybook/addon-actions": "^5.3.9",
     "@storybook/addon-links": "^5.3.9",
     "@storybook/addons": "^5.3.9",
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.9",
+    "@testing-library/dom": "^7.1.1",
     "@testing-library/react-hooks": "^3.2.1",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
