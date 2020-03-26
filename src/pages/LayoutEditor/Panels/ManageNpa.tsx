@@ -38,7 +38,7 @@ import {generateKey} from "../../../security";
 import {Warning} from "../../../atoms/Alerts";
 import {Modal, ModalBody, ModalButton, ModalFlexColumWrapper, ModalFooter} from "../../../atoms/Modal";
 import CopyInput from "../../../atoms/CopyInput";
-import {updateNewTreeNode} from "./utils";
+import updateNewTreeNodes from "./utils";
 
 interface INpaFormValues {
   npaname: string;
@@ -120,9 +120,7 @@ const ManageNpa = () => {
       genericDataFetchReducer
   );
 
-  const [treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
-      genericDataFetchReducer
-  );
+  const [setTreeChildrenApiRequest, treeChildrenApiResponse] = updateNewTreeNodes();
 
   const [npaKeyId, setNpaKeyId] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
@@ -155,14 +153,8 @@ const ManageNpa = () => {
           token: localStorageToken,
           url: `/api/nonpersonalaccount/${npa.id}/key`,
           cbSuccess: () => {
-            setGeneratedPassword(generatedKeys.password);
-            setTreeChildrenApiRequest(updateNewTreeNode(npa.id, node => {
-              dispatch({
-                type: LayoutEditorDataActionTypes.ADD_NODE,
-                node: {...node, parentLabelId: npa.parentLabelId}
-              });
-              formik.resetForm()
-            }));
+            setTreeChildrenApiRequest(npa.id, npa.parentLabelId);
+            formik.resetForm();
           }
         };
 

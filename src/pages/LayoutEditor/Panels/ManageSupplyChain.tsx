@@ -31,7 +31,7 @@ import {
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
-import {updateNewTreeNode} from "./utils";
+import updateNewTreeNodes from "./utils";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -56,9 +56,7 @@ const ManageSupplyChain = () => {
   const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
       genericDataFetchReducer
   );
-  const [treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
-      genericDataFetchReducer
-  );
+  const [setTreeChildrenApiRequest, treeChildrenApiResponse] = updateNewTreeNodes();
 
   const postSupplyChain = (values: ISupplyChainNameFormValues) => {
     const data: any = {};
@@ -75,13 +73,8 @@ const ManageSupplyChain = () => {
       token: localStorageToken,
       url: "/api/supplychain",
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
-        setTreeChildrenApiRequest(updateNewTreeNode(supplyChain.id, node => {
-          dispatch({
-            type: LayoutEditorDataActionTypes.ADD_NODE,
-            node: {...node, parentLabelId: supplyChain.parentLabelId}
-          });
-          formik.resetForm()
-        }));
+        setTreeChildrenApiRequest(supplyChain.id, supplyChain.parentLabelId);
+        formik.resetForm();
       }
     };
 

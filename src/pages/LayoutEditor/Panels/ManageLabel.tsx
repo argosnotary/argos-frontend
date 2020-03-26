@@ -31,7 +31,7 @@ import {
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-import {updateNewTreeNode} from "./utils";
+import updateNewTreeNodes from "./utils";
 
 interface ILabelNameFormValues {
     labelname: string;
@@ -56,9 +56,7 @@ const ManageLabel = () => {
     const [labelPostState, setLabelPostRequest] = useDataApi(
         genericDataFetchReducer
     );
-    const [treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
-        genericDataFetchReducer
-    );
+    const [setTreeChildrenApiRequest, treeChildrenApiResponse] = updateNewTreeNodes();
     const postNewLabel = (values: ILabelNameFormValues) => {
         const data: any = {};
 
@@ -75,13 +73,7 @@ const ManageLabel = () => {
             token: localStorageToken,
             url: "/api/label",
             cbSuccess: (label: ILabelPostResponse) => {
-                setTreeChildrenApiRequest(updateNewTreeNode(label.id, node => {
-                    dispatch({
-                        type: LayoutEditorDataActionTypes.ADD_NODE,
-                        node: {...node, parentLabelId: label.parentLabelId}
-                    });
-                    formik.resetForm()
-                }));
+                setTreeChildrenApiRequest(label.id, label.parentLabelId);
             }
         };
 
