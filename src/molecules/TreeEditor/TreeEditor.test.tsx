@@ -19,7 +19,6 @@ import { mount } from "enzyme";
 
 import TreeEditor, {
   AddAdditionalRootNodes,
-  TreeHeadLabel,
   ParentNode,
   TreeHead,
   NodeContextMenuContainer,
@@ -28,7 +27,13 @@ import TreeEditor, {
 import { ThemeProvider } from "styled-components";
 import theme from "../../theme/base.json";
 import json from "./sampleData.json";
-import { treeReducer, initialTreeState } from "../../stores/treeEditorStore";
+import {
+  treeReducer,
+  initialTreeState,
+  ITreeStateContext
+} from "../../stores/treeEditorStore";
+import { TreeHeadLabelSpan } from "./TreeHeadLabel";
+import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 
 const treeStringList = {
   createrootnode: "Create base label..."
@@ -41,13 +46,24 @@ const treeClickHandlers = [
   }
 ];
 
-const treeContextMenu = [
+const visibleFunction = jest.fn();
+const invisibleFunction = jest.fn();
+visibleFunction.mockReturnValue(true);
+invisibleFunction.mockReturnValue(false);
+
+const treeContextMenu: Array<ITreeContextMenuEntry> = [
   {
     type: "LABEL",
     menuitems: [
       {
         label: "Add child label",
-        callback: jest.fn()
+        callback: jest.fn(),
+        visible: visibleFunction
+      },
+      {
+        label: "invisible",
+        callback: jest.fn(),
+        visible: invisibleFunction
       }
     ]
   }
@@ -60,7 +76,7 @@ const cbGetNodeChildren = jest.fn();
 const DummyParent = () => {
   const [treeState, treeDispatch] = useReducer(treeReducer, initialTreeState);
 
-  const treeContext = {
+  const treeContext: ITreeStateContext = {
     treeState,
     treeDispatch,
     treeStringList,
@@ -90,12 +106,12 @@ describe("TreeEditor", () => {
 
   it("displays create root node button with correct text", () => {
     const element = root.find(AddAdditionalRootNodes);
-    const label = element.find(TreeHeadLabel);
+    const label = element.find(TreeHeadLabelSpan);
     expect(label.text()).toEqual("Create base label...");
   });
 
   it("onClick create root node button, cbCreateRootNode has to be called", () => {
-    const label = root.find(AddAdditionalRootNodes).find(TreeHeadLabel);
+    const label = root.find(AddAdditionalRootNodes).find(TreeHeadLabelSpan);
     label.simulate("click");
 
     expect(cbCreateRootNode).toHaveBeenCalled();
@@ -113,10 +129,11 @@ describe("TreeEditor", () => {
   });
 
   it("onContextMenu node with context options, contextmenu must be rendered", () => {
+    visibleFunction.mockReturnValueOnce(true);
     const node = root
       .find(ParentNode)
       .at(2)
-      .find(TreeHeadLabel);
+      .find(TreeHeadLabelSpan);
 
     node.simulate("contextmenu");
 
@@ -128,7 +145,7 @@ describe("TreeEditor", () => {
     const node = root
       .find(ParentNode)
       .at(2)
-      .find(TreeHeadLabel);
+      .find(TreeHeadLabelSpan);
 
     node.simulate("contextmenu");
 
@@ -144,7 +161,7 @@ describe("TreeEditor", () => {
     const node = root
       .find(ParentNode)
       .at(2)
-      .find(TreeHeadLabel);
+      .find(TreeHeadLabelSpan);
 
     node.simulate("click");
 
