@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, {useContext, useEffect, useState} from "react";
-import {LastBreadCrumb, NodesBreadCrumb} from "../../../atoms/Breadcrumbs";
-import {StateContext} from "../../../stores/layoutEditorStore";
+import React, { useContext, useEffect, useState } from "react";
+import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
+import { StateContext } from "../../../stores/layoutEditorStore";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import ISearchResult from "../../../interfaces/ISearchResult";
 import SearchInput from "../../../atoms/SearchInput";
 import useDataApi from "../../../hooks/useDataApi";
-import genericDataFetchReducer, {customGenericDataFetchReducer} from "../../../stores/genericDataFetchReducer";
+import genericDataFetchReducer, {
+  customGenericDataFetchReducer
+} from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
 import CollapsibleContainerComponent from "../../../atoms/CollapsibleContainer";
-import styled, {ThemeContext} from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 import DataCheckbox from "../../../atoms/DataCheckbox";
 
@@ -95,13 +97,13 @@ interface IUserPermissions {
 }
 
 const permissionTypes = [
-  {id: "LAYOUT_ADD", label: "add a layout"},
-  {id: "LINK_ADD", label: "add a link"},
-  {id: "LOCAL_PERMISSION_EDIT", label: "change permissions"},
-  {id: "TREE_EDIT", label: "change tree"},
-  {id: "READ", label: "read"},
-  {id: "VERIFY", label: "verify supply chains"},
-  {id: "NPA_EDIT", label: "add npa"}
+  { id: "LAYOUT_ADD", label: "add a layout" },
+  { id: "LINK_ADD", label: "add a link" },
+  { id: "LOCAL_PERMISSION_EDIT", label: "change permissions" },
+  { id: "TREE_EDIT", label: "change tree" },
+  { id: "READ", label: "read" },
+  { id: "VERIFY", label: "verify supply chains" },
+  { id: "NPA_EDIT", label: "add npa" }
 ];
 
 const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({

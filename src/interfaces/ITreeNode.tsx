@@ -21,5 +21,5 @@ export default interface ITreeNode {
   type: string;
   referenceId: string;
   children?: Array<ITreeNode>;
-  permissions: Array<PermissionTypes>;
+  permissions?: Array<PermissionTypes>;
 }

@@ -15,7 +15,7 @@
  */
 import * as asn1js from "asn1js";
 import generatePassword from "password-generator";
-import {PKCS8ShroudedKeyBag, PrivateKeyInfo} from "pkijs";
+import { PKCS8ShroudedKeyBag, PrivateKeyInfo } from "pkijs";
 
 const arrayBufferToHex = (buffer: ArrayBuffer) => {
   return Array.from(new Uint8Array(buffer))

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, {useEffect, useReducer} from "react";
+import React, { useReducer, useEffect } from "react";
 
 import DataRequest from "../../types/DataRequest";
 import FlexColumn from "../../atoms/FlexColumn";
@@ -23,26 +23,36 @@ import ITreeNode from "../../interfaces/ITreeNode";
 import TreeEditor from "../../molecules/TreeEditor/TreeEditor";
 import useDataApi from "../../hooks/useDataApi";
 import useToken from "../../hooks/useToken";
-import {initialTreeState, ITreeStateContext, treeReducer} from "../../stores/treeEditorStore";
+import {
+  initialTreeState,
+  ITreeStateContext,
+  treeReducer
+} from "../../stores/treeEditorStore";
 
-import {buildNodeTrail} from "../../molecules/TreeEditor/utils";
+import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 
 import {
-  LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionType,
-  LayoutEditorPaneActionTypes,
   layoutEditorReducer,
-  StateContext
+  StateContext,
+  LayoutEditorDataActionTypes,
+  LayoutEditorPaneActionTypes,
+  LayoutEditorPaneActionType
 } from "../../stores/layoutEditorStore";
-import {appendLabelChildrenToTree, appendObjectToTree, updateObjectInTree} from "./utils";
+import {
+  appendObjectToTree,
+  appendLabelChildrenToTree,
+  updateObjectInTree
+} from "./utils";
 import ManageLabel from "./Panels/ManageLabel";
-import genericDataFetchReducer, {customGenericDataFetchReducer} from "../../stores/genericDataFetchReducer";
+import genericDataFetchReducer, {
+  customGenericDataFetchReducer
+} from "../../stores/genericDataFetchReducer";
 import ManageSupplyChain from "./Panels/ManageSupplyChain";
 import ManageNpa from "./Panels/ManageNpa";
-import {Panel, PanelsContainer} from "../../molecules/Panel";
+import { PanelsContainer, Panel } from "../../molecules/Panel";
 import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
-import {PermissionTypes} from "../../types/PermissionType";
+import { PermissionTypes } from "../../types/PermissionType";
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
@@ -59,15 +69,14 @@ const LayoutEditor = () => {
     url: "/api/hierarchy"
   };
 
-
   interface ITreeDataState {
     isLoading: boolean;
     data: Array<ITreeNode>;
   }
 
   const [treeDataState] = useDataApi<ITreeDataState, Array<ITreeNode>>(
-      customGenericDataFetchReducer,
-      getTreeDataRequest
+    customGenericDataFetchReducer,
+    getTreeDataRequest
   );
 
   const [treeState, treeDispatch] = useReducer(treeReducer, initialTreeState);
@@ -138,48 +147,61 @@ const LayoutEditor = () => {
           label: "Add child label",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-                LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
-                node
+              LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
+              node
             );
           },
           visible: (node: ITreeNode) => {
-            return node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0;
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0
+            );
           }
         },
         {
           label: "Add supply chain",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-                LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
-                node
+              LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
+              node
             );
           },
           visible: (node: ITreeNode) => {
-            return node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0;
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0
+            );
           }
         },
         {
           label: "Add npa",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-                LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
-                node
+              LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
+              node
             );
           },
           visible: (node: ITreeNode) => {
-            return node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0;
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0
+            );
           }
         },
         {
           label: "Manage permissions",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-                LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
-                node
+              LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
+              node
             );
           },
           visible: (node: ITreeNode) => {
-            return node.permissions.indexOf(PermissionTypes.LOCAL_PERMISSION_EDIT) > 0;
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.LOCAL_PERMISSION_EDIT) >
+                0
+            );
           }
         }
       ]
@@ -191,12 +213,15 @@ const LayoutEditor = () => {
           label: "Generate new key for npa",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-                LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
-                node
+              LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
+              node
             );
           },
           visible: (node: ITreeNode) => {
-            return node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0;
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0
+            );
           }
         }
       ]
@@ -274,15 +299,31 @@ const LayoutEditor = () => {
   useEffect(() => {
     if (
       (state.dataAction &&
-          state.dataAction === LayoutEditorDataActionTypes.ADD_NODE)
+        state.dataAction === LayoutEditorDataActionTypes.POST_NEW_LABEL) ||
+      state.dataAction === LayoutEditorDataActionTypes.POST_NEW_NPA ||
+      state.dataAction === LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
     ) {
-      appendObjectToTree(
-        treeState,
-        treeDispatch,
-        dispatch,
-        state.data,
-          state.data.parentLabelId
-      );
+      const hierarchyDataRequest: DataRequest = {
+        params: {
+          HierarchyMode: "NONE"
+        },
+        method: "get",
+        token: localStorageToken,
+        url: `/api/hierarchy/${state.data.id}`,
+        cbSuccess: (node: ITreeNode) => {
+          appendObjectToTree(
+            treeState,
+            treeDispatch,
+            node,
+            state.data.parentLabelId
+          );
+          dispatch({
+            type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+            data: state.data
+          });
+        }
+      };
+      setTreeChildrenApiRequest(hierarchyDataRequest);
     }
 
     if (

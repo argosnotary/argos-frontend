@@ -19,12 +19,15 @@ import {
   findNode,
   updateSingleNode
 } from "../../molecules/TreeEditor/utils";
-import {ITreeReducerState, TreeReducerAction, TreeReducerActionTypes} from "../../stores/treeEditorStore";
+import {
+  ITreeReducerState,
+  TreeReducerAction,
+  TreeReducerActionTypes
+} from "../../stores/treeEditorStore";
 import ITreeNode from "../../interfaces/ITreeNode";
 import ILabelPostResponse from "../../interfaces/ILabelPostResponse";
 import {
   LayoutEditorAction,
-  LayoutEditorDataActionTypes,
   LayoutEditorPaneActionTypes
 } from "../../stores/layoutEditorStore";
 import ISupplyChainApiResponse from "../../interfaces/ISupplyChainApiResponse";
@@ -48,11 +51,10 @@ const appendLabelChildrenToTree = (
 };
 
 const appendObjectToTree = (
-    treeState: ITreeReducerState,
-    treeDispatch: (msg: TreeReducerAction) => void,
-    stateDispatch: (msg: LayoutEditorAction) => void,
-    node: ITreeNode,
-    parentLabelId?: string
+  treeState: ITreeReducerState,
+  treeDispatch: (msg: TreeReducerAction) => void,
+  node: ITreeNode,
+  parentLabelId?: string
 ) => {
   const newState = appendSingleNode(node, parentLabelId);
 
@@ -64,11 +66,6 @@ const appendObjectToTree = (
   treeDispatch({
     type: TreeReducerActionTypes.UPDATETOGGLEDNODES,
     id: parentLabelId || ""
-  });
-
-  stateDispatch({
-    type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
-    data: node
   });
 };
 

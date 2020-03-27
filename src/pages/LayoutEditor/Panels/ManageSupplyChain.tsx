@@ -13,25 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, {useContext, useEffect} from "react";
-import {useFormik} from "formik";
+import React, { useContext, useEffect } from "react";
+import { useFormik } from "formik";
 
-import {LastBreadCrumb, NodesBreadCrumb} from "../../../atoms/Breadcrumbs";
+import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import InputErrorLabel from "../../../atoms/InputErrorLabel";
-import {CancelButton, LoaderButton} from "../../../atoms/Button";
+import { LoaderButton, CancelButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
 import FormInput from "../../../molecules/FormInput";
 import {
+  StateContext,
   LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes,
-  StateContext
+  LayoutEditorPaneActionTypes
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
-import updateNewTreeNodes from "./utils";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -54,9 +53,8 @@ const ManageSupplyChain = () => {
   const [localStorageToken] = useToken();
   const [state, dispatch] = useContext(StateContext);
   const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
-      genericDataFetchReducer
+    genericDataFetchReducer
   );
-  const [setTreeChildrenApiRequest, treeChildrenApiResponse] = updateNewTreeNodes();
 
   const postSupplyChain = (values: ISupplyChainNameFormValues) => {
     const data: any = {};
@@ -73,7 +71,10 @@ const ManageSupplyChain = () => {
       token: localStorageToken,
       url: "/api/supplychain",
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
-        setTreeChildrenApiRequest(supplyChain.id, supplyChain.parentLabelId);
+        dispatch({
+          type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
+          supplyChain
+        });
         formik.resetForm();
       }
     };
@@ -180,8 +181,8 @@ const ManageSupplyChain = () => {
       ) : null}
       <ContentSeparator />
       <LoaderButton
-          buttonType="submit"
-          loading={supplyChainApiResponseState.isLoading || treeChildrenApiResponse.isLoading}
+        buttonType="submit"
+        loading={supplyChainApiResponseState.isLoading}
       >
         {updateMode ? "Update supply chain" : "Add supply chain"}
       </LoaderButton>

@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, {Dispatch} from "react";
+import React, { Dispatch } from "react";
 import ILabelPostResponse from "../interfaces/ILabelPostResponse";
 import ISupplyChainApiResponse from "../interfaces/ISupplyChainApiResponse";
 import INpaApiResponse from "../interfaces/INpaApiResponse";
-import ITreeNode from "../interfaces/ITreeNode";
 
 interface ILayoutEditorState {
   nodeParentId: string;
@@ -32,9 +31,11 @@ interface ILayoutEditorState {
 
 export enum LayoutEditorDataActionTypes {
   NONE = "",
-  ADD_NODE = "ADD_NODE",
+  POST_NEW_LABEL = "POST_NEW_LABEL",
   PUT_LABEL = "PUT_LABEL",
+  POST_SUPPLY_CHAIN = "POST_SUPPLY_CHAIN",
   PUT_SUPPLY_CHAIN = "PUT_SUPPLY_CHAIN",
+  POST_NEW_NPA = "POST_NEW_NPA",
   POST_NEW_NPA_KEY = "POST_NEW_NPA_KEY",
   PUT_NPA = "PUT_NPA",
   DATA_ACTION_COMPLETED = "DATA_ACTION_COMPLETED",
@@ -138,32 +139,35 @@ interface IStoredSearchedUser {
   name: string;
 }
 
-export interface ITreeNodeWithParentId extends ITreeNode {
-  parentLabelId?: string;
-}
-
 export type LayoutEditorDataAction =
-    | IDataActionCompleted
-    | {
-  type: LayoutEditorDataActionTypes.ADD_NODE;
-  parentLabelId?: string;
-  node: ITreeNodeWithParentId;
-}
-    | {
-  type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN;
-  supplyChain: ISupplyChainApiResponse;
-}
-    | { type: LayoutEditorDataActionTypes.PUT_LABEL; label: ILabelPostResponse }
-    | {
-  type: LayoutEditorDataActionTypes.POST_NEW_NPA_KEY;
-}
-    | {
-  type: LayoutEditorDataActionTypes.PUT_NPA;
-  npa: INpaApiResponse;
-}
-    | {
-  type: LayoutEditorDataActionTypes.STORE_SEARCHED_USER;
-  user: IStoredSearchedUser;
+  | IDataActionCompleted
+  | {
+      type: LayoutEditorDataActionTypes.POST_NEW_LABEL;
+      label: ILabelPostResponse;
+    }
+  | { type: LayoutEditorDataActionTypes.PUT_LABEL; label: ILabelPostResponse }
+  | {
+      type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN;
+      supplyChain: ISupplyChainApiResponse;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN;
+      supplyChain: ISupplyChainApiResponse;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.POST_NEW_NPA;
+      npa: INpaApiResponse;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.POST_NEW_NPA_KEY;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.PUT_NPA;
+      npa: INpaApiResponse;
+    }
+  | {
+      type: LayoutEditorDataActionTypes.STORE_SEARCHED_USER;
+      user: IStoredSearchedUser;
     }
   | {
       type: LayoutEditorDataActionTypes.REMOVE_SEARCHED_USER;
@@ -260,11 +264,11 @@ const layoutEditorReducer = (
         nodeReferenceId: "",
         dataAction: ""
       };
-    case LayoutEditorDataActionTypes.ADD_NODE:
+    case LayoutEditorDataActionTypes.POST_NEW_LABEL:
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.ADD_NODE,
-        data: action.node
+        dataAction: LayoutEditorDataActionTypes.POST_NEW_LABEL,
+        data: action.label
       };
     case LayoutEditorDataActionTypes.POST_NEW_NPA_KEY:
       return {
@@ -285,11 +289,23 @@ const layoutEditorReducer = (
         data: action.label
       };
     }
+    case LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN:
+      return {
+        ...state,
+        dataAction: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
+        data: action.supplyChain
+      };
     case LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN:
       return {
         ...state,
         dataAction: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
         data: action.supplyChain
+      };
+    case LayoutEditorDataActionTypes.POST_NEW_NPA:
+      return {
+        ...state,
+        dataAction: LayoutEditorDataActionTypes.POST_NEW_NPA,
+        data: action.npa
       };
     case LayoutEditorDataActionTypes.PUT_NPA:
       return {
