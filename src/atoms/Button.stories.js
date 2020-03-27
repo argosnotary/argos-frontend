@@ -13,15 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
+import React from "react";
 
-import { AnchorButton, Button } from './Button';
-import TransparentButton from './TransparentButton';
+import { AnchorButton, Button, LoaderButton, CancelButton } from "./Button";
+import TransparentButton from "./TransparentButton";
 
 export default {
-  title: 'Buttons'
-}
+  title: "Buttons"
+};
 
 export const anchor = () => <AnchorButton>Click</AnchorButton>;
 export const defaultButton = () => <Button>Click</Button>;
-export const transparent = () => <TransparentButton>Click</TransparentButton>;
+export const loaderButton = () => (
+  <>
+    <LoaderButton buttonType={"button"} loading={false}>
+      Click
+    </LoaderButton>{" "}
+    <LoaderButton buttonType={"button"} loading={true}>
+      Click
+    </LoaderButton>
+  </>
+);
+
+export const cancelButton = () => <CancelButton>Cancel</CancelButton>;
+export const transparentButto = () => (
+  <TransparentButton>Click</TransparentButton>
+);

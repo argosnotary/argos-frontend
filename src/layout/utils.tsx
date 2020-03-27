@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 const sizes: any = {
+  lg: "992px",
   md: "768px",
   sm: "576px"
 };

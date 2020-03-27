@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect } from "react";
+import styled from "styled-components";
 import { useFormik } from "formik";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
@@ -31,6 +32,10 @@ import {
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
+
+const CustomCancelButton = styled(CancelButton)`
+  margin-left: 1rem;
+`;
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -186,7 +191,7 @@ const ManageSupplyChain = () => {
       >
         {updateMode ? "Update supply chain" : "Add supply chain"}
       </LoaderButton>
-      <CancelButton
+      <CustomCancelButton
         buttonType={"button"}
         onClick={() =>
           dispatch({
@@ -195,7 +200,7 @@ const ManageSupplyChain = () => {
         }
       >
         Cancel
-      </CancelButton>
+      </CustomCancelButton>
     </form>
   );
 };

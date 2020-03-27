@@ -49,6 +49,10 @@ import {
 } from "../../../atoms/Modal";
 import CopyInput from "../../../atoms/CopyInput";
 
+const CustomCancelButton = styled(CancelButton)`
+  margin-left: 1rem;
+`;
+
 interface INpaFormValues {
   npaname: string;
 }
@@ -401,7 +405,7 @@ const ManageNpa = () => {
         <LoaderButton buttonType="submit" loading={npaPostState.isLoading}>
           {updateMode ? "Update NPA" : "Add NPA"}
         </LoaderButton>
-        <CancelButton
+        <CustomCancelButton
           buttonType="button"
           onClick={() =>
             dispatch({
@@ -410,7 +414,7 @@ const ManageNpa = () => {
           }
         >
           Cancel
-        </CancelButton>
+        </CustomCancelButton>
       </form>
     </>
   );

@@ -81,7 +81,6 @@ interface ICancelButtonProps {
 }
 
 const CancelButton = styled(Button)<ICancelButtonProps>`
-  margin-left: 1rem;
   background-color: ${props => props.theme.cancelButton.bgColor};
   color: ${props => props.theme.cancelButton.textColor};
   border: 1px solid ${props => props.theme.cancelButton.borderColor};

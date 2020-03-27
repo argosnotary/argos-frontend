@@ -20,35 +20,12 @@ import ContentSeparator from "../../../atoms/ContentSeparator";
 import ISearchResult from "../../../interfaces/ISearchResult";
 import SearchInput from "../../../atoms/SearchInput";
 import useDataApi from "../../../hooks/useDataApi";
-import genericDataFetchReducer, {
-  customGenericDataFetchReducer
-} from "../../../stores/genericDataFetchReducer";
+import { customGenericDataFetchReducer } from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
-import CollapsibleContainerComponent from "../../../atoms/CollapsibleContainer";
-import styled, { ThemeContext } from "styled-components";
+import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
-import DataCheckbox from "../../../atoms/DataCheckbox";
-
-const PermissionsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const PermissionLabel = styled.label`
-  display: flex;
-  position: relative;
-  padding: 0.25rem;
-  align-items: center;
-`;
-
-interface IPermissionsComponentProps {
-  labelId: string;
-  accountId: string;
-  accountName: string;
-  collapsedByDefault: boolean;
-}
+import UserAuthorizationComponent from "../../../molecules/UserAuthorizationComponent";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
@@ -80,150 +57,6 @@ interface ISearchUserApiResponse {
   isLoading: boolean;
   data: Array<ISearchApiUser>;
 }
-
-interface IPermissionsApiState {
-  isLoading: boolean;
-  data: IUserPermissions;
-}
-
-interface IPermission {
-  id: string;
-  label: string;
-}
-
-interface IUserPermissions {
-  labelId: string;
-  permissions: Array<string>;
-}
-
-const permissionTypes = [
-  { id: "LAYOUT_ADD", label: "add a layout" },
-  { id: "LINK_ADD", label: "add a link" },
-  { id: "LOCAL_PERMISSION_EDIT", label: "change permissions" },
-  { id: "TREE_EDIT", label: "change tree" },
-  { id: "READ", label: "read" },
-  { id: "VERIFY", label: "verify supply chains" },
-  { id: "NPA_EDIT", label: "add npa" }
-];
-
-const PermissionsComponent: React.FC<IPermissionsComponentProps> = ({
-  labelId,
-  accountId,
-  accountName,
-  collapsedByDefault
-}) => {
-  const [
-    updatePermissionApiResponse,
-    setUpdatePermissionApiRequest
-  ] = useDataApi(genericDataFetchReducer);
-
-  const [permissionsApiResponse, setPermissionsApiRequest] = useDataApi<
-    IPermissionsApiState,
-    IUserPermissions
-  >(customGenericDataFetchReducer);
-
-  const [localStorageToken] = useToken();
-
-  const theme = useContext(ThemeContext);
-
-  const shouldBeChecked = (permission: IPermission): boolean => {
-    if (!permissionsApiResponse.data.permissions) {
-      return false;
-    }
-
-    return (
-      permissionsApiResponse.data.permissions.findIndex(
-        (entry: any) => entry === permission.id
-      ) > -1
-    );
-  };
-
-  useEffect(() => {
-    if (!collapsedByDefault) {
-      const dataRequest: DataRequest = {
-        method: "get",
-        token: localStorageToken,
-        url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
-      };
-
-      setPermissionsApiRequest(dataRequest);
-    }
-  }, [accountId]);
-
-  return (
-    <CollapsibleContainerComponent
-      collapsedByDefault={collapsedByDefault}
-      title={`Permissions for ${accountName}`}
-      onCollapse={() => {
-        if (permissionsApiResponse && permissionsApiResponse.data) {
-          return;
-        }
-
-        const dataRequest: DataRequest = {
-          method: "get",
-          token: localStorageToken,
-          url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
-        };
-
-        setPermissionsApiRequest(dataRequest);
-      }}
-    >
-      <PermissionsContainer>
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            const formData = new FormData(e.currentTarget);
-            const permissions = [];
-
-            for (const [_key, value] of formData.entries()) {
-              permissions.push(value);
-            }
-
-            const dataRequest: DataRequest = {
-              method: "put",
-              data: [...permissions],
-              token: localStorageToken,
-              url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
-            };
-
-            setUpdatePermissionApiRequest(dataRequest);
-          }}
-        >
-          {permissionsApiResponse.isLoading ? (
-            <AlternateLoader size={32} color={theme.alternateLoader.color} />
-          ) : null}
-          {Object.prototype.hasOwnProperty.call(permissionsApiResponse, "data")
-            ? permissionTypes.map(permission => {
-                return (
-                  <PermissionLabel htmlFor={permission.id} key={permission.id}>
-                    <DataCheckbox
-                      initialCheckedValue={shouldBeChecked(permission)}
-                      type="checkbox"
-                      name={permission.id}
-                      value={permission.id}
-                      id={permission.id}
-                      parentIsLoading={updatePermissionApiResponse.isLoading}
-                      parentPutError={
-                        updatePermissionApiResponse.error ? true : false
-                      }
-                      onChange={e =>
-                        e.currentTarget
-                          .closest("form")
-                          ?.dispatchEvent(
-                            new Event("submit", { cancelable: true })
-                          )
-                      }
-                    />
-                    {permission.label}
-                  </PermissionLabel>
-                );
-              })
-            : null}
-        </form>
-      </PermissionsContainer>
-    </CollapsibleContainerComponent>
-  );
-};
 
 const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
   selectedLabelId
@@ -287,12 +120,13 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
           {allKnownUsers
             .filter((entry: any) => entry.id !== user.id)
             .map((knownUser: any) => (
-              <PermissionsComponent
+              <UserAuthorizationComponent
                 key={knownUser.id}
                 labelId={selectedLabelId}
                 accountId={knownUser.id}
                 accountName={knownUser.name}
                 collapsedByDefault={true}
+                type="label"
               />
             ))}
         </>
@@ -328,14 +162,17 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
           setSearchUserApiRequest(dataRequest);
         }}
         isLoading={searchUserApiResponse.isLoading}
+        defaultLabel={"Search user"}
+        onSelectLabel={"Selected user"}
       />
       {Object.keys(user).length > 0 ? (
         <>
-          <PermissionsComponent
+          <UserAuthorizationComponent
             labelId={selectedLabelId}
             accountId={user.id}
             accountName={user.name}
             collapsedByDefault={false}
+            type="label"
           />
         </>
       ) : null}

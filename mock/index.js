@@ -25,6 +25,25 @@ app.get(config.apiUrl, (_req, res) => {
   res.send({});
 });
 
+const mePersonalAccount = {
+  id: "06125d50-b0e6-4015-8b8b-6a72eb16e929",
+  name: "Luke Skywalker",
+  email: "luke@skywalker.imp",
+  roles: [
+    {
+      id: "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
+      name: "administrator",
+      permissions: [
+        "READ",
+        "LOCAL_PERMISSION_EDIT",
+        "TREE_EDIT",
+        "VERIFY",
+        "ASSIGN_ROLE"
+      ]
+    }
+  ]
+};
+
 const dummyPersonalAccounts = [
   {
     id: "9199f4c3-6643-4a89-9daa-b84eb62aa186",
@@ -45,6 +64,10 @@ const dummyPersonalAccounts = [
     permissions: ["LAYOUT_ADD"]
   }
 ];
+
+app.get(`${config.apiUrl}/personalaccount/me`, (_req, res) => {
+  res.send(mePersonalAccount);
+});
 
 app.get(
   `${config.apiUrl}/personalaccount/:accountId/localpermission/:labelId`,

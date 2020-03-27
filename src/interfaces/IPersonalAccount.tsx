@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import IRole from "./IRole";
 
-Enzyme.configure({ adapter: new Adapter() });
+interface IPersonalAccount {
+  id: string;
+  name: string;
+  email: string;
+  roles: Array<IRole>;
+}
 
-import MutationObserver from "@sheerun/mutationobserver-shim";
-// eslint-disable-next-line no-undef
-window.MutationObserver = MutationObserver;
+export default IPersonalAccount;
