@@ -13,18 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect } from "react";
-import styled from "styled-components";
-import { useFormik } from "formik";
+import React, { useContext, useEffect, useState } from "react";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
-import InputErrorLabel from "../../../atoms/InputErrorLabel";
-import { LoaderButton, CancelButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
 import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
-import FormInput from "../../../molecules/FormInput";
 import {
   StateContext,
   LayoutEditorDataActionTypes,
@@ -32,14 +27,21 @@ import {
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-
-const CustomCancelButton = styled(CancelButton)`
-  margin-left: 1rem;
-`;
+import GenericForm, {
+  IGenericFormSchema
+} from "../../../organisms/GenericForm";
 
 interface ILabelNameFormValues {
   labelname: string;
 }
+
+const formSchema: IGenericFormSchema = [
+  {
+    labelValue: "Label name*",
+    name: "labelname",
+    formType: "text"
+  }
+];
 
 const validate = (values: ILabelNameFormValues) => {
   const errors = {} as any;
@@ -61,6 +63,10 @@ const ManageLabel = () => {
     genericDataFetchReducer
   );
 
+  const [initialFormValues, setInitialFormValues] = useState(
+    {} as ILabelNameFormValues
+  );
+
   const postNewLabel = (values: ILabelNameFormValues) => {
     const data: any = {};
 
@@ -80,7 +86,6 @@ const ManageLabel = () => {
           type: LayoutEditorDataActionTypes.POST_NEW_LABEL,
           label
         });
-        formik.resetForm();
       }
     };
 
@@ -110,46 +115,24 @@ const ManageLabel = () => {
           type: LayoutEditorDataActionTypes.PUT_LABEL,
           label
         });
-        formik.resetForm();
       }
     };
 
     setLabelPostRequest(dataRequest);
   };
 
-  const formik = useFormik({
-    initialValues: {
-      labelname: ""
-    },
-    onSubmit: values => {
-      if (
-        state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
-      ) {
-        postNewLabel(values);
-      }
-
-      if (
-        state.firstPanelView ===
-        LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
-      ) {
-        updateLabel(values);
-      }
-    },
-    validate
-  });
-
   useEffect(() => {
     if (
       state.firstPanelView ===
       LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
     ) {
-      formik.setValues({ labelname: state.selectedNodeName });
+      setInitialFormValues({ labelname: state.selectedNodeName });
     }
 
     if (
       state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
     ) {
-      formik.setValues({ labelname: "" });
+      setInitialFormValues({ labelname: "" });
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
@@ -157,7 +140,7 @@ const ManageLabel = () => {
     state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <>
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -170,32 +153,36 @@ const ManageLabel = () => {
           <ContentSeparator />
         </>
       ) : null}
-      <FormInput
-        labelValue="Label name*"
-        name="labelname"
-        formType="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.labelname}
-      />
-      {formik.touched.labelname && formik.errors.labelname ? (
-        <InputErrorLabel>{formik.errors.labelname}</InputErrorLabel>
-      ) : null}
-      <ContentSeparator />
-      <LoaderButton buttonType="submit" loading={labelPostState.isLoading}>
-        {!updateMode ? "Add label" : "Update label"}
-      </LoaderButton>
-      <CustomCancelButton
-        buttonType={"button"}
-        onClick={() =>
+      <GenericForm
+        schema={formSchema}
+        permission={"edit"}
+        isLoading={labelPostState.isLoading}
+        validate={validate}
+        onCancel={() => {
           dispatch({
             type: LayoutEditorPaneActionTypes.RESET_PANE
-          })
-        }
-      >
-        Cancel
-      </CustomCancelButton>
-    </form>
+          });
+        }}
+        onSubmit={values => {
+          if (
+            state.firstPanelView ===
+            LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+          ) {
+            postNewLabel(values);
+          }
+
+          if (
+            state.firstPanelView ===
+            LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+          ) {
+            updateLabel(values);
+          }
+        }}
+        confirmationLabel={!updateMode ? "Add label" : "Update label"}
+        cancellationLabel={"Cancel"}
+        initialValues={initialFormValues}
+      />
+    </>
   );
 };
 

@@ -29,6 +29,7 @@ interface IFormInputProps {
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   formType: string;
+  disabled?: boolean;
 }
 
 const FormInputContainer = styled.div`
@@ -44,11 +45,13 @@ const FormInput: React.FC<IFormInputProps> = ({
   onChange,
   name,
   formType,
-  defaultValue
+  defaultValue,
+  disabled
 }) => (
   <FormInputContainer>
     <InputLabel>{labelValue}</InputLabel>
     <Input
+      disabled={disabled}
       name={name}
       {...(onBlur ? { onBlur } : "")}
       {...(onChange ? { onChange } : "")}

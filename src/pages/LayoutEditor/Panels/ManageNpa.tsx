@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect, useState } from "react";
-import { useFormik } from "formik";
 import styled, {
   css,
   FlattenInterpolation,
@@ -22,12 +21,10 @@ import styled, {
 } from "styled-components";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
-import InputErrorLabel from "../../../atoms/InputErrorLabel";
-import { CancelButton, LoaderButton } from "../../../atoms/Button";
+import { CancelButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
-import FormInput from "../../../molecules/FormInput";
 import {
   StateContext,
   LayoutEditorDataActionTypes,
@@ -48,10 +45,9 @@ import {
   Modal
 } from "../../../atoms/Modal";
 import CopyInput from "../../../atoms/CopyInput";
-
-const CustomCancelButton = styled(CancelButton)`
-  margin-left: 1rem;
-`;
+import GenericForm, {
+  IGenericFormSchema
+} from "../../../organisms/GenericForm";
 
 interface INpaFormValues {
   npaname: string;
@@ -64,6 +60,14 @@ enum WizardStates {
 const CloseButton = styled(CancelButton)`
   margin: 0;
 `;
+
+const formSchema: IGenericFormSchema = [
+  {
+    labelValue: "Non personal account name*",
+    name: "npaname",
+    formType: "text"
+  }
+];
 
 const validate = (values: INpaFormValues) => {
   const errors = {} as any;
@@ -131,6 +135,10 @@ const ManageNpa = () => {
   const [npaPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
   const [_npaGetRequestState, setNpaGetRequest] = useDataApi(
     genericDataFetchReducer
+  );
+
+  const [initialFormValues, setInitialFormValues] = useState(
+    {} as INpaFormValues
   );
 
   const [npaKeyId, setNpaKeyId] = useState("");
@@ -203,7 +211,6 @@ const ManageNpa = () => {
           type: LayoutEditorDataActionTypes.PUT_NPA,
           npa
         });
-        formik.resetForm();
       }
     };
 
@@ -223,39 +230,18 @@ const ManageNpa = () => {
     setNpaGetRequest(dataRequest);
   };
 
-  const formik = useFormik({
-    initialValues: {
-      npaname: ""
-    },
-    onSubmit: values => {
-      if (
-        state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
-      ) {
-        postNewNpa(values);
-      }
-
-      if (
-        state.firstPanelView ===
-        LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
-      ) {
-        updateNpa(values);
-      }
-    },
-    validate
-  });
-
   useEffect(() => {
     if (
       state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
     ) {
-      formik.setValues({ npaname: state.selectedNodeName });
+      setInitialFormValues({ npaname: state.selectedNodeName });
       getKeyId(state.nodeReferenceId);
     }
 
     if (
       state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
     ) {
-      formik.setValues({ npaname: "" });
+      setInitialFormValues({ npaname: "" });
     }
 
     if (
@@ -389,33 +375,35 @@ const ManageNpa = () => {
           <ContentSeparator />
         </>
       ) : null}
-      <form onSubmit={formik.handleSubmit}>
-        <FormInput
-          labelValue="Non personal account name*"
-          name="npaname"
-          formType="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.npaname}
-        />
-        {formik.touched.npaname && formik.errors.npaname ? (
-          <InputErrorLabel>{formik.errors.npaname}</InputErrorLabel>
-        ) : null}
-        <ContentSeparator />
-        <LoaderButton buttonType="submit" loading={npaPostState.isLoading}>
-          {updateMode ? "Update NPA" : "Add NPA"}
-        </LoaderButton>
-        <CustomCancelButton
-          buttonType="button"
-          onClick={() =>
-            dispatch({
-              type: LayoutEditorPaneActionTypes.RESET_PANE
-            })
+      <GenericForm
+        schema={formSchema}
+        permission={"edit"}
+        isLoading={npaPostState.isLoading}
+        validate={validate}
+        onCancel={() => {
+          dispatch({
+            type: LayoutEditorPaneActionTypes.RESET_PANE
+          });
+        }}
+        onSubmit={values => {
+          if (
+            state.firstPanelView ===
+            LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
+          ) {
+            postNewNpa(values);
           }
-        >
-          Cancel
-        </CustomCancelButton>
-      </form>
+
+          if (
+            state.firstPanelView ===
+            LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
+          ) {
+            updateNpa(values);
+          }
+        }}
+        confirmationLabel={updateMode ? "Update NPA" : "Add NPA"}
+        cancellationLabel={"Cancel"}
+        initialValues={initialFormValues}
+      />
     </>
   );
 };
