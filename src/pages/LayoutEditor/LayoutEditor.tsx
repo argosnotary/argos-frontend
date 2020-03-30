@@ -23,7 +23,11 @@ import ITreeNode from "../../interfaces/ITreeNode";
 import TreeEditor from "../../molecules/TreeEditor/TreeEditor";
 import useDataApi from "../../hooks/useDataApi";
 import useToken from "../../hooks/useToken";
-import { initialTreeState, treeReducer } from "../../stores/treeEditorStore";
+import {
+  initialTreeState,
+  ITreeStateContext,
+  treeReducer
+} from "../../stores/treeEditorStore";
 
 import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 
@@ -32,8 +36,7 @@ import {
   StateContext,
   LayoutEditorDataActionTypes,
   LayoutEditorPaneActionTypes,
-  LayoutEditorPaneActionType,
-  LayoutEditorDataActionType
+  LayoutEditorPaneActionType
 } from "../../stores/layoutEditorStore";
 import {
   appendObjectToTree,
@@ -46,9 +49,10 @@ import genericDataFetchReducer, {
 } from "../../stores/genericDataFetchReducer";
 import ManageSupplyChain from "./Panels/ManageSupplyChain";
 import ManageNpa from "./Panels/ManageNpa";
-import { TreeNodeTypes } from "../../types/TreeNodeType";
 import { PanelsContainer, Panel } from "../../molecules/Panel";
 import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
+import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
+import { PermissionTypes } from "../../types/PermissionType";
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
@@ -65,21 +69,12 @@ const LayoutEditor = () => {
     url: "/api/hierarchy"
   };
 
-  interface ITreeDataStateNode {
-    name: string;
-    type: string;
-    referenceId: string;
-    hasChildren: boolean;
-    children: Array<ITreeDataStateNode>;
-    permissions: Array<string>;
-  }
-
   interface ITreeDataState {
     isLoading: boolean;
-    data: Array<ITreeDataStateNode>;
+    data: Array<ITreeNode>;
   }
 
-  const [treeDataState] = useDataApi<ITreeDataState, Array<ITreeDataStateNode>>(
+  const [treeDataState] = useDataApi<ITreeDataState, Array<ITreeNode>>(
     customGenericDataFetchReducer,
     getTreeDataRequest
   );
@@ -144,7 +139,7 @@ const LayoutEditor = () => {
     }
   ];
 
-  const treeContextMenu = [
+  const treeContextMenu: Array<ITreeContextMenuEntry> = [
     {
       type: "LABEL",
       menuitems: [
@@ -155,6 +150,12 @@ const LayoutEditor = () => {
               LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
               node
             );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0
+            );
           }
         },
         {
@@ -163,6 +164,12 @@ const LayoutEditor = () => {
             treeContextMenuCb(
               LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
               node
+            );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0
             );
           }
         },
@@ -173,6 +180,12 @@ const LayoutEditor = () => {
               LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
               node
             );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0
+            );
           }
         },
         {
@@ -181,6 +194,13 @@ const LayoutEditor = () => {
             treeContextMenuCb(
               LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
               node
+            );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.LOCAL_PERMISSION_EDIT) >
+                0
             );
           }
         }
@@ -195,6 +215,12 @@ const LayoutEditor = () => {
             treeContextMenuCb(
               LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
               node
+            );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0
             );
           }
         }
@@ -247,19 +273,6 @@ const LayoutEditor = () => {
     }
   };
 
-  const getNodeTypeFromAction = (action: LayoutEditorDataActionType) => {
-    switch (action) {
-      case LayoutEditorDataActionTypes.POST_NEW_LABEL:
-        return TreeNodeTypes.LABEL;
-      case LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN:
-        return TreeNodeTypes.SUPPLY_CHAIN;
-      case LayoutEditorDataActionTypes.POST_NEW_NPA:
-        return TreeNodeTypes.NON_PERSONAL_ACCOUNT;
-      default:
-        return TreeNodeTypes.UNSPECIFIED;
-    }
-  };
-
   const getPanelTitleFromState = (pane: string): string => {
     switch (pane) {
       case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
@@ -290,13 +303,27 @@ const LayoutEditor = () => {
       state.dataAction === LayoutEditorDataActionTypes.POST_NEW_NPA ||
       state.dataAction === LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
     ) {
-      appendObjectToTree(
-        treeState,
-        treeDispatch,
-        dispatch,
-        state.data,
-        getNodeTypeFromAction(state.dataAction as LayoutEditorDataActionType)
-      );
+      const hierarchyDataRequest: DataRequest = {
+        params: {
+          HierarchyMode: "NONE"
+        },
+        method: "get",
+        token: localStorageToken,
+        url: `/api/hierarchy/${state.data.id}`,
+        cbSuccess: (node: ITreeNode) => {
+          appendObjectToTree(
+            treeState,
+            treeDispatch,
+            node,
+            state.data.parentLabelId
+          );
+          dispatch({
+            type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+            data: state.data
+          });
+        }
+      };
+      setTreeChildrenApiRequest(hierarchyDataRequest);
     }
 
     if (
@@ -309,7 +336,7 @@ const LayoutEditor = () => {
     }
   }, [state.data, state.dataAction]);
 
-  const treeContext = {
+  const treeContext: ITreeStateContext = {
     treeState,
     treeDispatch,
     treeStringList,

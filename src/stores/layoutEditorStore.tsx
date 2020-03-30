@@ -69,17 +69,6 @@ export type LayoutEditorPaneActionType =
   | LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
   | LayoutEditorPaneActionTypes.RESET_PANE;
 
-export type LayoutEditorDataActionType =
-  | LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED
-  | LayoutEditorDataActionTypes.POST_NEW_LABEL
-  | LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
-  | LayoutEditorDataActionTypes.POST_NEW_NPA
-  | LayoutEditorDataActionTypes.POST_NEW_NPA_KEY
-  | LayoutEditorDataActionTypes.PUT_LABEL
-  | LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN
-  | LayoutEditorDataActionTypes.PUT_NPA
-  | LayoutEditorDataActionTypes.STORE_SEARCHED_USER;
-
 export type LayoutEditorPaneAction =
   | {
       type: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE;

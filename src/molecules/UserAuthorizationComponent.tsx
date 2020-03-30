@@ -84,7 +84,8 @@ const permissionTypes = [
   { id: "LOCAL_PERMISSION_EDIT", label: "change permissions" },
   { id: "TREE_EDIT", label: "change tree" },
   { id: "READ", label: "read" },
-  { id: "VERIFY", label: "verify supply chains" }
+  { id: "VERIFY", label: "verify supply chains" },
+  { id: "NPA_EDIT", label: "add npa" }
 ];
 
 const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = ({

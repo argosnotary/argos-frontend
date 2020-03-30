@@ -33,6 +33,7 @@ import {
 } from "../../stores/treeEditorStore";
 import ITreeContextMenuItem from "../../interfaces/ITreeContextMenuItem";
 import FlexColumn from "../../atoms/FlexColumn";
+import TreeHeadLabel, { TreeHeadLabelSpan } from "./TreeHeadLabel";
 
 interface ITreeEditorProps {
   data: Array<ITreeNode>;
@@ -42,10 +43,6 @@ interface ITreeEditorProps {
 
 interface ITreeNodeContainerProps {
   depth: number;
-}
-
-interface ITreeHeadLabelProps {
-  selected: boolean;
 }
 
 interface IParentNodeProps {
@@ -80,22 +77,6 @@ export const TreeHead = styled.button`
 
   &:hover {
     cursor: pointer;
-  }
-`;
-
-export const TreeHeadLabel = styled.span<ITreeHeadLabelProps>`
-  user-select: none;
-  cursor: pointer;
-  padding: 0.1rem 0.4rem;
-  border: 1px solid transparent;
-  background-color: ${props =>
-    props.selected
-      ? props.theme.treeEditor.treeHeadLabel.bgColor
-      : "transparent"};
-
-  &:hover {
-    background-color: ${props => props.theme.treeEditor.treeHeadLabel.bgColor};
-    border-radius: 2px;
   }
 `;
 
@@ -169,22 +150,24 @@ const renderContextMenu = (
   dispatch: Dispatch<TreeReducerAction>,
   menuitems: Array<ITreeContextMenuItem>
 ) => {
-  return menuitems.map((item, index) => (
-    <React.Fragment key={index}>
-      <NodeContextMenuItem
-        key={index}
-        onClick={() => {
-          item.callback(node);
-          dispatch({ type: TreeReducerActionTypes.HIDECONTEXTMENU });
-        }}
-      >
-        {item.label}
-      </NodeContextMenuItem>
-      {menuitems.length > 1 && index < menuitems.length - 1 ? (
-        <NodeContextMenuItemSeparator />
-      ) : null}
-    </React.Fragment>
-  ));
+  return menuitems
+    .filter(item => item.visible(node))
+    .map((item, index) => (
+      <React.Fragment key={index}>
+        <NodeContextMenuItem
+          key={index}
+          onClick={() => {
+            item.callback(node);
+            dispatch({ type: TreeReducerActionTypes.HIDECONTEXTMENU });
+          }}
+        >
+          {item.label}
+        </NodeContextMenuItem>
+        {menuitems.length > 1 && index < menuitems.length - 1 ? (
+          <NodeContextMenuItemSeparator />
+        ) : null}
+      </React.Fragment>
+    ));
 };
 
 const NodeContextMenu: React.FC<INodeContextMenu> = ({ node }) => {
@@ -272,39 +255,8 @@ export const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
       <TypeIconContainer hasChildren={node.hasChildren}>
         {renderTypeIcon(theme, node.type)}
       </TypeIconContainer>
-      <TreeHeadLabel
-        selected={
-          treeContext.treeState.contextMenu.id === node.referenceId ||
-          treeContext.selectedNodeReferenceId === node.referenceId
-        }
-        onContextMenu={e => {
-          const hasContextMenu = treeContext.treeContextMenu.find(
-            entry => entry.type === node.type
-          );
+      <TreeHeadLabel node={node} />
 
-          if (hasContextMenu) {
-            const { clientX, clientY } = e;
-            e.preventDefault();
-            treeContext.treeDispatch({
-              type: TreeReducerActionTypes.SHOWCONTEXTMENU,
-              id: node.referenceId,
-              clientX,
-              clientY
-            });
-          }
-        }}
-        onClick={() => {
-          const typeClickHandler = treeContext.treeClickHandlers.find(
-            handler => handler.type === node.type
-          );
-
-          if (typeClickHandler) {
-            typeClickHandler.callback(node);
-          }
-        }}
-      >
-        {node.name}
-      </TreeHeadLabel>
       {treeContext.treeState.contextMenu.show &&
       treeContext.treeState.contextMenu.id === node.referenceId ? (
         <NodeContextMenu node={node} />
@@ -343,9 +295,12 @@ export const AddAdditionalRootNodes = () => {
           color={theme.treeEditor.iconColors.addRootNode}
         />
       </IconContainer>
-      <TreeHeadLabel selected={false} onClick={treeContext.cbCreateRootNode}>
+      <TreeHeadLabelSpan
+        selected={false}
+        onClick={treeContext.cbCreateRootNode}
+      >
         {treeContext.treeStringList.createrootnode}
-      </TreeHeadLabel>
+      </TreeHeadLabelSpan>
     </TreeNodeContainer>
   );
 };

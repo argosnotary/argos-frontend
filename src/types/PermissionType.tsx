@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {PermissionTypes} from "../types/PermissionType";
-
-export default interface ITreeNode {
-  hasChildren: boolean;
-  name: string;
-  type: string;
-  referenceId: string;
-  children?: Array<ITreeNode>;
-  permissions?: Array<PermissionTypes>;
+export enum PermissionTypes {
+  READ = "READ",
+  TREE_EDIT = "TREE_EDIT",
+  LOCAL_PERMISSION_EDIT = "LOCAL_PERMISSION_EDIT",
+  ASSIGN_ROLE = "ASSIGN_ROLE",
+  LINK_ADD = "LINK_ADD",
+  LAYOUT_ADD = "LAYOUT_ADD",
+  VERIFY = "VERIFY",
+  NPA_EDIT = "NPA_EDIT"
 }
+
+export type PermissionType = PermissionTypes.READ | PermissionTypes.TREE_EDIT | PermissionTypes.LOCAL_PERMISSION_EDIT
+    | PermissionTypes.ASSIGN_ROLE | PermissionTypes.LINK_ADD | PermissionTypes.LAYOUT_ADD | PermissionTypes.VERIFY
+    | PermissionTypes.NPA_EDIT

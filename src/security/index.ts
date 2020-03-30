@@ -137,8 +137,6 @@ const generateKey = async (hashKeyPassphrase = false) => {
       new TextEncoder().encode(password)
     );
 
-    console.log(hashedPassphrase);
-
     const encodedKeyId = new TextEncoder().encode(keyObj.keys.keyId);
     const hashedCombination = await crypto.subtle.digest(
       "SHA-512",
