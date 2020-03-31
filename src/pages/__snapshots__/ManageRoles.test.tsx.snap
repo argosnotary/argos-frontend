@@ -258,7 +258,7 @@ exports[`renders correctly 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-bwzfXH",
                                           "isStatic": false,
-                                          "lastClassName": "dLymFD",
+                                          "lastClassName": "hCflNK",
                                           "rules": Array [
                                             "
   overflow: visible;
@@ -268,7 +268,9 @@ exports[`renders correctly 1`] = `
   padding: 0.5rem;
   border: 1px solid #cacaca;
   border-radius: 0;
-  background-color: #fefefe;
+  background-color: ",
+                                            [Function],
+                                            ";
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   font-size: 1rem;
@@ -277,6 +279,12 @@ exports[`renders correctly 1`] = `
   color: #0a0a0a;
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
+
+  &:hover {
+    cursor: ",
+                                            [Function],
+                                            ";
+  }
 
   &:focus {
     outline: none;
@@ -302,7 +310,7 @@ exports[`renders correctly 1`] = `
                                     type="text"
                                   >
                                     <input
-                                      className="sc-bwzfXH dLymFD"
+                                      className="sc-bwzfXH hCflNK"
                                       name="searchinput"
                                       onChange={[Function]}
                                       type="text"
@@ -323,6 +331,21 @@ exports[`renders correctly 1`] = `
                 accountName="Luke Skywalker"
                 collapsedByDefault={true}
                 key="06125d50-b0e6-4015-8b8b-6a72eb16e929"
+                roles={
+                  Array [
+                    Object {
+                      "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
+                      "name": "administrator",
+                      "permissions": Array [
+                        "READ",
+                        "LOCAL_PERMISSION_EDIT",
+                        "TREE_EDIT",
+                        "VERIFY",
+                        "ASSIGN_ROLE",
+                      ],
+                    },
+                  ]
+                }
                 type="role"
               >
                 <CollapsibleContainerComponent

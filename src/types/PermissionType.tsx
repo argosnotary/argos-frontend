@@ -24,6 +24,12 @@ export enum PermissionTypes {
   NPA_EDIT = "NPA_EDIT"
 }
 
-export type PermissionType = PermissionTypes.READ | PermissionTypes.TREE_EDIT | PermissionTypes.LOCAL_PERMISSION_EDIT
-    | PermissionTypes.ASSIGN_ROLE | PermissionTypes.LINK_ADD | PermissionTypes.LAYOUT_ADD | PermissionTypes.VERIFY
-    | PermissionTypes.NPA_EDIT
+export type PermissionType =
+  | PermissionTypes.READ
+  | PermissionTypes.TREE_EDIT
+  | PermissionTypes.LOCAL_PERMISSION_EDIT
+  | PermissionTypes.ASSIGN_ROLE
+  | PermissionTypes.LINK_ADD
+  | PermissionTypes.LAYOUT_ADD
+  | PermissionTypes.VERIFY
+  | PermissionTypes.NPA_EDIT;
