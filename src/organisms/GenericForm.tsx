@@ -111,19 +111,23 @@ const GenericForm: React.FC<IGenericForm> = ({
     <FormContainer>
       <form onSubmit={formik.handleSubmit}>
         {renderFormElements(formik, schema)}
-        <ContentSeparator />
-        <FlexRow>
-          <LoaderButton buttonType="submit" loading={isLoading}>
-            {confirmationLabel}
-          </LoaderButton>
-          <CustomCancelButton
-            data-testhook="cancel-button"
-            type="button"
-            onClick={() => onCancel()}
-          >
-            {cancellationLabel}
-          </CustomCancelButton>
-        </FlexRow>
+        {permission === FormPermissions.EDIT ? (
+          <>
+            <ContentSeparator />
+            <FlexRow>
+              <LoaderButton buttonType="submit" loading={isLoading}>
+                {confirmationLabel}
+              </LoaderButton>
+              <CustomCancelButton
+                data-testhook="cancel-button"
+                type="button"
+                onClick={() => onCancel()}
+              >
+                {cancellationLabel}
+              </CustomCancelButton>
+            </FlexRow>
+          </>
+        ) : null}
       </form>
     </FormContainer>
   );

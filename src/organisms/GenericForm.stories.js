@@ -80,7 +80,7 @@ export const genericForm = () => (
       confirmationLabel={"Submit"}
       cancellationLabel={"Cancel"}
       initialValues={{
-        name: "",
+        name: "Luke",
         email: ""
       }}
     />
