@@ -76,11 +76,7 @@ const LoaderButton: React.FC<ILoaderButtonProps> = ({
   return <Button type={buttonType}>{children}</Button>;
 };
 
-interface ICancelButtonProps {
-  buttonType: "button" | "submit" | "reset";
-}
-
-const CancelButton = styled(Button)<ICancelButtonProps>`
+const CancelButton = styled(Button)`
   background-color: ${props => props.theme.cancelButton.bgColor};
   color: ${props => props.theme.cancelButton.textColor};
   border: 1px solid ${props => props.theme.cancelButton.borderColor};

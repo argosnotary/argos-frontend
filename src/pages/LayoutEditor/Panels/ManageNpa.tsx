@@ -276,7 +276,7 @@ const ManageNpa = () => {
         <PasswordView password={generatedPassword} margin={"0 0 1rem"} />
         <FlexRow>
           <CloseButton
-            buttonType={"button"}
+            type="button"
             onClick={() =>
               dispatch({
                 type: LayoutEditorPaneActionTypes.RESET_PANE
@@ -377,7 +377,7 @@ const ManageNpa = () => {
       ) : null}
       <GenericForm
         schema={formSchema}
-        permission={"edit"}
+        permission={state.panePermission}
         isLoading={npaPostState.isLoading}
         validate={validate}
         onCancel={() => {

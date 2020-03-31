@@ -44,7 +44,7 @@ const formSchema: IGenericFormSchema = [
 ];
 
 const validate = (values: ISupplyChainNameFormValues) => {
-  const errors = {} as any;
+  const errors = {} as ISupplyChainNameFormValues;
 
   if (!values.supplychainname) {
     errors.supplychainname = "Please fill in a supply chain name.";
@@ -157,7 +157,7 @@ const ManageSupplyChain = () => {
       ) : null}
       <GenericForm
         schema={formSchema}
-        permission={"edit"}
+        permission={state.panePermission}
         isLoading={supplyChainApiResponseState.isLoading}
         validate={validate}
         onCancel={() => {

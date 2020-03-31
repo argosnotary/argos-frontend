@@ -53,6 +53,7 @@ import { PanelsContainer, Panel } from "../../molecules/Panel";
 import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
+import { FormPermissions } from "../../types/FormPermission";
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
@@ -60,8 +61,10 @@ const LayoutEditor = () => {
     nodeReferenceId: "",
     nodeParentId: "",
     breadcrumb: "",
-    selectedNodeName: ""
+    selectedNodeName: "",
+    panePermission: FormPermissions.READ
   });
+
   const [localStorageToken] = useToken();
   const getTreeDataRequest: DataRequest = {
     method: "get",
@@ -88,6 +91,26 @@ const LayoutEditor = () => {
     createrootnode: "Create base label..."
   };
 
+  const getPanePermission = (node: ITreeNode) => {
+    let userHasEditPermission = false;
+
+    switch (node.type) {
+      case "LABEL":
+      case "SUPPLY_CHAIN":
+        userHasEditPermission =
+          node.permissions !== undefined &&
+          node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0;
+        break;
+      case "NON_PERSONAL_ACCOUNT":
+        userHasEditPermission =
+          node.permissions !== undefined &&
+          node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0;
+        break;
+    }
+
+    return userHasEditPermission ? FormPermissions.EDIT : FormPermissions.READ;
+  };
+
   const treeContextMenuCb = (
     type: LayoutEditorPaneActionType,
     node: ITreeNode
@@ -105,6 +128,7 @@ const LayoutEditor = () => {
       nodeReferenceId: node.referenceId,
       nodeParentId: trail.length > 1 ? trail[trail.length - 2].referenceId : "",
       breadcrumb,
+      panePermission: getPanePermission(node),
       selectedNodeName
     });
   };

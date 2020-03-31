@@ -14,7 +14,16 @@
  * limitations under the License.
  */
 import React from "react";
+import styled from "styled-components";
+
 import GenericForm from "./GenericForm";
+import FlexRow from "../atoms/FlexRow";
+
+const Container = styled(FlexRow)`
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  width: 50%;
+`;
 
 export default {
   title: "Forms"
@@ -22,8 +31,18 @@ export default {
 
 const dummyScheme = [
   {
-    labelValue: "Label name*",
-    name: "labelname",
+    labelValue: "Name*",
+    name: "name",
+    formType: "text"
+  },
+  {
+    labelValue: "Email*",
+    name: "email",
+    formType: "text"
+  },
+  {
+    labelValue: "Phonenumber*",
+    name: "phonenumber",
     formType: "text"
   }
 ];
@@ -31,11 +50,16 @@ const dummyScheme = [
 const validate = values => {
   const errors = {};
 
-  if (!values.labelname) {
-    errors.labelname = "Please fill in a label name.";
-  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.labelname)) {
-    errors.labelname =
-      "Invalid label name (only lowercase alphanumeric characters and underscore allowed).";
+  if (!values.name) {
+    errors.name = "Please fill in a name.";
+  }
+
+  if (!values.email) {
+    errors.email = "Please fill in an email.";
+  }
+
+  if (!values.phonenumber) {
+    errors.phonenumber = "Please fill in an phonenumber.";
   }
 
   return errors;
@@ -46,15 +70,19 @@ const onSubmit = () => {
 };
 
 export const genericForm = () => (
-  <GenericForm
-    schema={dummyScheme}
-    permission={"edit"}
-    validate={validate}
-    onSubmit={onSubmit}
-    confirmationLabel={"Add label"}
-    cancellationLabel={"Cancel"}
-    initialValues={{
-      labelname: ""
-    }}
-  />
+  <Container>
+    <GenericForm
+      schema={dummyScheme}
+      permission={"EDIT"}
+      validate={validate}
+      onSubmit={onSubmit}
+      onCancel={() => alert("Cancelled")}
+      confirmationLabel={"Submit"}
+      cancellationLabel={"Cancel"}
+      initialValues={{
+        name: "",
+        email: ""
+      }}
+    />
+  </Container>
 );

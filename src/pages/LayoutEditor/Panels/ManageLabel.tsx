@@ -155,7 +155,7 @@ const ManageLabel = () => {
       ) : null}
       <GenericForm
         schema={formSchema}
-        permission={"edit"}
+        permission={state.panePermission}
         isLoading={labelPostState.isLoading}
         validate={validate}
         onCancel={() => {
