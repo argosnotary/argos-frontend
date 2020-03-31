@@ -102,7 +102,7 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
     setUpdatePermissionApiRequest
   ] = useDataApi(genericDataFetchReducer);
 
-  const [_updateRolesApiResponse, setUpdateRolesApiRequest] = useDataApi(
+  const [updateRolesApiResponse, setUpdateRolesApiRequest] = useDataApi(
     genericDataFetchReducer
   );
 
@@ -211,8 +211,8 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
           name={role.name}
           value={role.name}
           id={role.id}
-          parentIsLoading={rolesApiResponse.isLoading}
-          parentPutError={rolesApiResponse.error ? true : false}
+          parentIsLoading={updateRolesApiResponse.isLoading}
+          parentPutError={updateRolesApiResponse.error ? true : false}
           onChange={e =>
             e.currentTarget
               .closest("form")
