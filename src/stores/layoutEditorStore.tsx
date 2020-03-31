@@ -101,6 +101,7 @@ export type LayoutEditorPaneAction =
       breadcrumb: string;
       selectedNodeName: string;
       nodeParentId: string;
+      panePermission: FormPermission;
     }
   | {
       type: LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
@@ -116,6 +117,7 @@ export type LayoutEditorPaneAction =
       breadcrumb: string;
       selectedNodeName: string;
       nodeParentId: string;
+      panePermission: FormPermission;
     }
   | {
       type: LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
@@ -222,7 +224,8 @@ const layoutEditorReducer = (
         firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
       return {
@@ -241,7 +244,8 @@ const layoutEditorReducer = (
         firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
       return {
