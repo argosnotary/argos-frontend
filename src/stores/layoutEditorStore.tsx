@@ -78,6 +78,7 @@ export type LayoutEditorPaneAction =
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
+      panePermission: FormPermission;
     }
   | {
       type: LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS;
@@ -193,7 +194,8 @@ const layoutEditorReducer = (
         firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
       return {

@@ -45,6 +45,7 @@ interface IUserAuthorizationComponentProps {
   accountName: string;
   collapsedByDefault: boolean;
   type: "label" | "role";
+  roles?: Array<IRole>;
 }
 
 interface IPermissionsApiState {
@@ -93,7 +94,8 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
   accountId,
   accountName,
   collapsedByDefault,
-  type
+  type,
+  roles
 }) => {
   const [
     updatePermissionApiResponse,
@@ -201,7 +203,7 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
       return null;
     }
 
-    return rolesApiResponse.data.roles.map(role => (
+    return roles?.map(role => (
       <Label htmlFor={role.id} key={role.id}>
         <DataCheckbox
           initialCheckedValue={preCheckRole(role)}

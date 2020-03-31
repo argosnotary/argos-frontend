@@ -258,7 +258,8 @@ const LayoutEditor = () => {
       nodeReferenceId: "",
       nodeParentId: "",
       breadcrumb: "",
-      selectedNodeName: ""
+      selectedNodeName: "",
+      panePermission: FormPermissions.EDIT
     });
   };
 
