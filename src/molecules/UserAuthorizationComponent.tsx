@@ -208,8 +208,8 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
         <DataCheckbox
           initialCheckedValue={preCheckRole(role)}
           type="checkbox"
-          name={role.id}
-          value={role.id}
+          name={role.name}
+          value={role.name}
           id={role.id}
           parentIsLoading={rolesApiResponse.isLoading}
           parentPutError={rolesApiResponse.error ? true : false}
