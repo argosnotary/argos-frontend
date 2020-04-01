@@ -24,7 +24,7 @@ const Input = styled.input`
   padding: 0.5rem;
   border: 1px solid #cacaca;
   border-radius: 0;
-  background-color: #fefefe;
+  background-color: ${props => (props.disabled ? "#e0e0e0" : "#fefefe")};
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   font-size: 1rem;
@@ -33,6 +33,10 @@ const Input = styled.input`
   color: #0a0a0a;
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
+
+  &:hover {
+    cursor: ${props => (props.disabled ? "not-allowed" : "initial")};
+  }
 
   &:focus {
     outline: none;

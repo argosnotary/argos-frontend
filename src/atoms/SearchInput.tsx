@@ -113,7 +113,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
               setSelected(false);
               onCancel();
             }}
-            buttonType={"button"}
+            type="button"
           >
             Cancel
           </CustomCancelButton>

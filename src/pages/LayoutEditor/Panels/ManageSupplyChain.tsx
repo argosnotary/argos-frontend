@@ -13,17 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect } from "react";
-import styled from "styled-components";
-import { useFormik } from "formik";
+import React, { useContext, useEffect, useState } from "react";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
-import InputErrorLabel from "../../../atoms/InputErrorLabel";
-import { LoaderButton, CancelButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
-import FormInput from "../../../molecules/FormInput";
 import {
   StateContext,
   LayoutEditorDataActionTypes,
@@ -32,17 +27,24 @@ import {
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
-
-const CustomCancelButton = styled(CancelButton)`
-  margin-left: 1rem;
-`;
+import GenericForm, {
+  IGenericFormSchema
+} from "../../../organisms/GenericForm";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
 }
 
+const formSchema: IGenericFormSchema = [
+  {
+    labelValue: "Supply chain name*",
+    name: "supplychainname",
+    formType: "text"
+  }
+];
+
 const validate = (values: ISupplyChainNameFormValues) => {
-  const errors = {} as any;
+  const errors = {} as ISupplyChainNameFormValues;
 
   if (!values.supplychainname) {
     errors.supplychainname = "Please fill in a supply chain name.";
@@ -59,6 +61,10 @@ const ManageSupplyChain = () => {
   const [state, dispatch] = useContext(StateContext);
   const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
     genericDataFetchReducer
+  );
+
+  const [initialFormValues, setInitialFormValues] = useState(
+    {} as ISupplyChainNameFormValues
   );
 
   const postSupplyChain = (values: ISupplyChainNameFormValues) => {
@@ -80,7 +86,6 @@ const ManageSupplyChain = () => {
           type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
           supplyChain
         });
-        formik.resetForm();
       }
     };
 
@@ -110,48 +115,25 @@ const ManageSupplyChain = () => {
           type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
           supplyChain
         });
-        formik.resetForm();
       }
     };
 
     setSupplyChainApiRequest(dataRequest);
   };
 
-  const formik = useFormik({
-    initialValues: {
-      supplychainname: ""
-    },
-    onSubmit: values => {
-      if (
-        state.firstPanelView ===
-        LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
-      ) {
-        postSupplyChain(values);
-      }
-
-      if (
-        state.firstPanelView ===
-        LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
-      ) {
-        updateSupplyChain(values);
-      }
-    },
-    validate
-  });
-
   useEffect(() => {
     if (
       state.firstPanelView ===
       LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
     ) {
-      formik.setValues({ supplychainname: state.selectedNodeName });
+      setInitialFormValues({ supplychainname: state.selectedNodeName });
     }
 
     if (
       state.firstPanelView ===
       LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
     ) {
-      formik.setValues({ supplychainname: "" });
+      setInitialFormValues({ supplychainname: "" });
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
@@ -160,7 +142,7 @@ const ManageSupplyChain = () => {
     LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <>
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -173,35 +155,38 @@ const ManageSupplyChain = () => {
           <ContentSeparator />
         </>
       ) : null}
-      <FormInput
-        labelValue="Supply chain name*"
-        name="supplychainname"
-        formType="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.supplychainname}
-      />
-      {formik.touched.supplychainname && formik.errors.supplychainname ? (
-        <InputErrorLabel>{formik.errors.supplychainname}</InputErrorLabel>
-      ) : null}
-      <ContentSeparator />
-      <LoaderButton
-        buttonType="submit"
-        loading={supplyChainApiResponseState.isLoading}
-      >
-        {updateMode ? "Update supply chain" : "Add supply chain"}
-      </LoaderButton>
-      <CustomCancelButton
-        buttonType={"button"}
-        onClick={() =>
+      <GenericForm
+        schema={formSchema}
+        permission={state.panePermission}
+        isLoading={supplyChainApiResponseState.isLoading}
+        validate={validate}
+        onCancel={() => {
           dispatch({
             type: LayoutEditorPaneActionTypes.RESET_PANE
-          })
+          });
+        }}
+        onSubmit={values => {
+          if (
+            state.firstPanelView ===
+            LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
+          ) {
+            postSupplyChain(values);
+          }
+
+          if (
+            state.firstPanelView ===
+            LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
+          ) {
+            updateSupplyChain(values);
+          }
+        }}
+        confirmationLabel={
+          !updateMode ? "Add supply chain" : "Update supply chaiin"
         }
-      >
-        Cancel
-      </CustomCancelButton>
-    </form>
+        cancellationLabel={"Cancel"}
+        initialValues={initialFormValues}
+      />
+    </>
   );
 };
 

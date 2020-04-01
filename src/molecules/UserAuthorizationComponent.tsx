@@ -45,6 +45,7 @@ interface IUserAuthorizationComponentProps {
   accountName: string;
   collapsedByDefault: boolean;
   type: "label" | "role";
+  roles?: Array<IRole>;
 }
 
 interface IPermissionsApiState {
@@ -93,14 +94,15 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
   accountId,
   accountName,
   collapsedByDefault,
-  type
+  type,
+  roles
 }) => {
   const [
     updatePermissionApiResponse,
     setUpdatePermissionApiRequest
   ] = useDataApi(genericDataFetchReducer);
 
-  const [_updateRolesApiResponse, setUpdateRolesApiRequest] = useDataApi(
+  const [updateRolesApiResponse, setUpdateRolesApiRequest] = useDataApi(
     genericDataFetchReducer
   );
 
@@ -201,16 +203,16 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
       return null;
     }
 
-    return rolesApiResponse.data.roles.map(role => (
+    return roles?.map(role => (
       <Label htmlFor={role.id} key={role.id}>
         <DataCheckbox
           initialCheckedValue={preCheckRole(role)}
           type="checkbox"
-          name={role.id}
-          value={role.id}
+          name={role.name}
+          value={role.name}
           id={role.id}
-          parentIsLoading={rolesApiResponse.isLoading}
-          parentPutError={rolesApiResponse.error ? true : false}
+          parentIsLoading={updateRolesApiResponse.isLoading}
+          parentPutError={updateRolesApiResponse.error ? true : false}
           onChange={e =>
             e.currentTarget
               .closest("form")

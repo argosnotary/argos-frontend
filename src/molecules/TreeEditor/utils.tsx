@@ -15,7 +15,7 @@
  */
 import ITreeNode from "../../interfaces/ITreeNode";
 import produce from "immer";
-import {ITreeReducerState} from "../../stores/treeEditorStore";
+import { ITreeReducerState } from "../../stores/treeEditorStore";
 
 const findNode = (
   nodes: Array<ITreeNode>,

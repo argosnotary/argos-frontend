@@ -17,8 +17,10 @@ import React, { Dispatch } from "react";
 import ILabelPostResponse from "../interfaces/ILabelPostResponse";
 import ISupplyChainApiResponse from "../interfaces/ISupplyChainApiResponse";
 import INpaApiResponse from "../interfaces/INpaApiResponse";
+import { FormPermission } from "../types/FormPermission";
 
 interface ILayoutEditorState {
+  panePermission: FormPermission;
   nodeParentId: string;
   nodeReferenceId: string;
   firstPanelView: string;
@@ -76,6 +78,7 @@ export type LayoutEditorPaneAction =
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
+      panePermission: FormPermission;
     }
   | {
       type: LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS;
@@ -90,6 +93,7 @@ export type LayoutEditorPaneAction =
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
+      panePermission: FormPermission;
     }
   | {
       type: LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE;
@@ -97,6 +101,7 @@ export type LayoutEditorPaneAction =
       breadcrumb: string;
       selectedNodeName: string;
       nodeParentId: string;
+      panePermission: FormPermission;
     }
   | {
       type: LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
@@ -104,6 +109,7 @@ export type LayoutEditorPaneAction =
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
+      panePermission: FormPermission;
     }
   | {
       type: LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE;
@@ -111,6 +117,7 @@ export type LayoutEditorPaneAction =
       breadcrumb: string;
       selectedNodeName: string;
       nodeParentId: string;
+      panePermission: FormPermission;
     }
   | {
       type: LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
@@ -118,6 +125,7 @@ export type LayoutEditorPaneAction =
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
+      panePermission: FormPermission;
     }
   | { type: LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE }
   | {
@@ -188,7 +196,8 @@ const layoutEditorReducer = (
         firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
       return {
@@ -206,7 +215,8 @@ const layoutEditorReducer = (
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
       return {
@@ -214,7 +224,8 @@ const layoutEditorReducer = (
         firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
       return {
@@ -224,7 +235,8 @@ const layoutEditorReducer = (
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
       return {
@@ -232,7 +244,8 @@ const layoutEditorReducer = (
         firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
       return {
@@ -241,7 +254,8 @@ const layoutEditorReducer = (
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE:
       return {

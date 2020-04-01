@@ -52,7 +52,7 @@ interface IExistingUserApiResponse {
 
 interface IRolesApiResponse {
   isLoading: boolean;
-  data: Array<IPersonalAccount>;
+  data: Array<IRole>;
 }
 
 export enum ManageRolesActionTypes {
@@ -98,7 +98,7 @@ const ManageRoles = () => {
     Array<IPersonalAccount>
   >(customGenericDataFetchReducer);
 
-  const [_rolesApiResponse, setRolesApiRequest] = useDataApi<
+  const [rolesApiResponse, setRolesApiRequest] = useDataApi<
     IRolesApiResponse,
     Array<IRole>
   >(customGenericDataFetchReducer);
@@ -194,6 +194,7 @@ const ManageRoles = () => {
               accountName={state.user.name}
               collapsedByDefault={false}
               type="role"
+              roles={rolesApiResponse.data}
             />
           ) : null}
           {existingUsersApiResponse.data
@@ -206,6 +207,7 @@ const ManageRoles = () => {
                     accountName={user.name}
                     collapsedByDefault={true}
                     type="role"
+                    roles={rolesApiResponse.data}
                   />
                 ))
             : null}

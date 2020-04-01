@@ -13,13 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { PermissionTypes } from "../types/PermissionType";
-
-export default interface ITreeNode {
-  hasChildren: boolean;
-  name: string;
-  type: string;
-  referenceId: string;
-  children?: Array<ITreeNode>;
-  permissions?: Array<PermissionTypes>;
+export enum FormPermissions {
+  READ = "READ",
+  EDIT = "EDIT"
 }
+
+export type FormPermission = FormPermissions.READ | FormPermissions.EDIT;
