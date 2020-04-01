@@ -99,12 +99,12 @@ const LayoutEditor = () => {
       case "SUPPLY_CHAIN":
         userHasEditPermission =
           node.permissions !== undefined &&
-          node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0;
+          node.permissions.indexOf(PermissionTypes.TREE_EDIT) >= 0;
         break;
       case "NON_PERSONAL_ACCOUNT":
         userHasEditPermission =
           node.permissions !== undefined &&
-          node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0;
+          node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0;
         break;
     }
 
@@ -178,7 +178,7 @@ const LayoutEditor = () => {
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0
+              node.permissions.indexOf(PermissionTypes.TREE_EDIT) >= 0
             );
           }
         },
@@ -193,7 +193,7 @@ const LayoutEditor = () => {
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.TREE_EDIT) > 0
+              node.permissions.indexOf(PermissionTypes.TREE_EDIT) >= 0
             );
           }
         },
@@ -208,7 +208,7 @@ const LayoutEditor = () => {
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0
+              node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0
             );
           }
         },
@@ -223,7 +223,7 @@ const LayoutEditor = () => {
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.LOCAL_PERMISSION_EDIT) >
+              node.permissions.indexOf(PermissionTypes.LOCAL_PERMISSION_EDIT) >=
                 0
             );
           }
@@ -244,7 +244,7 @@ const LayoutEditor = () => {
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.NPA_EDIT) > 0
+              node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0
             );
           }
         }
