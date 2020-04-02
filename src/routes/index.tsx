@@ -31,6 +31,7 @@ import PrivateRoute from "./PrivateRoute";
 import UserSettingsPage from "../pages/UserSettings";
 import useToken from "../hooks/useToken";
 import { RequestErrorStoreProvider } from "../stores/requestErrorStore";
+import { UserProfileStoreProvider } from "../UserProfile";
 
 interface IAuthenticationForwarderProps {
   token: string;
@@ -71,23 +72,25 @@ const Routes: React.FC = () => {
         <Route path="/authenticated">
           <AuthenticationForwarder token={token} setToken={setToken} />
         </Route>
-        <RequestErrorStoreProvider>
-          <PrivateRoute path="/dashboard">
-            <DashboardLayout>
-              <DashboardPage />
-            </DashboardLayout>
-          </PrivateRoute>
-          <PrivateRoute path="/settings">
-            <DashboardLayout>
-              <UserSettingsPage />
-            </DashboardLayout>
-          </PrivateRoute>
-          <PrivateRoute path="/edit/layout">
-            <DashboardLayout>
-              <LayoutEditorPage />
-            </DashboardLayout>
-          </PrivateRoute>
-        </RequestErrorStoreProvider>
+        <UserProfileStoreProvider>
+          <RequestErrorStoreProvider>
+            <PrivateRoute path="/dashboard">
+              <DashboardLayout>
+                <DashboardPage />
+              </DashboardLayout>
+            </PrivateRoute>
+            <PrivateRoute path="/settings">
+              <DashboardLayout>
+                <UserSettingsPage />
+              </DashboardLayout>
+            </PrivateRoute>
+            <PrivateRoute path="/edit/layout">
+              <DashboardLayout>
+                <LayoutEditorPage />
+              </DashboardLayout>
+            </PrivateRoute>
+          </RequestErrorStoreProvider>
+        </UserProfileStoreProvider>
       </Switch>
     </Router>
   );

@@ -132,6 +132,10 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
     );
   };
 
+  const preCheckEnabledRole = (_role: IRole): boolean => {
+    return false;
+  };
+
   const preCheckRole = (role: IRole): boolean => {
     if (!rolesApiResponse.data.roles) {
       return false;
@@ -207,6 +211,7 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
       <Label htmlFor={role.id} key={role.id}>
         <DataCheckbox
           initialCheckedValue={preCheckRole(role)}
+          disabled={preCheckEnabledRole(role)}
           type="checkbox"
           name={role.name}
           value={role.name}

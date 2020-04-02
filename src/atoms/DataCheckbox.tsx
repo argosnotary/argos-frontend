@@ -37,6 +37,7 @@ interface IDataCheckboxComponentProps {
   id: string;
   parentIsLoading: boolean;
   parentPutError: boolean;
+  disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -48,7 +49,8 @@ const DataCheckbox: React.FC<IDataCheckboxComponentProps> = ({
   id,
   parentIsLoading,
   parentPutError,
-  onChange
+  onChange,
+  disabled
 }) => {
   const [currentlyPostingData, setCurrentlyPostingData] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -83,6 +85,7 @@ const DataCheckbox: React.FC<IDataCheckboxComponentProps> = ({
       name={name}
       value={value}
       id={id}
+      disabled={disabled ? disabled : false}
       onChange={event => {
         setCurrentlyPostingData(true);
         setChecked(!checked);

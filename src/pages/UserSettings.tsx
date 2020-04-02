@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { lighten } from "polished";
-import React, { useContext } from "react";
+import React from "react";
 import {
   NavLink,
   Redirect,
@@ -22,7 +22,7 @@ import {
   Switch,
   useRouteMatch
 } from "react-router-dom";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 
 import FlexColumn from "../atoms/FlexColumn";
 import FlexRow from "../atoms/FlexRow";
@@ -31,24 +31,13 @@ import ProfilePage from "../pages/Profile";
 
 import { generateMediaQuery } from "../layout/utils";
 import ManageRoles from "./ManageRoles";
-import IPersonalAccount from "../interfaces/IPersonalAccount";
-import { customGenericDataFetchReducer } from "../stores/genericDataFetchReducer";
-import useToken from "../hooks/useToken";
-import useDataApi from "../hooks/useDataApi";
-import DataRequest from "../types/DataRequest";
-import { LoaderIcon } from "../atoms/Icons";
+import { useUserProfileContextStore } from "../UserProfile";
 
 const UserSettingsPageContainer = styled.section`
   position: fixed;
   height: 100%;
   width: 100%;
   background-color: ${props => props.theme.userSettingsPage.bgColor};
-`;
-
-const LoaderContainer = styled(FlexColumn)`
-  height: 100%;
-  justify-content: center;
-  align-items: center;
 `;
 
 const SidePanel = styled(FlexColumn)`
@@ -145,23 +134,13 @@ const ContentColumn = styled(FlexColumn)`
 
 const UserSettingsPage = () => {
   const match = useRouteMatch();
-  const [token] = useToken();
-  const theme = useContext(ThemeContext);
 
-  const dataRequest: DataRequest = {
-    method: "get",
-    token,
-    url: "/api/personalaccount/me"
-  };
-
-  const [personalAccountApiResponse] = useDataApi<
-    { data: IPersonalAccount; isLoading: boolean },
-    IPersonalAccount
-  >(customGenericDataFetchReducer, dataRequest);
+  const userProfile = useUserProfileContextStore();
 
   const userIsAdmin =
-    personalAccountApiResponse.data &&
-    personalAccountApiResponse.data.roles.findIndex(
+    userProfile &&
+    userProfile.personalAccount &&
+    userProfile.personalAccount.roles.findIndex(
       role => role.name === "administrator"
     ) > -1;
 
@@ -194,31 +173,25 @@ const UserSettingsPage = () => {
     <UserSettingsPageContainer>
       <SplitLayout>
         <SidePanel>
-          {personalAccountApiResponse.isLoading ? (
-            <LoaderContainer>
-              <LoaderIcon size={64} color={theme.loaderIcon.color} />
-            </LoaderContainer>
-          ) : (
-            <ul>
-              <SidePanelHeader>
-                <SidePanelHeaderIcon src="/images/cogs.svg" />
-                <SidePanelItemLabel>Settings</SidePanelItemLabel>{" "}
-              </SidePanelHeader>
-              <li>
-                <SidePanelLink to={`${match.url}/profile`}>
-                  <SidePanelItemIcon src="/images/profile.svg" />
-                  <SidePanelItemLabel>Profile</SidePanelItemLabel>
-                </SidePanelLink>
-              </li>
-              <li>
-                <SidePanelLink to={`${match.url}/key`}>
-                  <SidePanelItemIcon src="/images/key.svg" />
-                  <SidePanelItemLabel>Key management </SidePanelItemLabel>
-                </SidePanelLink>
-              </li>
-              {renderAdminOnlyLinks(userIsAdmin)}
-            </ul>
-          )}
+          <ul>
+            <SidePanelHeader>
+              <SidePanelHeaderIcon src="/images/cogs.svg" />
+              <SidePanelItemLabel>Settings</SidePanelItemLabel>{" "}
+            </SidePanelHeader>
+            <li>
+              <SidePanelLink to={`${match.url}/profile`}>
+                <SidePanelItemIcon src="/images/profile.svg" />
+                <SidePanelItemLabel>Profile</SidePanelItemLabel>
+              </SidePanelLink>
+            </li>
+            <li>
+              <SidePanelLink to={`${match.url}/key`}>
+                <SidePanelItemIcon src="/images/key.svg" />
+                <SidePanelItemLabel>Key management </SidePanelItemLabel>
+              </SidePanelLink>
+            </li>
+            {renderAdminOnlyLinks(userIsAdmin)}
+          </ul>
         </SidePanel>
         <ContentColumn>
           <Switch>

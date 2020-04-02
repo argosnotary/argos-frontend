@@ -17,47 +17,31 @@ import React from "react";
 import styled from "styled-components";
 
 import PageHeader from "../atoms/PageHeader";
-
-import DataRequest from "../types/DataRequest";
-import useDataApi from "../hooks/useDataApi";
-import useToken from "../hooks/useToken";
-import { customGenericDataFetchReducer } from "../stores/genericDataFetchReducer";
-import IPersonalAccount from "../interfaces/IPersonalAccount";
-
-interface IProfileApiReponse {
-  isLoading: boolean;
-  data: IPersonalAccount;
-}
+import { useUserProfileContextStore } from "../UserProfile";
 
 const ProfileListItem = styled.li`
   margin: 1rem 0;
 `;
 
 const ProfilePage = () => {
-  const [token] = useToken();
+  const userProfile = useUserProfileContextStore();
 
-  const dataRequest: DataRequest = {
-    method: "get",
-    token,
-    url: "/api/personalaccount/me"
-  };
-
-  const [profileApiResponse] = useDataApi<IProfileApiReponse, IPersonalAccount>(
-    customGenericDataFetchReducer,
-    dataRequest
-  );
-
-  return (
-    <>
-      <PageHeader>Profile</PageHeader>
-      <ul>
-        <ProfileListItem>Name: {profileApiResponse.data?.name}</ProfileListItem>
-        <ProfileListItem>
-          Email: {profileApiResponse.data?.email}
-        </ProfileListItem>
-      </ul>
-    </>
-  );
+  if (userProfile && userProfile.personalAccount) {
+    return (
+      <>
+        <PageHeader>Profile</PageHeader>
+        <ul>
+          <ProfileListItem>
+            Name: {userProfile.personalAccount.name}
+          </ProfileListItem>
+          <ProfileListItem>
+            Email: {userProfile.personalAccount.email}
+          </ProfileListItem>
+        </ul>
+      </>
+    );
+  }
+  return null;
 };
 
 export default ProfilePage;
