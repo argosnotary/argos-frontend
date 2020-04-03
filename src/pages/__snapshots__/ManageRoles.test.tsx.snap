@@ -49,9 +49,9 @@ exports[`renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-jKJlTe",
+            "componentId": "sc-eNQAEJ",
             "isStatic": false,
-            "lastClassName": "bqKDHP",
+            "lastClassName": "cafiZt",
             "rules": Array [
               "
   display: flex;
@@ -77,7 +77,7 @@ exports[`renders correctly 1`] = `
             "sc-EHOje",
           ],
           "render": [Function],
-          "styledComponentId": "sc-jKJlTe",
+          "styledComponentId": "sc-eNQAEJ",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -87,7 +87,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-EHOje sc-jKJlTe bqKDHP"
+        className="sc-EHOje sc-eNQAEJ cafiZt"
       >
         <Styled(styled.div)>
           <StyledComponent
@@ -96,9 +96,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-eNQAEJ",
+                  "componentId": "sc-hMqMXs",
                   "isStatic": false,
-                  "lastClassName": "gDNjjY",
+                  "lastClassName": "gjXSzY",
                   "rules": Array [
                     "
   display: flex;
@@ -114,7 +114,7 @@ exports[`renders correctly 1`] = `
                   "sc-ifAKCX",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-eNQAEJ",
+                "styledComponentId": "sc-hMqMXs",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -124,7 +124,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-ifAKCX sc-eNQAEJ gDNjjY"
+              className="sc-ifAKCX sc-hMqMXs gjXSzY"
             >
               <SearchInput
                 defaultLabel="Search user"
@@ -326,7 +326,7 @@ exports[`renders correctly 1`] = `
                   </StyledComponent>
                 </styled.div>
               </SearchInput>
-              <UserAuthorizationComponent
+              <RoleAuthorizationComponent
                 accountId="06125d50-b0e6-4015-8b8b-6a72eb16e929"
                 accountName="Luke Skywalker"
                 collapsedByDefault={true}
@@ -346,7 +346,6 @@ exports[`renders correctly 1`] = `
                     },
                   ]
                 }
-                type="role"
               >
                 <CollapsibleContainerComponent
                   collapsedByDefault={true}
@@ -535,9 +534,9 @@ exports[`renders correctly 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-dxgOiQ",
+                                        "componentId": "sc-ckVGcZ",
                                         "isStatic": false,
-                                        "lastClassName": "jxixUV",
+                                        "lastClassName": "nDNVv",
                                         "rules": Array [
                                           "
   display: flex;
@@ -549,7 +548,7 @@ exports[`renders correctly 1`] = `
                                       "displayName": "styled.div",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-dxgOiQ",
+                                      "styledComponentId": "sc-ckVGcZ",
                                       "target": "div",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -559,7 +558,7 @@ exports[`renders correctly 1`] = `
                                   forwardedRef={null}
                                 >
                                   <div
-                                    className="sc-dxgOiQ jxixUV"
+                                    className="sc-ckVGcZ nDNVv"
                                   >
                                     <form
                                       onSubmit={[Function]}
@@ -574,7 +573,7 @@ exports[`renders correctly 1`] = `
                     </StyledComponent>
                   </styled.section>
                 </CollapsibleContainerComponent>
-              </UserAuthorizationComponent>
+              </RoleAuthorizationComponent>
             </div>
           </StyledComponent>
         </Styled(styled.div)>

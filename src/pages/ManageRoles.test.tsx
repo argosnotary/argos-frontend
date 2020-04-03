@@ -24,7 +24,7 @@ import theme from "../theme/base.json";
 import { act } from "react-dom/test-utils";
 import ManageRoles from "./ManageRoles";
 import { waitFor } from "@testing-library/dom";
-import UserAuthorizationComponent from "../molecules/UserAuthorizationComponent";
+import RoleAuthorizationComponent from "../molecules/RoleAuthorizationComponent";
 
 const mock = new MockAdapter(Axios);
 const mockPersonalAccountApiUrl = "/api/personalaccount";
@@ -70,7 +70,7 @@ it("renders correctly", async () => {
     await waitFor(() => {
       root.update();
 
-      expect(root.find(UserAuthorizationComponent).length > 0).toBe(true);
+      expect(root.find(RoleAuthorizationComponent).length > 0).toBe(true);
     });
 
     expect(root.find(ManageRoles)).toMatchSnapshot();

@@ -22,27 +22,21 @@ interface IPrivateRouteProps {
   path: string;
 }
 
-const PrivateRoute = ({ children, ...rest }: IPrivateRouteProps) => {
+const PrivateRoute = ({ children, path }: IPrivateRouteProps) => {
   const [token] = useToken();
 
-  return (
-    <Route
-      {...rest}
-      // tslint:disable-next-line: jsx-no-lambda
-      render={({ location }) =>
-        token && token.length > 0 ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: location }
-            }}
-          />
-        )
-      }
-    />
-  );
+  if (token && token.length > 0) {
+    return <Route path={path}>{children}</Route>;
+  } else {
+    return (
+      <Redirect
+        to={{
+          pathname: "/login",
+          state: { from: location }
+        }}
+      />
+    );
+  }
 };
 
 export default PrivateRoute;

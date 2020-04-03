@@ -25,7 +25,7 @@ import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
 import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
-import UserAuthorizationComponent from "../../../molecules/UserAuthorizationComponent";
+import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationComponent";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
@@ -120,13 +120,12 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
           {allKnownUsers
             .filter((entry: any) => entry.id !== user.id)
             .map((knownUser: any) => (
-              <UserAuthorizationComponent
+              <LabelAuthorizationComponent
                 key={knownUser.id}
                 labelId={selectedLabelId}
                 accountId={knownUser.id}
                 accountName={knownUser.name}
                 collapsedByDefault={true}
-                type="label"
               />
             ))}
         </>
@@ -167,12 +166,11 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
       />
       {Object.keys(user).length > 0 ? (
         <>
-          <UserAuthorizationComponent
+          <LabelAuthorizationComponent
             labelId={selectedLabelId}
             accountId={user.id}
             accountName={user.name}
             collapsedByDefault={false}
-            type="label"
           />
         </>
       ) : null}

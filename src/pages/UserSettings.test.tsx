@@ -24,6 +24,8 @@ import { ThemeProvider } from "styled-components";
 import theme from "../theme/base.json";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
+import { UserProfileContext } from "../UserProfile";
+import IPersonalAccount from "../interfaces/IPersonalAccount";
 
 const mock = new MockAdapter(Axios);
 const mockUrl = "/api/personalaccount/me";
@@ -37,7 +39,7 @@ jest.mock("react-router-dom", () => ({
 }));
 
 it("renders with public menu", async () => {
-  mock.onGet(mockUrl).reply(200, {
+  const personalAccount: IPersonalAccount = {
     id: "a94cb614-e86e-4c52-ae1e-fc2f2cc0fffe",
     name: "Luke Skywalker",
     email: "luke@skywalker.imp",
@@ -54,12 +56,16 @@ it("renders with public menu", async () => {
         ]
       }
     ]
-  });
+  };
 
   const root = mount(
     <ThemeProvider theme={theme}>
       <MemoryRouter keyLength={0}>
-        <UserSettings />
+        <UserProfileContext.Provider
+          value={{ personalAccount: personalAccount }}
+        >
+          <UserSettings />
+        </UserProfileContext.Provider>
       </MemoryRouter>
     </ThemeProvider>
   );
@@ -74,7 +80,9 @@ it("renders with public menu", async () => {
 });
 
 it("renders with admin only menu", async () => {
-  mock.onGet(mockUrl).reply(200, {
+  mock.onGet(mockUrl).reply(200, {});
+
+  const personalAccount: IPersonalAccount = {
     id: "a94cb614-e86e-4c52-ae1e-fc2f2cc0fffe",
     name: "Luke Skywalker",
     email: "luke@skywalker.imp",
@@ -91,12 +99,16 @@ it("renders with admin only menu", async () => {
         ]
       }
     ]
-  });
+  };
 
   const root = mount(
     <ThemeProvider theme={theme}>
       <MemoryRouter keyLength={0}>
-        <UserSettings />
+        <UserProfileContext.Provider
+          value={{ personalAccount: personalAccount }}
+        >
+          <UserSettings />
+        </UserProfileContext.Provider>
       </MemoryRouter>
     </ThemeProvider>
   );

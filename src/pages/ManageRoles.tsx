@@ -25,10 +25,10 @@ import useDataApi from "../hooks/useDataApi";
 import { customGenericDataFetchReducer } from "../stores/genericDataFetchReducer";
 import DataRequest from "../types/DataRequest";
 import useToken from "../hooks/useToken";
-import UserAuthorizationComponent from "../molecules/UserAuthorizationComponent";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
 import IRole from "../interfaces/IRole";
 import { generateMediaQuery } from "../layout/utils";
+import RoleAuthorizationComponent from "../molecules/RoleAuthorizationComponent";
 
 const FlexRowContainer = styled(FlexRow)`
   max-width: 20rem;
@@ -188,12 +188,11 @@ const ManageRoles = () => {
             onSelectLabel={"Selected user"}
           />
           {Object.keys(state.user).length > 0 ? (
-            <UserAuthorizationComponent
+            <RoleAuthorizationComponent
               key={state.user.id}
               accountId={state.user.id}
               accountName={state.user.name}
               collapsedByDefault={false}
-              type="role"
               roles={rolesApiResponse.data}
             />
           ) : null}
@@ -201,12 +200,11 @@ const ManageRoles = () => {
             ? existingUsersApiResponse.data
                 .filter(user => user.id !== state.user.id)
                 .map(user => (
-                  <UserAuthorizationComponent
+                  <RoleAuthorizationComponent
                     key={user.id}
                     accountId={user.id}
                     accountName={user.name}
                     collapsedByDefault={true}
-                    type="role"
                     roles={rolesApiResponse.data}
                   />
                 ))

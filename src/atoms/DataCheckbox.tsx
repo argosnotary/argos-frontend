@@ -17,10 +17,16 @@ import React, { useContext, useEffect, useState } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { LoaderIcon } from "./Icons";
 
-const Checkbox = styled.input`
+interface ICheckboxProps {
+  disabledStyle?: boolean;
+}
+
+const Checkbox = styled.input<ICheckboxProps>`
   position: relative;
   top: 1px;
   margin: 0 1rem 0 0;
+  ${props =>
+    props.disabledStyle ? "pointer-events: none;\n  opacity: 0.5;" : null};
 `;
 
 const CheckboxLoaderContainer = styled.div`
@@ -80,16 +86,18 @@ const DataCheckbox: React.FC<IDataCheckboxComponentProps> = ({
 
   return (
     <Checkbox
+      disabledStyle={disabled}
       checked={checked}
       type={type}
       name={name}
       value={value}
       id={id}
-      disabled={disabled ? disabled : false}
       onChange={event => {
-        setCurrentlyPostingData(true);
-        setChecked(!checked);
-        onChange(event);
+        if (!disabled) {
+          setCurrentlyPostingData(true);
+          setChecked(!checked);
+          onChange(event);
+        }
       }}
     />
   );
