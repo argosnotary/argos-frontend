@@ -25,6 +25,10 @@ import { act } from "react-dom/test-utils";
 import ManageRoles from "./ManageRoles";
 import { waitFor } from "@testing-library/dom";
 import RoleAuthorizationComponent from "../molecules/RoleAuthorizationComponent";
+import IPersonalAccount from "../interfaces/IPersonalAccount";
+import { UserProfileContext } from "../UserProfile";
+import { CollapseButton } from "../atoms/CollapsibleContainer";
+import DataCheckbox from "../atoms/DataCheckbox";
 
 const mock = new MockAdapter(Axios);
 const mockPersonalAccountApiUrl = "/api/personalaccount";
@@ -38,41 +42,139 @@ jest.mock("react-router-dom", () => ({
 }));
 
 it("renders correctly", async () => {
-  mock.onGet(mockRolesApiUrl).reply(200, [
-    {
-      id: "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
-      name: "administrator",
-      permissions: [
-        "READ",
-        "LOCAL_PERMISSION_EDIT",
-        "TREE_EDIT",
-        "VERIFY",
-        "ASSIGN_ROLE"
-      ]
-    }
-  ]);
+  const personalAccount: IPersonalAccount = {
+    id: "06125d50-b0e6-4015-8b8b-6a72eb16e929",
+    name: "Luke Skywalker",
+    email: "luke@skywalker.imp",
+    roles: [
+      {
+        id: "16dbaebb-815d-461e-993a-bdfdced6350b",
+        name: "administrator",
+        permissions: [
+          "READ",
+          "LOCAL_PERMISSION_EDIT",
+          "TREE_EDIT",
+          "VERIFY",
+          "ASSIGN_ROLE"
+        ]
+      }
+    ]
+  };
 
-  mock.onGet(mockPersonalAccountApiUrl).reply(200, [
-    {
-      id: "06125d50-b0e6-4015-8b8b-6a72eb16e929",
-      name: "Luke Skywalker",
-      email: "luke@skywalker.imp"
-    }
-  ]);
+  const userRole = {
+    id: "fe9fe1b5-5eff-4b93-8fa4-1edd743e1725",
+    name: "user",
+    permissions: ["PERSONAL_ACCOUNT_READ"]
+  };
+  const adminRole = {
+    id: "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
+    name: "administrator",
+    permissions: [
+      "READ",
+      "LOCAL_PERMISSION_EDIT",
+      "TREE_EDIT",
+      "VERIFY",
+      "ASSIGN_ROLE"
+    ]
+  };
+  mock.onGet(mockRolesApiUrl).reply(200, [adminRole, userRole]);
+
+  const luke = {
+    id: "06125d50-b0e6-4015-8b8b-6a72eb16e929",
+    name: "Luke Skywalker"
+  };
+
+  const anikan = {
+    id: "06125d50-b0e6-4015-8b8b-6a72eb16e921",
+    name: "Anikan Skywalker"
+  };
+
+  mock
+    .onGet(mockPersonalAccountApiUrl, { params: { roleName: "administrator" } })
+    .reply(200, [luke]);
+
+  mock
+    .onGet(mockPersonalAccountApiUrl, { params: { roleName: "user" } })
+    .reply(200, [luke, anikan]);
+
+  mock
+    .onGet("/api/personalaccount/" + luke.id)
+    .reply(200, { id: luke.id, name: luke.name, roles: [adminRole, userRole] });
+
+  mock
+    .onGet("/api/personalaccount/" + anikan.id)
+    .reply(200, { id: anikan.id, name: anikan.name, roles: [userRole] });
+
+  mock
+    .onPut("/api/personalaccount/" + luke.id + "/role")
+    .reply(200, { id: luke.id, name: luke.name, roles: [adminRole] });
 
   const root = mount(
     <ThemeProvider theme={theme}>
-      <ManageRoles />
+      <UserProfileContext.Provider value={{ personalAccount: personalAccount }}>
+        <ManageRoles />
+      </UserProfileContext.Provider>
     </ThemeProvider>
   );
 
   await act(async () => {
     await waitFor(() => {
       root.update();
-
       expect(root.find(RoleAuthorizationComponent).length > 0).toBe(true);
     });
 
+    await waitFor(() => {
+      root
+        .find(CollapseButton)
+        .at(0)
+        .simulate("click");
+      expect(root.find(DataCheckbox).length >= 2).toBe(true);
+    });
+
+    await waitFor(() => {
+      root
+        .find(CollapseButton)
+        .at(1)
+        .simulate("click");
+      expect(root.find(DataCheckbox).length >= 4).toBe(true);
+    });
+
+    expect(
+      root
+        .find(DataCheckbox)
+        .at(0)
+        .props().initialCheckedValue
+    ).toEqual(true);
+    expect(
+      root
+        .find(DataCheckbox)
+        .at(1)
+        .props().initialCheckedValue
+    ).toEqual(true);
+    expect(
+      root
+        .find(DataCheckbox)
+        .at(2)
+        .props().initialCheckedValue
+    ).toEqual(false);
+    expect(
+      root
+        .find(DataCheckbox)
+        .at(3)
+        .props().initialCheckedValue
+    ).toEqual(true);
+
+    root
+      .find(DataCheckbox)
+      .at(1)
+      .simulate("change");
+    await waitFor(() => {
+      expect(mock.history.put.length).toBe(1);
+    });
+
+    expect(mock.history.put[0].data).toBe(
+      JSON.stringify(["administrator", "user"])
+    );
     expect(root.find(ManageRoles)).toMatchSnapshot();
   });
 });

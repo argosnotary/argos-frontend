@@ -42,7 +42,7 @@ const CollapsibleContainerBody = styled.main<ICollapsibleContainerBodyProps>`
   transition: max-height, padding 0.2s ease-out;
 `;
 
-const CollapseButton = styled.button`
+export const CollapseButton = styled.button`
   background: none;
   border: 0;
   outline: 0;
