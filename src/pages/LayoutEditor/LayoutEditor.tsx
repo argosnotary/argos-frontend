@@ -91,19 +91,22 @@ const LayoutEditor = () => {
     createrootnode: "Create base label..."
   };
 
-  const getPanePermission = (node: ITreeNode,paneActionType: LayoutEditorPaneActionTypes) => {
+  const getPanePermission = (
+    node: ITreeNode,
+    paneActionType: LayoutEditorPaneActionTypes
+  ) => {
     let userHasEditPermission = false;
     switch (paneActionType) {
       case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
       case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
         userHasEditPermission =
-            node.permissions !== undefined &&
-            node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0;
+          node.permissions !== undefined &&
+          node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0;
         break;
       default:
         userHasEditPermission =
-            node.permissions !== undefined &&
-            node.permissions.indexOf(PermissionTypes.TREE_EDIT) >= 0;
+          node.permissions !== undefined &&
+          node.permissions.indexOf(PermissionTypes.TREE_EDIT) >= 0;
         break;
     }
     return userHasEditPermission ? FormPermissions.EDIT : FormPermissions.READ;
@@ -126,7 +129,7 @@ const LayoutEditor = () => {
       nodeReferenceId: node.referenceId,
       nodeParentId: trail.length > 1 ? trail[trail.length - 2].referenceId : "",
       breadcrumb,
-      panePermission: getPanePermission(node,type),
+      panePermission: getPanePermission(node, type),
       selectedNodeName
     });
   };
