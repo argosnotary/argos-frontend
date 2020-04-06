@@ -18,32 +18,23 @@ version: '3.1'
 
 services:
 
-  argos-frontend:
-    build:
-      context: .
-    environment:
-      - BACKEND_URL=http://argos-service:8080
-    ports:
-      - 80:80
-
   argos-service:
-    image: rabobanknl/argos-service:0.0.1-RC4
+    image: argosnotary/argos-service-snapshot:master
     environment:
       spring.data.mongodb.uri: mongodb://mongodb/test
       spring.security.oauth2.client.registration.azure.clientId: client-id
       spring.security.oauth2.client.registration.azure.clientSecret: client-secret
-      spring.security.oauth2.client.provider.azure.authorizationUri: http://localhost:8087/oauth2/v2.0/authorize
+      spring.security.oauth2.client.provider.azure.authorizationUri: http://localhost:8087/oauth2/v2.0/authorize-manual
       spring.security.oauth2.client.provider.azure.tokenUri: http://oauth-stub:8080/oauth2/v2.0/token
       spring.security.oauth2.client.provider.azure.userInfoUri: http://oauth-stub:8080/v1.0/me
       jwt.token.secret: Z2LcVpgCuGtpb5rBDNIIWGe8RXqYGWDpWFjWhYQUS2Z8rjE2/GTJlu0s6BRYG0Mn0kV8StC9cFE83Jkl68RCkw==
-      auth.frontendRedirectBasePath: http://localhost
-      server.use-forward-headers: 'true'
+      auth.frontendRedirectBasePath: http://localhost:3000
+      JAVA_OPTS: '-Xmx1g'
     ports:
       - 8080:8080
       
   oauth-stub:
-    build:
-      context: docker/oauth-stub
+    image: rabobanknl/argos-integration-test-stub:test-several-accounts
     ports:
       - 8087:8080
 
