@@ -32,6 +32,7 @@ import ProfilePage from "../pages/Profile";
 import { generateMediaQuery } from "../layout/utils";
 import ManageRoles from "./ManageRoles";
 import { useUserProfileContextStore } from "../UserProfile";
+import { PermissionTypes } from "../types/PermissionType";
 
 const UserSettingsPageContainer = styled.section`
   position: fixed;
@@ -138,11 +139,7 @@ const UserSettingsPage = () => {
   const userProfile = useUserProfileContextStore();
 
   const userIsAdmin =
-    userProfile &&
-    userProfile.personalAccount &&
-    userProfile.personalAccount.roles.findIndex(
-      role => role.name === "administrator"
-    ) > -1;
+    userProfile && userProfile.hasPermission(PermissionTypes.ASSIGN_ROLE);
 
   const renderAdminOnlyLinks = (shouldRender: boolean) => {
     if (!shouldRender) {

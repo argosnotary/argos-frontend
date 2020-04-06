@@ -54,6 +54,7 @@ import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
+import { useUserProfileContextStore } from "../../UserProfile";
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
@@ -361,6 +362,12 @@ const LayoutEditor = () => {
     }
   }, [state.data, state.dataAction]);
 
+  const userProfile = useUserProfileContextStore();
+
+  const canCreateRootNode = (): boolean => {
+    return userProfile && userProfile.hasPermission(PermissionTypes.TREE_EDIT);
+  };
+
   const treeContext: ITreeStateContext = {
     treeState,
     treeDispatch,
@@ -368,6 +375,7 @@ const LayoutEditor = () => {
     treeContextMenu,
     treeClickHandlers,
     cbCreateRootNode,
+    canCreateRootNode,
     cbGetNodeChildren,
     isLoading: treeChildrenApiResponse.isLoading,
     selectedNodeReferenceId: state.nodeReferenceId

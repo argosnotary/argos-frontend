@@ -24,8 +24,9 @@ import { ThemeProvider } from "styled-components";
 import theme from "../theme/base.json";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
-import { UserProfileContext } from "../UserProfile";
+import { UserProfile, UserProfileContext } from "../UserProfile";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
+import { PermissionTypes } from "../types/PermissionType";
 
 const mock = new MockAdapter(Axios);
 const mockUrl = "/api/personalaccount/me";
@@ -48,11 +49,10 @@ it("renders with public menu", async () => {
         id: "16dbaebb-815d-461e-993a-bdfdced6350b",
         name: "jedi",
         permissions: [
-          "READ",
-          "LOCAL_PERMISSION_EDIT",
-          "TREE_EDIT",
-          "VERIFY",
-          "ASSIGN_ROLE"
+          PermissionTypes.READ,
+          PermissionTypes.LOCAL_PERMISSION_EDIT,
+          PermissionTypes.TREE_EDIT,
+          PermissionTypes.VERIFY
         ]
       }
     ]
@@ -61,9 +61,7 @@ it("renders with public menu", async () => {
   const root = mount(
     <ThemeProvider theme={theme}>
       <MemoryRouter keyLength={0}>
-        <UserProfileContext.Provider
-          value={{ personalAccount: personalAccount }}
-        >
+        <UserProfileContext.Provider value={new UserProfile(personalAccount)}>
           <UserSettings />
         </UserProfileContext.Provider>
       </MemoryRouter>
@@ -91,11 +89,11 @@ it("renders with admin only menu", async () => {
         id: "16dbaebb-815d-461e-993a-bdfdced6350b",
         name: "administrator",
         permissions: [
-          "READ",
-          "LOCAL_PERMISSION_EDIT",
-          "TREE_EDIT",
-          "VERIFY",
-          "ASSIGN_ROLE"
+          PermissionTypes.READ,
+          PermissionTypes.LOCAL_PERMISSION_EDIT,
+          PermissionTypes.TREE_EDIT,
+          PermissionTypes.VERIFY,
+          PermissionTypes.ASSIGN_ROLE
         ]
       }
     ]
@@ -104,9 +102,7 @@ it("renders with admin only menu", async () => {
   const root = mount(
     <ThemeProvider theme={theme}>
       <MemoryRouter keyLength={0}>
-        <UserProfileContext.Provider
-          value={{ personalAccount: personalAccount }}
-        >
+        <UserProfileContext.Provider value={new UserProfile(personalAccount)}>
           <UserSettings />
         </UserProfileContext.Provider>
       </MemoryRouter>

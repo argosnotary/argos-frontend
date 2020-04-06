@@ -22,9 +22,28 @@ import { customGenericDataFetchReducer } from "./stores/genericDataFetchReducer"
 import { LoaderIcon } from "./atoms/Icons";
 import styled, { ThemeContext } from "styled-components";
 import FlexColumn from "./atoms/FlexColumn";
+import { PermissionTypes } from "./types/PermissionType";
 
 export interface IUserProfile {
   personalAccount: IPersonalAccount;
+  hasPermission: (permission: PermissionTypes) => boolean;
+}
+
+export class UserProfile implements IUserProfile {
+  personalAccount: IPersonalAccount;
+  constructor(personalAccount: IPersonalAccount) {
+    this.personalAccount = personalAccount;
+  }
+
+  hasPermission(permission: PermissionTypes): boolean {
+    return (
+      this.personalAccount &&
+      this.personalAccount.roles &&
+      this.personalAccount.roles.filter(
+        role => role.permissions && role.permissions.indexOf(permission) >= 0
+      ).length > 0
+    );
+  }
 }
 
 export const UserProfileContext = React.createContext<IUserProfile>(
@@ -72,7 +91,7 @@ export const UserProfileStoreProvider: React.FC<IUserProfileStoreProviderProps> 
         </LoaderContainer>
       ) : (
         <UserProfileContext.Provider
-          value={{ personalAccount: profileApiResponse.data }}
+          value={new UserProfile(profileApiResponse.data)}
         >
           {children}
         </UserProfileContext.Provider>

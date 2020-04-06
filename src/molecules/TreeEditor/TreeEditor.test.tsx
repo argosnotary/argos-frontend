@@ -73,6 +73,10 @@ const cbCreateRootNode = jest.fn();
 
 const cbGetNodeChildren = jest.fn();
 
+const canCreateRootNode = jest.fn();
+
+canCreateRootNode.mockReturnValue(true);
+
 const DummyParent = () => {
   const [treeState, treeDispatch] = useReducer(treeReducer, initialTreeState);
 
@@ -83,6 +87,7 @@ const DummyParent = () => {
     treeContextMenu,
     treeClickHandlers,
     cbCreateRootNode,
+    canCreateRootNode,
     cbGetNodeChildren,
     isLoading: false,
     selectedNodeReferenceId: ""
@@ -102,6 +107,16 @@ describe("TreeEditor", () => {
 
   it("renders initial data correctly", () => {
     expect(root.find(TreeEditor)).toMatchSnapshot();
+  });
+
+  it("renders initial data correctly without add base label", () => {
+    canCreateRootNode.mockReturnValue(false);
+    const rootWithoutAddBaseLabel = mount(
+      <ThemeProvider theme={theme}>
+        <DummyParent />
+      </ThemeProvider>
+    );
+    expect(rootWithoutAddBaseLabel.find(TreeEditor)).toMatchSnapshot();
   });
 
   it("displays create root node button with correct text", () => {
