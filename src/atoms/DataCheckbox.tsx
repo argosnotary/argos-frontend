@@ -18,15 +18,15 @@ import styled, { ThemeContext } from "styled-components";
 import { LoaderIcon } from "./Icons";
 
 interface ICheckboxProps {
-  disabledStyle?: boolean;
+  disabledCheckbox?: boolean;
 }
 
 const Checkbox = styled.input<ICheckboxProps>`
   position: relative;
   top: 1px;
   margin: 0 1rem 0 0;
-  ${props =>
-    props.disabledStyle ? "pointer-events: none;\n  opacity: 0.5;" : null};
+  pointer-events: ${props => (props.disabledCheckbox ? "none" : "auto")};
+  opacity: ${props => (props.disabledCheckbox ? "0.5" : "1")};
 `;
 
 const CheckboxLoaderContainer = styled.div`
@@ -86,7 +86,7 @@ const DataCheckbox: React.FC<IDataCheckboxComponentProps> = ({
 
   return (
     <Checkbox
-      disabledStyle={disabled}
+      disabledCheckbox={disabled}
       checked={checked}
       type={type}
       name={name}

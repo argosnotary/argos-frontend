@@ -26,7 +26,7 @@ import ManageRoles from "./ManageRoles";
 import { waitFor } from "@testing-library/dom";
 import RoleAuthorizationComponent from "../molecules/RoleAuthorizationComponent";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
-import { UserProfileContext } from "../UserProfile";
+import { UserProfile, UserProfileContext } from "../UserProfile";
 import { CollapseButton } from "../atoms/CollapsibleContainer";
 import DataCheckbox from "../atoms/DataCheckbox";
 
@@ -50,13 +50,7 @@ it("renders correctly", async () => {
       {
         id: "16dbaebb-815d-461e-993a-bdfdced6350b",
         name: "administrator",
-        permissions: [
-          "READ",
-          "LOCAL_PERMISSION_EDIT",
-          "TREE_EDIT",
-          "VERIFY",
-          "ASSIGN_ROLE"
-        ]
+        permissions: []
       }
     ]
   };
@@ -69,13 +63,7 @@ it("renders correctly", async () => {
   const adminRole = {
     id: "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
     name: "administrator",
-    permissions: [
-      "READ",
-      "LOCAL_PERMISSION_EDIT",
-      "TREE_EDIT",
-      "VERIFY",
-      "ASSIGN_ROLE"
-    ]
+    permissions: []
   };
   mock.onGet(mockRolesApiUrl).reply(200, [adminRole, userRole]);
 
@@ -111,7 +99,7 @@ it("renders correctly", async () => {
 
   const root = mount(
     <ThemeProvider theme={theme}>
-      <UserProfileContext.Provider value={{ personalAccount: personalAccount }}>
+      <UserProfileContext.Provider value={new UserProfile(personalAccount)}>
         <ManageRoles />
       </UserProfileContext.Provider>
     </ThemeProvider>

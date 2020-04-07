@@ -336,13 +336,7 @@ exports[`renders correctly 1`] = `
                     Object {
                       "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
                       "name": "administrator",
-                      "permissions": Array [
-                        "READ",
-                        "LOCAL_PERMISSION_EDIT",
-                        "TREE_EDIT",
-                        "VERIFY",
-                        "ASSIGN_ROLE",
-                      ],
+                      "permissions": Array [],
                     },
                     Object {
                       "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1725",
@@ -622,7 +616,7 @@ exports[`renders correctly 1`] = `
                                             >
                                               <styled.input
                                                 checked={true}
-                                                disabledStyle={true}
+                                                disabledCheckbox={true}
                                                 id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
                                                 name="administrator"
                                                 onChange={[Function]}
@@ -631,7 +625,7 @@ exports[`renders correctly 1`] = `
                                               >
                                                 <StyledComponent
                                                   checked={true}
-                                                  disabledStyle={true}
+                                                  disabledCheckbox={true}
                                                   forwardedComponent={
                                                     Object {
                                                       "$$typeof": Symbol(react.forward_ref),
@@ -639,13 +633,16 @@ exports[`renders correctly 1`] = `
                                                       "componentStyle": ComponentStyle {
                                                         "componentId": "sc-kGXeez",
                                                         "isStatic": false,
-                                                        "lastClassName": "ipdwoa",
+                                                        "lastClassName": "gkutMX",
                                                         "rules": Array [
                                                           "
   position: relative;
   top: 1px;
   margin: 0 1rem 0 0;
-  ",
+  pointer-events: ",
+                                                          [Function],
+                                                          ";
+  opacity: ",
                                                           [Function],
                                                           ";
 ",
@@ -670,7 +667,7 @@ exports[`renders correctly 1`] = `
                                                 >
                                                   <input
                                                     checked={true}
-                                                    className="sc-kGXeez ieJhju"
+                                                    className="sc-kGXeez giBXHc"
                                                     id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
                                                     name="administrator"
                                                     onChange={[Function]}
@@ -736,7 +733,7 @@ exports[`renders correctly 1`] = `
                                             >
                                               <styled.input
                                                 checked={false}
-                                                disabledStyle={false}
+                                                disabledCheckbox={false}
                                                 id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
                                                 name="user"
                                                 onChange={[Function]}
@@ -745,7 +742,7 @@ exports[`renders correctly 1`] = `
                                               >
                                                 <StyledComponent
                                                   checked={false}
-                                                  disabledStyle={false}
+                                                  disabledCheckbox={false}
                                                   forwardedComponent={
                                                     Object {
                                                       "$$typeof": Symbol(react.forward_ref),
@@ -753,13 +750,16 @@ exports[`renders correctly 1`] = `
                                                       "componentStyle": ComponentStyle {
                                                         "componentId": "sc-kGXeez",
                                                         "isStatic": false,
-                                                        "lastClassName": "ipdwoa",
+                                                        "lastClassName": "gkutMX",
                                                         "rules": Array [
                                                           "
   position: relative;
   top: 1px;
   margin: 0 1rem 0 0;
-  ",
+  pointer-events: ",
+                                                          [Function],
+                                                          ";
+  opacity: ",
                                                           [Function],
                                                           ";
 ",
@@ -784,7 +784,7 @@ exports[`renders correctly 1`] = `
                                                 >
                                                   <input
                                                     checked={false}
-                                                    className="sc-kGXeez ipdwoa"
+                                                    className="sc-kGXeez gkutMX"
                                                     id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
                                                     name="user"
                                                     onChange={[Function]}
@@ -820,13 +820,7 @@ exports[`renders correctly 1`] = `
                     Object {
                       "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
                       "name": "administrator",
-                      "permissions": Array [
-                        "READ",
-                        "LOCAL_PERMISSION_EDIT",
-                        "TREE_EDIT",
-                        "VERIFY",
-                        "ASSIGN_ROLE",
-                      ],
+                      "permissions": Array [],
                     },
                     Object {
                       "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1725",
@@ -1105,7 +1099,7 @@ exports[`renders correctly 1`] = `
                                             >
                                               <styled.input
                                                 checked={false}
-                                                disabledStyle={false}
+                                                disabledCheckbox={false}
                                                 id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
                                                 name="administrator"
                                                 onChange={[Function]}
@@ -1114,7 +1108,7 @@ exports[`renders correctly 1`] = `
                                               >
                                                 <StyledComponent
                                                   checked={false}
-                                                  disabledStyle={false}
+                                                  disabledCheckbox={false}
                                                   forwardedComponent={
                                                     Object {
                                                       "$$typeof": Symbol(react.forward_ref),
@@ -1122,13 +1116,16 @@ exports[`renders correctly 1`] = `
                                                       "componentStyle": ComponentStyle {
                                                         "componentId": "sc-kGXeez",
                                                         "isStatic": false,
-                                                        "lastClassName": "ipdwoa",
+                                                        "lastClassName": "gkutMX",
                                                         "rules": Array [
                                                           "
   position: relative;
   top: 1px;
   margin: 0 1rem 0 0;
-  ",
+  pointer-events: ",
+                                                          [Function],
+                                                          ";
+  opacity: ",
                                                           [Function],
                                                           ";
 ",
@@ -1153,7 +1150,7 @@ exports[`renders correctly 1`] = `
                                                 >
                                                   <input
                                                     checked={false}
-                                                    className="sc-kGXeez ipdwoa"
+                                                    className="sc-kGXeez gkutMX"
                                                     id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
                                                     name="administrator"
                                                     onChange={[Function]}
@@ -1218,7 +1215,7 @@ exports[`renders correctly 1`] = `
                                             >
                                               <styled.input
                                                 checked={true}
-                                                disabledStyle={false}
+                                                disabledCheckbox={false}
                                                 id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
                                                 name="user"
                                                 onChange={[Function]}
@@ -1227,7 +1224,7 @@ exports[`renders correctly 1`] = `
                                               >
                                                 <StyledComponent
                                                   checked={true}
-                                                  disabledStyle={false}
+                                                  disabledCheckbox={false}
                                                   forwardedComponent={
                                                     Object {
                                                       "$$typeof": Symbol(react.forward_ref),
@@ -1235,13 +1232,16 @@ exports[`renders correctly 1`] = `
                                                       "componentStyle": ComponentStyle {
                                                         "componentId": "sc-kGXeez",
                                                         "isStatic": false,
-                                                        "lastClassName": "ipdwoa",
+                                                        "lastClassName": "gkutMX",
                                                         "rules": Array [
                                                           "
   position: relative;
   top: 1px;
   margin: 0 1rem 0 0;
-  ",
+  pointer-events: ",
+                                                          [Function],
+                                                          ";
+  opacity: ",
                                                           [Function],
                                                           ";
 ",
@@ -1266,7 +1266,7 @@ exports[`renders correctly 1`] = `
                                                 >
                                                   <input
                                                     checked={true}
-                                                    className="sc-kGXeez ipdwoa"
+                                                    className="sc-kGXeez gkutMX"
                                                     id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
                                                     name="user"
                                                     onChange={[Function]}
