@@ -31,7 +31,7 @@ import ProfilePage from "../pages/Profile";
 
 import { generateMediaQuery } from "../layout/utils";
 import ManageRoles from "./ManageRoles";
-import { useUserProfileContextStore } from "../UserProfile";
+import { useUserProfileContextStore } from "../stores/UserProfile";
 import { PermissionTypes } from "../types/PermissionType";
 
 const UserSettingsPageContainer = styled.section`

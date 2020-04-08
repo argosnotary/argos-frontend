@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 import React, { ReactNode, useContext } from "react";
-import IPersonalAccount from "./interfaces/IPersonalAccount";
-import useToken from "./hooks/useToken";
-import DataRequest from "./types/DataRequest";
-import useDataApi from "./hooks/useDataApi";
-import { customGenericDataFetchReducer } from "./stores/genericDataFetchReducer";
-import { LoaderIcon } from "./atoms/Icons";
+import IPersonalAccount from "../interfaces/IPersonalAccount";
+import useToken from "../hooks/useToken";
+import DataRequest from "../types/DataRequest";
+import useDataApi from "../hooks/useDataApi";
+import { customGenericDataFetchReducer } from "./genericDataFetchReducer";
+import { LoaderIcon } from "../atoms/Icons";
 import styled, { ThemeContext } from "styled-components";
-import FlexColumn from "./atoms/FlexColumn";
-import { PermissionTypes } from "./types/PermissionType";
+import FlexColumn from "../atoms/FlexColumn";
+import { PermissionTypes } from "../types/PermissionType";
 
 export interface IUserProfile {
   personalAccount: IPersonalAccount;

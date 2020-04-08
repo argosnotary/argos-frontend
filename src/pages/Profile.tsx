@@ -17,7 +17,7 @@ import React from "react";
 import styled from "styled-components";
 
 import PageHeader from "../atoms/PageHeader";
-import { useUserProfileContextStore } from "../UserProfile";
+import { useUserProfileContextStore } from "../stores/UserProfile";
 
 const ProfileListItem = styled.li`
   margin: 1rem 0;

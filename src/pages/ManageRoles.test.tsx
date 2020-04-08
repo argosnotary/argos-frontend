@@ -26,7 +26,7 @@ import ManageRoles from "./ManageRoles";
 import { waitFor } from "@testing-library/dom";
 import RoleAuthorizationComponent from "../molecules/RoleAuthorizationComponent";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
-import { UserProfile, UserProfileContext } from "../UserProfile";
+import { UserProfile, UserProfileContext } from "../stores/UserProfile";
 import { CollapseButton } from "../atoms/CollapsibleContainer";
 import DataCheckbox from "../atoms/DataCheckbox";
 

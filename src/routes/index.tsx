@@ -31,7 +31,7 @@ import PrivateRoute from "./PrivateRoute";
 import UserSettingsPage from "../pages/UserSettings";
 import useToken from "../hooks/useToken";
 import { RequestErrorStoreProvider } from "../stores/requestErrorStore";
-import { UserProfileStoreProvider } from "../UserProfile";
+import { UserProfileStoreProvider } from "../stores/UserProfile";
 
 interface IAuthenticationForwarderProps {
   token: string;

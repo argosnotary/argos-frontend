@@ -24,7 +24,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "../theme/base.json";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
-import { UserProfile, UserProfileContext } from "../UserProfile";
+import { UserProfile, UserProfileContext } from "../stores/UserProfile";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
 import { PermissionTypes } from "../types/PermissionType";
 

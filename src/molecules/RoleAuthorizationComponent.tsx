@@ -25,7 +25,7 @@ import CollapsibleContainerComponent from "../atoms/CollapsibleContainer";
 import DataRequest from "../types/DataRequest";
 import AlternateLoader from "../atoms/Icons/AlternateLoader";
 import DataCheckbox from "../atoms/DataCheckbox";
-import { useUserProfileContextStore } from "../UserProfile";
+import { useUserProfileContextStore } from "../stores/UserProfile";
 
 const AuthorizationContainer = styled.div`
   display: flex;
