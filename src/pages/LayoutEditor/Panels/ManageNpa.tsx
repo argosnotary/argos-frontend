@@ -16,6 +16,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled, {
   css,
+  FlattenInterpolation,
+  ThemeProps
 } from "styled-components";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
@@ -42,11 +44,10 @@ import {
   ModalButton,
   Modal
 } from "../../../atoms/Modal";
+import CopyInput from "../../../atoms/CopyInput";
 import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
-import KeyIdContainer from "../../../atoms/KeyIdContainer";
-import {IKeyId} from "../../../interfaces/IKeyId";
 
 interface INpaFormValues {
   npaname: string;
@@ -94,6 +95,39 @@ const clipboardWrapperCss = css`
   height: 1.8rem;
 `;
 
+const CopyInputWrapper = styled.div`
+  margin: 0 0 1rem;
+`;
+
+interface IKeyId {
+  npaKeyId: string;
+  clipboardIconSize: number;
+  inputCss: FlattenInterpolation<ThemeProps<any>>;
+  clipboardWrapperCss: FlattenInterpolation<ThemeProps<any>>;
+}
+
+const KeyIdLabel = styled.span`
+  font-size: 0.875rem;
+`;
+
+const KeyId: React.FC<IKeyId> = ({
+  npaKeyId,
+  inputCss,
+  clipboardIconSize,
+  clipboardWrapperCss
+}) => (
+  <>
+    <KeyIdLabel>Key id</KeyIdLabel>
+    <CopyInputWrapper>
+      <CopyInput
+        value={npaKeyId}
+        clipboardIconSize={clipboardIconSize}
+        inputCss={inputCss}
+        clipboardWrapperCss={clipboardWrapperCss}
+      />
+    </CopyInputWrapper>
+  </>
+);
 
 const ManageNpa = () => {
   const [localStorageToken] = useToken();
@@ -188,7 +222,7 @@ const ManageNpa = () => {
       method: "get",
       token: localStorageToken,
       url: `/api/nonpersonalaccount/${id}/key`,
-      cbSuccess: (n: IKeyId) => {
+      cbSuccess: (n: any) => {
         setNpaKeyId(n.keyId);
       }
     };
@@ -232,8 +266,8 @@ const ManageNpa = () => {
           </LastBreadCrumb>
         </NodesBreadCrumb>
         <ContentSeparator />
-        <KeyIdContainer
-          keyId={state.data.keyId}
+        <KeyId
+          npaKeyId={state.data.keyId}
           clipboardIconSize={16}
           clipboardWrapperCss={clipboardWrapperCss}
           inputCss={copyInputCss}
@@ -332,8 +366,8 @@ const ManageNpa = () => {
       ) : null}
       {npaKeyId ? (
         <>
-          <KeyIdContainer
-            keyId={npaKeyId}
+          <KeyId
+            npaKeyId={npaKeyId}
             clipboardIconSize={16}
             clipboardWrapperCss={clipboardWrapperCss}
             inputCss={copyInputCss}

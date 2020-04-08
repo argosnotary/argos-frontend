@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect, useState } from "react";
-import styled, {css, ThemeContext} from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 
 import { generateKey } from "../security";
 
@@ -35,26 +35,10 @@ import useDataApi from "../hooks/useDataApi";
 import useToken from "../hooks/useToken";
 import genericDataFetchReducer from "../stores/genericDataFetchReducer";
 import PasswordView from "../atoms/PasswordView";
-import {IKeyId} from "../interfaces/IKeyId";
-import KeyIdContainer from "../atoms/KeyIdContainer";
 
 const CreateKeyButton = styled(TransparentButton)`
   margin: 1.3rem 0;
 `;
-
-const copyInputCss = css`
-  border: 0;
-  outline: 0;
-  background: none;
-  font-size: 0.8rem;
-`;
-
-const clipboardWrapperCss = css`
-  padding: 0.4rem;
-  margin: 0 1rem;
-  height: 1.8rem;
-`;
-
 
 enum WizardStates {
   Loading,
@@ -66,52 +50,48 @@ enum WizardStates {
 interface IKeyManagementModalProps {
   displayModal: boolean;
   setDisplayModal: (displayModal: boolean) => void;
-  cbKeyCreated: (key: IKeyId) => void;
 }
 
 const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
-  setDisplayModal, cbKeyCreated
+  setDisplayModal
 }) => {
   const [wizardState, setWizardState] = useState(
     WizardStates.KeyOverrideWarning
   );
+  const [generatedPassword, setGeneratedPassword] = useState("");
+  const [response, setDataRequest] = useDataApi(genericDataFetchReducer);
   const theme = useContext(ThemeContext);
   const [localStorageToken] = useToken();
-  const [generatedPassword, setGeneratedPassword] = useState("");
-  const [createKeyResponse, setCreateKeyDataRequest] = useDataApi(
-    genericDataFetchReducer
-  );
-
 
   useEffect(() => {
     if (
-      Object.prototype.hasOwnProperty.call(createKeyResponse, "data") &&
-      !createKeyResponse.isLoading
+      Object.prototype.hasOwnProperty.call(response, "data") &&
+      !response.isLoading
     ) {
       setWizardState(WizardStates.CopyKey);
-
     }
 
-    if (createKeyResponse.isLoading) {
+    if (response.isLoading) {
       setWizardState(WizardStates.Loading);
     }
 
-    if (createKeyResponse.error) {
+    if (response.error) {
       setWizardState(WizardStates.Error);
     }
-  }, [createKeyResponse]);
+  }, [response]);
 
   const postKeyData = async () => {
     const generatedKeys = await generateKey();
+
     const dataRequest: DataRequest = {
       data: generatedKeys.keys,
       method: "post",
       token: localStorageToken,
-      url: "/api/personalaccount/me/key",
-      cbSuccess:()=> {cbKeyCreated(generatedKeys.keys)}
+      url: "/api/personalaccount/me/key"
     };
+
     setGeneratedPassword(generatedKeys.password);
-    setCreateKeyDataRequest(dataRequest);
+    setDataRequest(dataRequest);
   };
 
   const getModalContent = (currentWizardState: number) => {
@@ -184,42 +164,18 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
 const KeyManagement = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const theme = useContext(ThemeContext);
-  const [keyId, setKeyId] = useState("");
-  const [localStorageToken] = useToken();
+
   const enableModal = () => {
     setDisplayModal(true);
   };
 
-  const cbKeyCreated = (key: IKeyId) => {
-    setKeyId(key.keyId);
-  };
-  const getActivekeyDataRequest: DataRequest = {
-    method: "get",
-    token: localStorageToken,
-    url: "/api/personalaccount/me/key",
-    cbSuccess: (key: IKeyId) => {
-      setKeyId(key.keyId);
-    }
-  };
-  const [_getActiveKeyResponse] = useDataApi(
-      genericDataFetchReducer,
-      getActivekeyDataRequest
-
-  );
   return (
     <>
       <PageHeader>Key management</PageHeader>
-      <KeyIdContainer
-          keyId={keyId}
-          clipboardIconSize={16}
-          inputCss={copyInputCss}
-          clipboardWrapperCss={clipboardWrapperCss}/>
-
       {displayModal ? (
         <KeyManagementModal
           displayModal={displayModal}
           setDisplayModal={setDisplayModal}
-          cbKeyCreated={cbKeyCreated}
         />
       ) : (
         <CreateKeyButton onClick={enableModal}>
