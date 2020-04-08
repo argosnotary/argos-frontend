@@ -35,7 +35,7 @@ import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import INpaApiResponse from "../../../interfaces/INpaApiResponse";
 import PasswordView from "../../../atoms/PasswordView";
 import FlexRow from "../../../atoms/FlexRow";
-import { generateKey } from "../../../security";
+import { generateKey, signString } from "../../../security";
 import { Warning } from "../../../atoms/Alerts";
 import {
   ModalBody,
@@ -298,6 +298,12 @@ const ManageNpa = () => {
     const continueHandler = async () => {
       const generatedKeys = await generateKey(true);
 
+      const signature = await signString(
+        generatedKeys.password,
+        generatedKeys.keys.encryptedPrivateKey,
+        "mooi man"
+      );
+      console.log(signature);
       const dataRequest: DataRequest = {
         data: generatedKeys.keys,
         method: "post",
