@@ -1,3 +1,6 @@
+Argos Frontend [![Build Status](https://cloud.drone.io/api/badges/argosnotary/argos-frontend/status.svg)](https://cloud.drone.io/argosnotary/argos-frontend)
+============
+
 ## Available Scripts
 
 In the project directory, you can run:
