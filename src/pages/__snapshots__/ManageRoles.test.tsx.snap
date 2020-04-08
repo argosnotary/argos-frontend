@@ -49,9 +49,9 @@ exports[`renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-jKJlTe",
+            "componentId": "sc-eNQAEJ",
             "isStatic": false,
-            "lastClassName": "bqKDHP",
+            "lastClassName": "cafiZt",
             "rules": Array [
               "
   display: flex;
@@ -77,7 +77,7 @@ exports[`renders correctly 1`] = `
             "sc-EHOje",
           ],
           "render": [Function],
-          "styledComponentId": "sc-jKJlTe",
+          "styledComponentId": "sc-eNQAEJ",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -87,7 +87,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-EHOje sc-jKJlTe bqKDHP"
+        className="sc-EHOje sc-eNQAEJ cafiZt"
       >
         <Styled(styled.div)>
           <StyledComponent
@@ -96,9 +96,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-eNQAEJ",
+                  "componentId": "sc-hMqMXs",
                   "isStatic": false,
-                  "lastClassName": "gDNjjY",
+                  "lastClassName": "gjXSzY",
                   "rules": Array [
                     "
   display: flex;
@@ -114,7 +114,7 @@ exports[`renders correctly 1`] = `
                   "sc-ifAKCX",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-eNQAEJ",
+                "styledComponentId": "sc-hMqMXs",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -124,7 +124,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-ifAKCX sc-eNQAEJ gDNjjY"
+              className="sc-ifAKCX sc-hMqMXs gjXSzY"
             >
               <SearchInput
                 defaultLabel="Search user"
@@ -326,7 +326,7 @@ exports[`renders correctly 1`] = `
                   </StyledComponent>
                 </styled.div>
               </SearchInput>
-              <UserAuthorizationComponent
+              <RoleAuthorizationComponent
                 accountId="06125d50-b0e6-4015-8b8b-6a72eb16e929"
                 accountName="Luke Skywalker"
                 collapsedByDefault={true}
@@ -336,17 +336,17 @@ exports[`renders correctly 1`] = `
                     Object {
                       "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
                       "name": "administrator",
+                      "permissions": Array [],
+                    },
+                    Object {
+                      "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1725",
+                      "name": "user",
                       "permissions": Array [
-                        "READ",
-                        "LOCAL_PERMISSION_EDIT",
-                        "TREE_EDIT",
-                        "VERIFY",
-                        "ASSIGN_ROLE",
+                        "PERSONAL_ACCOUNT_READ",
                       ],
                     },
                   ]
                 }
-                type="role"
               >
                 <CollapsibleContainerComponent
                   collapsedByDefault={true}
@@ -496,7 +496,7 @@ exports[`renders correctly 1`] = `
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-chPdSV",
                                   "isStatic": false,
-                                  "lastClassName": "hMQlJo",
+                                  "lastClassName": "dWigFp",
                                   "rules": Array [
                                     "
   border: ",
@@ -535,9 +535,9 @@ exports[`renders correctly 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-dxgOiQ",
+                                        "componentId": "sc-ckVGcZ",
                                         "isStatic": false,
-                                        "lastClassName": "jxixUV",
+                                        "lastClassName": "nDNVv",
                                         "rules": Array [
                                           "
   display: flex;
@@ -549,7 +549,7 @@ exports[`renders correctly 1`] = `
                                       "displayName": "styled.div",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-dxgOiQ",
+                                      "styledComponentId": "sc-ckVGcZ",
                                       "target": "div",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -559,11 +559,246 @@ exports[`renders correctly 1`] = `
                                   forwardedRef={null}
                                 >
                                   <div
-                                    className="sc-dxgOiQ jxixUV"
+                                    className="sc-ckVGcZ nDNVv"
                                   >
                                     <form
                                       onSubmit={[Function]}
-                                    />
+                                    >
+                                      <styled.label
+                                        htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                        key="fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                      >
+                                        <StyledComponent
+                                          forwardedComponent={
+                                            Object {
+                                              "$$typeof": Symbol(react.forward_ref),
+                                              "attrs": Array [],
+                                              "componentStyle": ComponentStyle {
+                                                "componentId": "sc-jKJlTe",
+                                                "isStatic": false,
+                                                "lastClassName": "fyzVSQ",
+                                                "rules": Array [
+                                                  "
+  display: flex;
+  position: relative;
+  padding: 0.25rem;
+  align-items: center;
+",
+                                                ],
+                                              },
+                                              "displayName": "styled.label",
+                                              "foldedComponentIds": Array [],
+                                              "render": [Function],
+                                              "styledComponentId": "sc-jKJlTe",
+                                              "target": "label",
+                                              "toString": [Function],
+                                              "warnTooManyClasses": [Function],
+                                              "withComponent": [Function],
+                                            }
+                                          }
+                                          forwardedRef={null}
+                                          htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                        >
+                                          <label
+                                            className="sc-jKJlTe fyzVSQ"
+                                            htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                          >
+                                            <DataCheckbox
+                                              disabled={true}
+                                              id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                              initialCheckedValue={true}
+                                              name="administrator"
+                                              onChange={[Function]}
+                                              parentIsLoading={false}
+                                              parentPutError={false}
+                                              type="checkbox"
+                                              value="administrator"
+                                            >
+                                              <styled.input
+                                                checked={true}
+                                                disabledCheckbox={true}
+                                                id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                                name="administrator"
+                                                onChange={[Function]}
+                                                type="checkbox"
+                                                value="administrator"
+                                              >
+                                                <StyledComponent
+                                                  checked={true}
+                                                  disabledCheckbox={true}
+                                                  forwardedComponent={
+                                                    Object {
+                                                      "$$typeof": Symbol(react.forward_ref),
+                                                      "attrs": Array [],
+                                                      "componentStyle": ComponentStyle {
+                                                        "componentId": "sc-kGXeez",
+                                                        "isStatic": false,
+                                                        "lastClassName": "gkutMX",
+                                                        "rules": Array [
+                                                          "
+  position: relative;
+  top: 1px;
+  margin: 0 1rem 0 0;
+  pointer-events: ",
+                                                          [Function],
+                                                          ";
+  opacity: ",
+                                                          [Function],
+                                                          ";
+",
+                                                        ],
+                                                      },
+                                                      "displayName": "styled.input",
+                                                      "foldedComponentIds": Array [],
+                                                      "render": [Function],
+                                                      "styledComponentId": "sc-kGXeez",
+                                                      "target": "input",
+                                                      "toString": [Function],
+                                                      "warnTooManyClasses": [Function],
+                                                      "withComponent": [Function],
+                                                    }
+                                                  }
+                                                  forwardedRef={null}
+                                                  id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                                  name="administrator"
+                                                  onChange={[Function]}
+                                                  type="checkbox"
+                                                  value="administrator"
+                                                >
+                                                  <input
+                                                    checked={true}
+                                                    className="sc-kGXeez giBXHc"
+                                                    id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                                    name="administrator"
+                                                    onChange={[Function]}
+                                                    type="checkbox"
+                                                    value="administrator"
+                                                  />
+                                                </StyledComponent>
+                                              </styled.input>
+                                            </DataCheckbox>
+                                            administrator
+                                          </label>
+                                        </StyledComponent>
+                                      </styled.label>
+                                      <styled.label
+                                        htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                        key="fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                      >
+                                        <StyledComponent
+                                          forwardedComponent={
+                                            Object {
+                                              "$$typeof": Symbol(react.forward_ref),
+                                              "attrs": Array [],
+                                              "componentStyle": ComponentStyle {
+                                                "componentId": "sc-jKJlTe",
+                                                "isStatic": false,
+                                                "lastClassName": "fyzVSQ",
+                                                "rules": Array [
+                                                  "
+  display: flex;
+  position: relative;
+  padding: 0.25rem;
+  align-items: center;
+",
+                                                ],
+                                              },
+                                              "displayName": "styled.label",
+                                              "foldedComponentIds": Array [],
+                                              "render": [Function],
+                                              "styledComponentId": "sc-jKJlTe",
+                                              "target": "label",
+                                              "toString": [Function],
+                                              "warnTooManyClasses": [Function],
+                                              "withComponent": [Function],
+                                            }
+                                          }
+                                          forwardedRef={null}
+                                          htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                        >
+                                          <label
+                                            className="sc-jKJlTe fyzVSQ"
+                                            htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                          >
+                                            <DataCheckbox
+                                              disabled={false}
+                                              id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                              initialCheckedValue={true}
+                                              name="user"
+                                              onChange={[Function]}
+                                              parentIsLoading={false}
+                                              parentPutError={false}
+                                              type="checkbox"
+                                              value="user"
+                                            >
+                                              <styled.input
+                                                checked={false}
+                                                disabledCheckbox={false}
+                                                id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                                name="user"
+                                                onChange={[Function]}
+                                                type="checkbox"
+                                                value="user"
+                                              >
+                                                <StyledComponent
+                                                  checked={false}
+                                                  disabledCheckbox={false}
+                                                  forwardedComponent={
+                                                    Object {
+                                                      "$$typeof": Symbol(react.forward_ref),
+                                                      "attrs": Array [],
+                                                      "componentStyle": ComponentStyle {
+                                                        "componentId": "sc-kGXeez",
+                                                        "isStatic": false,
+                                                        "lastClassName": "gkutMX",
+                                                        "rules": Array [
+                                                          "
+  position: relative;
+  top: 1px;
+  margin: 0 1rem 0 0;
+  pointer-events: ",
+                                                          [Function],
+                                                          ";
+  opacity: ",
+                                                          [Function],
+                                                          ";
+",
+                                                        ],
+                                                      },
+                                                      "displayName": "styled.input",
+                                                      "foldedComponentIds": Array [],
+                                                      "render": [Function],
+                                                      "styledComponentId": "sc-kGXeez",
+                                                      "target": "input",
+                                                      "toString": [Function],
+                                                      "warnTooManyClasses": [Function],
+                                                      "withComponent": [Function],
+                                                    }
+                                                  }
+                                                  forwardedRef={null}
+                                                  id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                                  name="user"
+                                                  onChange={[Function]}
+                                                  type="checkbox"
+                                                  value="user"
+                                                >
+                                                  <input
+                                                    checked={false}
+                                                    className="sc-kGXeez gkutMX"
+                                                    id="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                                    name="user"
+                                                    onChange={[Function]}
+                                                    type="checkbox"
+                                                    value="user"
+                                                  />
+                                                </StyledComponent>
+                                              </styled.input>
+                                            </DataCheckbox>
+                                            user
+                                          </label>
+                                        </StyledComponent>
+                                      </styled.label>
+                                    </form>
                                   </div>
                                 </StyledComponent>
                               </styled.div>
@@ -574,7 +809,489 @@ exports[`renders correctly 1`] = `
                     </StyledComponent>
                   </styled.section>
                 </CollapsibleContainerComponent>
-              </UserAuthorizationComponent>
+              </RoleAuthorizationComponent>
+              <RoleAuthorizationComponent
+                accountId="06125d50-b0e6-4015-8b8b-6a72eb16e921"
+                accountName="Anikan Skywalker"
+                collapsedByDefault={true}
+                key="06125d50-b0e6-4015-8b8b-6a72eb16e921"
+                roles={
+                  Array [
+                    Object {
+                      "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1726",
+                      "name": "administrator",
+                      "permissions": Array [],
+                    },
+                    Object {
+                      "id": "fe9fe1b5-5eff-4b93-8fa4-1edd743e1725",
+                      "name": "user",
+                      "permissions": Array [
+                        "PERSONAL_ACCOUNT_READ",
+                      ],
+                    },
+                  ]
+                }
+              >
+                <CollapsibleContainerComponent
+                  collapsedByDefault={true}
+                  onCollapse={[Function]}
+                  title="Anikan Skywalker"
+                >
+                  <styled.section>
+                    <StyledComponent
+                      forwardedComponent={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "attrs": Array [],
+                          "componentStyle": ComponentStyle {
+                            "componentId": "sc-cSHVUG",
+                            "isStatic": false,
+                            "lastClassName": "CAuLq",
+                            "rules": Array [],
+                          },
+                          "displayName": "styled.section",
+                          "foldedComponentIds": Array [],
+                          "render": [Function],
+                          "styledComponentId": "sc-cSHVUG",
+                          "target": "section",
+                          "toString": [Function],
+                          "warnTooManyClasses": [Function],
+                          "withComponent": [Function],
+                        }
+                      }
+                      forwardedRef={null}
+                    >
+                      <section
+                        className="sc-cSHVUG CAuLq"
+                      >
+                        <styled.header>
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-kAzzGY",
+                                  "isStatic": false,
+                                  "lastClassName": "cbchkU",
+                                  "rules": Array [
+                                    "
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: ",
+                                    [Function],
+                                    ";
+",
+                                  ],
+                                },
+                                "displayName": "styled.header",
+                                "foldedComponentIds": Array [],
+                                "render": [Function],
+                                "styledComponentId": "sc-kAzzGY",
+                                "target": "header",
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                          >
+                            <header
+                              className="sc-kAzzGY cbchkU"
+                            >
+                              Anikan Skywalker
+                              <styled.button
+                                onClick={[Function]}
+                              >
+                                <StyledComponent
+                                  forwardedComponent={
+                                    Object {
+                                      "$$typeof": Symbol(react.forward_ref),
+                                      "attrs": Array [],
+                                      "componentStyle": ComponentStyle {
+                                        "componentId": "sc-kgoBCf",
+                                        "isStatic": false,
+                                        "lastClassName": "btTeLY",
+                                        "rules": Array [
+                                          "
+  background: none;
+  border: 0;
+  outline: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+",
+                                        ],
+                                      },
+                                      "displayName": "styled.button",
+                                      "foldedComponentIds": Array [],
+                                      "render": [Function],
+                                      "styledComponentId": "sc-kgoBCf",
+                                      "target": "button",
+                                      "toString": [Function],
+                                      "warnTooManyClasses": [Function],
+                                      "withComponent": [Function],
+                                    }
+                                  }
+                                  forwardedRef={null}
+                                  onClick={[Function]}
+                                >
+                                  <button
+                                    className="sc-kgoBCf btTeLY"
+                                    onClick={[Function]}
+                                  >
+                                    <ChevronIcon
+                                      color="gray"
+                                      size={16}
+                                      transform="rotate(180)"
+                                    >
+                                      <svg
+                                        height={16}
+                                        transform="rotate(180)"
+                                        version="1.1"
+                                        viewBox="0 0 28 28"
+                                        width={16}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M26.297 12.625l-11.594 11.578c-0.391 0.391-1.016 0.391-1.406 0l-11.594-11.578c-0.391-0.391-0.391-1.031 0-1.422l2.594-2.578c0.391-0.391 1.016-0.391 1.406 0l8.297 8.297 8.297-8.297c0.391-0.391 1.016-0.391 1.406 0l2.594 2.578c0.391 0.391 0.391 1.031 0 1.422z"
+                                          fill="gray"
+                                        />
+                                      </svg>
+                                    </ChevronIcon>
+                                  </button>
+                                </StyledComponent>
+                              </styled.button>
+                            </header>
+                          </StyledComponent>
+                        </styled.header>
+                        <styled.main
+                          collapsed={false}
+                        >
+                          <StyledComponent
+                            collapsed={false}
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-chPdSV",
+                                  "isStatic": false,
+                                  "lastClassName": "dWigFp",
+                                  "rules": Array [
+                                    "
+  border: ",
+                                    [Function],
+                                    ";
+  padding: ",
+                                    [Function],
+                                    ";
+  max-height: ",
+                                    [Function],
+                                    ";
+  overflow: hidden;
+  transition: max-height, padding 0.2s ease-out;
+",
+                                  ],
+                                },
+                                "displayName": "styled.main",
+                                "foldedComponentIds": Array [],
+                                "render": [Function],
+                                "styledComponentId": "sc-chPdSV",
+                                "target": "main",
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                          >
+                            <main
+                              className="sc-chPdSV dWigFp"
+                            >
+                              <styled.div>
+                                <StyledComponent
+                                  forwardedComponent={
+                                    Object {
+                                      "$$typeof": Symbol(react.forward_ref),
+                                      "attrs": Array [],
+                                      "componentStyle": ComponentStyle {
+                                        "componentId": "sc-ckVGcZ",
+                                        "isStatic": false,
+                                        "lastClassName": "nDNVv",
+                                        "rules": Array [
+                                          "
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+",
+                                        ],
+                                      },
+                                      "displayName": "styled.div",
+                                      "foldedComponentIds": Array [],
+                                      "render": [Function],
+                                      "styledComponentId": "sc-ckVGcZ",
+                                      "target": "div",
+                                      "toString": [Function],
+                                      "warnTooManyClasses": [Function],
+                                      "withComponent": [Function],
+                                    }
+                                  }
+                                  forwardedRef={null}
+                                >
+                                  <div
+                                    className="sc-ckVGcZ nDNVv"
+                                  >
+                                    <form
+                                      onSubmit={[Function]}
+                                    >
+                                      <styled.label
+                                        htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                        key="fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                      >
+                                        <StyledComponent
+                                          forwardedComponent={
+                                            Object {
+                                              "$$typeof": Symbol(react.forward_ref),
+                                              "attrs": Array [],
+                                              "componentStyle": ComponentStyle {
+                                                "componentId": "sc-jKJlTe",
+                                                "isStatic": false,
+                                                "lastClassName": "fyzVSQ",
+                                                "rules": Array [
+                                                  "
+  display: flex;
+  position: relative;
+  padding: 0.25rem;
+  align-items: center;
+",
+                                                ],
+                                              },
+                                              "displayName": "styled.label",
+                                              "foldedComponentIds": Array [],
+                                              "render": [Function],
+                                              "styledComponentId": "sc-jKJlTe",
+                                              "target": "label",
+                                              "toString": [Function],
+                                              "warnTooManyClasses": [Function],
+                                              "withComponent": [Function],
+                                            }
+                                          }
+                                          forwardedRef={null}
+                                          htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                        >
+                                          <label
+                                            className="sc-jKJlTe fyzVSQ"
+                                            htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                          >
+                                            <DataCheckbox
+                                              disabled={false}
+                                              id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                              initialCheckedValue={false}
+                                              name="administrator"
+                                              onChange={[Function]}
+                                              parentPutError={false}
+                                              type="checkbox"
+                                              value="administrator"
+                                            >
+                                              <styled.input
+                                                checked={false}
+                                                disabledCheckbox={false}
+                                                id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                                name="administrator"
+                                                onChange={[Function]}
+                                                type="checkbox"
+                                                value="administrator"
+                                              >
+                                                <StyledComponent
+                                                  checked={false}
+                                                  disabledCheckbox={false}
+                                                  forwardedComponent={
+                                                    Object {
+                                                      "$$typeof": Symbol(react.forward_ref),
+                                                      "attrs": Array [],
+                                                      "componentStyle": ComponentStyle {
+                                                        "componentId": "sc-kGXeez",
+                                                        "isStatic": false,
+                                                        "lastClassName": "gkutMX",
+                                                        "rules": Array [
+                                                          "
+  position: relative;
+  top: 1px;
+  margin: 0 1rem 0 0;
+  pointer-events: ",
+                                                          [Function],
+                                                          ";
+  opacity: ",
+                                                          [Function],
+                                                          ";
+",
+                                                        ],
+                                                      },
+                                                      "displayName": "styled.input",
+                                                      "foldedComponentIds": Array [],
+                                                      "render": [Function],
+                                                      "styledComponentId": "sc-kGXeez",
+                                                      "target": "input",
+                                                      "toString": [Function],
+                                                      "warnTooManyClasses": [Function],
+                                                      "withComponent": [Function],
+                                                    }
+                                                  }
+                                                  forwardedRef={null}
+                                                  id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                                  name="administrator"
+                                                  onChange={[Function]}
+                                                  type="checkbox"
+                                                  value="administrator"
+                                                >
+                                                  <input
+                                                    checked={false}
+                                                    className="sc-kGXeez gkutMX"
+                                                    id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
+                                                    name="administrator"
+                                                    onChange={[Function]}
+                                                    type="checkbox"
+                                                    value="administrator"
+                                                  />
+                                                </StyledComponent>
+                                              </styled.input>
+                                            </DataCheckbox>
+                                            administrator
+                                          </label>
+                                        </StyledComponent>
+                                      </styled.label>
+                                      <styled.label
+                                        htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                        key="fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                      >
+                                        <StyledComponent
+                                          forwardedComponent={
+                                            Object {
+                                              "$$typeof": Symbol(react.forward_ref),
+                                              "attrs": Array [],
+                                              "componentStyle": ComponentStyle {
+                                                "componentId": "sc-jKJlTe",
+                                                "isStatic": false,
+                                                "lastClassName": "fyzVSQ",
+                                                "rules": Array [
+                                                  "
+  display: flex;
+  position: relative;
+  padding: 0.25rem;
+  align-items: center;
+",
+                                                ],
+                                              },
+                                              "displayName": "styled.label",
+                                              "foldedComponentIds": Array [],
+                                              "render": [Function],
+                                              "styledComponentId": "sc-jKJlTe",
+                                              "target": "label",
+                                              "toString": [Function],
+                                              "warnTooManyClasses": [Function],
+                                              "withComponent": [Function],
+                                            }
+                                          }
+                                          forwardedRef={null}
+                                          htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                        >
+                                          <label
+                                            className="sc-jKJlTe fyzVSQ"
+                                            htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                          >
+                                            <DataCheckbox
+                                              disabled={false}
+                                              id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                              initialCheckedValue={true}
+                                              name="user"
+                                              onChange={[Function]}
+                                              parentPutError={false}
+                                              type="checkbox"
+                                              value="user"
+                                            >
+                                              <styled.input
+                                                checked={true}
+                                                disabledCheckbox={false}
+                                                id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                                name="user"
+                                                onChange={[Function]}
+                                                type="checkbox"
+                                                value="user"
+                                              >
+                                                <StyledComponent
+                                                  checked={true}
+                                                  disabledCheckbox={false}
+                                                  forwardedComponent={
+                                                    Object {
+                                                      "$$typeof": Symbol(react.forward_ref),
+                                                      "attrs": Array [],
+                                                      "componentStyle": ComponentStyle {
+                                                        "componentId": "sc-kGXeez",
+                                                        "isStatic": false,
+                                                        "lastClassName": "gkutMX",
+                                                        "rules": Array [
+                                                          "
+  position: relative;
+  top: 1px;
+  margin: 0 1rem 0 0;
+  pointer-events: ",
+                                                          [Function],
+                                                          ";
+  opacity: ",
+                                                          [Function],
+                                                          ";
+",
+                                                        ],
+                                                      },
+                                                      "displayName": "styled.input",
+                                                      "foldedComponentIds": Array [],
+                                                      "render": [Function],
+                                                      "styledComponentId": "sc-kGXeez",
+                                                      "target": "input",
+                                                      "toString": [Function],
+                                                      "warnTooManyClasses": [Function],
+                                                      "withComponent": [Function],
+                                                    }
+                                                  }
+                                                  forwardedRef={null}
+                                                  id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                                  name="user"
+                                                  onChange={[Function]}
+                                                  type="checkbox"
+                                                  value="user"
+                                                >
+                                                  <input
+                                                    checked={true}
+                                                    className="sc-kGXeez gkutMX"
+                                                    id="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
+                                                    name="user"
+                                                    onChange={[Function]}
+                                                    type="checkbox"
+                                                    value="user"
+                                                  />
+                                                </StyledComponent>
+                                              </styled.input>
+                                            </DataCheckbox>
+                                            user
+                                          </label>
+                                        </StyledComponent>
+                                      </styled.label>
+                                    </form>
+                                  </div>
+                                </StyledComponent>
+                              </styled.div>
+                            </main>
+                          </StyledComponent>
+                        </styled.main>
+                      </section>
+                    </StyledComponent>
+                  </styled.section>
+                </CollapsibleContainerComponent>
+              </RoleAuthorizationComponent>
             </div>
           </StyledComponent>
         </Styled(styled.div)>

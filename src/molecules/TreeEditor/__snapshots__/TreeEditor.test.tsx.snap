@@ -150,6 +150,22 @@ exports[`TreeEditor renders initial data correctly 1`] = `
 <TreeEditor
   context={
     Object {
+      "canCreateRootNode": [MockFunction] {
+        "calls": Array [
+          Array [],
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": true,
+          },
+          Object {
+            "type": "return",
+            "value": true,
+          },
+        ],
+      },
       "cbCreateRootNode": [MockFunction],
       "cbGetNodeChildren": [MockFunction],
       "isLoading": false,
@@ -1044,6 +1060,2196 @@ exports[`TreeEditor renders initial data correctly 1`] = `
                   </StyledComponent>
                 </styled.li>
               </AddAdditionalRootNodes>
+              <ParentNode
+                depth={1}
+                key="0"
+                node={
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [
+                          Object {
+                            "children": Array [
+                              Object {
+                                "children": Array [],
+                                "hasChildren": false,
+                                "name": "jenkins",
+                                "permissions": Array [
+                                  "ASSIGN_ROLE",
+                                  "LOCAL_PERMISSION_EDIT",
+                                  "READ",
+                                  "TREE_EDIT",
+                                  "VERIFY",
+                                ],
+                                "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                                "type": "NON_PERSONAL_ACCOUNT",
+                              },
+                              Object {
+                                "children": Array [],
+                                "hasChildren": false,
+                                "name": "myfirstsupplychain",
+                                "permissions": Array [
+                                  "ASSIGN_ROLE",
+                                  "LOCAL_PERMISSION_EDIT",
+                                  "READ",
+                                  "TREE_EDIT",
+                                  "VERIFY",
+                                ],
+                                "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                                "type": "SUPPLY_CHAIN",
+                              },
+                            ],
+                            "hasChildren": true,
+                            "name": "label_d",
+                            "permissions": Array [
+                              "ASSIGN_ROLE",
+                              "LOCAL_PERMISSION_EDIT",
+                              "READ",
+                              "TREE_EDIT",
+                              "VERIFY",
+                            ],
+                            "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                            "type": "LABEL",
+                          },
+                        ],
+                        "hasChildren": true,
+                        "name": "label_c",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                        "type": "LABEL",
+                      },
+                    ],
+                    "hasChildren": true,
+                    "name": "label_a",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+                    "type": "LABEL",
+                  }
+                }
+              >
+                <styled.li
+                  depth={1}
+                >
+                  <StyledComponent
+                    depth={1}
+                    forwardedComponent={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-htpNat",
+                          "isStatic": false,
+                          "lastClassName": "ioHYS",
+                          "rules": Array [
+                            "
+  margin: 0.2rem 0;
+  position: relative;
+  left: ",
+                            [Function],
+                            "rem;
+  width: 100%;
+",
+                          ],
+                        },
+                        "displayName": "styled.li",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-htpNat",
+                        "target": "li",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      }
+                    }
+                    forwardedRef={null}
+                  >
+                    <li
+                      className="sc-htpNat ioHYS"
+                    >
+                      <styled.button
+                        onClick={[Function]}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-ifAKCX",
+                                "isStatic": false,
+                                "lastClassName": "kuocgS",
+                                "rules": Array [
+                                  "
+  background: none;
+  border: 0;
+  outline: none;
+  margin: 0 0.2rem;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.button",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-ifAKCX",
+                              "target": "button",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                        >
+                          <button
+                            className="sc-ifAKCX kuocgS"
+                            onClick={[Function]}
+                          >
+                            <Styled(TriangleIcon)
+                              color="#1779ba"
+                              size={12}
+                            >
+                              <StyledComponent
+                                color="#1779ba"
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-bxivhb",
+                                      "isStatic": false,
+                                      "lastClassName": "bUZGRr",
+                                      "rules": Array [],
+                                    },
+                                    "displayName": "Styled(TriangleIcon)",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-bxivhb",
+                                    "target": [Function],
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                size={12}
+                              >
+                                <TriangleIcon
+                                  className="sc-bxivhb bUZGRr"
+                                  color="#1779ba"
+                                  size={12}
+                                >
+                                  <svg
+                                    height={12}
+                                    version="1.1"
+                                    viewBox="0 0 32 32"
+                                    width={12}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M6 4l20 12-20 12z"
+                                      fill="#1779ba"
+                                    />
+                                  </svg>
+                                </TriangleIcon>
+                              </StyledComponent>
+                            </Styled(TriangleIcon)>
+                          </button>
+                        </StyledComponent>
+                      </styled.button>
+                      <styled.div
+                        hasChildren={true}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-EHOje",
+                                "isStatic": false,
+                                "lastClassName": "jvlXLV",
+                                "rules": Array [
+                                  "
+  margin: ",
+                                  [Function],
+                                  ";
+  display: inline-flex;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-EHOje",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          hasChildren={true}
+                        >
+                          <div
+                            className="sc-EHOje jvlXLV"
+                          >
+                            <LabelIcon
+                              color="#8D99AE"
+                              size={14}
+                            >
+                              <svg
+                                height={14}
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width={14}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M29 3h-11.3l-14.9 14.8 11.3 11.3 14.9-14.8v-11.3zM20 12v-4h4v4h-4z"
+                                  fill="#8D99AE"
+                                />
+                                 
+                              </svg>
+                            </LabelIcon>
+                          </div>
+                        </StyledComponent>
+                      </styled.div>
+                      <TreeHeadLabel
+                        node={
+                          Object {
+                            "children": Array [
+                              Object {
+                                "children": Array [
+                                  Object {
+                                    "children": Array [
+                                      Object {
+                                        "children": Array [],
+                                        "hasChildren": false,
+                                        "name": "jenkins",
+                                        "permissions": Array [
+                                          "ASSIGN_ROLE",
+                                          "LOCAL_PERMISSION_EDIT",
+                                          "READ",
+                                          "TREE_EDIT",
+                                          "VERIFY",
+                                        ],
+                                        "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                                        "type": "NON_PERSONAL_ACCOUNT",
+                                      },
+                                      Object {
+                                        "children": Array [],
+                                        "hasChildren": false,
+                                        "name": "myfirstsupplychain",
+                                        "permissions": Array [
+                                          "ASSIGN_ROLE",
+                                          "LOCAL_PERMISSION_EDIT",
+                                          "READ",
+                                          "TREE_EDIT",
+                                          "VERIFY",
+                                        ],
+                                        "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                                        "type": "SUPPLY_CHAIN",
+                                      },
+                                    ],
+                                    "hasChildren": true,
+                                    "name": "label_d",
+                                    "permissions": Array [
+                                      "ASSIGN_ROLE",
+                                      "LOCAL_PERMISSION_EDIT",
+                                      "READ",
+                                      "TREE_EDIT",
+                                      "VERIFY",
+                                    ],
+                                    "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                                    "type": "LABEL",
+                                  },
+                                ],
+                                "hasChildren": true,
+                                "name": "label_c",
+                                "permissions": Array [
+                                  "ASSIGN_ROLE",
+                                  "LOCAL_PERMISSION_EDIT",
+                                  "READ",
+                                  "TREE_EDIT",
+                                  "VERIFY",
+                                ],
+                                "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                                "type": "LABEL",
+                              },
+                            ],
+                            "hasChildren": true,
+                            "name": "label_a",
+                            "permissions": Array [
+                              "ASSIGN_ROLE",
+                              "LOCAL_PERMISSION_EDIT",
+                              "READ",
+                              "TREE_EDIT",
+                              "VERIFY",
+                            ],
+                            "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+                            "type": "LABEL",
+                          }
+                        }
+                      >
+                        <styled.span
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          selected={false}
+                        >
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-bwzfXH",
+                                  "isStatic": false,
+                                  "lastClassName": "hgfxlh",
+                                  "rules": Array [
+                                    "
+  user-select: none;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  background-color: ",
+                                    [Function],
+                                    ";
+
+  &:hover {
+    background-color: ",
+                                    [Function],
+                                    ";
+    border-radius: 2px;
+  }
+",
+                                  ],
+                                },
+                                "displayName": "styled.span",
+                                "foldedComponentIds": Array [],
+                                "render": [Function],
+                                "styledComponentId": "sc-bwzfXH",
+                                "target": "span",
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            selected={false}
+                          >
+                            <span
+                              className="sc-bwzfXH hgfxlh"
+                              onClick={[Function]}
+                              onContextMenu={[Function]}
+                              selected={false}
+                            >
+                              label_a
+                            </span>
+                          </StyledComponent>
+                        </styled.span>
+                      </TreeHeadLabel>
+                    </li>
+                  </StyledComponent>
+                </styled.li>
+              </ParentNode>
+              <ParentNode
+                depth={1}
+                key="1"
+                node={
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "label_e",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                        "type": "LABEL",
+                      },
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "mysecondsupplychain",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                        "type": "SUPPLY_CHAIN",
+                      },
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "xl_deploy",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                        "type": "NON_PERSONAL_ACCOUNT",
+                      },
+                    ],
+                    "hasChildren": true,
+                    "name": "label_b",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                    "type": "LABEL",
+                  }
+                }
+              >
+                <styled.li
+                  depth={1}
+                >
+                  <StyledComponent
+                    depth={1}
+                    forwardedComponent={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-htpNat",
+                          "isStatic": false,
+                          "lastClassName": "ioHYS",
+                          "rules": Array [
+                            "
+  margin: 0.2rem 0;
+  position: relative;
+  left: ",
+                            [Function],
+                            "rem;
+  width: 100%;
+",
+                          ],
+                        },
+                        "displayName": "styled.li",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-htpNat",
+                        "target": "li",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      }
+                    }
+                    forwardedRef={null}
+                  >
+                    <li
+                      className="sc-htpNat ioHYS"
+                    >
+                      <styled.button
+                        onClick={[Function]}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-ifAKCX",
+                                "isStatic": false,
+                                "lastClassName": "kuocgS",
+                                "rules": Array [
+                                  "
+  background: none;
+  border: 0;
+  outline: none;
+  margin: 0 0.2rem;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.button",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-ifAKCX",
+                              "target": "button",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                        >
+                          <button
+                            className="sc-ifAKCX kuocgS"
+                            onClick={[Function]}
+                          >
+                            <Styled(TriangleIcon)
+                              color="#1779ba"
+                              size={12}
+                            >
+                              <StyledComponent
+                                color="#1779ba"
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-bxivhb",
+                                      "isStatic": false,
+                                      "lastClassName": "bUZGRr",
+                                      "rules": Array [],
+                                    },
+                                    "displayName": "Styled(TriangleIcon)",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-bxivhb",
+                                    "target": [Function],
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                size={12}
+                              >
+                                <TriangleIcon
+                                  className="sc-bxivhb bUZGRr"
+                                  color="#1779ba"
+                                  size={12}
+                                >
+                                  <svg
+                                    height={12}
+                                    version="1.1"
+                                    viewBox="0 0 32 32"
+                                    width={12}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M6 4l20 12-20 12z"
+                                      fill="#1779ba"
+                                    />
+                                  </svg>
+                                </TriangleIcon>
+                              </StyledComponent>
+                            </Styled(TriangleIcon)>
+                          </button>
+                        </StyledComponent>
+                      </styled.button>
+                      <styled.div
+                        hasChildren={true}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-EHOje",
+                                "isStatic": false,
+                                "lastClassName": "jvlXLV",
+                                "rules": Array [
+                                  "
+  margin: ",
+                                  [Function],
+                                  ";
+  display: inline-flex;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-EHOje",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          hasChildren={true}
+                        >
+                          <div
+                            className="sc-EHOje jvlXLV"
+                          >
+                            <LabelIcon
+                              color="#8D99AE"
+                              size={14}
+                            >
+                              <svg
+                                height={14}
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width={14}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M29 3h-11.3l-14.9 14.8 11.3 11.3 14.9-14.8v-11.3zM20 12v-4h4v4h-4z"
+                                  fill="#8D99AE"
+                                />
+                                 
+                              </svg>
+                            </LabelIcon>
+                          </div>
+                        </StyledComponent>
+                      </styled.div>
+                      <TreeHeadLabel
+                        node={
+                          Object {
+                            "children": Array [
+                              Object {
+                                "children": Array [],
+                                "hasChildren": false,
+                                "name": "label_e",
+                                "permissions": Array [
+                                  "ASSIGN_ROLE",
+                                  "LOCAL_PERMISSION_EDIT",
+                                  "READ",
+                                  "TREE_EDIT",
+                                  "VERIFY",
+                                ],
+                                "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                                "type": "LABEL",
+                              },
+                              Object {
+                                "children": Array [],
+                                "hasChildren": false,
+                                "name": "mysecondsupplychain",
+                                "permissions": Array [
+                                  "ASSIGN_ROLE",
+                                  "LOCAL_PERMISSION_EDIT",
+                                  "READ",
+                                  "TREE_EDIT",
+                                  "VERIFY",
+                                ],
+                                "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                                "type": "SUPPLY_CHAIN",
+                              },
+                              Object {
+                                "children": Array [],
+                                "hasChildren": false,
+                                "name": "xl_deploy",
+                                "permissions": Array [
+                                  "ASSIGN_ROLE",
+                                  "LOCAL_PERMISSION_EDIT",
+                                  "READ",
+                                  "TREE_EDIT",
+                                  "VERIFY",
+                                ],
+                                "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                                "type": "NON_PERSONAL_ACCOUNT",
+                              },
+                            ],
+                            "hasChildren": true,
+                            "name": "label_b",
+                            "permissions": Array [
+                              "ASSIGN_ROLE",
+                              "LOCAL_PERMISSION_EDIT",
+                              "READ",
+                              "TREE_EDIT",
+                              "VERIFY",
+                            ],
+                            "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                            "type": "LABEL",
+                          }
+                        }
+                      >
+                        <styled.span
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          selected={false}
+                        >
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-bwzfXH",
+                                  "isStatic": false,
+                                  "lastClassName": "hgfxlh",
+                                  "rules": Array [
+                                    "
+  user-select: none;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  background-color: ",
+                                    [Function],
+                                    ";
+
+  &:hover {
+    background-color: ",
+                                    [Function],
+                                    ";
+    border-radius: 2px;
+  }
+",
+                                  ],
+                                },
+                                "displayName": "styled.span",
+                                "foldedComponentIds": Array [],
+                                "render": [Function],
+                                "styledComponentId": "sc-bwzfXH",
+                                "target": "span",
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            selected={false}
+                          >
+                            <span
+                              className="sc-bwzfXH hgfxlh"
+                              onClick={[Function]}
+                              onContextMenu={[Function]}
+                              selected={false}
+                            >
+                              label_b
+                            </span>
+                          </StyledComponent>
+                        </styled.span>
+                      </TreeHeadLabel>
+                    </li>
+                  </StyledComponent>
+                </styled.li>
+              </ParentNode>
+              <ParentNode
+                depth={1}
+                key="2"
+                node={
+                  Object {
+                    "children": Array [],
+                    "hasChildren": true,
+                    "name": "label_y",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                    "type": "LABEL",
+                  }
+                }
+              >
+                <styled.li
+                  depth={1}
+                >
+                  <StyledComponent
+                    depth={1}
+                    forwardedComponent={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "attrs": Array [],
+                        "componentStyle": ComponentStyle {
+                          "componentId": "sc-htpNat",
+                          "isStatic": false,
+                          "lastClassName": "ioHYS",
+                          "rules": Array [
+                            "
+  margin: 0.2rem 0;
+  position: relative;
+  left: ",
+                            [Function],
+                            "rem;
+  width: 100%;
+",
+                          ],
+                        },
+                        "displayName": "styled.li",
+                        "foldedComponentIds": Array [],
+                        "render": [Function],
+                        "styledComponentId": "sc-htpNat",
+                        "target": "li",
+                        "toString": [Function],
+                        "warnTooManyClasses": [Function],
+                        "withComponent": [Function],
+                      }
+                    }
+                    forwardedRef={null}
+                  >
+                    <li
+                      className="sc-htpNat ioHYS"
+                    >
+                      <styled.button
+                        onClick={[Function]}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-ifAKCX",
+                                "isStatic": false,
+                                "lastClassName": "kuocgS",
+                                "rules": Array [
+                                  "
+  background: none;
+  border: 0;
+  outline: none;
+  margin: 0 0.2rem;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+",
+                                ],
+                              },
+                              "displayName": "styled.button",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-ifAKCX",
+                              "target": "button",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          onClick={[Function]}
+                        >
+                          <button
+                            className="sc-ifAKCX kuocgS"
+                            onClick={[Function]}
+                          >
+                            <Styled(TriangleIcon)
+                              color="#1779ba"
+                              size={12}
+                            >
+                              <StyledComponent
+                                color="#1779ba"
+                                forwardedComponent={
+                                  Object {
+                                    "$$typeof": Symbol(react.forward_ref),
+                                    "attrs": Array [],
+                                    "componentStyle": ComponentStyle {
+                                      "componentId": "sc-bxivhb",
+                                      "isStatic": false,
+                                      "lastClassName": "bUZGRr",
+                                      "rules": Array [],
+                                    },
+                                    "displayName": "Styled(TriangleIcon)",
+                                    "foldedComponentIds": Array [],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-bxivhb",
+                                    "target": [Function],
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                size={12}
+                              >
+                                <TriangleIcon
+                                  className="sc-bxivhb bUZGRr"
+                                  color="#1779ba"
+                                  size={12}
+                                >
+                                  <svg
+                                    height={12}
+                                    version="1.1"
+                                    viewBox="0 0 32 32"
+                                    width={12}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M6 4l20 12-20 12z"
+                                      fill="#1779ba"
+                                    />
+                                  </svg>
+                                </TriangleIcon>
+                              </StyledComponent>
+                            </Styled(TriangleIcon)>
+                          </button>
+                        </StyledComponent>
+                      </styled.button>
+                      <styled.div
+                        hasChildren={true}
+                      >
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-EHOje",
+                                "isStatic": false,
+                                "lastClassName": "jvlXLV",
+                                "rules": Array [
+                                  "
+  margin: ",
+                                  [Function],
+                                  ";
+  display: inline-flex;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-EHOje",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                          hasChildren={true}
+                        >
+                          <div
+                            className="sc-EHOje jvlXLV"
+                          >
+                            <LabelIcon
+                              color="#8D99AE"
+                              size={14}
+                            >
+                              <svg
+                                height={14}
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width={14}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M29 3h-11.3l-14.9 14.8 11.3 11.3 14.9-14.8v-11.3zM20 12v-4h4v4h-4z"
+                                  fill="#8D99AE"
+                                />
+                                 
+                              </svg>
+                            </LabelIcon>
+                          </div>
+                        </StyledComponent>
+                      </styled.div>
+                      <TreeHeadLabel
+                        node={
+                          Object {
+                            "children": Array [],
+                            "hasChildren": true,
+                            "name": "label_y",
+                            "permissions": Array [
+                              "ASSIGN_ROLE",
+                              "LOCAL_PERMISSION_EDIT",
+                              "READ",
+                              "TREE_EDIT",
+                              "VERIFY",
+                            ],
+                            "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                            "type": "LABEL",
+                          }
+                        }
+                      >
+                        <styled.span
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          selected={false}
+                        >
+                          <StyledComponent
+                            forwardedComponent={
+                              Object {
+                                "$$typeof": Symbol(react.forward_ref),
+                                "attrs": Array [],
+                                "componentStyle": ComponentStyle {
+                                  "componentId": "sc-bwzfXH",
+                                  "isStatic": false,
+                                  "lastClassName": "hgfxlh",
+                                  "rules": Array [
+                                    "
+  user-select: none;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid transparent;
+  background-color: ",
+                                    [Function],
+                                    ";
+
+  &:hover {
+    background-color: ",
+                                    [Function],
+                                    ";
+    border-radius: 2px;
+  }
+",
+                                  ],
+                                },
+                                "displayName": "styled.span",
+                                "foldedComponentIds": Array [],
+                                "render": [Function],
+                                "styledComponentId": "sc-bwzfXH",
+                                "target": "span",
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            selected={false}
+                          >
+                            <span
+                              className="sc-bwzfXH hgfxlh"
+                              onClick={[Function]}
+                              onContextMenu={[Function]}
+                              selected={false}
+                            >
+                              label_y
+                            </span>
+                          </StyledComponent>
+                        </styled.span>
+                      </TreeHeadLabel>
+                    </li>
+                  </StyledComponent>
+                </styled.li>
+              </ParentNode>
+            </ul>
+          </StyledComponent>
+        </styled.ul>
+      </aside>
+    </StyledComponent>
+  </styled.aside>
+</TreeEditor>
+`;
+
+exports[`TreeEditor renders initial data correctly without add base label 1`] = `
+<TreeEditor
+  context={
+    Object {
+      "canCreateRootNode": [MockFunction] {
+        "calls": Array [
+          Array [],
+          Array [],
+          Array [],
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": true,
+          },
+          Object {
+            "type": "return",
+            "value": true,
+          },
+          Object {
+            "type": "return",
+            "value": false,
+          },
+          Object {
+            "type": "return",
+            "value": false,
+          },
+        ],
+      },
+      "cbCreateRootNode": [MockFunction],
+      "cbGetNodeChildren": [MockFunction],
+      "isLoading": false,
+      "selectedNodeReferenceId": "",
+      "treeClickHandlers": Array [
+        Object {
+          "callback": [MockFunction],
+          "type": "LABEL",
+        },
+      ],
+      "treeContextMenu": Array [
+        Object {
+          "menuitems": Array [
+            Object {
+              "callback": [MockFunction],
+              "label": "Add child label",
+              "visible": [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "children": Array [
+                            Object {
+                              "children": Array [
+                                Object {
+                                  "children": Array [],
+                                  "hasChildren": false,
+                                  "name": "jenkins",
+                                  "permissions": Array [
+                                    "ASSIGN_ROLE",
+                                    "LOCAL_PERMISSION_EDIT",
+                                    "READ",
+                                    "TREE_EDIT",
+                                    "VERIFY",
+                                  ],
+                                  "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                                  "type": "NON_PERSONAL_ACCOUNT",
+                                },
+                                Object {
+                                  "children": Array [],
+                                  "hasChildren": false,
+                                  "name": "myfirstsupplychain",
+                                  "permissions": Array [
+                                    "ASSIGN_ROLE",
+                                    "LOCAL_PERMISSION_EDIT",
+                                    "READ",
+                                    "TREE_EDIT",
+                                    "VERIFY",
+                                  ],
+                                  "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                                  "type": "SUPPLY_CHAIN",
+                                },
+                              ],
+                              "hasChildren": true,
+                              "name": "label_d",
+                              "permissions": Array [
+                                "ASSIGN_ROLE",
+                                "LOCAL_PERMISSION_EDIT",
+                                "READ",
+                                "TREE_EDIT",
+                                "VERIFY",
+                              ],
+                              "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                              "type": "LABEL",
+                            },
+                          ],
+                          "hasChildren": true,
+                          "name": "label_c",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                          "type": "LABEL",
+                        },
+                      ],
+                      "hasChildren": true,
+                      "name": "label_a",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "label_e",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                          "type": "LABEL",
+                        },
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "mysecondsupplychain",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                          "type": "SUPPLY_CHAIN",
+                        },
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "xl_deploy",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                          "type": "NON_PERSONAL_ACCOUNT",
+                        },
+                      ],
+                      "hasChildren": true,
+                      "name": "label_b",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [],
+                      "hasChildren": true,
+                      "name": "label_y",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "children": Array [
+                            Object {
+                              "children": Array [
+                                Object {
+                                  "children": Array [],
+                                  "hasChildren": false,
+                                  "name": "jenkins",
+                                  "permissions": Array [
+                                    "ASSIGN_ROLE",
+                                    "LOCAL_PERMISSION_EDIT",
+                                    "READ",
+                                    "TREE_EDIT",
+                                    "VERIFY",
+                                  ],
+                                  "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                                  "type": "NON_PERSONAL_ACCOUNT",
+                                },
+                                Object {
+                                  "children": Array [],
+                                  "hasChildren": false,
+                                  "name": "myfirstsupplychain",
+                                  "permissions": Array [
+                                    "ASSIGN_ROLE",
+                                    "LOCAL_PERMISSION_EDIT",
+                                    "READ",
+                                    "TREE_EDIT",
+                                    "VERIFY",
+                                  ],
+                                  "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                                  "type": "SUPPLY_CHAIN",
+                                },
+                              ],
+                              "hasChildren": true,
+                              "name": "label_d",
+                              "permissions": Array [
+                                "ASSIGN_ROLE",
+                                "LOCAL_PERMISSION_EDIT",
+                                "READ",
+                                "TREE_EDIT",
+                                "VERIFY",
+                              ],
+                              "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                              "type": "LABEL",
+                            },
+                          ],
+                          "hasChildren": true,
+                          "name": "label_c",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                          "type": "LABEL",
+                        },
+                      ],
+                      "hasChildren": true,
+                      "name": "label_a",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "label_e",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                          "type": "LABEL",
+                        },
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "mysecondsupplychain",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                          "type": "SUPPLY_CHAIN",
+                        },
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "xl_deploy",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                          "type": "NON_PERSONAL_ACCOUNT",
+                        },
+                      ],
+                      "hasChildren": true,
+                      "name": "label_b",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [],
+                      "hasChildren": true,
+                      "name": "label_y",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                      "type": "LABEL",
+                    },
+                  ],
+                ],
+                "results": Array [
+                  Object {
+                    "type": "return",
+                    "value": true,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": true,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": true,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": true,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": true,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": true,
+                  },
+                ],
+              },
+            },
+            Object {
+              "callback": [MockFunction],
+              "label": "invisible",
+              "visible": [MockFunction] {
+                "calls": Array [
+                  Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "children": Array [
+                            Object {
+                              "children": Array [
+                                Object {
+                                  "children": Array [],
+                                  "hasChildren": false,
+                                  "name": "jenkins",
+                                  "permissions": Array [
+                                    "ASSIGN_ROLE",
+                                    "LOCAL_PERMISSION_EDIT",
+                                    "READ",
+                                    "TREE_EDIT",
+                                    "VERIFY",
+                                  ],
+                                  "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                                  "type": "NON_PERSONAL_ACCOUNT",
+                                },
+                                Object {
+                                  "children": Array [],
+                                  "hasChildren": false,
+                                  "name": "myfirstsupplychain",
+                                  "permissions": Array [
+                                    "ASSIGN_ROLE",
+                                    "LOCAL_PERMISSION_EDIT",
+                                    "READ",
+                                    "TREE_EDIT",
+                                    "VERIFY",
+                                  ],
+                                  "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                                  "type": "SUPPLY_CHAIN",
+                                },
+                              ],
+                              "hasChildren": true,
+                              "name": "label_d",
+                              "permissions": Array [
+                                "ASSIGN_ROLE",
+                                "LOCAL_PERMISSION_EDIT",
+                                "READ",
+                                "TREE_EDIT",
+                                "VERIFY",
+                              ],
+                              "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                              "type": "LABEL",
+                            },
+                          ],
+                          "hasChildren": true,
+                          "name": "label_c",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                          "type": "LABEL",
+                        },
+                      ],
+                      "hasChildren": true,
+                      "name": "label_a",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "label_e",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                          "type": "LABEL",
+                        },
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "mysecondsupplychain",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                          "type": "SUPPLY_CHAIN",
+                        },
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "xl_deploy",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                          "type": "NON_PERSONAL_ACCOUNT",
+                        },
+                      ],
+                      "hasChildren": true,
+                      "name": "label_b",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [],
+                      "hasChildren": true,
+                      "name": "label_y",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "children": Array [
+                            Object {
+                              "children": Array [
+                                Object {
+                                  "children": Array [],
+                                  "hasChildren": false,
+                                  "name": "jenkins",
+                                  "permissions": Array [
+                                    "ASSIGN_ROLE",
+                                    "LOCAL_PERMISSION_EDIT",
+                                    "READ",
+                                    "TREE_EDIT",
+                                    "VERIFY",
+                                  ],
+                                  "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                                  "type": "NON_PERSONAL_ACCOUNT",
+                                },
+                                Object {
+                                  "children": Array [],
+                                  "hasChildren": false,
+                                  "name": "myfirstsupplychain",
+                                  "permissions": Array [
+                                    "ASSIGN_ROLE",
+                                    "LOCAL_PERMISSION_EDIT",
+                                    "READ",
+                                    "TREE_EDIT",
+                                    "VERIFY",
+                                  ],
+                                  "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                                  "type": "SUPPLY_CHAIN",
+                                },
+                              ],
+                              "hasChildren": true,
+                              "name": "label_d",
+                              "permissions": Array [
+                                "ASSIGN_ROLE",
+                                "LOCAL_PERMISSION_EDIT",
+                                "READ",
+                                "TREE_EDIT",
+                                "VERIFY",
+                              ],
+                              "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                              "type": "LABEL",
+                            },
+                          ],
+                          "hasChildren": true,
+                          "name": "label_c",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                          "type": "LABEL",
+                        },
+                      ],
+                      "hasChildren": true,
+                      "name": "label_a",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "label_e",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                          "type": "LABEL",
+                        },
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "mysecondsupplychain",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                          "type": "SUPPLY_CHAIN",
+                        },
+                        Object {
+                          "children": Array [],
+                          "hasChildren": false,
+                          "name": "xl_deploy",
+                          "permissions": Array [
+                            "ASSIGN_ROLE",
+                            "LOCAL_PERMISSION_EDIT",
+                            "READ",
+                            "TREE_EDIT",
+                            "VERIFY",
+                          ],
+                          "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                          "type": "NON_PERSONAL_ACCOUNT",
+                        },
+                      ],
+                      "hasChildren": true,
+                      "name": "label_b",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                      "type": "LABEL",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "children": Array [],
+                      "hasChildren": true,
+                      "name": "label_y",
+                      "permissions": Array [
+                        "ASSIGN_ROLE",
+                        "LOCAL_PERMISSION_EDIT",
+                        "READ",
+                        "TREE_EDIT",
+                        "VERIFY",
+                      ],
+                      "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+                      "type": "LABEL",
+                    },
+                  ],
+                ],
+                "results": Array [
+                  Object {
+                    "type": "return",
+                    "value": false,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": false,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": false,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": false,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": false,
+                  },
+                  Object {
+                    "type": "return",
+                    "value": false,
+                  },
+                ],
+              },
+            },
+          ],
+          "type": "LABEL",
+        },
+      ],
+      "treeDispatch": [Function],
+      "treeState": Object {
+        "contextMenu": Object {
+          "id": "",
+          "show": false,
+          "x": 0,
+          "y": 0,
+        },
+        "data": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "jenkins",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                        "type": "NON_PERSONAL_ACCOUNT",
+                      },
+                      Object {
+                        "children": Array [],
+                        "hasChildren": false,
+                        "name": "myfirstsupplychain",
+                        "permissions": Array [
+                          "ASSIGN_ROLE",
+                          "LOCAL_PERMISSION_EDIT",
+                          "READ",
+                          "TREE_EDIT",
+                          "VERIFY",
+                        ],
+                        "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                        "type": "SUPPLY_CHAIN",
+                      },
+                    ],
+                    "hasChildren": true,
+                    "name": "label_d",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                    "type": "LABEL",
+                  },
+                ],
+                "hasChildren": true,
+                "name": "label_c",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+                "type": "LABEL",
+              },
+            ],
+            "hasChildren": true,
+            "name": "label_a",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+            "type": "LABEL",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [],
+                "hasChildren": false,
+                "name": "label_e",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                "type": "LABEL",
+              },
+              Object {
+                "children": Array [],
+                "hasChildren": false,
+                "name": "mysecondsupplychain",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+                "type": "SUPPLY_CHAIN",
+              },
+              Object {
+                "children": Array [],
+                "hasChildren": false,
+                "name": "xl_deploy",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+                "type": "NON_PERSONAL_ACCOUNT",
+              },
+            ],
+            "hasChildren": true,
+            "name": "label_b",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+            "type": "LABEL",
+          },
+          Object {
+            "children": Array [],
+            "hasChildren": true,
+            "name": "label_y",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+            "type": "LABEL",
+          },
+        ],
+        "toggledNodes": Array [],
+      },
+      "treeStringList": Object {
+        "createrootnode": "Create base label...",
+      },
+    }
+  }
+  data={
+    Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [],
+                    "hasChildren": false,
+                    "name": "jenkins",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
+                    "type": "NON_PERSONAL_ACCOUNT",
+                  },
+                  Object {
+                    "children": Array [],
+                    "hasChildren": false,
+                    "name": "myfirstsupplychain",
+                    "permissions": Array [
+                      "ASSIGN_ROLE",
+                      "LOCAL_PERMISSION_EDIT",
+                      "READ",
+                      "TREE_EDIT",
+                      "VERIFY",
+                    ],
+                    "referenceId": "ad99801a-74e4-488d-acf1-a179e5cedbff",
+                    "type": "SUPPLY_CHAIN",
+                  },
+                ],
+                "hasChildren": true,
+                "name": "label_d",
+                "permissions": Array [
+                  "ASSIGN_ROLE",
+                  "LOCAL_PERMISSION_EDIT",
+                  "READ",
+                  "TREE_EDIT",
+                  "VERIFY",
+                ],
+                "referenceId": "d3cca05f-3b17-4c7e-8a80-ea2382c55f11",
+                "type": "LABEL",
+              },
+            ],
+            "hasChildren": true,
+            "name": "label_c",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "16a53038-8f08-4588-88f4-9b939897467c",
+            "type": "LABEL",
+          },
+        ],
+        "hasChildren": true,
+        "name": "label_a",
+        "permissions": Array [
+          "ASSIGN_ROLE",
+          "LOCAL_PERMISSION_EDIT",
+          "READ",
+          "TREE_EDIT",
+          "VERIFY",
+        ],
+        "referenceId": "7b21b5f2-7c6b-40d2-84ea-e4afaf615aff",
+        "type": "LABEL",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "hasChildren": false,
+            "name": "label_e",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+            "type": "LABEL",
+          },
+          Object {
+            "children": Array [],
+            "hasChildren": false,
+            "name": "mysecondsupplychain",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "c54f479a-8db6-41f1-a808-6b9c25a79829",
+            "type": "SUPPLY_CHAIN",
+          },
+          Object {
+            "children": Array [],
+            "hasChildren": false,
+            "name": "xl_deploy",
+            "permissions": Array [
+              "ASSIGN_ROLE",
+              "LOCAL_PERMISSION_EDIT",
+              "READ",
+              "TREE_EDIT",
+              "VERIFY",
+            ],
+            "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
+            "type": "NON_PERSONAL_ACCOUNT",
+          },
+        ],
+        "hasChildren": true,
+        "name": "label_b",
+        "permissions": Array [
+          "ASSIGN_ROLE",
+          "LOCAL_PERMISSION_EDIT",
+          "READ",
+          "TREE_EDIT",
+          "VERIFY",
+        ],
+        "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+        "type": "LABEL",
+      },
+      Object {
+        "children": Array [],
+        "hasChildren": true,
+        "name": "label_y",
+        "permissions": Array [
+          "ASSIGN_ROLE",
+          "LOCAL_PERMISSION_EDIT",
+          "READ",
+          "TREE_EDIT",
+          "VERIFY",
+        ],
+        "referenceId": "c1e7e2ad-6754-40c1-9c83-8e43c3772f18",
+        "type": "LABEL",
+      },
+    ]
+  }
+  loading={false}
+>
+  <styled.aside>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-gqjmRU",
+            "isStatic": false,
+            "lastClassName": "kkNkaN",
+            "rules": Array [
+              "
+  height: 100vh;
+  color: ",
+              [Function],
+              ";
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+",
+            ],
+          },
+          "displayName": "styled.aside",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-gqjmRU",
+          "target": "aside",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <aside
+        className="sc-gqjmRU kkNkaN"
+      >
+        <styled.ul>
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-iwsKbI",
+                  "isStatic": false,
+                  "lastClassName": "kGIsiM",
+                  "rules": Array [
+                    "
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+",
+                  ],
+                },
+                "displayName": "styled.ul",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-iwsKbI",
+                "target": "ul",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+          >
+            <ul
+              className="sc-iwsKbI kGIsiM"
+            >
+              <AddAdditionalRootNodes />
               <ParentNode
                 depth={1}
                 key="0"

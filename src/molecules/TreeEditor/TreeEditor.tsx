@@ -287,22 +287,26 @@ export const AddAdditionalRootNodes = () => {
   const treeContext = useContext(TreeStateContext);
   const theme = useContext(ThemeContext);
 
-  return (
-    <TreeNodeContainer depth={1}>
-      <IconContainer>
-        <AltPlusIcon
-          size={12}
-          color={theme.treeEditor.iconColors.addRootNode}
-        />
-      </IconContainer>
-      <TreeHeadLabelSpan
-        selected={false}
-        onClick={treeContext.cbCreateRootNode}
-      >
-        {treeContext.treeStringList.createrootnode}
-      </TreeHeadLabelSpan>
-    </TreeNodeContainer>
-  );
+  if (treeContext.canCreateRootNode()) {
+    return (
+      <TreeNodeContainer depth={1}>
+        <IconContainer>
+          <AltPlusIcon
+            size={12}
+            color={theme.treeEditor.iconColors.addRootNode}
+          />
+        </IconContainer>
+        <TreeHeadLabelSpan
+          selected={false}
+          onClick={treeContext.cbCreateRootNode}
+        >
+          {treeContext.treeStringList.createrootnode}
+        </TreeHeadLabelSpan>
+      </TreeNodeContainer>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 const TreeEditorContainer = styled.aside`

@@ -49,11 +49,6 @@ export type TreeReducerAction =
     }
   | { type: TreeReducerActionTypes.HIDECONTEXTMENU };
 
-type TreeStateContextType = {
-  treeState: ITreeReducerState;
-  treeStateDispatch: Dispatch<TreeReducerAction>;
-};
-
 export interface ITreeStateContext {
   treeState: ITreeReducerState;
   treeDispatch: Dispatch<TreeReducerAction>;
@@ -61,6 +56,7 @@ export interface ITreeStateContext {
   treeContextMenu: Array<ITreeContextMenuEntry>;
   treeClickHandlers: Array<ITreeClickHandler>;
   cbCreateRootNode: () => void;
+  canCreateRootNode: () => boolean;
   cbGetNodeChildren: (parentId: string) => void;
   isLoading: boolean;
   selectedNodeReferenceId: string;

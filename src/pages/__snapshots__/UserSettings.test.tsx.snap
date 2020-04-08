@@ -9,9 +9,9 @@ exports[`renders with admin only menu 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-jhAzac",
+            "componentId": "sc-fBuWsC",
             "isStatic": false,
-            "lastClassName": "iAdapl",
+            "lastClassName": "fIuVxw",
             "rules": Array [
               "
   position: fixed;
@@ -26,7 +26,7 @@ exports[`renders with admin only menu 1`] = `
           "displayName": "styled.section",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-jhAzac",
+          "styledComponentId": "sc-fBuWsC",
           "target": "section",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -36,7 +36,7 @@ exports[`renders with admin only menu 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-jhAzac iAdapl"
+        className="sc-fBuWsC fIuVxw"
       >
         <Styled(styled.div)>
           <StyledComponent
@@ -1014,9 +1014,9 @@ exports[`renders with public menu 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-jhAzac",
+            "componentId": "sc-fBuWsC",
             "isStatic": false,
-            "lastClassName": "iAdapl",
+            "lastClassName": "fIuVxw",
             "rules": Array [
               "
   position: fixed;
@@ -1031,7 +1031,7 @@ exports[`renders with public menu 1`] = `
           "displayName": "styled.section",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-jhAzac",
+          "styledComponentId": "sc-fBuWsC",
           "target": "section",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -1041,7 +1041,7 @@ exports[`renders with public menu 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-jhAzac iAdapl"
+        className="sc-fBuWsC fIuVxw"
       >
         <Styled(styled.div)>
           <StyledComponent

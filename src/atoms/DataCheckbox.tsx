@@ -17,10 +17,16 @@ import React, { useContext, useEffect, useState } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { LoaderIcon } from "./Icons";
 
-const Checkbox = styled.input`
+interface ICheckboxProps {
+  disabledCheckbox?: boolean;
+}
+
+const Checkbox = styled.input<ICheckboxProps>`
   position: relative;
   top: 1px;
   margin: 0 1rem 0 0;
+  pointer-events: ${props => (props.disabledCheckbox ? "none" : "auto")};
+  opacity: ${props => (props.disabledCheckbox ? "0.5" : "1")};
 `;
 
 const CheckboxLoaderContainer = styled.div`
@@ -37,6 +43,7 @@ interface IDataCheckboxComponentProps {
   id: string;
   parentIsLoading: boolean;
   parentPutError: boolean;
+  disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -48,7 +55,8 @@ const DataCheckbox: React.FC<IDataCheckboxComponentProps> = ({
   id,
   parentIsLoading,
   parentPutError,
-  onChange
+  onChange,
+  disabled
 }) => {
   const [currentlyPostingData, setCurrentlyPostingData] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -78,15 +86,18 @@ const DataCheckbox: React.FC<IDataCheckboxComponentProps> = ({
 
   return (
     <Checkbox
+      disabledCheckbox={disabled}
       checked={checked}
       type={type}
       name={name}
       value={value}
       id={id}
       onChange={event => {
-        setCurrentlyPostingData(true);
-        setChecked(!checked);
-        onChange(event);
+        if (!disabled) {
+          setCurrentlyPostingData(true);
+          setChecked(!checked);
+          onChange(event);
+        }
       }}
     />
   );

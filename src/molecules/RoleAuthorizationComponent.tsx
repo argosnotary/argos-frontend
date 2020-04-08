@@ -25,6 +25,7 @@ import CollapsibleContainerComponent from "../atoms/CollapsibleContainer";
 import DataRequest from "../types/DataRequest";
 import AlternateLoader from "../atoms/Icons/AlternateLoader";
 import DataCheckbox from "../atoms/DataCheckbox";
+import { useUserProfileContextStore } from "../stores/UserProfile";
 
 const AuthorizationContainer = styled.div`
   display: flex;
@@ -39,28 +40,12 @@ const Label = styled.label`
   align-items: center;
 `;
 
-interface IUserAuthorizationComponentProps {
+interface IRoleAuthorizationComponentProps {
   labelId?: string;
   accountId: string;
   accountName: string;
   collapsedByDefault: boolean;
-  type: "label" | "role";
   roles?: Array<IRole>;
-}
-
-interface IPermissionsApiState {
-  isLoading: boolean;
-  data: IUserPermissions;
-}
-
-interface IPermission {
-  id: string;
-  label: string;
-}
-
-interface IUserPermissions {
-  labelId: string;
-  permissions: Array<string>;
 }
 
 interface IRole {
@@ -79,37 +64,15 @@ interface IRolesApiState {
   error?: string;
 }
 
-const permissionTypes = [
-  { id: "LAYOUT_ADD", label: "add a layout" },
-  { id: "LINK_ADD", label: "add a link" },
-  { id: "LOCAL_PERMISSION_EDIT", label: "change permissions" },
-  { id: "TREE_EDIT", label: "change tree" },
-  { id: "READ", label: "read" },
-  { id: "VERIFY", label: "verify supply chains" },
-  { id: "NPA_EDIT", label: "add npa" }
-];
-
-const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = ({
-  labelId,
+const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = ({
   accountId,
   accountName,
   collapsedByDefault,
-  type,
   roles
 }) => {
-  const [
-    updatePermissionApiResponse,
-    setUpdatePermissionApiRequest
-  ] = useDataApi(genericDataFetchReducer);
-
   const [updateRolesApiResponse, setUpdateRolesApiRequest] = useDataApi(
     genericDataFetchReducer
   );
-
-  const [permissionsApiResponse, setPermissionsApiRequest] = useDataApi<
-    IPermissionsApiState,
-    IUserPermissions
-  >(customGenericDataFetchReducer);
 
   const [rolesApiResponse, setRolesApiRequest] = useDataApi<
     IRolesApiState,
@@ -120,15 +83,12 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
 
   const theme = useContext(ThemeContext);
 
-  const preCheckPermission = (permission: IPermission): boolean => {
-    if (!permissionsApiResponse.data.permissions) {
-      return false;
-    }
+  const userProfile = useUserProfileContextStore();
 
+  const preCheckEnabledRole = (role: IRole): boolean => {
     return (
-      permissionsApiResponse.data.permissions.findIndex(
-        (entry: any) => entry === permission.id
-      ) > -1
+      role.name === "administrator" &&
+      accountId === userProfile.personalAccount.id
     );
   };
 
@@ -165,36 +125,9 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
     setUpdateRolesApiRequest(dataRequest);
   };
 
-  const getLocalPermissions = () => {
-    const dataRequest: DataRequest = {
-      method: "get",
-      token: localStorageToken,
-      url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
-    };
-
-    setPermissionsApiRequest(dataRequest);
-  };
-
-  const putLocalPermissions = (data: Array<string>) => {
-    const dataRequest: DataRequest = {
-      method: "put",
-      data,
-      token: localStorageToken,
-      url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
-    };
-
-    setUpdatePermissionApiRequest(dataRequest);
-  };
-
   useEffect(() => {
     if (!collapsedByDefault) {
-      if (type === "label") {
-        getLocalPermissions();
-      }
-
-      if (type === "role") {
-        getGlobalRoles();
-      }
+      getGlobalRoles();
     }
   }, [accountId]);
 
@@ -204,13 +137,14 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
     }
 
     return roles?.map(role => (
-      <Label htmlFor={role.id} key={role.id}>
+      <Label htmlFor={accountId + role.id} key={role.id}>
         <DataCheckbox
           initialCheckedValue={preCheckRole(role)}
+          disabled={preCheckEnabledRole(role)}
           type="checkbox"
           name={role.name}
           value={role.name}
-          id={role.id}
+          id={accountId + role.id}
           parentIsLoading={updateRolesApiResponse.isLoading}
           parentPutError={updateRolesApiResponse.error ? true : false}
           onChange={e =>
@@ -224,55 +158,15 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
     ));
   };
 
-  const renderLocalPermissions = (
-    permissionsApiResponse: IPermissionsApiState
-  ) => {
-    if (!permissionsApiResponse.data) {
-      return null;
-    }
-
-    return permissionTypes.map(permission => (
-      <Label htmlFor={permission.id} key={permission.id}>
-        <DataCheckbox
-          initialCheckedValue={preCheckPermission(permission)}
-          type="checkbox"
-          name={permission.id}
-          value={permission.id}
-          id={permission.id}
-          parentIsLoading={updatePermissionApiResponse.isLoading}
-          parentPutError={updatePermissionApiResponse.error ? true : false}
-          onChange={e =>
-            e.currentTarget
-              .closest("form")
-              ?.dispatchEvent(new Event("submit", { cancelable: true }))
-          }
-        />
-        {permission.label}
-      </Label>
-    ));
-  };
-
   return (
     <CollapsibleContainerComponent
       collapsedByDefault={collapsedByDefault}
-      title={
-        type === "label" ? `Permissions for ${accountName}` : `${accountName}`
-      }
+      title={`${accountName}`}
       onCollapse={() => {
-        if (
-          (permissionsApiResponse && permissionsApiResponse.data) ||
-          (rolesApiResponse && rolesApiResponse.data)
-        ) {
+        if (rolesApiResponse && rolesApiResponse.data) {
           return;
         }
-
-        if (type === "label") {
-          getLocalPermissions();
-        }
-
-        if (type === "role") {
-          getGlobalRoles();
-        }
+        getGlobalRoles();
       }}
     >
       <AuthorizationContainer>
@@ -281,31 +175,21 @@ const UserAuthorizationComponent: React.FC<IUserAuthorizationComponentProps> = (
             e.preventDefault();
             const formData = new FormData(e.currentTarget);
             const permissions: Array<string> = [];
-
-            for (const [_key, value] of formData.entries()) {
+            for (const value of formData.values()) {
               permissions.push(value as string);
             }
 
-            if (type === "label") {
-              putLocalPermissions([...permissions]);
-            }
-
-            if (type === "role") {
-              putGlobalRoles([...permissions]);
-            }
+            putGlobalRoles([...permissions]);
           }}
         >
-          {permissionsApiResponse.isLoading || rolesApiResponse.isLoading ? (
+          {rolesApiResponse.isLoading ? (
             <AlternateLoader size={32} color={theme.alternateLoader.color} />
           ) : null}
-          {type === "label"
-            ? renderLocalPermissions(permissionsApiResponse)
-            : null}
-          {type === "role" ? renderGlobalRoles(rolesApiResponse) : null}
+          {renderGlobalRoles(rolesApiResponse)}
         </form>
       </AuthorizationContainer>
     </CollapsibleContainerComponent>
   );
 };
 
-export default UserAuthorizationComponent;
+export default RoleAuthorizationComponent;

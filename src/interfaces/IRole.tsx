@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { PermissionTypes } from "../types/PermissionType";
+
 interface IRole {
   id: string;
   name: string;
-  permissions: Array<string>;
+  permissions: Array<PermissionTypes>;
 }
 
 export default IRole;

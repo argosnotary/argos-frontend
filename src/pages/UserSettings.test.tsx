@@ -24,6 +24,9 @@ import { ThemeProvider } from "styled-components";
 import theme from "../theme/base.json";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
+import { UserProfile, UserProfileContext } from "../stores/UserProfile";
+import IPersonalAccount from "../interfaces/IPersonalAccount";
+import { PermissionTypes } from "../types/PermissionType";
 
 const mock = new MockAdapter(Axios);
 const mockUrl = "/api/personalaccount/me";
@@ -37,7 +40,7 @@ jest.mock("react-router-dom", () => ({
 }));
 
 it("renders with public menu", async () => {
-  mock.onGet(mockUrl).reply(200, {
+  const personalAccount: IPersonalAccount = {
     id: "a94cb614-e86e-4c52-ae1e-fc2f2cc0fffe",
     name: "Luke Skywalker",
     email: "luke@skywalker.imp",
@@ -46,20 +49,21 @@ it("renders with public menu", async () => {
         id: "16dbaebb-815d-461e-993a-bdfdced6350b",
         name: "jedi",
         permissions: [
-          "READ",
-          "LOCAL_PERMISSION_EDIT",
-          "TREE_EDIT",
-          "VERIFY",
-          "ASSIGN_ROLE"
+          PermissionTypes.READ,
+          PermissionTypes.LOCAL_PERMISSION_EDIT,
+          PermissionTypes.TREE_EDIT,
+          PermissionTypes.VERIFY
         ]
       }
     ]
-  });
+  };
 
   const root = mount(
     <ThemeProvider theme={theme}>
       <MemoryRouter keyLength={0}>
-        <UserSettings />
+        <UserProfileContext.Provider value={new UserProfile(personalAccount)}>
+          <UserSettings />
+        </UserProfileContext.Provider>
       </MemoryRouter>
     </ThemeProvider>
   );
@@ -74,7 +78,9 @@ it("renders with public menu", async () => {
 });
 
 it("renders with admin only menu", async () => {
-  mock.onGet(mockUrl).reply(200, {
+  mock.onGet(mockUrl).reply(200, {});
+
+  const personalAccount: IPersonalAccount = {
     id: "a94cb614-e86e-4c52-ae1e-fc2f2cc0fffe",
     name: "Luke Skywalker",
     email: "luke@skywalker.imp",
@@ -83,20 +89,22 @@ it("renders with admin only menu", async () => {
         id: "16dbaebb-815d-461e-993a-bdfdced6350b",
         name: "administrator",
         permissions: [
-          "READ",
-          "LOCAL_PERMISSION_EDIT",
-          "TREE_EDIT",
-          "VERIFY",
-          "ASSIGN_ROLE"
+          PermissionTypes.READ,
+          PermissionTypes.LOCAL_PERMISSION_EDIT,
+          PermissionTypes.TREE_EDIT,
+          PermissionTypes.VERIFY,
+          PermissionTypes.ASSIGN_ROLE
         ]
       }
     ]
-  });
+  };
 
   const root = mount(
     <ThemeProvider theme={theme}>
       <MemoryRouter keyLength={0}>
-        <UserSettings />
+        <UserProfileContext.Provider value={new UserProfile(personalAccount)}>
+          <UserSettings />
+        </UserProfileContext.Provider>
       </MemoryRouter>
     </ThemeProvider>
   );
