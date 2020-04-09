@@ -58,7 +58,7 @@ export interface LayoutSegment {
 export interface Step {
   name: string;
   authorizedKeyIds: string[];
-  requiredNumberOfLinks?: number;
+  requiredNumberOfLinks: number;
   expectedCommand: string[];
   expectedMaterials: Rule[];
   expectedProducts: Rule[];

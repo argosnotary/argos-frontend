@@ -88,7 +88,7 @@ const generateEncryptePrivateKey = async (
 const decryptPrivateKey = async (
     password: string,
     encryptedPrivateKey: string
-) => {
+): Promise<CryptoKey> => {
     const asn1 = asn1js.fromBER(decode(encryptedPrivateKey));
     const keyBag = new PKCS8ShroudedKeyBag({ schema: asn1.result });
     await keyBag.parseInternalValues({password: stringToArrayBuffer(password)});
@@ -110,7 +110,7 @@ const signString = async (
     password: string,
     encryptedPrivateKey: string,
     data: string
-) => {
+): Promise<string> => {
    const privateKey = await decryptPrivateKey(password, encryptedPrivateKey);
     const signature = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", privateKey,stringToArrayBuffer(data));
     return arrayBufferToHex(signature);

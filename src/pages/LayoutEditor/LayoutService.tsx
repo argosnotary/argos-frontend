@@ -16,14 +16,38 @@
 import {
   Layout,
   LayoutMetaBlock,
-  LayoutSegment
+  LayoutSegment,
+  Rule,
+  RuleRuleTypeEnum,
+  Step
 } from "../../interfaces/ILayout";
 import { Domain } from "./argos-domain.layout";
+import stringify from "json-stable-stringify";
+import { signString } from "../../security";
 
-const signLayout = (layoutJson: string) => {
-  const layout: Layout = JSON.parse(layoutJson);
+const signLayout = async (
+  password: string,
+  keyId: string,
+  encryptedPrivateKey: string,
+  layout: Layout
+): Promise<LayoutMetaBlock> => {
+  const signature = await signString(
+    password,
+    encryptedPrivateKey,
+    serialize(layout)
+  );
+  return {
+    signatures: [{ signature: signature, keyId: keyId }],
+    layout: layout
+  };
+};
 
-  const domainLayout: Domain.Layout = {
+const serialize = (layout: Layout): string => {
+  return stringify(mapLayout(layout));
+};
+
+const mapLayout = (layout: Layout): Domain.Layout => {
+  return {
     keys: layout.keys.map(key => {
       return { ...key };
     }),
@@ -31,12 +55,59 @@ const signLayout = (layoutJson: string) => {
     expectedEndProducts: layout.expectedEndProducts.map(rule => {
       return { ...rule, ruleType: "MATCH" };
     }),
-    layoutSegments: layout.layoutSegments.map(segment => {
-      return { name: segment.name, steps: [] };
+    layoutSegments: layout.layoutSegments.map(mapSegment).sort((n1, n2) => {
+      if (n1.name > n2.name) {
+        return 1;
+      }
+
+      if (n1.name < n2.name) {
+        return -1;
+      }
+
+      return 0;
     })
   };
 };
 
-const mapSegment = (segment: LayoutSegment) => {};
+const mapSegment = (segment: LayoutSegment): Domain.LayoutSegment => {
+  return {
+    name: segment.name,
+    steps: segment.steps.map(mapStep).sort((n1, n2) => {
+      if (n1.name > n2.name) {
+        return 1;
+      }
 
-export { signLayout };
+      if (n1.name < n2.name) {
+        return -1;
+      }
+
+      return 0;
+    })
+  };
+};
+
+const mapStep = (step: Step): Domain.Step => {
+  return {
+    ...step,
+    expectedMaterials: step.expectedMaterials.map(mapRule),
+    expectedProducts: step.expectedProducts.map(mapRule)
+  };
+};
+
+const mapRule = (rule: Rule): Domain.Rule | Domain.MatchRule => {
+  if (rule.ruleType === RuleRuleTypeEnum.MATCH) {
+    return {
+      sourcePathPrefix: rule.sourcePathPrefix,
+      destinationType: rule.destinationType,
+      destinationPathPrefix: rule.sourcePathPrefix,
+      destinationSegmentName: rule.destinationSegmentName,
+      destinationStepName: rule.destinationStepName,
+      ruleType: "MATCH",
+      pattern: rule.pattern
+    };
+  } else {
+    return { ruleType: rule.ruleType, pattern: rule.pattern };
+  }
+};
+
+export { serialize, signLayout };

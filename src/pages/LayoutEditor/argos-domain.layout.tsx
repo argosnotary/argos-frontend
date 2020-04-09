@@ -32,10 +32,10 @@ export namespace Domain {
 
   export interface MatchRule extends Rule {
     sourcePathPrefix?: string;
-    destinationType: ArtifactType;
+    destinationType?: ArtifactType;
     destinationPathPrefix?: string;
-    destinationSegmentName: string;
-    destinationStepName: string;
+    destinationSegmentName?: string;
+    destinationStepName?: string;
   }
 
   export interface LayoutSegment {
