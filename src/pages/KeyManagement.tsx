@@ -49,10 +49,17 @@ const copyInputCss = css`
   font-size: 0.8rem;
 `;
 
+
+
 const clipboardWrapperCss = css`
   padding: 0.4rem;
   margin: 0 1rem;
   height: 1.8rem;
+  width: 50%;
+`;
+
+const copyInputWrapperCss = css`
+margin: 0;
 `;
 
 enum WizardStates {
@@ -213,6 +220,7 @@ const KeyManagement = () => {
         clipboardIconSize={16}
         inputCss={copyInputCss}
         clipboardWrapperCss={clipboardWrapperCss}
+        copyInputWrapperCss={copyInputWrapperCss}
       />
 
       {displayModal ? (

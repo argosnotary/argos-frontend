@@ -22,25 +22,31 @@ interface IKeyId {
   clipboardIconSize: number;
   inputCss: FlattenInterpolation<ThemeProps<any>>;
   clipboardWrapperCss: FlattenInterpolation<ThemeProps<any>>;
+  copyInputWrapperCss: FlattenInterpolation<ThemeProps<any>>;
+}
+
+interface ICopyInputProps{
+    copyInputWrapperCss: FlattenInterpolation<ThemeProps<any>>;
 }
 
 const KeyIdLabel = styled.span`
   font-size: 0.875rem;
 `;
 
-const CopyInputWrapper = styled.div`
-  margin: 0 0 1rem;
+const CopyInputWrapper = styled.div<ICopyInputProps>`
+  ${props => props.copyInputWrapperCss}
 `;
 
 const KeyIdContainer: React.FC<IKeyId> = ({
   keyId,
   inputCss,
   clipboardIconSize,
-  clipboardWrapperCss
+  clipboardWrapperCss,
+    copyInputWrapperCss
 }) => (
   <>
     <KeyIdLabel>Key id</KeyIdLabel>
-    <CopyInputWrapper>
+    <CopyInputWrapper copyInputWrapperCss={copyInputWrapperCss}>
       <CopyInput
         value={keyId}
         clipboardIconSize={clipboardIconSize}

@@ -86,6 +86,9 @@ const copyInputCss = css`
   font-size: 0.8rem;
 `;
 
+const copyInputWrapperCss = css`
+margin: 0 0 1rem;
+`;
 const clipboardWrapperCss = css`
   padding: 0.4rem;
   margin: 0 1rem;
@@ -234,6 +237,7 @@ const ManageNpa = () => {
           clipboardIconSize={16}
           clipboardWrapperCss={clipboardWrapperCss}
           inputCss={copyInputCss}
+          copyInputWrapperCss={copyInputWrapperCss}
         />
         <ContentSeparator />
         <PasswordView password={generatedPassword} margin={"0 0 1rem"} />
@@ -334,6 +338,7 @@ const ManageNpa = () => {
             clipboardIconSize={16}
             clipboardWrapperCss={clipboardWrapperCss}
             inputCss={copyInputCss}
+            copyInputWrapperCss={copyInputWrapperCss}
           />
           <ContentSeparator />
         </>
