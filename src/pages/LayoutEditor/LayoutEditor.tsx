@@ -244,8 +244,11 @@ const LayoutEditor = () => {
               node
             );
           },
-          visible: (_node: ITreeNode) => {
-            return true;
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.LAYOUT_ADD) >= 0
+            );
           }
         }
       ]
