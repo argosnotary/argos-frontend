@@ -22,14 +22,15 @@ import FormInput from "../molecules/FormInput";
 import InputErrorLabel from "./InputErrorLabel";
 import FlexColumn from "./FlexColumn";
 import SearchInput from "./SearchInput";
+import TextArea from "./TextArea";
 
 export default {
-  title: "Inputs"
+  title: "Inputs",
 };
 
 const inputCss = css`
   margin: 0.75rem 1rem;
-  color: ${props => props.theme.keyManagementPage.passwordColor};
+  color: ${(props) => props.theme.keyManagementPage.passwordColor};
   font-size: 1.2rem;
   border: none;
   outline: none;
@@ -89,27 +90,27 @@ export const formInput = () => (
 const dummySearchData = [
   {
     id: 1,
-    displayLabel: "Luke Skywalker"
+    displayLabel: "Luke Skywalker",
   },
   {
     id: 2,
-    displayLabel: "Leah Organa"
+    displayLabel: "Leah Organa",
   },
   {
     id: 3,
-    displayLabel: "Han Solo"
-  }
+    displayLabel: "Han Solo",
+  },
 ];
 
 export const searchInput = () => (
   <FormInputContainer>
     <SearchInput
       results={dummySearchData}
-      onSelect={selectedSearchResult => {
+      onSelect={(selectedSearchResult) => {
         alert(selectedSearchResult.displayLabel);
       }}
       onCancel={() => alert("cancelled")}
-      fetchData={_searchQuery => {
+      fetchData={(_searchQuery) => {
         return dummySearchData;
       }}
       isLoading={false}
@@ -118,3 +119,5 @@ export const searchInput = () => (
     />
   </FormInputContainer>
 );
+
+export const textArea = () => <TextArea />;
