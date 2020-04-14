@@ -56,6 +56,7 @@ export enum LayoutEditorPaneActionTypes {
   SHOW_UPDATE_NPA_PANE = "SHOW_UPDATE_NPA_PANE",
   SHOW_NPA_PASSPHRASE = "SHOW_NPA_PASSPHRASE",
   SHOW_UPDATE_NPA_KEY_MODAL = "SHOW_UPDATE_NPA_KEY_MODAL",
+  SHOW_MANAGE_LAYOUT = "SHOW_MANAGE_LAYOUT",
   RESET_PANE = "RESET_PANE"
 }
 
@@ -69,6 +70,7 @@ export type LayoutEditorPaneActionType =
   | LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
   | LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
   | LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
+  | LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT
   | LayoutEditorPaneActionTypes.RESET_PANE;
 
 export type LayoutEditorPaneAction =
@@ -134,6 +136,14 @@ export type LayoutEditorPaneAction =
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
+    }
+  | {
+      type: LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT;
+      nodeParentId: string;
+      nodeReferenceId: string;
+      breadcrumb: string;
+      selectedNodeName: string;
+      panePermission: FormPermission;
     }
   | { type: LayoutEditorPaneActionTypes.RESET_PANE };
 
@@ -270,6 +280,17 @@ const layoutEditorReducer = (
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
+      };
+
+    case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+      return {
+        ...state,
+        firstPanelView: LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
+        nodeReferenceId: action.nodeReferenceId,
+        nodeParentId: action.nodeParentId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
       };
     case LayoutEditorPaneActionTypes.RESET_PANE:
       return {
