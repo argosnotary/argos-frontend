@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { PermissionTypes } from "../types/PermissionType";
 
-export default interface ITreeNode {
-  hasChildren: boolean;
-  name: string;
-  type: string;
-  parentId?: string;
-  referenceId: string;
-  children?: Array<ITreeNode>;
-  permissions?: Array<PermissionTypes>;
-}
+import styled from "styled-components";
+import { InputCSS } from "./Input";
+
+const TextArea = styled.textarea`
+  ${InputCSS};
+`;
+
+export default TextArea;

@@ -26,28 +26,33 @@ const Container = styled(FlexRow)`
 `;
 
 export default {
-  title: "Forms"
+  title: "Forms",
 };
 
 const dummyScheme = [
   {
     labelValue: "Name*",
     name: "name",
-    formType: "text"
+    formType: "text",
   },
   {
     labelValue: "Email*",
     name: "email",
-    formType: "text"
+    formType: "text",
   },
   {
     labelValue: "Phonenumber*",
     name: "phonenumber",
-    formType: "text"
-  }
+    formType: "text",
+  },
+  {
+    labelValue: "Comments*",
+    name: "comments",
+    formType: "textArea",
+  },
 ];
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
 
   if (!values.name) {
@@ -60,6 +65,10 @@ const validate = values => {
 
   if (!values.phonenumber) {
     errors.phonenumber = "Please fill in an phonenumber.";
+  }
+
+  if (!values.comments) {
+    errors.comments = "Please fill in comments.";
   }
 
   return errors;
@@ -81,7 +90,7 @@ export const genericForm = () => (
       cancellationLabel={"Cancel"}
       initialValues={{
         name: "Luke",
-        email: ""
+        email: "",
       }}
     />
   </Container>

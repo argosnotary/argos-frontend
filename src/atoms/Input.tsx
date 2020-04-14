@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const Input = styled.input`
+export const InputCSS = css<{ disabled: boolean | undefined }>`
   overflow: visible;
   box-sizing: border-box;
   height: 2.4375rem;
@@ -24,7 +24,7 @@ const Input = styled.input`
   padding: 0.5rem;
   border: 1px solid #cacaca;
   border-radius: 0;
-  background-color: ${props => (props.disabled ? "#e0e0e0" : "#fefefe")};
+  background-color: ${(props) => (props.disabled ? "#e0e0e0" : "#fefefe")};
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   font-size: 1rem;
@@ -35,7 +35,7 @@ const Input = styled.input`
     -webkit-box-shadow 0.5s;
 
   &:hover {
-    cursor: ${props => (props.disabled ? "not-allowed" : "initial")};
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "initial")};
   }
 
   &:focus {
@@ -43,6 +43,10 @@ const Input = styled.input`
     border: 1px solid #8a8a8a;
     box-shadow: 0 0 5px #cacaca;
   }
+`;
+
+const Input = styled.input`
+  ${InputCSS}
 `;
 
 export default Input;
