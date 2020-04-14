@@ -45,11 +45,12 @@ const FormInput: React.FC<IFormTextAreaProps> = ({
   onInput,
   name,
   defaultValue,
-  disabled,
+  disabled
 }) => (
   <FormTextAreaContainer>
     <InputLabel>{labelValue}</InputLabel>
     <TextArea
+      height={"25rem"}
       disabled={disabled}
       name={name}
       {...(onBlur ? { onBlur } : "")}

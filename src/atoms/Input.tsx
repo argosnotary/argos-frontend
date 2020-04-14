@@ -16,15 +16,15 @@
 
 import styled, { css } from "styled-components";
 
-export const InputCSS = css<{ disabled: boolean | undefined }>`
+export const InputCSS = css<{ disabled?: boolean; height?: string }>`
   overflow: visible;
   box-sizing: border-box;
-  height: 2.4375rem;
+  height: ${props => (props.height ? props.height : "2.4375rem")};
   margin: 0 0 1rem;
   padding: 0.5rem;
   border: 1px solid #cacaca;
   border-radius: 0;
-  background-color: ${(props) => (props.disabled ? "#e0e0e0" : "#fefefe")};
+  background-color: ${props => (props.disabled ? "#e0e0e0" : "#fefefe")};
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   font-size: 1rem;
@@ -35,7 +35,7 @@ export const InputCSS = css<{ disabled: boolean | undefined }>`
     -webkit-box-shadow 0.5s;
 
   &:hover {
-    cursor: ${(props) => (props.disabled ? "not-allowed" : "initial")};
+    cursor: ${props => (props.disabled ? "not-allowed" : "initial")};
   }
 
   &:focus {

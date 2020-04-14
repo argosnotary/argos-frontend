@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+/* tslint:disable */
+/* eslint-disable */
 export interface LayoutMetaBlock {
   signatures: Signature[];
   layout: Layout;

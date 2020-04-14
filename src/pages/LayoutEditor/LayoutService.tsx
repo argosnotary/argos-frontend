@@ -97,13 +97,8 @@ const mapStep = (step: Step): Domain.Step => {
 const mapRule = (rule: Rule): Domain.Rule | Domain.MatchRule => {
   if (rule.ruleType === RuleRuleTypeEnum.MATCH) {
     return {
-      sourcePathPrefix: rule.sourcePathPrefix,
-      destinationType: rule.destinationType,
-      destinationPathPrefix: rule.sourcePathPrefix,
-      destinationSegmentName: rule.destinationSegmentName,
-      destinationStepName: rule.destinationStepName,
-      ruleType: "MATCH",
-      pattern: rule.pattern
+      ...rule,
+      ruleType: "MATCH"
     };
   } else {
     return { ruleType: rule.ruleType, pattern: rule.pattern };

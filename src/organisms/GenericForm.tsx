@@ -66,7 +66,7 @@ const GenericForm: React.FC<IGenericForm> = ({
   isLoading,
   confirmationLabel,
   cancellationLabel,
-  initialValues,
+  initialValues
 }) => {
   const formik = useFormik({
     initialValues,
@@ -74,7 +74,7 @@ const GenericForm: React.FC<IGenericForm> = ({
       onSubmit(values);
       formik.resetForm();
     },
-    validate,
+    validate
   });
 
   useEffect(() => {
@@ -88,6 +88,7 @@ const GenericForm: React.FC<IGenericForm> = ({
     return schema.map((entry: IGenericFormInput, index) => {
       switch (entry.formType) {
         case "text":
+        case "password":
           return (
             <React.Fragment key={`${entry.name}-${index}`}>
               <FormInput
