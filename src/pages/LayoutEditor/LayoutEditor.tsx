@@ -105,6 +105,11 @@ const LayoutEditor = () => {
           node.permissions !== undefined &&
           node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0;
         break;
+      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+        userHasEditPermission =
+            node.permissions !== undefined &&
+            node.permissions.indexOf(PermissionTypes.LAYOUT_ADD) >= 0;
+        break;
       default:
         userHasEditPermission =
           node.permissions !== undefined &&
