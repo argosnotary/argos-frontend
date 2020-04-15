@@ -50,14 +50,14 @@ const KeyContainer: React.FC<IKeyDisplay> = ({
     <KeyContainerLabel>Key id</KeyContainerLabel>
     <CopyInputWrapper copyInputWrapperCss={copyInputWrapperCss}>
       <CopyInput
-        value={publicKey.keyId}
+        value={publicKey ? publicKey.keyId : ""}
         clipboardIconSize={clipboardIconSize}
         inputCss={inputCss}
         clipboardWrapperCss={clipboardWrapperCss}
       />
       <KeyContainerLabel>Public key</KeyContainerLabel>
       <CopyInput
-        value={publicKey.publicKey}
+        value={publicKey ? publicKey.publicKey : ""}
         clipboardIconSize={clipboardIconSize}
         inputCss={inputCss}
         clipboardWrapperCss={clipboardWrapperCss}

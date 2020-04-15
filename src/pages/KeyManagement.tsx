@@ -247,15 +247,15 @@ const KeyManagement = () => {
           clipboardWrapperCss={clipboardWrapperCss}
           copyInputWrapperCss={copyInputWrapperCss}
         />
-      ) : !getActiveKeyResponse.isLoading ?(
+      ) : !getActiveKeyResponse.isLoading ? (
         <NoActiveKeyWarning>
           There is no key currently active. Please create a new key.
         </NoActiveKeyWarning>
-
-      ) :getActiveKeyResponse.isLoading ?(<LoaderContainer>
-        <LoaderIcon size={32} color={theme.loaderIcon.color} />
-      </LoaderContainer>):null}
-
+      ) : getActiveKeyResponse.isLoading ? (
+        <LoaderContainer>
+          <LoaderIcon size={32} color={theme.loaderIcon.color} />
+        </LoaderContainer>
+      ) : null}
 
       {displayModal ? (
         <KeyManagementModal
