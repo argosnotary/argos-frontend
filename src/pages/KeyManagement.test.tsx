@@ -34,17 +34,17 @@ jest.mock("react-router-dom", () => ({
   })
 }));
 
-
 jest.mock("../security", () => ({
   ...jest.requireActual("../security"),
   generateKey: () => ({
     push: jest.fn().mockReturnValue({
-      "keys": {
-        "encryptedPrivateKey": "encryptedPrivateKey",
-        "keyId": "b154f8515d1097e553a6592c3329722fd447d53626b5fc72f3255dfa37896268",
-        "publicKey": "puKey"
+      keys: {
+        encryptedPrivateKey: "encryptedPrivateKey",
+        keyId:
+          "b154f8515d1097e553a6592c3329722fd447d53626b5fc72f3255dfa37896268",
+        publicKey: "puKey"
       },
-      "password": "ASwBaq5GkamoRq"
+      password: "ASwBaq5GkamoRq"
     })
   })
 }));
@@ -85,7 +85,7 @@ it("when no key is present it should display warning message", async () => {
 
 it("when create key is clicked and key is not present it should display modal window", async () => {
   mock.onGet(mockUrl).reply(403);
-  mock.onPost(mockUrl).reply(200,{
+  mock.onPost(mockUrl).reply(200, {
     keyId: "keyiddnew",
     publicKey: "publicKednew",
     encryptedPrivateKey: "privateKeynew"
@@ -113,16 +113,17 @@ it("when create key is clicked and no key is present it should display modal win
     encryptedPrivateKey: "privateKey"
   });
   const root = mount(
-      <ThemeProvider theme={theme}>
-        <KeyManagement />
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <KeyManagement />
+    </ThemeProvider>
   );
+
   await act(async () => {
     await waitFor(() => {
       root
-          .find(CreateKeyButton)
-          .at(0)
-          .simulate("click");
+        .find(CreateKeyButton)
+        .at(0)
+        .simulate("click");
       expect(root.find(KeyManagement)).toMatchSnapshot();
     });
   });
