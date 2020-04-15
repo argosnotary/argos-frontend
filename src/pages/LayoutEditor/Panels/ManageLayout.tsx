@@ -141,6 +141,9 @@ const ManageLayoutPanel = () => {
     url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
     cbSuccess: (layoutMetaBlock: LayoutMetaBlock) => {
       setLayout({ layout: JSON.stringify(layoutMetaBlock.layout, null, 2) });
+    },
+    cbFailure: (error): boolean => {
+      return error.response && error.response.status === 404;
     }
   };
 

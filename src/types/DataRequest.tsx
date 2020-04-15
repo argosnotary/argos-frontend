@@ -21,6 +21,7 @@ type DataRequest =
       method: "get";
       params?: {};
       cbSuccess?: (arg: any) => void;
+      cbFailure?: (arg: any) => boolean;
     }
   | {
       token: string;
@@ -29,6 +30,7 @@ type DataRequest =
       data: {};
       params?: {};
       cbSuccess?: (arg: any) => void;
+      cbFailure?: (arg: any) => boolean;
     };
 
 export default DataRequest;

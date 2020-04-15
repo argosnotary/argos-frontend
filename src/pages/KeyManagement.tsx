@@ -49,8 +49,6 @@ const copyInputCss = css`
   font-size: 0.8rem;
 `;
 
-
-
 const clipboardWrapperCss = css`
   padding: 0.4rem;
   margin: 0 1rem;
@@ -59,7 +57,7 @@ const clipboardWrapperCss = css`
 `;
 
 const copyInputWrapperCss = css`
-margin: 0;
+  margin: 0;
 `;
 
 enum WizardStates {
@@ -206,6 +204,9 @@ const KeyManagement = () => {
     url: "/api/personalaccount/me/key",
     cbSuccess: (key: IKeyId) => {
       setKeyId(key.keyId);
+    },
+    cbFailure: (error): boolean => {
+      return error.response && error.response.status === 404;
     }
   };
   const [_getActiveKeyResponse] = useDataApi(
@@ -215,13 +216,15 @@ const KeyManagement = () => {
   return (
     <>
       <PageHeader>Key management</PageHeader>
-      <KeyIdContainer
-        keyId={keyId}
-        clipboardIconSize={16}
-        inputCss={copyInputCss}
-        clipboardWrapperCss={clipboardWrapperCss}
-        copyInputWrapperCss={copyInputWrapperCss}
-      />
+      {keyId ? (
+        <KeyIdContainer
+          keyId={keyId}
+          clipboardIconSize={16}
+          inputCss={copyInputCss}
+          clipboardWrapperCss={clipboardWrapperCss}
+          copyInputWrapperCss={copyInputWrapperCss}
+        />
+      ) : null}
 
       {displayModal ? (
         <KeyManagementModal
