@@ -30,6 +30,7 @@ interface IFormTextAreaProps {
   onInput?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   formType: string;
   disabled?: boolean;
+  height?: string;
 }
 
 const FormTextAreaContainer = styled.div`
@@ -45,12 +46,13 @@ const FormInput: React.FC<IFormTextAreaProps> = ({
   onInput,
   name,
   defaultValue,
-  disabled
+  disabled,
+  height
 }) => (
   <FormTextAreaContainer>
     <InputLabel>{labelValue}</InputLabel>
     <TextArea
-      height={"25rem"}
+      height={height}
       disabled={disabled}
       name={name}
       {...(onBlur ? { onBlur } : "")}

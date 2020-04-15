@@ -36,7 +36,7 @@ const KeyContainerLabel = styled.p`
 `;
 
 const CopyInputWrapper = styled.div<ICopyInputProps>`
-  ${(props) => props.copyInputWrapperCss}
+  ${props => props.copyInputWrapperCss}
 `;
 
 const KeyContainer: React.FC<IKeyDisplay> = ({
@@ -44,7 +44,7 @@ const KeyContainer: React.FC<IKeyDisplay> = ({
   inputCss,
   clipboardIconSize,
   clipboardWrapperCss,
-  copyInputWrapperCss,
+  copyInputWrapperCss
 }) => (
   <>
     <KeyContainerLabel>Key id</KeyContainerLabel>

@@ -17,7 +17,7 @@ import React, { useRef, useContext, useState } from "react";
 import styled, {
   ThemeContext,
   FlattenInterpolation,
-  ThemeProps,
+  ThemeProps
 } from "styled-components";
 import ClipboardIcon from "./Icons/ClipboardIcon";
 import { darken } from "polished";
@@ -36,10 +36,10 @@ const InputDisplay = styled.p<IInputDisplayProps>`
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  background: ${(props) => props.theme.copyInput.bgColor};
+  background: ${props => props.theme.copyInput.bgColor};
   padding: 0 0.2rem;
   border-radius: 0.1rem;
-  ${(props) => props.inputCss}
+  ${props => props.inputCss}
 `;
 
 interface IClipboardWrapperProps {
@@ -54,16 +54,16 @@ const ClipboardWrapper = styled.button<IClipboardWrapperProps>`
 
   &:hover {
     cursor: pointer;
-    background-color: ${(props) =>
+    background-color: ${props =>
       props.theme.passwordView.clipboardIcon.hoverBgColor};
 
     svg path {
-      fill: ${(props) =>
+      fill: ${props =>
         darken(0.1, props.theme.passwordView.clipboardIcon.color)};
     }
   }
 
-  ${(props) => props.clipboardWrapperCss}
+  ${props => props.clipboardWrapperCss}
 `;
 
 const ModifiedFlexRow = styled(FlexRow)`
@@ -82,7 +82,7 @@ const CopyInput: React.FC<ICopyInputProps> = ({
   value,
   inputCss,
   clipboardWrapperCss,
-  clipboardIconSize,
+  clipboardIconSize
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const theme = useContext(ThemeContext);

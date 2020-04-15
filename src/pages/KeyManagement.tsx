@@ -25,7 +25,7 @@ import {
   ModalBody,
   ModalButton,
   ModalFlexColumWrapper,
-  ModalFooter,
+  ModalFooter
 } from "../atoms/Modal";
 import PageHeader from "../atoms/PageHeader";
 import TransparentButton from "../atoms/TransparentButton";
@@ -63,10 +63,9 @@ const NoActiveKeyWarning = styled.p`
   margin: 0.25rem 0 0;
   padding: 1rem;
   max-width: 50%;
-  color: ${(props) =>
-    props.theme.keyManagementPage.noActiveKeyWarning.textColor};
+  color: ${props => props.theme.keyManagementPage.noActiveKeyWarning.textColor};
   border: 1px solid
-    ${(props) => props.theme.keyManagementPage.noActiveKeyWarning.borderColor};
+    ${props => props.theme.keyManagementPage.noActiveKeyWarning.borderColor};
   background: white;
 `;
 
@@ -74,18 +73,20 @@ enum WizardStates {
   Loading,
   Error,
   KeyOverrideWarning,
-  CopyKey,
+  CopyKey
 }
 
 interface IKeyManagementModalProps {
   displayModal: boolean;
   setDisplayModal: (displayModal: boolean) => void;
   cbKeyCreated: (key: IPublicKey) => void;
+  createFirstKey: boolean;
 }
 
 const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   setDisplayModal,
   cbKeyCreated,
+  createFirstKey
 }) => {
   const [wizardState, setWizardState] = useState(
     WizardStates.KeyOverrideWarning
@@ -123,7 +124,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
       url: "/api/personalaccount/me/key",
       cbSuccess: () => {
         cbKeyCreated(generatedKeys.keys);
-      },
+      }
     };
     setGeneratedPassword(generatedKeys.password);
     setCreateKeyDataRequest(dataRequest);
@@ -187,6 +188,13 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (createFirstKey) {
+      setWizardState(WizardStates.Loading);
+      postKeyData();
+    }
+  }, [createFirstKey]);
+
   return (
     <Modal>
       <ModalFlexColumWrapper>
@@ -198,14 +206,16 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
 
 const KeyManagement = () => {
   const [displayModal, setDisplayModal] = useState(false);
+  const [keyAvailable, setKeyAvailable] = useState(true);
   const theme = useContext(ThemeContext);
   const [publicKey, setPublicKey] = useState({} as IPublicKey);
   const [localStorageToken] = useToken();
-  const enableModal = () => {
+  const createNewKey = () => {
     setDisplayModal(true);
   };
 
   const cbKeyCreated = (publicKey: IPublicKey) => {
+    setKeyAvailable(true);
     setPublicKey(publicKey);
   };
   const getActivekeyDataRequest: DataRequest = {
@@ -214,8 +224,10 @@ const KeyManagement = () => {
     url: "/api/personalaccount/me/key",
     cbSuccess: (key: IPublicKey) => {
       setPublicKey(key);
+      setKeyAvailable(true);
     },
     cbFailure: (error): boolean => {
+      setKeyAvailable(false);
       return error.response && error.response.status === 404;
     }
   };
@@ -226,7 +238,7 @@ const KeyManagement = () => {
   return (
     <>
       <PageHeader>Key management</PageHeader>
-      {Object.keys(publicKey).length ? (
+      {keyAvailable ? (
         <KeyContainer
           publicKey={publicKey}
           clipboardIconSize={16}
@@ -245,9 +257,10 @@ const KeyManagement = () => {
           displayModal={displayModal}
           setDisplayModal={setDisplayModal}
           cbKeyCreated={cbKeyCreated}
+          createFirstKey={!keyAvailable}
         />
       ) : (
-        <CreateKeyButton onClick={enableModal}>
+        <CreateKeyButton onClick={createNewKey}>
           <PlusIcon size={32} color={theme.keyManagementPage.iconColor} />
           Create new key
         </CreateKeyButton>

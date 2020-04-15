@@ -116,6 +116,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name]}
                 disabled={permission === FormPermissions.READ ? true : false}
+                height={"25rem"}
               />
               {formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>

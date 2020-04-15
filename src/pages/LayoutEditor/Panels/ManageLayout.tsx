@@ -108,7 +108,7 @@ const getModalContent = (
           validate={validatePassphrase}
           onCancel={onCancel}
           onSubmit={onSubmit}
-          confirmationLabel={"Sign and Submit"}
+          confirmationLabel={"Confirm"}
           cancellationLabel={"Cancel"}
           initialValues={{ passphrase: passphrase }}
         />
