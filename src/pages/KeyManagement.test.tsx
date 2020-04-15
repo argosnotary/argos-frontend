@@ -24,7 +24,6 @@ import theme from "../theme/base.json";
 import { act } from "react-dom/test-utils";
 import KeyManagement, { CreateKeyButton } from "./KeyManagement";
 import { waitFor } from "@testing-library/dom";
-
 const mock = new MockAdapter(Axios);
 const mockUrl = "/api/personalaccount/me/key";
 
@@ -32,6 +31,21 @@ jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useHistory: () => ({
     push: jest.fn()
+  })
+}));
+
+
+jest.mock("../security", () => ({
+  ...jest.requireActual("../security"),
+  generateKey: () => ({
+    push: jest.fn().mockReturnValue({
+      "keys": {
+        "encryptedPrivateKey": "encryptedPrivateKey",
+        "keyId": "b154f8515d1097e553a6592c3329722fd447d53626b5fc72f3255dfa37896268",
+        "publicKey": "puKey"
+      },
+      "password": "ASwBaq5GkamoRq"
+    })
   })
 }));
 
@@ -69,11 +83,12 @@ it("when no key is present it should display warning message", async () => {
   );
 });
 
-it("when create key is clicked it should display modal window", async () => {
-  mock.onGet(mockUrl).reply(200, {
-    keyId: "keyid",
-    publicKey: "publicKey",
-    encryptedPrivateKey: "privateKey"
+it("when create key is clicked and key is not present it should display modal window", async () => {
+  mock.onGet(mockUrl).reply(403);
+  mock.onPost(mockUrl).reply(200,{
+    keyId: "keyiddnew",
+    publicKey: "publicKednew",
+    encryptedPrivateKey: "privateKeynew"
   });
   const root = mount(
     <ThemeProvider theme={theme}>
@@ -86,6 +101,28 @@ it("when create key is clicked it should display modal window", async () => {
         .find(CreateKeyButton)
         .at(0)
         .simulate("click");
+      expect(root.find(KeyManagement)).toMatchSnapshot();
+    });
+  });
+});
+
+it("when create key is clicked and no key is present it should display modal window and create new key", async () => {
+  mock.onGet(mockUrl).reply(200, {
+    keyId: "keyid",
+    publicKey: "publicKey",
+    encryptedPrivateKey: "privateKey"
+  });
+  const root = mount(
+      <ThemeProvider theme={theme}>
+        <KeyManagement />
+      </ThemeProvider>
+  );
+  await act(async () => {
+    await waitFor(() => {
+      root
+          .find(CreateKeyButton)
+          .at(0)
+          .simulate("click");
       expect(root.find(KeyManagement)).toMatchSnapshot();
     });
   });
