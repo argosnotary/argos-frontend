@@ -25,7 +25,7 @@ import {
   ModalBody,
   ModalButton,
   ModalFlexColumWrapper,
-  ModalFooter
+  ModalFooter,
 } from "../atoms/Modal";
 import PageHeader from "../atoms/PageHeader";
 import TransparentButton from "../atoms/TransparentButton";
@@ -35,8 +35,8 @@ import useDataApi from "../hooks/useDataApi";
 import useToken from "../hooks/useToken";
 import genericDataFetchReducer from "../stores/genericDataFetchReducer";
 import PasswordView from "../atoms/PasswordView";
-import { IKeyId } from "../interfaces/IKeyId";
-import KeyIdContainer from "../atoms/KeyIdContainer";
+import { IPublicKey } from "../interfaces/IPublicKey";
+import KeyContainer from "../atoms/KeyContainer";
 
 const CreateKeyButton = styled(TransparentButton)`
   margin: 1.3rem 0;
@@ -45,7 +45,6 @@ const CreateKeyButton = styled(TransparentButton)`
 const copyInputCss = css`
   border: 0;
   outline: 0;
-  background: none;
   font-size: 0.8rem;
 `;
 
@@ -53,29 +52,40 @@ const clipboardWrapperCss = css`
   padding: 0.4rem;
   margin: 0 1rem;
   height: 1.8rem;
-  width: 50%;
 `;
 
 const copyInputWrapperCss = css`
   margin: 0;
+  width: 30vw;
+`;
+
+const NoActiveKeyWarning = styled.p`
+  margin: 0.25rem 0 0;
+  padding: 1rem;
+  max-width: 50%;
+  color: ${(props) =>
+    props.theme.keyManagementPage.noActiveKeyWarning.textColor};
+  border: 1px solid
+    ${(props) => props.theme.keyManagementPage.noActiveKeyWarning.borderColor};
+  background: white;
 `;
 
 enum WizardStates {
   Loading,
   Error,
   KeyOverrideWarning,
-  CopyKey
+  CopyKey,
 }
 
 interface IKeyManagementModalProps {
   displayModal: boolean;
   setDisplayModal: (displayModal: boolean) => void;
-  cbKeyCreated: (key: IKeyId) => void;
+  cbKeyCreated: (key: IPublicKey) => void;
 }
 
 const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   setDisplayModal,
-  cbKeyCreated
+  cbKeyCreated,
 }) => {
   const [wizardState, setWizardState] = useState(
     WizardStates.KeyOverrideWarning
@@ -113,7 +123,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
       url: "/api/personalaccount/me/key",
       cbSuccess: () => {
         cbKeyCreated(generatedKeys.keys);
-      }
+      },
     };
     setGeneratedPassword(generatedKeys.password);
     setCreateKeyDataRequest(dataRequest);
@@ -189,21 +199,21 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
 const KeyManagement = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const theme = useContext(ThemeContext);
-  const [keyId, setKeyId] = useState("");
+  const [publicKey, setPublicKey] = useState({} as IPublicKey);
   const [localStorageToken] = useToken();
   const enableModal = () => {
     setDisplayModal(true);
   };
 
-  const cbKeyCreated = (key: IKeyId) => {
-    setKeyId(key.keyId);
+  const cbKeyCreated = (publicKey: IPublicKey) => {
+    setPublicKey(publicKey);
   };
   const getActivekeyDataRequest: DataRequest = {
     method: "get",
     token: localStorageToken,
     url: "/api/personalaccount/me/key",
-    cbSuccess: (key: IKeyId) => {
-      setKeyId(key.keyId);
+    cbSuccess: (key: IPublicKey) => {
+      setPublicKey(key);
     },
     cbFailure: (error): boolean => {
       return error.response && error.response.status === 404;
@@ -216,15 +226,19 @@ const KeyManagement = () => {
   return (
     <>
       <PageHeader>Key management</PageHeader>
-      {keyId ? (
-        <KeyIdContainer
-          keyId={keyId}
+      {Object.keys(publicKey).length ? (
+        <KeyContainer
+          publicKey={publicKey}
           clipboardIconSize={16}
           inputCss={copyInputCss}
           clipboardWrapperCss={clipboardWrapperCss}
           copyInputWrapperCss={copyInputWrapperCss}
         />
-      ) : null}
+      ) : (
+        <NoActiveKeyWarning>
+          There is no key currently active. Please create a new key.
+        </NoActiveKeyWarning>
+      )}
 
       {displayModal ? (
         <KeyManagementModal

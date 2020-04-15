@@ -26,9 +26,10 @@ interface ISinglePanelContainerProps {
 }
 
 const SinglePanelContainer = styled.section<ISinglePanelContainerProps>`
-  flex: ${props => (props.shrink ? "0 0 1rem" : `1 1 ${props.width}`)};
-  flex-grow: ${props =>
+  flex: ${(props) => (props.shrink ? "0 0 1rem" : `1 1 ${props.width}`)};
+  flex-grow: ${(props) =>
     props.disableFlexGrow ? "0" : props.shrink ? "0" : "1"};
+  min-width: 0;
 `;
 
 interface IPanelBodyProps {
@@ -39,14 +40,14 @@ interface IPanelBodyProps {
 const PanelBody = styled.main<IPanelBodyProps>`
   overflow-y: auto;
   height: calc(100vh - 7.7rem);
-  background-color: ${props => props.theme.layoutPage.panel.bgColor};
-  margin: ${props => (!props.last ? "0 0 1rem 1rem" : "0 1rem 0 1rem")};
+  background-color: ${(props) => props.theme.layoutPage.panel.bgColor};
+  margin: ${(props) => (!props.last ? "0 0 1rem 1rem" : "0 1rem 0 1rem")};
   padding: 1rem;
   display: flex;
   flex-direction: column;
 
   > * {
-    display: ${props => (props.shrink ? "none" : "")};
+    display: ${(props) => (props.shrink ? "none" : "")};
   }
 `;
 
@@ -64,7 +65,7 @@ interface IPanelHeaderProps {
 }
 
 const PanelHeader = styled.header<IPanelHeaderProps>`
-  margin: ${props => (!props.last ? "1rem 0 0 1rem" : "1rem 1rem 0 1rem")};
+  margin: ${(props) => (!props.last ? "1rem 0 0 1rem" : "1rem 1rem 0 1rem")};
   padding: 0.5rem 1rem;
   background-color: #fff;
   display: flex;
@@ -93,7 +94,7 @@ export const Panel: React.FC<IPanelProps> = ({
   children,
   last,
   disableFlexGrow,
-  resizable
+  resizable,
 }) => {
   const [shrink, setShrinkState] = useShrinkToggle();
   const theme = useContext(ThemeContext);
