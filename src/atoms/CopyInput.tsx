@@ -29,7 +29,6 @@ interface IInputDisplayProps {
 const Input = styled.input`
   position: absolute;
   left: -1000%;
-  
 `;
 
 const InputDisplay = styled.p<IInputDisplayProps>`
@@ -109,7 +108,7 @@ const CopyInput: React.FC<ICopyInputProps> = ({
       />
       <ModifiedFlexRow disableWrap={true}>
         <InputDisplay inputCss={inputCss}>
-          {tempMessage.length > 0 ? tempMessage : value.substr(0,35)+ "..."}
+          {tempMessage.length > 0 ? tempMessage : value.substr(0, 35) + "..."}
         </InputDisplay>
 
         <ClipboardWrapper

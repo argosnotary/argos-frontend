@@ -87,7 +87,7 @@ const copyInputCss = css`
 `;
 
 const copyInputWrapperCss = css`
-margin: 0 0 1rem;
+  margin: 0 0 1rem;
 `;
 const clipboardWrapperCss = css`
   padding: 0.4rem;
@@ -107,7 +107,7 @@ const ManageNpa = () => {
     {} as INpaFormValues
   );
 
-  const [npaKey, setNpaKey] = useState({keyId: "",publicKey: ""});
+  const [npaKey, setNpaKey] = useState({ keyId: "", publicKey: "" });
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, _setWizardState] = useState(
     WizardStates.KEY_OVERRIDE_WARNING

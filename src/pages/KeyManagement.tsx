@@ -49,8 +49,6 @@ const copyInputCss = css`
   font-size: 0.8rem;
 `;
 
-
-
 const clipboardWrapperCss = css`
   padding: 0.4rem;
   margin: 0 1rem;
@@ -59,7 +57,7 @@ const clipboardWrapperCss = css`
 `;
 
 const copyInputWrapperCss = css`
-margin: 0;
+  margin: 0;
 `;
 
 enum WizardStates {
@@ -191,7 +189,7 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
 const KeyManagement = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const theme = useContext(ThemeContext);
-  const [publicKey, setPublicKey] = useState({keyId: "",publicKey: ""});
+  const [publicKey, setPublicKey] = useState({ keyId: "", publicKey: "" });
   const [localStorageToken] = useToken();
   const enableModal = () => {
     setDisplayModal(true);
