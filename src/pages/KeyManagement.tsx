@@ -37,11 +37,11 @@ import genericDataFetchReducer from "../stores/genericDataFetchReducer";
 import PasswordView from "../atoms/PasswordView";
 import { IPublicKey } from "../interfaces/IPublicKey";
 import KeyContainer from "../atoms/KeyContainer";
+import FlexColumn from "../atoms/FlexColumn";
 
-const CreateKeyButton = styled(TransparentButton)`
+export const CreateKeyButton = styled(TransparentButton)`
   margin: 1.3rem 0;
 `;
-
 const copyInputCss = css`
   border: 0;
   outline: 0;
@@ -68,7 +68,11 @@ const NoActiveKeyWarning = styled.p`
     ${props => props.theme.keyManagementPage.noActiveKeyWarning.borderColor};
   background: white;
 `;
-
+const LoaderContainer = styled(FlexColumn)`
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 enum WizardStates {
   Loading,
   Error,
@@ -97,7 +101,12 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   const [createKeyResponse, setCreateKeyDataRequest] = useDataApi(
     genericDataFetchReducer
   );
-
+  useEffect(() => {
+    if (createFirstKey) {
+      setWizardState(WizardStates.Loading);
+      postKeyData();
+    }
+  }, [createFirstKey]);
   useEffect(() => {
     if (
       Object.prototype.hasOwnProperty.call(createKeyResponse, "data") &&
@@ -187,14 +196,6 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
         );
     }
   };
-
-  useEffect(() => {
-    if (createFirstKey) {
-      setWizardState(WizardStates.Loading);
-      postKeyData();
-    }
-  }, [createFirstKey]);
-
   return (
     <Modal>
       <ModalFlexColumWrapper>
@@ -231,14 +232,14 @@ const KeyManagement = () => {
       return error.response && error.response.status === 404;
     }
   };
-  const [_getActiveKeyResponse] = useDataApi(
+  const [getActiveKeyResponse] = useDataApi(
     genericDataFetchReducer,
     getActivekeyDataRequest
   );
   return (
     <>
       <PageHeader>Key management</PageHeader>
-      {keyAvailable ? (
+      {keyAvailable && !getActiveKeyResponse.isLoading ? (
         <KeyContainer
           publicKey={publicKey}
           clipboardIconSize={16}
@@ -246,11 +247,15 @@ const KeyManagement = () => {
           clipboardWrapperCss={clipboardWrapperCss}
           copyInputWrapperCss={copyInputWrapperCss}
         />
-      ) : (
+      ) : !getActiveKeyResponse.isLoading ?(
         <NoActiveKeyWarning>
           There is no key currently active. Please create a new key.
         </NoActiveKeyWarning>
-      )}
+
+      ) :getActiveKeyResponse.isLoading ?(<LoaderContainer>
+        <LoaderIcon size={32} color={theme.loaderIcon.color} />
+      </LoaderContainer>):null}
+
 
       {displayModal ? (
         <KeyManagementModal
@@ -268,5 +273,4 @@ const KeyManagement = () => {
     </>
   );
 };
-
 export default KeyManagement;
