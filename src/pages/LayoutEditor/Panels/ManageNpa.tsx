@@ -43,8 +43,8 @@ import {
 import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
-import KeyIdContainer from "../../../atoms/KeyIdContainer";
-import { IKeyId } from "../../../interfaces/IKeyId";
+import KeyContainer from "../../../atoms/KeyContainer";
+import { IPublicKey } from "../../../interfaces/IPublicKey";
 
 interface INpaFormValues {
   npaname: string;
@@ -107,7 +107,7 @@ const ManageNpa = () => {
     {} as INpaFormValues
   );
 
-  const [npaKeyId, setNpaKeyId] = useState("");
+  const [npaKey, setNpaKey] = useState({keyId: "",publicKey: ""});
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, _setWizardState] = useState(
     WizardStates.KEY_OVERRIDE_WARNING
@@ -188,8 +188,8 @@ const ManageNpa = () => {
       method: "get",
       token: localStorageToken,
       url: `/api/nonpersonalaccount/${id}/key`,
-      cbSuccess: (n: IKeyId) => {
-        setNpaKeyId(n.keyId);
+      cbSuccess: (n: IPublicKey) => {
+        setNpaKey(n);
       }
     };
 
@@ -232,8 +232,8 @@ const ManageNpa = () => {
           </LastBreadCrumb>
         </NodesBreadCrumb>
         <ContentSeparator />
-        <KeyIdContainer
-          keyId={state.data.keyId}
+        <KeyContainer
+          publicKey={state.data.keyId}
           clipboardIconSize={16}
           clipboardWrapperCss={clipboardWrapperCss}
           inputCss={copyInputCss}
@@ -331,10 +331,10 @@ const ManageNpa = () => {
           <ContentSeparator />
         </>
       ) : null}
-      {npaKeyId ? (
+      {npaKey ? (
         <>
-          <KeyIdContainer
-            keyId={npaKeyId}
+          <KeyContainer
+            publicKey={npaKey}
             clipboardIconSize={16}
             clipboardWrapperCss={clipboardWrapperCss}
             inputCss={copyInputCss}

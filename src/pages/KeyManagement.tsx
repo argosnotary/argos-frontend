@@ -35,8 +35,8 @@ import useDataApi from "../hooks/useDataApi";
 import useToken from "../hooks/useToken";
 import genericDataFetchReducer from "../stores/genericDataFetchReducer";
 import PasswordView from "../atoms/PasswordView";
-import { IKeyId } from "../interfaces/IKeyId";
-import KeyIdContainer from "../atoms/KeyIdContainer";
+import { IPublicKey } from "../interfaces/IPublicKey";
+import KeyContainer from "../atoms/KeyContainer";
 
 const CreateKeyButton = styled(TransparentButton)`
   margin: 1.3rem 0;
@@ -72,7 +72,7 @@ enum WizardStates {
 interface IKeyManagementModalProps {
   displayModal: boolean;
   setDisplayModal: (displayModal: boolean) => void;
-  cbKeyCreated: (key: IKeyId) => void;
+  cbKeyCreated: (key: IPublicKey) => void;
 }
 
 const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
@@ -191,21 +191,21 @@ const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
 const KeyManagement = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const theme = useContext(ThemeContext);
-  const [keyId, setKeyId] = useState("");
+  const [publicKey, setPublicKey] = useState({keyId: "",publicKey: ""});
   const [localStorageToken] = useToken();
   const enableModal = () => {
     setDisplayModal(true);
   };
 
-  const cbKeyCreated = (key: IKeyId) => {
-    setKeyId(key.keyId);
+  const cbKeyCreated = (publicKey: IPublicKey) => {
+    setPublicKey(publicKey);
   };
   const getActivekeyDataRequest: DataRequest = {
     method: "get",
     token: localStorageToken,
     url: "/api/personalaccount/me/key",
-    cbSuccess: (key: IKeyId) => {
-      setKeyId(key.keyId);
+    cbSuccess: (key: IPublicKey) => {
+      setPublicKey(key);
     }
   };
   const [_getActiveKeyResponse] = useDataApi(
@@ -215,8 +215,9 @@ const KeyManagement = () => {
   return (
     <>
       <PageHeader>Key management</PageHeader>
-      <KeyIdContainer
-        keyId={keyId}
+
+      <KeyContainer
+        publicKey={publicKey}
         clipboardIconSize={16}
         inputCss={copyInputCss}
         clipboardWrapperCss={clipboardWrapperCss}
