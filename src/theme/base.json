@@ -78,6 +78,9 @@
       "hoverBgColor": "#e8feff"
     }
   },
+  "copyInput": {
+    "bgColor": "#e0e0e0"
+  },
   "treeEditor": {
     "textColor": "#2e2e2e",
     "bgColor": "#f1f1f1",
@@ -188,7 +191,11 @@
   },
   "keyManagementPage": {
     "iconColor": "#1779ba",
-    "passwordColor": "orange"
+    "passwordColor": "orange",
+    "noActiveKeyWarning": {
+      "textColor": "orange",
+      "borderColor": "orange"
+    }
   },
   "layoutPage": {
     "panel": {

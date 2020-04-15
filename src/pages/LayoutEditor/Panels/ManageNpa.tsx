@@ -24,7 +24,7 @@ import DataRequest from "../../../types/DataRequest";
 import {
   StateContext,
   LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes
+  LayoutEditorPaneActionTypes,
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
@@ -38,10 +38,10 @@ import {
   ModalFlexColumWrapper,
   ModalFooter,
   ModalButton,
-  Modal
+  Modal,
 } from "../../../atoms/Modal";
 import GenericForm, {
-  IGenericFormSchema
+  IGenericFormSchema,
 } from "../../../organisms/GenericForm";
 import KeyContainer from "../../../atoms/KeyContainer";
 import { IPublicKey } from "../../../interfaces/IPublicKey";
@@ -51,7 +51,7 @@ interface INpaFormValues {
 }
 
 enum WizardStates {
-  KEY_OVERRIDE_WARNING
+  KEY_OVERRIDE_WARNING,
 }
 
 const CloseButton = styled(CancelButton)`
@@ -62,8 +62,8 @@ const formSchema: IGenericFormSchema = [
   {
     labelValue: "Non personal account name*",
     name: "npaname",
-    formType: "text"
-  }
+    formType: "text",
+  },
 ];
 
 const validate = (values: INpaFormValues) => {
@@ -82,7 +82,6 @@ const validate = (values: INpaFormValues) => {
 const copyInputCss = css`
   border: 0;
   outline: 0;
-  background: none;
   font-size: 0.8rem;
 `;
 
@@ -107,7 +106,7 @@ const ManageNpa = () => {
     {} as INpaFormValues
   );
 
-  const [npaKey, setNpaKey] = useState({ keyId: "", publicKey: "" });
+  const [npaKey, setNpaKey] = useState({} as IPublicKey);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, _setWizardState] = useState(
     WizardStates.KEY_OVERRIDE_WARNING
@@ -140,15 +139,20 @@ const ManageNpa = () => {
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
 
+            setNpaKey({
+              publicKey: generatedKeys.keys.publicKey,
+              keyId: generatedKeys.keys.keyId,
+            });
+
             dispatch({
               type: LayoutEditorDataActionTypes.POST_NEW_NPA,
-              npa: { ...npa, keyId: generatedKeys.keys.keyId }
+              npa: { ...npa, keyId: generatedKeys.keys.keyId },
             });
-          }
+          },
         };
 
         setNpaPostRequest(dataRequest);
-      }
+      },
     };
 
     setNpaPostRequest(dataRequest);
@@ -175,9 +179,9 @@ const ManageNpa = () => {
       cbSuccess: (npa: INpaApiResponse) => {
         dispatch({
           type: LayoutEditorDataActionTypes.PUT_NPA,
-          npa
+          npa,
         });
-      }
+      },
     };
 
     setNpaPostRequest(dataRequest);
@@ -190,7 +194,7 @@ const ManageNpa = () => {
       url: `/api/nonpersonalaccount/${id}/key`,
       cbSuccess: (n: IPublicKey) => {
         setNpaKey(n);
-      }
+      },
     };
 
     setNpaGetRequest(dataRequest);
@@ -232,13 +236,15 @@ const ManageNpa = () => {
           </LastBreadCrumb>
         </NodesBreadCrumb>
         <ContentSeparator />
-        <KeyContainer
-          publicKey={state.data.keyId}
-          clipboardIconSize={16}
-          clipboardWrapperCss={clipboardWrapperCss}
-          inputCss={copyInputCss}
-          copyInputWrapperCss={copyInputWrapperCss}
-        />
+        {Object.keys(npaKey).length ? (
+          <KeyContainer
+            publicKey={npaKey}
+            clipboardIconSize={16}
+            clipboardWrapperCss={clipboardWrapperCss}
+            inputCss={copyInputCss}
+            copyInputWrapperCss={copyInputWrapperCss}
+          />
+        ) : null}
         <ContentSeparator />
         <PasswordView password={generatedPassword} margin={"0 0 1rem"} />
         <FlexRow>
@@ -246,7 +252,7 @@ const ManageNpa = () => {
             type="button"
             onClick={() =>
               dispatch({
-                type: LayoutEditorPaneActionTypes.RESET_PANE
+                type: LayoutEditorPaneActionTypes.RESET_PANE,
               })
             }
           >
@@ -275,9 +281,9 @@ const ManageNpa = () => {
 
           dispatch({
             type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
-            data: { keyId: generatedKeys.keys.keyId }
+            data: { keyId: generatedKeys.keys.keyId },
           });
-        }
+        },
       };
 
       setNpaPostRequest(dataRequest);
@@ -331,7 +337,7 @@ const ManageNpa = () => {
           <ContentSeparator />
         </>
       ) : null}
-      {npaKey ? (
+      {Object.keys(npaKey).length ? (
         <>
           <KeyContainer
             publicKey={npaKey}
@@ -350,10 +356,10 @@ const ManageNpa = () => {
         validate={validate}
         onCancel={() => {
           dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
+            type: LayoutEditorPaneActionTypes.RESET_PANE,
           });
         }}
-        onSubmit={values => {
+        onSubmit={(values) => {
           if (
             state.firstPanelView ===
             LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE

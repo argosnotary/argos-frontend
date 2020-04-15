@@ -17,7 +17,6 @@ import styled, { FlattenInterpolation, ThemeProps } from "styled-components";
 import React from "react";
 import CopyInput from "./CopyInput";
 import { IPublicKey } from "../interfaces/IPublicKey";
-import ContentSeparator from "./ContentSeparator";
 
 interface IKeyDisplay {
   publicKey: IPublicKey;
@@ -31,12 +30,13 @@ interface ICopyInputProps {
   copyInputWrapperCss: FlattenInterpolation<ThemeProps<any>>;
 }
 
-const KeyContainerLabel = styled.span`
+const KeyContainerLabel = styled.p`
+  font-weight: bold;
   font-size: 0.875rem;
 `;
 
 const CopyInputWrapper = styled.div<ICopyInputProps>`
-  ${props => props.copyInputWrapperCss}
+  ${(props) => props.copyInputWrapperCss}
 `;
 
 const KeyContainer: React.FC<IKeyDisplay> = ({
@@ -44,11 +44,10 @@ const KeyContainer: React.FC<IKeyDisplay> = ({
   inputCss,
   clipboardIconSize,
   clipboardWrapperCss,
-  copyInputWrapperCss
+  copyInputWrapperCss,
 }) => (
   <>
     <KeyContainerLabel>Key id</KeyContainerLabel>
-    <ContentSeparator />
     <CopyInputWrapper copyInputWrapperCss={copyInputWrapperCss}>
       <CopyInput
         value={publicKey.keyId}
@@ -56,9 +55,7 @@ const KeyContainer: React.FC<IKeyDisplay> = ({
         inputCss={inputCss}
         clipboardWrapperCss={clipboardWrapperCss}
       />
-      <ContentSeparator />
       <KeyContainerLabel>Public key</KeyContainerLabel>
-      <ContentSeparator />
       <CopyInput
         value={publicKey.publicKey}
         clipboardIconSize={clipboardIconSize}
