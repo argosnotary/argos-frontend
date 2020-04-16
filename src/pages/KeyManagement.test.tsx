@@ -22,8 +22,12 @@ import Axios from "axios";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme/base.json";
 import { act } from "react-dom/test-utils";
-import KeyManagement, { CreateKeyButton } from "./KeyManagement";
+import KeyManagement, {
+  CreateKeyButton,
+  KeyManagementModal
+} from "./KeyManagement";
 import { waitFor } from "@testing-library/dom";
+import PasswordView from "../atoms/PasswordView";
 const mock = new MockAdapter(Axios);
 const mockUrl = "/api/personalaccount/me/key";
 
@@ -83,30 +87,42 @@ it("when no key is present it should display warning message", async () => {
   );
 });
 
-it("when create key is clicked and key is not present it should display modal window", async () => {
-  mock.onGet(mockUrl).reply(403);
+it("when create key is clicked and no key is present it should display password generated window", async () => {
+  mock.onGet(mockUrl).reply(404);
   mock.onPost(mockUrl).reply(200, {
     keyId: "keyiddnew",
     publicKey: "publicKednew",
     encryptedPrivateKey: "privateKeynew"
   });
+
   const root = mount(
     <ThemeProvider theme={theme}>
       <KeyManagement />
     </ThemeProvider>
   );
+
   await act(async () => {
-    await waitFor(() => {
+
+    await waitFor(() =>
+      expect(root.find(CreateKeyButton).length >= 1).toBe(true)
+    );
+
       root
-        .find(CreateKeyButton)
-        .at(0)
-        .simulate("click");
-      expect(root.find(KeyManagement)).toMatchSnapshot();
-    });
+          .find(CreateKeyButton)
+          .at(0)
+          .simulate("click");
+
+      await waitFor(() => {
+             root.update();
+             expect(root.find(PasswordView).length >= 1).toBe(true);
+          }
+      );
+
+    expect(root.find(KeyManagement)).toMatchSnapshot();
   });
 });
 
-it("when create key is clicked and no key is present it should display modal window and create new key", async () => {
+it("when create key is clicked and key is present it should display create new key window ", async () => {
   mock.onGet(mockUrl).reply(200, {
     keyId: "keyid",
     publicKey: "publicKey",
@@ -119,12 +135,19 @@ it("when create key is clicked and no key is present it should display modal win
   );
 
   await act(async () => {
-    await waitFor(() => {
+      await waitFor(() =>
+          expect(root.find(CreateKeyButton).length >= 1).toBe(true)
+      );
       root
-        .find(CreateKeyButton)
-        .at(0)
-        .simulate("click");
+          .find(CreateKeyButton)
+          .at(0)
+          .simulate("click");
+
+      await waitFor(() => {
+              root.update();
+              expect(root.find(KeyManagementModal).length >= 1).toBe(true);
+          }
+      );
       expect(root.find(KeyManagement)).toMatchSnapshot();
-    });
   });
 });

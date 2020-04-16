@@ -87,7 +87,7 @@ interface IKeyManagementModalProps {
   createFirstKey: boolean;
 }
 
-const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
+export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   setDisplayModal,
   cbKeyCreated,
   createFirstKey
