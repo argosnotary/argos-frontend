@@ -102,21 +102,19 @@ it("when create key is clicked and no key is present it should display password 
   );
 
   await act(async () => {
-
     await waitFor(() =>
       expect(root.find(CreateKeyButton).length >= 1).toBe(true)
     );
 
-      root
-          .find(CreateKeyButton)
-          .at(0)
-          .simulate("click");
+    root
+      .find(CreateKeyButton)
+      .at(0)
+      .simulate("click");
 
-      await waitFor(() => {
-             root.update();
-             expect(root.find(PasswordView).length >= 1).toBe(true);
-          }
-      );
+    await waitFor(() => {
+      root.update();
+      expect(root.find(PasswordView).length >= 1).toBe(true);
+    });
 
     expect(root.find(KeyManagement)).toMatchSnapshot();
   });
@@ -135,19 +133,18 @@ it("when create key is clicked and key is present it should display create new k
   );
 
   await act(async () => {
-      await waitFor(() =>
-          expect(root.find(CreateKeyButton).length >= 1).toBe(true)
-      );
-      root
-          .find(CreateKeyButton)
-          .at(0)
-          .simulate("click");
+    await waitFor(() =>
+      expect(root.find(CreateKeyButton).length >= 1).toBe(true)
+    );
+    root
+      .find(CreateKeyButton)
+      .at(0)
+      .simulate("click");
 
-      await waitFor(() => {
-              root.update();
-              expect(root.find(KeyManagementModal).length >= 1).toBe(true);
-          }
-      );
-      expect(root.find(KeyManagement)).toMatchSnapshot();
+    await waitFor(() => {
+      root.update();
+      expect(root.find(KeyManagementModal).length >= 1).toBe(true);
+    });
+    expect(root.find(KeyManagement)).toMatchSnapshot();
   });
 });
