@@ -34,7 +34,9 @@ exports[`renders correctly 1`] = `
         className="sc-gqjmRU iRKzVP"
       >
         <DashboardNavbar>
-          <Navbar>
+          <Navbar
+            homeUrl="/dashboard"
+          >
             <styled.header>
               <StyledComponent
                 forwardedComponent={
@@ -81,10 +83,10 @@ exports[`renders correctly 1`] = `
                         "display": "flex",
                       }
                     }
-                    to="/"
+                    to="/dashboard"
                   >
                     <LinkAnchor
-                      href="/"
+                      href="/dashboard"
                       navigate={[Function]}
                       style={
                         Object {
@@ -93,7 +95,7 @@ exports[`renders correctly 1`] = `
                       }
                     >
                       <a
-                        href="/"
+                        href="/dashboard"
                         onClick={[Function]}
                         style={
                           Object {

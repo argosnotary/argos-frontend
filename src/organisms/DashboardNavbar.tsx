@@ -71,7 +71,7 @@ const DashboardNavbar = () => {
   };
 
   return (
-    <Navbar>
+    <Navbar homeUrl={"/dashboard"}>
       <LinkContainer>
         <Link to={"/edit/layout"}>Supply chains</Link>
       </LinkContainer>

@@ -14,9 +14,14 @@
  * limitations under the License.
  */
 
-import React, { FunctionComponent } from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
+interface INavbar {
+  children: ReactNode;
+  homeUrl: string;
+}
 
 const Header = styled.header`
   display: flex;
@@ -39,15 +44,17 @@ const Brand = styled.img`
   height: 2rem;
 `;
 
-const Navbar: FunctionComponent = props => (
-  <Header>
-    <Link to="/" style={{ display: "flex" }}>
-      <Brand src="/images/logo.svg" />
-    </Link>
-    <nav>
-      <Ul>{props.children}</Ul>
-    </nav>
-  </Header>
-);
+const Navbar: React.FC<INavbar> = ({ children, homeUrl }: INavbar) => {
+  return (
+    <Header>
+      <Link to={homeUrl} style={{ display: "flex" }}>
+        <Brand src="/images/logo.svg" />
+      </Link>
+      <nav>
+        <Ul>{children}</Ul>
+      </nav>
+    </Header>
+  );
+};
 
 export default Navbar;
