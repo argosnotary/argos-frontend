@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 import {
-  Layout,
-  LayoutMetaBlock,
-  LayoutSegment,
-  Rule,
+  ILayout,
+  ILayoutMetaBlock,
+  ILayoutSegment,
+  IRule,
   RuleRuleTypeEnum,
-  Step
+  IStep
 } from "../../interfaces/ILayout";
 import { Domain } from "./argos-domain.layout";
 import stringify from "json-stable-stringify";
@@ -29,8 +29,8 @@ const signLayout = async (
   password: string,
   keyId: string,
   encryptedPrivateKey: string,
-  layout: Layout
-): Promise<LayoutMetaBlock> => {
+  layout: ILayout
+): Promise<ILayoutMetaBlock> => {
   const signature = await signString(
     password,
     encryptedPrivateKey,
@@ -42,11 +42,11 @@ const signLayout = async (
   };
 };
 
-const serialize = (layout: Layout): string => {
+const serialize = (layout: ILayout): string => {
   return stringify(mapLayout(layout));
 };
 
-const mapLayout = (layout: Layout): Domain.Layout => {
+const mapLayout = (layout: ILayout): Domain.ILayout => {
   return {
     keys: layout.keys.map(key => {
       return { ...key };
@@ -69,7 +69,7 @@ const mapLayout = (layout: Layout): Domain.Layout => {
   };
 };
 
-const mapSegment = (segment: LayoutSegment): Domain.LayoutSegment => {
+const mapSegment = (segment: ILayoutSegment): Domain.ILayoutSegment => {
   return {
     name: segment.name,
     steps: segment.steps.map(mapStep).sort((n1, n2) => {
@@ -86,7 +86,7 @@ const mapSegment = (segment: LayoutSegment): Domain.LayoutSegment => {
   };
 };
 
-const mapStep = (step: Step): Domain.Step => {
+const mapStep = (step: IStep): Domain.IStep => {
   return {
     ...step,
     expectedMaterials: step.expectedMaterials.map(mapRule),
@@ -94,7 +94,7 @@ const mapStep = (step: Step): Domain.Step => {
   };
 };
 
-const mapRule = (rule: Rule): Domain.Rule | Domain.MatchRule => {
+const mapRule = (rule: IRule): Domain.IRule | Domain.IMatchRule => {
   if (rule.ruleType === RuleRuleTypeEnum.MATCH) {
     return {
       ...rule,

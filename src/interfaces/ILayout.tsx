@@ -14,31 +14,29 @@
  * limitations under the License.
  */
 
-/* tslint:disable */
-/* eslint-disable */
-export interface LayoutMetaBlock {
-  signatures: Signature[];
-  layout: Layout;
+export interface ILayoutMetaBlock {
+  signatures: ISignature[];
+  layout: ILayout;
 }
 
-export interface Signature {
+export interface ISignature {
   keyId: string;
   signature: string;
 }
 
-export interface Layout {
-  keys: PublicKey[];
+export interface ILayout {
+  keys: IPublicKey[];
   authorizedKeyIds: string[];
-  expectedEndProducts: MatchRule[];
-  layoutSegments: LayoutSegment[];
+  expectedEndProducts: IMatchRule[];
+  layoutSegments: ILayoutSegment[];
 }
 
-export interface PublicKey {
+export interface IPublicKey {
   id: string;
   key: string;
 }
 
-export interface MatchRule {
+export interface IMatchRule {
   pattern: string;
   sourcePathPrefix?: string;
   destinationType: MatchRuleDestinationTypeEnum;
@@ -52,21 +50,21 @@ export enum MatchRuleDestinationTypeEnum {
   MATERIALS = "MATERIALS"
 }
 
-export interface LayoutSegment {
+export interface ILayoutSegment {
   name: string;
-  steps: Array<Step>;
+  steps: Array<IStep>;
 }
 
-export interface Step {
+export interface IStep {
   name: string;
   authorizedKeyIds: string[];
   requiredNumberOfLinks: number;
   expectedCommand: string[];
-  expectedMaterials: Rule[];
-  expectedProducts: Rule[];
+  expectedMaterials: IRule[];
+  expectedProducts: IRule[];
 }
 
-export interface Rule {
+export interface IRule {
   ruleType: RuleRuleTypeEnum;
   pattern: string;
   sourcePathPrefix?: string;
