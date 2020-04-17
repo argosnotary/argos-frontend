@@ -28,7 +28,7 @@ import KeyManagement, {
 } from "./KeyManagement";
 import { waitFor } from "@testing-library/dom";
 import PasswordView from "../atoms/PasswordView";
-import {ModalButton} from "../atoms/Modal";
+import { ModalButton } from "../atoms/Modal";
 const mock = new MockAdapter(Axios);
 const mockUrl = "/api/personalaccount/me/key";
 
@@ -60,40 +60,40 @@ const configureGetKeyMockSuccess = () => {
     publicKey: "publicKey",
     encryptedPrivateKey: "privateKey"
   });
-}
+};
 
-const configureGetKeyMockNotFound=()=> {
+const configureGetKeyMockNotFound = () => {
   mock.onGet(mockUrl).reply(404);
-}
+};
 
-const configureCreatekeyMockSuccess= ()=> {
+const configureCreatekeyMockSuccess = () => {
   mock.onPost(mockUrl).reply(200, {
     keyId: "keyiddnew",
     publicKey: "publicKednew",
     encryptedPrivateKey: "privateKeynew"
   });
-}
-const createRoot=()=> {
-  const root = mount(
-      <ThemeProvider theme={theme}>
-        <KeyManagement/>
-      </ThemeProvider>
-  );
-  return root;
-}
+};
 
-const simulateCreateKeyClick = async  (root: any) => {
+const createRoot = () => {
+  return mount(
+    <ThemeProvider theme={theme}>
+      <KeyManagement />
+    </ThemeProvider>
+  );
+};
+
+const simulateCreateKeyClick = async (root: any) => {
   root
-      .find(CreateKeyButton)
-      .at(0)
-      .simulate("click");
-}
+    .find(CreateKeyButton)
+    .at(0)
+    .simulate("click");
+};
 
-const waitForCreateKeyButton = async (root: any)=> {
+const waitForCreateKeyButton = async (root: any) => {
   await waitFor(() =>
-      expect(root.find(CreateKeyButton).length >= 1).toBe(true)
+    expect(root.find(CreateKeyButton).length >= 1).toBe(true)
   );
-}
+};
 
 it("when key is present it should display keycontainer", async () => {
   configureGetKeyMockSuccess();
@@ -117,7 +117,6 @@ it("when no key is present it should display warning message", async () => {
   );
 });
 
-
 it("when create key is clicked and no key is present it should display password generated window", async () => {
   configureGetKeyMockNotFound();
   configureCreatekeyMockSuccess();
@@ -125,7 +124,7 @@ it("when create key is clicked and no key is present it should display password 
 
   await act(async () => {
     await waitForCreateKeyButton(root);
-    simulateCreateKeyClick(root);
+    await simulateCreateKeyClick(root);
     await waitFor(() => {
       root.update();
       expect(root.find(PasswordView).length >= 1).toBe(true);
@@ -140,7 +139,7 @@ it("when create key is clicked and key is present it should display create new k
   const root = createRoot();
   await act(async () => {
     await waitForCreateKeyButton(root);
-    simulateCreateKeyClick(root);
+    await simulateCreateKeyClick(root);
     await waitFor(() => {
       expect(root.find(KeyManagementModal).length >= 1).toBe(true);
     });
@@ -148,14 +147,38 @@ it("when create key is clicked and key is present it should display create new k
   });
 });
 
+it("when Continue is clicked on modal window it should show password view modal window", async () => {
+  configureGetKeyMockSuccess();
+  configureCreatekeyMockSuccess();
+  const root = createRoot();
+  await act(async () => {
+    await waitForCreateKeyButton(root);
+    await simulateCreateKeyClick(root);
+    await waitFor(() => {
+      expect(root.find(KeyManagementModal).length >= 1).toBe(true);
+    });
+
+    root
+      .find(ModalButton)
+      .at(1)
+      .simulate("click");
+
+    await waitFor(() => {
+      root.update();
+      expect(root.find(PasswordView).length >= 1).toBe(true);
+    });
+
+    expect(root.find(KeyManagement)).toMatchSnapshot();
+  });
+});
 
 it("when Continue is clicked on modal window it should show password view modal window", async () => {
   configureGetKeyMockSuccess();
   configureCreatekeyMockSuccess();
   const root = createRoot();
   await act(async () => {
-    await  waitForCreateKeyButton(root);
-    simulateCreateKeyClick(root);
+    await waitForCreateKeyButton(root);
+    await simulateCreateKeyClick(root);
     await waitFor(() => {
       expect(root.find(KeyManagementModal).length >= 1).toBe(true);
     });
@@ -169,6 +192,42 @@ it("when Continue is clicked on modal window it should show password view modal 
       root.update();
       expect(root.find(PasswordView).length >= 1).toBe(true);
     });
+
+    expect(root.find(KeyManagement)).toMatchSnapshot();
+  });
+});
+
+it("when Close is clicked on modal window it should close modal window", async () => {
+  configureGetKeyMockSuccess();
+  configureCreatekeyMockSuccess();
+  const root = createRoot();
+  await act(async () => {
+    await waitForCreateKeyButton(root);
+    await simulateCreateKeyClick(root);
+    await waitFor(() => {
+      expect(root.find(KeyManagementModal).length >= 1).toBe(true);
+    });
+
+    root
+        .find(ModalButton)
+        .at(1)
+        .simulate("click");
+
+    await waitFor(() => {
+      root.update();
+      expect(root.find(PasswordView).length >= 1).toBe(true);
+    });
+
+    root
+        .find(ModalButton)
+        .at(0)
+        .simulate("click");
+
+    await waitFor(() => {
+      root.update();
+      expect(root.find(KeyManagementModal).length >= 1).toBe(false);
+    });
+
     expect(root.find(KeyManagement)).toMatchSnapshot();
   });
 });
