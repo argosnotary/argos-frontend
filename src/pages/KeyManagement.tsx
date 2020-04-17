@@ -215,9 +215,9 @@ const KeyManagement = () => {
     setDisplayModal(true);
   };
 
-  const cbKeyCreated = (publicKey: IPublicKey) => {
+  const cbKeyCreated = (key: IPublicKey) => {
     setKeyAvailable(true);
-    setPublicKey(publicKey);
+    setPublicKey(key);
   };
   const getActivekeyDataRequest: DataRequest = {
     method: "get",
