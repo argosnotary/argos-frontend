@@ -70,6 +70,13 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
 ",
       ]
     }
+    publicKey={
+      Object {
+        "encryptedPrivateKey": "privateKey",
+        "keyId": "keyid",
+        "publicKey": "publicKey",
+      }
+    }
   >
     <styled.p>
       <StyledComponent
@@ -177,11 +184,11 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
 ",
               ]
             }
-            value=""
+            value="keyid"
           >
             <styled.input
               readOnly={true}
-              value=""
+              value="keyid"
             >
               <StyledComponent
                 forwardedComponent={
@@ -214,17 +221,17 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
                     "current": <input
                       class="sc-gqjmRU fktYVK"
                       readonly=""
-                      value=""
+                      value="keyid"
                     />,
                   }
                 }
                 readOnly={true}
-                value=""
+                value="keyid"
               >
                 <input
                   className="sc-gqjmRU fktYVK"
                   readOnly={true}
-                  value=""
+                  value="keyid"
                 />
               </StyledComponent>
             </styled.input>
@@ -332,7 +339,9 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
                     >
                       <p
                         className="sc-VigVT MRPrb"
-                      />
+                      >
+                        keyid
+                      </p>
                     </StyledComponent>
                   </styled.p>
                   <styled.button
@@ -491,11 +500,11 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
 ",
               ]
             }
-            value=""
+            value="publicKey"
           >
             <styled.input
               readOnly={true}
-              value=""
+              value="publicKey"
             >
               <StyledComponent
                 forwardedComponent={
@@ -528,17 +537,17 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
                     "current": <input
                       class="sc-gqjmRU fktYVK"
                       readonly=""
-                      value=""
+                      value="publicKey"
                     />,
                   }
                 }
                 readOnly={true}
-                value=""
+                value="publicKey"
               >
                 <input
                   className="sc-gqjmRU fktYVK"
                   readOnly={true}
-                  value=""
+                  value="publicKey"
                 />
               </StyledComponent>
             </styled.input>
@@ -646,7 +655,9 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
                     >
                       <p
                         className="sc-VigVT MRPrb"
-                      />
+                      >
+                        publicKey
+                      </p>
                     </StyledComponent>
                   </styled.p>
                   <styled.button
