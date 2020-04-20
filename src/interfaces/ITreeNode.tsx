@@ -19,6 +19,7 @@ export default interface ITreeNode {
   hasChildren: boolean;
   name: string;
   type: string;
+  parentId?: string;
   referenceId: string;
   children?: Array<ITreeNode>;
   permissions?: Array<PermissionTypes>;

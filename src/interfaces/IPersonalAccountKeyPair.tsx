@@ -13,24 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+interface IPersonalAccountKeyPair {
+  keyId: string;
+  publicKey: string;
+  encryptedPrivateKey: string;
+}
 
-type DataRequest =
-  | {
-      token: string;
-      url: string;
-      method: "get";
-      params?: {};
-      cbSuccess?: (arg: any) => void;
-      cbFailure?: (arg: any) => boolean;
-    }
-  | {
-      token: string;
-      url: string;
-      method: "post" | "put";
-      data: {};
-      params?: {};
-      cbSuccess?: (arg: any) => void;
-      cbFailure?: (arg: any) => boolean;
-    };
-
-export default DataRequest;
+export default IPersonalAccountKeyPair;

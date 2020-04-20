@@ -31,7 +31,7 @@ import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import INpaApiResponse from "../../../interfaces/INpaApiResponse";
 import PasswordView from "../../../atoms/PasswordView";
 import FlexRow from "../../../atoms/FlexRow";
-import { generateKey } from "../../../security";
+import { generateKey, signString } from "../../../security";
 import { Warning } from "../../../atoms/Alerts";
 import {
   ModalBody,
@@ -43,8 +43,8 @@ import {
 import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
-import KeyIdContainer from "../../../atoms/KeyIdContainer";
-import { IKeyId } from "../../../interfaces/IKeyId";
+import KeyContainer from "../../../atoms/KeyContainer";
+import { IPublicKey } from "../../../interfaces/IPublicKey";
 
 interface INpaFormValues {
   npaname: string;
@@ -82,12 +82,11 @@ const validate = (values: INpaFormValues) => {
 const copyInputCss = css`
   border: 0;
   outline: 0;
-  background: none;
   font-size: 0.8rem;
 `;
 
 const copyInputWrapperCss = css`
-margin: 0 0 1rem;
+  margin: 0 0 1rem;
 `;
 const clipboardWrapperCss = css`
   padding: 0.4rem;
@@ -107,7 +106,7 @@ const ManageNpa = () => {
     {} as INpaFormValues
   );
 
-  const [npaKeyId, setNpaKeyId] = useState("");
+  const [npaKey, setNpaKey] = useState({} as IPublicKey);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, _setWizardState] = useState(
     WizardStates.KEY_OVERRIDE_WARNING
@@ -139,6 +138,11 @@ const ManageNpa = () => {
           url: `/api/nonpersonalaccount/${npa.id}/key`,
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
+
+            setNpaKey({
+              publicKey: generatedKeys.keys.publicKey,
+              keyId: generatedKeys.keys.keyId
+            });
 
             dispatch({
               type: LayoutEditorDataActionTypes.POST_NEW_NPA,
@@ -188,8 +192,8 @@ const ManageNpa = () => {
       method: "get",
       token: localStorageToken,
       url: `/api/nonpersonalaccount/${id}/key`,
-      cbSuccess: (n: IKeyId) => {
-        setNpaKeyId(n.keyId);
+      cbSuccess: (n: IPublicKey) => {
+        setNpaKey(n);
       }
     };
 
@@ -232,13 +236,15 @@ const ManageNpa = () => {
           </LastBreadCrumb>
         </NodesBreadCrumb>
         <ContentSeparator />
-        <KeyIdContainer
-          keyId={state.data.keyId}
-          clipboardIconSize={16}
-          clipboardWrapperCss={clipboardWrapperCss}
-          inputCss={copyInputCss}
-          copyInputWrapperCss={copyInputWrapperCss}
-        />
+        {Object.keys(npaKey).length ? (
+          <KeyContainer
+            publicKey={npaKey}
+            clipboardIconSize={16}
+            clipboardWrapperCss={clipboardWrapperCss}
+            inputCss={copyInputCss}
+            copyInputWrapperCss={copyInputWrapperCss}
+          />
+        ) : null}
         <ContentSeparator />
         <PasswordView password={generatedPassword} margin={"0 0 1rem"} />
         <FlexRow>
@@ -265,6 +271,12 @@ const ManageNpa = () => {
     const continueHandler = async () => {
       const generatedKeys = await generateKey(true);
 
+      const signature = await signString(
+        generatedKeys.password,
+        generatedKeys.keys.encryptedPrivateKey,
+        "mooi man"
+      );
+      console.log(signature);
       const dataRequest: DataRequest = {
         data: generatedKeys.keys,
         method: "post",
@@ -331,10 +343,10 @@ const ManageNpa = () => {
           <ContentSeparator />
         </>
       ) : null}
-      {npaKeyId ? (
+      {Object.keys(npaKey).length ? (
         <>
-          <KeyIdContainer
-            keyId={npaKeyId}
+          <KeyContainer
+            publicKey={npaKey}
             clipboardIconSize={16}
             clipboardWrapperCss={clipboardWrapperCss}
             inputCss={copyInputCss}

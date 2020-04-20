@@ -258,12 +258,16 @@ exports[`renders correctly 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-bwzfXH",
                                           "isStatic": false,
-                                          "lastClassName": "hCflNK",
+                                          "lastClassName": "fQcSTW",
                                           "rules": Array [
+                                            "
+  ",
                                             "
   overflow: visible;
   box-sizing: border-box;
-  height: 2.4375rem;
+  height: ",
+                                            [Function],
+                                            ";
   margin: 0 0 1rem;
   padding: 0.5rem;
   border: 1px solid #cacaca;
@@ -292,6 +296,8 @@ exports[`renders correctly 1`] = `
     box-shadow: 0 0 5px #cacaca;
   }
 ",
+                                            "
+",
                                           ],
                                         },
                                         "displayName": "styled.input",
@@ -310,7 +316,7 @@ exports[`renders correctly 1`] = `
                                     type="text"
                                   >
                                     <input
-                                      className="sc-bwzfXH hCflNK"
+                                      className="sc-bwzfXH fQcSTW"
                                       name="searchinput"
                                       onChange={[Function]}
                                       type="text"

@@ -29,6 +29,7 @@ const SinglePanelContainer = styled.section<ISinglePanelContainerProps>`
   flex: ${props => (props.shrink ? "0 0 1rem" : `1 1 ${props.width}`)};
   flex-grow: ${props =>
     props.disableFlexGrow ? "0" : props.shrink ? "0" : "1"};
+  min-width: 0;
 `;
 
 interface IPanelBodyProps {

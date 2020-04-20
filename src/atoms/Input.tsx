@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const Input = styled.input`
+export const InputCSS = css<{ disabled?: boolean; height?: string }>`
   overflow: visible;
   box-sizing: border-box;
-  height: 2.4375rem;
+  height: ${props => (props.height ? props.height : "2.4375rem")};
   margin: 0 0 1rem;
   padding: 0.5rem;
   border: 1px solid #cacaca;
@@ -43,6 +43,10 @@ const Input = styled.input`
     border: 1px solid #8a8a8a;
     box-shadow: 0 0 5px #cacaca;
   }
+`;
+
+const Input = styled.input`
+  ${InputCSS}
 `;
 
 export default Input;

@@ -16,20 +16,13 @@
 import * as asn1js from "asn1js";
 import generatePassword from "password-generator";
 import { PKCS8ShroudedKeyBag, PrivateKeyInfo } from "pkijs";
+import {decode, encode} from "base64-arraybuffer";
 
 const arrayBufferToHex = (buffer: ArrayBuffer) => {
   return Array.from(new Uint8Array(buffer))
     .map(b => b.toString(16).padStart(2, "0"))
     .join("");
 };
-
-const arrayBufferToBase64 = (arrayBuffer: ArrayBuffer) =>
-  btoa(
-    new Uint8Array(arrayBuffer).reduce(
-      (data, byte) => data + String.fromCharCode(byte),
-      ""
-    )
-  );
 
 function stringToArrayBuffer(input: string) {
   const { length } = input;
@@ -56,7 +49,7 @@ const concatArrayBuffers = (buffer1: ArrayBuffer, buffer2: ArrayBuffer) => {
 };
 
 const generateKeyPair = async () => {
-  const keyPair = await crypto.subtle.generateKey(
+  return await crypto.subtle.generateKey(
     {
       hash: {
         name: "SHA-256"
@@ -68,8 +61,6 @@ const generateKeyPair = async () => {
     true,
     ["sign"]
   );
-
-  return keyPair;
 };
 
 const generateEncryptePrivateKey = async (
@@ -90,9 +81,39 @@ const generateEncryptePrivateKey = async (
     iterationCount: 100000,
     password: stringToArrayBuffer(password)
   });
-  const encKeyBinary = pkcs8.toSchema().toBER(false);
 
-  return encKeyBinary;
+  return pkcs8.toSchema().toBER(false);
+};
+
+const decryptPrivateKey = async (
+    password: string,
+    encryptedPrivateKey: string
+): Promise<CryptoKey> => {
+    const asn1 = asn1js.fromBER(decode(encryptedPrivateKey));
+    const keyBag = new PKCS8ShroudedKeyBag({ schema: asn1.result });
+    await keyBag.parseInternalValues({password: stringToArrayBuffer(password)});
+
+    const json = keyBag.parsedValue.parsedKey.toJSON();
+    const keyData: JsonWebKey = {...json,
+      alg: "RS256",
+      kty: "RSA"
+    };
+  return await crypto.subtle.importKey(
+      'jwk',
+      keyData,
+      { name: "RSASSA-PKCS1-v1_5", hash:{name:"SHA-256"}},
+      false,
+      ["sign"]);
+};
+
+const signString = async (
+    password: string,
+    encryptedPrivateKey: string,
+    data: string
+): Promise<string> => {
+   const privateKey = await decryptPrivateKey(password, encryptedPrivateKey);
+    const signature = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", privateKey,stringToArrayBuffer(data));
+    return arrayBufferToHex(signature);
 };
 
 interface IKey {
@@ -124,9 +145,9 @@ const generateKey = async (hashKeyPassphrase = false) => {
 
   const keyObj: IKey = {
     keys: {
-      encryptedPrivateKey: arrayBufferToBase64(encryptedPrivateKey),
+      encryptedPrivateKey: encode(encryptedPrivateKey),
       keyId: arrayBufferToHex(digestedPublicKey),
-      publicKey: arrayBufferToBase64(exportedPublicKey)
+      publicKey: encode(exportedPublicKey)
     },
     password
   };
@@ -153,4 +174,4 @@ const generateKey = async (hashKeyPassphrase = false) => {
   return keyObj;
 };
 
-export { generateEncryptePrivateKey, generateKeyPair, generateKey };
+export { generateEncryptePrivateKey, generateKeyPair, generateKey, signString};

@@ -13,24 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-type DataRequest =
-  | {
-      token: string;
-      url: string;
-      method: "get";
-      params?: {};
-      cbSuccess?: (arg: any) => void;
-      cbFailure?: (arg: any) => boolean;
-    }
-  | {
-      token: string;
-      url: string;
-      method: "post" | "put";
-      data: {};
-      params?: {};
-      cbSuccess?: (arg: any) => void;
-      cbFailure?: (arg: any) => boolean;
-    };
-
-export default DataRequest;
+export interface IPublicKey {
+  keyId: string;
+  publicKey: string;
+}

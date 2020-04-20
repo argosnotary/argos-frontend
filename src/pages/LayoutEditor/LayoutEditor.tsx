@@ -55,6 +55,7 @@ import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
 import { useUserProfileContextStore } from "../../stores/UserProfile";
+import ManageLayoutPanel from "./Panels/ManageLayout";
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
@@ -103,6 +104,11 @@ const LayoutEditor = () => {
         userHasEditPermission =
           node.permissions !== undefined &&
           node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0;
+        break;
+      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+        userHasEditPermission =
+          node.permissions !== undefined &&
+          node.permissions.indexOf(PermissionTypes.LAYOUT_ADD) >= 0;
         break;
       default:
         userHasEditPermission =
@@ -233,6 +239,26 @@ const LayoutEditor = () => {
       ]
     },
     {
+      type: "SUPPLY_CHAIN",
+      menuitems: [
+        {
+          label: "manage layout",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCb(
+              LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
+              node
+            );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.LAYOUT_ADD) >= 0
+            );
+          }
+        }
+      ]
+    },
+    {
       type: "NON_PERSONAL_ACCOUNT",
       menuitems: [
         {
@@ -295,6 +321,8 @@ const LayoutEditor = () => {
         return <ManageNpa />;
       case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
         return <ManageLabelPermissions />;
+      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+        return <ManageLayoutPanel />;
       default:
         return null;
     }
@@ -318,6 +346,8 @@ const LayoutEditor = () => {
         return "Update selected non personal account";
       case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
         return "Manage label permissions";
+      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+        return "Manage Layout";
     }
 
     return "";

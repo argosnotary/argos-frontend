@@ -96,9 +96,14 @@ function useDataApi<S, T>(
               removeLocalStorageToken();
               history.push("/login");
             }
-
             dispatch({ type: "FETCH_FAILURE", isLoading: false, error });
-            setError(error);
+            if (dataRequest.cbFailure) {
+              if (!dataRequest.cbFailure(error)) {
+                setError(error);
+              }
+            } else {
+              setError(error);
+            }
           });
       };
 

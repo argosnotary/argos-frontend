@@ -18,6 +18,7 @@ import styled from "styled-components";
 import { useFormik, FormikValues } from "formik";
 
 import FormInput from "../molecules/FormInput";
+import FormTextArea from "../molecules/FormTextArea";
 import InputErrorLabel from "../atoms/InputErrorLabel";
 import { LoaderButton, CancelButton } from "../atoms/Button";
 import ContentSeparator from "../atoms/ContentSeparator";
@@ -87,6 +88,7 @@ const GenericForm: React.FC<IGenericForm> = ({
     return schema.map((entry: IGenericFormInput, index) => {
       switch (entry.formType) {
         case "text":
+        case "password":
           return (
             <React.Fragment key={`${entry.name}-${index}`}>
               <FormInput
@@ -97,6 +99,24 @@ const GenericForm: React.FC<IGenericForm> = ({
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name]}
                 disabled={permission === FormPermissions.READ ? true : false}
+              />
+              {formik.touched[entry.name] && formik.errors[entry.name] ? (
+                <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
+              ) : null}
+            </React.Fragment>
+          );
+        case "textArea":
+          return (
+            <React.Fragment key={`${entry.name}-${index}`}>
+              <FormTextArea
+                labelValue={entry.labelValue}
+                name={entry.name}
+                formType={entry.formType}
+                onInput={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values[entry.name]}
+                disabled={permission === FormPermissions.READ ? true : false}
+                height={"25rem"}
               />
               {formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>

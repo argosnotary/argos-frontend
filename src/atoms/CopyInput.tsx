@@ -32,8 +32,13 @@ const Input = styled.input`
 `;
 
 const InputDisplay = styled.p<IInputDisplayProps>`
-  word-break: break-all;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  background: ${props => props.theme.copyInput.bgColor};
+  padding: 0 0.2rem;
+  border-radius: 0.1rem;
   ${props => props.inputCss}
 `;
 
@@ -63,7 +68,7 @@ const ClipboardWrapper = styled.button<IClipboardWrapperProps>`
 
 const ModifiedFlexRow = styled(FlexRow)`
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
 interface ICopyInputProps {
