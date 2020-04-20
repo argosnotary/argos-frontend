@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* tslint:disable */
-/* eslint-disable */
-// Generated using typescript-generator version 2.21.588 on 2020-04-09 14:40:34.
-
 export namespace Domain {
-  export interface Layout {
-    keys: PublicKey[];
+  export interface ILayout {
+    keys: IPublicKey[];
     authorizedKeyIds: string[];
-    expectedEndProducts: MatchRule[];
-    layoutSegments: LayoutSegment[];
+    expectedEndProducts: IMatchRule[];
+    layoutSegments: ILayoutSegment[];
   }
 
-  export interface PublicKey {
+  export interface IPublicKey {
     id: string;
     key: string;
   }
 
-  export interface MatchRule extends Rule {
+  export interface IMatchRule extends IRule {
     sourcePathPrefix?: string;
     destinationType?: ArtifactType;
     destinationPathPrefix?: string;
@@ -38,23 +34,23 @@ export namespace Domain {
     destinationStepName?: string;
   }
 
-  export interface LayoutSegment {
+  export interface ILayoutSegment {
     name: string;
-    steps: Step[];
+    steps: IStep[];
   }
 
-  export interface Rule {
+  export interface IRule {
     ruleType: RuleType;
     pattern: string;
   }
 
-  export interface Step {
+  export interface IStep {
     name: string;
     authorizedKeyIds: string[];
     requiredNumberOfLinks: number;
     expectedCommand: string[];
-    expectedMaterials: Rule[];
-    expectedProducts: Rule[];
+    expectedMaterials: IRule[];
+    expectedProducts: IRule[];
   }
 
   export type RuleType =

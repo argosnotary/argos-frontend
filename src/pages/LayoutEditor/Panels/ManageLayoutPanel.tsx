@@ -38,7 +38,7 @@ import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
 import { signLayout } from "../LayoutService";
 import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
-import { LayoutMetaBlock } from "../../../interfaces/ILayout";
+import { ILayoutMetaBlock } from "../../../interfaces/ILayout";
 import { Warning } from "../../../atoms/Alerts";
 
 interface ILayoutFormValues {
@@ -78,7 +78,6 @@ const validatePassphrase = (values: IPasswordFormValues) => {
   if (!values.passphrase) {
     errors.passphrase = "Please fill in a passphrase.";
   }
-
   return errors;
 };
 
@@ -139,7 +138,7 @@ const ManageLayoutPanel = () => {
     method: "get",
     token,
     url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
-    cbSuccess: (layoutMetaBlock: LayoutMetaBlock) => {
+    cbSuccess: (layoutMetaBlock: ILayoutMetaBlock) => {
       setLayout({ layout: JSON.stringify(layoutMetaBlock.layout, null, 2) });
     },
     cbFailure: (error): boolean => {
@@ -149,10 +148,10 @@ const ManageLayoutPanel = () => {
 
   interface ILayoutApiResponse {
     isLoading: boolean;
-    data: LayoutMetaBlock;
+    data: ILayoutMetaBlock;
   }
 
-  const [profileApiResponse] = useDataApi<ILayoutApiResponse, LayoutMetaBlock>(
+  const [profileApiResponse] = useDataApi<ILayoutApiResponse, ILayoutMetaBlock>(
     customGenericDataFetchReducer,
     getLayoutRequest
   );

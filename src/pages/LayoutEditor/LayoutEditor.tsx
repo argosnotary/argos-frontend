@@ -55,7 +55,7 @@ import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
 import { useUserProfileContextStore } from "../../stores/UserProfile";
-import ManageLayoutPanel from "./Panels/ManageLayout";
+import ManageLayoutPanel from "./Panels/ManageLayoutPanel";
 
 const LayoutEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
