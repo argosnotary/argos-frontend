@@ -16,7 +16,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 
-import { generateKey } from "../security";
+import { cryptoAvailable, generateKey } from "../security";
 
 import { Warning } from "../atoms/Alerts";
 import { LoaderIcon, PlusIcon } from "../atoms/Icons";
@@ -38,6 +38,8 @@ import PasswordView from "../atoms/PasswordView";
 import { IPublicKey } from "../interfaces/IPublicKey";
 import KeyContainer from "../atoms/KeyContainer";
 import FlexColumn from "../atoms/FlexColumn";
+import { NoCryptoWarning } from "../molecules/NoCryptoWarning";
+import { CryptoExceptionWarning } from "../molecules/CryptoExceptionWarning";
 
 export const CreateKeyButton = styled(TransparentButton)`
   margin: 1.3rem 0;
@@ -77,7 +79,8 @@ enum WizardStates {
   Loading,
   Error,
   KeyOverrideWarning,
-  CopyKey
+  CopyKey,
+  CryptoError
 }
 
 interface IKeyManagementModalProps {
@@ -125,18 +128,23 @@ export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   }, [createKeyResponse]);
 
   const postKeyData = async () => {
-    const generatedKeys = await generateKey();
-    const dataRequest: DataRequest = {
-      data: generatedKeys.keys,
-      method: "post",
-      token: localStorageToken,
-      url: "/api/personalaccount/me/key",
-      cbSuccess: () => {
-        cbKeyCreated(generatedKeys.keys);
-      }
-    };
-    setGeneratedPassword(generatedKeys.password);
-    setCreateKeyDataRequest(dataRequest);
+    try {
+      const generatedKeys = await generateKey();
+      const dataRequest: DataRequest = {
+        data: generatedKeys.keys,
+        method: "post",
+        token: localStorageToken,
+        url: "/api/personalaccount/me/key",
+        cbSuccess: () => {
+          cbKeyCreated(generatedKeys.keys);
+        }
+      };
+      setGeneratedPassword(generatedKeys.password);
+      setCreateKeyDataRequest(dataRequest);
+    } catch (e) {
+      setWizardState(WizardStates.CryptoError);
+      throw e;
+    }
   };
 
   const getModalContent = (currentWizardState: number) => {
@@ -194,6 +202,17 @@ export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
             </ModalFooter>
           </>
         );
+      case WizardStates.CryptoError:
+        return (
+          <>
+            <ModalBody>
+              <CryptoExceptionWarning />
+            </ModalBody>
+            <ModalFooter>
+              <ModalButton onClick={disableModal}>Close</ModalButton>
+            </ModalFooter>
+          </>
+        );
     }
   };
   return (
@@ -236,6 +255,7 @@ const KeyManagement = () => {
     genericDataFetchReducer,
     getActivekeyDataRequest
   );
+
   return (
     <>
       <PageHeader>Key management</PageHeader>
@@ -264,12 +284,14 @@ const KeyManagement = () => {
           cbKeyCreated={cbKeyCreated}
           createFirstKey={!keyAvailable}
         />
-      ) : (
+      ) : null}
+      {!cryptoAvailable() ? <NoCryptoWarning /> : null}
+      {!displayModal && cryptoAvailable() ? (
         <CreateKeyButton onClick={createNewKey}>
           <PlusIcon size={32} color={theme.keyManagementPage.iconColor} />
           Create new key
         </CreateKeyButton>
-      )}
+      ) : null}
     </>
   );
 };
