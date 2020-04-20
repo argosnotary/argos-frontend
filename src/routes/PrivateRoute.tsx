@@ -31,8 +31,7 @@ const PrivateRoute = ({ children, path }: IPrivateRouteProps) => {
     return (
       <Redirect
         to={{
-          pathname: "/login",
-          state: { from: location }
+          pathname: "/login"
         }}
       />
     );

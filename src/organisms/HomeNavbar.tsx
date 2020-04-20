@@ -46,7 +46,7 @@ const ButtonLink = styled.a`
 `;
 
 const HomeNavbar = () => (
-  <Navbar>
+  <Navbar homeUrl={"/"}>
     <li>
       <ButtonLink href="/login">Sign in</ButtonLink>
     </li>
