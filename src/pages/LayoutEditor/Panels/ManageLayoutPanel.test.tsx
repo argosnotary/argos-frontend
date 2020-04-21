@@ -43,6 +43,10 @@ jest.mock("react-router-dom", () => ({
     push: jest.fn()
   })
 }));
+jest.mock("../../../security", () => ({
+  ...jest.requireActual("../../../security"),
+  cryptoAvailable: jest.fn().mockReturnValue(true)
+}));
 
 jest.mock("../LayoutService", () => ({
   ...jest.requireActual("../LayoutService"),

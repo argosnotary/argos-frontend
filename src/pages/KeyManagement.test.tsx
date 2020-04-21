@@ -51,7 +51,8 @@ jest.mock("../security", () => ({
       },
       password: "ASwBaq5GkamoRq"
     })
-  })
+  }),
+  cryptoAvailable: jest.fn().mockReturnValue(true)
 }));
 
 const configureGetKeyMockSuccess = () => {
