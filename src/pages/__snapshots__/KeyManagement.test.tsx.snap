@@ -2475,728 +2475,89 @@ exports[`when create key is clicked and key is present it should display create 
       </h1>
     </StyledComponent>
   </styled.h1>
-  <KeyContainer
-    clipboardIconSize={16}
-    clipboardWrapperCss={
-      Array [
-        "
-  padding: 0.4rem;
-  margin: 0 1rem;
-  height: 1.8rem;
+  <Styled(styled.div)>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-jKJlTe",
+            "isStatic": false,
+            "lastClassName": "cDlKLq",
+            "rules": Array [
+              "
+  display: flex;
+  flex-direction: column;
 ",
-      ]
-    }
-    copyInputWrapperCss={
-      Array [
-        "
-  margin: 0;
-  width: 30vw;
+              "
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 ",
-      ]
-    }
-    inputCss={
-      Array [
-        "
-  border: 0;
-  outline: 0;
-  font-size: 0.8rem;
-",
-      ]
-    }
-    publicKey={
-      Object {
-        "encryptedPrivateKey": "privateKey",
-        "keyId": "keyid",
-        "publicKey": "publicKey",
-      }
-    }
-  >
-    <styled.p>
-      <StyledComponent
-        forwardedComponent={
-          Object {
-            "$$typeof": Symbol(react.forward_ref),
-            "attrs": Array [],
-            "componentStyle": ComponentStyle {
-              "componentId": "sc-kGXeez",
-              "isStatic": false,
-              "lastClassName": "doJMEi",
-              "rules": Array [
-                "
-  font-weight: bold;
-  font-size: 0.875rem;
-",
-              ],
-            },
-            "displayName": "styled.p",
-            "foldedComponentIds": Array [],
-            "render": [Function],
-            "styledComponentId": "sc-kGXeez",
-            "target": "p",
-            "toString": [Function],
-            "warnTooManyClasses": [Function],
-            "withComponent": [Function],
-          }
+            ],
+          },
+          "displayName": "Styled(styled.div)",
+          "foldedComponentIds": Array [
+            "sc-bxivhb",
+          ],
+          "render": [Function],
+          "styledComponentId": "sc-jKJlTe",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
         }
-        forwardedRef={null}
-      >
-        <p
-          className="sc-kGXeez doJMEi"
-        >
-          Key id
-        </p>
-      </StyledComponent>
-    </styled.p>
-    <styled.div
-      copyInputWrapperCss={
-        Array [
-          "
-  margin: 0;
-  width: 30vw;
-",
-        ]
       }
+      forwardedRef={null}
     >
-      <StyledComponent
-        copyInputWrapperCss={
-          Array [
-            "
-  margin: 0;
-  width: 30vw;
-",
-          ]
-        }
-        forwardedComponent={
-          Object {
-            "$$typeof": Symbol(react.forward_ref),
-            "attrs": Array [],
-            "componentStyle": ComponentStyle {
-              "componentId": "sc-kpOJdX",
-              "isStatic": false,
-              "lastClassName": "cNcSPB",
-              "rules": Array [
-                "
-  ",
-                [Function],
-                "
-",
-              ],
-            },
-            "displayName": "styled.div",
-            "foldedComponentIds": Array [],
-            "render": [Function],
-            "styledComponentId": "sc-kpOJdX",
-            "target": "div",
-            "toString": [Function],
-            "warnTooManyClasses": [Function],
-            "withComponent": [Function],
-          }
-        }
-        forwardedRef={null}
+      <div
+        className="sc-bxivhb sc-jKJlTe cDlKLq"
       >
-        <div
-          className="sc-kpOJdX cNcSPB"
+        <LoaderIcon
+          color="#1779ba"
+          size={32}
         >
-          <CopyInput
-            clipboardIconSize={16}
-            clipboardWrapperCss={
-              Array [
-                "
-  padding: 0.4rem;
-  margin: 0 1rem;
-  height: 1.8rem;
-",
-              ]
-            }
-            inputCss={
-              Array [
-                "
-  border: 0;
-  outline: 0;
-  font-size: 0.8rem;
-",
-              ]
-            }
-            value="keyid"
+          <svg
+            height={32}
+            stroke="#1779ba"
+            viewBox="0 0 38 38"
+            width={32}
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <styled.input
-              readOnly={true}
-              value="keyid"
+            <g
+              fill="none"
+              fillRule="evenodd"
             >
-              <StyledComponent
-                forwardedComponent={
-                  Object {
-                    "$$typeof": Symbol(react.forward_ref),
-                    "attrs": Array [],
-                    "componentStyle": ComponentStyle {
-                      "componentId": "sc-gqjmRU",
-                      "isStatic": false,
-                      "lastClassName": "fktYVK",
-                      "rules": Array [
-                        "
-  position: absolute;
-  left: -1000%;
-",
-                      ],
-                    },
-                    "displayName": "styled.input",
-                    "foldedComponentIds": Array [],
-                    "render": [Function],
-                    "styledComponentId": "sc-gqjmRU",
-                    "target": "input",
-                    "toString": [Function],
-                    "warnTooManyClasses": [Function],
-                    "withComponent": [Function],
-                  }
-                }
-                forwardedRef={
-                  Object {
-                    "current": <input
-                      class="sc-gqjmRU fktYVK"
-                      readonly=""
-                      value="keyid"
-                    />,
-                  }
-                }
-                readOnly={true}
-                value="keyid"
+              <g
+                strokeWidth="2"
+                transform="translate(1 1)"
               >
-                <input
-                  className="sc-gqjmRU fktYVK"
-                  readOnly={true}
-                  value="keyid"
+                <circle
+                  cx="18"
+                  cy="18"
+                  r="18"
+                  strokeOpacity=".5"
                 />
-              </StyledComponent>
-            </styled.input>
-            <Styled(styled.div)
-              disableWrap={true}
-            >
-              <StyledComponent
-                disableWrap={true}
-                forwardedComponent={
-                  Object {
-                    "$$typeof": Symbol(react.forward_ref),
-                    "attrs": Array [],
-                    "componentStyle": ComponentStyle {
-                      "componentId": "sc-fjdhpX",
-                      "isStatic": false,
-                      "lastClassName": "ifepHu",
-                      "rules": Array [
-                        "
-  display: flex;
-  flex-direction: row;
-  flex-wrap: ",
-                        [Function],
-                        ";
-",
-                        "
-  align-items: center;
-  justify-content: flex-start;
-",
-                      ],
-                    },
-                    "displayName": "Styled(styled.div)",
-                    "foldedComponentIds": Array [
-                      "sc-gZMcBi",
-                    ],
-                    "render": [Function],
-                    "styledComponentId": "sc-fjdhpX",
-                    "target": "div",
-                    "toString": [Function],
-                    "warnTooManyClasses": [Function],
-                    "withComponent": [Function],
-                  }
-                }
-                forwardedRef={null}
-              >
-                <div
-                  className="sc-gZMcBi sc-fjdhpX ifepHu"
+                <path
+                  d="M36 18c0-9.94-8.06-18-18-18"
                 >
-                  <styled.p
-                    inputCss={
-                      Array [
-                        "
-  border: 0;
-  outline: 0;
-  font-size: 0.8rem;
-",
-                      ]
-                    }
-                  >
-                    <StyledComponent
-                      forwardedComponent={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "attrs": Array [],
-                          "componentStyle": ComponentStyle {
-                            "componentId": "sc-VigVT",
-                            "isStatic": false,
-                            "lastClassName": "MRPrb",
-                            "rules": Array [
-                              "
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  background: ",
-                              [Function],
-                              ";
-  padding: 0 0.2rem;
-  border-radius: 0.1rem;
-  ",
-                              [Function],
-                              "
-",
-                            ],
-                          },
-                          "displayName": "styled.p",
-                          "foldedComponentIds": Array [],
-                          "render": [Function],
-                          "styledComponentId": "sc-VigVT",
-                          "target": "p",
-                          "toString": [Function],
-                          "warnTooManyClasses": [Function],
-                          "withComponent": [Function],
-                        }
-                      }
-                      forwardedRef={null}
-                      inputCss={
-                        Array [
-                          "
-  border: 0;
-  outline: 0;
-  font-size: 0.8rem;
-",
-                        ]
-                      }
-                    >
-                      <p
-                        className="sc-VigVT MRPrb"
-                      >
-                        keyid
-                      </p>
-                    </StyledComponent>
-                  </styled.p>
-                  <styled.button
-                    clipboardWrapperCss={
-                      Array [
-                        "
-  padding: 0.4rem;
-  margin: 0 1rem;
-  height: 1.8rem;
-",
-                      ]
-                    }
-                    onClick={[Function]}
-                    title="Copy value to clipboard"
-                  >
-                    <StyledComponent
-                      clipboardWrapperCss={
-                        Array [
-                          "
-  padding: 0.4rem;
-  margin: 0 1rem;
-  height: 1.8rem;
-",
-                        ]
-                      }
-                      forwardedComponent={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "attrs": Array [],
-                          "componentStyle": ComponentStyle {
-                            "componentId": "sc-jTzLTM",
-                            "isStatic": false,
-                            "lastClassName": "iNngVg",
-                            "rules": Array [
-                              "
-  display: flex;
-  background: transparent;
-  border: 0;
-  outline: 0;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ",
-                              [Function],
-                              ";
-
-    svg path {
-      fill: ",
-                              [Function],
-                              ";
-    }
-  }
-
-  ",
-                              [Function],
-                              "
-",
-                            ],
-                          },
-                          "displayName": "styled.button",
-                          "foldedComponentIds": Array [],
-                          "render": [Function],
-                          "styledComponentId": "sc-jTzLTM",
-                          "target": "button",
-                          "toString": [Function],
-                          "warnTooManyClasses": [Function],
-                          "withComponent": [Function],
-                        }
-                      }
-                      forwardedRef={null}
-                      onClick={[Function]}
-                      title="Copy value to clipboard"
-                    >
-                      <button
-                        className="sc-jTzLTM iNngVg"
-                        onClick={[Function]}
-                        title="Copy value to clipboard"
-                      >
-                        <ClipboardIcon
-                          color="#8D99AE"
-                          size={16}
-                        >
-                          <svg
-                            height={16}
-                            version="1.1"
-                            viewBox="0 0 27.5 27.5"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12 26h14v-10h-6.5c-0.828 0-1.5-0.672-1.5-1.5v-6.5h-6v18zM16 3.5v-1c0-0.266-0.234-0.5-0.5-0.5h-11c-0.266 0-0.5 0.234-0.5 0.5v1c0 0.266 0.234 0.5 0.5 0.5h11c0.266 0 0.5-0.234 0.5-0.5zM20 14h4.672l-4.672-4.672v4.672zM28 16v10.5c0 0.828-0.672 1.5-1.5 1.5h-15c-0.828 0-1.5-0.672-1.5-1.5v-2.5h-8.5c-0.828 0-1.5-0.672-1.5-1.5v-21c0-0.828 0.672-1.5 1.5-1.5h17c0.828 0 1.5 0.672 1.5 1.5v5.125c0.203 0.125 0.391 0.266 0.562 0.437l6.375 6.375c0.594 0.594 1.062 1.734 1.062 2.562z"
-                              fill="#8D99AE"
-                            />
-                          </svg>
-                        </ClipboardIcon>
-                      </button>
-                    </StyledComponent>
-                  </styled.button>
-                </div>
-              </StyledComponent>
-            </Styled(styled.div)>
-          </CopyInput>
-          <styled.p>
-            <StyledComponent
-              forwardedComponent={
-                Object {
-                  "$$typeof": Symbol(react.forward_ref),
-                  "attrs": Array [],
-                  "componentStyle": ComponentStyle {
-                    "componentId": "sc-kGXeez",
-                    "isStatic": false,
-                    "lastClassName": "doJMEi",
-                    "rules": Array [
-                      "
-  font-weight: bold;
-  font-size: 0.875rem;
-",
-                    ],
-                  },
-                  "displayName": "styled.p",
-                  "foldedComponentIds": Array [],
-                  "render": [Function],
-                  "styledComponentId": "sc-kGXeez",
-                  "target": "p",
-                  "toString": [Function],
-                  "warnTooManyClasses": [Function],
-                  "withComponent": [Function],
-                }
-              }
-              forwardedRef={null}
-            >
-              <p
-                className="sc-kGXeez doJMEi"
-              >
-                Public key
-              </p>
-            </StyledComponent>
-          </styled.p>
-          <CopyInput
-            clipboardIconSize={16}
-            clipboardWrapperCss={
-              Array [
-                "
-  padding: 0.4rem;
-  margin: 0 1rem;
-  height: 1.8rem;
-",
-              ]
-            }
-            inputCss={
-              Array [
-                "
-  border: 0;
-  outline: 0;
-  font-size: 0.8rem;
-",
-              ]
-            }
-            value="publicKey"
-          >
-            <styled.input
-              readOnly={true}
-              value="publicKey"
-            >
-              <StyledComponent
-                forwardedComponent={
-                  Object {
-                    "$$typeof": Symbol(react.forward_ref),
-                    "attrs": Array [],
-                    "componentStyle": ComponentStyle {
-                      "componentId": "sc-gqjmRU",
-                      "isStatic": false,
-                      "lastClassName": "fktYVK",
-                      "rules": Array [
-                        "
-  position: absolute;
-  left: -1000%;
-",
-                      ],
-                    },
-                    "displayName": "styled.input",
-                    "foldedComponentIds": Array [],
-                    "render": [Function],
-                    "styledComponentId": "sc-gqjmRU",
-                    "target": "input",
-                    "toString": [Function],
-                    "warnTooManyClasses": [Function],
-                    "withComponent": [Function],
-                  }
-                }
-                forwardedRef={
-                  Object {
-                    "current": <input
-                      class="sc-gqjmRU fktYVK"
-                      readonly=""
-                      value="publicKey"
-                    />,
-                  }
-                }
-                readOnly={true}
-                value="publicKey"
-              >
-                <input
-                  className="sc-gqjmRU fktYVK"
-                  readOnly={true}
-                  value="publicKey"
-                />
-              </StyledComponent>
-            </styled.input>
-            <Styled(styled.div)
-              disableWrap={true}
-            >
-              <StyledComponent
-                disableWrap={true}
-                forwardedComponent={
-                  Object {
-                    "$$typeof": Symbol(react.forward_ref),
-                    "attrs": Array [],
-                    "componentStyle": ComponentStyle {
-                      "componentId": "sc-fjdhpX",
-                      "isStatic": false,
-                      "lastClassName": "ifepHu",
-                      "rules": Array [
-                        "
-  display: flex;
-  flex-direction: row;
-  flex-wrap: ",
-                        [Function],
-                        ";
-",
-                        "
-  align-items: center;
-  justify-content: flex-start;
-",
-                      ],
-                    },
-                    "displayName": "Styled(styled.div)",
-                    "foldedComponentIds": Array [
-                      "sc-gZMcBi",
-                    ],
-                    "render": [Function],
-                    "styledComponentId": "sc-fjdhpX",
-                    "target": "div",
-                    "toString": [Function],
-                    "warnTooManyClasses": [Function],
-                    "withComponent": [Function],
-                  }
-                }
-                forwardedRef={null}
-              >
-                <div
-                  className="sc-gZMcBi sc-fjdhpX ifepHu"
-                >
-                  <styled.p
-                    inputCss={
-                      Array [
-                        "
-  border: 0;
-  outline: 0;
-  font-size: 0.8rem;
-",
-                      ]
-                    }
-                  >
-                    <StyledComponent
-                      forwardedComponent={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "attrs": Array [],
-                          "componentStyle": ComponentStyle {
-                            "componentId": "sc-VigVT",
-                            "isStatic": false,
-                            "lastClassName": "MRPrb",
-                            "rules": Array [
-                              "
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  background: ",
-                              [Function],
-                              ";
-  padding: 0 0.2rem;
-  border-radius: 0.1rem;
-  ",
-                              [Function],
-                              "
-",
-                            ],
-                          },
-                          "displayName": "styled.p",
-                          "foldedComponentIds": Array [],
-                          "render": [Function],
-                          "styledComponentId": "sc-VigVT",
-                          "target": "p",
-                          "toString": [Function],
-                          "warnTooManyClasses": [Function],
-                          "withComponent": [Function],
-                        }
-                      }
-                      forwardedRef={null}
-                      inputCss={
-                        Array [
-                          "
-  border: 0;
-  outline: 0;
-  font-size: 0.8rem;
-",
-                        ]
-                      }
-                    >
-                      <p
-                        className="sc-VigVT MRPrb"
-                      >
-                        publicKey
-                      </p>
-                    </StyledComponent>
-                  </styled.p>
-                  <styled.button
-                    clipboardWrapperCss={
-                      Array [
-                        "
-  padding: 0.4rem;
-  margin: 0 1rem;
-  height: 1.8rem;
-",
-                      ]
-                    }
-                    onClick={[Function]}
-                    title="Copy value to clipboard"
-                  >
-                    <StyledComponent
-                      clipboardWrapperCss={
-                        Array [
-                          "
-  padding: 0.4rem;
-  margin: 0 1rem;
-  height: 1.8rem;
-",
-                        ]
-                      }
-                      forwardedComponent={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "attrs": Array [],
-                          "componentStyle": ComponentStyle {
-                            "componentId": "sc-jTzLTM",
-                            "isStatic": false,
-                            "lastClassName": "iNngVg",
-                            "rules": Array [
-                              "
-  display: flex;
-  background: transparent;
-  border: 0;
-  outline: 0;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ",
-                              [Function],
-                              ";
-
-    svg path {
-      fill: ",
-                              [Function],
-                              ";
-    }
-  }
-
-  ",
-                              [Function],
-                              "
-",
-                            ],
-                          },
-                          "displayName": "styled.button",
-                          "foldedComponentIds": Array [],
-                          "render": [Function],
-                          "styledComponentId": "sc-jTzLTM",
-                          "target": "button",
-                          "toString": [Function],
-                          "warnTooManyClasses": [Function],
-                          "withComponent": [Function],
-                        }
-                      }
-                      forwardedRef={null}
-                      onClick={[Function]}
-                      title="Copy value to clipboard"
-                    >
-                      <button
-                        className="sc-jTzLTM iNngVg"
-                        onClick={[Function]}
-                        title="Copy value to clipboard"
-                      >
-                        <ClipboardIcon
-                          color="#8D99AE"
-                          size={16}
-                        >
-                          <svg
-                            height={16}
-                            version="1.1"
-                            viewBox="0 0 27.5 27.5"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12 26h14v-10h-6.5c-0.828 0-1.5-0.672-1.5-1.5v-6.5h-6v18zM16 3.5v-1c0-0.266-0.234-0.5-0.5-0.5h-11c-0.266 0-0.5 0.234-0.5 0.5v1c0 0.266 0.234 0.5 0.5 0.5h11c0.266 0 0.5-0.234 0.5-0.5zM20 14h4.672l-4.672-4.672v4.672zM28 16v10.5c0 0.828-0.672 1.5-1.5 1.5h-15c-0.828 0-1.5-0.672-1.5-1.5v-2.5h-8.5c-0.828 0-1.5-0.672-1.5-1.5v-21c0-0.828 0.672-1.5 1.5-1.5h17c0.828 0 1.5 0.672 1.5 1.5v5.125c0.203 0.125 0.391 0.266 0.562 0.437l6.375 6.375c0.594 0.594 1.062 1.734 1.062 2.562z"
-                              fill="#8D99AE"
-                            />
-                          </svg>
-                        </ClipboardIcon>
-                      </button>
-                    </StyledComponent>
-                  </styled.button>
-                </div>
-              </StyledComponent>
-            </Styled(styled.div)>
-          </CopyInput>
-        </div>
-      </StyledComponent>
-    </styled.div>
-  </KeyContainer>
+                  <animateTransform
+                    attributeName="transform"
+                    dur="1s"
+                    from="0 18 18"
+                    repeatCount="indefinite"
+                    to="360 18 18"
+                    type="rotate"
+                  />
+                </path>
+              </g>
+            </g>
+          </svg>
+        </LoaderIcon>
+      </div>
+    </StyledComponent>
+  </Styled(styled.div)>
   <KeyManagementModal
     cbKeyCreated={[Function]}
     createFirstKey={false}
