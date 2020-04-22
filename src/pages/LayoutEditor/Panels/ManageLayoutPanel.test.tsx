@@ -36,6 +36,8 @@ import GenericForm from "../../../organisms/GenericForm";
 import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
 import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { cryptoAvailable } from "../../../security";
+import { signLayout } from "../LayoutService";
+import * as layoutService from "../LayoutService";
 
 const mock = new MockAdapter(Axios);
 
@@ -50,10 +52,9 @@ jest.mock("../../../security", () => ({
   cryptoAvailable: jest.fn()
 }));
 
-jest.mock("../LayoutService", () => ({
-  ...jest.requireActual("../LayoutService"),
-  signLayout: jest.fn().mockResolvedValue(mockLayoutMetaBlock())
-}));
+jest
+  .spyOn(layoutService, "signLayout")
+  .mockResolvedValue(mockLayoutMetaBlock());
 
 function mockLayoutMetaBlock(): ILayoutMetaBlock {
   return {
@@ -94,6 +95,7 @@ function createComponent() {
 }
 
 it("renders correctly with non existing layout", async () => {
+  mock.reset();
   mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
   (cryptoAvailable as jest.Mock).mockReturnValue(true);
   const root = createComponent();
@@ -108,6 +110,7 @@ it("renders correctly with non existing layout", async () => {
 });
 
 it("renders correctly with existing layout", async () => {
+  mock.reset();
   (cryptoAvailable as jest.Mock).mockReturnValue(true);
   const layoutMetaBlock: ILayoutMetaBlock = {
     signatures: [],
@@ -134,6 +137,7 @@ it("renders correctly with existing layout", async () => {
 });
 
 it("renders correctly with existing layout without crypto support", async () => {
+  mock.reset();
   (cryptoAvailable as jest.Mock).mockReturnValue(false);
   const layoutMetaBlock: ILayoutMetaBlock = {
     signatures: [],
@@ -200,11 +204,23 @@ it("sign layout happy flow", async () => {
       return expect(root.find(GenericForm).props().isLoading).toBe(false);
     });
 
-    updateField(root.find(TextArea).first(), "layout", "{}");
+    updateField(
+      root.find(TextArea).first(),
+      "layout",
+      JSON.stringify({
+        keys: [],
+        authorizedKeyIds: [],
+        expectedEndProducts: [],
+        layoutSegments: []
+      })
+    );
 
     root.find("form").simulate("submit");
 
-    await waitFor(() => expect(root.find(Modal).length >= 1).toBe(true));
+    await waitFor(() => {
+      root.update();
+      expect(root.find(Modal).length >= 1).toBe(true);
+    });
 
     expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
     updateField(

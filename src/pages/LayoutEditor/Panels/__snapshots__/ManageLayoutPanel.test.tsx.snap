@@ -2171,7 +2171,7 @@ exports[`sign layout happy flow 1`] = `
     confirmationLabel="Sign and Submit"
     initialValues={
       Object {
-        "layout": "{}",
+        "layout": "{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}",
       }
     }
     isLoading={false}
@@ -2239,7 +2239,7 @@ exports[`sign layout happy flow 1`] = `
               name="layout"
               onBlur={[Function]}
               onInput={[Function]}
-              value="{}"
+              value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
             >
               <styled.div>
                 <StyledComponent
@@ -2317,7 +2317,7 @@ exports[`sign layout happy flow 1`] = `
                       name="layout"
                       onBlur={[Function]}
                       onInput={[Function]}
-                      value="{}"
+                      value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
                     >
                       <StyledComponent
                         disabled={false}
@@ -2385,7 +2385,7 @@ exports[`sign layout happy flow 1`] = `
                         name="layout"
                         onBlur={[Function]}
                         onInput={[Function]}
-                        value="{}"
+                        value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
                       >
                         <textarea
                           className="sc-bZQynM iBrmMe"
@@ -2394,7 +2394,7 @@ exports[`sign layout happy flow 1`] = `
                           name="layout"
                           onBlur={[Function]}
                           onInput={[Function]}
-                          value="{}"
+                          value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
                         />
                       </StyledComponent>
                     </styled.textarea>

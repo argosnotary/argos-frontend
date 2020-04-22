@@ -36,7 +36,7 @@ import genericDataFetchReducer, {
 } from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
-import { signLayout } from "../LayoutService";
+import { serialize, signLayout } from "../LayoutService";
 import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
 import { ILayoutMetaBlock } from "../../../interfaces/ILayout";
 import { Warning } from "../../../atoms/Alerts";
@@ -67,7 +67,7 @@ const validateLayout = (values: ILayoutFormValues) => {
     errors.layout = "Please fill in a layout.";
   } else {
     try {
-      JSON.parse(values.layout);
+      serialize(JSON.parse(values.layout));
     } catch (e) {
       errors.layout = "Invalid json";
     }
