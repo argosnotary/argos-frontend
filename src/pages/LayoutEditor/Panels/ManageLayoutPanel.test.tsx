@@ -36,7 +36,6 @@ import GenericForm from "../../../organisms/GenericForm";
 import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
 import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { cryptoAvailable } from "../../../security";
-import { signLayout } from "../LayoutService";
 import * as layoutService from "../LayoutService";
 
 const mock = new MockAdapter(Axios);
