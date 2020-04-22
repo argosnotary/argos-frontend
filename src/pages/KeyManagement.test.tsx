@@ -29,6 +29,7 @@ import KeyManagement, {
 import { waitFor } from "@testing-library/dom";
 import PasswordView from "../atoms/PasswordView";
 import { ModalButton } from "../atoms/Modal";
+import KeyContainer from "../atoms/KeyContainer";
 const mock = new MockAdapter(Axios);
 const mockUrl = "/api/personalaccount/me/key";
 
@@ -149,6 +150,10 @@ it("when create key is clicked and key is present it should display create new k
   const root = createRoot();
   await act(async () => {
     await createFixtureForKeyManagementModalView(root);
+    await waitFor(() => {
+      root.update();
+      expect(root.find(KeyContainer).length).toBe(1);
+    });
     expect(root.find(KeyManagement)).toMatchSnapshot();
   });
 });
