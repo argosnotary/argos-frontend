@@ -100,6 +100,7 @@ const createFixtureForKeyManagementModalView = async (root: any) => {
   await waitForCreateKeyButton(root);
   await simulateCreateKeyClick(root);
   await waitFor(() => {
+    root.update();
     expect(root.find(KeyManagementModal).length >= 1).toBe(true);
   });
 };
