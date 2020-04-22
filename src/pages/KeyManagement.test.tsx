@@ -55,6 +55,7 @@ jest.mock("../security", () => ({
 }));
 
 const configureGetKeyMockSuccess = () => {
+  mock.reset();
   mock.onGet(mockUrl).reply(200, {
     keyId: "keyid",
     publicKey: "publicKey",
@@ -63,10 +64,12 @@ const configureGetKeyMockSuccess = () => {
 };
 
 const configureGetKeyMockNotFound = () => {
+  mock.reset();
   mock.onGet(mockUrl).reply(404);
 };
 
 const configureCreatekeyMockSuccess = () => {
+  mock.reset();
   mock.onPost(mockUrl).reply(200, {
     keyId: "keyiddnew",
     publicKey: "publicKednew",
