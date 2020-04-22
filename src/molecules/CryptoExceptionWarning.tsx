@@ -20,8 +20,8 @@ export const CryptoExceptionWarning: React.FC = () => {
   return (
     <Warning
       message={
-        "Something went wrong in the web crypto api of the browser. Argos Notary is only supported by the following browsers: Edge 55+, FF 26..."
+        "Something went wrong in the web crypto api of the browser. Argos Notary is only supported by a recent version of Chrome, Firefox, Safari or Edge"
       }
-    ></Warning>
+    />
   );
 };

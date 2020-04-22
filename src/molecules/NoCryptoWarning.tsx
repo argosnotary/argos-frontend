@@ -19,7 +19,9 @@ import { Warning } from "../atoms/Alerts";
 export const NoCryptoWarning: React.FC = () => {
   return (
     <Warning
-      message={"Argos-Notary relies on.... your browser is not supported."}
+      message={
+        "The web crypto api is not present in the browser your using. Argos Notary is only supported by a recent version of Chrome, Firefox, Safari or Edge"
+      }
     />
   );
 };

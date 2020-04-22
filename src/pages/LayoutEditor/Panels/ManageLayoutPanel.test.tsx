@@ -34,6 +34,8 @@ import { waitFor } from "@testing-library/dom";
 import { Modal } from "../../../atoms/Modal";
 import GenericForm from "../../../organisms/GenericForm";
 import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
+import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
+import { cryptoAvailable } from "../../../security";
 
 const mock = new MockAdapter(Axios);
 
@@ -43,9 +45,9 @@ jest.mock("react-router-dom", () => ({
     push: jest.fn()
   })
 }));
+
 jest.mock("../../../security", () => ({
-  ...jest.requireActual("../../../security"),
-  cryptoAvailable: jest.fn().mockReturnValue(true)
+  cryptoAvailable: jest.fn()
 }));
 
 jest.mock("../LayoutService", () => ({
@@ -93,6 +95,7 @@ function createComponent() {
 
 it("renders correctly with non existing layout", async () => {
   mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
   const root = createComponent();
 
   await act(() =>
@@ -105,6 +108,7 @@ it("renders correctly with non existing layout", async () => {
 });
 
 it("renders correctly with existing layout", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
   const layoutMetaBlock: ILayoutMetaBlock = {
     signatures: [],
     layout: {
@@ -129,6 +133,32 @@ it("renders correctly with existing layout", async () => {
   );
 });
 
+it("renders correctly with existing layout without crypto support", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(false);
+  const layoutMetaBlock: ILayoutMetaBlock = {
+    signatures: [],
+    layout: {
+      authorizedKeyIds: [],
+      expectedEndProducts: [],
+      keys: [],
+      layoutSegments: []
+    }
+  };
+
+  mock
+    .onGet("/api/supplychain/supplyChainId/layout")
+    .reply(200, layoutMetaBlock);
+  const root = createComponent();
+
+  await act(() =>
+    new Promise(resolve => setImmediate(resolve)).then(() => {
+      root.update();
+
+      expect(root.find(NoCryptoWarning)).toMatchSnapshot();
+    })
+  );
+});
+
 const updateField = (wrapper: ReactWrapper<any>, name: string, value: any) => {
   wrapper.simulate("input", {
     persist: () => {},
@@ -148,6 +178,7 @@ const updateField = (wrapper: ReactWrapper<any>, name: string, value: any) => {
 
 it("sign layout happy flow", async () => {
   mock.reset();
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
 
   mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
 

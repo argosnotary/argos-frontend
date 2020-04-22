@@ -181,7 +181,7 @@ const generateKey = async (hashKeyPassphrase = false): Promise<IKey> => {
 };
 
 const cryptoAvailable = (): boolean => {
-  return crypto !== undefined && crypto.subtle !== undefined;
+  return typeof crypto != "undefined" && typeof crypto.subtle != "undefined";
 }
 
 export {cryptoAvailable,generateKey, signString};
