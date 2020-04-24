@@ -7,7 +7,7 @@ steps:
   - name: build front-end image
     image: plugins/docker
     settings:
-      repo: rabobanknl/argos-frontend-snapshot
+      repo: argosnotary/argos-frontend-snapshot
       tags: ${DRONE_BRANCH/\//_}${DRONE_TAG}
       username:
         from_secret: docker_login_user
@@ -20,7 +20,7 @@ steps:
   - name: build and release front-end image
     image: plugins/docker
     settings:
-      repo: rabobanknl/argos-frontend
+      repo: argosnotary/argos-frontend
       auto_tag: true
       build_args:
         - VERSION=${DRONE_TAG}
