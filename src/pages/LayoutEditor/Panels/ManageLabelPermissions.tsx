@@ -26,6 +26,7 @@ import useToken from "../../../hooks/useToken";
 import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationComponent";
+import { Panel } from "../../../molecules/Panel";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
@@ -59,7 +60,7 @@ interface ISearchUserApiResponse {
 }
 
 const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
-  selectedLabelId
+  selectedLabelId,
 }) => {
   const [localStorageToken] = useToken();
   const [user, setUser] = useState({} as IUser);
@@ -71,7 +72,7 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
 
   const [
     allKnownUsersApiResponse,
-    setAllKnownLabelUsersApiRequest
+    setAllKnownLabelUsersApiRequest,
   ] = useDataApi<IAllKnownUsersApiResponse, Array<IKnownUser>>(
     customGenericDataFetchReducer
   );
@@ -82,10 +83,10 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
     const dataRequest: DataRequest = {
       method: "get",
       params: {
-        localPermissionsLabelId: selectedLabelId
+        localPermissionsLabelId: selectedLabelId,
       },
       token: localStorageToken,
-      url: `/api/personalaccount`
+      url: `/api/personalaccount`,
     };
 
     setAllKnownLabelUsersApiRequest(dataRequest);
@@ -96,10 +97,10 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
   ): Array<ISearchResult> => {
     if (apiResponse && apiResponse.length > 0) {
       const searchInputResults: Array<ISearchResult> = apiResponse.map(
-        entry =>
+        (entry) =>
           ({
             id: entry.id,
-            displayLabel: entry.name
+            displayLabel: entry.name,
           } as ISearchResult)
       );
 
@@ -142,7 +143,7 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
         onSelect={(selectedSearchResult: ISearchResult) => {
           setUser({
             id: selectedSearchResult.id,
-            name: selectedSearchResult.displayLabel
+            name: selectedSearchResult.displayLabel,
           });
         }}
         onCancel={() => {
@@ -152,10 +153,10 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
           const dataRequest: DataRequest = {
             method: "get",
             params: {
-              name: searchQuery
+              name: searchQuery,
             },
             token: localStorageToken,
-            url: `/api/personalaccount`
+            url: `/api/personalaccount`,
           };
 
           setSearchUserApiRequest(dataRequest);
@@ -186,7 +187,12 @@ const ManageLabelPermissions = () => {
   const [state] = useContext(StateContext);
 
   return (
-    <div>
+    <Panel
+      maxWidth={"37.5vw"}
+      resizable={false}
+      last={true}
+      title={"Manage label permissions"}
+    >
       <NodesBreadCrumb>
         Selected: {state.breadcrumb}
         <LastBreadCrumb>
@@ -196,7 +202,7 @@ const ManageLabelPermissions = () => {
       </NodesBreadCrumb>
       <ContentSeparator />
       <UserPermissions selectedLabelId={state.nodeReferenceId} />
-    </div>
+    </Panel>
   );
 };
 

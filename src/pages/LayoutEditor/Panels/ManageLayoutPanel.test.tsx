@@ -25,7 +25,7 @@ import { act } from "react-dom/test-utils";
 import ManageLayoutPanel from "./ManageLayoutPanel";
 import {
   LayoutEditorPaneActionTypes,
-  StateContext
+  StateContext,
 } from "../../../stores/layoutEditorStore";
 import { FormPermissions } from "../../../types/FormPermission";
 import { ILayoutMetaBlock } from "../../../interfaces/ILayout";
@@ -37,40 +37,41 @@ import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair
 import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { cryptoAvailable } from "../../../security";
 import * as layoutService from "../LayoutService";
+import { Notification } from "../../../molecules/NotificationsList";
 
 const mock = new MockAdapter(Axios);
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useHistory: () => ({
-    push: jest.fn()
-  })
+    push: jest.fn(),
+  }),
 }));
 
 jest.mock("../../../security", () => ({
-  cryptoAvailable: jest.fn()
+  cryptoAvailable: jest.fn(),
 }));
-
-jest
-  .spyOn(layoutService, "signLayout")
-  .mockResolvedValue(mockLayoutMetaBlock());
 
 function mockLayoutMetaBlock(): ILayoutMetaBlock {
   return {
     signatures: [
       {
         keyId: "keyId",
-        signature: "signature"
-      }
+        signature: "signature",
+      },
     ],
     layout: {
       authorizedKeyIds: [],
       expectedEndProducts: [],
       keys: [],
-      layoutSegments: []
-    }
+      layoutSegments: [],
+    },
   };
 }
+
+jest
+  .spyOn(layoutService, "signLayout")
+  .mockResolvedValue(mockLayoutMetaBlock());
 
 const addItem = jest.fn();
 
@@ -81,7 +82,7 @@ function createComponent() {
     nodeParentId: "",
     breadcrumb: "label / ",
     selectedNodeName: "layout",
-    panePermission: FormPermissions.EDIT
+    panePermission: FormPermissions.EDIT,
   };
 
   return mount(
@@ -100,7 +101,7 @@ it("renders correctly with non existing layout", async () => {
   const root = createComponent();
 
   await act(() =>
-    new Promise(resolve => setImmediate(resolve)).then(() => {
+    new Promise((resolve) => setImmediate(resolve)).then(() => {
       root.update();
 
       expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
@@ -117,8 +118,8 @@ it("renders correctly with existing layout", async () => {
       authorizedKeyIds: [],
       expectedEndProducts: [],
       keys: [],
-      layoutSegments: []
-    }
+      layoutSegments: [],
+    },
   };
 
   mock
@@ -127,7 +128,7 @@ it("renders correctly with existing layout", async () => {
   const root = createComponent();
 
   await act(() =>
-    new Promise(resolve => setImmediate(resolve)).then(() => {
+    new Promise((resolve) => setImmediate(resolve)).then(() => {
       root.update();
 
       expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
@@ -144,8 +145,8 @@ it("renders correctly with existing layout without crypto support", async () => 
       authorizedKeyIds: [],
       expectedEndProducts: [],
       keys: [],
-      layoutSegments: []
-    }
+      layoutSegments: [],
+    },
   };
 
   mock
@@ -154,7 +155,7 @@ it("renders correctly with existing layout without crypto support", async () => 
   const root = createComponent();
 
   await act(() =>
-    new Promise(resolve => setImmediate(resolve)).then(() => {
+    new Promise((resolve) => setImmediate(resolve)).then(() => {
       root.update();
 
       expect(root.find(NoCryptoWarning)).toMatchSnapshot();
@@ -167,33 +168,45 @@ const updateField = (wrapper: ReactWrapper<any>, name: string, value: any) => {
     persist: () => {},
     target: {
       name,
-      value
-    }
+      value,
+    },
   });
   wrapper.simulate("change", {
     persist: () => {},
     target: {
       name,
-      value
-    }
+      value,
+    },
   });
 };
 
-it("sign layout happy flow", async () => {
+it("validates a faulty layout and returns errors", async () => {
   mock.reset();
-  (cryptoAvailable as jest.Mock).mockReturnValue(true);
 
-  mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
-
-  const key: IPersonalAccountKeyPair = {
-    encryptedPrivateKey: "encryptedPrivateKey",
-    keyId: "keyId",
-    publicKey: "publicKey"
-  };
-
-  mock.onGet("/api/personalaccount/me/key").reply(200, key);
-
-  mock.onPost("/api/supplychain/supplyChainId/layout").reply(200);
+  mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(400, {
+    messages: [
+      {
+        field: "authorizedKeyIds",
+        type: "DATA_INPUT",
+        message: "size must be between 1 and 2147483647",
+      },
+      {
+        field: "expectedEndProducts",
+        type: "DATA_INPUT",
+        message: "size must be between 1 and 2147483647",
+      },
+      {
+        field: "keys",
+        type: "DATA_INPUT",
+        message: "size must be between 1 and 2147483647",
+      },
+      {
+        field: "layoutSegments",
+        type: "DATA_INPUT",
+        message: "size must be between 1 and 2147483647",
+      },
+    ],
+  });
 
   const root = createComponent();
 
@@ -210,7 +223,50 @@ it("sign layout happy flow", async () => {
         keys: [],
         authorizedKeyIds: [],
         expectedEndProducts: [],
-        layoutSegments: []
+        layoutSegments: [],
+      })
+    );
+
+    root.find("form").simulate("submit");
+
+    await waitFor(() => expect(root.find(Notification).length == 4).toBe(true));
+    expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
+  });
+});
+
+it("sign layout happy flow", async () => {
+  mock.reset();
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
+
+  mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
+
+  const key: IPersonalAccountKeyPair = {
+    encryptedPrivateKey: "encryptedPrivateKey",
+    keyId: "keyId",
+    publicKey: "publicKey",
+  };
+
+  mock.onGet("/api/personalaccount/me/key").reply(200, key);
+
+  mock.onPost("/api/supplychain/supplyChainId/layout").reply(200);
+  mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(200);
+
+  const root = createComponent();
+
+  await act(async () => {
+    await waitFor(() => {
+      root.update();
+      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+    });
+
+    updateField(
+      root.find(TextArea).first(),
+      "layout",
+      JSON.stringify({
+        keys: [],
+        authorizedKeyIds: [],
+        expectedEndProducts: [],
+        layoutSegments: [],
       })
     );
 
@@ -233,10 +289,10 @@ it("sign layout happy flow", async () => {
       .simulate("submit");
 
     await waitFor(() => expect(mock.history.get.length).toBe(2));
-    await waitFor(() => expect(mock.history.post.length).toBe(1));
+    await waitFor(() => expect(mock.history.post.length).toBe(2));
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
-    expect(mock.history.post[0].data).toBe(
+    expect(mock.history.post[1].data).toBe(
       JSON.stringify(mockLayoutMetaBlock())
     );
   });

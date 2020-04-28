@@ -26,7 +26,7 @@ import useToken from "../../hooks/useToken";
 import {
   initialTreeState,
   ITreeStateContext,
-  treeReducer
+  treeReducer,
 } from "../../stores/treeEditorStore";
 
 import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
@@ -36,16 +36,16 @@ import {
   StateContext,
   LayoutEditorDataActionTypes,
   LayoutEditorPaneActionTypes,
-  LayoutEditorPaneActionType
+  LayoutEditorPaneActionType,
 } from "../../stores/layoutEditorStore";
 import {
   appendObjectToTree,
   appendLabelChildrenToTree,
-  updateObjectInTree
+  updateObjectInTree,
 } from "./utils";
 import ManageLabel from "./Panels/ManageLabel";
 import genericDataFetchReducer, {
-  customGenericDataFetchReducer
+  customGenericDataFetchReducer,
 } from "../../stores/genericDataFetchReducer";
 import ManageSupplyChain from "./Panels/ManageSupplyChain";
 import ManageNpa from "./Panels/ManageNpa";
@@ -64,14 +64,14 @@ const LayoutEditor = () => {
     nodeParentId: "",
     breadcrumb: "",
     selectedNodeName: "",
-    panePermission: FormPermissions.READ
+    panePermission: FormPermissions.READ,
   });
 
   const [localStorageToken] = useToken();
   const getTreeDataRequest: DataRequest = {
     method: "get",
     token: localStorageToken,
-    url: "/api/hierarchy"
+    url: "/api/hierarchy",
   };
 
   interface ITreeDataState {
@@ -90,7 +90,7 @@ const LayoutEditor = () => {
   );
 
   const treeStringList = {
-    createrootnode: "Create base label..."
+    createrootnode: "Create base label...",
   };
 
   const getPanePermission = (
@@ -124,11 +124,13 @@ const LayoutEditor = () => {
     node: ITreeNode
   ) => {
     const trail = buildNodeTrail([], treeState.data, node.referenceId);
-    const breadcrumb = Array.from(trail.slice(0, -1), t => t.name).join(" / ");
+    const breadcrumb = Array.from(trail.slice(0, -1), (t) => t.name).join(
+      " / "
+    );
     const selectedNodeName = Array.from(trail.slice(-1))[0].name;
 
     dispatch({
-      type: LayoutEditorPaneActionTypes.RESET_PANE
+      type: LayoutEditorPaneActionTypes.RESET_PANE,
     });
 
     dispatch({
@@ -137,7 +139,7 @@ const LayoutEditor = () => {
       nodeParentId: trail.length > 1 ? trail[trail.length - 2].referenceId : "",
       breadcrumb,
       panePermission: getPanePermission(node, type),
-      selectedNodeName
+      selectedNodeName,
     });
   };
 
@@ -149,7 +151,7 @@ const LayoutEditor = () => {
           LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
           node
         );
-      }
+      },
     },
     {
       type: "SUPPLY_CHAIN",
@@ -158,7 +160,7 @@ const LayoutEditor = () => {
           LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
           node
         );
-      }
+      },
     },
     {
       type: "NON_PERSONAL_ACCOUNT",
@@ -167,8 +169,8 @@ const LayoutEditor = () => {
           LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
           node
         );
-      }
-    }
+      },
+    },
   ];
 
   const treeContextMenu: Array<ITreeContextMenuEntry> = [
@@ -188,7 +190,7 @@ const LayoutEditor = () => {
               node.permissions !== undefined &&
               node.permissions.indexOf(PermissionTypes.TREE_EDIT) >= 0
             );
-          }
+          },
         },
         {
           label: "Add supply chain",
@@ -203,7 +205,7 @@ const LayoutEditor = () => {
               node.permissions !== undefined &&
               node.permissions.indexOf(PermissionTypes.TREE_EDIT) >= 0
             );
-          }
+          },
         },
         {
           label: "Add npa",
@@ -218,7 +220,7 @@ const LayoutEditor = () => {
               node.permissions !== undefined &&
               node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0
             );
-          }
+          },
         },
         {
           label: "Manage permissions",
@@ -234,9 +236,9 @@ const LayoutEditor = () => {
               node.permissions.indexOf(PermissionTypes.LOCAL_PERMISSION_EDIT) >=
                 0
             );
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     {
       type: "SUPPLY_CHAIN",
@@ -254,9 +256,9 @@ const LayoutEditor = () => {
               node.permissions !== undefined &&
               node.permissions.indexOf(PermissionTypes.LAYOUT_ADD) >= 0
             );
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     {
       type: "NON_PERSONAL_ACCOUNT",
@@ -274,10 +276,10 @@ const LayoutEditor = () => {
               node.permissions !== undefined &&
               node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0
             );
-          }
-        }
-      ]
-    }
+          },
+        },
+      ],
+    },
   ];
 
   const cbCreateRootNode = () => {
@@ -287,21 +289,21 @@ const LayoutEditor = () => {
       nodeParentId: "",
       breadcrumb: "",
       selectedNodeName: "",
-      panePermission: FormPermissions.EDIT
+      panePermission: FormPermissions.EDIT,
     });
   };
 
   const cbGetNodeChildren = (parentId: string) => {
     const dataRequest: DataRequest = {
       params: {
-        HierarchyMode: "MAX_DEPTH"
+        HierarchyMode: "MAX_DEPTH",
       },
       method: "get",
       token: localStorageToken,
       url: `/api/hierarchy/${parentId}`,
       cbSuccess: (node: ITreeNode) => {
         appendLabelChildrenToTree(treeState, treeDispatch, node);
-      }
+      },
     };
 
     setTreeChildrenApiRequest(dataRequest);
@@ -328,31 +330,6 @@ const LayoutEditor = () => {
     }
   };
 
-  const getPanelTitleFromState = (pane: string): string => {
-    switch (pane) {
-      case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
-        return "Add child label to selected label";
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
-        return "Update selected label";
-      case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
-        return "Add supply chain to label";
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
-        return "Update selected supply chain";
-      case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
-        return "Add non personal account to label";
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
-        return "Generate new key for npa";
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
-        return "Update selected non personal account";
-      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
-        return "Manage label permissions";
-      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
-        return "Manage Layout";
-    }
-
-    return "";
-  };
-
   useEffect(() => {
     if (
       (state.dataAction &&
@@ -362,7 +339,7 @@ const LayoutEditor = () => {
     ) {
       const hierarchyDataRequest: DataRequest = {
         params: {
-          HierarchyMode: "NONE"
+          HierarchyMode: "NONE",
         },
         method: "get",
         token: localStorageToken,
@@ -376,9 +353,9 @@ const LayoutEditor = () => {
           );
           dispatch({
             type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
-            data: state.data
+            data: state.data,
           });
-        }
+        },
       };
       setTreeChildrenApiRequest(hierarchyDataRequest);
     }
@@ -409,7 +386,7 @@ const LayoutEditor = () => {
     canCreateRootNode,
     cbGetNodeChildren,
     isLoading: treeChildrenApiResponse.isLoading,
-    selectedNodeReferenceId: state.nodeReferenceId
+    selectedNodeReferenceId: state.nodeReferenceId,
   };
 
   return (
@@ -430,15 +407,7 @@ const LayoutEditor = () => {
                   context={treeContext}
                 />
               </Panel>
-              <Panel
-                width={"37.5vw"}
-                title={getPanelTitleFromState(state.firstPanelView)}
-              >
-                {renderPanel(state.firstPanelView)}
-              </Panel>
-              <Panel width={"37.5vw"} last={true}>
-                &nbsp;
-              </Panel>
+              {renderPanel(state.firstPanelView)}
             </FlexRow>
           </PanelsContainer>
         </StateContext.Provider>

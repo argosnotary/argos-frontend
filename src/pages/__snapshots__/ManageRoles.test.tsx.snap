@@ -468,11 +468,11 @@ exports[`renders correctly 1`] = `
                                     <ChevronIcon
                                       color="gray"
                                       size={16}
-                                      transform=""
+                                      transform="rotate(180)"
                                     >
                                       <svg
                                         height={16}
-                                        transform=""
+                                        transform="rotate(180)"
                                         version="1.1"
                                         viewBox="0 0 28 28"
                                         width={16}
@@ -491,10 +491,10 @@ exports[`renders correctly 1`] = `
                           </StyledComponent>
                         </styled.header>
                         <styled.main
-                          collapsed={true}
+                          collapsed={false}
                         >
                           <StyledComponent
-                            collapsed={true}
+                            collapsed={false}
                             forwardedComponent={
                               Object {
                                 "$$typeof": Symbol(react.forward_ref),
@@ -532,7 +532,7 @@ exports[`renders correctly 1`] = `
                             forwardedRef={null}
                           >
                             <main
-                              className="sc-chPdSV hMQlJo"
+                              className="sc-chPdSV dWigFp"
                             >
                               <styled.div>
                                 <StyledComponent

@@ -22,14 +22,15 @@ import DataRequest from "../../../types/DataRequest";
 import {
   StateContext,
   LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes
+  LayoutEditorPaneActionTypes,
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
 import GenericForm, {
-  IGenericFormSchema
+  IGenericFormSchema,
 } from "../../../organisms/GenericForm";
+import { Panel } from "../../../molecules/Panel";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -39,8 +40,8 @@ const formSchema: IGenericFormSchema = [
   {
     labelValue: "Supply chain name*",
     name: "supplychainname",
-    formType: "text"
-  }
+    formType: "text",
+  },
 ];
 
 const validate = (values: ISupplyChainNameFormValues) => {
@@ -84,9 +85,9 @@ const ManageSupplyChain = () => {
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
           type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
-          supplyChain
+          supplyChain,
         });
-      }
+      },
     };
 
     setSupplyChainApiRequest(dataRequest);
@@ -113,9 +114,9 @@ const ManageSupplyChain = () => {
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
           type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
-          supplyChain
+          supplyChain,
         });
-      }
+      },
     };
 
     setSupplyChainApiRequest(dataRequest);
@@ -142,7 +143,16 @@ const ManageSupplyChain = () => {
     LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
 
   return (
-    <>
+    <Panel
+      maxWidth={"37.5vw"}
+      resizable={false}
+      last={true}
+      title={
+        updateMode
+          ? "Update selected supply chain"
+          : "Add child supply chain to selected label"
+      }
+    >
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -162,10 +172,10 @@ const ManageSupplyChain = () => {
         validate={validate}
         onCancel={() => {
           dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
+            type: LayoutEditorPaneActionTypes.RESET_PANE,
           });
         }}
-        onSubmit={values => {
+        onSubmit={(values) => {
           if (
             state.firstPanelView ===
             LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
@@ -186,7 +196,7 @@ const ManageSupplyChain = () => {
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}
       />
-    </>
+    </Panel>
   );
 };
 

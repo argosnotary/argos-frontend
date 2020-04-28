@@ -16,23 +16,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   LayoutEditorPaneActionTypes,
-  StateContext
+  StateContext,
 } from "../../../stores/layoutEditorStore";
 import { LastBreadCrumb, NodesBreadCrumb } from "../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import GenericForm, {
-  IGenericFormSchema
+  IGenericFormSchema,
 } from "../../../organisms/GenericForm";
 import {
   Modal,
   ModalBody,
   ModalFlexColumWrapper,
-  ModalFooter
+  ModalFooter,
 } from "../../../atoms/Modal";
 import { FormPermissions } from "../../../types/FormPermission";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer, {
-  customGenericDataFetchReducer
+  customGenericDataFetchReducer,
 } from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
@@ -43,6 +43,26 @@ import { Warning } from "../../../atoms/Alerts";
 import { cryptoAvailable, WRONG_PASSWORD } from "../../../security";
 import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
 import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
+import { Panel } from "../../../molecules/Panel";
+import NotificationsList, {
+  INotification,
+  NotificationTypes,
+} from "../../../molecules/NotificationsList";
+
+enum ILayoutValidationMessageTypes {
+  DATA_INPUT = "DATA_INPUT",
+  MODEL_CONSISTENCY = "MODEL_CONSISTENCY",
+}
+
+interface ILayoutValidationMessage {
+  field?: string;
+  type: ILayoutValidationMessageTypes;
+  message: string;
+}
+
+interface ILayoutValidationErrorResponse {
+  messages: Array<ILayoutValidationMessage>;
+}
 
 interface ILayoutFormValues {
   layout: string;
@@ -56,8 +76,8 @@ const formSchema: IGenericFormSchema = [
   {
     labelValue: "Layout*",
     name: "layout",
-    formType: "textArea"
-  }
+    formType: "textArea",
+  },
 ];
 
 const validateLayout = (values: ILayoutFormValues) => {
@@ -88,8 +108,8 @@ const passPhraseFormSchema: IGenericFormSchema = [
   {
     labelValue: "Passphrase*",
     name: "passphrase",
-    formType: "password"
-  }
+    formType: "password",
+  },
 ];
 
 const getModalContent = (
@@ -136,6 +156,15 @@ const ManageLayoutPanel = () => {
     genericDataFetchReducer
   );
 
+  const [
+    _responseLayoutValidation,
+    setLayoutValidationDataRequest,
+  ] = useDataApi(genericDataFetchReducer);
+
+  const [layoutValidationErrors, setLayoutValidationErrors] = useState(
+    [] as Array<INotification>
+  );
+
   const [token] = useToken();
 
   const getLayoutRequest: DataRequest = {
@@ -147,7 +176,7 @@ const ManageLayoutPanel = () => {
     },
     cbFailure: (error): boolean => {
       return error.response && error.response.status === 404;
-    }
+    },
   };
 
   interface ILayoutApiResponse {
@@ -159,6 +188,53 @@ const ManageLayoutPanel = () => {
     customGenericDataFetchReducer,
     getLayoutRequest
   );
+
+  const requestLayoutValidation = (values: ILayoutFormValues) => {
+    const dataRequest: DataRequest = {
+      data: values.layout,
+      method: "post",
+      token: token,
+      url: "/api/supplychain/" + state.nodeReferenceId + "/layout/validate",
+      cbSuccess: () => {
+        setLayout(values);
+        setDisplayModal(true);
+      },
+      cbFailure: (error: any): boolean => {
+        const response: ILayoutValidationErrorResponse = error.response.data;
+        const notifications: Array<INotification> = convertValidationMessagesToNotifications(
+          response
+        );
+
+        setLayoutValidationErrors(notifications);
+        return true;
+      },
+    };
+
+    setLayoutValidationDataRequest(dataRequest);
+  };
+
+  const convertValidationMessagesToNotifications = (
+    response: ILayoutValidationErrorResponse
+  ) => {
+    if (!response) {
+      return [] as Array<INotification>;
+    }
+
+    const notifications: Array<INotification> = response.messages.map(
+      (message: ILayoutValidationMessage) => {
+        const notification: INotification = {} as INotification;
+
+        notification.body = `${message.field ? message.field : ""} ${
+          message.message
+        }`;
+        notification.type = NotificationTypes.ERROR;
+
+        return notification;
+      }
+    );
+
+    return notifications;
+  };
 
   const postNewLayout = () => {
     const dataRequest: DataRequest = {
@@ -172,7 +248,7 @@ const ManageLayoutPanel = () => {
           key.encryptedPrivateKey,
           JSON.parse(layout.layout)
         )
-          .then(layoutMetaBlock => {
+          .then((layoutMetaBlock) => {
             setDataRequestPostLayout({
               data: layoutMetaBlock,
               method: "post",
@@ -180,12 +256,12 @@ const ManageLayoutPanel = () => {
               url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
               cbSuccess: () => {
                 dispatch({
-                  type: LayoutEditorPaneActionTypes.RESET_PANE
+                  type: LayoutEditorPaneActionTypes.RESET_PANE,
                 });
-              }
+              },
             });
           })
-          .catch(e => {
+          .catch((e) => {
             setPassphrase("");
             if (e === WRONG_PASSWORD) {
               setShowWarning(true);
@@ -195,7 +271,7 @@ const ManageLayoutPanel = () => {
               throw e;
             }
           });
-      }
+      },
     };
     setDataRequestKey(dataRequest);
   };
@@ -208,61 +284,68 @@ const ManageLayoutPanel = () => {
 
   return (
     <>
-      {displayModal ? (
-        <Modal>
-          <ModalFlexColumWrapper>
-            {getModalContent(
-              value => {
-                setShowWarning(false);
-                setPassphrase(value.passphrase);
-              },
-              () => {
-                setDisplayModal(false);
-                setShowWarning(false);
-                setPassphrase("");
-              },
-              responseRequestKey.isLoading || responsePostLayout.isLoading,
-              showWarning,
-              passphrase
-            )}
-          </ModalFlexColumWrapper>
-        </Modal>
-      ) : null}
-      {state.selectedNodeName !== "" ? (
-        <>
-          <NodesBreadCrumb>
-            Selected: {state.breadcrumb}
-            <LastBreadCrumb>
-              {state.breadcrumb.length > 0 ? " / " : ""}
-              {state.selectedNodeName}
-            </LastBreadCrumb>
-          </NodesBreadCrumb>
-          <ContentSeparator />
-        </>
-      ) : null}
-
-      <GenericForm
-        schema={formSchema}
-        permission={
-          cryptoAvailable() ? state.panePermission : FormPermissions.READ
-        }
-        isLoading={profileApiResponse.isLoading}
-        validate={validateLayout}
-        onCancel={() => {
-          dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
-          });
-        }}
-        onSubmit={values => {
-          setLayout(values);
-          setDisplayModal(true);
-        }}
-        confirmationLabel={"Sign and Submit"}
-        cancellationLabel={"Cancel"}
-        initialValues={layout}
-      />
-      {!cryptoAvailable() ? <NoCryptoWarning /> : null}
-      {cryptoException ? <CryptoExceptionWarning /> : null}
+      <Panel width={"37.5vw"} resizable={true} title={"Manage layout"}>
+        {displayModal ? (
+          <Modal>
+            <ModalFlexColumWrapper>
+              {getModalContent(
+                (value) => {
+                  setShowWarning(false);
+                  setPassphrase(value.passphrase);
+                },
+                () => {
+                  setDisplayModal(false);
+                  setShowWarning(false);
+                  setPassphrase("");
+                },
+                responseRequestKey.isLoading || responsePostLayout.isLoading,
+                showWarning,
+                passphrase
+              )}
+            </ModalFlexColumWrapper>
+          </Modal>
+        ) : null}
+        {state.selectedNodeName !== "" ? (
+          <>
+            <NodesBreadCrumb>
+              Selected: {state.breadcrumb}
+              <LastBreadCrumb>
+                {state.breadcrumb.length > 0 ? " / " : ""}
+                {state.selectedNodeName}
+              </LastBreadCrumb>
+            </NodesBreadCrumb>
+            <ContentSeparator />
+          </>
+        ) : null}
+        <GenericForm
+          schema={formSchema}
+          permission={
+            cryptoAvailable() ? state.panePermission : FormPermissions.READ
+          }
+          isLoading={profileApiResponse.isLoading}
+          validate={validateLayout}
+          onCancel={() => {
+            dispatch({
+              type: LayoutEditorPaneActionTypes.RESET_PANE,
+            });
+          }}
+          onSubmit={(values) => {
+            requestLayoutValidation(values);
+          }}
+          confirmationLabel={"Sign and Submit"}
+          cancellationLabel={"Cancel"}
+          initialValues={layout}
+        />
+        {!cryptoAvailable() ? <NoCryptoWarning /> : null}
+        {cryptoException ? <CryptoExceptionWarning /> : null}
+      </Panel>
+      <Panel
+        width={"37.5vw"}
+        last={true}
+        title={layoutValidationErrors.length ? "Validation errors" : ""}
+      >
+        <NotificationsList notifications={layoutValidationErrors} />
+      </Panel>
     </>
   );
 };

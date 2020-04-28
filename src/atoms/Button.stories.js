@@ -19,7 +19,7 @@ import { AnchorButton, Button, LoaderButton, CancelButton } from "./Button";
 import TransparentButton from "./TransparentButton";
 
 export default {
-  title: "Buttons"
+  title: "Buttons",
 };
 
 export const anchor = () => <AnchorButton>Click</AnchorButton>;
@@ -36,6 +36,6 @@ export const loaderButton = () => (
 );
 
 export const cancelButton = () => <CancelButton>Cancel</CancelButton>;
-export const transparentButto = () => (
+export const transparentButton = () => (
   <TransparentButton>Click</TransparentButton>
 );
