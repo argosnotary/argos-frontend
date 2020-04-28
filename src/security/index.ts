@@ -18,13 +18,13 @@ import generatePassword from "password-generator";
 import { PKCS8ShroudedKeyBag, PrivateKeyInfo } from "pkijs";
 import {decode, encode} from "base64-arraybuffer";
 
-const arrayBufferToHex = (buffer: ArrayBuffer) => {
+const arrayBufferToHex = (buffer: ArrayBuffer): string => {
   return Array.from(new Uint8Array(buffer))
     .map(b => b.toString(16).padStart(2, "0"))
     .join("");
 };
 
-function stringToArrayBuffer(input: string) {
+function stringToArrayBuffer(input: string): Uint8Array {
   const { length } = input;
   const buffer = new Uint8Array(length);
 
@@ -35,7 +35,7 @@ function stringToArrayBuffer(input: string) {
   return buffer;
 }
 
-const concatArrayBuffers = (buffer1: ArrayBuffer, buffer2: ArrayBuffer) => {
+const concatArrayBuffers = (buffer1: ArrayBuffer, buffer2: ArrayBuffer): ArrayBuffer => {
   if (!buffer1) {
     return buffer2;
   } else if (!buffer2) {
@@ -48,7 +48,7 @@ const concatArrayBuffers = (buffer1: ArrayBuffer, buffer2: ArrayBuffer) => {
   return tmp.buffer;
 };
 
-const generateKeyPair = async () => {
+const generateKeyPair = async (): Promise<CryptoKeyPair> => {
   return await crypto.subtle.generateKey(
     {
       hash: {
@@ -63,10 +63,10 @@ const generateKeyPair = async () => {
   );
 };
 
-const generateEncryptePrivateKey = async (
+const generateEncryptedPrivateKey = async (
   password: string,
   privateKey: CryptoKey
-) => {
+): Promise<ArrayBuffer> => {
   const privateKeyBinary = await crypto.subtle.exportKey("pkcs8", privateKey);
   const pkcs8Simpl = new PrivateKeyInfo({
     schema: asn1js.fromBER(privateKeyBinary).result
@@ -85,13 +85,19 @@ const generateEncryptePrivateKey = async (
   return pkcs8.toSchema().toBER(false);
 };
 
+export const WRONG_PASSWORD = "wrong password";
+
 const decryptPrivateKey = async (
     password: string,
     encryptedPrivateKey: string
 ): Promise<CryptoKey> => {
     const asn1 = asn1js.fromBER(decode(encryptedPrivateKey));
     const keyBag = new PKCS8ShroudedKeyBag({ schema: asn1.result });
-    await keyBag.parseInternalValues({password: stringToArrayBuffer(password)});
+    try {
+      await keyBag.parseInternalValues({password: stringToArrayBuffer(password)});
+    } catch (e) {
+      return Promise.reject(WRONG_PASSWORD);
+    }
 
     const json = keyBag.parsedValue.parsedKey.toJSON();
     const keyData: JsonWebKey = {...json,
@@ -126,7 +132,7 @@ interface IKey {
   password: string;
 }
 
-const generateKey = async (hashKeyPassphrase = false) => {
+const generateKey = async (hashKeyPassphrase = false): Promise<IKey> => {
   const keyPair = await generateKeyPair();
   const exportedPublicKey = await crypto.subtle.exportKey(
     "spki",
@@ -134,7 +140,7 @@ const generateKey = async (hashKeyPassphrase = false) => {
   );
 
   const password = generatePassword(14, false);
-  const encryptedPrivateKey = await generateEncryptePrivateKey(
+  const encryptedPrivateKey = await generateEncryptedPrivateKey(
     password,
     keyPair.privateKey
   );
@@ -162,7 +168,7 @@ const generateKey = async (hashKeyPassphrase = false) => {
     const hashedCombination = await crypto.subtle.digest(
       "SHA-512",
       concatArrayBuffers(encodedKeyId, hashedPassphrase)
-    ); 
+    );
 
     const hashArray = Array.from(new Uint8Array(hashedCombination));
 
@@ -174,4 +180,8 @@ const generateKey = async (hashKeyPassphrase = false) => {
   return keyObj;
 };
 
-export { generateEncryptePrivateKey, generateKeyPair, generateKey, signString};
+const cryptoAvailable = (): boolean => {
+  return typeof crypto != "undefined" && typeof crypto.subtle != "undefined";
+}
+
+export {cryptoAvailable,generateKey, signString};

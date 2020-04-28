@@ -639,6 +639,157 @@ exports[`renders correctly with existing layout 1`] = `
 </ManageLayoutPanel>
 `;
 
+exports[`renders correctly with existing layout without crypto support 1`] = `
+<NoCryptoWarning>
+  <Warning
+    message="The web crypto api is not present in the browser your using. Argos Notary is only supported by a recent version of Chrome, Firefox, Safari or Edge"
+  >
+    <styled.section>
+      <StyledComponent
+        forwardedComponent={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-kpOJdX",
+              "isStatic": false,
+              "lastClassName": "kUNWdS",
+              "rules": Array [
+                "
+  display: flex;
+  align-items: center;
+  border: 1px solid ",
+                [Function],
+                ";
+  margin: 1rem 0;
+  padding: 1rem;
+  width: 100%;
+",
+              ],
+            },
+            "displayName": "styled.section",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-kpOJdX",
+            "target": "section",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          }
+        }
+        forwardedRef={null}
+      >
+        <section
+          className="sc-kpOJdX kUNWdS"
+        >
+          <styled.div>
+            <StyledComponent
+              forwardedComponent={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-ckVGcZ",
+                    "isStatic": false,
+                    "lastClassName": "dbPkiQ",
+                    "rules": Array [
+                      "
+  margin: 0 2rem 0 0;
+",
+                    ],
+                  },
+                  "displayName": "styled.div",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-ckVGcZ",
+                  "target": "div",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                }
+              }
+              forwardedRef={null}
+            >
+              <div
+                className="sc-ckVGcZ dbPkiQ"
+              >
+                <WarningIcon
+                  color="red"
+                  size={48}
+                >
+                  <svg
+                    height={48}
+                    version="1.1"
+                    viewBox="0 0 32 32"
+                    width={48}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>
+                      warning
+                    </title>
+                    <path
+                      d="M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"
+                      fill="red"
+                    />
+                     
+                    <path
+                      d="M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
+                      fill="red"
+                    />
+                     
+                    <path
+                      d="M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"
+                      fill="red"
+                    />
+                  </svg>
+                </WarningIcon>
+              </div>
+            </StyledComponent>
+          </styled.div>
+          <styled.p>
+            <StyledComponent
+              forwardedComponent={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-dxgOiQ",
+                    "isStatic": false,
+                    "lastClassName": "goaGPw",
+                    "rules": Array [
+                      "
+  color: ",
+                      [Function],
+                      ";
+",
+                    ],
+                  },
+                  "displayName": "styled.p",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-dxgOiQ",
+                  "target": "p",
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                }
+              }
+              forwardedRef={null}
+            >
+              <p
+                className="sc-dxgOiQ goaGPw"
+              >
+                The web crypto api is not present in the browser your using. Argos Notary is only supported by a recent version of Chrome, Firefox, Safari or Edge
+              </p>
+            </StyledComponent>
+          </styled.p>
+        </section>
+      </StyledComponent>
+    </styled.section>
+  </Warning>
+</NoCryptoWarning>
+`;
+
 exports[`renders correctly with non existing layout 1`] = `
 <ManageLayoutPanel>
   <styled.p>
@@ -2020,7 +2171,7 @@ exports[`sign layout happy flow 1`] = `
     confirmationLabel="Sign and Submit"
     initialValues={
       Object {
-        "layout": "{}",
+        "layout": "{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}",
       }
     }
     isLoading={false}
@@ -2088,7 +2239,7 @@ exports[`sign layout happy flow 1`] = `
               name="layout"
               onBlur={[Function]}
               onInput={[Function]}
-              value="{}"
+              value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
             >
               <styled.div>
                 <StyledComponent
@@ -2166,7 +2317,7 @@ exports[`sign layout happy flow 1`] = `
                       name="layout"
                       onBlur={[Function]}
                       onInput={[Function]}
-                      value="{}"
+                      value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
                     >
                       <StyledComponent
                         disabled={false}
@@ -2234,7 +2385,7 @@ exports[`sign layout happy flow 1`] = `
                         name="layout"
                         onBlur={[Function]}
                         onInput={[Function]}
-                        value="{}"
+                        value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
                       >
                         <textarea
                           className="sc-bZQynM iBrmMe"
@@ -2243,7 +2394,7 @@ exports[`sign layout happy flow 1`] = `
                           name="layout"
                           onBlur={[Function]}
                           onInput={[Function]}
-                          value="{}"
+                          value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
                         />
                       </StyledComponent>
                     </styled.textarea>

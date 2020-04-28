@@ -36,10 +36,13 @@ import genericDataFetchReducer, {
 } from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
-import { signLayout } from "../LayoutService";
+import { serialize, signLayout } from "../LayoutService";
 import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
 import { ILayoutMetaBlock } from "../../../interfaces/ILayout";
 import { Warning } from "../../../atoms/Alerts";
+import { cryptoAvailable, WRONG_PASSWORD } from "../../../security";
+import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
+import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 
 interface ILayoutFormValues {
   layout: string;
@@ -64,7 +67,7 @@ const validateLayout = (values: ILayoutFormValues) => {
     errors.layout = "Please fill in a layout.";
   } else {
     try {
-      JSON.parse(values.layout);
+      serialize(JSON.parse(values.layout));
     } catch (e) {
       errors.layout = "Invalid json";
     }
@@ -112,7 +115,7 @@ const getModalContent = (
           initialValues={{ passphrase: passphrase }}
         />
       </ModalBody>
-      <ModalFooter></ModalFooter>
+      <ModalFooter />
     </>
   );
 };
@@ -122,6 +125,7 @@ const ManageLayoutPanel = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
   const [layout, setLayout] = useState({} as ILayoutFormValues);
+  const [cryptoException, setCryptoException] = useState(false);
 
   const [passphrase, setPassphrase] = useState("");
 
@@ -181,13 +185,18 @@ const ManageLayoutPanel = () => {
               }
             });
           })
-          .catch(() => {
+          .catch(e => {
             setPassphrase("");
-            setShowWarning(true);
+            if (e === WRONG_PASSWORD) {
+              setShowWarning(true);
+            } else {
+              setDisplayModal(false);
+              setCryptoException(true);
+              throw e;
+            }
           });
       }
     };
-
     setDataRequestKey(dataRequest);
   };
 
@@ -234,7 +243,9 @@ const ManageLayoutPanel = () => {
 
       <GenericForm
         schema={formSchema}
-        permission={state.panePermission}
+        permission={
+          cryptoAvailable() ? state.panePermission : FormPermissions.READ
+        }
         isLoading={profileApiResponse.isLoading}
         validate={validateLayout}
         onCancel={() => {
@@ -250,6 +261,8 @@ const ManageLayoutPanel = () => {
         cancellationLabel={"Cancel"}
         initialValues={layout}
       />
+      {!cryptoAvailable() ? <NoCryptoWarning /> : null}
+      {cryptoException ? <CryptoExceptionWarning /> : null}
     </>
   );
 };

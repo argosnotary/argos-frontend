@@ -31,7 +31,7 @@ import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import INpaApiResponse from "../../../interfaces/INpaApiResponse";
 import PasswordView from "../../../atoms/PasswordView";
 import FlexRow from "../../../atoms/FlexRow";
-import { generateKey, signString } from "../../../security";
+import { cryptoAvailable, generateKey } from "../../../security";
 import { Warning } from "../../../atoms/Alerts";
 import {
   ModalBody,
@@ -45,13 +45,18 @@ import GenericForm, {
 } from "../../../organisms/GenericForm";
 import KeyContainer from "../../../atoms/KeyContainer";
 import { IPublicKey } from "../../../interfaces/IPublicKey";
+import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
+import { FormPermissions } from "../../../types/FormPermission";
+import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
 
 interface INpaFormValues {
   npaname: string;
 }
 
 enum WizardStates {
-  KEY_OVERRIDE_WARNING
+  KEY_OVERRIDE_WARNING,
+  NO_CRYPTO_SUPPORT,
+  CRYPTO_EXCEPTION
 }
 
 const CloseButton = styled(CancelButton)`
@@ -108,11 +113,14 @@ const ManageNpa = () => {
 
   const [npaKey, setNpaKey] = useState({} as IPublicKey);
   const [generatedPassword, setGeneratedPassword] = useState("");
-  const [wizardState, _setWizardState] = useState(
-    WizardStates.KEY_OVERRIDE_WARNING
+  const [wizardState, setWizardState] = useState(
+    cryptoAvailable()
+      ? WizardStates.KEY_OVERRIDE_WARNING
+      : WizardStates.NO_CRYPTO_SUPPORT
   );
 
   const [displayModal, setDisplayModal] = useState(false);
+  const [cryptoException, setCryptoException] = useState(false);
 
   const postNewNpa = (values: INpaFormValues) => {
     const data: any = {};
@@ -129,29 +137,34 @@ const ManageNpa = () => {
       token: localStorageToken,
       url: "/api/nonpersonalaccount",
       cbSuccess: async (npa: INpaApiResponse) => {
-        const generatedKeys = await generateKey(true);
+        try {
+          const generatedKeys = await generateKey(true);
 
-        const dataRequest: DataRequest = {
-          data: generatedKeys.keys,
-          method: "post",
-          token: localStorageToken,
-          url: `/api/nonpersonalaccount/${npa.id}/key`,
-          cbSuccess: () => {
-            setGeneratedPassword(generatedKeys.password);
+          const keyDataRequest: DataRequest = {
+            data: generatedKeys.keys,
+            method: "post",
+            token: localStorageToken,
+            url: `/api/nonpersonalaccount/${npa.id}/key`,
+            cbSuccess: () => {
+              setGeneratedPassword(generatedKeys.password);
 
-            setNpaKey({
-              publicKey: generatedKeys.keys.publicKey,
-              keyId: generatedKeys.keys.keyId
-            });
+              setNpaKey({
+                publicKey: generatedKeys.keys.publicKey,
+                keyId: generatedKeys.keys.keyId
+              });
 
-            dispatch({
-              type: LayoutEditorDataActionTypes.POST_NEW_NPA,
-              npa: { ...npa, keyId: generatedKeys.keys.keyId }
-            });
-          }
-        };
+              dispatch({
+                type: LayoutEditorDataActionTypes.POST_NEW_NPA,
+                npa: { ...npa, keyId: generatedKeys.keys.keyId }
+              });
+            }
+          };
 
-        setNpaPostRequest(dataRequest);
+          setNpaPostRequest(keyDataRequest);
+        } catch (e) {
+          setCryptoException(true);
+          throw e;
+        }
       }
     };
 
@@ -269,30 +282,28 @@ const ManageNpa = () => {
     };
 
     const continueHandler = async () => {
-      const generatedKeys = await generateKey(true);
+      try {
+        const generatedKeys = await generateKey(true);
+        const dataRequest: DataRequest = {
+          data: generatedKeys.keys,
+          method: "post",
+          token: localStorageToken,
+          url: `/api/nonpersonalaccount/${state.nodeReferenceId}/key`,
+          cbSuccess: () => {
+            setGeneratedPassword(generatedKeys.password);
 
-      const signature = await signString(
-        generatedKeys.password,
-        generatedKeys.keys.encryptedPrivateKey,
-        "mooi man"
-      );
-      console.log(signature);
-      const dataRequest: DataRequest = {
-        data: generatedKeys.keys,
-        method: "post",
-        token: localStorageToken,
-        url: `/api/nonpersonalaccount/${state.nodeReferenceId}/key`,
-        cbSuccess: () => {
-          setGeneratedPassword(generatedKeys.password);
+            dispatch({
+              type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+              data: { keyId: generatedKeys.keys.keyId }
+            });
+          }
+        };
 
-          dispatch({
-            type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
-            data: { keyId: generatedKeys.keys.keyId }
-          });
-        }
-      };
-
-      setNpaPostRequest(dataRequest);
+        setNpaPostRequest(dataRequest);
+      } catch (e) {
+        setWizardState(WizardStates.CRYPTO_EXCEPTION);
+        throw e;
+      }
     };
 
     switch (currentWizardState) {
@@ -309,6 +320,28 @@ const ManageNpa = () => {
             <ModalFooter>
               <ModalButton onClick={cancelHandler}>No</ModalButton>
               <ModalButton onClick={continueHandler}>Continue</ModalButton>
+            </ModalFooter>
+          </>
+        );
+      case WizardStates.NO_CRYPTO_SUPPORT:
+        return (
+          <>
+            <ModalBody>
+              <NoCryptoWarning />
+            </ModalBody>
+            <ModalFooter>
+              <ModalButton onClick={cancelHandler}>Close</ModalButton>
+            </ModalFooter>
+          </>
+        );
+      case WizardStates.CRYPTO_EXCEPTION:
+        return (
+          <>
+            <ModalBody>
+              <CryptoExceptionWarning />
+            </ModalBody>
+            <ModalFooter>
+              <ModalButton onClick={cancelHandler}>Close</ModalButton>
             </ModalFooter>
           </>
         );
@@ -357,7 +390,13 @@ const ManageNpa = () => {
       ) : null}
       <GenericForm
         schema={formSchema}
-        permission={state.panePermission}
+        permission={
+          updateMode
+            ? state.panePermission
+            : cryptoAvailable()
+            ? state.panePermission
+            : FormPermissions.READ
+        }
         isLoading={npaPostState.isLoading}
         validate={validate}
         onCancel={() => {
@@ -384,6 +423,8 @@ const ManageNpa = () => {
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}
       />
+      {!updateMode && !cryptoAvailable() ? <NoCryptoWarning /> : null}
+      {cryptoException ? <CryptoExceptionWarning /> : null}
     </>
   );
 };

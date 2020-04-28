@@ -30,6 +30,7 @@ import { waitFor } from "@testing-library/dom";
 import PasswordView from "../atoms/PasswordView";
 import { ModalButton } from "../atoms/Modal";
 import KeyContainer from "../atoms/KeyContainer";
+import { cryptoAvailable } from "../security";
 const mock = new MockAdapter(Axios);
 const mockUrl = "/api/personalaccount/me/key";
 
@@ -41,7 +42,6 @@ jest.mock("react-router-dom", () => ({
 }));
 
 jest.mock("../security", () => ({
-  ...jest.requireActual("../security"),
   generateKey: () => ({
     push: jest.fn().mockReturnValue({
       keys: {
@@ -52,7 +52,8 @@ jest.mock("../security", () => ({
       },
       password: "ASwBaq5GkamoRq"
     })
-  })
+  }),
+  cryptoAvailable: jest.fn()
 }));
 
 const configureGetKeyMockSuccess = () => {
@@ -109,6 +110,7 @@ const createFixtureForKeyManagementModalView = async (root: any) => {
 };
 
 it("when key is present it should display keycontainer", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
   configureGetKeyMockSuccess();
   const root = createRoot();
   await act(() =>
@@ -120,6 +122,19 @@ it("when key is present it should display keycontainer", async () => {
 });
 
 it("when no key is present it should display warning message", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
+  configureGetKeyMockNotFound();
+  const root = createRoot();
+  await act(() =>
+    new Promise(resolve => setImmediate(resolve)).then(() => {
+      root.update();
+      expect(root.find(KeyManagement)).toMatchSnapshot();
+    })
+  );
+});
+
+it("when no cryto available there should be a warning", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(false);
   configureGetKeyMockNotFound();
   const root = createRoot();
   await act(() =>
@@ -131,6 +146,7 @@ it("when no key is present it should display warning message", async () => {
 });
 
 it("when create key is clicked and no key is present it should display password generated window", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
   configureGetKeyMockNotFound();
   configureCreatekeyMockSuccess();
   const root = createRoot();
@@ -145,6 +161,7 @@ it("when create key is clicked and no key is present it should display password 
 });
 
 it("when create key is clicked and key is present it should display create new key window ", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
   configureGetKeyMockSuccess();
   const root = createRoot();
   await act(async () => {
@@ -158,6 +175,7 @@ it("when create key is clicked and key is present it should display create new k
 });
 
 it("when Continue is clicked on modal window it should show password view modal window", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
   configureGetKeyMockSuccess();
   configureCreatekeyMockSuccess();
   const root = createRoot();
@@ -176,6 +194,7 @@ it("when Continue is clicked on modal window it should show password view modal 
 });
 
 it("when Close is clicked on modal window it should close modal window", async () => {
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
   configureGetKeyMockSuccess();
   const root = createRoot();
   await act(async () => {
