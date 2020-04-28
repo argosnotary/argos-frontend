@@ -48,6 +48,8 @@ import NotificationsList, {
   INotification,
   NotificationTypes,
 } from "../../../molecules/NotificationsList";
+import { ThemeContext } from "styled-components";
+import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 
 enum ILayoutValidationMessageTypes {
   DATA_INPUT = "DATA_INPUT",
@@ -156,16 +158,16 @@ const ManageLayoutPanel = () => {
     genericDataFetchReducer
   );
 
-  const [
-    _responseLayoutValidation,
-    setLayoutValidationDataRequest,
-  ] = useDataApi(genericDataFetchReducer);
+  const [responseLayoutValidation, setLayoutValidationDataRequest] = useDataApi(
+    genericDataFetchReducer
+  );
 
   const [layoutValidationErrors, setLayoutValidationErrors] = useState(
     [] as Array<INotification>
   );
 
   const [token] = useToken();
+  const theme = useContext(ThemeContext);
 
   const getLayoutRequest: DataRequest = {
     method: "get",
@@ -344,7 +346,11 @@ const ManageLayoutPanel = () => {
         last={true}
         title={layoutValidationErrors.length ? "Validation errors" : ""}
       >
-        <NotificationsList notifications={layoutValidationErrors} />
+        {responseLayoutValidation.isLoading ? (
+          <AlternateLoader size={32} color={theme.alternateLoader.color} />
+        ) : (
+          <NotificationsList notifications={layoutValidationErrors} />
+        )}
       </Panel>
     </>
   );
