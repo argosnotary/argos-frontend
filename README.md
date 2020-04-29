@@ -1,4 +1,4 @@
-Argos Frontend [![Build Status](https://cloud.drone.io/api/badges/argosnotary/argos-frontend/status.svg)](https://cloud.drone.io/argosnotary/argos-frontend)
+Argos Frontend [![Build Status](https://cloud.drone.io/api/badges/argosnotary/argos-frontend/status.svg)](https://cloud.drone.io/argosnotary/argos-frontend) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=argosnotary_argos-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=argosnotary_argos-frontend)
 ============
 
 ## Available Scripts
