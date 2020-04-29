@@ -36,7 +36,9 @@ FROM nginx:1.17.6 as run-server-stage
 
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
 
-COPY --from=build-stage /app/docker/config/nginx.conf.template /nginx.conf.template
+RUN mkdir /image_config
+
+COPY --from=build-stage /app/docker/config/nginx.conf.template /image_config/nginx.conf.template
 
 COPY --from=build-stage /app/docker/run.sh /run.sh
 RUN chmod +x /run.sh
