@@ -112,11 +112,6 @@ export const getTypeIcon = (
 ) => {
   switch (type) {
     case NotificationTypes.WARNING:
-      return (
-        <NotificationIconContainer color={getTypeColor(theme, type)}>
-          <WarningIcon color={theme.iconColor} size={theme.iconSize} />
-        </NotificationIconContainer>
-      );
     case NotificationTypes.ERROR:
       return (
         <NotificationIconContainer color={getTypeColor(theme, type)}>
