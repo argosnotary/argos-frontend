@@ -30,6 +30,7 @@ import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
+import { Panel } from "../../../molecules/Panel";
 
 interface ILabelNameFormValues {
   labelname: string;
@@ -140,7 +141,16 @@ const ManageLabel = () => {
     state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
 
   return (
-    <>
+    <Panel
+      maxWidth={"37.5vw"}
+      resizable={false}
+      last={true}
+      title={
+        updateMode
+          ? "Update selected label"
+          : "Add child label to selected label"
+      }
+    >
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -182,7 +192,7 @@ const ManageLabel = () => {
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}
       />
-    </>
+    </Panel>
   );
 };
 

@@ -37,6 +37,7 @@ import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair
 import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { cryptoAvailable } from "../../../security";
 import * as layoutService from "../LayoutService";
+import { Notification } from "../../../molecules/NotificationsList";
 
 const mock = new MockAdapter(Axios);
 
@@ -50,10 +51,6 @@ jest.mock("react-router-dom", () => ({
 jest.mock("../../../security", () => ({
   cryptoAvailable: jest.fn()
 }));
-
-jest
-  .spyOn(layoutService, "signLayout")
-  .mockResolvedValue(mockLayoutMetaBlock());
 
 function mockLayoutMetaBlock(): ILayoutMetaBlock {
   return {
@@ -71,6 +68,10 @@ function mockLayoutMetaBlock(): ILayoutMetaBlock {
     }
   };
 }
+
+jest
+  .spyOn(layoutService, "signLayout")
+  .mockResolvedValue(mockLayoutMetaBlock());
 
 const addItem = jest.fn();
 
@@ -179,6 +180,60 @@ const updateField = (wrapper: ReactWrapper<any>, name: string, value: any) => {
   });
 };
 
+it("validates a faulty layout and returns errors", async () => {
+  mock.reset();
+
+  mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(400, {
+    messages: [
+      {
+        field: "authorizedKeyIds",
+        type: "DATA_INPUT",
+        message: "size must be between 1 and 2147483647"
+      },
+      {
+        field: "expectedEndProducts",
+        type: "DATA_INPUT",
+        message: "size must be between 1 and 2147483647"
+      },
+      {
+        field: "keys",
+        type: "DATA_INPUT",
+        message: "size must be between 1 and 2147483647"
+      },
+      {
+        field: "layoutSegments",
+        type: "DATA_INPUT",
+        message: "size must be between 1 and 2147483647"
+      }
+    ]
+  });
+
+  const root = createComponent();
+
+  await act(async () => {
+    await waitFor(() => {
+      root.update();
+      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+    });
+
+    updateField(
+      root.find(TextArea).first(),
+      "layout",
+      JSON.stringify({
+        keys: [],
+        authorizedKeyIds: [],
+        expectedEndProducts: [],
+        layoutSegments: []
+      })
+    );
+
+    root.find("form").simulate("submit");
+
+    await waitFor(() => expect(root.find(Notification).length == 4).toBe(true));
+    expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
+  });
+});
+
 it("sign layout happy flow", async () => {
   mock.reset();
   (cryptoAvailable as jest.Mock).mockReturnValue(true);
@@ -194,6 +249,7 @@ it("sign layout happy flow", async () => {
   mock.onGet("/api/personalaccount/me/key").reply(200, key);
 
   mock.onPost("/api/supplychain/supplyChainId/layout").reply(200);
+  mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(200);
 
   const root = createComponent();
 
@@ -233,10 +289,10 @@ it("sign layout happy flow", async () => {
       .simulate("submit");
 
     await waitFor(() => expect(mock.history.get.length).toBe(2));
-    await waitFor(() => expect(mock.history.post.length).toBe(1));
+    await waitFor(() => expect(mock.history.post.length).toBe(2));
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
-    expect(mock.history.post[0].data).toBe(
+    expect(mock.history.post[1].data).toBe(
       JSON.stringify(mockLayoutMetaBlock())
     );
   });

@@ -81,6 +81,16 @@
   "copyInput": {
     "bgColor": "#e0e0e0"
   },
+  "notificationsList": {
+    "notificationBgColor": "#fff",
+    "iconSize": 22,
+    "iconColor": "#fff",
+    "colors": {
+      "WARNING": "orange",
+      "ERROR": "red",
+      "SUCCESS": "green"
+    }
+  },
   "treeEditor": {
     "textColor": "#2e2e2e",
     "bgColor": "#f1f1f1",

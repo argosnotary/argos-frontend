@@ -48,6 +48,7 @@ import { IPublicKey } from "../../../interfaces/IPublicKey";
 import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { FormPermissions } from "../../../types/FormPermission";
 import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
+import { Panel } from "../../../molecules/Panel";
 
 interface INpaFormValues {
   npaname: string;
@@ -240,7 +241,14 @@ const ManageNpa = () => {
 
   if (state.dataAction === LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED) {
     return (
-      <>
+      <Panel
+        maxWidth={"37.5vw"}
+        resizable={false}
+        last={true}
+        title={
+          updateMode ? "Update selected npa" : "Add child npa to selected label"
+        }
+      >
         <NodesBreadCrumb>
           Selected: {state.breadcrumb}
           <LastBreadCrumb>
@@ -272,7 +280,7 @@ const ManageNpa = () => {
             Close
           </CloseButton>
         </FlexRow>
-      </>
+      </Panel>
     );
   }
 
@@ -363,7 +371,14 @@ const ManageNpa = () => {
   }
 
   return (
-    <>
+    <Panel
+      maxWidth={"37.5vw"}
+      resizable={false}
+      last={true}
+      title={
+        updateMode ? "Update selected npa" : "Add child npa to selected label"
+      }
+    >
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -425,7 +440,7 @@ const ManageNpa = () => {
       />
       {!updateMode && !cryptoAvailable() ? <NoCryptoWarning /> : null}
       {cryptoException ? <CryptoExceptionWarning /> : null}
-    </>
+    </Panel>
   );
 };
 

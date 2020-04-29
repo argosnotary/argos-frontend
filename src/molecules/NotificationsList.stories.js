@@ -13,4 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-declare module "react-treebeard";
+import React from "react";
+import NotificationsList from "./NotificationsList";
+
+export default {
+  title: "NotificationsList",
+};
+
+const dummyNotifications = [
+  {
+    body: "Please consider A",
+    type: "WARNING",
+  },
+  {
+    body: "Something went wrong",
+    type: "ERROR",
+  },
+  {
+    body: "Data was added",
+    type: "SUCCESS",
+  },
+];
+
+export const notificationsList = () => (
+  <NotificationsList notifications={dummyNotifications} />
+);

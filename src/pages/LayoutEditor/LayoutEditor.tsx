@@ -328,31 +328,6 @@ const LayoutEditor = () => {
     }
   };
 
-  const getPanelTitleFromState = (pane: string): string => {
-    switch (pane) {
-      case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
-        return "Add child label to selected label";
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
-        return "Update selected label";
-      case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
-        return "Add supply chain to label";
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
-        return "Update selected supply chain";
-      case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
-        return "Add non personal account to label";
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
-        return "Generate new key for npa";
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
-        return "Update selected non personal account";
-      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
-        return "Manage label permissions";
-      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
-        return "Manage Layout";
-    }
-
-    return "";
-  };
-
   useEffect(() => {
     if (
       (state.dataAction &&
@@ -430,15 +405,7 @@ const LayoutEditor = () => {
                   context={treeContext}
                 />
               </Panel>
-              <Panel
-                width={"37.5vw"}
-                title={getPanelTitleFromState(state.firstPanelView)}
-              >
-                {renderPanel(state.firstPanelView)}
-              </Panel>
-              <Panel width={"37.5vw"} last={true}>
-                &nbsp;
-              </Panel>
+              {renderPanel(state.firstPanelView)}
             </FlexRow>
           </PanelsContainer>
         </StateContext.Provider>

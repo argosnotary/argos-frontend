@@ -21,7 +21,8 @@ import useShrinkToggle from "../hooks/useShrinkToggle";
 
 interface ISinglePanelContainerProps {
   disableFlexGrow?: boolean;
-  width: string;
+  width?: string;
+  maxWidth?: string;
   shrink: boolean;
 }
 
@@ -29,7 +30,8 @@ const SinglePanelContainer = styled.section<ISinglePanelContainerProps>`
   flex: ${props => (props.shrink ? "0 0 1rem" : `1 1 ${props.width}`)};
   flex-grow: ${props =>
     props.disableFlexGrow ? "0" : props.shrink ? "0" : "1"};
-  min-width: 0;
+  ${props => (!props.shrink ? "min-width: 0;" : null)};
+  max-width: ${props => (props.maxWidth ? props.maxWidth : "none")};
 `;
 
 interface IPanelBodyProps {
@@ -56,7 +58,8 @@ interface IPanelProps {
   last?: boolean;
   resizable?: boolean;
   disableFlexGrow?: boolean;
-  width: string;
+  width?: string;
+  maxWidth?: string;
   children: React.ReactNode;
 }
 
@@ -73,15 +76,27 @@ const PanelHeader = styled.header<IPanelHeaderProps>`
   align-items: center;
   min-height: 2.5rem;
   font-weight: bolder;
-
-  > svg:hover {
-    fill-opacity: 0.8;
-    cursor: pointer;
-  }
 `;
 
 const PanelTitle = styled.p`
   justify-self: center;
+`;
+
+interface IPanelIconContainer {
+  shrink: boolean;
+}
+
+const PanelIconContainer = styled.div<IPanelIconContainer>`
+  padding: ${props => (!props.shrink ? "0 0 0 1rem" : "0")};
+  display: flex;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  > svg:hover {
+    fill-opacity: 0.8;
+  }
 `;
 
 export const PanelsContainer = styled.section`
@@ -91,6 +106,7 @@ export const PanelsContainer = styled.section`
 export const Panel: React.FC<IPanelProps> = ({
   title,
   width,
+  maxWidth,
   children,
   last,
   disableFlexGrow,
@@ -102,6 +118,7 @@ export const Panel: React.FC<IPanelProps> = ({
   return (
     <SinglePanelContainer
       width={width}
+      maxWidth={maxWidth}
       shrink={shrink}
       disableFlexGrow={disableFlexGrow}
     >
@@ -111,18 +128,26 @@ export const Panel: React.FC<IPanelProps> = ({
             {!shrink ? (
               <>
                 <PanelTitle>{title}</PanelTitle>
-                <ShrinkIcon
-                  size={16}
-                  color={theme.panel.icons.shrinkIcon.color}
+                <PanelIconContainer
                   onClick={() => setShrinkState(!shrink)}
-                />
+                  shrink={shrink}
+                >
+                  <ShrinkIcon
+                    size={16}
+                    color={theme.panel.icons.shrinkIcon.color}
+                  />
+                </PanelIconContainer>
               </>
             ) : (
-              <EnlargeIcon
-                size={16}
-                color={theme.panel.icons.enlargeIcon.color}
+              <PanelIconContainer
                 onClick={() => setShrinkState(!shrink)}
-              />
+                shrink={shrink}
+              >
+                <EnlargeIcon
+                  size={16}
+                  color={theme.panel.icons.enlargeIcon.color}
+                />
+              </PanelIconContainer>
             )}
           </>
         ) : (

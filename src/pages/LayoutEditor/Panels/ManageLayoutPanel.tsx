@@ -43,6 +43,28 @@ import { Warning } from "../../../atoms/Alerts";
 import { cryptoAvailable, WRONG_PASSWORD } from "../../../security";
 import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
 import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
+import { Panel } from "../../../molecules/Panel";
+import NotificationsList, {
+  INotification,
+  NotificationTypes
+} from "../../../molecules/NotificationsList";
+import { ThemeContext } from "styled-components";
+import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
+
+enum ILayoutValidationMessageTypes {
+  DATA_INPUT = "DATA_INPUT",
+  MODEL_CONSISTENCY = "MODEL_CONSISTENCY"
+}
+
+interface ILayoutValidationMessage {
+  field?: string;
+  type: ILayoutValidationMessageTypes;
+  message: string;
+}
+
+interface ILayoutValidationErrorResponse {
+  messages: Array<ILayoutValidationMessage>;
+}
 
 interface ILayoutFormValues {
   layout: string;
@@ -136,7 +158,16 @@ const ManageLayoutPanel = () => {
     genericDataFetchReducer
   );
 
+  const [responseLayoutValidation, setLayoutValidationDataRequest] = useDataApi(
+    genericDataFetchReducer
+  );
+
+  const [layoutValidationErrors, setLayoutValidationErrors] = useState(
+    [] as Array<INotification>
+  );
+
   const [token] = useToken();
+  const theme = useContext(ThemeContext);
 
   const getLayoutRequest: DataRequest = {
     method: "get",
@@ -159,6 +190,53 @@ const ManageLayoutPanel = () => {
     customGenericDataFetchReducer,
     getLayoutRequest
   );
+
+  const requestLayoutValidation = (values: ILayoutFormValues) => {
+    const dataRequest: DataRequest = {
+      data: values.layout,
+      method: "post",
+      token: token,
+      url: "/api/supplychain/" + state.nodeReferenceId + "/layout/validate",
+      cbSuccess: () => {
+        setLayout(values);
+        setDisplayModal(true);
+      },
+      cbFailure: (error: any): boolean => {
+        const response: ILayoutValidationErrorResponse = error.response.data;
+        const notifications: Array<INotification> = convertValidationMessagesToNotifications(
+          response
+        );
+
+        setLayoutValidationErrors(notifications);
+        return true;
+      }
+    };
+
+    setLayoutValidationDataRequest(dataRequest);
+  };
+
+  const convertValidationMessagesToNotifications = (
+    response: ILayoutValidationErrorResponse
+  ) => {
+    if (!response) {
+      return [] as Array<INotification>;
+    }
+
+    const notifications: Array<INotification> = response.messages.map(
+      (message: ILayoutValidationMessage) => {
+        const notification: INotification = {} as INotification;
+
+        notification.body = `${message.field ? message.field : ""} ${
+          message.message
+        }`;
+        notification.type = NotificationTypes.ERROR;
+
+        return notification;
+      }
+    );
+
+    return notifications;
+  };
 
   const postNewLayout = () => {
     const dataRequest: DataRequest = {
@@ -208,61 +286,72 @@ const ManageLayoutPanel = () => {
 
   return (
     <>
-      {displayModal ? (
-        <Modal>
-          <ModalFlexColumWrapper>
-            {getModalContent(
-              value => {
-                setShowWarning(false);
-                setPassphrase(value.passphrase);
-              },
-              () => {
-                setDisplayModal(false);
-                setShowWarning(false);
-                setPassphrase("");
-              },
-              responseRequestKey.isLoading || responsePostLayout.isLoading,
-              showWarning,
-              passphrase
-            )}
-          </ModalFlexColumWrapper>
-        </Modal>
-      ) : null}
-      {state.selectedNodeName !== "" ? (
-        <>
-          <NodesBreadCrumb>
-            Selected: {state.breadcrumb}
-            <LastBreadCrumb>
-              {state.breadcrumb.length > 0 ? " / " : ""}
-              {state.selectedNodeName}
-            </LastBreadCrumb>
-          </NodesBreadCrumb>
-          <ContentSeparator />
-        </>
-      ) : null}
-
-      <GenericForm
-        schema={formSchema}
-        permission={
-          cryptoAvailable() ? state.panePermission : FormPermissions.READ
-        }
-        isLoading={profileApiResponse.isLoading}
-        validate={validateLayout}
-        onCancel={() => {
-          dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
-          });
-        }}
-        onSubmit={values => {
-          setLayout(values);
-          setDisplayModal(true);
-        }}
-        confirmationLabel={"Sign and Submit"}
-        cancellationLabel={"Cancel"}
-        initialValues={layout}
-      />
-      {!cryptoAvailable() ? <NoCryptoWarning /> : null}
-      {cryptoException ? <CryptoExceptionWarning /> : null}
+      <Panel width={"37.5vw"} resizable={true} title={"Manage layout"}>
+        {displayModal ? (
+          <Modal>
+            <ModalFlexColumWrapper>
+              {getModalContent(
+                value => {
+                  setShowWarning(false);
+                  setPassphrase(value.passphrase);
+                },
+                () => {
+                  setDisplayModal(false);
+                  setShowWarning(false);
+                  setPassphrase("");
+                },
+                responseRequestKey.isLoading || responsePostLayout.isLoading,
+                showWarning,
+                passphrase
+              )}
+            </ModalFlexColumWrapper>
+          </Modal>
+        ) : null}
+        {state.selectedNodeName !== "" ? (
+          <>
+            <NodesBreadCrumb>
+              Selected: {state.breadcrumb}
+              <LastBreadCrumb>
+                {state.breadcrumb.length > 0 ? " / " : ""}
+                {state.selectedNodeName}
+              </LastBreadCrumb>
+            </NodesBreadCrumb>
+            <ContentSeparator />
+          </>
+        ) : null}
+        <GenericForm
+          schema={formSchema}
+          permission={
+            cryptoAvailable() ? state.panePermission : FormPermissions.READ
+          }
+          isLoading={profileApiResponse.isLoading}
+          validate={validateLayout}
+          onCancel={() => {
+            dispatch({
+              type: LayoutEditorPaneActionTypes.RESET_PANE
+            });
+          }}
+          onSubmit={values => {
+            requestLayoutValidation(values);
+          }}
+          confirmationLabel={"Sign and Submit"}
+          cancellationLabel={"Cancel"}
+          initialValues={layout}
+        />
+        {!cryptoAvailable() ? <NoCryptoWarning /> : null}
+        {cryptoException ? <CryptoExceptionWarning /> : null}
+      </Panel>
+      <Panel
+        width={"37.5vw"}
+        last={true}
+        title={layoutValidationErrors.length ? "Validation errors" : ""}
+      >
+        {responseLayoutValidation.isLoading ? (
+          <AlternateLoader size={32} color={theme.alternateLoader.color} />
+        ) : (
+          <NotificationsList notifications={layoutValidationErrors} />
+        )}
+      </Panel>
     </>
   );
 };

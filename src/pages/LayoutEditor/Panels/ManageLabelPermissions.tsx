@@ -26,6 +26,7 @@ import useToken from "../../../hooks/useToken";
 import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationComponent";
+import { Panel } from "../../../molecules/Panel";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
@@ -186,7 +187,12 @@ const ManageLabelPermissions = () => {
   const [state] = useContext(StateContext);
 
   return (
-    <div>
+    <Panel
+      maxWidth={"37.5vw"}
+      resizable={false}
+      last={true}
+      title={"Manage label permissions"}
+    >
       <NodesBreadCrumb>
         Selected: {state.breadcrumb}
         <LastBreadCrumb>
@@ -196,7 +202,7 @@ const ManageLabelPermissions = () => {
       </NodesBreadCrumb>
       <ContentSeparator />
       <UserPermissions selectedLabelId={state.nodeReferenceId} />
-    </div>
+    </Panel>
   );
 };
 

@@ -30,6 +30,7 @@ import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse
 import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
+import { Panel } from "../../../molecules/Panel";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -142,7 +143,16 @@ const ManageSupplyChain = () => {
     LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
 
   return (
-    <>
+    <Panel
+      maxWidth={"37.5vw"}
+      resizable={false}
+      last={true}
+      title={
+        updateMode
+          ? "Update selected supply chain"
+          : "Add child supply chain to selected label"
+      }
+    >
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -186,7 +196,7 @@ const ManageSupplyChain = () => {
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}
       />
-    </>
+    </Panel>
   );
 };
 
