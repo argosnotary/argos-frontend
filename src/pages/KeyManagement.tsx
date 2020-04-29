@@ -25,7 +25,7 @@ import {
   ModalBody,
   ModalButton,
   ModalFlexColumWrapper,
-  ModalFooter,
+  ModalFooter
 } from "../atoms/Modal";
 import PageHeader from "../atoms/PageHeader";
 import TransparentButton from "../atoms/TransparentButton";
@@ -65,10 +65,9 @@ const NoActiveKeyWarning = styled.p`
   margin: 0.25rem 0 0;
   padding: 1rem;
   max-width: 50%;
-  color: ${(props) =>
-    props.theme.keyManagementPage.noActiveKeyWarning.textColor};
+  color: ${props => props.theme.keyManagementPage.noActiveKeyWarning.textColor};
   border: 1px solid
-    ${(props) => props.theme.keyManagementPage.noActiveKeyWarning.borderColor};
+    ${props => props.theme.keyManagementPage.noActiveKeyWarning.borderColor};
   background: white;
 `;
 const LoaderContainer = styled(FlexColumn)`
@@ -81,7 +80,7 @@ enum WizardStates {
   Error,
   KeyOverrideWarning,
   CopyKey,
-  CryptoError,
+  CryptoError
 }
 
 interface IKeyManagementModalProps {
@@ -94,7 +93,7 @@ interface IKeyManagementModalProps {
 export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
   setDisplayModal,
   cbKeyCreated,
-  createFirstKey,
+  createFirstKey
 }) => {
   const [wizardState, setWizardState] = useState(
     WizardStates.KeyOverrideWarning
@@ -138,7 +137,7 @@ export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
         url: "/api/personalaccount/me/key",
         cbSuccess: () => {
           cbKeyCreated(generatedKeys.keys);
-        },
+        }
       };
       setGeneratedPassword(generatedKeys.password);
       setCreateKeyDataRequest(dataRequest);
@@ -250,7 +249,7 @@ const KeyManagement = () => {
     cbFailure: (error): boolean => {
       setKeyAvailable(false);
       return error.response && error.response.status === 404;
-    },
+    }
   };
   const [getActiveKeyResponse] = useDataApi(
     genericDataFetchReducer,

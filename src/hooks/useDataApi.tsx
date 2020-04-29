@@ -34,7 +34,7 @@ function useDataApi<S, T>(
   const [
     _localStorageToken,
     _setLocalStorageToken,
-    removeLocalStorageToken,
+    removeLocalStorageToken
   ] = useToken();
   const history = useHistory();
   const [_error, setError] = useRequestErrorStore();
@@ -45,11 +45,11 @@ function useDataApi<S, T>(
         dispatch({ type: "FETCH_INIT", isLoading: true });
         const authorizationHeader = {
           Authorization: `Bearer ${dataRequest.token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         };
 
         const requestConfig: AxiosRequestConfig = {
-          headers: authorizationHeader,
+          headers: authorizationHeader
         };
 
         if (dataRequest.params) {
@@ -80,18 +80,18 @@ function useDataApi<S, T>(
         }
 
         axios(dataRequest.url, requestConfig)
-          .then((result) => {
+          .then(result => {
             dispatch({
               isLoading: false,
               results: result.data,
-              type: "FETCH_SUCCESS",
+              type: "FETCH_SUCCESS"
             });
 
             if (dataRequest.cbSuccess) {
               dataRequest.cbSuccess(result.data);
             }
           })
-          .catch((error) => {
+          .catch(error => {
             if (error.response && error.response.status === 401) {
               removeLocalStorageToken();
               history.push("/login");

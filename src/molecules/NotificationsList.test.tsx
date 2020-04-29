@@ -20,7 +20,7 @@ import NotificationsList, {
   getTypeColor,
   getTypeIcon,
   Notification,
-  NotificationTypes,
+  NotificationTypes
 } from "./NotificationsList";
 import { WarningIcon } from "../atoms/Icons";
 import SuccessIcon from "../atoms/Icons/SuccessIcon";
@@ -32,8 +32,8 @@ const dummyTheme: INotificationListTheme = {
   colors: {
     WARNING: "orange",
     ERROR: "red",
-    SUCCESS: "green",
-  },
+    SUCCESS: "green"
+  }
 };
 
 describe("NotificationsList", () => {
@@ -77,16 +77,16 @@ describe("NotificationsList", () => {
           notifications={[
             {
               body: "Please consider A",
-              type: NotificationTypes.WARNING,
+              type: NotificationTypes.WARNING
             },
             {
               body: "Something went wrong",
-              type: NotificationTypes.ERROR,
+              type: NotificationTypes.ERROR
             },
             {
               body: "Data was added",
-              type: NotificationTypes.SUCCESS,
-            },
+              type: NotificationTypes.SUCCESS
+            }
           ]}
         />
       </ThemeProvider>

@@ -25,7 +25,7 @@ import { act } from "react-dom/test-utils";
 import ManageLayoutPanel from "./ManageLayoutPanel";
 import {
   LayoutEditorPaneActionTypes,
-  StateContext,
+  StateContext
 } from "../../../stores/layoutEditorStore";
 import { FormPermissions } from "../../../types/FormPermission";
 import { ILayoutMetaBlock } from "../../../interfaces/ILayout";
@@ -44,12 +44,12 @@ const mock = new MockAdapter(Axios);
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useHistory: () => ({
-    push: jest.fn(),
-  }),
+    push: jest.fn()
+  })
 }));
 
 jest.mock("../../../security", () => ({
-  cryptoAvailable: jest.fn(),
+  cryptoAvailable: jest.fn()
 }));
 
 function mockLayoutMetaBlock(): ILayoutMetaBlock {
@@ -57,15 +57,15 @@ function mockLayoutMetaBlock(): ILayoutMetaBlock {
     signatures: [
       {
         keyId: "keyId",
-        signature: "signature",
-      },
+        signature: "signature"
+      }
     ],
     layout: {
       authorizedKeyIds: [],
       expectedEndProducts: [],
       keys: [],
-      layoutSegments: [],
-    },
+      layoutSegments: []
+    }
   };
 }
 
@@ -82,7 +82,7 @@ function createComponent() {
     nodeParentId: "",
     breadcrumb: "label / ",
     selectedNodeName: "layout",
-    panePermission: FormPermissions.EDIT,
+    panePermission: FormPermissions.EDIT
   };
 
   return mount(
@@ -101,7 +101,7 @@ it("renders correctly with non existing layout", async () => {
   const root = createComponent();
 
   await act(() =>
-    new Promise((resolve) => setImmediate(resolve)).then(() => {
+    new Promise(resolve => setImmediate(resolve)).then(() => {
       root.update();
 
       expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
@@ -118,8 +118,8 @@ it("renders correctly with existing layout", async () => {
       authorizedKeyIds: [],
       expectedEndProducts: [],
       keys: [],
-      layoutSegments: [],
-    },
+      layoutSegments: []
+    }
   };
 
   mock
@@ -128,7 +128,7 @@ it("renders correctly with existing layout", async () => {
   const root = createComponent();
 
   await act(() =>
-    new Promise((resolve) => setImmediate(resolve)).then(() => {
+    new Promise(resolve => setImmediate(resolve)).then(() => {
       root.update();
 
       expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
@@ -145,8 +145,8 @@ it("renders correctly with existing layout without crypto support", async () => 
       authorizedKeyIds: [],
       expectedEndProducts: [],
       keys: [],
-      layoutSegments: [],
-    },
+      layoutSegments: []
+    }
   };
 
   mock
@@ -155,7 +155,7 @@ it("renders correctly with existing layout without crypto support", async () => 
   const root = createComponent();
 
   await act(() =>
-    new Promise((resolve) => setImmediate(resolve)).then(() => {
+    new Promise(resolve => setImmediate(resolve)).then(() => {
       root.update();
 
       expect(root.find(NoCryptoWarning)).toMatchSnapshot();
@@ -168,15 +168,15 @@ const updateField = (wrapper: ReactWrapper<any>, name: string, value: any) => {
     persist: () => {},
     target: {
       name,
-      value,
-    },
+      value
+    }
   });
   wrapper.simulate("change", {
     persist: () => {},
     target: {
       name,
-      value,
-    },
+      value
+    }
   });
 };
 
@@ -188,24 +188,24 @@ it("validates a faulty layout and returns errors", async () => {
       {
         field: "authorizedKeyIds",
         type: "DATA_INPUT",
-        message: "size must be between 1 and 2147483647",
+        message: "size must be between 1 and 2147483647"
       },
       {
         field: "expectedEndProducts",
         type: "DATA_INPUT",
-        message: "size must be between 1 and 2147483647",
+        message: "size must be between 1 and 2147483647"
       },
       {
         field: "keys",
         type: "DATA_INPUT",
-        message: "size must be between 1 and 2147483647",
+        message: "size must be between 1 and 2147483647"
       },
       {
         field: "layoutSegments",
         type: "DATA_INPUT",
-        message: "size must be between 1 and 2147483647",
-      },
-    ],
+        message: "size must be between 1 and 2147483647"
+      }
+    ]
   });
 
   const root = createComponent();
@@ -223,7 +223,7 @@ it("validates a faulty layout and returns errors", async () => {
         keys: [],
         authorizedKeyIds: [],
         expectedEndProducts: [],
-        layoutSegments: [],
+        layoutSegments: []
       })
     );
 
@@ -243,7 +243,7 @@ it("sign layout happy flow", async () => {
   const key: IPersonalAccountKeyPair = {
     encryptedPrivateKey: "encryptedPrivateKey",
     keyId: "keyId",
-    publicKey: "publicKey",
+    publicKey: "publicKey"
   };
 
   mock.onGet("/api/personalaccount/me/key").reply(200, key);
@@ -266,7 +266,7 @@ it("sign layout happy flow", async () => {
         keys: [],
         authorizedKeyIds: [],
         expectedEndProducts: [],
-        layoutSegments: [],
+        layoutSegments: []
       })
     );
 

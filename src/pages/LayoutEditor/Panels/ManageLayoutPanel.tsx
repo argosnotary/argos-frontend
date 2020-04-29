@@ -16,23 +16,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   LayoutEditorPaneActionTypes,
-  StateContext,
+  StateContext
 } from "../../../stores/layoutEditorStore";
 import { LastBreadCrumb, NodesBreadCrumb } from "../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import GenericForm, {
-  IGenericFormSchema,
+  IGenericFormSchema
 } from "../../../organisms/GenericForm";
 import {
   Modal,
   ModalBody,
   ModalFlexColumWrapper,
-  ModalFooter,
+  ModalFooter
 } from "../../../atoms/Modal";
 import { FormPermissions } from "../../../types/FormPermission";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer, {
-  customGenericDataFetchReducer,
+  customGenericDataFetchReducer
 } from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
 import useToken from "../../../hooks/useToken";
@@ -46,14 +46,14 @@ import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { Panel } from "../../../molecules/Panel";
 import NotificationsList, {
   INotification,
-  NotificationTypes,
+  NotificationTypes
 } from "../../../molecules/NotificationsList";
 import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 
 enum ILayoutValidationMessageTypes {
   DATA_INPUT = "DATA_INPUT",
-  MODEL_CONSISTENCY = "MODEL_CONSISTENCY",
+  MODEL_CONSISTENCY = "MODEL_CONSISTENCY"
 }
 
 interface ILayoutValidationMessage {
@@ -78,8 +78,8 @@ const formSchema: IGenericFormSchema = [
   {
     labelValue: "Layout*",
     name: "layout",
-    formType: "textArea",
-  },
+    formType: "textArea"
+  }
 ];
 
 const validateLayout = (values: ILayoutFormValues) => {
@@ -110,8 +110,8 @@ const passPhraseFormSchema: IGenericFormSchema = [
   {
     labelValue: "Passphrase*",
     name: "passphrase",
-    formType: "password",
-  },
+    formType: "password"
+  }
 ];
 
 const getModalContent = (
@@ -178,7 +178,7 @@ const ManageLayoutPanel = () => {
     },
     cbFailure: (error): boolean => {
       return error.response && error.response.status === 404;
-    },
+    }
   };
 
   interface ILayoutApiResponse {
@@ -209,7 +209,7 @@ const ManageLayoutPanel = () => {
 
         setLayoutValidationErrors(notifications);
         return true;
-      },
+      }
     };
 
     setLayoutValidationDataRequest(dataRequest);
@@ -250,7 +250,7 @@ const ManageLayoutPanel = () => {
           key.encryptedPrivateKey,
           JSON.parse(layout.layout)
         )
-          .then((layoutMetaBlock) => {
+          .then(layoutMetaBlock => {
             setDataRequestPostLayout({
               data: layoutMetaBlock,
               method: "post",
@@ -258,12 +258,12 @@ const ManageLayoutPanel = () => {
               url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
               cbSuccess: () => {
                 dispatch({
-                  type: LayoutEditorPaneActionTypes.RESET_PANE,
+                  type: LayoutEditorPaneActionTypes.RESET_PANE
                 });
-              },
+              }
             });
           })
-          .catch((e) => {
+          .catch(e => {
             setPassphrase("");
             if (e === WRONG_PASSWORD) {
               setShowWarning(true);
@@ -273,7 +273,7 @@ const ManageLayoutPanel = () => {
               throw e;
             }
           });
-      },
+      }
     };
     setDataRequestKey(dataRequest);
   };
@@ -291,7 +291,7 @@ const ManageLayoutPanel = () => {
           <Modal>
             <ModalFlexColumWrapper>
               {getModalContent(
-                (value) => {
+                value => {
                   setShowWarning(false);
                   setPassphrase(value.passphrase);
                 },
@@ -328,10 +328,10 @@ const ManageLayoutPanel = () => {
           validate={validateLayout}
           onCancel={() => {
             dispatch({
-              type: LayoutEditorPaneActionTypes.RESET_PANE,
+              type: LayoutEditorPaneActionTypes.RESET_PANE
             });
           }}
-          onSubmit={(values) => {
+          onSubmit={values => {
             requestLayoutValidation(values);
           }}
           confirmationLabel={"Sign and Submit"}

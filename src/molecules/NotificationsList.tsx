@@ -22,7 +22,7 @@ const NotificationContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 0 1rem;
-  background-color: ${(props) =>
+  background-color: ${props =>
     props.theme.notificationsList.notificationBgColor};
 `;
 
@@ -35,8 +35,8 @@ const NotificationBody = styled.p<INotificationBodyProps>`
   flex: 1 1 auto;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid ${(props) => props.color};
-  color: ${(props) => props.color};
+  border: 1px solid ${props => props.color};
+  color: ${props => props.color};
   padding: 0.5rem 1rem 0.5rem 0;
   font-size: 0.9rem;
   word-break: break-word;
@@ -51,7 +51,7 @@ const NotificationIconContainer = styled.div<INotificationIconContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.color};
+  background-color: ${props => props.color};
 `;
 
 interface INotificationIndentProps {
@@ -66,14 +66,14 @@ const NotificationIdent = styled.span<INotificationIndentProps>`
   height: 0;
   border-top: 0.5rem solid transparent;
   border-bottom: 0.5rem solid transparent;
-  border-left: 0.5rem solid ${(props) => props.color};
+  border-left: 0.5rem solid ${props => props.color};
   padding-right: 0.5rem;
 `;
 
 export enum NotificationTypes {
   ERROR = "ERROR",
   WARNING = "WARNING",
-  SUCCESS = "SUCCESS",
+  SUCCESS = "SUCCESS"
 }
 
 interface ITypeColors {
@@ -85,7 +85,7 @@ interface ITypeColors {
 const TypeColors = (colors: ITypeColors) => ({
   [NotificationTypes.ERROR]: colors[NotificationTypes.ERROR],
   [NotificationTypes.WARNING]: colors[NotificationTypes.WARNING],
-  [NotificationTypes.SUCCESS]: colors[NotificationTypes.SUCCESS],
+  [NotificationTypes.SUCCESS]: colors[NotificationTypes.SUCCESS]
 });
 
 interface INotificationProps {
@@ -127,7 +127,7 @@ export const getTypeIcon = (
   }
 };
 
-export const Notification: React.FC<INotificationProps> = (props) => {
+export const Notification: React.FC<INotificationProps> = props => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -154,7 +154,7 @@ export interface INotificationListProps {
   notifications: Array<INotification>;
 }
 
-const NotificationsList: React.FC<INotificationListProps> = (props) => {
+const NotificationsList: React.FC<INotificationListProps> = props => {
   return (
     <ul>
       {props.notifications.map((notification, key) => (

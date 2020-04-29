@@ -23,12 +23,12 @@ import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
 import {
   StateContext,
   LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes,
+  LayoutEditorPaneActionTypes
 } from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import GenericForm, {
-  IGenericFormSchema,
+  IGenericFormSchema
 } from "../../../organisms/GenericForm";
 import { Panel } from "../../../molecules/Panel";
 
@@ -40,8 +40,8 @@ const formSchema: IGenericFormSchema = [
   {
     labelValue: "Label name*",
     name: "labelname",
-    formType: "text",
-  },
+    formType: "text"
+  }
 ];
 
 const validate = (values: ILabelNameFormValues) => {
@@ -85,9 +85,9 @@ const ManageLabel = () => {
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
           type: LayoutEditorDataActionTypes.POST_NEW_LABEL,
-          label,
+          label
         });
-      },
+      }
     };
 
     setLabelPostRequest(dataRequest);
@@ -114,9 +114,9 @@ const ManageLabel = () => {
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
           type: LayoutEditorDataActionTypes.PUT_LABEL,
-          label,
+          label
         });
-      },
+      }
     };
 
     setLabelPostRequest(dataRequest);
@@ -170,10 +170,10 @@ const ManageLabel = () => {
         validate={validate}
         onCancel={() => {
           dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE,
+            type: LayoutEditorPaneActionTypes.RESET_PANE
           });
         }}
-        onSubmit={(values) => {
+        onSubmit={values => {
           if (
             state.firstPanelView ===
             LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
