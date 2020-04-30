@@ -22,7 +22,6 @@ import FlexRow from "../../atoms/FlexRow";
 import ITreeNode from "../../interfaces/ITreeNode";
 import TreeEditor from "../../molecules/TreeEditor/TreeEditor";
 import useDataApi from "../../hooks/useDataApi";
-import useToken from "../../hooks/useToken";
 import {
   initialTreeState,
   ITreeStateContext,
@@ -54,7 +53,7 @@ import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
-import { useUserProfileContextStore } from "../../stores/UserProfile";
+import { getToken, useUserProfileContextStore } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayoutPanel";
 
 const LayoutEditor = () => {
@@ -67,7 +66,7 @@ const LayoutEditor = () => {
     panePermission: FormPermissions.READ
   });
 
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
   const getTreeDataRequest: DataRequest = {
     method: "get",
     token: localStorageToken,
@@ -371,7 +370,11 @@ const LayoutEditor = () => {
   const userProfile = useUserProfileContextStore();
 
   const canCreateRootNode = (): boolean => {
-    return userProfile && userProfile.hasPermission(PermissionTypes.TREE_EDIT);
+    return (
+      userProfile &&
+      userProfile.profile !== undefined &&
+      userProfile.profile.hasPermission(PermissionTypes.TREE_EDIT)
+    );
   };
 
   const treeContext: ITreeStateContext = {

@@ -22,11 +22,11 @@ import SearchInput from "../../../atoms/SearchInput";
 import useDataApi from "../../../hooks/useDataApi";
 import { customGenericDataFetchReducer } from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
-import useToken from "../../../hooks/useToken";
 import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationComponent";
 import { Panel } from "../../../molecules/Panel";
+import { getToken } from "../../../stores/UserProfile";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
@@ -62,7 +62,7 @@ interface ISearchUserApiResponse {
 const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
   selectedLabelId
 }) => {
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
   const [user, setUser] = useState({} as IUser);
 
   const [searchUserApiResponse, setSearchUserApiRequest] = useDataApi<

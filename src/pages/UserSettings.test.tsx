@@ -24,7 +24,11 @@ import { ThemeProvider } from "styled-components";
 import theme from "../theme/base.json";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router-dom";
-import { UserProfile, UserProfileContext } from "../stores/UserProfile";
+import {
+  PROFILE_STATE,
+  UserProfile,
+  UserProfileContext
+} from "../stores/UserProfile";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
 import { PermissionTypes } from "../types/PermissionType";
 
@@ -61,7 +65,15 @@ it("renders with public menu", async () => {
   const root = mount(
     <ThemeProvider theme={theme}>
       <MemoryRouter keyLength={0}>
-        <UserProfileContext.Provider value={new UserProfile(personalAccount)}>
+        <UserProfileContext.Provider
+          value={{
+            profile: new UserProfile(personalAccount),
+            setToken: jest.fn(),
+            state: PROFILE_STATE.READY,
+            token: "token",
+            setUserProfile: jest.fn()
+          }}
+        >
           <UserSettings />
         </UserProfileContext.Provider>
       </MemoryRouter>
@@ -102,7 +114,15 @@ it("renders with admin only menu", async () => {
   const root = mount(
     <ThemeProvider theme={theme}>
       <MemoryRouter keyLength={0}>
-        <UserProfileContext.Provider value={new UserProfile(personalAccount)}>
+        <UserProfileContext.Provider
+          value={{
+            profile: new UserProfile(personalAccount),
+            setToken: jest.fn(),
+            state: PROFILE_STATE.READY,
+            token: "token",
+            setUserProfile: jest.fn()
+          }}
+        >
           <UserSettings />
         </UserProfileContext.Provider>
       </MemoryRouter>

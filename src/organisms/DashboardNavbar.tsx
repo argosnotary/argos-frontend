@@ -80,7 +80,10 @@ const DashboardNavbar = () => {
           <TransparentOverlay onClick={disableContextMenuDisplay} />
         ) : null}
         <Avatar onClick={enableContextMenuDisplay} />
-        <NavbarContextMenu displayContextMenu={displayContextMenu} />
+        <NavbarContextMenu
+          displayContextMenu={displayContextMenu}
+          setDisplayContextMenu={setDisplayContextMenu}
+        />
       </AvatarContainer>
     </Navbar>
   );

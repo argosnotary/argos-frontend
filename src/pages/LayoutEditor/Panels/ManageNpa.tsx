@@ -19,7 +19,6 @@ import styled, { css } from "styled-components";
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import { CancelButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
-import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
 import {
   StateContext,
@@ -49,6 +48,7 @@ import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { FormPermissions } from "../../../types/FormPermission";
 import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
 import { Panel } from "../../../molecules/Panel";
+import { getToken } from "../../../stores/UserProfile";
 
 interface INpaFormValues {
   npaname: string;
@@ -101,7 +101,7 @@ const clipboardWrapperCss = css`
 `;
 
 const ManageNpa = () => {
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
   const [state, dispatch] = useContext(StateContext);
   const [npaPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
   const [_npaGetRequestState, setNpaGetRequest] = useDataApi(

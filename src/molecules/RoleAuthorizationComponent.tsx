@@ -20,12 +20,11 @@ import useDataApi from "../hooks/useDataApi";
 import genericDataFetchReducer, {
   customGenericDataFetchReducer
 } from "../stores/genericDataFetchReducer";
-import useToken from "../hooks/useToken";
 import CollapsibleContainerComponent from "../atoms/CollapsibleContainer";
 import DataRequest from "../types/DataRequest";
 import AlternateLoader from "../atoms/Icons/AlternateLoader";
 import DataCheckbox from "../atoms/DataCheckbox";
-import { useUserProfileContextStore } from "../stores/UserProfile";
+import { getToken, useUserProfileContextStore } from "../stores/UserProfile";
 
 const AuthorizationContainer = styled.div`
   display: flex;
@@ -79,7 +78,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
     Array<IRole>
   >(customGenericDataFetchReducer);
 
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
 
   const theme = useContext(ThemeContext);
 
@@ -88,7 +87,8 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
   const preCheckEnabledRole = (role: IRole): boolean => {
     return (
       role.name === "administrator" &&
-      accountId === userProfile.personalAccount.id
+      userProfile.profile !== undefined &&
+      accountId === userProfile.profile.personalAccount.id
     );
   };
 

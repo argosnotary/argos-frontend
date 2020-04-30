@@ -35,7 +35,6 @@ import genericDataFetchReducer, {
   customGenericDataFetchReducer
 } from "../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../types/DataRequest";
-import useToken from "../../../hooks/useToken";
 import { serialize, signLayout } from "../LayoutService";
 import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
 import { ILayoutMetaBlock } from "../../../interfaces/ILayout";
@@ -50,6 +49,7 @@ import NotificationsList, {
 } from "../../../molecules/NotificationsList";
 import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
+import { getToken } from "../../../stores/UserProfile";
 
 enum ILayoutValidationMessageTypes {
   DATA_INPUT = "DATA_INPUT",
@@ -166,7 +166,7 @@ const ManageLayoutPanel = () => {
     [] as Array<INotification>
   );
 
-  const [token] = useToken();
+  const token = getToken();
   const theme = useContext(ThemeContext);
 
   const getLayoutRequest: DataRequest = {

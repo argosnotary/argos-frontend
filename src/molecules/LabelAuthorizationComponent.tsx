@@ -20,11 +20,11 @@ import useDataApi from "../hooks/useDataApi";
 import genericDataFetchReducer, {
   customGenericDataFetchReducer
 } from "../stores/genericDataFetchReducer";
-import useToken from "../hooks/useToken";
 import CollapsibleContainerComponent from "../atoms/CollapsibleContainer";
 import DataRequest from "../types/DataRequest";
 import AlternateLoader from "../atoms/Icons/AlternateLoader";
 import DataCheckbox from "../atoms/DataCheckbox";
+import { getToken } from "../stores/UserProfile";
 
 const AuthorizationContainer = styled.div`
   display: flex;
@@ -87,7 +87,7 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
     IUserPermissions
   >(customGenericDataFetchReducer);
 
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
 
   const theme = useContext(ThemeContext);
 

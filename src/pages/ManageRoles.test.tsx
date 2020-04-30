@@ -26,7 +26,11 @@ import ManageRoles from "./ManageRoles";
 import { waitFor } from "@testing-library/dom";
 import RoleAuthorizationComponent from "../molecules/RoleAuthorizationComponent";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
-import { UserProfile, UserProfileContext } from "../stores/UserProfile";
+import {
+  PROFILE_STATE,
+  UserProfile,
+  UserProfileContext
+} from "../stores/UserProfile";
 import { CollapseButton } from "../atoms/CollapsibleContainer";
 import DataCheckbox from "../atoms/DataCheckbox";
 
@@ -99,7 +103,15 @@ it("renders correctly", async () => {
 
   const root = mount(
     <ThemeProvider theme={theme}>
-      <UserProfileContext.Provider value={new UserProfile(personalAccount)}>
+      <UserProfileContext.Provider
+        value={{
+          profile: new UserProfile(personalAccount),
+          setToken: jest.fn(),
+          state: PROFILE_STATE.READY,
+          token: "token",
+          setUserProfile: jest.fn()
+        }}
+      >
         <ManageRoles />
       </UserProfileContext.Provider>
     </ThemeProvider>

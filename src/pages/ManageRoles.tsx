@@ -24,11 +24,11 @@ import styled from "styled-components";
 import useDataApi from "../hooks/useDataApi";
 import { customGenericDataFetchReducer } from "../stores/genericDataFetchReducer";
 import DataRequest from "../types/DataRequest";
-import useToken from "../hooks/useToken";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
 import IRole from "../interfaces/IRole";
 import { generateMediaQuery } from "../layout/utils";
 import RoleAuthorizationComponent from "../molecules/RoleAuthorizationComponent";
+import { getToken } from "../stores/UserProfile";
 
 const FlexRowContainer = styled(FlexRow)`
   max-width: 20rem;
@@ -87,7 +87,7 @@ const manageRolesReducer = (
 };
 
 const ManageRoles = () => {
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
 
   const [state, dispatch] = useReducer(manageRolesReducer, {
     user: {} as IPersonalAccount

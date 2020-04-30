@@ -13,9 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { ReactNode, useContext } from "react";
+import React, {
+  Dispatch,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState
+} from "react";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
-import useToken from "../hooks/useToken";
 import DataRequest from "../types/DataRequest";
 import useDataApi from "../hooks/useDataApi";
 import { customGenericDataFetchReducer } from "./genericDataFetchReducer";
@@ -23,6 +28,20 @@ import { LoaderIcon } from "../atoms/Icons";
 import styled, { ThemeContext } from "styled-components";
 import FlexColumn from "../atoms/FlexColumn";
 import { PermissionTypes } from "../types/PermissionType";
+
+export enum PROFILE_STATE {
+  LOADING,
+  READY,
+  LOGGED_OUT
+}
+
+export interface IUserProfileContext {
+  state: PROFILE_STATE;
+  profile?: IUserProfile;
+  setUserProfile: Dispatch<IUserProfile>;
+  token?: string;
+  setToken: Dispatch<string>;
+}
 
 export interface IUserProfile {
   personalAccount: IPersonalAccount;
@@ -46,9 +65,15 @@ export class UserProfile implements IUserProfile {
   }
 }
 
-export const UserProfileContext = React.createContext<IUserProfile>(
-  {} as IUserProfile
-);
+export const UserProfileContext = React.createContext<IUserProfileContext>({
+  setUserProfile: () => {
+    return;
+  },
+  setToken: () => {
+    return;
+  },
+  state: PROFILE_STATE.LOGGED_OUT
+});
 
 interface IUserProfileStoreProviderProps {
   children: ReactNode;
@@ -63,41 +88,71 @@ const LoaderContainer = styled(FlexColumn)`
 export const UserProfileStoreProvider: React.FC<IUserProfileStoreProviderProps> = ({
   children
 }) => {
-  interface IProfileApiReponse {
+  const [userProfile, setUserProfile] = useState<IUserProfile | undefined>();
+  const [token, setToken] = useState<string>(
+    localStorage.getItem("token") || ""
+  );
+  const [state, setState] = useState<PROFILE_STATE>(PROFILE_STATE.LOADING);
+  interface IProfileApiResponse {
     isLoading: boolean;
     data: IPersonalAccount;
   }
 
-  const [token] = useToken();
+  const [userProfileResponse, setGetUserProfileRequest] = useDataApi<
+    IProfileApiResponse,
+    IPersonalAccount
+  >(customGenericDataFetchReducer);
 
-  const dataRequest: DataRequest = {
-    method: "get",
-    token,
-    url: "/api/personalaccount/me"
-  };
+  useEffect(() => {
+    if (token && token.length > 0) {
+      setState(PROFILE_STATE.LOADING);
+      localStorage.setItem("token", token);
+      const dataRequest: DataRequest = {
+        method: "get",
+        token,
+        url: "/api/personalaccount/me"
+      };
+      setGetUserProfileRequest(dataRequest);
+    } else {
+      localStorage.removeItem("token");
+      setUserProfile(undefined);
+      setState(PROFILE_STATE.LOGGED_OUT);
+    }
+  }, [token]);
 
-  const [profileApiResponse] = useDataApi<IProfileApiReponse, IPersonalAccount>(
-    customGenericDataFetchReducer,
-    dataRequest
-  );
+  useEffect(() => {
+    setUserProfile(new UserProfile(userProfileResponse.data));
+    setState(PROFILE_STATE.READY);
+  }, [userProfileResponse]);
 
   const theme = useContext(ThemeContext);
 
   return (
     <>
-      {profileApiResponse.isLoading ? (
+      {userProfileResponse.isLoading ? (
         <LoaderContainer>
           <LoaderIcon size={64} color={theme.loaderIcon.color} />
         </LoaderContainer>
       ) : (
         <UserProfileContext.Provider
-          value={new UserProfile(profileApiResponse.data)}
+          value={{
+            profile: userProfile,
+            setUserProfile: setUserProfile,
+            token: token,
+            setToken: setToken,
+            state: state
+          }}
         >
           {children}
         </UserProfileContext.Provider>
       )}
     </>
   );
+};
+
+export const getToken = (): string | "" => {
+  const token = useContext(UserProfileContext).token;
+  return token || "";
 };
 
 export const useUserProfileContextStore = () => useContext(UserProfileContext);

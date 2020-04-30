@@ -26,16 +26,20 @@ const ProfileListItem = styled.li`
 const ProfilePage = () => {
   const userProfile = useUserProfileContextStore();
 
-  if (userProfile && userProfile.personalAccount) {
+  if (
+    userProfile &&
+    userProfile.profile !== undefined &&
+    userProfile.profile.personalAccount
+  ) {
     return (
       <>
         <PageHeader>Profile</PageHeader>
         <ul>
           <ProfileListItem>
-            Name: {userProfile.personalAccount.name}
+            Name: {userProfile.profile.personalAccount.name}
           </ProfileListItem>
           <ProfileListItem>
-            Email: {userProfile.personalAccount.email}
+            Email: {userProfile.profile.personalAccount.email}
           </ProfileListItem>
         </ul>
       </>

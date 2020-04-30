@@ -139,7 +139,9 @@ const UserSettingsPage = () => {
   const userProfile = useUserProfileContextStore();
 
   const userIsAdmin =
-    userProfile && userProfile.hasPermission(PermissionTypes.ASSIGN_ROLE);
+    userProfile &&
+    userProfile.profile !== undefined &&
+    userProfile.profile.hasPermission(PermissionTypes.ASSIGN_ROLE);
 
   const renderAdminOnlyLinks = (shouldRender: boolean) => {
     if (!shouldRender) {

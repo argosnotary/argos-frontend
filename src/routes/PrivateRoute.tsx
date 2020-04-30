@@ -15,19 +15,22 @@
  */
 import React, { ReactNode } from "react";
 import { Redirect, Route } from "react-router-dom";
-import useToken from "../hooks/useToken";
+import {
+  PROFILE_STATE,
+  useUserProfileContextStore
+} from "../stores/UserProfile";
 
 interface IPrivateRouteProps {
   children: ReactNode;
   path: string;
 }
 
-const PrivateRoute = ({ children, path }: IPrivateRouteProps) => {
-  const [token] = useToken();
-
-  if (token && token.length > 0) {
-    return <Route path={path}>{children}</Route>;
-  } else {
+const PrivateRoute: React.FC<IPrivateRouteProps> = ({
+  children,
+  path
+}: IPrivateRouteProps) => {
+  const userProfile = useUserProfileContextStore();
+  if (userProfile.state === PROFILE_STATE.LOGGED_OUT) {
     return (
       <Redirect
         to={{
@@ -35,6 +38,8 @@ const PrivateRoute = ({ children, path }: IPrivateRouteProps) => {
         }}
       />
     );
+  } else {
+    return <Route path={path}>{children}</Route>;
   }
 };
 

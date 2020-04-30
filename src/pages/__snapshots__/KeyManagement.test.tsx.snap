@@ -773,9 +773,9 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-dxgOiQ",
+            "componentId": "sc-ckVGcZ",
             "isStatic": false,
-            "lastClassName": "dOvbJl",
+            "lastClassName": "mFjJe",
             "rules": Array [
               "
   display: flex;
@@ -828,7 +828,7 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
             "sc-iwsKbI",
           ],
           "render": [Function],
-          "styledComponentId": "sc-dxgOiQ",
+          "styledComponentId": "sc-ckVGcZ",
           "target": "button",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -839,7 +839,7 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
       onClick={[Function]}
     >
       <button
-        className="sc-iwsKbI sc-dxgOiQ dOvbJl"
+        className="sc-iwsKbI sc-ckVGcZ mFjJe"
         onClick={[Function]}
       >
         <PlusIcon
@@ -5961,9 +5961,9 @@ exports[`when key is present it should display keycontainer 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-dxgOiQ",
+            "componentId": "sc-ckVGcZ",
             "isStatic": false,
-            "lastClassName": "dOvbJl",
+            "lastClassName": "mFjJe",
             "rules": Array [
               "
   display: flex;
@@ -6016,7 +6016,7 @@ exports[`when key is present it should display keycontainer 1`] = `
             "sc-iwsKbI",
           ],
           "render": [Function],
-          "styledComponentId": "sc-dxgOiQ",
+          "styledComponentId": "sc-ckVGcZ",
           "target": "button",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -6027,7 +6027,7 @@ exports[`when key is present it should display keycontainer 1`] = `
       onClick={[Function]}
     >
       <button
-        className="sc-iwsKbI sc-dxgOiQ dOvbJl"
+        className="sc-iwsKbI sc-ckVGcZ mFjJe"
         onClick={[Function]}
       >
         <PlusIcon
@@ -6106,9 +6106,9 @@ exports[`when no cryto available there should be a warning 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-ckVGcZ",
+            "componentId": "sc-jKJlTe",
             "isStatic": false,
-            "lastClassName": "Dlegt",
+            "lastClassName": "iyJgwU",
             "rules": Array [
               "
   margin: 0.25rem 0 0;
@@ -6128,7 +6128,7 @@ exports[`when no cryto available there should be a warning 1`] = `
           "displayName": "styled.p",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-ckVGcZ",
+          "styledComponentId": "sc-jKJlTe",
           "target": "p",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -6138,7 +6138,7 @@ exports[`when no cryto available there should be a warning 1`] = `
       forwardedRef={null}
     >
       <p
-        className="sc-ckVGcZ Dlegt"
+        className="sc-jKJlTe iyJgwU"
       >
         There is no key currently active. Please create a new key.
       </p>
@@ -6344,9 +6344,9 @@ exports[`when no key is present it should display warning message 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-ckVGcZ",
+            "componentId": "sc-jKJlTe",
             "isStatic": false,
-            "lastClassName": "Dlegt",
+            "lastClassName": "iyJgwU",
             "rules": Array [
               "
   margin: 0.25rem 0 0;
@@ -6366,7 +6366,7 @@ exports[`when no key is present it should display warning message 1`] = `
           "displayName": "styled.p",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-ckVGcZ",
+          "styledComponentId": "sc-jKJlTe",
           "target": "p",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -6376,7 +6376,7 @@ exports[`when no key is present it should display warning message 1`] = `
       forwardedRef={null}
     >
       <p
-        className="sc-ckVGcZ Dlegt"
+        className="sc-jKJlTe iyJgwU"
       >
         There is no key currently active. Please create a new key.
       </p>
@@ -6391,9 +6391,9 @@ exports[`when no key is present it should display warning message 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-dxgOiQ",
+            "componentId": "sc-ckVGcZ",
             "isStatic": false,
-            "lastClassName": "dOvbJl",
+            "lastClassName": "mFjJe",
             "rules": Array [
               "
   display: flex;
@@ -6446,7 +6446,7 @@ exports[`when no key is present it should display warning message 1`] = `
             "sc-iwsKbI",
           ],
           "render": [Function],
-          "styledComponentId": "sc-dxgOiQ",
+          "styledComponentId": "sc-ckVGcZ",
           "target": "button",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -6457,7 +6457,7 @@ exports[`when no key is present it should display warning message 1`] = `
       onClick={[Function]}
     >
       <button
-        className="sc-iwsKbI sc-dxgOiQ dOvbJl"
+        className="sc-iwsKbI sc-ckVGcZ mFjJe"
         onClick={[Function]}
       >
         <PlusIcon

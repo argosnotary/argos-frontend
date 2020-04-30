@@ -17,7 +17,6 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../atoms/ContentSeparator";
-import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
 import {
   StateContext,
@@ -31,6 +30,7 @@ import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
 import { Panel } from "../../../molecules/Panel";
+import { getToken } from "../../../stores/UserProfile";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -58,7 +58,7 @@ const validate = (values: ISupplyChainNameFormValues) => {
 };
 
 const ManageSupplyChain = () => {
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
   const [state, dispatch] = useContext(StateContext);
   const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
     genericDataFetchReducer

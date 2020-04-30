@@ -32,7 +32,6 @@ import TransparentButton from "../atoms/TransparentButton";
 
 import DataRequest from "../types/DataRequest";
 import useDataApi from "../hooks/useDataApi";
-import useToken from "../hooks/useToken";
 import genericDataFetchReducer from "../stores/genericDataFetchReducer";
 import PasswordView from "../atoms/PasswordView";
 import { IPublicKey } from "../interfaces/IPublicKey";
@@ -40,6 +39,7 @@ import KeyContainer from "../atoms/KeyContainer";
 import FlexColumn from "../atoms/FlexColumn";
 import { NoCryptoWarning } from "../molecules/NoCryptoWarning";
 import { CryptoExceptionWarning } from "../molecules/CryptoExceptionWarning";
+import { getToken } from "../stores/UserProfile";
 
 export const CreateKeyButton = styled(TransparentButton)`
   margin: 1.3rem 0;
@@ -99,7 +99,7 @@ export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
     WizardStates.KeyOverrideWarning
   );
   const theme = useContext(ThemeContext);
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [createKeyResponse, setCreateKeyDataRequest] = useDataApi(
     genericDataFetchReducer
@@ -229,7 +229,7 @@ const KeyManagement = () => {
   const [keyAvailable, setKeyAvailable] = useState(true);
   const theme = useContext(ThemeContext);
   const [publicKey, setPublicKey] = useState({} as IPublicKey);
-  const [localStorageToken] = useToken();
+  const localStorageToken = getToken();
   const createNewKey = () => {
     setDisplayModal(true);
   };
