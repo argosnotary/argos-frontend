@@ -9,9 +9,9 @@ exports[`renders with admin only menu 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-fAjcbJ",
+            "componentId": "sc-caSCKo",
             "isStatic": false,
-            "lastClassName": "eVDIhP",
+            "lastClassName": "iHbmiT",
             "rules": Array [
               "
   position: fixed;
@@ -26,7 +26,7 @@ exports[`renders with admin only menu 1`] = `
           "displayName": "styled.section",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-fAjcbJ",
+          "styledComponentId": "sc-caSCKo",
           "target": "section",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -36,7 +36,7 @@ exports[`renders with admin only menu 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-fAjcbJ eVDIhP"
+        className="sc-caSCKo iHbmiT"
       >
         <Styled(styled.div)>
           <StyledComponent
@@ -45,9 +45,9 @@ exports[`renders with admin only menu 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-cJSrbW",
+                  "componentId": "sc-ksYbfQ",
                   "isStatic": false,
-                  "lastClassName": "bmPTNT",
+                  "lastClassName": "hJbzmI",
                   "rules": Array [
                     "
   display: flex;
@@ -66,7 +66,7 @@ exports[`renders with admin only menu 1`] = `
                   "sc-bwzfXH",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-cJSrbW",
+                "styledComponentId": "sc-ksYbfQ",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -76,7 +76,7 @@ exports[`renders with admin only menu 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-bwzfXH sc-cJSrbW bmPTNT"
+              className="sc-bwzfXH sc-ksYbfQ hJbzmI"
             >
               <Styled(styled.div)>
                 <StyledComponent
@@ -85,9 +85,9 @@ exports[`renders with admin only menu 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-caSCKo",
+                        "componentId": "sc-gisBJw",
                         "isStatic": false,
-                        "lastClassName": "gXizkZ",
+                        "lastClassName": "jVdiPu",
                         "rules": Array [
                           "
   display: flex;
@@ -118,7 +118,7 @@ exports[`renders with admin only menu 1`] = `
                         "sc-bdVaJa",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-caSCKo",
+                      "styledComponentId": "sc-gisBJw",
                       "target": "div",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -128,7 +128,7 @@ exports[`renders with admin only menu 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-bdVaJa sc-caSCKo gXizkZ"
+                    className="sc-bdVaJa sc-gisBJw jVdiPu"
                   >
                     <ul>
                       <styled.li>
@@ -138,9 +138,9 @@ exports[`renders with admin only menu 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-gisBJw",
+                                "componentId": "sc-kjoXOD",
                                 "isStatic": false,
-                                "lastClassName": "diYrbt",
+                                "lastClassName": "eHKHTh",
                                 "rules": Array [
                                   "
   color: ",
@@ -162,7 +162,7 @@ exports[`renders with admin only menu 1`] = `
                               "displayName": "styled.li",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-gisBJw",
+                              "styledComponentId": "sc-kjoXOD",
                               "target": "li",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -172,7 +172,7 @@ exports[`renders with admin only menu 1`] = `
                           forwardedRef={null}
                         >
                           <li
-                            className="sc-gisBJw diYrbt"
+                            className="sc-kjoXOD eHKHTh"
                           >
                             <styled.img
                               src="/images/cogs.svg"
@@ -183,9 +183,9 @@ exports[`renders with admin only menu 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-TOsTZ",
+                                      "componentId": "sc-kgAjT",
                                       "isStatic": false,
-                                      "lastClassName": "jaIEXS",
+                                      "lastClassName": "eeVZpc",
                                       "rules": Array [
                                         "
   width: 1.1rem;
@@ -202,7 +202,7 @@ exports[`renders with admin only menu 1`] = `
                                     "displayName": "styled.img",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-TOsTZ",
+                                    "styledComponentId": "sc-kgAjT",
                                     "target": "img",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -213,7 +213,7 @@ exports[`renders with admin only menu 1`] = `
                                 src="/images/cogs.svg"
                               >
                                 <img
-                                  className="sc-TOsTZ jaIEXS"
+                                  className="sc-kgAjT eeVZpc"
                                   src="/images/cogs.svg"
                                 />
                               </StyledComponent>
@@ -225,9 +225,9 @@ exports[`renders with admin only menu 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-kgAjT",
+                                      "componentId": "sc-cJSrbW",
                                       "isStatic": false,
-                                      "lastClassName": "gWUZjc",
+                                      "lastClassName": "bjNYfy",
                                       "rules": Array [
                                         "
   ",
@@ -241,7 +241,7 @@ exports[`renders with admin only menu 1`] = `
                                     "displayName": "styled.span",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-kgAjT",
+                                    "styledComponentId": "sc-cJSrbW",
                                     "target": "span",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -251,7 +251,7 @@ exports[`renders with admin only menu 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-kgAjT gWUZjc"
+                                  className="sc-cJSrbW bjNYfy"
                                 >
                                   Settings
                                 </span>
@@ -271,9 +271,9 @@ exports[`renders with admin only menu 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-kjoXOD",
+                                  "componentId": "sc-cHGsZl",
                                   "isStatic": false,
-                                  "lastClassName": "jpewGY",
+                                  "lastClassName": "cKHTuk",
                                   "rules": Array [
                                     "
   text-decoration: none;
@@ -334,7 +334,7 @@ exports[`renders with admin only menu 1`] = `
                                   "to": [Function],
                                 },
                                 "render": [Function],
-                                "styledComponentId": "sc-kjoXOD",
+                                "styledComponentId": "sc-cHGsZl",
                                 "target": Object {
                                   "$$typeof": Symbol(react.forward_ref),
                                   "displayName": "NavLink",
@@ -365,12 +365,12 @@ exports[`renders with admin only menu 1`] = `
                             to="//profile"
                           >
                             <NavLink
-                              className="sc-kjoXOD jpewGY"
+                              className="sc-cHGsZl cKHTuk"
                               to="//profile"
                             >
                               <Link
                                 aria-current={null}
-                                className="sc-kjoXOD jpewGY"
+                                className="sc-cHGsZl cKHTuk"
                                 to={
                                   Object {
                                     "hash": "",
@@ -382,13 +382,13 @@ exports[`renders with admin only menu 1`] = `
                               >
                                 <LinkAnchor
                                   aria-current={null}
-                                  className="sc-kjoXOD jpewGY"
+                                  className="sc-cHGsZl cKHTuk"
                                   href="//profile"
                                   navigate={[Function]}
                                 >
                                   <a
                                     aria-current={null}
-                                    className="sc-kjoXOD jpewGY"
+                                    className="sc-cHGsZl cKHTuk"
                                     href="//profile"
                                     onClick={[Function]}
                                   >
@@ -401,9 +401,9 @@ exports[`renders with admin only menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-cHGsZl",
+                                              "componentId": "sc-TOsTZ",
                                               "isStatic": false,
-                                              "lastClassName": "eXnEeI",
+                                              "lastClassName": "kilmAS",
                                               "rules": Array [
                                                 "
   width: 1.1rem;
@@ -420,7 +420,7 @@ exports[`renders with admin only menu 1`] = `
                                             "displayName": "styled.img",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-cHGsZl",
+                                            "styledComponentId": "sc-TOsTZ",
                                             "target": "img",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -431,7 +431,7 @@ exports[`renders with admin only menu 1`] = `
                                         src="/images/profile.svg"
                                       >
                                         <img
-                                          className="sc-cHGsZl eXnEeI"
+                                          className="sc-TOsTZ kilmAS"
                                           src="/images/profile.svg"
                                         />
                                       </StyledComponent>
@@ -443,9 +443,9 @@ exports[`renders with admin only menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-kgAjT",
+                                              "componentId": "sc-cJSrbW",
                                               "isStatic": false,
-                                              "lastClassName": "gWUZjc",
+                                              "lastClassName": "bjNYfy",
                                               "rules": Array [
                                                 "
   ",
@@ -459,7 +459,7 @@ exports[`renders with admin only menu 1`] = `
                                             "displayName": "styled.span",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-kgAjT",
+                                            "styledComponentId": "sc-cJSrbW",
                                             "target": "span",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -469,7 +469,7 @@ exports[`renders with admin only menu 1`] = `
                                         forwardedRef={null}
                                       >
                                         <span
-                                          className="sc-kgAjT gWUZjc"
+                                          className="sc-cJSrbW bjNYfy"
                                         >
                                           Profile
                                         </span>
@@ -492,9 +492,9 @@ exports[`renders with admin only menu 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-kjoXOD",
+                                  "componentId": "sc-cHGsZl",
                                   "isStatic": false,
-                                  "lastClassName": "jpewGY",
+                                  "lastClassName": "cKHTuk",
                                   "rules": Array [
                                     "
   text-decoration: none;
@@ -555,7 +555,7 @@ exports[`renders with admin only menu 1`] = `
                                   "to": [Function],
                                 },
                                 "render": [Function],
-                                "styledComponentId": "sc-kjoXOD",
+                                "styledComponentId": "sc-cHGsZl",
                                 "target": Object {
                                   "$$typeof": Symbol(react.forward_ref),
                                   "displayName": "NavLink",
@@ -586,12 +586,12 @@ exports[`renders with admin only menu 1`] = `
                             to="//key"
                           >
                             <NavLink
-                              className="sc-kjoXOD jpewGY"
+                              className="sc-cHGsZl cKHTuk"
                               to="//key"
                             >
                               <Link
                                 aria-current={null}
-                                className="sc-kjoXOD jpewGY"
+                                className="sc-cHGsZl cKHTuk"
                                 to={
                                   Object {
                                     "hash": "",
@@ -603,13 +603,13 @@ exports[`renders with admin only menu 1`] = `
                               >
                                 <LinkAnchor
                                   aria-current={null}
-                                  className="sc-kjoXOD jpewGY"
+                                  className="sc-cHGsZl cKHTuk"
                                   href="//key"
                                   navigate={[Function]}
                                 >
                                   <a
                                     aria-current={null}
-                                    className="sc-kjoXOD jpewGY"
+                                    className="sc-cHGsZl cKHTuk"
                                     href="//key"
                                     onClick={[Function]}
                                   >
@@ -622,9 +622,9 @@ exports[`renders with admin only menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-cHGsZl",
+                                              "componentId": "sc-TOsTZ",
                                               "isStatic": false,
-                                              "lastClassName": "eXnEeI",
+                                              "lastClassName": "kilmAS",
                                               "rules": Array [
                                                 "
   width: 1.1rem;
@@ -641,7 +641,7 @@ exports[`renders with admin only menu 1`] = `
                                             "displayName": "styled.img",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-cHGsZl",
+                                            "styledComponentId": "sc-TOsTZ",
                                             "target": "img",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -652,7 +652,7 @@ exports[`renders with admin only menu 1`] = `
                                         src="/images/key.svg"
                                       >
                                         <img
-                                          className="sc-cHGsZl eXnEeI"
+                                          className="sc-TOsTZ kilmAS"
                                           src="/images/key.svg"
                                         />
                                       </StyledComponent>
@@ -664,9 +664,9 @@ exports[`renders with admin only menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-kgAjT",
+                                              "componentId": "sc-cJSrbW",
                                               "isStatic": false,
-                                              "lastClassName": "gWUZjc",
+                                              "lastClassName": "bjNYfy",
                                               "rules": Array [
                                                 "
   ",
@@ -680,7 +680,7 @@ exports[`renders with admin only menu 1`] = `
                                             "displayName": "styled.span",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-kgAjT",
+                                            "styledComponentId": "sc-cJSrbW",
                                             "target": "span",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -690,7 +690,7 @@ exports[`renders with admin only menu 1`] = `
                                         forwardedRef={null}
                                       >
                                         <span
-                                          className="sc-kgAjT gWUZjc"
+                                          className="sc-cJSrbW bjNYfy"
                                         >
                                           Key management 
                                         </span>
@@ -713,9 +713,9 @@ exports[`renders with admin only menu 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-kjoXOD",
+                                  "componentId": "sc-cHGsZl",
                                   "isStatic": false,
-                                  "lastClassName": "jpewGY",
+                                  "lastClassName": "cKHTuk",
                                   "rules": Array [
                                     "
   text-decoration: none;
@@ -776,7 +776,7 @@ exports[`renders with admin only menu 1`] = `
                                   "to": [Function],
                                 },
                                 "render": [Function],
-                                "styledComponentId": "sc-kjoXOD",
+                                "styledComponentId": "sc-cHGsZl",
                                 "target": Object {
                                   "$$typeof": Symbol(react.forward_ref),
                                   "displayName": "NavLink",
@@ -807,12 +807,12 @@ exports[`renders with admin only menu 1`] = `
                             to="//manage-roles"
                           >
                             <NavLink
-                              className="sc-kjoXOD jpewGY"
+                              className="sc-cHGsZl cKHTuk"
                               to="//manage-roles"
                             >
                               <Link
                                 aria-current={null}
-                                className="sc-kjoXOD jpewGY"
+                                className="sc-cHGsZl cKHTuk"
                                 to={
                                   Object {
                                     "hash": "",
@@ -824,13 +824,13 @@ exports[`renders with admin only menu 1`] = `
                               >
                                 <LinkAnchor
                                   aria-current={null}
-                                  className="sc-kjoXOD jpewGY"
+                                  className="sc-cHGsZl cKHTuk"
                                   href="//manage-roles"
                                   navigate={[Function]}
                                 >
                                   <a
                                     aria-current={null}
-                                    className="sc-kjoXOD jpewGY"
+                                    className="sc-cHGsZl cKHTuk"
                                     href="//manage-roles"
                                     onClick={[Function]}
                                   >
@@ -843,9 +843,9 @@ exports[`renders with admin only menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-cHGsZl",
+                                              "componentId": "sc-TOsTZ",
                                               "isStatic": false,
-                                              "lastClassName": "eXnEeI",
+                                              "lastClassName": "kilmAS",
                                               "rules": Array [
                                                 "
   width: 1.1rem;
@@ -862,7 +862,7 @@ exports[`renders with admin only menu 1`] = `
                                             "displayName": "styled.img",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-cHGsZl",
+                                            "styledComponentId": "sc-TOsTZ",
                                             "target": "img",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -873,7 +873,7 @@ exports[`renders with admin only menu 1`] = `
                                         src="/images/lock-stripes.svg"
                                       >
                                         <img
-                                          className="sc-cHGsZl eXnEeI"
+                                          className="sc-TOsTZ kilmAS"
                                           src="/images/lock-stripes.svg"
                                         />
                                       </StyledComponent>
@@ -885,9 +885,9 @@ exports[`renders with admin only menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-kgAjT",
+                                              "componentId": "sc-cJSrbW",
                                               "isStatic": false,
-                                              "lastClassName": "gWUZjc",
+                                              "lastClassName": "bjNYfy",
                                               "rules": Array [
                                                 "
   ",
@@ -901,7 +901,7 @@ exports[`renders with admin only menu 1`] = `
                                             "displayName": "styled.span",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-kgAjT",
+                                            "styledComponentId": "sc-cJSrbW",
                                             "target": "span",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -911,7 +911,7 @@ exports[`renders with admin only menu 1`] = `
                                         forwardedRef={null}
                                       >
                                         <span
-                                          className="sc-kgAjT gWUZjc"
+                                          className="sc-cJSrbW bjNYfy"
                                         >
                                           Manage Roles
                                         </span>
@@ -935,9 +935,9 @@ exports[`renders with admin only menu 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-ksYbfQ",
+                        "componentId": "sc-hmzhuo",
                         "isStatic": false,
-                        "lastClassName": "jjWFJF",
+                        "lastClassName": "kdoJtb",
                         "rules": Array [
                           "
   display: flex;
@@ -954,7 +954,7 @@ exports[`renders with admin only menu 1`] = `
                         "sc-bdVaJa",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-ksYbfQ",
+                      "styledComponentId": "sc-hmzhuo",
                       "target": "div",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -964,7 +964,7 @@ exports[`renders with admin only menu 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-bdVaJa sc-ksYbfQ jjWFJF"
+                    className="sc-bdVaJa sc-hmzhuo kdoJtb"
                   >
                     <Switch>
                       <Redirect
@@ -1014,9 +1014,9 @@ exports[`renders with public menu 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-fAjcbJ",
+            "componentId": "sc-caSCKo",
             "isStatic": false,
-            "lastClassName": "eVDIhP",
+            "lastClassName": "iHbmiT",
             "rules": Array [
               "
   position: fixed;
@@ -1031,7 +1031,7 @@ exports[`renders with public menu 1`] = `
           "displayName": "styled.section",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-fAjcbJ",
+          "styledComponentId": "sc-caSCKo",
           "target": "section",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -1041,7 +1041,7 @@ exports[`renders with public menu 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-fAjcbJ eVDIhP"
+        className="sc-caSCKo iHbmiT"
       >
         <Styled(styled.div)>
           <StyledComponent
@@ -1050,9 +1050,9 @@ exports[`renders with public menu 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-cJSrbW",
+                  "componentId": "sc-ksYbfQ",
                   "isStatic": false,
-                  "lastClassName": "bmPTNT",
+                  "lastClassName": "hJbzmI",
                   "rules": Array [
                     "
   display: flex;
@@ -1071,7 +1071,7 @@ exports[`renders with public menu 1`] = `
                   "sc-bwzfXH",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-cJSrbW",
+                "styledComponentId": "sc-ksYbfQ",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -1081,7 +1081,7 @@ exports[`renders with public menu 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-bwzfXH sc-cJSrbW bmPTNT"
+              className="sc-bwzfXH sc-ksYbfQ hJbzmI"
             >
               <Styled(styled.div)>
                 <StyledComponent
@@ -1090,9 +1090,9 @@ exports[`renders with public menu 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-caSCKo",
+                        "componentId": "sc-gisBJw",
                         "isStatic": false,
-                        "lastClassName": "gXizkZ",
+                        "lastClassName": "jVdiPu",
                         "rules": Array [
                           "
   display: flex;
@@ -1123,7 +1123,7 @@ exports[`renders with public menu 1`] = `
                         "sc-bdVaJa",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-caSCKo",
+                      "styledComponentId": "sc-gisBJw",
                       "target": "div",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -1133,7 +1133,7 @@ exports[`renders with public menu 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-bdVaJa sc-caSCKo gXizkZ"
+                    className="sc-bdVaJa sc-gisBJw jVdiPu"
                   >
                     <ul>
                       <styled.li>
@@ -1143,9 +1143,9 @@ exports[`renders with public menu 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-gisBJw",
+                                "componentId": "sc-kjoXOD",
                                 "isStatic": false,
-                                "lastClassName": "diYrbt",
+                                "lastClassName": "eHKHTh",
                                 "rules": Array [
                                   "
   color: ",
@@ -1167,7 +1167,7 @@ exports[`renders with public menu 1`] = `
                               "displayName": "styled.li",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-gisBJw",
+                              "styledComponentId": "sc-kjoXOD",
                               "target": "li",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -1177,7 +1177,7 @@ exports[`renders with public menu 1`] = `
                           forwardedRef={null}
                         >
                           <li
-                            className="sc-gisBJw diYrbt"
+                            className="sc-kjoXOD eHKHTh"
                           >
                             <styled.img
                               src="/images/cogs.svg"
@@ -1188,9 +1188,9 @@ exports[`renders with public menu 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-TOsTZ",
+                                      "componentId": "sc-kgAjT",
                                       "isStatic": false,
-                                      "lastClassName": "jaIEXS",
+                                      "lastClassName": "eeVZpc",
                                       "rules": Array [
                                         "
   width: 1.1rem;
@@ -1207,7 +1207,7 @@ exports[`renders with public menu 1`] = `
                                     "displayName": "styled.img",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-TOsTZ",
+                                    "styledComponentId": "sc-kgAjT",
                                     "target": "img",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -1218,7 +1218,7 @@ exports[`renders with public menu 1`] = `
                                 src="/images/cogs.svg"
                               >
                                 <img
-                                  className="sc-TOsTZ jaIEXS"
+                                  className="sc-kgAjT eeVZpc"
                                   src="/images/cogs.svg"
                                 />
                               </StyledComponent>
@@ -1230,9 +1230,9 @@ exports[`renders with public menu 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-kgAjT",
+                                      "componentId": "sc-cJSrbW",
                                       "isStatic": false,
-                                      "lastClassName": "gWUZjc",
+                                      "lastClassName": "bjNYfy",
                                       "rules": Array [
                                         "
   ",
@@ -1246,7 +1246,7 @@ exports[`renders with public menu 1`] = `
                                     "displayName": "styled.span",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-kgAjT",
+                                    "styledComponentId": "sc-cJSrbW",
                                     "target": "span",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -1256,7 +1256,7 @@ exports[`renders with public menu 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-kgAjT gWUZjc"
+                                  className="sc-cJSrbW bjNYfy"
                                 >
                                   Settings
                                 </span>
@@ -1276,9 +1276,9 @@ exports[`renders with public menu 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-kjoXOD",
+                                  "componentId": "sc-cHGsZl",
                                   "isStatic": false,
-                                  "lastClassName": "jpewGY",
+                                  "lastClassName": "cKHTuk",
                                   "rules": Array [
                                     "
   text-decoration: none;
@@ -1339,7 +1339,7 @@ exports[`renders with public menu 1`] = `
                                   "to": [Function],
                                 },
                                 "render": [Function],
-                                "styledComponentId": "sc-kjoXOD",
+                                "styledComponentId": "sc-cHGsZl",
                                 "target": Object {
                                   "$$typeof": Symbol(react.forward_ref),
                                   "displayName": "NavLink",
@@ -1370,12 +1370,12 @@ exports[`renders with public menu 1`] = `
                             to="//profile"
                           >
                             <NavLink
-                              className="sc-kjoXOD jpewGY"
+                              className="sc-cHGsZl cKHTuk"
                               to="//profile"
                             >
                               <Link
                                 aria-current={null}
-                                className="sc-kjoXOD jpewGY"
+                                className="sc-cHGsZl cKHTuk"
                                 to={
                                   Object {
                                     "hash": "",
@@ -1387,13 +1387,13 @@ exports[`renders with public menu 1`] = `
                               >
                                 <LinkAnchor
                                   aria-current={null}
-                                  className="sc-kjoXOD jpewGY"
+                                  className="sc-cHGsZl cKHTuk"
                                   href="//profile"
                                   navigate={[Function]}
                                 >
                                   <a
                                     aria-current={null}
-                                    className="sc-kjoXOD jpewGY"
+                                    className="sc-cHGsZl cKHTuk"
                                     href="//profile"
                                     onClick={[Function]}
                                   >
@@ -1406,9 +1406,9 @@ exports[`renders with public menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-cHGsZl",
+                                              "componentId": "sc-TOsTZ",
                                               "isStatic": false,
-                                              "lastClassName": "eXnEeI",
+                                              "lastClassName": "kilmAS",
                                               "rules": Array [
                                                 "
   width: 1.1rem;
@@ -1425,7 +1425,7 @@ exports[`renders with public menu 1`] = `
                                             "displayName": "styled.img",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-cHGsZl",
+                                            "styledComponentId": "sc-TOsTZ",
                                             "target": "img",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -1436,7 +1436,7 @@ exports[`renders with public menu 1`] = `
                                         src="/images/profile.svg"
                                       >
                                         <img
-                                          className="sc-cHGsZl eXnEeI"
+                                          className="sc-TOsTZ kilmAS"
                                           src="/images/profile.svg"
                                         />
                                       </StyledComponent>
@@ -1448,9 +1448,9 @@ exports[`renders with public menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-kgAjT",
+                                              "componentId": "sc-cJSrbW",
                                               "isStatic": false,
-                                              "lastClassName": "gWUZjc",
+                                              "lastClassName": "bjNYfy",
                                               "rules": Array [
                                                 "
   ",
@@ -1464,7 +1464,7 @@ exports[`renders with public menu 1`] = `
                                             "displayName": "styled.span",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-kgAjT",
+                                            "styledComponentId": "sc-cJSrbW",
                                             "target": "span",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -1474,7 +1474,7 @@ exports[`renders with public menu 1`] = `
                                         forwardedRef={null}
                                       >
                                         <span
-                                          className="sc-kgAjT gWUZjc"
+                                          className="sc-cJSrbW bjNYfy"
                                         >
                                           Profile
                                         </span>
@@ -1497,9 +1497,9 @@ exports[`renders with public menu 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-kjoXOD",
+                                  "componentId": "sc-cHGsZl",
                                   "isStatic": false,
-                                  "lastClassName": "jpewGY",
+                                  "lastClassName": "cKHTuk",
                                   "rules": Array [
                                     "
   text-decoration: none;
@@ -1560,7 +1560,7 @@ exports[`renders with public menu 1`] = `
                                   "to": [Function],
                                 },
                                 "render": [Function],
-                                "styledComponentId": "sc-kjoXOD",
+                                "styledComponentId": "sc-cHGsZl",
                                 "target": Object {
                                   "$$typeof": Symbol(react.forward_ref),
                                   "displayName": "NavLink",
@@ -1591,12 +1591,12 @@ exports[`renders with public menu 1`] = `
                             to="//key"
                           >
                             <NavLink
-                              className="sc-kjoXOD jpewGY"
+                              className="sc-cHGsZl cKHTuk"
                               to="//key"
                             >
                               <Link
                                 aria-current={null}
-                                className="sc-kjoXOD jpewGY"
+                                className="sc-cHGsZl cKHTuk"
                                 to={
                                   Object {
                                     "hash": "",
@@ -1608,13 +1608,13 @@ exports[`renders with public menu 1`] = `
                               >
                                 <LinkAnchor
                                   aria-current={null}
-                                  className="sc-kjoXOD jpewGY"
+                                  className="sc-cHGsZl cKHTuk"
                                   href="//key"
                                   navigate={[Function]}
                                 >
                                   <a
                                     aria-current={null}
-                                    className="sc-kjoXOD jpewGY"
+                                    className="sc-cHGsZl cKHTuk"
                                     href="//key"
                                     onClick={[Function]}
                                   >
@@ -1627,9 +1627,9 @@ exports[`renders with public menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-cHGsZl",
+                                              "componentId": "sc-TOsTZ",
                                               "isStatic": false,
-                                              "lastClassName": "eXnEeI",
+                                              "lastClassName": "kilmAS",
                                               "rules": Array [
                                                 "
   width: 1.1rem;
@@ -1646,7 +1646,7 @@ exports[`renders with public menu 1`] = `
                                             "displayName": "styled.img",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-cHGsZl",
+                                            "styledComponentId": "sc-TOsTZ",
                                             "target": "img",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -1657,7 +1657,7 @@ exports[`renders with public menu 1`] = `
                                         src="/images/key.svg"
                                       >
                                         <img
-                                          className="sc-cHGsZl eXnEeI"
+                                          className="sc-TOsTZ kilmAS"
                                           src="/images/key.svg"
                                         />
                                       </StyledComponent>
@@ -1669,9 +1669,9 @@ exports[`renders with public menu 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-kgAjT",
+                                              "componentId": "sc-cJSrbW",
                                               "isStatic": false,
-                                              "lastClassName": "gWUZjc",
+                                              "lastClassName": "bjNYfy",
                                               "rules": Array [
                                                 "
   ",
@@ -1685,7 +1685,7 @@ exports[`renders with public menu 1`] = `
                                             "displayName": "styled.span",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-kgAjT",
+                                            "styledComponentId": "sc-cJSrbW",
                                             "target": "span",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -1695,7 +1695,7 @@ exports[`renders with public menu 1`] = `
                                         forwardedRef={null}
                                       >
                                         <span
-                                          className="sc-kgAjT gWUZjc"
+                                          className="sc-cJSrbW bjNYfy"
                                         >
                                           Key management 
                                         </span>
@@ -1719,9 +1719,9 @@ exports[`renders with public menu 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-ksYbfQ",
+                        "componentId": "sc-hmzhuo",
                         "isStatic": false,
-                        "lastClassName": "jjWFJF",
+                        "lastClassName": "kdoJtb",
                         "rules": Array [
                           "
   display: flex;
@@ -1738,7 +1738,7 @@ exports[`renders with public menu 1`] = `
                         "sc-bdVaJa",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-ksYbfQ",
+                      "styledComponentId": "sc-hmzhuo",
                       "target": "div",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -1748,7 +1748,7 @@ exports[`renders with public menu 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-bdVaJa sc-ksYbfQ jjWFJF"
+                    className="sc-bdVaJa sc-hmzhuo kdoJtb"
                   >
                     <Switch>
                       <Redirect

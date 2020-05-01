@@ -28,6 +28,7 @@ import { LoaderIcon } from "../atoms/Icons";
 import styled, { ThemeContext } from "styled-components";
 import FlexColumn from "../atoms/FlexColumn";
 import { PermissionTypes } from "../types/PermissionType";
+import { ConnectionErrorMessage } from "../atoms/ConnectionError";
 
 export enum PROFILE_STATE {
   LOADING,
@@ -41,6 +42,7 @@ export interface IUserProfileContext {
   setUserProfile: Dispatch<IUserProfile>;
   token?: string;
   setToken: Dispatch<string>;
+  setError: Dispatch<string | null>;
 }
 
 export interface IUserProfile {
@@ -72,6 +74,9 @@ export const UserProfileContext = React.createContext<IUserProfileContext>({
   setToken: () => {
     return;
   },
+  setError: () => {
+    return;
+  },
   state: PROFILE_STATE.LOGGED_OUT
 });
 
@@ -93,6 +98,7 @@ export const UserProfileStoreProvider: React.FC<IUserProfileStoreProviderProps> 
     localStorage.getItem("token") || ""
   );
   const [state, setState] = useState<PROFILE_STATE>(PROFILE_STATE.LOADING);
+  const [error, setError] = useState<string | null>();
   interface IProfileApiResponse {
     isLoading: boolean;
     data: IPersonalAccount;
@@ -127,27 +133,33 @@ export const UserProfileStoreProvider: React.FC<IUserProfileStoreProviderProps> 
 
   const theme = useContext(ThemeContext);
 
-  return (
-    <>
-      {userProfileResponse.isLoading ? (
-        <LoaderContainer>
-          <LoaderIcon size={64} color={theme.loaderIcon.color} />
-        </LoaderContainer>
-      ) : (
+  if (userProfileResponse.isLoading) {
+    return (
+      <LoaderContainer>
+        <LoaderIcon size={64} color={theme.loaderIcon.color} />
+      </LoaderContainer>
+    );
+  } else {
+    return (
+      <>
+        {error ? (
+          <ConnectionErrorMessage>{error}</ConnectionErrorMessage>
+        ) : null}
         <UserProfileContext.Provider
           value={{
             profile: userProfile,
             setUserProfile: setUserProfile,
             token: token,
             setToken: setToken,
-            state: state
+            state: state,
+            setError: setError
           }}
         >
           {children}
         </UserProfileContext.Provider>
-      )}
-    </>
-  );
+      </>
+    );
+  }
 };
 
 export const getToken = (): string | "" => {

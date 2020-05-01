@@ -46,8 +46,10 @@ const AuthenticationForwarder: React.FC = () => {
     if (queryToken) {
       userProfile.setToken(queryToken);
       history.push("/dashboard");
+    } else if (query.get("error")) {
+      userProfile.setError(query.get("error"));
+      history.push("/login");
     } else {
-      console.log("AuthenticationForwarder " + query);
       history.push("/login");
     }
   });

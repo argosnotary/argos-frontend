@@ -38,7 +38,7 @@ const slideDown = keyframes`
 
 const animationSeconds = 8;
 
-const ConnectionErrorMessage = styled.p`
+export const ConnectionErrorMessage = styled.p`
   text-align: center;
   background-color: ${props => props.theme.connectionError.bgColor};
   color: ${props => props.theme.connectionError.textColor};
