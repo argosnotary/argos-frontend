@@ -31,6 +31,7 @@ const PrivateRoute: React.FC<IPrivateRouteProps> = ({
 }: IPrivateRouteProps) => {
   const userProfile = useUserProfileContextStore();
   if (userProfile.state === PROFILE_STATE.LOGGED_OUT) {
+    console.log("logedout");
     return (
       <Redirect
         to={{
