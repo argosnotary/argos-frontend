@@ -532,7 +532,7 @@ exports[`renders correctly 1`] = `
                             forwardedRef={null}
                           >
                             <main
-                              className="sc-chPdSV dWigFp"
+                              className="sc-chPdSV hMQlJo"
                             >
                               <styled.div>
                                 <StyledComponent
