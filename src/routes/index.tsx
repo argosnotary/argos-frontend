@@ -16,9 +16,9 @@
 import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
-  Redirect,
   Route,
   Switch,
+  useHistory,
   useLocation
 } from "react-router-dom";
 
@@ -37,7 +37,7 @@ import {
 
 const AuthenticationForwarder: React.FC = () => {
   const location = useLocation();
-
+  const history = useHistory();
   const userProfile = useUserProfileContextStore();
 
   useEffect(() => {
@@ -45,10 +45,12 @@ const AuthenticationForwarder: React.FC = () => {
     const queryToken = query.get("token");
     if (queryToken) {
       userProfile.setToken(queryToken);
+      history.push("/dashboard");
+    } else {
+      history.push("/login");
     }
   });
-
-  return <Redirect to="/dashboard" />;
+  return null;
 };
 
 const Routes: React.FC = () => {
