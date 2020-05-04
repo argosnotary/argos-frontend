@@ -27,9 +27,7 @@ import {
 } from "../../../../atoms/Modal";
 import { FormPermissions } from "../../../../types/FormPermission";
 import useDataApi from "../../../../hooks/useDataApi";
-import genericDataFetchReducer, {
-  customGenericDataFetchReducer
-} from "../../../../stores/genericDataFetchReducer";
+import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
 import { ILayout, ILayoutMetaBlock } from "../../../../interfaces/ILayout";
 import { Warning } from "../../../../atoms/Alerts";
@@ -146,6 +144,7 @@ const ManageLayoutPanel = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
   const [layout, setLayout] = useState({} as ILayout);
+  const [layoutJson, setLayoutJson] = useState<string>("");
   const [cryptoException, setCryptoException] = useState(false);
 
   const [passphrase, setPassphrase] = useState("");
@@ -168,27 +167,29 @@ const ManageLayoutPanel = () => {
   const [token] = useToken();
   const theme = useContext(ThemeContext);
 
-  const getLayoutRequest: DataRequest = {
-    method: "get",
-    token,
-    url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
-    cbSuccess: (layoutMetaBlock: ILayoutMetaBlock) => {
-      setLayout(layoutMetaBlock.layout);
-    },
-    cbFailure: (error): boolean => {
-      return error.response && error.response.status === 404;
-    }
-  };
-
-  interface ILayoutApiResponse {
-    isLoading: boolean;
-    data: ILayoutMetaBlock;
-  }
-
-  const [profileApiResponse] = useDataApi<ILayoutApiResponse, ILayoutMetaBlock>(
-    customGenericDataFetchReducer,
-    getLayoutRequest
+  const [layoutApiResponse, setLayoutApiRequest] = useDataApi(
+    genericDataFetchReducer
   );
+
+  useEffect(() => {
+    setLayout({} as ILayout);
+    const getLayoutRequest: DataRequest = {
+      method: "get",
+      token,
+      url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
+      cbSuccess: (layoutMetaBlock: ILayoutMetaBlock) => {
+        setLayout(layoutMetaBlock.layout);
+      },
+      cbFailure: (error): boolean => {
+        return error.response && error.response.status === 404;
+      }
+    };
+    setLayoutApiRequest(getLayoutRequest);
+  }, [state.nodeReferenceId]);
+
+  useEffect(() => {
+    setLayoutJson(JSON.stringify(layout, null, 2));
+  }, [layout]);
 
   const requestLayoutValidation = (values: ILayoutFormValues) => {
     const dataRequest: DataRequest = {
@@ -197,7 +198,6 @@ const ManageLayoutPanel = () => {
       token: token,
       url: "/api/supplychain/" + state.nodeReferenceId + "/layout/validate",
       cbSuccess: () => {
-        // setLayout(JSON.parse(values.layout));
         setDisplayModal(true);
       },
       cbFailure: (error: any): boolean => {
@@ -319,7 +319,7 @@ const ManageLayoutPanel = () => {
           permission={
             cryptoAvailable() ? state.panePermission : FormPermissions.READ
           }
-          isLoading={profileApiResponse.isLoading}
+          isLoading={layoutApiResponse.isLoading}
           validate={validateLayout}
           onCancel={() => {
             dispatch({
@@ -327,12 +327,11 @@ const ManageLayoutPanel = () => {
             });
           }}
           onSubmit={values => {
-            setLayout(JSON.parse(values.layout));
             requestLayoutValidation(values);
           }}
           confirmationLabel={"Sign and Submit"}
           cancellationLabel={"Cancel"}
-          initialValues={{ layout: JSON.stringify(layout, null, 2) }}
+          initialValues={{ layout: layoutJson }}
           onValidChange={values => setLayout(JSON.parse(values.layout))}
         />
         {!cryptoAvailable() ? <NoCryptoWarning /> : null}

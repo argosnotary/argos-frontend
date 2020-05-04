@@ -379,7 +379,74 @@ exports[`renders correctly with existing layout 1`] = `
                     }
                   }
                   setLayout={[Function]}
-                />
+                >
+                  <styled.button
+                    onClick={[Function]}
+                  >
+                    <StyledComponent
+                      forwardedComponent={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "attrs": Array [],
+                          "componentStyle": ComponentStyle {
+                            "componentId": "sc-dnqmqq",
+                            "isStatic": false,
+                            "lastClassName": "hxFUxa",
+                            "rules": Array [
+                              "
+  ",
+                              "
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 1rem 0;
+  line-height: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  text-align: center;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background-color: ",
+                              [Function],
+                              ";
+  color: ",
+                              [Function],
+                              ";
+  outline: 0;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+  &:hover {
+    background-color: ",
+                              [Function],
+                              ";
+    cursor: pointer;
+  }
+",
+                              "
+",
+                            ],
+                          },
+                          "displayName": "styled.button",
+                          "foldedComponentIds": Array [],
+                          "render": [Function],
+                          "styledComponentId": "sc-dnqmqq",
+                          "target": "button",
+                          "toString": [Function],
+                          "warnTooManyClasses": [Function],
+                          "withComponent": [Function],
+                        }
+                      }
+                      forwardedRef={null}
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="sc-dnqmqq hxFUxa"
+                        onClick={[Function]}
+                      >
+                        +
+                      </button>
+                    </StyledComponent>
+                  </styled.button>
+                </LayoutEditor>
                 <GenericForm
                   cancellationLabel="Cancel"
                   confirmationLabel="Sign and Submit"
@@ -449,6 +516,7 @@ exports[`renders correctly with existing layout 1`] = `
                         className="sc-VigVT sc-jzJRlG jNQHJE"
                       >
                         <form
+                          onBlur={[Function]}
                           onSubmit={[Function]}
                         >
                           <FormInput
@@ -1626,7 +1694,74 @@ exports[`renders correctly with non existing layout 1`] = `
                 <LayoutEditor
                   layout={Object {}}
                   setLayout={[Function]}
-                />
+                >
+                  <styled.button
+                    onClick={[Function]}
+                  >
+                    <StyledComponent
+                      forwardedComponent={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "attrs": Array [],
+                          "componentStyle": ComponentStyle {
+                            "componentId": "sc-dnqmqq",
+                            "isStatic": false,
+                            "lastClassName": "hxFUxa",
+                            "rules": Array [
+                              "
+  ",
+                              "
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 1rem 0;
+  line-height: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  text-align: center;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background-color: ",
+                              [Function],
+                              ";
+  color: ",
+                              [Function],
+                              ";
+  outline: 0;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+  &:hover {
+    background-color: ",
+                              [Function],
+                              ";
+    cursor: pointer;
+  }
+",
+                              "
+",
+                            ],
+                          },
+                          "displayName": "styled.button",
+                          "foldedComponentIds": Array [],
+                          "render": [Function],
+                          "styledComponentId": "sc-dnqmqq",
+                          "target": "button",
+                          "toString": [Function],
+                          "warnTooManyClasses": [Function],
+                          "withComponent": [Function],
+                        }
+                      }
+                      forwardedRef={null}
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="sc-dnqmqq hxFUxa"
+                        onClick={[Function]}
+                      >
+                        +
+                      </button>
+                    </StyledComponent>
+                  </styled.button>
+                </LayoutEditor>
                 <GenericForm
                   cancellationLabel="Cancel"
                   confirmationLabel="Sign and Submit"
@@ -1691,6 +1826,7 @@ exports[`renders correctly with non existing layout 1`] = `
                         className="sc-VigVT sc-jzJRlG jNQHJE"
                       >
                         <form
+                          onBlur={[Function]}
                           onSubmit={[Function]}
                         >
                           <FormInput
@@ -2757,6 +2893,7 @@ exports[`sign layout happy flow 1`] = `
                                           className="sc-VigVT sc-jzJRlG jNQHJE"
                                         >
                                           <form
+                                            onBlur={[Function]}
                                             onSubmit={[Function]}
                                           >
                                             <FormInput
@@ -3345,27 +3482,82 @@ exports[`sign layout happy flow 1`] = `
                   </StyledComponent>
                 </styled.hr>
                 <LayoutEditor
-                  layout={
-                    Object {
-                      "authorizedKeyIds": Array [],
-                      "expectedEndProducts": Array [],
-                      "keys": Array [],
-                      "layoutSegments": Array [],
-                    }
-                  }
+                  layout={Object {}}
                   setLayout={[Function]}
-                />
+                >
+                  <styled.button
+                    onClick={[Function]}
+                  >
+                    <StyledComponent
+                      forwardedComponent={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "attrs": Array [],
+                          "componentStyle": ComponentStyle {
+                            "componentId": "sc-dnqmqq",
+                            "isStatic": false,
+                            "lastClassName": "hxFUxa",
+                            "rules": Array [
+                              "
+  ",
+                              "
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 1rem 0;
+  line-height: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  text-align: center;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background-color: ",
+                              [Function],
+                              ";
+  color: ",
+                              [Function],
+                              ";
+  outline: 0;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+  &:hover {
+    background-color: ",
+                              [Function],
+                              ";
+    cursor: pointer;
+  }
+",
+                              "
+",
+                            ],
+                          },
+                          "displayName": "styled.button",
+                          "foldedComponentIds": Array [],
+                          "render": [Function],
+                          "styledComponentId": "sc-dnqmqq",
+                          "target": "button",
+                          "toString": [Function],
+                          "warnTooManyClasses": [Function],
+                          "withComponent": [Function],
+                        }
+                      }
+                      forwardedRef={null}
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="sc-dnqmqq hxFUxa"
+                        onClick={[Function]}
+                      >
+                        +
+                      </button>
+                    </StyledComponent>
+                  </styled.button>
+                </LayoutEditor>
                 <GenericForm
                   cancellationLabel="Cancel"
                   confirmationLabel="Sign and Submit"
                   initialValues={
                     Object {
-                      "layout": "{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}",
+                      "layout": "{}",
                     }
                   }
                   isLoading={false}
@@ -3424,6 +3616,7 @@ exports[`sign layout happy flow 1`] = `
                         className="sc-VigVT sc-jzJRlG jNQHJE"
                       >
                         <form
+                          onBlur={[Function]}
                           onSubmit={[Function]}
                         >
                           <FormInput
@@ -3434,12 +3627,7 @@ exports[`sign layout happy flow 1`] = `
                             name="layout"
                             onBlur={[Function]}
                             onInput={[Function]}
-                            value="{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}"
+                            value="{}"
                           >
                             <styled.div>
                               <StyledComponent
@@ -3517,12 +3705,7 @@ exports[`sign layout happy flow 1`] = `
                                     name="layout"
                                     onBlur={[Function]}
                                     onInput={[Function]}
-                                    value="{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}"
+                                    value="{}"
                                   >
                                     <StyledComponent
                                       disabled={false}
@@ -3590,12 +3773,7 @@ exports[`sign layout happy flow 1`] = `
                                       name="layout"
                                       onBlur={[Function]}
                                       onInput={[Function]}
-                                      value="{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}"
+                                      value="{}"
                                     >
                                       <textarea
                                         className="sc-bZQynM iBrmMe"
@@ -3604,12 +3782,7 @@ exports[`sign layout happy flow 1`] = `
                                         name="layout"
                                         onBlur={[Function]}
                                         onInput={[Function]}
-                                        value="{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}"
+                                        value="{}"
                                       />
                                     </StyledComponent>
                                   </styled.textarea>
@@ -4448,27 +4621,82 @@ exports[`validates a faulty layout and returns errors 1`] = `
                   </StyledComponent>
                 </styled.hr>
                 <LayoutEditor
-                  layout={
-                    Object {
-                      "authorizedKeyIds": Array [],
-                      "expectedEndProducts": Array [],
-                      "keys": Array [],
-                      "layoutSegments": Array [],
-                    }
-                  }
+                  layout={Object {}}
                   setLayout={[Function]}
-                />
+                >
+                  <styled.button
+                    onClick={[Function]}
+                  >
+                    <StyledComponent
+                      forwardedComponent={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "attrs": Array [],
+                          "componentStyle": ComponentStyle {
+                            "componentId": "sc-dnqmqq",
+                            "isStatic": false,
+                            "lastClassName": "hxFUxa",
+                            "rules": Array [
+                              "
+  ",
+                              "
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 1rem 0;
+  line-height: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  text-align: center;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background-color: ",
+                              [Function],
+                              ";
+  color: ",
+                              [Function],
+                              ";
+  outline: 0;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+  &:hover {
+    background-color: ",
+                              [Function],
+                              ";
+    cursor: pointer;
+  }
+",
+                              "
+",
+                            ],
+                          },
+                          "displayName": "styled.button",
+                          "foldedComponentIds": Array [],
+                          "render": [Function],
+                          "styledComponentId": "sc-dnqmqq",
+                          "target": "button",
+                          "toString": [Function],
+                          "warnTooManyClasses": [Function],
+                          "withComponent": [Function],
+                        }
+                      }
+                      forwardedRef={null}
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="sc-dnqmqq hxFUxa"
+                        onClick={[Function]}
+                      >
+                        +
+                      </button>
+                    </StyledComponent>
+                  </styled.button>
+                </LayoutEditor>
                 <GenericForm
                   cancellationLabel="Cancel"
                   confirmationLabel="Sign and Submit"
                   initialValues={
                     Object {
-                      "layout": "{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}",
+                      "layout": "{}",
                     }
                   }
                   isLoading={false}
@@ -4527,6 +4755,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                         className="sc-VigVT sc-jzJRlG jNQHJE"
                       >
                         <form
+                          onBlur={[Function]}
                           onSubmit={[Function]}
                         >
                           <FormInput
@@ -4537,12 +4766,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                             name="layout"
                             onBlur={[Function]}
                             onInput={[Function]}
-                            value="{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}"
+                            value="{}"
                           >
                             <styled.div>
                               <StyledComponent
@@ -4620,12 +4844,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                     name="layout"
                                     onBlur={[Function]}
                                     onInput={[Function]}
-                                    value="{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}"
+                                    value="{}"
                                   >
                                     <StyledComponent
                                       disabled={true}
@@ -4693,12 +4912,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       name="layout"
                                       onBlur={[Function]}
                                       onInput={[Function]}
-                                      value="{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}"
+                                      value="{}"
                                     >
                                       <textarea
                                         className="sc-bZQynM ifPtDs"
@@ -4707,12 +4921,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         name="layout"
                                         onBlur={[Function]}
                                         onInput={[Function]}
-                                        value="{
-  \\"keys\\": [],
-  \\"authorizedKeyIds\\": [],
-  \\"expectedEndProducts\\": [],
-  \\"layoutSegments\\": []
-}"
+                                        value="{}"
                                       />
                                     </StyledComponent>
                                   </styled.textarea>
