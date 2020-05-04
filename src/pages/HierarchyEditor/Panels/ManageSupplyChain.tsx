@@ -18,11 +18,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import DataRequest from "../../../types/DataRequest";
-import {
-  StateContext,
-  LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes
-} from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
@@ -30,6 +25,11 @@ import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
 import { Panel } from "../../../molecules/Panel";
+import { StateContext } from "../HierarchyEditor";
+import {
+  HierarchyEditorDataActionTypes,
+  HierarchyEditorPaneActionTypes
+} from "../../../stores/hierarchyEditorStore";
 import { getToken } from "../../../stores/UserProfile";
 
 interface ISupplyChainNameFormValues {
@@ -84,7 +84,7 @@ const ManageSupplyChain = () => {
       url: "/api/supplychain",
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
+          type: HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN,
           supplyChain
         });
       }
@@ -113,7 +113,7 @@ const ManageSupplyChain = () => {
       url: `/api/supplychain/${state.nodeReferenceId}`,
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
+          type: HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN,
           supplyChain
         });
       }
@@ -125,14 +125,14 @@ const ManageSupplyChain = () => {
   useEffect(() => {
     if (
       state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
     ) {
       setInitialFormValues({ supplychainname: state.selectedNodeName });
     }
 
     if (
       state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
+      HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
     ) {
       setInitialFormValues({ supplychainname: "" });
     }
@@ -140,7 +140,7 @@ const ManageSupplyChain = () => {
 
   const updateMode =
     state.firstPanelView ===
-    LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
+    HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
 
   return (
     <Panel
@@ -172,20 +172,20 @@ const ManageSupplyChain = () => {
         validate={validate}
         onCancel={() => {
           dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
+            type: HierarchyEditorPaneActionTypes.RESET_PANE
           });
         }}
         onSubmit={values => {
           if (
             state.firstPanelView ===
-            LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
+            HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
           ) {
             postSupplyChain(values);
           }
 
           if (
             state.firstPanelView ===
-            LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
+            HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
           ) {
             updateSupplyChain(values);
           }

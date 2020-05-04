@@ -14,42 +14,40 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect, useState } from "react";
-import {
-  LayoutEditorPaneActionTypes,
-  StateContext
-} from "../../../stores/layoutEditorStore";
-import { LastBreadCrumb, NodesBreadCrumb } from "../../../atoms/Breadcrumbs";
-import ContentSeparator from "../../../atoms/ContentSeparator";
+import { LastBreadCrumb, NodesBreadCrumb } from "../../../../atoms/Breadcrumbs";
+import ContentSeparator from "../../../../atoms/ContentSeparator";
 import GenericForm, {
   IGenericFormSchema
-} from "../../../organisms/GenericForm";
+} from "../../../../organisms/GenericForm";
 import {
   Modal,
   ModalBody,
   ModalFlexColumWrapper,
   ModalFooter
-} from "../../../atoms/Modal";
-import { FormPermissions } from "../../../types/FormPermission";
-import useDataApi from "../../../hooks/useDataApi";
+} from "../../../../atoms/Modal";
+import { FormPermissions } from "../../../../types/FormPermission";
+import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer, {
   customGenericDataFetchReducer
-} from "../../../stores/genericDataFetchReducer";
-import DataRequest from "../../../types/DataRequest";
-import { serialize, signLayout } from "../LayoutService";
-import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
-import { ILayoutMetaBlock } from "../../../interfaces/ILayout";
-import { Warning } from "../../../atoms/Alerts";
-import { cryptoAvailable, WRONG_PASSWORD } from "../../../security";
-import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
-import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
-import { Panel } from "../../../molecules/Panel";
+} from "../../../../stores/genericDataFetchReducer";
+import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
+import { ILayoutMetaBlock } from "../../../../interfaces/ILayout";
+import { Warning } from "../../../../atoms/Alerts";
+import { CryptoExceptionWarning } from "../../../../molecules/CryptoExceptionWarning";
+import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
+import { Panel } from "../../../../molecules/Panel";
+import { cryptoAvailable, WRONG_PASSWORD } from "../../../../security";
 import NotificationsList, {
   INotification,
   NotificationTypes
-} from "../../../molecules/NotificationsList";
+} from "../../../../molecules/NotificationsList";
 import { ThemeContext } from "styled-components";
-import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
-import { getToken } from "../../../stores/UserProfile";
+import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
+import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
+import { StateContext } from "../../HierarchyEditor";
+import { serialize, signLayout } from "../../LayoutService";
+import useToken from "../../../../hooks/useToken";
+import DataRequest from "../../../../types/DataRequest";
 
 enum ILayoutValidationMessageTypes {
   DATA_INPUT = "DATA_INPUT",
@@ -258,7 +256,7 @@ const ManageLayoutPanel = () => {
               url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
               cbSuccess: () => {
                 dispatch({
-                  type: LayoutEditorPaneActionTypes.RESET_PANE
+                  type: HierarchyEditorPaneActionTypes.RESET_PANE
                 });
               }
             });
@@ -328,7 +326,7 @@ const ManageLayoutPanel = () => {
           validate={validateLayout}
           onCancel={() => {
             dispatch({
-              type: LayoutEditorPaneActionTypes.RESET_PANE
+              type: HierarchyEditorPaneActionTypes.RESET_PANE
             });
           }}
           onSubmit={values => {

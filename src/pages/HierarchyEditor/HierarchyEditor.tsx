@@ -33,10 +33,10 @@ import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 import {
   layoutEditorReducer,
   StateContext,
-  LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes,
+  HierarchyEditorDataActionTypes,
+  HierarchyEditorPaneActionTypes,
   LayoutEditorPaneActionType
-} from "../../stores/layoutEditorStore";
+} from "../../stores/hierarchyEditorStore";
 import {
   appendObjectToTree,
   appendLabelChildrenToTree,
@@ -56,9 +56,9 @@ import { FormPermissions } from "../../types/FormPermission";
 import { getToken, useUserProfileContextStore } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayoutPanel";
 
-const LayoutEditor = () => {
+const HierarchyEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
-    firstPanelView: LayoutEditorPaneActionTypes.NONE,
+    firstPanelView: HierarchyEditorPaneActionTypes.NONE,
     nodeReferenceId: "",
     nodeParentId: "",
     breadcrumb: "",
@@ -94,17 +94,17 @@ const LayoutEditor = () => {
 
   const getPanePermission = (
     node: ITreeNode,
-    paneActionType: LayoutEditorPaneActionTypes
+    paneActionType: HierarchyEditorPaneActionTypes
   ) => {
     let userHasEditPermission = false;
     switch (paneActionType) {
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
-      case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
         userHasEditPermission =
           node.permissions !== undefined &&
           node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0;
         break;
-      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+      case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
         userHasEditPermission =
           node.permissions !== undefined &&
           node.permissions.indexOf(PermissionTypes.LAYOUT_ADD) >= 0;
@@ -127,7 +127,7 @@ const LayoutEditor = () => {
     const selectedNodeName = Array.from(trail.slice(-1))[0].name;
 
     dispatch({
-      type: LayoutEditorPaneActionTypes.RESET_PANE
+      type: HierarchyEditorPaneActionTypes.RESET_PANE
     });
 
     dispatch({
@@ -145,7 +145,7 @@ const LayoutEditor = () => {
       type: "LABEL",
       callback: (node: ITreeNode) => {
         treeContextMenuCb(
-          LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
+          HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
           node
         );
       }
@@ -154,7 +154,7 @@ const LayoutEditor = () => {
       type: "SUPPLY_CHAIN",
       callback: (node: ITreeNode) => {
         treeContextMenuCb(
-          LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
+          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
           node
         );
       }
@@ -163,7 +163,7 @@ const LayoutEditor = () => {
       type: "NON_PERSONAL_ACCOUNT",
       callback: (node: ITreeNode) => {
         treeContextMenuCb(
-          LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
+          HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
           node
         );
       }
@@ -178,7 +178,7 @@ const LayoutEditor = () => {
           label: "Add child label",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
+              HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
               node
             );
           },
@@ -193,7 +193,7 @@ const LayoutEditor = () => {
           label: "Add supply chain",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
+              HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
               node
             );
           },
@@ -208,7 +208,7 @@ const LayoutEditor = () => {
           label: "Add npa",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
+              HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
               node
             );
           },
@@ -223,7 +223,7 @@ const LayoutEditor = () => {
           label: "Manage permissions",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
+              HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
               node
             );
           },
@@ -244,7 +244,7 @@ const LayoutEditor = () => {
           label: "manage layout",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
+              HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
               node
             );
           },
@@ -264,7 +264,7 @@ const LayoutEditor = () => {
           label: "Generate new key for npa",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-              LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
+              HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
               node
             );
           },
@@ -281,7 +281,7 @@ const LayoutEditor = () => {
 
   const cbCreateRootNode = () => {
     dispatch({
-      type: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
+      type: HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
       nodeReferenceId: "",
       nodeParentId: "",
       breadcrumb: "",
@@ -308,19 +308,19 @@ const LayoutEditor = () => {
 
   const renderPanel = (panelView: string) => {
     switch (panelView) {
-      case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
         return <ManageLabel />;
-      case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
         return <ManageSupplyChain />;
-      case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
-      case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
+      case HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
         return <ManageNpa />;
-      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
+      case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
         return <ManageLabelPermissions />;
-      case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+      case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
         return <ManageLayoutPanel />;
       default:
         return null;
@@ -330,9 +330,9 @@ const LayoutEditor = () => {
   useEffect(() => {
     if (
       (state.dataAction &&
-        state.dataAction === LayoutEditorDataActionTypes.POST_NEW_LABEL) ||
-      state.dataAction === LayoutEditorDataActionTypes.POST_NEW_NPA ||
-      state.dataAction === LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN
+        state.dataAction === HierarchyEditorDataActionTypes.POST_NEW_LABEL) ||
+      state.dataAction === HierarchyEditorDataActionTypes.POST_NEW_NPA ||
+      state.dataAction === HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN
     ) {
       const hierarchyDataRequest: DataRequest = {
         params: {
@@ -349,7 +349,7 @@ const LayoutEditor = () => {
             state.data.parentLabelId
           );
           dispatch({
-            type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+            type: HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED,
             data: state.data
           });
         }
@@ -359,9 +359,9 @@ const LayoutEditor = () => {
 
     if (
       state.dataAction &&
-      (state.dataAction === LayoutEditorDataActionTypes.PUT_LABEL ||
-        state.dataAction === LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN ||
-        state.dataAction === LayoutEditorDataActionTypes.PUT_NPA)
+      (state.dataAction === HierarchyEditorDataActionTypes.PUT_LABEL ||
+        state.dataAction === HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN ||
+        state.dataAction === HierarchyEditorDataActionTypes.PUT_NPA)
     ) {
       updateObjectInTree(treeState, treeDispatch, dispatch, state.data);
     }
@@ -417,5 +417,5 @@ const LayoutEditor = () => {
   );
 };
 
-export default LayoutEditor;
+export default HierarchyEditor;
 export { StateContext };

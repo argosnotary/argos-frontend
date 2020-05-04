@@ -21,9 +21,9 @@ import DataRequest from "../../../types/DataRequest";
 import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
 import {
   StateContext,
-  LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes
-} from "../../../stores/layoutEditorStore";
+  HierarchyEditorDataActionTypes,
+  HierarchyEditorPaneActionTypes
+} from "../../../stores/hierarchyEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import GenericForm, {
@@ -84,7 +84,7 @@ const ManageLabel = () => {
       url: "/api/label",
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.POST_NEW_LABEL,
+          type: HierarchyEditorDataActionTypes.POST_NEW_LABEL,
           label
         });
       }
@@ -113,7 +113,7 @@ const ManageLabel = () => {
       url: `/api/label/${state.nodeReferenceId}`,
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.PUT_LABEL,
+          type: HierarchyEditorDataActionTypes.PUT_LABEL,
           label
         });
       }
@@ -125,20 +125,22 @@ const ManageLabel = () => {
   useEffect(() => {
     if (
       state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
     ) {
       setInitialFormValues({ labelname: state.selectedNodeName });
     }
 
     if (
-      state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+      state.firstPanelView ===
+      HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
     ) {
       setInitialFormValues({ labelname: "" });
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
   const updateMode =
-    state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
+    state.firstPanelView ===
+    HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
 
   return (
     <Panel
@@ -170,20 +172,20 @@ const ManageLabel = () => {
         validate={validate}
         onCancel={() => {
           dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
+            type: HierarchyEditorPaneActionTypes.RESET_PANE
           });
         }}
         onSubmit={values => {
           if (
             state.firstPanelView ===
-            LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+            HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
           ) {
             postNewLabel(values);
           }
 
           if (
             state.firstPanelView ===
-            LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+            HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
           ) {
             updateLabel(values);
           }

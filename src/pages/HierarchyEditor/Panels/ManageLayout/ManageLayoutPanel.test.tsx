@@ -20,24 +20,22 @@ import { mount, ReactWrapper } from "enzyme";
 import MockAdapter from "axios-mock-adapter";
 import Axios from "axios";
 import { ThemeProvider } from "styled-components";
-import theme from "../../../theme/base.json";
+import theme from "../../../../theme/base.json";
 import { act } from "react-dom/test-utils";
 import ManageLayoutPanel from "./ManageLayoutPanel";
-import {
-  LayoutEditorPaneActionTypes,
-  StateContext
-} from "../../../stores/layoutEditorStore";
-import { FormPermissions } from "../../../types/FormPermission";
-import { ILayoutMetaBlock } from "../../../interfaces/ILayout";
-import TextArea from "../../../atoms/TextArea";
+import { FormPermissions } from "../../../../types/FormPermission";
+import { ILayoutMetaBlock } from "../../../../interfaces/ILayout";
+import TextArea from "../../../../atoms/TextArea";
 import { waitFor } from "@testing-library/dom";
-import { Modal } from "../../../atoms/Modal";
-import GenericForm from "../../../organisms/GenericForm";
-import IPersonalAccountKeyPair from "../../../interfaces/IPersonalAccountKeyPair";
-import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
-import { cryptoAvailable } from "../../../security";
-import * as layoutService from "../LayoutService";
-import { Notification } from "../../../molecules/NotificationsList";
+import { Modal } from "../../../../atoms/Modal";
+import GenericForm from "../../../../organisms/GenericForm";
+import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
+import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
+import { cryptoAvailable } from "../../../../security";
+import * as layoutService from "../../LayoutService";
+import { Notification } from "../../../../molecules/NotificationsList";
+import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
+import { StateContext } from "../../HierarchyEditor";
 
 const mock = new MockAdapter(Axios);
 
@@ -48,7 +46,7 @@ jest.mock("react-router-dom", () => ({
   })
 }));
 
-jest.mock("../../../security", () => ({
+jest.mock("../../../../security", () => ({
   cryptoAvailable: jest.fn()
 }));
 
@@ -77,7 +75,7 @@ const addItem = jest.fn();
 
 function createComponent() {
   const state = {
-    firstPanelView: LayoutEditorPaneActionTypes.NONE,
+    firstPanelView: HierarchyEditorPaneActionTypes.NONE,
     nodeReferenceId: "supplyChainId",
     nodeParentId: "",
     breadcrumb: "label / ",

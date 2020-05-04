@@ -27,9 +27,9 @@ import {
 import ITreeNode from "../../interfaces/ITreeNode";
 import ILabelPostResponse from "../../interfaces/ILabelPostResponse";
 import {
-  LayoutEditorAction,
-  LayoutEditorPaneActionTypes
-} from "../../stores/layoutEditorStore";
+  HierarchyEditorAction,
+  HierarchyEditorPaneActionTypes
+} from "../../stores/hierarchyEditorStore";
 import ISupplyChainApiResponse from "../../interfaces/ISupplyChainApiResponse";
 
 const appendLabelChildrenToTree = (
@@ -72,7 +72,7 @@ const appendObjectToTree = (
 const updateObjectInTree = (
   treeState: ITreeReducerState,
   treeDispatch: (msg: TreeReducerAction) => void,
-  stateDispatch: (msg: LayoutEditorAction) => void,
+  stateDispatch: (msg: HierarchyEditorAction) => void,
   object: ILabelPostResponse | ISupplyChainApiResponse
 ) => {
   const currentNode = findNode(treeState.data, object.id);
@@ -87,7 +87,7 @@ const updateObjectInTree = (
   });
 
   stateDispatch({
-    type: LayoutEditorPaneActionTypes.RESET_PANE
+    type: HierarchyEditorPaneActionTypes.RESET_PANE
   });
 };
 

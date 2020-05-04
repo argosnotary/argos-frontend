@@ -25,11 +25,12 @@ import {
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/Home";
-import LayoutEditorPage from "../pages/LayoutEditor/LayoutEditor";
 import LoginPage from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import UserSettingsPage from "../pages/UserSettings";
 import { RequestErrorStoreProvider } from "../stores/requestErrorStore";
+import HierarchyEditor from "../pages/HierarchyEditor/HierarchyEditor";
+import { UserProfileStoreProvider } from "../stores/UserProfile";
 import {
   UserProfileStoreProvider,
   useUserProfileContextStore
@@ -83,7 +84,7 @@ const Routes: React.FC = () => {
             </PrivateRoute>
             <PrivateRoute path="/edit/layout">
               <DashboardLayout>
-                <LayoutEditorPage />
+                <HierarchyEditor />
               </DashboardLayout>
             </PrivateRoute>
           </RequestErrorStoreProvider>
