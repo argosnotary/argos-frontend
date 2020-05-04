@@ -21,11 +21,6 @@ import { CancelButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
-import {
-  StateContext,
-  LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes
-} from "../../../stores/layoutEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import INpaApiResponse from "../../../interfaces/INpaApiResponse";
@@ -49,6 +44,11 @@ import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { FormPermissions } from "../../../types/FormPermission";
 import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
 import { Panel } from "../../../molecules/Panel";
+import { StateContext } from "../HierarchyEditor";
+import {
+  HierarchyEditorDataActionTypes,
+  HierarchyEditorPaneActionTypes
+} from "../../../stores/hierarchyEditorStore";
 
 interface INpaFormValues {
   npaname: string;
@@ -155,7 +155,7 @@ const ManageNpa = () => {
               });
 
               dispatch({
-                type: LayoutEditorDataActionTypes.POST_NEW_NPA,
+                type: HierarchyEditorDataActionTypes.POST_NEW_NPA,
                 npa: { ...npa, keyId: generatedKeys.keys.keyId }
               });
             }
@@ -192,7 +192,7 @@ const ManageNpa = () => {
       url: `/api/nonpersonalaccount/${state.nodeReferenceId}`,
       cbSuccess: (npa: INpaApiResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.PUT_NPA,
+          type: HierarchyEditorDataActionTypes.PUT_NPA,
           npa
         });
       }
@@ -216,30 +216,34 @@ const ManageNpa = () => {
 
   useEffect(() => {
     if (
-      state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
+      state.firstPanelView ===
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
     ) {
       setInitialFormValues({ npaname: state.selectedNodeName });
       getKeyId(state.nodeReferenceId);
     }
 
     if (
-      state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
+      state.firstPanelView === HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE
     ) {
       setInitialFormValues({ npaname: "" });
     }
 
     if (
       state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
     ) {
       setDisplayModal(true);
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
   const updateMode =
-    state.firstPanelView === LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
+    state.firstPanelView ===
+    HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
 
-  if (state.dataAction === LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED) {
+  if (
+    state.dataAction === HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED
+  ) {
     return (
       <Panel
         maxWidth={"37.5vw"}
@@ -273,7 +277,7 @@ const ManageNpa = () => {
             type="button"
             onClick={() =>
               dispatch({
-                type: LayoutEditorPaneActionTypes.RESET_PANE
+                type: HierarchyEditorPaneActionTypes.RESET_PANE
               })
             }
           >
@@ -286,7 +290,7 @@ const ManageNpa = () => {
 
   const getModalContent = (currentWizardState: number) => {
     const cancelHandler = () => {
-      dispatch({ type: LayoutEditorPaneActionTypes.RESET_PANE });
+      dispatch({ type: HierarchyEditorPaneActionTypes.RESET_PANE });
     };
 
     const continueHandler = async () => {
@@ -301,7 +305,7 @@ const ManageNpa = () => {
             setGeneratedPassword(generatedKeys.password);
 
             dispatch({
-              type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+              type: HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED,
               data: { keyId: generatedKeys.keys.keyId }
             });
           }
@@ -358,7 +362,7 @@ const ManageNpa = () => {
 
   if (
     state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL &&
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL &&
     displayModal
   ) {
     return (
@@ -416,20 +420,20 @@ const ManageNpa = () => {
         validate={validate}
         onCancel={() => {
           dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
+            type: HierarchyEditorPaneActionTypes.RESET_PANE
           });
         }}
         onSubmit={values => {
           if (
             state.firstPanelView ===
-            LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
+            HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE
           ) {
             postNewNpa(values);
           }
 
           if (
             state.firstPanelView ===
-            LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
+            HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
           ) {
             updateNpa(values);
           }

@@ -19,7 +19,7 @@ import ISupplyChainApiResponse from "../interfaces/ISupplyChainApiResponse";
 import INpaApiResponse from "../interfaces/INpaApiResponse";
 import { FormPermission } from "../types/FormPermission";
 
-interface ILayoutEditorState {
+interface IHierarchyEditorState {
   panePermission: FormPermission;
   nodeParentId: string;
   nodeReferenceId: string;
@@ -31,7 +31,7 @@ interface ILayoutEditorState {
   user?: any;
 }
 
-export enum LayoutEditorDataActionTypes {
+export enum HierarchyEditorDataActionTypes {
   NONE = "",
   POST_NEW_LABEL = "POST_NEW_LABEL",
   PUT_LABEL = "PUT_LABEL",
@@ -45,7 +45,7 @@ export enum LayoutEditorDataActionTypes {
   REMOVE_SEARCHED_USER = "DELETE_SEARCHED_USER"
 }
 
-export enum LayoutEditorPaneActionTypes {
+export enum HierarchyEditorPaneActionTypes {
   NONE = "",
   SHOW_ADD_LABEL_PANE = "SHOW_ADD_LABEL_PANE",
   SHOW_UPDATE_LABEL_PANE = "SHOW_UPDATE_LABEL_PANE",
@@ -61,21 +61,21 @@ export enum LayoutEditorPaneActionTypes {
 }
 
 export type LayoutEditorPaneActionType =
-  | LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
-  | LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS
-  | LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
-  | LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
-  | LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
-  | LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE
-  | LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
-  | LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
-  | LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
-  | LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT
-  | LayoutEditorPaneActionTypes.RESET_PANE;
+  | HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
+  | HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS
+  | HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
+  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
+  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
+  | HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE
+  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
+  | HierarchyEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
+  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
+  | HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT
+  | HierarchyEditorPaneActionTypes.RESET_PANE;
 
-export type LayoutEditorPaneAction =
+export type HierarchyEditorPaneAction =
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE;
+      type: HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE;
       nodeParentId: string;
       nodeReferenceId: string;
       breadcrumb: string;
@@ -83,14 +83,14 @@ export type LayoutEditorPaneAction =
       panePermission: FormPermission;
     }
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS;
+      type: HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS;
       nodeParentId: string;
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
     }
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
+      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
       nodeReferenceId: string;
       nodeParentId: string;
       breadcrumb: string;
@@ -98,7 +98,7 @@ export type LayoutEditorPaneAction =
       panePermission: FormPermission;
     }
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE;
+      type: HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE;
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
@@ -106,7 +106,7 @@ export type LayoutEditorPaneAction =
       panePermission: FormPermission;
     }
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
+      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
       nodeReferenceId: string;
       nodeParentId: string;
       breadcrumb: string;
@@ -114,7 +114,7 @@ export type LayoutEditorPaneAction =
       panePermission: FormPermission;
     }
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE;
+      type: HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE;
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
@@ -122,33 +122,33 @@ export type LayoutEditorPaneAction =
       panePermission: FormPermission;
     }
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
+      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
       nodeReferenceId: string;
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
       panePermission: FormPermission;
     }
-  | { type: LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE }
+  | { type: HierarchyEditorPaneActionTypes.SHOW_NPA_PASSPHRASE }
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL;
+      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL;
       nodeReferenceId: string;
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
     }
   | {
-      type: LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT;
+      type: HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT;
       nodeParentId: string;
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
       panePermission: FormPermission;
     }
-  | { type: LayoutEditorPaneActionTypes.RESET_PANE };
+  | { type: HierarchyEditorPaneActionTypes.RESET_PANE };
 
 interface IDataActionCompleted {
-  type: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED;
+  type: HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED;
   data: any;
 }
 
@@ -157,203 +157,208 @@ interface IStoredSearchedUser {
   name: string;
 }
 
-export type LayoutEditorDataAction =
+export type HierarchyEditorDataAction =
   | IDataActionCompleted
   | {
-      type: LayoutEditorDataActionTypes.POST_NEW_LABEL;
+      type: HierarchyEditorDataActionTypes.POST_NEW_LABEL;
       label: ILabelPostResponse;
     }
-  | { type: LayoutEditorDataActionTypes.PUT_LABEL; label: ILabelPostResponse }
   | {
-      type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN;
+      type: HierarchyEditorDataActionTypes.PUT_LABEL;
+      label: ILabelPostResponse;
+    }
+  | {
+      type: HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN;
       supplyChain: ISupplyChainApiResponse;
     }
   | {
-      type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN;
+      type: HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN;
       supplyChain: ISupplyChainApiResponse;
     }
   | {
-      type: LayoutEditorDataActionTypes.POST_NEW_NPA;
+      type: HierarchyEditorDataActionTypes.POST_NEW_NPA;
       npa: INpaApiResponse;
     }
   | {
-      type: LayoutEditorDataActionTypes.POST_NEW_NPA_KEY;
+      type: HierarchyEditorDataActionTypes.POST_NEW_NPA_KEY;
     }
   | {
-      type: LayoutEditorDataActionTypes.PUT_NPA;
+      type: HierarchyEditorDataActionTypes.PUT_NPA;
       npa: INpaApiResponse;
     }
   | {
-      type: LayoutEditorDataActionTypes.STORE_SEARCHED_USER;
+      type: HierarchyEditorDataActionTypes.STORE_SEARCHED_USER;
       user: IStoredSearchedUser;
     }
   | {
-      type: LayoutEditorDataActionTypes.REMOVE_SEARCHED_USER;
+      type: HierarchyEditorDataActionTypes.REMOVE_SEARCHED_USER;
     };
 
-export type LayoutEditorAction =
-  | LayoutEditorPaneAction
-  | LayoutEditorDataAction;
+export type HierarchyEditorAction =
+  | HierarchyEditorPaneAction
+  | HierarchyEditorDataAction;
 
 const layoutEditorReducer = (
-  state: ILayoutEditorState,
-  action: LayoutEditorAction
+  state: IHierarchyEditorState,
+  action: HierarchyEditorAction
 ) => {
   switch (action.type) {
-    case LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
+    case HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
       return {
         ...state,
-        firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
+    case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
       return {
         ...state,
         firstPanelView:
-          LayoutEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
+          HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
-    case LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
+    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
       return {
         ...state,
-        firstPanelView: LayoutEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
-      return {
-        ...state,
-        firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
-        nodeReferenceId: action.nodeReferenceId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
-      };
-    case LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
+    case HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
       return {
         ...state,
         firstPanelView:
-          LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
+          HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
+        nodeReferenceId: action.nodeReferenceId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
+      };
+    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
+      return {
+        ...state,
+        firstPanelView:
+          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+    case HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
       return {
         ...state,
-        firstPanelView: LayoutEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
       return {
         ...state,
-        firstPanelView: LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE:
+    case HierarchyEditorPaneActionTypes.SHOW_NPA_PASSPHRASE:
       return {
         ...state,
-        firstPanelView: LayoutEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
       };
-    case LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
+    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
       return {
         ...state,
-        firstPanelView: LayoutEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
+        firstPanelView:
+          HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName
       };
 
-    case LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+    case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
       return {
         ...state,
-        firstPanelView: LayoutEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case LayoutEditorPaneActionTypes.RESET_PANE:
+    case HierarchyEditorPaneActionTypes.RESET_PANE:
       return {
         ...state,
         firstPanelView: "",
         nodeReferenceId: "",
         dataAction: ""
       };
-    case LayoutEditorDataActionTypes.POST_NEW_LABEL:
+    case HierarchyEditorDataActionTypes.POST_NEW_LABEL:
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.POST_NEW_LABEL,
+        dataAction: HierarchyEditorDataActionTypes.POST_NEW_LABEL,
         data: action.label
       };
-    case LayoutEditorDataActionTypes.POST_NEW_NPA_KEY:
+    case HierarchyEditorDataActionTypes.POST_NEW_NPA_KEY:
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.POST_NEW_NPA_KEY
+        dataAction: HierarchyEditorDataActionTypes.POST_NEW_NPA_KEY
       };
-    case LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED: {
+    case HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED: {
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.DATA_ACTION_COMPLETED,
+        dataAction: HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED,
         data: action.data
       };
     }
-    case LayoutEditorDataActionTypes.PUT_LABEL: {
+    case HierarchyEditorDataActionTypes.PUT_LABEL: {
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.PUT_LABEL,
+        dataAction: HierarchyEditorDataActionTypes.PUT_LABEL,
         data: action.label
       };
     }
-    case LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN:
+    case HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN:
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
+        dataAction: HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN,
         data: action.supplyChain
       };
-    case LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN:
+    case HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN:
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
+        dataAction: HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN,
         data: action.supplyChain
       };
-    case LayoutEditorDataActionTypes.POST_NEW_NPA:
+    case HierarchyEditorDataActionTypes.POST_NEW_NPA:
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.POST_NEW_NPA,
+        dataAction: HierarchyEditorDataActionTypes.POST_NEW_NPA,
         data: action.npa
       };
-    case LayoutEditorDataActionTypes.PUT_NPA:
+    case HierarchyEditorDataActionTypes.PUT_NPA:
       return {
         ...state,
-        dataAction: LayoutEditorDataActionTypes.PUT_NPA,
+        dataAction: HierarchyEditorDataActionTypes.PUT_NPA,
         data: action.npa
       };
-    case LayoutEditorDataActionTypes.STORE_SEARCHED_USER:
+    case HierarchyEditorDataActionTypes.STORE_SEARCHED_USER:
       return {
         ...state,
         user: action.user
       };
-    case LayoutEditorDataActionTypes.REMOVE_SEARCHED_USER: {
+    case HierarchyEditorDataActionTypes.REMOVE_SEARCHED_USER: {
       const stateCopy = Object.assign({}, state);
       delete stateCopy["user"];
 
@@ -363,9 +368,9 @@ const layoutEditorReducer = (
 };
 
 const StateContext = React.createContext<
-  [ILayoutEditorState, Dispatch<LayoutEditorAction>]
+  [IHierarchyEditorState, Dispatch<HierarchyEditorAction>]
 >([
-  {} as ILayoutEditorState,
+  {} as IHierarchyEditorState,
   () => {
     return;
   }

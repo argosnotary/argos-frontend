@@ -15,7 +15,6 @@
  */
 import React, { useContext, useEffect, useState } from "react";
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
-import { StateContext } from "../../../stores/layoutEditorStore";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import ISearchResult from "../../../interfaces/ISearchResult";
 import SearchInput from "../../../atoms/SearchInput";
@@ -27,6 +26,7 @@ import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationComponent";
 import { Panel } from "../../../molecules/Panel";
+import { StateContext } from "../HierarchyEditor";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
