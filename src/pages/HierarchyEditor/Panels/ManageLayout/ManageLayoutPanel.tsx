@@ -46,8 +46,8 @@ import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
 import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
 import { StateContext } from "../../HierarchyEditor";
 import { serialize, signLayout } from "../../LayoutService";
-import useToken from "../../../../hooks/useToken";
 import DataRequest from "../../../../types/DataRequest";
+import { getToken } from "../../../../stores/UserProfile";
 
 enum ILayoutValidationMessageTypes {
   DATA_INPUT = "DATA_INPUT",

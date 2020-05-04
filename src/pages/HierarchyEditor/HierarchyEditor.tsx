@@ -54,7 +54,7 @@ import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
 import { getToken, useUserProfileContextStore } from "../../stores/UserProfile";
-import ManageLayoutPanel from "./Panels/ManageLayoutPanel";
+import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
 
 const HierarchyEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {

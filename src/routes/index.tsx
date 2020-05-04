@@ -30,7 +30,6 @@ import PrivateRoute from "./PrivateRoute";
 import UserSettingsPage from "../pages/UserSettings";
 import { RequestErrorStoreProvider } from "../stores/requestErrorStore";
 import HierarchyEditor from "../pages/HierarchyEditor/HierarchyEditor";
-import { UserProfileStoreProvider } from "../stores/UserProfile";
 import {
   UserProfileStoreProvider,
   useUserProfileContextStore
