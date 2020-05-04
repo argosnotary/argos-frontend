@@ -14,6 +14,24 @@
  * limitations under the License.
  */
 
-const LayoutEditor = () => {};
+import React, { Dispatch } from "react";
+import { ILayout } from "../../../../interfaces/ILayout";
+
+interface ILayoutEditorProps {
+  setLayout: Dispatch<ILayout>;
+  layout: ILayout;
+}
+
+const LayoutEditor: React.FC<ILayoutEditorProps> = ({ layout }) => {
+  return (
+    <>
+      {layout.layoutSegments
+        ? layout.layoutSegments.map((segment, _key) => (
+            <li key={segment.name}>{segment.name}</li>
+          ))
+        : null}
+    </>
+  );
+};
 
 export default LayoutEditor;

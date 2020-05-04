@@ -369,6 +369,17 @@ exports[`renders correctly with existing layout 1`] = `
                     />
                   </StyledComponent>
                 </styled.hr>
+                <LayoutEditor
+                  layout={
+                    Object {
+                      "authorizedKeyIds": Array [],
+                      "expectedEndProducts": Array [],
+                      "keys": Array [],
+                      "layoutSegments": Array [],
+                    }
+                  }
+                  setLayout={[Function]}
+                />
                 <GenericForm
                   cancellationLabel="Cancel"
                   confirmationLabel="Sign and Submit"
@@ -385,6 +396,7 @@ exports[`renders correctly with existing layout 1`] = `
                   isLoading={false}
                   onCancel={[Function]}
                   onSubmit={[Function]}
+                  onValidChange={[Function]}
                   permission="EDIT"
                   schema={
                     Array [
@@ -1611,13 +1623,22 @@ exports[`renders correctly with non existing layout 1`] = `
                     />
                   </StyledComponent>
                 </styled.hr>
+                <LayoutEditor
+                  layout={Object {}}
+                  setLayout={[Function]}
+                />
                 <GenericForm
                   cancellationLabel="Cancel"
                   confirmationLabel="Sign and Submit"
-                  initialValues={Object {}}
+                  initialValues={
+                    Object {
+                      "layout": "{}",
+                    }
+                  }
                   isLoading={false}
                   onCancel={[Function]}
                   onSubmit={[Function]}
+                  onValidChange={[Function]}
                   permission="EDIT"
                   schema={
                     Array [
@@ -1680,6 +1701,7 @@ exports[`renders correctly with non existing layout 1`] = `
                             name="layout"
                             onBlur={[Function]}
                             onInput={[Function]}
+                            value="{}"
                           >
                             <styled.div>
                               <StyledComponent
@@ -1757,6 +1779,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                     name="layout"
                                     onBlur={[Function]}
                                     onInput={[Function]}
+                                    value="{}"
                                   >
                                     <StyledComponent
                                       disabled={false}
@@ -1824,6 +1847,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                       name="layout"
                                       onBlur={[Function]}
                                       onInput={[Function]}
+                                      value="{}"
                                     >
                                       <textarea
                                         className="sc-bZQynM iBrmMe"
@@ -1832,6 +1856,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                         name="layout"
                                         onBlur={[Function]}
                                         onInput={[Function]}
+                                        value="{}"
                                       />
                                     </StyledComponent>
                                   </styled.textarea>
@@ -3319,17 +3344,34 @@ exports[`sign layout happy flow 1`] = `
                     />
                   </StyledComponent>
                 </styled.hr>
+                <LayoutEditor
+                  layout={
+                    Object {
+                      "authorizedKeyIds": Array [],
+                      "expectedEndProducts": Array [],
+                      "keys": Array [],
+                      "layoutSegments": Array [],
+                    }
+                  }
+                  setLayout={[Function]}
+                />
                 <GenericForm
                   cancellationLabel="Cancel"
                   confirmationLabel="Sign and Submit"
                   initialValues={
                     Object {
-                      "layout": "{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}",
+                      "layout": "{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}",
                     }
                   }
                   isLoading={false}
                   onCancel={[Function]}
                   onSubmit={[Function]}
+                  onValidChange={[Function]}
                   permission="EDIT"
                   schema={
                     Array [
@@ -3392,7 +3434,12 @@ exports[`sign layout happy flow 1`] = `
                             name="layout"
                             onBlur={[Function]}
                             onInput={[Function]}
-                            value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
+                            value="{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}"
                           >
                             <styled.div>
                               <StyledComponent
@@ -3470,7 +3517,12 @@ exports[`sign layout happy flow 1`] = `
                                     name="layout"
                                     onBlur={[Function]}
                                     onInput={[Function]}
-                                    value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
+                                    value="{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}"
                                   >
                                     <StyledComponent
                                       disabled={false}
@@ -3538,7 +3590,12 @@ exports[`sign layout happy flow 1`] = `
                                       name="layout"
                                       onBlur={[Function]}
                                       onInput={[Function]}
-                                      value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
+                                      value="{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}"
                                     >
                                       <textarea
                                         className="sc-bZQynM iBrmMe"
@@ -3547,7 +3604,12 @@ exports[`sign layout happy flow 1`] = `
                                         name="layout"
                                         onBlur={[Function]}
                                         onInput={[Function]}
-                                        value="{\\"keys\\":[],\\"authorizedKeyIds\\":[],\\"expectedEndProducts\\":[],\\"layoutSegments\\":[]}"
+                                        value="{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}"
                                       />
                                     </StyledComponent>
                                   </styled.textarea>
@@ -4385,13 +4447,34 @@ exports[`validates a faulty layout and returns errors 1`] = `
                     />
                   </StyledComponent>
                 </styled.hr>
+                <LayoutEditor
+                  layout={
+                    Object {
+                      "authorizedKeyIds": Array [],
+                      "expectedEndProducts": Array [],
+                      "keys": Array [],
+                      "layoutSegments": Array [],
+                    }
+                  }
+                  setLayout={[Function]}
+                />
                 <GenericForm
                   cancellationLabel="Cancel"
                   confirmationLabel="Sign and Submit"
-                  initialValues={Object {}}
+                  initialValues={
+                    Object {
+                      "layout": "{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}",
+                    }
+                  }
                   isLoading={false}
                   onCancel={[Function]}
                   onSubmit={[Function]}
+                  onValidChange={[Function]}
                   permission="READ"
                   schema={
                     Array [
@@ -4454,6 +4537,12 @@ exports[`validates a faulty layout and returns errors 1`] = `
                             name="layout"
                             onBlur={[Function]}
                             onInput={[Function]}
+                            value="{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}"
                           >
                             <styled.div>
                               <StyledComponent
@@ -4531,6 +4620,12 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                     name="layout"
                                     onBlur={[Function]}
                                     onInput={[Function]}
+                                    value="{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}"
                                   >
                                     <StyledComponent
                                       disabled={true}
@@ -4598,6 +4693,12 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       name="layout"
                                       onBlur={[Function]}
                                       onInput={[Function]}
+                                      value="{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}"
                                     >
                                       <textarea
                                         className="sc-bZQynM ifPtDs"
@@ -4606,6 +4707,12 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         name="layout"
                                         onBlur={[Function]}
                                         onInput={[Function]}
+                                        value="{
+  \\"keys\\": [],
+  \\"authorizedKeyIds\\": [],
+  \\"expectedEndProducts\\": [],
+  \\"layoutSegments\\": []
+}"
                                       />
                                     </StyledComponent>
                                   </styled.textarea>

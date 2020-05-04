@@ -55,6 +55,7 @@ interface IGenericForm {
   confirmationLabel: string;
   cancellationLabel: string;
   initialValues: FormikValues;
+  onValidChange?: (values: any) => void;
 }
 
 const GenericForm: React.FC<IGenericForm> = ({
@@ -66,7 +67,8 @@ const GenericForm: React.FC<IGenericForm> = ({
   isLoading,
   confirmationLabel,
   cancellationLabel,
-  initialValues
+  initialValues,
+  onValidChange
 }) => {
   const formik = useFormik({
     initialValues,
@@ -76,7 +78,6 @@ const GenericForm: React.FC<IGenericForm> = ({
     },
     validate
   });
-
   useEffect(() => {
     formik.setValues(initialValues);
   }, [initialValues]);
@@ -113,7 +114,12 @@ const GenericForm: React.FC<IGenericForm> = ({
                 name={entry.name}
                 formType={entry.formType}
                 onInput={formik.handleChange}
-                onBlur={formik.handleBlur}
+                onBlur={event => {
+                  formik.handleBlur(event);
+                  if (onValidChange && formik.isValid) {
+                    onValidChange(formik.values);
+                  }
+                }}
                 value={formik.values[entry.name]}
                 disabled={permission === FormPermissions.READ ? true : false}
                 height={"25rem"}

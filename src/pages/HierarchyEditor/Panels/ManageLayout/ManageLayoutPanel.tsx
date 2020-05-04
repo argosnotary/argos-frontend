@@ -31,7 +31,7 @@ import genericDataFetchReducer, {
   customGenericDataFetchReducer
 } from "../../../../stores/genericDataFetchReducer";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
-import { ILayoutMetaBlock } from "../../../../interfaces/ILayout";
+import { ILayout, ILayoutMetaBlock } from "../../../../interfaces/ILayout";
 import { Warning } from "../../../../atoms/Alerts";
 import { CryptoExceptionWarning } from "../../../../molecules/CryptoExceptionWarning";
 import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
@@ -45,9 +45,10 @@ import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
 import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
 import { StateContext } from "../../HierarchyEditor";
-import { serialize, signLayout } from "../../LayoutService";
+import { signLayout } from "../../LayoutService";
 import useToken from "../../../../hooks/useToken";
 import DataRequest from "../../../../types/DataRequest";
+import LayoutEditor from "./LayoutEditor";
 
 enum ILayoutValidationMessageTypes {
   DATA_INPUT = "DATA_INPUT",
@@ -87,9 +88,9 @@ const validateLayout = (values: ILayoutFormValues) => {
     errors.layout = "Please fill in a layout.";
   } else {
     try {
-      serialize(JSON.parse(values.layout));
+      JSON.parse(values.layout);
     } catch (e) {
-      errors.layout = "Invalid json";
+      errors.layout = "Invalid json " + e;
     }
   }
   return errors;
@@ -144,7 +145,7 @@ const ManageLayoutPanel = () => {
   const [state, dispatch] = useContext(StateContext);
   const [displayModal, setDisplayModal] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
-  const [layout, setLayout] = useState({} as ILayoutFormValues);
+  const [layout, setLayout] = useState({} as ILayout);
   const [cryptoException, setCryptoException] = useState(false);
 
   const [passphrase, setPassphrase] = useState("");
@@ -172,7 +173,7 @@ const ManageLayoutPanel = () => {
     token,
     url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
     cbSuccess: (layoutMetaBlock: ILayoutMetaBlock) => {
-      setLayout({ layout: JSON.stringify(layoutMetaBlock.layout, null, 2) });
+      setLayout(layoutMetaBlock.layout);
     },
     cbFailure: (error): boolean => {
       return error.response && error.response.status === 404;
@@ -196,7 +197,7 @@ const ManageLayoutPanel = () => {
       token: token,
       url: "/api/supplychain/" + state.nodeReferenceId + "/layout/validate",
       cbSuccess: () => {
-        setLayout(values);
+        // setLayout(JSON.parse(values.layout));
         setDisplayModal(true);
       },
       cbFailure: (error: any): boolean => {
@@ -242,12 +243,7 @@ const ManageLayoutPanel = () => {
       token: token,
       url: "/api/personalaccount/me/key",
       cbSuccess: (key: IPersonalAccountKeyPair) => {
-        signLayout(
-          passphrase,
-          key.keyId,
-          key.encryptedPrivateKey,
-          JSON.parse(layout.layout)
-        )
+        signLayout(passphrase, key.keyId, key.encryptedPrivateKey, layout)
           .then(layoutMetaBlock => {
             setDataRequestPostLayout({
               data: layoutMetaBlock,
@@ -317,6 +313,7 @@ const ManageLayoutPanel = () => {
             <ContentSeparator />
           </>
         ) : null}
+        <LayoutEditor layout={layout} setLayout={setLayout} />
         <GenericForm
           schema={formSchema}
           permission={
@@ -330,11 +327,13 @@ const ManageLayoutPanel = () => {
             });
           }}
           onSubmit={values => {
+            setLayout(JSON.parse(values.layout));
             requestLayoutValidation(values);
           }}
           confirmationLabel={"Sign and Submit"}
           cancellationLabel={"Cancel"}
-          initialValues={layout}
+          initialValues={{ layout: JSON.stringify(layout, null, 2) }}
+          onValidChange={values => setLayout(JSON.parse(values.layout))}
         />
         {!cryptoAvailable() ? <NoCryptoWarning /> : null}
         {cryptoException ? <CryptoExceptionWarning /> : null}
