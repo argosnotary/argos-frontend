@@ -19,59 +19,59 @@ import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
+import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
 import {
   StateContext,
-  LayoutEditorDataActionTypes,
-  LayoutEditorPaneActionTypes
-} from "../../../stores/layoutEditorStore";
+  HierarchyEditorDataActionTypes,
+  HierarchyEditorPaneActionTypes
+} from "../../../stores/hierarchyEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
 import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
 import { Panel } from "../../../molecules/Panel";
 
-interface ISupplyChainNameFormValues {
-  supplychainname: string;
+interface ILabelNameFormValues {
+  labelname: string;
 }
 
 const formSchema: IGenericFormSchema = [
   {
-    labelValue: "Supply chain name*",
-    name: "supplychainname",
+    labelValue: "Label name*",
+    name: "labelname",
     formType: "text"
   }
 ];
 
-const validate = (values: ISupplyChainNameFormValues) => {
-  const errors = {} as ISupplyChainNameFormValues;
+const validate = (values: ILabelNameFormValues) => {
+  const errors = {} as any;
 
-  if (!values.supplychainname) {
-    errors.supplychainname = "Please fill in a supply chain name.";
-  } else if (!/^([a-z]{1}[a-z0-9-]*)?$/.test(values.supplychainname)) {
-    errors.supplychainname =
-      "Invalid supply chain name (only lowercase alphanumeric characters and hyphen is allowed).";
+  if (!values.labelname) {
+    errors.labelname = "Please fill in a label name.";
+  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.labelname)) {
+    errors.labelname =
+      "Invalid label name (only lowercase alphanumeric characters and underscore allowed).";
   }
 
   return errors;
 };
 
-const ManageSupplyChain = () => {
+const ManageLabel = () => {
   const [localStorageToken] = useToken();
   const [state, dispatch] = useContext(StateContext);
-  const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
+  const [labelPostState, setLabelPostRequest] = useDataApi(
     genericDataFetchReducer
   );
 
   const [initialFormValues, setInitialFormValues] = useState(
-    {} as ISupplyChainNameFormValues
+    {} as ILabelNameFormValues
   );
 
-  const postSupplyChain = (values: ISupplyChainNameFormValues) => {
+  const postNewLabel = (values: ILabelNameFormValues) => {
     const data: any = {};
 
-    data.name = values.supplychainname;
+    data.name = values.labelname;
 
     if (state.nodeReferenceId !== "") {
       data.parentLabelId = state.nodeReferenceId;
@@ -81,25 +81,25 @@ const ManageSupplyChain = () => {
       data,
       method: "post",
       token: localStorageToken,
-      url: "/api/supplychain",
-      cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
+      url: "/api/label",
+      cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.POST_SUPPLY_CHAIN,
-          supplyChain
+          type: HierarchyEditorDataActionTypes.POST_NEW_LABEL,
+          label
         });
       }
     };
 
-    setSupplyChainApiRequest(dataRequest);
+    setLabelPostRequest(dataRequest);
   };
 
-  const updateSupplyChain = (values: ISupplyChainNameFormValues) => {
+  const updateLabel = (values: ILabelNameFormValues) => {
     const data: any = {};
 
-    data.name = values.supplychainname;
+    data.name = values.labelname;
 
     if (state.nodeReferenceId !== "") {
-      data.supplyChainId = state.nodeReferenceId;
+      data.labelId = state.nodeReferenceId;
     }
 
     if (state.nodeParentId !== "") {
@@ -110,37 +110,37 @@ const ManageSupplyChain = () => {
       data,
       method: "put",
       token: localStorageToken,
-      url: `/api/supplychain/${state.nodeReferenceId}`,
-      cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
+      url: `/api/label/${state.nodeReferenceId}`,
+      cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
-          type: LayoutEditorDataActionTypes.PUT_SUPPLY_CHAIN,
-          supplyChain
+          type: HierarchyEditorDataActionTypes.PUT_LABEL,
+          label
         });
       }
     };
 
-    setSupplyChainApiRequest(dataRequest);
+    setLabelPostRequest(dataRequest);
   };
 
   useEffect(() => {
     if (
       state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
     ) {
-      setInitialFormValues({ supplychainname: state.selectedNodeName });
+      setInitialFormValues({ labelname: state.selectedNodeName });
     }
 
     if (
       state.firstPanelView ===
-      LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
+      HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
     ) {
-      setInitialFormValues({ supplychainname: "" });
+      setInitialFormValues({ labelname: "" });
     }
   }, [state.selectedNodeName, state.firstPanelView]);
 
   const updateMode =
     state.firstPanelView ===
-    LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
+    HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
 
   return (
     <Panel
@@ -149,8 +149,8 @@ const ManageSupplyChain = () => {
       last={true}
       title={
         updateMode
-          ? "Update selected supply chain"
-          : "Add child supply chain to selected label"
+          ? "Update selected label"
+          : "Add child label to selected label"
       }
     >
       {state.selectedNodeName !== "" ? (
@@ -168,31 +168,29 @@ const ManageSupplyChain = () => {
       <GenericForm
         schema={formSchema}
         permission={state.panePermission}
-        isLoading={supplyChainApiResponseState.isLoading}
+        isLoading={labelPostState.isLoading}
         validate={validate}
         onCancel={() => {
           dispatch({
-            type: LayoutEditorPaneActionTypes.RESET_PANE
+            type: HierarchyEditorPaneActionTypes.RESET_PANE
           });
         }}
         onSubmit={values => {
           if (
             state.firstPanelView ===
-            LayoutEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
+            HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
           ) {
-            postSupplyChain(values);
+            postNewLabel(values);
           }
 
           if (
             state.firstPanelView ===
-            LayoutEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
+            HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
           ) {
-            updateSupplyChain(values);
+            updateLabel(values);
           }
         }}
-        confirmationLabel={
-          !updateMode ? "Add supply chain" : "Update supply chaiin"
-        }
+        confirmationLabel={!updateMode ? "Add label" : "Update label"}
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}
       />
@@ -200,4 +198,4 @@ const ManageSupplyChain = () => {
   );
 };
 
-export default ManageSupplyChain;
+export default ManageLabel;
