@@ -16,7 +16,6 @@
 
 import React, { Dispatch, useState } from "react";
 import { ILayout, ILayoutSegment } from "../../../../interfaces/ILayout";
-import { Button } from "../../../../atoms/Button";
 import GenericForm, {
   IGenericFormSchema
 } from "../../../../organisms/GenericForm";
@@ -55,10 +54,35 @@ const LayoutEditor: React.FC<ILayoutEditorProps> = ({ layout, setLayout }) => {
     setActiveLayoutSegment(layoutSegment);
   };
 
+  const onDeleteSegment = (layoutSegment: ILayoutSegment) => {
+    const index = layout.layoutSegments.indexOf(layoutSegment);
+    if (index >= 0) {
+      layout.layoutSegments.splice(index, 1);
+    }
+    setLayout({ ...layout });
+  };
+
+  const onAddOrUpdateSegment = (formValues: ISegmentFormFormValues) => {
+    if (activeLayoutSegment) {
+      activeLayoutSegment.name = formValues.segmentName;
+      if (!editMode) {
+        if (layout.layoutSegments === undefined) {
+          layout.layoutSegments = [];
+        }
+        layout.layoutSegments.push(activeLayoutSegment);
+      }
+      setLayout({ ...layout });
+      setActiveLayoutSegment(undefined);
+    }
+  };
+
   const validateSegmentForm = (values: ISegmentFormFormValues) => {
     const errors = {} as ISegmentFormFormValues;
     if (!values.segmentName) {
       errors.segmentName = "Please fill in a segment name.";
+    } else if (!/^([A-Za-z0-9_-]*)?$/.test(values.segmentName)) {
+      errors.segmentName =
+        "Invalid segment name (only alphanumeric characters, hyphen and underscore allowed).";
     } else if (
       layout.layoutSegments &&
       layout.layoutSegments.findIndex(
@@ -79,31 +103,25 @@ const LayoutEditor: React.FC<ILayoutEditorProps> = ({ layout, setLayout }) => {
           isLoading={false}
           validate={validateSegmentForm}
           onCancel={() => setActiveLayoutSegment(undefined)}
-          onSubmit={form => {
-            activeLayoutSegment.name = form.segmentName;
-            if (!editMode) {
-              if (layout.layoutSegments === undefined) {
-                layout.layoutSegments = [];
-              }
-              layout.layoutSegments.push(activeLayoutSegment);
-            }
-            setLayout({ ...layout });
-            setActiveLayoutSegment(undefined);
-          }}
+          onSubmit={onAddOrUpdateSegment}
           confirmationLabel={editMode ? "Update" : "Add"}
           cancellationLabel={"Cancel"}
           initialValues={{ segmentName: activeLayoutSegment.name }}
         />
       ) : (
-        <Button onClick={onAddSegment}>+</Button>
+        <button onClick={onAddSegment}>add segment</button>
       )}
-      {layout.layoutSegments
-        ? layout.layoutSegments.map((segment, _key) => (
-            <li onClick={() => onUpdateSegment(segment)} key={segment.name}>
-              {segment.name}
-            </li>
-          ))
-        : null}
+      <ul>
+        {layout.layoutSegments
+          ? layout.layoutSegments.map((segment, _key) => (
+              <li key={segment.name}>
+                {segment.name}
+                <button onClick={() => onUpdateSegment(segment)}>edit</button>
+                <button onClick={() => onDeleteSegment(segment)}>delete</button>
+              </li>
+            ))
+          : null}
+      </ul>
     </>
   );
 };
