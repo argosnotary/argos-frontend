@@ -13,163 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { LastBreadCrumb, NodesBreadCrumb } from "../../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../../atoms/ContentSeparator";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../../organisms/GenericForm";
-import {
-  Modal,
-  ModalBody,
-  ModalFlexColumWrapper,
-  ModalFooter
-} from "../../../../atoms/Modal";
-import { FormPermissions } from "../../../../types/FormPermission";
+
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
-import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
+
 import { ILayout, ILayoutMetaBlock } from "../../../../interfaces/ILayout";
-import { Warning } from "../../../../atoms/Alerts";
-import { CryptoExceptionWarning } from "../../../../molecules/CryptoExceptionWarning";
+
 import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { Panel } from "../../../../molecules/Panel";
-import { cryptoAvailable, WRONG_PASSWORD } from "../../../../security";
-import NotificationsList, {
-  INotification,
-  NotificationTypes
-} from "../../../../molecules/NotificationsList";
-import { ThemeContext } from "styled-components";
-import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
-import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
-import { StateContext } from "../../HierarchyEditor";
-import { signLayout } from "../../LayoutService";
+import { cryptoAvailable } from "../../../../security";
 import useToken from "../../../../hooks/useToken";
 import DataRequest from "../../../../types/DataRequest";
 import LayoutEditor from "./LayoutEditor";
+import {
+  createLayoutEditorStoreContext,
+  LayoutEditorActionType,
+  LayoutEditorStoreContext
+} from "./LayoutEditorStore";
+import LayoutJsonEditor from "./LayoutJsonEditor";
+import LayoutSigner from "./LayoutSigner";
+import LayoutEditorDetailsPane from "./LayoutEditorDetailsPane";
+import { StateContext } from "../../HierarchyEditor";
 
-enum ILayoutValidationMessageTypes {
-  DATA_INPUT = "DATA_INPUT",
-  MODEL_CONSISTENCY = "MODEL_CONSISTENCY"
-}
+const ManageLayoutPanel: React.FC = () => {
+  const [state, _dispatch] = useContext(StateContext);
 
-interface ILayoutValidationMessage {
-  field?: string;
-  type: ILayoutValidationMessageTypes;
-  message: string;
-}
-
-interface ILayoutValidationErrorResponse {
-  messages: Array<ILayoutValidationMessage>;
-}
-
-interface ILayoutFormValues {
-  layout: string;
-}
-
-interface IPasswordFormValues {
-  passphrase: string;
-}
-
-const formSchema: IGenericFormSchema = [
-  {
-    labelValue: "Layout*",
-    name: "layout",
-    formType: "textArea"
-  }
-];
-
-const validateLayout = (values: ILayoutFormValues) => {
-  const errors = {} as ILayoutFormValues;
-
-  if (!values.layout) {
-    errors.layout = "Please fill in a layout.";
-  } else {
-    try {
-      JSON.parse(values.layout);
-    } catch (e) {
-      errors.layout = "Invalid json " + e;
-    }
-  }
-  return errors;
-};
-
-const validatePassphrase = (values: IPasswordFormValues) => {
-  const errors = {} as IPasswordFormValues;
-
-  if (!values.passphrase) {
-    errors.passphrase = "Please fill in a passphrase.";
-  }
-  return errors;
-};
-
-const passPhraseFormSchema: IGenericFormSchema = [
-  {
-    labelValue: "Passphrase*",
-    name: "passphrase",
-    formType: "password"
-  }
-];
-
-const getModalContent = (
-  onSubmit: (values: any) => void,
-  onCancel: () => void,
-  isLoading: boolean,
-  showWarning: boolean,
-  passphrase: string
-) => {
-  return (
-    <>
-      {showWarning ? <Warning message={"Incorrect passphrase"} /> : null}
-      <ModalBody>
-        <GenericForm
-          schema={passPhraseFormSchema}
-          permission={FormPermissions.EDIT}
-          isLoading={isLoading}
-          validate={validatePassphrase}
-          onCancel={onCancel}
-          onSubmit={onSubmit}
-          confirmationLabel={"Confirm"}
-          cancellationLabel={"Cancel"}
-          initialValues={{ passphrase: passphrase }}
-        />
-      </ModalBody>
-      <ModalFooter />
-    </>
-  );
-};
-
-const ManageLayoutPanel = () => {
-  const [state, dispatch] = useContext(StateContext);
-  const [displayModal, setDisplayModal] = useState(false);
-  const [showWarning, setShowWarning] = useState(false);
-  const [layout, setLayout] = useState({} as ILayout);
-  const [layoutJson, setLayoutJson] = useState<string>("");
-  const [cryptoException, setCryptoException] = useState(false);
-
-  const [passphrase, setPassphrase] = useState("");
-
-  const [responseRequestKey, setDataRequestKey] = useDataApi(
-    genericDataFetchReducer
-  );
-  const [responsePostLayout, setDataRequestPostLayout] = useDataApi(
-    genericDataFetchReducer
-  );
-
-  const [responseLayoutValidation, setLayoutValidationDataRequest] = useDataApi(
-    genericDataFetchReducer
-  );
-
-  const [layoutValidationErrors, setLayoutValidationErrors] = useState(
-    [] as Array<INotification>
-  );
+  const editorStoreContext = createLayoutEditorStoreContext();
 
   const [token] = useToken();
-  const theme = useContext(ThemeContext);
 
   const [layoutApiResponse, setLayoutApiRequest] = useDataApi(
     genericDataFetchReducer
   );
+
+  useEffect(() => {
+    editorStoreContext.dispatch({
+      type: layoutApiResponse.isLoading
+        ? LayoutEditorActionType.START_LOADING
+        : LayoutEditorActionType.END_LOADING
+    });
+  }, [layoutApiResponse.isLoading]);
+
+  const setLayout = (layout: ILayout) => {
+    editorStoreContext.dispatch({
+      type: LayoutEditorActionType.UPDATE_LAYOUT,
+      layout: layout
+    });
+  };
 
   useEffect(() => {
     setLayout({} as ILayout);
@@ -187,167 +80,29 @@ const ManageLayoutPanel = () => {
     setLayoutApiRequest(getLayoutRequest);
   }, [state.nodeReferenceId]);
 
-  useEffect(() => {
-    setLayoutJson(JSON.stringify(layout, null, 2));
-  }, [layout]);
-
-  const requestLayoutValidation = (values: ILayoutFormValues) => {
-    const dataRequest: DataRequest = {
-      data: values.layout,
-      method: "post",
-      token: token,
-      url: "/api/supplychain/" + state.nodeReferenceId + "/layout/validate",
-      cbSuccess: () => {
-        setDisplayModal(true);
-      },
-      cbFailure: (error: any): boolean => {
-        const response: ILayoutValidationErrorResponse = error.response.data;
-        const notifications: Array<INotification> = convertValidationMessagesToNotifications(
-          response
-        );
-
-        setLayoutValidationErrors(notifications);
-        return true;
-      }
-    };
-
-    setLayoutValidationDataRequest(dataRequest);
-  };
-
-  const convertValidationMessagesToNotifications = (
-    response: ILayoutValidationErrorResponse
-  ) => {
-    if (!response) {
-      return [] as Array<INotification>;
-    }
-
-    const notifications: Array<INotification> = response.messages.map(
-      (message: ILayoutValidationMessage) => {
-        const notification: INotification = {} as INotification;
-
-        notification.body = `${message.field ? message.field : ""} ${
-          message.message
-        }`;
-        notification.type = NotificationTypes.ERROR;
-
-        return notification;
-      }
-    );
-
-    return notifications;
-  };
-
-  const postNewLayout = () => {
-    const dataRequest: DataRequest = {
-      method: "get",
-      token: token,
-      url: "/api/personalaccount/me/key",
-      cbSuccess: (key: IPersonalAccountKeyPair) => {
-        signLayout(passphrase, key.keyId, key.encryptedPrivateKey, layout)
-          .then(layoutMetaBlock => {
-            setDataRequestPostLayout({
-              data: layoutMetaBlock,
-              method: "post",
-              token: token,
-              url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
-              cbSuccess: () => {
-                dispatch({
-                  type: HierarchyEditorPaneActionTypes.RESET_PANE
-                });
-              }
-            });
-          })
-          .catch(e => {
-            setPassphrase("");
-            if (e === WRONG_PASSWORD) {
-              setShowWarning(true);
-            } else {
-              setDisplayModal(false);
-              setCryptoException(true);
-              throw e;
-            }
-          });
-      }
-    };
-    setDataRequestKey(dataRequest);
-  };
-
-  useEffect(() => {
-    if (passphrase.length > 0) {
-      postNewLayout();
-    }
-  }, [passphrase]);
-
   return (
     <>
-      <Panel width={"37.5vw"} resizable={true} title={"Manage layout"}>
-        {displayModal ? (
-          <Modal>
-            <ModalFlexColumWrapper>
-              {getModalContent(
-                value => {
-                  setShowWarning(false);
-                  setPassphrase(value.passphrase);
-                },
-                () => {
-                  setDisplayModal(false);
-                  setShowWarning(false);
-                  setPassphrase("");
-                },
-                responseRequestKey.isLoading || responsePostLayout.isLoading,
-                showWarning,
-                passphrase
-              )}
-            </ModalFlexColumWrapper>
-          </Modal>
-        ) : null}
-        {state.selectedNodeName !== "" ? (
-          <>
-            <NodesBreadCrumb>
-              Selected: {state.breadcrumb}
-              <LastBreadCrumb>
-                {state.breadcrumb.length > 0 ? " / " : ""}
-                {state.selectedNodeName}
-              </LastBreadCrumb>
-            </NodesBreadCrumb>
-            <ContentSeparator />
-          </>
-        ) : null}
-        <LayoutEditor layout={layout} setLayout={setLayout} />
-        <GenericForm
-          schema={formSchema}
-          permission={
-            cryptoAvailable() ? state.panePermission : FormPermissions.READ
-          }
-          isLoading={layoutApiResponse.isLoading}
-          validate={validateLayout}
-          onCancel={() => {
-            dispatch({
-              type: HierarchyEditorPaneActionTypes.RESET_PANE
-            });
-          }}
-          onSubmit={values => {
-            requestLayoutValidation(values);
-          }}
-          confirmationLabel={"Sign and Submit"}
-          cancellationLabel={"Cancel"}
-          initialValues={{ layout: layoutJson }}
-          onValidChange={values => setLayout(JSON.parse(values.layout))}
-        />
-        {!cryptoAvailable() ? <NoCryptoWarning /> : null}
-        {cryptoException ? <CryptoExceptionWarning /> : null}
-      </Panel>
-      <Panel
-        width={"37.5vw"}
-        last={true}
-        title={layoutValidationErrors.length ? "Validation errors" : ""}
-      >
-        {responseLayoutValidation.isLoading ? (
-          <AlternateLoader size={32} color={theme.alternateLoader.color} />
-        ) : (
-          <NotificationsList notifications={layoutValidationErrors} />
-        )}
-      </Panel>
+      <LayoutEditorStoreContext.Provider value={editorStoreContext}>
+        <Panel width={"37.5vw"} resizable={true} title={"Manage layout"}>
+          {state.selectedNodeName !== "" ? (
+            <>
+              <NodesBreadCrumb>
+                Selected: {state.breadcrumb}
+                <LastBreadCrumb>
+                  {state.breadcrumb.length > 0 ? " / " : ""}
+                  {state.selectedNodeName}
+                </LastBreadCrumb>
+              </NodesBreadCrumb>
+              <ContentSeparator />
+            </>
+          ) : null}
+          <LayoutEditor />
+          <LayoutJsonEditor />
+          <LayoutSigner />
+          {!cryptoAvailable() ? <NoCryptoWarning /> : null}
+        </Panel>
+        <LayoutEditorDetailsPane />
+      </LayoutEditorStoreContext.Provider>
     </>
   );
 };

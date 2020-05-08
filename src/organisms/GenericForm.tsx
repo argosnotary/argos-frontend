@@ -38,7 +38,7 @@ const FormContainer = styled(FlexColumn)`
 `;
 
 export interface IGenericFormInput {
-  labelValue: string;
+  labelValue?: string;
   name: string;
   formType: string;
 }
@@ -52,8 +52,8 @@ interface IGenericForm {
   onSubmit: (values: any) => void;
   onCancel: () => void;
   isLoading: boolean;
-  confirmationLabel: string;
-  cancellationLabel: string;
+  confirmationLabel?: string;
+  cancellationLabel?: string;
   initialValues: FormikValues;
   onValidChange?: (values: any) => void;
 }
@@ -139,20 +139,25 @@ const GenericForm: React.FC<IGenericForm> = ({
         }}
       >
         {renderFormElements(formik, schema)}
-        {permission === FormPermissions.EDIT ? (
+        {permission === FormPermissions.EDIT &&
+        (confirmationLabel || cancellationLabel) ? (
           <>
             <ContentSeparator />
             <FlexRow>
-              <LoaderButton buttonType="submit" loading={isLoading}>
-                {confirmationLabel}
-              </LoaderButton>
-              <CustomCancelButton
-                data-testhook="cancel-button"
-                type="button"
-                onClick={() => onCancel()}
-              >
-                {cancellationLabel}
-              </CustomCancelButton>
+              {confirmationLabel ? (
+                <LoaderButton buttonType="submit" loading={isLoading}>
+                  {confirmationLabel}
+                </LoaderButton>
+              ) : null}
+              {cancellationLabel ? (
+                <CustomCancelButton
+                  data-testhook="cancel-button"
+                  type="button"
+                  onClick={() => onCancel()}
+                >
+                  {cancellationLabel}
+                </CustomCancelButton>
+              ) : null}
             </FlexRow>
           </>
         ) : null}

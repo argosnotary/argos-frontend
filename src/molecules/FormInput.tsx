@@ -21,7 +21,7 @@ import Input from "../atoms/Input";
 import InputLabel from "../atoms/InputLabel";
 
 interface IFormInputProps {
-  labelValue: string;
+  labelValue?: string;
   placeHolder?: string;
   name: string;
   defaultValue?: string;
@@ -49,8 +49,9 @@ const FormInput: React.FC<IFormInputProps> = ({
   disabled
 }) => (
   <FormInputContainer>
-    <InputLabel>{labelValue}</InputLabel>
+    {labelValue ? <InputLabel>{labelValue}</InputLabel> : null}
     <Input
+      autoFocus={true}
       disabled={disabled}
       name={name}
       {...(onBlur ? { onBlur } : "")}
