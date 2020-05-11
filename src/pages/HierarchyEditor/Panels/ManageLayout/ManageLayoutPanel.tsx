@@ -30,13 +30,18 @@ import LayoutEditor from "./LayoutEditor";
 import {
   createLayoutEditorStoreContext,
   LayoutEditorActionType,
-  LayoutEditorStoreContext
+  LayoutEditorStoreContext,
 } from "./LayoutEditorStore";
 import LayoutJsonEditor from "./LayoutJsonEditor";
 import LayoutSigner from "./LayoutSigner";
 import LayoutEditorDetailsPane from "./LayoutEditorDetailsPane";
 import { StateContext } from "../../HierarchyEditor";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
+import styled from "styled-components";
+
+const PageSpecificContentSeparator = styled(ContentSeparator)`
+  margin: 0.7rem 0 1rem;
+`;
 
 const ManageLayoutPanel: React.FC = () => {
   const [state, _dispatch] = useContext(StateContext);
@@ -53,14 +58,14 @@ const ManageLayoutPanel: React.FC = () => {
     editorStoreContext.dispatch({
       type: layoutApiResponse.isLoading
         ? LayoutEditorActionType.START_LOADING
-        : LayoutEditorActionType.END_LOADING
+        : LayoutEditorActionType.END_LOADING,
     });
   }, [layoutApiResponse.isLoading]);
 
   const setLayout = (layout: ILayout) => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.UPDATE_LAYOUT,
-      layout: layout
+      layout: layout,
     });
   };
 
@@ -75,7 +80,7 @@ const ManageLayoutPanel: React.FC = () => {
       },
       cbFailure: (error): boolean => {
         return error.response && error.response.status === 404;
-      }
+      },
     };
     setLayoutApiRequest(getLayoutRequest);
   }, [state.nodeReferenceId]);
@@ -97,6 +102,7 @@ const ManageLayoutPanel: React.FC = () => {
             </>
           ) : null}
           <LayoutEditor />
+          <PageSpecificContentSeparator />
           <LayoutJsonEditor />
           <LayoutSigner />
           {!cryptoAvailable() ? <NoCryptoWarning /> : null}

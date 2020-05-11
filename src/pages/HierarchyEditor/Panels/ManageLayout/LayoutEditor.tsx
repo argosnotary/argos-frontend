@@ -16,7 +16,7 @@
 
 import {
   LayoutEditorActionType,
-  useLayoutEditorStore
+  useLayoutEditorStore,
 } from "./LayoutEditorStore";
 import React from "react";
 import SegmentContainer from "./SegmentContainer";
@@ -26,8 +26,9 @@ import {
   LayoutItemContainer,
   LayoutItemContainerButton,
   LayoutItemContainerRow,
-  LayoutItemContainerTitle
-} from "./CommonStyle";
+  LayoutItemContainerTitle,
+  LayoutItemContainerList,
+} from "../../../../atoms/LayoutItemContainer";
 
 const SegmentsContainer = styled(LayoutItemContainer)`
   flex-direction: column;
@@ -45,6 +46,8 @@ const SegmentsContainerTitle = styled(LayoutItemContainerTitle)`
 `;
 
 const AddSegmentButton = styled(LayoutItemContainerButton)`
+  right: 0;
+
   &:hover {
     cursor: pointer;
     transform: scale(0.8);
@@ -58,14 +61,14 @@ const LayoutEditor: React.FC = () => {
     const layoutElement = { name: "", steps: [] };
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.ADD_SEGMENT,
-      layoutElement: layoutElement
+      layoutElement: layoutElement,
     });
   };
 
-  const layout = editorStoreContext.state.layout;
+  const { layout } = editorStoreContext.state;
 
   return (
-    <>
+    <ul>
       <SegmentsContainer>
         <LayoutItemContainerRow>
           <SegmentsContainerTitle>Segments</SegmentsContainerTitle>
@@ -73,15 +76,15 @@ const LayoutEditor: React.FC = () => {
             <PlusIcon size={24} color={"#1779ba"} />
           </AddSegmentButton>
         </LayoutItemContainerRow>
-        <ul>
+        <LayoutItemContainerList>
           {layout.layoutSegments
             ? layout.layoutSegments.map((segment, _key) => (
                 <SegmentContainer key={segment.name} segment={segment} />
               ))
             : null}
-        </ul>
+        </LayoutItemContainerList>
       </SegmentsContainer>
-    </>
+    </ul>
   );
 };
 

@@ -18,11 +18,14 @@ import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import styled from "styled-components";
-import { ActionIconsContainer, BaseActionButton } from "./CommonStyle";
+import {
+  ActionIconsContainer,
+  BaseActionButton,
+} from "../../../../atoms/LayoutItemContainer";
 import LayoutElementNameEditor from "./LayoutElementNameEditor";
 import {
   LayoutEditorActionType,
-  useLayoutEditorStore
+  useLayoutEditorStore,
 } from "./LayoutEditorStore";
 
 const StepTitle = styled.header`
@@ -38,7 +41,6 @@ const StepTitle = styled.header`
 
 const Step = styled.section`
   width: 100%;
-  padding: 0 1rem;
   margin: 0 0 1rem;
 `;
 
@@ -54,7 +56,7 @@ interface IStepContainer {
 const StepContainer: React.FC<IStepContainer> = ({
   step,
   stepKey,
-  segment
+  segment,
 }) => {
   const editorStoreContext = useLayoutEditorStore();
 
@@ -62,7 +64,7 @@ const StepContainer: React.FC<IStepContainer> = ({
     e.stopPropagation();
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
-      layoutElement: step
+      layoutElement: step,
     });
   };
 
@@ -70,18 +72,18 @@ const StepContainer: React.FC<IStepContainer> = ({
     e.stopPropagation();
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.SELECT_LAYOUT_ELEMENT,
-      layoutElement: segment
+      layoutElement: segment,
     });
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_STEP,
-      layoutElement: step
+      layoutElement: step,
     });
   };
 
   const stepNameExists = (stepName: string): boolean => {
     return (
       segment.steps &&
-      segment.steps.findIndex(step => step.name === stepName) >= 0
+      segment.steps.findIndex((step) => step.name === stepName) >= 0
     );
   };
 
@@ -89,7 +91,7 @@ const StepContainer: React.FC<IStepContainer> = ({
     e.stopPropagation();
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.SELECT_LAYOUT_ELEMENT,
-      layoutElement: step
+      layoutElement: step,
     });
   };
 
