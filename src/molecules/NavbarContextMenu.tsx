@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import React, { SyntheticEvent } from "react";
+import React, { Dispatch, SyntheticEvent } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { useUserProfileContext } from "../stores/UserProfile";
 
 interface IContextMenu {
   displayContextMenu: boolean;
+  setDisplayContextMenu: Dispatch<boolean>;
 }
 
 const Nav = styled.nav<{ displayContextMenu: boolean }>`
@@ -65,17 +67,26 @@ const MenuDivider = styled.li`
 const NavbarContextMenu: React.FC<IContextMenu> = props => {
   const history = useHistory();
 
+  const useUserProfile = useUserProfileContext();
+
   const logoutUser = (e: SyntheticEvent) => {
     e.preventDefault();
-    localStorage.removeItem("token");
+    props.setDisplayContextMenu(false);
+    useUserProfile.setToken("");
     history.push("/login");
+  };
+
+  const toSettings = (e: SyntheticEvent) => {
+    e.preventDefault();
+    props.setDisplayContextMenu(false);
+    history.push("/settings");
   };
 
   return (
     <Nav displayContextMenu={props.displayContextMenu}>
       <ul>
         <A href="/settings">
-          <MenuItem>Settings</MenuItem>
+          <MenuItem onClick={toSettings}>Settings</MenuItem>
         </A>
         <MenuDivider />
         <A href="/logout">

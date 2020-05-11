@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
-  Redirect,
   Route,
   Switch,
+  useHistory,
   useLocation
 } from "react-router-dom";
 
@@ -28,51 +28,48 @@ import HomePage from "../pages/Home";
 import LoginPage from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import UserSettingsPage from "../pages/UserSettings";
-import useToken from "../hooks/useToken";
 import { RequestErrorStoreProvider } from "../stores/requestErrorStore";
 import HierarchyEditor from "../pages/HierarchyEditor/HierarchyEditor";
-import { UserProfileStoreProvider } from "../stores/UserProfile";
+import {
+  UserProfileStoreProvider,
+  useUserProfileContext
+} from "../stores/UserProfile";
 
-interface IAuthenticationForwarderProps {
-  token: string;
-  setToken: (token: string) => void;
-}
-
-const AuthenticationForwarder: React.FC<IAuthenticationForwarderProps> = ({
-  setToken
-}) => {
+const AuthenticationForwarder: React.FC = () => {
   const location = useLocation();
-  const [_token, setLocalStorageToken] = useToken();
+  const history = useHistory();
+  const userProfile = useUserProfileContext();
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
     const queryToken = query.get("token");
-
     if (queryToken) {
-      setLocalStorageToken(queryToken);
-      setToken(queryToken);
+      userProfile.setToken(queryToken);
+      history.push("/dashboard");
+    } else if (query.get("error")) {
+      userProfile.setError(query.get("error"));
+      history.push("/login");
+    } else {
+      history.push("/login");
     }
   });
-
-  return <Redirect to="/dashboard" />;
+  return null;
 };
 
 const Routes: React.FC = () => {
-  const [token, setToken] = useState("");
-
   return (
     <Router>
-      <Switch>
-        <Route exact={true} path="/">
-          <HomePage />
-        </Route>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-        <Route path="/authenticated">
-          <AuthenticationForwarder token={token} setToken={setToken} />
-        </Route>
-        <UserProfileStoreProvider>
+      <UserProfileStoreProvider>
+        <Switch>
+          <Route exact={true} path="/">
+            <HomePage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/authenticated">
+            <AuthenticationForwarder />
+          </Route>
           <RequestErrorStoreProvider>
             <PrivateRoute path="/dashboard">
               <DashboardLayout>
@@ -90,8 +87,8 @@ const Routes: React.FC = () => {
               </DashboardLayout>
             </PrivateRoute>
           </RequestErrorStoreProvider>
-        </UserProfileStoreProvider>
-      </Switch>
+        </Switch>
+      </UserProfileStoreProvider>
     </Router>
   );
 };
