@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
+import React, { useContext } from "react";
 import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import {
   ActionIconsContainer,
   BaseActionButton
@@ -89,6 +89,8 @@ const StepContainer: React.FC<IStepContainer> = ({
 }) => {
   const editorStoreContext = useLayoutEditorStore();
 
+  const theme = useContext(ThemeContext);
+
   const onEditStep = (e: any) => {
     if (step !== editorStoreContext.state.activeEditLayoutElement) {
       e.stopPropagation();
@@ -145,10 +147,10 @@ const StepContainer: React.FC<IStepContainer> = ({
               <span>{step.name}</span>
               <ActionIconsContainer>
                 <EditStepButton onClick={onSelectStep}>
-                  <EditIcon size={26} color={"#1779ba"} />
+                  <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
                 </EditStepButton>
                 <RemoveStepButton onClick={onDeleteStep}>
-                  <RemoveIcon size={20} color={"#1779ba"} />
+                  <RemoveIcon size={20} color={theme.layoutBuilder.iconColor} />
                 </RemoveStepButton>
               </ActionIconsContainer>
             </>
