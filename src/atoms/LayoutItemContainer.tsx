@@ -56,6 +56,7 @@ export const LayoutItemContainerRow = styled.div`
 
 export const LayoutItemContainerTitle = styled.header`
   position: relative;
+  font-size: 0.9rem;
   top: -0.75rem;
   background-color: #f1f1f1;
   display: inline-flex;

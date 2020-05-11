@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
-import styled from "styled-components";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
 import {
   LayoutEditorActionType,
@@ -40,7 +40,8 @@ const SegmentTitle = styled.header`
   padding: 0.5rem;
   width: 100%;
   margin: 0.2rem 0 0;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.layoutBuilder.segmentTitleBgColor};
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,18 +64,21 @@ const StepsContainer = styled(LayoutItemContainer)`
   padding: 0 1rem 1rem;
   margin: 1rem 0;
   min-height: 10rem;
-  background-color: #e0e0e0;
+  background-color: ${(props) =>
+    props.theme.layoutBuilder.stepContainerBgColor};
 `;
 
 const StepsContainerTitle = styled(LayoutItemContainerTitle)`
   top: -1rem;
   margin: 0 auto;
   padding: 0.25rem 1rem;
-  border: 1px solid #1779ba;
+  border: 1px solid
+    ${(props) => props.theme.layoutBuilder.stepContainerTitleBorderColor};
 `;
 
 const AddStepButton = styled(LayoutItemContainerButton)`
-  border: 1px solid #1779ba;
+  border: 1px solid
+    ${(props) => props.theme.layoutBuilder.addStepButtonBorderColor};
   padding: 0 0.65rem;
 
   &:hover {
@@ -97,6 +101,8 @@ interface ISegmentContainerProps {
 
 const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
   const editorStoreContext = useLayoutEditorStore();
+
+  const theme = useContext(ThemeContext);
 
   const onEditSegment = () => {
     editorStoreContext.dispatch({
@@ -151,10 +157,10 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
               <span>{segment.name}</span>
               <ActionIconsContainer>
                 <EditSegmentButton onClick={onEditSegment}>
-                  <EditIcon size={30} color={"#1779ba"} />
+                  <EditIcon size={30} color={theme.layoutBuilder.iconColor} />
                 </EditSegmentButton>
                 <RemoveSegmentButton onClick={onDeleteSegment}>
-                  <RemoveIcon size={24} color={"#1779ba"} />
+                  <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
                 </RemoveSegmentButton>
               </ActionIconsContainer>
             </>
@@ -165,7 +171,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
         <LayoutItemContainerRow>
           <StepsContainerTitle>Steps</StepsContainerTitle>
           <AddStepButton onClick={onAddStep}>
-            <PlusIcon size={20} color={"#1779ba"} />
+            <PlusIcon size={20} color={theme.layoutBuilder.iconColor} />
           </AddStepButton>
         </LayoutItemContainerRow>
         {segment.steps &&

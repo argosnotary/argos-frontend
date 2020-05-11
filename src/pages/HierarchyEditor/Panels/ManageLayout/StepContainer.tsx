@@ -35,7 +35,7 @@ const StepTitle = styled.header`
   padding: 0.5rem;
   width: 100%;
   margin: 0.5rem 0 0;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.layoutBuilder.stepTitleBgColor};
   display: flex;
   align-items: center;
   justify-content: space-between;

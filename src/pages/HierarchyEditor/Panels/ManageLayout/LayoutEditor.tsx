@@ -18,9 +18,9 @@ import {
   LayoutEditorActionType,
   useLayoutEditorStore,
 } from "./LayoutEditorStore";
-import React from "react";
+import React, { useContext } from "react";
 import SegmentContainer from "./SegmentContainer";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { PlusIcon } from "../../../../atoms/Icons";
 import {
   LayoutItemContainer,
@@ -34,14 +34,16 @@ const SegmentsContainer = styled(LayoutItemContainer)`
   flex-direction: column;
   border: 0;
   padding: 0 1rem;
-  border: 1px solid #1779ba;
+  border: 1px solid
+    ${(props) => props.theme.layoutBuilder.segmentContainerBorderColor};
 `;
 
 const SegmentsContainerTitle = styled(LayoutItemContainerTitle)`
-  font-size: 1.25rem;
+  font-size: 1rem;
   top: -1rem;
   color: #fff;
-  background-color: #1779ba;
+  background-color: ${(props) =>
+    props.theme.layoutBuilder.segmentContainerTitleBgColor};
   padding: 0.25rem 2rem 0.4rem;
 `;
 
@@ -56,6 +58,8 @@ const AddSegmentButton = styled(LayoutItemContainerButton)`
 
 const LayoutEditor: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();
+
+  const theme = useContext(ThemeContext);
 
   const onAddSegment = () => {
     const layoutElement = { name: "", steps: [] };
@@ -73,7 +77,7 @@ const LayoutEditor: React.FC = () => {
         <LayoutItemContainerRow>
           <SegmentsContainerTitle>Segments</SegmentsContainerTitle>
           <AddSegmentButton onClick={onAddSegment}>
-            <PlusIcon size={24} color={"#1779ba"} />
+            <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
           </AddSegmentButton>
         </LayoutItemContainerRow>
         <LayoutItemContainerList>
