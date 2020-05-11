@@ -31,7 +31,7 @@ import DataRequest from "../../../../types/DataRequest";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
-import useToken from "../../../../hooks/useToken";
+import { useUserProfileContext } from "../../../../stores/UserProfile";
 
 interface ILayoutValidationErrorResponse {
   messages: Array<ILayoutValidationMessage>;
@@ -87,7 +87,7 @@ const LayoutJsonEditor: React.FC = () => {
     });
   }, [responseLayoutValidation.isLoading]);
 
-  const [token] = useToken();
+  const { token } = useUserProfileContext();
 
   const requestLayoutValidation = (values: ILayoutFormValues) => {
     const dataRequest: DataRequest = {

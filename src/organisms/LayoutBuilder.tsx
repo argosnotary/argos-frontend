@@ -162,7 +162,7 @@ interface ILayoutBuilderProps {
   onRemoveStep: () => void;
 }
 
-const LayoutBuilder: React.FC<ILayoutBuilderProps> = (props) => {
+const LayoutBuilder: React.FC<ILayoutBuilderProps> = props => {
   return (
     <SegmentsContainer>
       <LayoutItemContainerRow>

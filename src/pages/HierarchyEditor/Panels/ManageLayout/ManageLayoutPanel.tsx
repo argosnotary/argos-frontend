@@ -25,7 +25,6 @@ import { ILayout, ILayoutMetaBlock } from "../../../../interfaces/ILayout";
 import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { Panel } from "../../../../molecules/Panel";
 import { cryptoAvailable } from "../../../../security";
-import useToken from "../../../../hooks/useToken";
 import DataRequest from "../../../../types/DataRequest";
 import LayoutEditor from "./LayoutEditor";
 import {
@@ -37,13 +36,14 @@ import LayoutJsonEditor from "./LayoutJsonEditor";
 import LayoutSigner from "./LayoutSigner";
 import LayoutEditorDetailsPane from "./LayoutEditorDetailsPane";
 import { StateContext } from "../../HierarchyEditor";
+import { useUserProfileContext } from "../../../../stores/UserProfile";
 
 const ManageLayoutPanel: React.FC = () => {
   const [state, _dispatch] = useContext(StateContext);
 
   const editorStoreContext = createLayoutEditorStoreContext();
 
-  const [token] = useToken();
+  const { token } = useUserProfileContext();
 
   const [layoutApiResponse, setLayoutApiRequest] = useDataApi(
     genericDataFetchReducer

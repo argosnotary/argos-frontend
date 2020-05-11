@@ -33,7 +33,6 @@ import {
   StateContext
 } from "../../../../stores/hierarchyEditorStore";
 import { WRONG_PASSWORD } from "../../../../security";
-import useToken from "../../../../hooks/useToken";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
 import {
@@ -41,6 +40,7 @@ import {
   useLayoutEditorStore
 } from "./LayoutEditorStore";
 import { CryptoExceptionWarning } from "../../../../molecules/CryptoExceptionWarning";
+import { useUserProfileContext } from "../../../../stores/UserProfile";
 
 interface IPasswordFormValues {
   passphrase: string;
@@ -96,7 +96,7 @@ const LayoutSigner: React.FC = () => {
   const [state, dispatch] = useContext(StateContext);
   const [showWarning, setShowWarning] = useState(false);
   const [passphrase, setPassphrase] = useState("");
-  const [token] = useToken();
+  const { token } = useUserProfileContext();
   const [cryptoException, setCryptoException] = useState(false);
 
   const [responsePostLayout, setDataRequestPostLayout] = useDataApi(
@@ -123,7 +123,7 @@ const LayoutSigner: React.FC = () => {
             setDataRequestPostLayout({
               data: layoutMetaBlock,
               method: "post",
-              token: token,
+              token,
               url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
               cbSuccess: () => {
                 dispatch({
