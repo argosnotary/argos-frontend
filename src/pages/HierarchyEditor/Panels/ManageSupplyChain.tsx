@@ -80,7 +80,7 @@ const ManageSupplyChain = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token: token,
+      token,
       url: "/api/supplychain",
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
@@ -109,7 +109,7 @@ const ManageSupplyChain = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token: token,
+      token,
       url: `/api/supplychain/${state.nodeReferenceId}`,
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({

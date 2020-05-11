@@ -135,7 +135,7 @@ const ManageNpa = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token: token,
+      token,
       url: "/api/nonpersonalaccount",
       cbSuccess: async (npa: INpaApiResponse) => {
         try {
@@ -144,7 +144,7 @@ const ManageNpa = () => {
           const keyDataRequest: DataRequest = {
             data: generatedKeys.keys,
             method: "post",
-            token: token,
+            token,
             url: `/api/nonpersonalaccount/${npa.id}/key`,
             cbSuccess: () => {
               setGeneratedPassword(generatedKeys.password);
@@ -188,7 +188,7 @@ const ManageNpa = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token: token,
+      token,
       url: `/api/nonpersonalaccount/${state.nodeReferenceId}`,
       cbSuccess: (npa: INpaApiResponse) => {
         dispatch({
@@ -204,7 +204,7 @@ const ManageNpa = () => {
   const getKeyId = (id: string) => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: token,
+      token,
       url: `/api/nonpersonalaccount/${id}/key`,
       cbSuccess: (n: IPublicKey) => {
         setNpaKey(n);
@@ -299,7 +299,7 @@ const ManageNpa = () => {
         const dataRequest: DataRequest = {
           data: generatedKeys.keys,
           method: "post",
-          token: token,
+          token,
           url: `/api/nonpersonalaccount/${state.nodeReferenceId}/key`,
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);

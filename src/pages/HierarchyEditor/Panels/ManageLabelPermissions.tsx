@@ -85,7 +85,7 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
       params: {
         localPermissionsLabelId: selectedLabelId
       },
-      token: token,
+      token,
       url: `/api/personalaccount`
     };
 
@@ -155,7 +155,7 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
             params: {
               name: searchQuery
             },
-            token: token,
+            token,
             url: `/api/personalaccount`
           };
 

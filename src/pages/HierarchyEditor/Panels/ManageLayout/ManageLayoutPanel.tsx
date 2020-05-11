@@ -193,7 +193,7 @@ const ManageLayoutPanel = () => {
     const dataRequest: DataRequest = {
       data: values.layout,
       method: "post",
-      token: token,
+      token,
       url: "/api/supplychain/" + state.nodeReferenceId + "/layout/validate",
       cbSuccess: () => {
         setLayout(values);
@@ -239,7 +239,7 @@ const ManageLayoutPanel = () => {
   const postNewLayout = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: token,
+      token,
       url: "/api/personalaccount/me/key",
       cbSuccess: (key: IPersonalAccountKeyPair) => {
         signLayout(
@@ -252,7 +252,7 @@ const ManageLayoutPanel = () => {
             setDataRequestPostLayout({
               data: layoutMetaBlock,
               method: "post",
-              token: token,
+              token,
               url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
               cbSuccess: () => {
                 dispatch({

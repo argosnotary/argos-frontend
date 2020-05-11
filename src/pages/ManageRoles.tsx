@@ -111,7 +111,7 @@ const ManageRoles = () => {
   useEffect(() => {
     const getRolesDataRequest: DataRequest = {
       method: "get",
-      token: token,
+      token,
       url: `/api/permissions/global/role`,
       cbSuccess: roles => {
         roles.map((role: IRole) => {
@@ -120,7 +120,7 @@ const ManageRoles = () => {
             params: {
               roleName: role.name
             },
-            token: token,
+            token,
             url: `/api/personalaccount`
           };
 
@@ -177,7 +177,7 @@ const ManageRoles = () => {
                 params: {
                   name: searchQuery
                 },
-                token: token,
+                token,
                 url: `/api/personalaccount`
               };
 

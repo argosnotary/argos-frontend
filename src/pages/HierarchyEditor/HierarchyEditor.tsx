@@ -69,7 +69,7 @@ const HierarchyEditor = () => {
   const { token } = useUserProfileContext();
   const getTreeDataRequest: DataRequest = {
     method: "get",
-    token: token,
+    token,
     url: "/api/hierarchy"
   };
 
@@ -296,7 +296,7 @@ const HierarchyEditor = () => {
         HierarchyMode: "MAX_DEPTH"
       },
       method: "get",
-      token: token,
+      token,
       url: `/api/hierarchy/${parentId}`,
       cbSuccess: (node: ITreeNode) => {
         appendLabelChildrenToTree(treeState, treeDispatch, node);
@@ -339,7 +339,7 @@ const HierarchyEditor = () => {
           HierarchyMode: "NONE"
         },
         method: "get",
-        token: token,
+        token,
         url: `/api/hierarchy/${state.data.id}`,
         cbSuccess: (node: ITreeNode) => {
           appendObjectToTree(

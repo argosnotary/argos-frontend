@@ -106,7 +106,7 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
   const getLocalPermissions = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: token,
+      token,
       url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
     };
 
@@ -117,7 +117,7 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
     const dataRequest: DataRequest = {
       method: "put",
       data,
-      token: token,
+      token,
       url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
     };
 

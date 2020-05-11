@@ -80,7 +80,7 @@ const ManageLabel = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token: token,
+      token,
       url: "/api/label",
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
@@ -109,7 +109,7 @@ const ManageLabel = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token: token,
+      token,
       url: `/api/label/${state.nodeReferenceId}`,
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({

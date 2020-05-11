@@ -107,7 +107,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
   const getGlobalRoles = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: token,
+      token,
       url: `/api/personalaccount/${accountId}`
     };
 
@@ -118,7 +118,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
     const dataRequest: DataRequest = {
       method: "put",
       data,
-      token: token,
+      token,
       url: `/api/personalaccount/${accountId}/role`
     };
 

@@ -133,7 +133,7 @@ export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
       const dataRequest: DataRequest = {
         data: generatedKeys.keys,
         method: "post",
-        token: token,
+        token,
         url: "/api/personalaccount/me/key",
         cbSuccess: () => {
           cbKeyCreated(generatedKeys.keys);
@@ -240,7 +240,7 @@ const KeyManagement = () => {
   };
   const getActivekeyDataRequest: DataRequest = {
     method: "get",
-    token: token,
+    token,
     url: "/api/personalaccount/me/key",
     cbSuccess: (key: IPublicKey) => {
       setPublicKey(key);
