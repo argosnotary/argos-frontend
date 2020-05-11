@@ -40,7 +40,7 @@ export interface IUserProfileContext {
   state: PROFILE_STATE;
   profile?: IUserProfile;
   setUserProfile: Dispatch<IUserProfile>;
-  token?: string;
+  token: string;
   setToken: Dispatch<string>;
   setError: Dispatch<string | null>;
 }
@@ -77,7 +77,8 @@ export const UserProfileContext = React.createContext<IUserProfileContext>({
   setError: () => {
     return;
   },
-  state: PROFILE_STATE.LOGGED_OUT
+  state: PROFILE_STATE.LOGGED_OUT,
+  token: ""
 });
 
 interface IUserProfileStoreProviderProps {
@@ -148,11 +149,11 @@ export const UserProfileStoreProvider: React.FC<IUserProfileStoreProviderProps> 
         <UserProfileContext.Provider
           value={{
             profile: userProfile,
-            setUserProfile: setUserProfile,
-            token: token,
-            setToken: setToken,
-            state: state,
-            setError: setError
+            setUserProfile,
+            token,
+            setToken,
+            state,
+            setError
           }}
         >
           {children}
@@ -162,9 +163,4 @@ export const UserProfileStoreProvider: React.FC<IUserProfileStoreProviderProps> 
   }
 };
 
-export const getToken = (): string | "" => {
-  const token = useContext(UserProfileContext).token;
-  return token || "";
-};
-
-export const useUserProfileContextStore = () => useContext(UserProfileContext);
+export const useUserProfileContext = () => useContext(UserProfileContext);

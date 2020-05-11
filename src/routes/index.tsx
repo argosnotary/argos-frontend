@@ -32,13 +32,13 @@ import { RequestErrorStoreProvider } from "../stores/requestErrorStore";
 import HierarchyEditor from "../pages/HierarchyEditor/HierarchyEditor";
 import {
   UserProfileStoreProvider,
-  useUserProfileContextStore
+  useUserProfileContext
 } from "../stores/UserProfile";
 
 const AuthenticationForwarder: React.FC = () => {
   const location = useLocation();
   const history = useHistory();
-  const userProfile = useUserProfileContextStore();
+  const userProfile = useUserProfileContext();
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);

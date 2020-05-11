@@ -17,14 +17,14 @@ import React from "react";
 import styled from "styled-components";
 
 import PageHeader from "../atoms/PageHeader";
-import { useUserProfileContextStore } from "../stores/UserProfile";
+import { useUserProfileContext } from "../stores/UserProfile";
 
 const ProfileListItem = styled.li`
   margin: 1rem 0;
 `;
 
 const ProfilePage = () => {
-  const userProfile = useUserProfileContextStore();
+  const userProfile = useUserProfileContext();
 
   if (
     userProfile &&

@@ -28,7 +28,7 @@ import IPersonalAccount from "../interfaces/IPersonalAccount";
 import IRole from "../interfaces/IRole";
 import { generateMediaQuery } from "../layout/utils";
 import RoleAuthorizationComponent from "../molecules/RoleAuthorizationComponent";
-import { getToken } from "../stores/UserProfile";
+import { useUserProfileContext } from "../stores/UserProfile";
 
 const FlexRowContainer = styled(FlexRow)`
   max-width: 20rem;
@@ -87,7 +87,7 @@ const manageRolesReducer = (
 };
 
 const ManageRoles = () => {
-  const localStorageToken = getToken();
+  const { token } = useUserProfileContext();
 
   const [state, dispatch] = useReducer(manageRolesReducer, {
     user: {} as IPersonalAccount
@@ -111,7 +111,7 @@ const ManageRoles = () => {
   useEffect(() => {
     const getRolesDataRequest: DataRequest = {
       method: "get",
-      token: localStorageToken,
+      token: token,
       url: `/api/permissions/global/role`,
       cbSuccess: roles => {
         roles.map((role: IRole) => {
@@ -120,7 +120,7 @@ const ManageRoles = () => {
             params: {
               roleName: role.name
             },
-            token: localStorageToken,
+            token: token,
             url: `/api/personalaccount`
           };
 
@@ -177,7 +177,7 @@ const ManageRoles = () => {
                 params: {
                   name: searchQuery
                 },
-                token: localStorageToken,
+                token: token,
                 url: `/api/personalaccount`
               };
 

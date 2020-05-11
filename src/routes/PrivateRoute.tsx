@@ -15,10 +15,7 @@
  */
 import React, { ReactNode } from "react";
 import { Redirect, Route } from "react-router-dom";
-import {
-  PROFILE_STATE,
-  useUserProfileContextStore
-} from "../stores/UserProfile";
+import { PROFILE_STATE, useUserProfileContext } from "../stores/UserProfile";
 
 interface IPrivateRouteProps {
   children: ReactNode;
@@ -29,7 +26,7 @@ const PrivateRoute: React.FC<IPrivateRouteProps> = ({
   children,
   path
 }: IPrivateRouteProps) => {
-  const userProfile = useUserProfileContextStore();
+  const userProfile = useUserProfileContext();
   if (userProfile.state === PROFILE_STATE.LOGGED_OUT) {
     return (
       <Redirect

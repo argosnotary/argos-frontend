@@ -31,7 +31,7 @@ import ProfilePage from "../pages/Profile";
 
 import { generateMediaQuery } from "../layout/utils";
 import ManageRoles from "./ManageRoles";
-import { useUserProfileContextStore } from "../stores/UserProfile";
+import { useUserProfileContext } from "../stores/UserProfile";
 import { PermissionTypes } from "../types/PermissionType";
 
 const UserSettingsPageContainer = styled.section`
@@ -136,7 +136,7 @@ const ContentColumn = styled(FlexColumn)`
 const UserSettingsPage = () => {
   const match = useRouteMatch();
 
-  const userProfile = useUserProfileContextStore();
+  const userProfile = useUserProfileContext();
 
   const userIsAdmin =
     userProfile &&

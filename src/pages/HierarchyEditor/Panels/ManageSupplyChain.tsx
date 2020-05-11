@@ -30,7 +30,7 @@ import {
   HierarchyEditorDataActionTypes,
   HierarchyEditorPaneActionTypes
 } from "../../../stores/hierarchyEditorStore";
-import { getToken } from "../../../stores/UserProfile";
+import { useUserProfileContext } from "../../../stores/UserProfile";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -58,7 +58,7 @@ const validate = (values: ISupplyChainNameFormValues) => {
 };
 
 const ManageSupplyChain = () => {
-  const localStorageToken = getToken();
+  const { token } = useUserProfileContext();
   const [state, dispatch] = useContext(StateContext);
   const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
     genericDataFetchReducer
@@ -80,7 +80,7 @@ const ManageSupplyChain = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token: localStorageToken,
+      token: token,
       url: "/api/supplychain",
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
@@ -109,7 +109,7 @@ const ManageSupplyChain = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token: localStorageToken,
+      token: token,
       url: `/api/supplychain/${state.nodeReferenceId}`,
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({

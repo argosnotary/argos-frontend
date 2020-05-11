@@ -47,7 +47,7 @@ import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEdit
 import { StateContext } from "../../HierarchyEditor";
 import { serialize, signLayout } from "../../LayoutService";
 import DataRequest from "../../../../types/DataRequest";
-import { getToken } from "../../../../stores/UserProfile";
+import { useUserProfileContext } from "../../../../stores/UserProfile";
 
 enum ILayoutValidationMessageTypes {
   DATA_INPUT = "DATA_INPUT",
@@ -164,7 +164,7 @@ const ManageLayoutPanel = () => {
     [] as Array<INotification>
   );
 
-  const token = getToken();
+  const { token } = useUserProfileContext();
   const theme = useContext(ThemeContext);
 
   const getLayoutRequest: DataRequest = {

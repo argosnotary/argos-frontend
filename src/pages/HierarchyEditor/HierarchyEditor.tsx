@@ -53,7 +53,7 @@ import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
-import { getToken, useUserProfileContextStore } from "../../stores/UserProfile";
+import { useUserProfileContext } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
 
 const HierarchyEditor = () => {
@@ -66,10 +66,10 @@ const HierarchyEditor = () => {
     panePermission: FormPermissions.READ
   });
 
-  const localStorageToken = getToken();
+  const { token } = useUserProfileContext();
   const getTreeDataRequest: DataRequest = {
     method: "get",
-    token: localStorageToken,
+    token: token,
     url: "/api/hierarchy"
   };
 
@@ -296,7 +296,7 @@ const HierarchyEditor = () => {
         HierarchyMode: "MAX_DEPTH"
       },
       method: "get",
-      token: localStorageToken,
+      token: token,
       url: `/api/hierarchy/${parentId}`,
       cbSuccess: (node: ITreeNode) => {
         appendLabelChildrenToTree(treeState, treeDispatch, node);
@@ -339,7 +339,7 @@ const HierarchyEditor = () => {
           HierarchyMode: "NONE"
         },
         method: "get",
-        token: localStorageToken,
+        token: token,
         url: `/api/hierarchy/${state.data.id}`,
         cbSuccess: (node: ITreeNode) => {
           appendObjectToTree(
@@ -367,7 +367,7 @@ const HierarchyEditor = () => {
     }
   }, [state.data, state.dataAction]);
 
-  const userProfile = useUserProfileContextStore();
+  const userProfile = useUserProfileContext();
 
   const canCreateRootNode = (): boolean => {
     return (

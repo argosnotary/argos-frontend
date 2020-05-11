@@ -17,7 +17,7 @@
 import React, { Dispatch, SyntheticEvent } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { useUserProfileContextStore } from "../stores/UserProfile";
+import { useUserProfileContext } from "../stores/UserProfile";
 
 interface IContextMenu {
   displayContextMenu: boolean;
@@ -67,7 +67,7 @@ const MenuDivider = styled.li`
 const NavbarContextMenu: React.FC<IContextMenu> = props => {
   const history = useHistory();
 
-  const useUserProfile = useUserProfileContextStore();
+  const useUserProfile = useUserProfileContext();
 
   const logoutUser = (e: SyntheticEvent) => {
     e.preventDefault();

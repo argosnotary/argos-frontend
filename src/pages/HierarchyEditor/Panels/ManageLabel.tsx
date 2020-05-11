@@ -30,7 +30,7 @@ import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
 import { Panel } from "../../../molecules/Panel";
-import { getToken } from "../../../stores/UserProfile";
+import { useUserProfileContext } from "../../../stores/UserProfile";
 
 interface ILabelNameFormValues {
   labelname: string;
@@ -58,7 +58,7 @@ const validate = (values: ILabelNameFormValues) => {
 };
 
 const ManageLabel = () => {
-  const localStorageToken = getToken();
+  const { token } = useUserProfileContext();
   const [state, dispatch] = useContext(StateContext);
   const [labelPostState, setLabelPostRequest] = useDataApi(
     genericDataFetchReducer
@@ -80,7 +80,7 @@ const ManageLabel = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token: localStorageToken,
+      token: token,
       url: "/api/label",
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({
@@ -109,7 +109,7 @@ const ManageLabel = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token: localStorageToken,
+      token: token,
       url: `/api/label/${state.nodeReferenceId}`,
       cbSuccess: (label: ILabelPostResponse) => {
         dispatch({

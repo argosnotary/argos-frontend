@@ -43,12 +43,12 @@ import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { FormPermissions } from "../../../types/FormPermission";
 import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
 import { Panel } from "../../../molecules/Panel";
-import { getToken } from "../../../stores/UserProfile";
 import { StateContext } from "../HierarchyEditor";
 import {
   HierarchyEditorDataActionTypes,
   HierarchyEditorPaneActionTypes
 } from "../../../stores/hierarchyEditorStore";
+import { useUserProfileContext } from "../../../stores/UserProfile";
 
 interface INpaFormValues {
   npaname: string;
@@ -101,7 +101,7 @@ const clipboardWrapperCss = css`
 `;
 
 const ManageNpa = () => {
-  const localStorageToken = getToken();
+  const { token } = useUserProfileContext();
   const [state, dispatch] = useContext(StateContext);
   const [npaPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
   const [_npaGetRequestState, setNpaGetRequest] = useDataApi(
@@ -135,7 +135,7 @@ const ManageNpa = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token: localStorageToken,
+      token: token,
       url: "/api/nonpersonalaccount",
       cbSuccess: async (npa: INpaApiResponse) => {
         try {
@@ -144,7 +144,7 @@ const ManageNpa = () => {
           const keyDataRequest: DataRequest = {
             data: generatedKeys.keys,
             method: "post",
-            token: localStorageToken,
+            token: token,
             url: `/api/nonpersonalaccount/${npa.id}/key`,
             cbSuccess: () => {
               setGeneratedPassword(generatedKeys.password);
@@ -188,7 +188,7 @@ const ManageNpa = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token: localStorageToken,
+      token: token,
       url: `/api/nonpersonalaccount/${state.nodeReferenceId}`,
       cbSuccess: (npa: INpaApiResponse) => {
         dispatch({
@@ -204,7 +204,7 @@ const ManageNpa = () => {
   const getKeyId = (id: string) => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: localStorageToken,
+      token: token,
       url: `/api/nonpersonalaccount/${id}/key`,
       cbSuccess: (n: IPublicKey) => {
         setNpaKey(n);
@@ -299,7 +299,7 @@ const ManageNpa = () => {
         const dataRequest: DataRequest = {
           data: generatedKeys.keys,
           method: "post",
-          token: localStorageToken,
+          token: token,
           url: `/api/nonpersonalaccount/${state.nodeReferenceId}/key`,
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
