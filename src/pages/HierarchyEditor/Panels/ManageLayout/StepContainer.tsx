@@ -27,6 +27,8 @@ import {
   LayoutEditorActionType,
   useLayoutEditorStore,
 } from "./LayoutEditorStore";
+import Input from "../../../../atoms/Input";
+import InputErrorLabel from "../../../../atoms/InputErrorLabel";
 
 const StepTitle = styled.header`
   font-size: 0.9rem;
@@ -37,6 +39,14 @@ const StepTitle = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${Input} {
+    margin: 0;
+  }
+
+  ${InputErrorLabel} {
+    margin: 0.5rem 0 0;
+  }
 `;
 
 const Step = styled.section`

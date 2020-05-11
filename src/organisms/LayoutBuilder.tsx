@@ -18,6 +18,7 @@ import styled from "styled-components";
 import { PlusIcon } from "../atoms/Icons";
 import EditIcon from "../atoms/Icons/EditIcon";
 import RemoveIcon from "../atoms/Icons/RemoveIcon";
+import Input from "../atoms/Input";
 
 const LayoutItemContainer = styled.div`
   margin: 1rem 0 0;
@@ -162,7 +163,7 @@ interface ILayoutBuilderProps {
   onRemoveStep: () => void;
 }
 
-const LayoutBuilder: React.FC<ILayoutBuilderProps> = props => {
+const LayoutBuilder: React.FC<ILayoutBuilderProps> = (props) => {
   return (
     <SegmentsContainer>
       <LayoutItemContainerRow>

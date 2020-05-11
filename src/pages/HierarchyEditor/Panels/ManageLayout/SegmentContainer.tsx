@@ -33,6 +33,8 @@ import {
 import { PlusIcon } from "../../../../atoms/Icons";
 import StepContainer from "./StepContainer";
 import LayoutElementNameEditor from "./LayoutElementNameEditor";
+import InputErrorLabel from "../../../../atoms/InputErrorLabel";
+import Input from "../../../../atoms/Input";
 
 const SegmentTitle = styled.header`
   padding: 0.5rem 1rem;
@@ -42,6 +44,14 @@ const SegmentTitle = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${Input} {
+    margin: 0;
+  }
+
+  ${InputErrorLabel} {
+    margin: 0.5rem 0 0;
+  }
 `;
 
 const StepsContainer = styled(LayoutItemContainer)`
