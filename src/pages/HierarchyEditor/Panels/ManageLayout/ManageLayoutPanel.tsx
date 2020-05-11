@@ -30,7 +30,7 @@ import LayoutEditor from "./LayoutEditor";
 import {
   createLayoutEditorStoreContext,
   LayoutEditorActionType,
-  LayoutEditorStoreContext,
+  LayoutEditorStoreContext
 } from "./LayoutEditorStore";
 import LayoutJsonEditor from "./LayoutJsonEditor";
 import LayoutSigner from "./LayoutSigner";
@@ -58,14 +58,14 @@ const ManageLayoutPanel: React.FC = () => {
     editorStoreContext.dispatch({
       type: layoutApiResponse.isLoading
         ? LayoutEditorActionType.START_LOADING
-        : LayoutEditorActionType.END_LOADING,
+        : LayoutEditorActionType.END_LOADING
     });
   }, [layoutApiResponse.isLoading]);
 
   const setLayout = (layout: ILayout) => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.UPDATE_LAYOUT,
-      layout: layout,
+      layout: layout
     });
   };
 
@@ -80,7 +80,7 @@ const ManageLayoutPanel: React.FC = () => {
       },
       cbFailure: (error): boolean => {
         return error.response && error.response.status === 404;
-      },
+      }
     };
     setLayoutApiRequest(getLayoutRequest);
   }, [state.nodeReferenceId]);

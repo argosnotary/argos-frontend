@@ -46,6 +46,7 @@ export interface IGenericFormInput {
 export type IGenericFormSchema = Array<IGenericFormInput>;
 
 interface IGenericForm {
+  dataTesthookId?: string;
   schema: IGenericFormSchema;
   permission: FormPermission;
   validate: (values: any) => void;
@@ -59,6 +60,7 @@ interface IGenericForm {
 }
 
 const GenericForm: React.FC<IGenericForm> = ({
+  dataTesthookId,
   schema,
   permission,
   validate,
@@ -131,6 +133,7 @@ const GenericForm: React.FC<IGenericForm> = ({
   return (
     <FormContainer>
       <form
+        data-testhook-id={dataTesthookId}
         onSubmit={formik.handleSubmit}
         onBlur={() => {
           if (onValidChange && formik.isValid) {

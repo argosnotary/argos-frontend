@@ -16,7 +16,7 @@
 
 import {
   LayoutEditorActionType,
-  useLayoutEditorStore,
+  useLayoutEditorStore
 } from "./LayoutEditorStore";
 import React, { useContext } from "react";
 import SegmentContainer from "./SegmentContainer";
@@ -27,7 +27,7 @@ import {
   LayoutItemContainerButton,
   LayoutItemContainerRow,
   LayoutItemContainerTitle,
-  LayoutItemContainerList,
+  LayoutItemContainerList
 } from "../../../../atoms/LayoutItemContainer";
 
 const SegmentsContainer = styled(LayoutItemContainer)`
@@ -35,14 +35,14 @@ const SegmentsContainer = styled(LayoutItemContainer)`
   border: 0;
   padding: 0 1rem;
   border: 1px solid
-    ${(props) => props.theme.layoutBuilder.segmentContainerBorderColor};
+    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
 `;
 
 const SegmentsContainerTitle = styled(LayoutItemContainerTitle)`
   font-size: 1rem;
   top: -1rem;
-  color: ${(props) => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${(props) =>
+  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
+  background-color: ${props =>
     props.theme.layoutBuilder.segmentContainerTitleBgColor};
   padding: 0.25rem 2rem 0.4rem;
 `;
@@ -65,7 +65,7 @@ const LayoutEditor: React.FC = () => {
     const layoutElement = { name: "", steps: [] };
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.ADD_SEGMENT,
-      layoutElement: layoutElement,
+      layoutElement: layoutElement
     });
   };
 

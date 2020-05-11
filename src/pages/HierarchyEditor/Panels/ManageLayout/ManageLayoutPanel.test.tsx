@@ -181,6 +181,7 @@ const updateField = (wrapper: ReactWrapper<any>, name: string, value: any) => {
 it("validates a faulty layout and returns errors", async () => {
   mock.reset();
 
+  mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
   mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(400, {
     messages: [
       {
@@ -225,7 +226,7 @@ it("validates a faulty layout and returns errors", async () => {
       })
     );
 
-    root.find("form").simulate("submit");
+    root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
 
     await waitFor(() => expect(root.find(Notification).length == 4).toBe(true));
     expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
@@ -268,7 +269,7 @@ it("sign layout happy flow", async () => {
       })
     );
 
-    root.find("form").simulate("submit");
+    root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
 
     await waitFor(() => {
       root.update();
@@ -282,7 +283,7 @@ it("sign layout happy flow", async () => {
       "password"
     );
     root
-      .find("form")
+      .find('form[data-testhook-id="passphrase-form"]')
       .first()
       .simulate("submit");
 

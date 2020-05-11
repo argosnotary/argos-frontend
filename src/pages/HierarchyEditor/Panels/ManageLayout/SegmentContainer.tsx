@@ -18,9 +18,8 @@ import styled, { ThemeContext } from "styled-components";
 import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
 import {
   LayoutEditorActionType,
-  useLayoutEditorStore,
+  useLayoutEditorStore
 } from "./LayoutEditorStore";
-import EditIcon from "../../../../atoms/Icons/EditIcon";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import {
   ActionIconsContainer,
@@ -28,7 +27,7 @@ import {
   LayoutItemContainer,
   LayoutItemContainerButton,
   LayoutItemContainerRow,
-  LayoutItemContainerTitle,
+  LayoutItemContainerTitle
 } from "../../../../atoms/LayoutItemContainer";
 import { PlusIcon } from "../../../../atoms/Icons";
 import StepContainer from "./StepContainer";
@@ -42,7 +41,7 @@ const SegmentTitle = styled.header`
   padding: 0.5rem;
   width: 100%;
   margin: 0.2rem 0 0;
-  background-color: ${(props) => props.theme.layoutBuilder.segmentTitleBgColor};
+  background-color: ${props => props.theme.layoutBuilder.segmentTitleBgColor};
 
   display: flex;
   align-items: center;
@@ -63,7 +62,7 @@ const SegmentTitle = styled.header`
   &:hover {
     cursor: pointer;
     border: 1px solid
-      ${(props) => props.theme.layoutBuilder.segmentTitleHoverBorderColor};
+      ${props => props.theme.layoutBuilder.segmentTitleHoverBorderColor};
   }
 `;
 
@@ -72,8 +71,7 @@ const StepsContainer = styled(LayoutItemContainer)`
   padding: 0 1rem 1rem;
   margin: 1rem 0;
   min-height: 10rem;
-  background-color: ${(props) =>
-    props.theme.layoutBuilder.stepContainerBgColor};
+  background-color: ${props => props.theme.layoutBuilder.stepContainerBgColor};
 `;
 
 const StepsContainerTitle = styled(LayoutItemContainerTitle)`
@@ -81,12 +79,12 @@ const StepsContainerTitle = styled(LayoutItemContainerTitle)`
   margin: 0 auto;
   padding: 0.25rem 1rem;
   border: 1px solid
-    ${(props) => props.theme.layoutBuilder.stepContainerTitleBorderColor};
+    ${props => props.theme.layoutBuilder.stepContainerTitleBorderColor};
 `;
 
 const AddStepButton = styled(LayoutItemContainerButton)`
   border: 1px solid
-    ${(props) => props.theme.layoutBuilder.addStepButtonBorderColor};
+    ${props => props.theme.layoutBuilder.addStepButtonBorderColor};
   padding: 0 0.65rem;
 
   &:hover {
@@ -95,7 +93,6 @@ const AddStepButton = styled(LayoutItemContainerButton)`
   }
 `;
 
-const EditSegmentButton = styled(BaseActionButton)``;
 const RemoveSegmentButton = styled(BaseActionButton)``;
 
 const SegmentContainerLi = styled.li`
@@ -113,32 +110,34 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
   const theme = useContext(ThemeContext);
 
   const onEditSegment = () => {
-    editorStoreContext.dispatch({
-      type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
-      layoutElement: segment,
-    });
+    if (segment !== editorStoreContext.state.activeEditLayoutElement) {
+      editorStoreContext.dispatch({
+        type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
+        layoutElement: segment
+      });
+    }
   };
 
   const onDeleteSegment = () => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_SEGMENT,
-      layoutElement: segment,
+      layoutElement: segment
     });
   };
 
   const onAddStep = () => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.SELECT_LAYOUT_ELEMENT,
-      layoutElement: segment,
+      layoutElement: segment
     });
     const newStep = { name: "" } as IStep;
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.ADD_STEP,
-      layoutElement: newStep,
+      layoutElement: newStep
     });
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
-      layoutElement: newStep,
+      layoutElement: newStep
     });
   };
 
@@ -146,7 +145,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
     return (
       editorStoreContext.state.layout.layoutSegments &&
       editorStoreContext.state.layout.layoutSegments.findIndex(
-        (segment) => segment.name === segmentName
+        segment => segment.name === segmentName
       ) >= 0
     );
   };
@@ -154,7 +153,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
   return (
     <>
       <SegmentContainerLi>
-        <SegmentTitle>
+        <SegmentTitle onClick={onEditSegment}>
           {segment === editorStoreContext.state.activeEditLayoutElement ? (
             <LayoutElementNameEditor
               currentName={segment.name}
@@ -164,9 +163,6 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
             <>
               <span>{segment.name}</span>
               <ActionIconsContainer>
-                <EditSegmentButton onClick={onEditSegment}>
-                  <EditIcon size={30} color={theme.layoutBuilder.iconColor} />
-                </EditSegmentButton>
                 <RemoveSegmentButton onClick={onDeleteSegment}>
                   <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
                 </RemoveSegmentButton>

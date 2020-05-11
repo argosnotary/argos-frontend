@@ -75,6 +75,7 @@ const getModalContent = (
       {showWarning ? <Warning message={"Incorrect passphrase"} /> : null}
       <ModalBody>
         <GenericForm
+          dataTesthookId={"passphrase-form"}
           schema={passPhraseFormSchema}
           permission={FormPermissions.EDIT}
           isLoading={isLoading}

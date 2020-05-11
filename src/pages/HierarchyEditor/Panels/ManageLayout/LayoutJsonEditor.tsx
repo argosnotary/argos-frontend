@@ -115,6 +115,7 @@ const LayoutJsonEditor: React.FC = () => {
 
   return (
     <GenericForm
+      dataTesthookId={"layout-json-form"}
       schema={formSchema}
       permission={
         cryptoAvailable() ? state.panePermission : FormPermissions.READ
