@@ -20,12 +20,11 @@ import useDataApi from "../hooks/useDataApi";
 import genericDataFetchReducer, {
   customGenericDataFetchReducer
 } from "../stores/genericDataFetchReducer";
-import useToken from "../hooks/useToken";
 import CollapsibleContainerComponent from "../atoms/CollapsibleContainer";
 import DataRequest from "../types/DataRequest";
 import AlternateLoader from "../atoms/Icons/AlternateLoader";
 import DataCheckbox from "../atoms/DataCheckbox";
-import { useUserProfileContextStore } from "../stores/UserProfile";
+import { useUserProfileContext } from "../stores/UserProfile";
 
 const AuthorizationContainer = styled.div`
   display: flex;
@@ -79,16 +78,17 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
     Array<IRole>
   >(customGenericDataFetchReducer);
 
-  const [localStorageToken] = useToken();
+  const { token } = useUserProfileContext();
 
   const theme = useContext(ThemeContext);
 
-  const userProfile = useUserProfileContextStore();
+  const userProfile = useUserProfileContext();
 
   const preCheckEnabledRole = (role: IRole): boolean => {
     return (
       role.name === "administrator" &&
-      accountId === userProfile.personalAccount.id
+      userProfile.profile !== undefined &&
+      accountId === userProfile.profile.personalAccount.id
     );
   };
 
@@ -107,7 +107,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
   const getGlobalRoles = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: localStorageToken,
+      token,
       url: `/api/personalaccount/${accountId}`
     };
 
@@ -118,7 +118,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
     const dataRequest: DataRequest = {
       method: "put",
       data,
-      token: localStorageToken,
+      token,
       url: `/api/personalaccount/${accountId}/role`
     };
 

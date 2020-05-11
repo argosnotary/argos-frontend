@@ -22,7 +22,6 @@ import FlexRow from "../../atoms/FlexRow";
 import ITreeNode from "../../interfaces/ITreeNode";
 import TreeEditor from "../../molecules/TreeEditor/TreeEditor";
 import useDataApi from "../../hooks/useDataApi";
-import useToken from "../../hooks/useToken";
 import {
   initialTreeState,
   ITreeStateContext,
@@ -54,7 +53,7 @@ import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
-import { useUserProfileContextStore } from "../../stores/UserProfile";
+import { useUserProfileContext } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
 
 const HierarchyEditor = () => {
@@ -67,10 +66,10 @@ const HierarchyEditor = () => {
     panePermission: FormPermissions.READ
   });
 
-  const [localStorageToken] = useToken();
+  const { token } = useUserProfileContext();
   const getTreeDataRequest: DataRequest = {
     method: "get",
-    token: localStorageToken,
+    token,
     url: "/api/hierarchy"
   };
 
@@ -297,7 +296,7 @@ const HierarchyEditor = () => {
         HierarchyMode: "MAX_DEPTH"
       },
       method: "get",
-      token: localStorageToken,
+      token,
       url: `/api/hierarchy/${parentId}`,
       cbSuccess: (node: ITreeNode) => {
         appendLabelChildrenToTree(treeState, treeDispatch, node);
@@ -340,7 +339,7 @@ const HierarchyEditor = () => {
           HierarchyMode: "NONE"
         },
         method: "get",
-        token: localStorageToken,
+        token,
         url: `/api/hierarchy/${state.data.id}`,
         cbSuccess: (node: ITreeNode) => {
           appendObjectToTree(
@@ -368,10 +367,14 @@ const HierarchyEditor = () => {
     }
   }, [state.data, state.dataAction]);
 
-  const userProfile = useUserProfileContextStore();
+  const userProfile = useUserProfileContext();
 
   const canCreateRootNode = (): boolean => {
-    return userProfile && userProfile.hasPermission(PermissionTypes.TREE_EDIT);
+    return (
+      userProfile &&
+      userProfile.profile !== undefined &&
+      userProfile.profile.hasPermission(PermissionTypes.TREE_EDIT)
+    );
   };
 
   const treeContext: ITreeStateContext = {

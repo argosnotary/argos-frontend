@@ -49,9 +49,9 @@ exports[`renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-eNQAEJ",
+            "componentId": "sc-hMqMXs",
             "isStatic": false,
-            "lastClassName": "cafiZt",
+            "lastClassName": "gmVQQe",
             "rules": Array [
               "
   display: flex;
@@ -77,7 +77,7 @@ exports[`renders correctly 1`] = `
             "sc-EHOje",
           ],
           "render": [Function],
-          "styledComponentId": "sc-eNQAEJ",
+          "styledComponentId": "sc-hMqMXs",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -87,7 +87,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-EHOje sc-eNQAEJ cafiZt"
+        className="sc-EHOje sc-hMqMXs gmVQQe"
       >
         <Styled(styled.div)>
           <StyledComponent
@@ -96,9 +96,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-hMqMXs",
+                  "componentId": "sc-kEYyzF",
                   "isStatic": false,
-                  "lastClassName": "gjXSzY",
+                  "lastClassName": "kgLtyB",
                   "rules": Array [
                     "
   display: flex;
@@ -114,7 +114,7 @@ exports[`renders correctly 1`] = `
                   "sc-ifAKCX",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-hMqMXs",
+                "styledComponentId": "sc-kEYyzF",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -124,7 +124,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-ifAKCX sc-hMqMXs gjXSzY"
+              className="sc-ifAKCX sc-kEYyzF kgLtyB"
             >
               <SearchInput
                 defaultLabel="Search user"
@@ -541,9 +541,9 @@ exports[`renders correctly 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-ckVGcZ",
+                                        "componentId": "sc-jKJlTe",
                                         "isStatic": false,
-                                        "lastClassName": "nDNVv",
+                                        "lastClassName": "ibAGWl",
                                         "rules": Array [
                                           "
   display: flex;
@@ -555,7 +555,7 @@ exports[`renders correctly 1`] = `
                                       "displayName": "styled.div",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-ckVGcZ",
+                                      "styledComponentId": "sc-jKJlTe",
                                       "target": "div",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -565,7 +565,7 @@ exports[`renders correctly 1`] = `
                                   forwardedRef={null}
                                 >
                                   <div
-                                    className="sc-ckVGcZ nDNVv"
+                                    className="sc-jKJlTe ibAGWl"
                                   >
                                     <form
                                       onSubmit={[Function]}
@@ -580,9 +580,9 @@ exports[`renders correctly 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-jKJlTe",
+                                                "componentId": "sc-eNQAEJ",
                                                 "isStatic": false,
-                                                "lastClassName": "fyzVSQ",
+                                                "lastClassName": "lJAtv",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -595,7 +595,7 @@ exports[`renders correctly 1`] = `
                                               "displayName": "styled.label",
                                               "foldedComponentIds": Array [],
                                               "render": [Function],
-                                              "styledComponentId": "sc-jKJlTe",
+                                              "styledComponentId": "sc-eNQAEJ",
                                               "target": "label",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -606,7 +606,7 @@ exports[`renders correctly 1`] = `
                                           htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
                                         >
                                           <label
-                                            className="sc-jKJlTe fyzVSQ"
+                                            className="sc-eNQAEJ lJAtv"
                                             htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
                                           >
                                             <DataCheckbox
@@ -697,9 +697,9 @@ exports[`renders correctly 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-jKJlTe",
+                                                "componentId": "sc-eNQAEJ",
                                                 "isStatic": false,
-                                                "lastClassName": "fyzVSQ",
+                                                "lastClassName": "lJAtv",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -712,7 +712,7 @@ exports[`renders correctly 1`] = `
                                               "displayName": "styled.label",
                                               "foldedComponentIds": Array [],
                                               "render": [Function],
-                                              "styledComponentId": "sc-jKJlTe",
+                                              "styledComponentId": "sc-eNQAEJ",
                                               "target": "label",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -723,7 +723,7 @@ exports[`renders correctly 1`] = `
                                           htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
                                         >
                                           <label
-                                            className="sc-jKJlTe fyzVSQ"
+                                            className="sc-eNQAEJ lJAtv"
                                             htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e929fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
                                           >
                                             <DataCheckbox
@@ -1025,9 +1025,9 @@ exports[`renders correctly 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-ckVGcZ",
+                                        "componentId": "sc-jKJlTe",
                                         "isStatic": false,
-                                        "lastClassName": "nDNVv",
+                                        "lastClassName": "ibAGWl",
                                         "rules": Array [
                                           "
   display: flex;
@@ -1039,7 +1039,7 @@ exports[`renders correctly 1`] = `
                                       "displayName": "styled.div",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-ckVGcZ",
+                                      "styledComponentId": "sc-jKJlTe",
                                       "target": "div",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -1049,7 +1049,7 @@ exports[`renders correctly 1`] = `
                                   forwardedRef={null}
                                 >
                                   <div
-                                    className="sc-ckVGcZ nDNVv"
+                                    className="sc-jKJlTe ibAGWl"
                                   >
                                     <form
                                       onSubmit={[Function]}
@@ -1064,9 +1064,9 @@ exports[`renders correctly 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-jKJlTe",
+                                                "componentId": "sc-eNQAEJ",
                                                 "isStatic": false,
-                                                "lastClassName": "fyzVSQ",
+                                                "lastClassName": "lJAtv",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -1079,7 +1079,7 @@ exports[`renders correctly 1`] = `
                                               "displayName": "styled.label",
                                               "foldedComponentIds": Array [],
                                               "render": [Function],
-                                              "styledComponentId": "sc-jKJlTe",
+                                              "styledComponentId": "sc-eNQAEJ",
                                               "target": "label",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -1090,7 +1090,7 @@ exports[`renders correctly 1`] = `
                                           htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
                                         >
                                           <label
-                                            className="sc-jKJlTe fyzVSQ"
+                                            className="sc-eNQAEJ lJAtv"
                                             htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1726"
                                           >
                                             <DataCheckbox
@@ -1180,9 +1180,9 @@ exports[`renders correctly 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-jKJlTe",
+                                                "componentId": "sc-eNQAEJ",
                                                 "isStatic": false,
-                                                "lastClassName": "fyzVSQ",
+                                                "lastClassName": "lJAtv",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -1195,7 +1195,7 @@ exports[`renders correctly 1`] = `
                                               "displayName": "styled.label",
                                               "foldedComponentIds": Array [],
                                               "render": [Function],
-                                              "styledComponentId": "sc-jKJlTe",
+                                              "styledComponentId": "sc-eNQAEJ",
                                               "target": "label",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -1206,7 +1206,7 @@ exports[`renders correctly 1`] = `
                                           htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
                                         >
                                           <label
-                                            className="sc-jKJlTe fyzVSQ"
+                                            className="sc-eNQAEJ lJAtv"
                                             htmlFor="06125d50-b0e6-4015-8b8b-6a72eb16e921fe9fe1b5-5eff-4b93-8fa4-1edd743e1725"
                                           >
                                             <DataCheckbox

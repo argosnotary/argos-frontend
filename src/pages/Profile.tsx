@@ -17,25 +17,29 @@ import React from "react";
 import styled from "styled-components";
 
 import PageHeader from "../atoms/PageHeader";
-import { useUserProfileContextStore } from "../stores/UserProfile";
+import { useUserProfileContext } from "../stores/UserProfile";
 
 const ProfileListItem = styled.li`
   margin: 1rem 0;
 `;
 
 const ProfilePage = () => {
-  const userProfile = useUserProfileContextStore();
+  const userProfile = useUserProfileContext();
 
-  if (userProfile && userProfile.personalAccount) {
+  if (
+    userProfile &&
+    userProfile.profile !== undefined &&
+    userProfile.profile.personalAccount
+  ) {
     return (
       <>
         <PageHeader>Profile</PageHeader>
         <ul>
           <ProfileListItem>
-            Name: {userProfile.personalAccount.name}
+            Name: {userProfile.profile.personalAccount.name}
           </ProfileListItem>
           <ProfileListItem>
-            Email: {userProfile.personalAccount.email}
+            Email: {userProfile.profile.personalAccount.email}
           </ProfileListItem>
         </ul>
       </>

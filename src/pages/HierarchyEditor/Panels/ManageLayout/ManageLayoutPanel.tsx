@@ -46,8 +46,8 @@ import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
 import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
 import { StateContext } from "../../HierarchyEditor";
 import { serialize, signLayout } from "../../LayoutService";
-import useToken from "../../../../hooks/useToken";
 import DataRequest from "../../../../types/DataRequest";
+import { useUserProfileContext } from "../../../../stores/UserProfile";
 
 enum ILayoutValidationMessageTypes {
   DATA_INPUT = "DATA_INPUT",
@@ -164,7 +164,7 @@ const ManageLayoutPanel = () => {
     [] as Array<INotification>
   );
 
-  const [token] = useToken();
+  const { token } = useUserProfileContext();
   const theme = useContext(ThemeContext);
 
   const getLayoutRequest: DataRequest = {
@@ -193,7 +193,7 @@ const ManageLayoutPanel = () => {
     const dataRequest: DataRequest = {
       data: values.layout,
       method: "post",
-      token: token,
+      token,
       url: "/api/supplychain/" + state.nodeReferenceId + "/layout/validate",
       cbSuccess: () => {
         setLayout(values);
@@ -239,7 +239,7 @@ const ManageLayoutPanel = () => {
   const postNewLayout = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: token,
+      token,
       url: "/api/personalaccount/me/key",
       cbSuccess: (key: IPersonalAccountKeyPair) => {
         signLayout(
@@ -252,7 +252,7 @@ const ManageLayoutPanel = () => {
             setDataRequestPostLayout({
               data: layoutMetaBlock,
               method: "post",
-              token: token,
+              token,
               url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
               cbSuccess: () => {
                 dispatch({

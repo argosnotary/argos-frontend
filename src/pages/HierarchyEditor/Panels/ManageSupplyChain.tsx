@@ -17,7 +17,6 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../atoms/ContentSeparator";
-import useToken from "../../../hooks/useToken";
 import DataRequest from "../../../types/DataRequest";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
@@ -31,6 +30,7 @@ import {
   HierarchyEditorDataActionTypes,
   HierarchyEditorPaneActionTypes
 } from "../../../stores/hierarchyEditorStore";
+import { useUserProfileContext } from "../../../stores/UserProfile";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -58,7 +58,7 @@ const validate = (values: ISupplyChainNameFormValues) => {
 };
 
 const ManageSupplyChain = () => {
-  const [localStorageToken] = useToken();
+  const { token } = useUserProfileContext();
   const [state, dispatch] = useContext(StateContext);
   const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
     genericDataFetchReducer
@@ -80,7 +80,7 @@ const ManageSupplyChain = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token: localStorageToken,
+      token,
       url: "/api/supplychain",
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({
@@ -109,7 +109,7 @@ const ManageSupplyChain = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token: localStorageToken,
+      token,
       url: `/api/supplychain/${state.nodeReferenceId}`,
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         dispatch({

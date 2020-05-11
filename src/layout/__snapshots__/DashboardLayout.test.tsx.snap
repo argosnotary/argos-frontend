@@ -9,9 +9,9 @@ exports[`renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-gqjmRU",
+            "componentId": "sc-jTzLTM",
             "isStatic": false,
-            "lastClassName": "iRKzVP",
+            "lastClassName": "KEePz",
             "rules": Array [
               "
   background-color: #e0e0e0;
@@ -21,7 +21,7 @@ exports[`renders correctly 1`] = `
           "displayName": "styled.div",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-gqjmRU",
+          "styledComponentId": "sc-jTzLTM",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -31,7 +31,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-gqjmRU iRKzVP"
+        className="sc-jTzLTM KEePz"
       >
         <DashboardNavbar>
           <Navbar
@@ -184,9 +184,9 @@ exports[`renders correctly 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-gZMcBi",
+                                    "componentId": "sc-VigVT",
                                     "isStatic": false,
-                                    "lastClassName": "enBxRt",
+                                    "lastClassName": "hCOpfZ",
                                     "rules": Array [
                                       "
   margin: 0 1rem;
@@ -211,7 +211,7 @@ exports[`renders correctly 1`] = `
                                   "displayName": "styled.li",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-gZMcBi",
+                                  "styledComponentId": "sc-VigVT",
                                   "target": "li",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -221,7 +221,7 @@ exports[`renders correctly 1`] = `
                               forwardedRef={null}
                             >
                               <li
-                                className="sc-gZMcBi enBxRt"
+                                className="sc-VigVT hCOpfZ"
                               >
                                 <Link
                                   to="/edit/layout"
@@ -248,9 +248,9 @@ exports[`renders correctly 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-htoDjs",
+                                    "componentId": "sc-iwsKbI",
                                     "isStatic": false,
-                                    "lastClassName": "fHktW",
+                                    "lastClassName": "fzPyAB",
                                     "rules": Array [
                                       "
   position: relative;
@@ -260,7 +260,7 @@ exports[`renders correctly 1`] = `
                                   "displayName": "styled.li",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-htoDjs",
+                                  "styledComponentId": "sc-iwsKbI",
                                   "target": "li",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -270,7 +270,7 @@ exports[`renders correctly 1`] = `
                               forwardedRef={null}
                             >
                               <li
-                                className="sc-htoDjs fHktW"
+                                className="sc-iwsKbI fzPyAB"
                               >
                                 <styled.div
                                   onClick={[Function]}
@@ -281,9 +281,9 @@ exports[`renders correctly 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-dnqmqq",
+                                          "componentId": "sc-gZMcBi",
                                           "isStatic": false,
-                                          "lastClassName": "kOLwKy",
+                                          "lastClassName": "ifVkIT",
                                           "rules": Array [
                                             "
   border-radius: 50%;
@@ -301,7 +301,7 @@ exports[`renders correctly 1`] = `
                                         "displayName": "styled.div",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-dnqmqq",
+                                        "styledComponentId": "sc-gZMcBi",
                                         "target": "div",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -312,13 +312,14 @@ exports[`renders correctly 1`] = `
                                     onClick={[Function]}
                                   >
                                     <div
-                                      className="sc-dnqmqq kOLwKy"
+                                      className="sc-gZMcBi ifVkIT"
                                       onClick={[Function]}
                                     />
                                   </StyledComponent>
                                 </styled.div>
                                 <NavbarContextMenu
                                   displayContextMenu={false}
+                                  setDisplayContextMenu={[Function]}
                                 >
                                   <styled.nav
                                     displayContextMenu={false}
@@ -330,9 +331,9 @@ exports[`renders correctly 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-ifAKCX",
+                                            "componentId": "sc-bZQynM",
                                             "isStatic": false,
-                                            "lastClassName": "reiVT",
+                                            "lastClassName": "huhGFC",
                                             "rules": Array [
                                               "
   display: ",
@@ -357,7 +358,7 @@ exports[`renders correctly 1`] = `
                                           "displayName": "styled.nav",
                                           "foldedComponentIds": Array [],
                                           "render": [Function],
-                                          "styledComponentId": "sc-ifAKCX",
+                                          "styledComponentId": "sc-bZQynM",
                                           "target": "nav",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -367,7 +368,7 @@ exports[`renders correctly 1`] = `
                                       forwardedRef={null}
                                     >
                                       <nav
-                                        className="sc-ifAKCX reiVT"
+                                        className="sc-bZQynM huhGFC"
                                       >
                                         <ul>
                                           <styled.a
@@ -379,9 +380,9 @@ exports[`renders correctly 1`] = `
                                                   "$$typeof": Symbol(react.forward_ref),
                                                   "attrs": Array [],
                                                   "componentStyle": ComponentStyle {
-                                                    "componentId": "sc-EHOje",
+                                                    "componentId": "sc-gzVnrw",
                                                     "isStatic": false,
-                                                    "lastClassName": "jpIMeL",
+                                                    "lastClassName": "blhrmw",
                                                     "rules": Array [
                                                       "
   text-decoration: none;
@@ -396,7 +397,7 @@ exports[`renders correctly 1`] = `
                                                   "displayName": "styled.a",
                                                   "foldedComponentIds": Array [],
                                                   "render": [Function],
-                                                  "styledComponentId": "sc-EHOje",
+                                                  "styledComponentId": "sc-gzVnrw",
                                                   "target": "a",
                                                   "toString": [Function],
                                                   "warnTooManyClasses": [Function],
@@ -407,19 +408,21 @@ exports[`renders correctly 1`] = `
                                               href="/settings"
                                             >
                                               <a
-                                                className="sc-EHOje jpIMeL"
+                                                className="sc-gzVnrw blhrmw"
                                                 href="/settings"
                                               >
-                                                <styled.li>
+                                                <styled.li
+                                                  onClick={[Function]}
+                                                >
                                                   <StyledComponent
                                                     forwardedComponent={
                                                       Object {
                                                         "$$typeof": Symbol(react.forward_ref),
                                                         "attrs": Array [],
                                                         "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-bZQynM",
+                                                          "componentId": "sc-htoDjs",
                                                           "isStatic": false,
-                                                          "lastClassName": "dwfasY",
+                                                          "lastClassName": "bERjei",
                                                           "rules": Array [
                                                             "
   background-color: ",
@@ -443,7 +446,7 @@ exports[`renders correctly 1`] = `
                                                         "displayName": "styled.li",
                                                         "foldedComponentIds": Array [],
                                                         "render": [Function],
-                                                        "styledComponentId": "sc-bZQynM",
+                                                        "styledComponentId": "sc-htoDjs",
                                                         "target": "li",
                                                         "toString": [Function],
                                                         "warnTooManyClasses": [Function],
@@ -451,9 +454,11 @@ exports[`renders correctly 1`] = `
                                                       }
                                                     }
                                                     forwardedRef={null}
+                                                    onClick={[Function]}
                                                   >
                                                     <li
-                                                      className="sc-bZQynM dwfasY"
+                                                      className="sc-htoDjs bERjei"
+                                                      onClick={[Function]}
                                                     >
                                                       Settings
                                                     </li>
@@ -469,9 +474,9 @@ exports[`renders correctly 1`] = `
                                                   "$$typeof": Symbol(react.forward_ref),
                                                   "attrs": Array [],
                                                   "componentStyle": ComponentStyle {
-                                                    "componentId": "sc-gzVnrw",
+                                                    "componentId": "sc-dnqmqq",
                                                     "isStatic": false,
-                                                    "lastClassName": "cokAvr",
+                                                    "lastClassName": "jjrELI",
                                                     "rules": Array [
                                                       "
   height: 1px;
@@ -484,7 +489,7 @@ exports[`renders correctly 1`] = `
                                                   "displayName": "styled.li",
                                                   "foldedComponentIds": Array [],
                                                   "render": [Function],
-                                                  "styledComponentId": "sc-gzVnrw",
+                                                  "styledComponentId": "sc-dnqmqq",
                                                   "target": "li",
                                                   "toString": [Function],
                                                   "warnTooManyClasses": [Function],
@@ -494,7 +499,7 @@ exports[`renders correctly 1`] = `
                                               forwardedRef={null}
                                             >
                                               <li
-                                                className="sc-gzVnrw cokAvr"
+                                                className="sc-dnqmqq jjrELI"
                                               />
                                             </StyledComponent>
                                           </styled.li>
@@ -507,9 +512,9 @@ exports[`renders correctly 1`] = `
                                                   "$$typeof": Symbol(react.forward_ref),
                                                   "attrs": Array [],
                                                   "componentStyle": ComponentStyle {
-                                                    "componentId": "sc-EHOje",
+                                                    "componentId": "sc-gzVnrw",
                                                     "isStatic": false,
-                                                    "lastClassName": "jpIMeL",
+                                                    "lastClassName": "blhrmw",
                                                     "rules": Array [
                                                       "
   text-decoration: none;
@@ -524,7 +529,7 @@ exports[`renders correctly 1`] = `
                                                   "displayName": "styled.a",
                                                   "foldedComponentIds": Array [],
                                                   "render": [Function],
-                                                  "styledComponentId": "sc-EHOje",
+                                                  "styledComponentId": "sc-gzVnrw",
                                                   "target": "a",
                                                   "toString": [Function],
                                                   "warnTooManyClasses": [Function],
@@ -535,7 +540,7 @@ exports[`renders correctly 1`] = `
                                               href="/logout"
                                             >
                                               <a
-                                                className="sc-EHOje jpIMeL"
+                                                className="sc-gzVnrw blhrmw"
                                                 href="/logout"
                                               >
                                                 <styled.li
@@ -547,9 +552,9 @@ exports[`renders correctly 1`] = `
                                                         "$$typeof": Symbol(react.forward_ref),
                                                         "attrs": Array [],
                                                         "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-bZQynM",
+                                                          "componentId": "sc-htoDjs",
                                                           "isStatic": false,
-                                                          "lastClassName": "dwfasY",
+                                                          "lastClassName": "bERjei",
                                                           "rules": Array [
                                                             "
   background-color: ",
@@ -573,7 +578,7 @@ exports[`renders correctly 1`] = `
                                                         "displayName": "styled.li",
                                                         "foldedComponentIds": Array [],
                                                         "render": [Function],
-                                                        "styledComponentId": "sc-bZQynM",
+                                                        "styledComponentId": "sc-htoDjs",
                                                         "target": "li",
                                                         "toString": [Function],
                                                         "warnTooManyClasses": [Function],
@@ -584,7 +589,7 @@ exports[`renders correctly 1`] = `
                                                     onClick={[Function]}
                                                   >
                                                     <li
-                                                      className="sc-bZQynM dwfasY"
+                                                      className="sc-htoDjs bERjei"
                                                       onClick={[Function]}
                                                     >
                                                       Log out
