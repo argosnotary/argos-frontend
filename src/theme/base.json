@@ -99,7 +99,10 @@
     "stepContainerTitleBorderColor": "#1779ba",
     "addStepButtonBorderColor": "#1779ba",
     "segmentTitleBgColor": "#fff",
-    "stepTitleBgColor": "#fff"
+    "segmentTitleHoverBorderColor": "#1779ba",
+    "stepTitleBgColor": "#fff",
+    "stepTitleHoverBorderColor": "#1779ba",
+    "segmentsContainerTitleColor": "#fff"
   },
   "treeEditor": {
     "textColor": "#2e2e2e",

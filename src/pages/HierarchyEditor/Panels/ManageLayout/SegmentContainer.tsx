@@ -37,6 +37,8 @@ import InputErrorLabel from "../../../../atoms/InputErrorLabel";
 import Input from "../../../../atoms/Input";
 
 const SegmentTitle = styled.header`
+  border: 1px solid transparent;
+  box-sizing: border-box;
   padding: 0.5rem;
   width: 100%;
   margin: 0.2rem 0 0;
@@ -56,6 +58,12 @@ const SegmentTitle = styled.header`
 
   ${InputErrorLabel} {
     margin: 0.5rem 0 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid
+      ${(props) => props.theme.layoutBuilder.segmentTitleHoverBorderColor};
   }
 `;
 

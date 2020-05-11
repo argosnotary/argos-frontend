@@ -31,6 +31,7 @@ import Input from "../../../../atoms/Input";
 import InputErrorLabel from "../../../../atoms/InputErrorLabel";
 
 const StepTitle = styled.header`
+  border: 1px solid transparent;
   font-size: 0.9rem;
   padding: 0.5rem;
   width: 100%;
@@ -50,6 +51,12 @@ const StepTitle = styled.header`
 
   ${InputErrorLabel} {
     margin: 0.5rem 0 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid
+      ${(props) => props.theme.layoutBuilder.stepTitleHoverBorderColor};
   }
 `;
 

@@ -41,7 +41,7 @@ const SegmentsContainer = styled(LayoutItemContainer)`
 const SegmentsContainerTitle = styled(LayoutItemContainerTitle)`
   font-size: 1rem;
   top: -1rem;
-  color: #fff;
+  color: ${(props) => props.theme.layoutBuilder.segmentsContainerTitleColor};
   background-color: ${(props) =>
     props.theme.layoutBuilder.segmentContainerTitleBgColor};
   padding: 0.25rem 2rem 0.4rem;
