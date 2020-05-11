@@ -37,13 +37,17 @@ import InputErrorLabel from "../../../../atoms/InputErrorLabel";
 import Input from "../../../../atoms/Input";
 
 const SegmentTitle = styled.header`
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   width: 100%;
   margin: 0.2rem 0 0;
   background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  span {
+    margin: 0 0.5rem;
+  }
 
   ${Input} {
     margin: 0;

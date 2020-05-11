@@ -32,13 +32,17 @@ import InputErrorLabel from "../../../../atoms/InputErrorLabel";
 
 const StepTitle = styled.header`
   font-size: 0.9rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   width: 100%;
   margin: 0.5rem 0 0;
   background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  span {
+    margin: 0 0.5rem;
+  }
 
   ${Input} {
     margin: 0;
