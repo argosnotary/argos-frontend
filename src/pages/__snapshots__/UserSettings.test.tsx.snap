@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders with admin only menu 1`] = `
+exports[`UserSettings renders with admin only menu 1`] = `
 <UserSettingsPage>
   <styled.section>
     <StyledComponent
@@ -1005,7 +1005,7 @@ exports[`renders with admin only menu 1`] = `
 </UserSettingsPage>
 `;
 
-exports[`renders with public menu 1`] = `
+exports[`UserSettings renders with public menu 1`] = `
 <UserSettingsPage>
   <styled.section>
     <StyledComponent

@@ -27,7 +27,7 @@ import { MemoryRouter } from "react-router-dom";
 import {
   PROFILE_STATE,
   UserProfile,
-  UserProfileContext
+  UserProfileContext,
 } from "../stores/UserProfile";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
 import { PermissionTypes } from "../types/PermissionType";
@@ -38,102 +38,98 @@ const mockUrl = "/api/personalaccount/me";
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useHistory: () => ({
-    push: jest.fn()
+    push: jest.fn(),
   }),
-  useRouteMatch: () => ({ url: "/" })
+  useRouteMatch: () => ({ url: "/" }),
 }));
 
-it("renders with public menu", async () => {
-  const personalAccount: IPersonalAccount = {
-    id: "a94cb614-e86e-4c52-ae1e-fc2f2cc0fffe",
-    name: "Luke Skywalker",
-    email: "luke@skywalker.imp",
-    roles: [
-      {
-        id: "16dbaebb-815d-461e-993a-bdfdced6350b",
-        name: "jedi",
-        permissions: [
-          PermissionTypes.READ,
-          PermissionTypes.LOCAL_PERMISSION_EDIT,
-          PermissionTypes.TREE_EDIT,
-          PermissionTypes.VERIFY
-        ]
-      }
-    ]
-  };
+interface IWrappedUserSettings {
+  personalAccount: IPersonalAccount;
+}
 
-  const root = mount(
-    <ThemeProvider theme={theme}>
-      <MemoryRouter keyLength={0}>
-        <UserProfileContext.Provider
-          value={{
-            profile: new UserProfile(personalAccount),
-            setToken: jest.fn(),
-            state: PROFILE_STATE.READY,
-            token: "token",
-            setUserProfile: jest.fn()
-          }}
-        >
-          <UserSettings />
-        </UserProfileContext.Provider>
-      </MemoryRouter>
-    </ThemeProvider>
-  );
+const WrappedUserSettings: React.FC<IWrappedUserSettings> = (props) => (
+  <ThemeProvider theme={theme}>
+    <MemoryRouter keyLength={0}>
+      <UserProfileContext.Provider
+        value={{
+          profile: new UserProfile(props.personalAccount),
+          setToken: jest.fn(),
+          state: PROFILE_STATE.READY,
+          token: "token",
+          setUserProfile: jest.fn(),
+        }}
+      >
+        <UserSettings />
+      </UserProfileContext.Provider>
+    </MemoryRouter>
+  </ThemeProvider>
+);
 
-  await act(() =>
-    new Promise(resolve => setImmediate(resolve)).then(() => {
-      root.update();
+describe("UserSettings", () => {
+  it("renders with public menu", async () => {
+    const personalAccount: IPersonalAccount = {
+      id: "a94cb614-e86e-4c52-ae1e-fc2f2cc0fffe",
+      name: "Luke Skywalker",
+      email: "luke@skywalker.imp",
+      roles: [
+        {
+          id: "16dbaebb-815d-461e-993a-bdfdced6350b",
+          name: "jedi",
+          permissions: [
+            PermissionTypes.READ,
+            PermissionTypes.LOCAL_PERMISSION_EDIT,
+            PermissionTypes.TREE_EDIT,
+            PermissionTypes.VERIFY,
+          ],
+        },
+      ],
+    };
 
-      expect(root.find(UserSettings)).toMatchSnapshot();
-    })
-  );
-});
+    const root = mount(
+      <WrappedUserSettings personalAccount={personalAccount} />
+    );
 
-it("renders with admin only menu", async () => {
-  mock.onGet(mockUrl).reply(200, {});
+    await act(() =>
+      new Promise((resolve) => setImmediate(resolve)).then(() => {
+        root.update();
 
-  const personalAccount: IPersonalAccount = {
-    id: "a94cb614-e86e-4c52-ae1e-fc2f2cc0fffe",
-    name: "Luke Skywalker",
-    email: "luke@skywalker.imp",
-    roles: [
-      {
-        id: "16dbaebb-815d-461e-993a-bdfdced6350b",
-        name: "administrator",
-        permissions: [
-          PermissionTypes.READ,
-          PermissionTypes.LOCAL_PERMISSION_EDIT,
-          PermissionTypes.TREE_EDIT,
-          PermissionTypes.VERIFY,
-          PermissionTypes.ASSIGN_ROLE
-        ]
-      }
-    ]
-  };
+        expect(root.find(UserSettings)).toMatchSnapshot();
+      })
+    );
+  });
 
-  const root = mount(
-    <ThemeProvider theme={theme}>
-      <MemoryRouter keyLength={0}>
-        <UserProfileContext.Provider
-          value={{
-            profile: new UserProfile(personalAccount),
-            setToken: jest.fn(),
-            state: PROFILE_STATE.READY,
-            token: "token",
-            setUserProfile: jest.fn()
-          }}
-        >
-          <UserSettings />
-        </UserProfileContext.Provider>
-      </MemoryRouter>
-    </ThemeProvider>
-  );
+  it("renders with admin only menu", async () => {
+    mock.onGet(mockUrl).reply(200, {});
 
-  await act(() =>
-    new Promise(resolve => setImmediate(resolve)).then(() => {
-      root.update();
+    const personalAccount: IPersonalAccount = {
+      id: "a94cb614-e86e-4c52-ae1e-fc2f2cc0fffe",
+      name: "Luke Skywalker",
+      email: "luke@skywalker.imp",
+      roles: [
+        {
+          id: "16dbaebb-815d-461e-993a-bdfdced6350b",
+          name: "administrator",
+          permissions: [
+            PermissionTypes.READ,
+            PermissionTypes.LOCAL_PERMISSION_EDIT,
+            PermissionTypes.TREE_EDIT,
+            PermissionTypes.VERIFY,
+            PermissionTypes.ASSIGN_ROLE,
+          ],
+        },
+      ],
+    };
 
-      expect(root.find(UserSettings)).toMatchSnapshot();
-    })
-  );
+    const root = mount(
+      <WrappedUserSettings personalAccount={personalAccount} />
+    );
+
+    await act(() =>
+      new Promise((resolve) => setImmediate(resolve)).then(() => {
+        root.update();
+
+        expect(root.find(UserSettings)).toMatchSnapshot();
+      })
+    );
+  });
 });
