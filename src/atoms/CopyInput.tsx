@@ -119,7 +119,8 @@ const CopyInput: React.FC<ICopyInputProps> = ({
         <ClipboardWrapper
           clipboardWrapperCss={clipboardWrapperCss}
           title="Copy value to clipboard"
-          onClick={copyInputToClipboard}>
+          onClick={copyInputToClipboard}
+        >
           <ClipboardIcon
             size={clipboardIconSize}
             color={theme.passwordView.clipboardIcon.color}

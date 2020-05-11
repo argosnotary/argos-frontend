@@ -97,7 +97,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 formType={entry.formType}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values[entry.name] || ""}
+                value={formik.values[entry.name]}
                 disabled={permission === FormPermissions.READ ? true : false}
               />
               {formik.touched[entry.name] && formik.errors[entry.name] ? (
@@ -114,7 +114,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 formType={entry.formType}
                 onInput={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values[entry.name] || ""}
+                value={formik.values[entry.name]}
                 disabled={permission === FormPermissions.READ ? true : false}
                 height={"25rem"}
               />
@@ -141,7 +141,8 @@ const GenericForm: React.FC<IGenericForm> = ({
               <CustomCancelButton
                 data-testhook="cancel-button"
                 type="button"
-                onClick={() => onCancel()}>
+                onClick={() => onCancel()}
+              >
                 {cancellationLabel}
               </CustomCancelButton>
             </FlexRow>
