@@ -92,11 +92,12 @@ const StepContainer: React.FC<IStepContainer> = ({
   const theme = useContext(ThemeContext);
 
   const onEditStep = (e: any) => {
-    if (step !== editorStoreContext.state.activeEditLayoutElement) {
+    if (step !== editorStoreContext.state.activeEditLayoutElement?.step) {
       e.stopPropagation();
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
-        layoutElement: step
+        layoutSegment: segment,
+        layoutStep: step
       });
     }
   };
@@ -104,12 +105,9 @@ const StepContainer: React.FC<IStepContainer> = ({
   const onDeleteStep = (e: any) => {
     e.stopPropagation();
     editorStoreContext.dispatch({
-      type: LayoutEditorActionType.SELECT_LAYOUT_ELEMENT,
-      layoutElement: segment
-    });
-    editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_STEP,
-      layoutElement: step
+      layoutStep: step,
+      layoutSegment: segment
     });
   };
 
@@ -123,8 +121,9 @@ const StepContainer: React.FC<IStepContainer> = ({
   const onSelectStep = (e: any) => {
     e.stopPropagation();
     editorStoreContext.dispatch({
-      type: LayoutEditorActionType.SELECT_LAYOUT_ELEMENT,
-      layoutElement: step
+      type: LayoutEditorActionType.SELECT_STEP,
+      layoutStep: step,
+      layoutSegment: segment
     });
   };
 
@@ -133,11 +132,11 @@ const StepContainer: React.FC<IStepContainer> = ({
       <Step key={stepKey} onClick={onEditStep}>
         <StepTitle
           active={
-            step === editorStoreContext.state.selectedLayoutElement ||
-            step === editorStoreContext.state.activeEditLayoutElement
+            step === editorStoreContext.state.selectedLayoutElement?.step ||
+            step === editorStoreContext.state.activeEditLayoutElement?.step
           }
         >
-          {step === editorStoreContext.state.activeEditLayoutElement ? (
+          {step === editorStoreContext.state.activeEditLayoutElement?.step ? (
             <LayoutElementNameEditor
               currentName={step.name}
               nameExists={stepNameExists}

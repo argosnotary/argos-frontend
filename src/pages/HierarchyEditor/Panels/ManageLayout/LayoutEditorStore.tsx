@@ -20,6 +20,10 @@ import {
   ILayoutValidationMessage,
   IStep
 } from "../../../../interfaces/ILayout";
+import {
+  IApprovalConfig,
+  IArtifactCollector
+} from "../../../../interfaces/IApprovalConfig";
 
 export enum DetailsPanelType {
   EMPTY,
@@ -27,14 +31,21 @@ export enum DetailsPanelType {
   STEP_DETAILS
 }
 
+interface ILayoutElement {
+  segment?: ILayoutSegment;
+  step?: IStep;
+  approvalConfig?: IApprovalConfig;
+}
+
 interface ILayoutEditorState {
-  activeEditLayoutElement: IStep | ILayoutSegment | undefined;
-  selectedLayoutElement: IStep | ILayoutSegment | undefined;
+  activeEditLayoutElement: ILayoutElement | undefined;
+  selectedLayoutElement: ILayoutElement | undefined;
   layout: ILayout;
   validationErrors?: Array<ILayoutValidationMessage>;
   loading: boolean;
   showSigningDialog: boolean;
   detailPanelMode: DetailsPanelType;
+  approvalConfigs: Array<IApprovalConfig>;
 }
 
 interface ILayoutEditorStoreContext {
@@ -58,27 +69,42 @@ export enum LayoutEditorActionType {
   LAYOUT_HAS_VALIDATION_ERRORS,
   START_SIGNING,
   STOP_SIGNING,
-  SELECT_LAYOUT_ELEMENT,
+  SELECT_STEP,
   ADD_STEP,
-  DELETE_STEP
+  DELETE_STEP,
+  UPDATE_APPROVAL_CONFIGS,
+  UPDATE_ARTIFACT_COLLECTOR,
+  ADD_ARTIFACT_COLLECTOR
 }
 
 export interface ILayoutEditorAction {
   type: LayoutEditorActionType;
-  layoutElement?: IStep | ILayoutSegment;
+  layoutStep?: IStep;
+  layoutSegment?: ILayoutSegment;
   layout?: ILayout;
   layoutElementName?: string;
   validationErrors?: Array<ILayoutValidationMessage>;
+  approvalConfigs?: Array<IApprovalConfig>;
+  artifactCollector?: IArtifactCollector;
 }
 
-const determinePanelMode = (
-  layoutElement?: IStep | ILayoutSegment
-): DetailsPanelType => {
-  return layoutElement
-    ? (layoutElement as ILayoutSegment).steps
-      ? DetailsPanelType.EMPTY
-      : DetailsPanelType.STEP_DETAILS
-    : DetailsPanelType.EMPTY;
+const createSelectedLayoutElement = (
+  state: ILayoutEditorState,
+  action: ILayoutEditorAction
+): ILayoutElement => {
+  return {
+    segment: action.layoutSegment,
+    step: action.layoutStep,
+    approvalConfig:
+      action.layoutSegment && action.layoutStep
+        ? state.approvalConfigs.find(config => {
+            return (
+              config.stepName === action.layoutStep?.name &&
+              config.segmentName === action.layoutSegment?.name
+            );
+          })
+        : undefined
+  };
 };
 
 const reducer = (
@@ -96,12 +122,15 @@ const reducer = (
       }
       return { ...state };
     case LayoutEditorActionType.EDIT_LAYOUT_ELEMENT:
-      return { ...state, activeEditLayoutElement: action.layoutElement };
-    case LayoutEditorActionType.SELECT_LAYOUT_ELEMENT:
       return {
         ...state,
-        selectedLayoutElement: action.layoutElement,
-        detailPanelMode: determinePanelMode(action.layoutElement)
+        activeEditLayoutElement: createSelectedLayoutElement(state, action)
+      };
+    case LayoutEditorActionType.SELECT_STEP:
+      return {
+        ...state,
+        selectedLayoutElement: createSelectedLayoutElement(state, action),
+        detailPanelMode: DetailsPanelType.STEP_DETAILS
       };
     case LayoutEditorActionType.DEACTIVATE_LAYOUT_ELEMENT:
       return {
@@ -110,36 +139,40 @@ const reducer = (
         detailPanelMode: DetailsPanelType.EMPTY
       };
     case LayoutEditorActionType.ADD_SEGMENT:
-      if (action.layoutElement) {
+      if (action.layoutSegment) {
         if (state.layout.layoutSegments === undefined) {
           state.layout.layoutSegments = [];
         }
-        state.layout.layoutSegments.push(
-          action.layoutElement as ILayoutSegment
-        );
+        state.layout.layoutSegments.push(action.layoutSegment);
         return {
           ...state,
           layout: { ...state.layout },
-          activeEditLayoutElement: action.layoutElement
+          activeEditLayoutElement: createSelectedLayoutElement(state, action)
         };
       }
       return { ...state };
     case LayoutEditorActionType.UPDATE_NAME_ACTIVATE_LAYOUT_ELEMENT:
       if (action.layoutElementName && state.activeEditLayoutElement) {
-        state.activeEditLayoutElement.name = action.layoutElementName;
+        if (state.activeEditLayoutElement.step) {
+          state.activeEditLayoutElement.step.name = action.layoutElementName;
+        } else if (state.activeEditLayoutElement.segment) {
+          state.activeEditLayoutElement.segment.name = action.layoutElementName;
+        }
         return {
           ...state,
           activeEditLayoutElement: undefined,
           selectedLayoutElement: state.activeEditLayoutElement,
           layout: { ...state.layout },
-          detailPanelMode: determinePanelMode(state.activeEditLayoutElement)
+          detailPanelMode: state.activeEditLayoutElement.step
+            ? DetailsPanelType.STEP_DETAILS
+            : DetailsPanelType.EMPTY
         };
       }
       return { ...state };
     case LayoutEditorActionType.DELETE_SEGMENT:
-      if (action.layoutElement) {
+      if (action.layoutSegment) {
         const segmentIndex = state.layout.layoutSegments.indexOf(
-          action.layoutElement as ILayoutSegment
+          action.layoutSegment
         );
         if (segmentIndex >= 0) {
           state.layout.layoutSegments.splice(segmentIndex, 1);
@@ -163,23 +196,16 @@ const reducer = (
       }
       return { ...state };
     case LayoutEditorActionType.ADD_STEP:
-      if (action.layoutElement && state.selectedLayoutElement) {
-        (state.selectedLayoutElement as ILayoutSegment).steps.push(
-          action.layoutElement as IStep
-        );
+      if (action.layoutSegment && action.layoutStep) {
+        action.layoutSegment.steps.push(action.layoutStep);
         return { ...state, layout: { ...state.layout } };
       }
       return { ...state };
     case LayoutEditorActionType.DELETE_STEP:
-      if (action.layoutElement && state.selectedLayoutElement) {
-        const stepIndex = (state.selectedLayoutElement as ILayoutSegment).steps.indexOf(
-          action.layoutElement as IStep
-        );
+      if (action.layoutSegment && action.layoutStep) {
+        const stepIndex = action.layoutSegment.steps.indexOf(action.layoutStep);
         if (stepIndex >= 0) {
-          (state.selectedLayoutElement as ILayoutSegment).steps.splice(
-            stepIndex,
-            1
-          );
+          action.layoutSegment.steps.splice(stepIndex, 1);
         }
         return {
           ...state,
@@ -194,6 +220,35 @@ const reducer = (
       return { ...state, showSigningDialog: true };
     case LayoutEditorActionType.STOP_SIGNING:
       return { ...state, showSigningDialog: false };
+    case LayoutEditorActionType.UPDATE_APPROVAL_CONFIGS:
+      return { ...state, approvalConfigs: action.approvalConfigs || [] };
+    case LayoutEditorActionType.UPDATE_ARTIFACT_COLLECTOR:
+      if (action.artifactCollector) {
+        return {
+          ...state,
+          selectedLayoutElement: { ...state.selectedLayoutElement }
+        };
+      } else return { ...state };
+    case LayoutEditorActionType.ADD_ARTIFACT_COLLECTOR:
+      if (action.artifactCollector && state.selectedLayoutElement) {
+        const selected = state.selectedLayoutElement as ILayoutElement;
+        if (selected.approvalConfig) {
+          selected.approvalConfig.artifactCollectors.push(
+            action.artifactCollector
+          );
+        } else {
+          selected.approvalConfig = {
+            segmentName: selected.segment?.name || "",
+            stepName: selected.step?.name || "",
+            artifactCollectors: [action.artifactCollector]
+          };
+          state.approvalConfigs.push(selected.approvalConfig);
+        }
+        return {
+          ...state,
+          selectedLayoutElement: { ...state.selectedLayoutElement }
+        };
+      } else return { ...state };
     default:
       throw new Error();
   }
@@ -206,7 +261,8 @@ export const createLayoutEditorStoreContext = (): ILayoutEditorStoreContext => {
     selectedLayoutElement: undefined,
     loading: false,
     showSigningDialog: false,
-    detailPanelMode: DetailsPanelType.EMPTY
+    detailPanelMode: DetailsPanelType.EMPTY,
+    approvalConfigs: []
   });
   return { state: state, dispatch: dispatch };
 };

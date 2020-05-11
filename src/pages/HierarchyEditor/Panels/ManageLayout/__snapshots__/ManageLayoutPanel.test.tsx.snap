@@ -2210,7 +2210,7 @@ exports[`renders correctly with non existing layout 1`] = `
                         "layout": "{}",
                       }
                     }
-                    isLoading={true}
+                    isLoading={false}
                     onCancel={[Function]}
                     onSubmit={[Function]}
                     onValidChange={[Function]}
@@ -2517,9 +2517,9 @@ exports[`renders correctly with non existing layout 1`] = `
                                 >
                                   <LoaderButton
                                     buttonType="submit"
-                                    loading={true}
+                                    loading={false}
                                   >
-                                    <Styled(styled.button)
+                                    <styled.button
                                       type="submit"
                                     >
                                       <StyledComponent
@@ -2528,9 +2528,9 @@ exports[`renders correctly with non existing layout 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-hMqMXs",
+                                              "componentId": "sc-jKJlTe",
                                               "isStatic": false,
-                                              "lastClassName": "joTMQl",
+                                              "lastClassName": "kwmUOl",
                                               "rules": Array [
                                                 "
   ",
@@ -2562,17 +2562,12 @@ exports[`renders correctly with non existing layout 1`] = `
 ",
                                                 "
 ",
-                                                "
-  padding: 0.58rem 1rem;
-",
                                               ],
                                             },
-                                            "displayName": "Styled(styled.button)",
-                                            "foldedComponentIds": Array [
-                                              "sc-jKJlTe",
-                                            ],
+                                            "displayName": "styled.button",
+                                            "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-hMqMXs",
+                                            "styledComponentId": "sc-jKJlTe",
                                             "target": "button",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -2583,53 +2578,13 @@ exports[`renders correctly with non existing layout 1`] = `
                                         type="submit"
                                       >
                                         <button
-                                          className="sc-jKJlTe sc-hMqMXs joTMQl"
+                                          className="sc-jKJlTe kwmUOl"
                                           type="submit"
                                         >
-                                          <LoaderIcon
-                                            color="#fff"
-                                            size={18}
-                                          >
-                                            <svg
-                                              height={18}
-                                              stroke="#fff"
-                                              viewBox="0 0 38 38"
-                                              width={18}
-                                              xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                              <g
-                                                fill="none"
-                                                fillRule="evenodd"
-                                              >
-                                                <g
-                                                  strokeWidth="2"
-                                                  transform="translate(1 1)"
-                                                >
-                                                  <circle
-                                                    cx="18"
-                                                    cy="18"
-                                                    r="18"
-                                                    strokeOpacity=".5"
-                                                  />
-                                                  <path
-                                                    d="M36 18c0-9.94-8.06-18-18-18"
-                                                  >
-                                                    <animateTransform
-                                                      attributeName="transform"
-                                                      dur="1s"
-                                                      from="0 18 18"
-                                                      repeatCount="indefinite"
-                                                      to="360 18 18"
-                                                      type="rotate"
-                                                    />
-                                                  </path>
-                                                </g>
-                                              </g>
-                                            </svg>
-                                          </LoaderIcon>
+                                          Sign and Submit
                                         </button>
                                       </StyledComponent>
-                                    </Styled(styled.button)>
+                                    </styled.button>
                                   </LoaderButton>
                                   <Styled(Styled(styled.button))
                                     data-testhook="cancel-button"

@@ -38,6 +38,7 @@ import LayoutEditorDetailsPane from "./LayoutEditorDetailsPane";
 import { StateContext } from "../../HierarchyEditor";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
 import styled from "styled-components";
+import { IApprovalConfig } from "../../../../interfaces/IApprovalConfig";
 
 const PageSpecificContentSeparator = styled(ContentSeparator)`
   margin: 0.7rem 0 1rem;
@@ -53,6 +54,11 @@ const ManageLayoutPanel: React.FC = () => {
   const [layoutApiResponse, setLayoutApiRequest] = useDataApi(
     genericDataFetchReducer
   );
+
+  const [
+    _approvalConfigsApiResponse,
+    setApprovalConfigsApiRequest
+  ] = useDataApi(genericDataFetchReducer);
 
   useEffect(() => {
     editorStoreContext.dispatch({
@@ -83,6 +89,24 @@ const ManageLayoutPanel: React.FC = () => {
       }
     };
     setLayoutApiRequest(getLayoutRequest);
+
+    const getGetApprovalConfigsRequest: DataRequest = {
+      method: "get",
+      token,
+      url:
+        "/api/supplychain/" + state.nodeReferenceId + "/layout/approvalconfig",
+      cbSuccess: (approvalConfigs: Array<IApprovalConfig>) => {
+        editorStoreContext.dispatch({
+          type: LayoutEditorActionType.UPDATE_APPROVAL_CONFIGS,
+          approvalConfigs: approvalConfigs
+        });
+      },
+      cbFailure: (error): boolean => {
+        return error.response && error.response.status === 404;
+      }
+    };
+
+    setApprovalConfigsApiRequest(getGetApprovalConfigsRequest);
   }, [state.nodeReferenceId]);
 
   return (

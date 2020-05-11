@@ -110,10 +110,10 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
   const theme = useContext(ThemeContext);
 
   const onEditSegment = () => {
-    if (segment !== editorStoreContext.state.activeEditLayoutElement) {
+    if (segment !== editorStoreContext.state.activeEditLayoutElement?.segment) {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
-        layoutElement: segment
+        layoutSegment: segment
       });
     }
   };
@@ -121,23 +121,16 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
   const onDeleteSegment = () => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_SEGMENT,
-      layoutElement: segment
+      layoutSegment: segment
     });
   };
 
   const onAddStep = () => {
-    editorStoreContext.dispatch({
-      type: LayoutEditorActionType.SELECT_LAYOUT_ELEMENT,
-      layoutElement: segment
-    });
     const newStep = { name: "" } as IStep;
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.ADD_STEP,
-      layoutElement: newStep
-    });
-    editorStoreContext.dispatch({
-      type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
-      layoutElement: newStep
+      layoutSegment: segment,
+      layoutStep: newStep
     });
   };
 
@@ -154,7 +147,10 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
     <>
       <SegmentContainerLi>
         <SegmentTitle onClick={onEditSegment}>
-          {segment === editorStoreContext.state.activeEditLayoutElement ? (
+          {editorStoreContext.state.activeEditLayoutElement?.step ===
+            undefined &&
+          segment ===
+            editorStoreContext.state.activeEditLayoutElement?.segment ? (
             <LayoutElementNameEditor
               currentName={segment.name}
               nameExists={segmentNameExists}

@@ -65,7 +65,7 @@ const LayoutEditor: React.FC = () => {
     const layoutElement = { name: "", steps: [] };
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.ADD_SEGMENT,
-      layoutElement: layoutElement
+      layoutSegment: layoutElement
     });
   };
 
