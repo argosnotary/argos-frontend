@@ -228,7 +228,10 @@ const KeyManagement = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [keyAvailable, setKeyAvailable] = useState(true);
   const theme = useContext(ThemeContext);
-  const [publicKey, setPublicKey] = useState({} as IPublicKey);
+  const [publicKey, setPublicKey] = useState({
+    keyId: "",
+    publicKey: ""
+  } as IPublicKey);
   const { token } = useUserProfileContext();
   const createNewKey = () => {
     setDisplayModal(true);
