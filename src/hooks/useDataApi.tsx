@@ -41,12 +41,12 @@ function useDataApi<S, T>(
         dispatch({ type: "FETCH_INIT", isLoading: true });
         const authorizationHeader = {
           Authorization: `Bearer ${dataRequest.token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         };
 
         const requestConfig: AxiosRequestConfig = {
           headers: authorizationHeader,
-          cancelToken: source.token,
+          cancelToken: source.token
         };
 
         if (dataRequest.params) {
@@ -82,7 +82,7 @@ function useDataApi<S, T>(
           dispatch({
             isLoading: false,
             results: result.data,
-            type: "FETCH_SUCCESS",
+            type: "FETCH_SUCCESS"
           });
 
           if (dataRequest.cbSuccess) {
