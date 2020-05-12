@@ -34,8 +34,10 @@ function useDataApi<S, T>(
   const [_error, setError] = useRequestErrorStore();
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
+
     if (dataRequest) {
-      const fetchData = () => {
+      const fetchData = async () => {
         dispatch({ type: "FETCH_INIT", isLoading: true });
         const authorizationHeader = {
           Authorization: `Bearer ${dataRequest.token}`,
@@ -43,7 +45,8 @@ function useDataApi<S, T>(
         };
 
         const requestConfig: AxiosRequestConfig = {
-          headers: authorizationHeader
+          headers: authorizationHeader,
+          cancelToken: source.token
         };
 
         if (dataRequest.params) {
@@ -73,19 +76,20 @@ function useDataApi<S, T>(
           }
         }
 
-        axios(dataRequest.url, requestConfig)
-          .then(result => {
-            dispatch({
-              isLoading: false,
-              results: result.data,
-              type: "FETCH_SUCCESS"
-            });
+        try {
+          const result = await axios(dataRequest.url, requestConfig);
 
-            if (dataRequest.cbSuccess) {
-              dataRequest.cbSuccess(result.data);
-            }
-          })
-          .catch(error => {
+          dispatch({
+            isLoading: false,
+            results: result.data,
+            type: "FETCH_SUCCESS"
+          });
+
+          if (dataRequest.cbSuccess) {
+            dataRequest.cbSuccess(result.data);
+          }
+        } catch (error) {
+          if (!axios.isCancel(error)) {
             if (error.response && error.response.status === 401) {
               history.push("/login");
             }
@@ -97,11 +101,16 @@ function useDataApi<S, T>(
             } else {
               setError(error);
             }
-          });
+          }
+        }
       };
 
       fetchData();
     }
+
+    return () => {
+      source.cancel();
+    };
   }, [dataRequest]);
 
   return [state, setDataRequest, dataRequest];
