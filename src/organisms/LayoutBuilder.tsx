@@ -20,7 +20,7 @@ import EditIcon from "../atoms/Icons/EditIcon";
 import RemoveIcon from "../atoms/Icons/RemoveIcon";
 import Input from "../atoms/Input";
 
-const LayoutItemContainer = styled.div`
+const CollectionContainer = styled.div`
   margin: 1rem 0 0;
   border: 1px solid #1779ba;
   display: flex;
@@ -28,7 +28,7 @@ const LayoutItemContainer = styled.div`
   width: 100%;
 `;
 
-const LayoutItemContainerTitle = styled.header`
+const CollectionContainerTitle = styled.header`
   position: relative;
   top: -0.75rem;
   left: 1rem;
@@ -36,7 +36,7 @@ const LayoutItemContainerTitle = styled.header`
   display: inline-flex;
 `;
 
-const LayoutItemContainerButton = styled.button`
+const CollectionContainerButton = styled.button`
   position: relative;
   top: -1rem;
   right: 1rem;
@@ -44,21 +44,21 @@ const LayoutItemContainerButton = styled.button`
   border: 0;
 `;
 
-const LayoutItemContainerRow = styled.div`
+const CollectionContainerRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 `;
 
-const SegmentsContainer = styled(LayoutItemContainer)`
+const SegmentsContainer = styled(CollectionContainer)`
   flex-direction: column;
   border: 0;
   padding: 0 1rem;
   border: 1px solid #1779ba;
 `;
 
-const SegmentsContainerTitle = styled(LayoutItemContainerTitle)`
+const SegmentsContainerTitle = styled(CollectionContainerTitle)`
   font-size: 1.25rem;
   top: -1rem;
   color: #fff;
@@ -82,7 +82,7 @@ const SegmentTitle = styled.header`
   justify-content: space-between;
 `;
 
-const StepsContainer = styled(LayoutItemContainer)`
+const StepsContainer = styled(CollectionContainer)`
   flex-direction: column;
   padding: 0 1rem 1rem;
   margin: 2rem 0 1rem;
@@ -107,21 +107,21 @@ const StepTitle = styled.header`
   justify-content: space-between;
 `;
 
-const StepsContainerTitle = styled(LayoutItemContainerTitle)`
+const StepsContainerTitle = styled(CollectionContainerTitle)`
   top: -1rem;
   margin: 0 auto;
   padding: 0.25rem 1rem;
   border: 1px solid #1779ba;
 `;
 
-const AddSegmentButton = styled(LayoutItemContainerButton)`
+const AddSegmentButton = styled(CollectionContainerButton)`
   &:hover {
     cursor: pointer;
     transform: scale(0.8);
   }
 `;
 
-const AddStepButton = styled(LayoutItemContainerButton)`
+const AddStepButton = styled(CollectionContainerButton)`
   border: 1px solid #1779ba;
   padding: 0 0.65rem;
 
@@ -163,15 +163,15 @@ interface ILayoutBuilderProps {
   onRemoveStep: () => void;
 }
 
-const LayoutBuilder: React.FC<ILayoutBuilderProps> = props => {
+const LayoutBuilder: React.FC<ILayoutBuilderProps> = (props) => {
   return (
     <SegmentsContainer>
-      <LayoutItemContainerRow>
+      <CollectionContainerRow>
         <SegmentsContainerTitle>Segments</SegmentsContainerTitle>
         <AddSegmentButton onClick={props.onAddSegment}>
           <PlusIcon size={24} color={"#1779ba"} />
         </AddSegmentButton>
-      </LayoutItemContainerRow>
+      </CollectionContainerRow>
       {props.data.segments.map((segment: any, segmentKey: any) => (
         <Segment key={segmentKey}>
           <SegmentTitle>
@@ -186,12 +186,12 @@ const LayoutBuilder: React.FC<ILayoutBuilderProps> = props => {
             </ActionIconsContainer>
           </SegmentTitle>
           <StepsContainer>
-            <LayoutItemContainerRow>
+            <CollectionContainerRow>
               <StepsContainerTitle>Steps</StepsContainerTitle>
               <AddStepButton onClick={props.onAddStep}>
                 <PlusIcon size={20} color={"#1779ba"} />
               </AddStepButton>
-            </LayoutItemContainerRow>
+            </CollectionContainerRow>
             {segment.steps &&
               segment.steps.map((step: any, stepKey: any) => (
                 <Step key={stepKey}>

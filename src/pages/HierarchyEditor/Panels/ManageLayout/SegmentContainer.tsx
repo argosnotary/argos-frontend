@@ -18,17 +18,17 @@ import styled, { ThemeContext } from "styled-components";
 import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
 import {
   LayoutEditorActionType,
-  useLayoutEditorStore
+  useLayoutEditorStore,
 } from "./LayoutEditorStore";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import {
   ActionIconsContainer,
   BaseActionButton,
-  LayoutItemContainer,
-  LayoutItemContainerButton,
-  LayoutItemContainerRow,
-  LayoutItemContainerTitle
-} from "../../../../atoms/LayoutItemContainer";
+  CollectionContainer,
+  CollectionContainerButton,
+  CollectionContainerRow,
+  CollectionContainerTitle,
+} from "../../../../atoms/Collection";
 import { PlusIcon } from "../../../../atoms/Icons";
 import StepContainer from "./StepContainer";
 import LayoutElementNameEditor from "./LayoutElementNameEditor";
@@ -41,7 +41,7 @@ const SegmentTitle = styled.header`
   padding: 0.5rem;
   width: 100%;
   margin: 0.2rem 0 0;
-  background-color: ${props => props.theme.layoutBuilder.segmentTitleBgColor};
+  background-color: ${(props) => props.theme.layoutBuilder.segmentTitleBgColor};
 
   display: flex;
   align-items: center;
@@ -62,29 +62,30 @@ const SegmentTitle = styled.header`
   &:hover {
     cursor: pointer;
     border: 1px solid
-      ${props => props.theme.layoutBuilder.segmentTitleHoverBorderColor};
+      ${(props) => props.theme.layoutBuilder.segmentTitleHoverBorderColor};
   }
 `;
 
-const StepsContainer = styled(LayoutItemContainer)`
+const StepsContainer = styled(CollectionContainer)`
   flex-direction: column;
   padding: 0 1rem 1rem;
   margin: 1rem 0;
   min-height: 10rem;
-  background-color: ${props => props.theme.layoutBuilder.stepContainerBgColor};
+  background-color: ${(props) =>
+    props.theme.layoutBuilder.stepContainerBgColor};
 `;
 
-const StepsContainerTitle = styled(LayoutItemContainerTitle)`
+const StepsContainerTitle = styled(CollectionContainerTitle)`
   top: -1rem;
   margin: 0 auto;
   padding: 0.25rem 1rem;
   border: 1px solid
-    ${props => props.theme.layoutBuilder.stepContainerTitleBorderColor};
+    ${(props) => props.theme.layoutBuilder.stepContainerTitleBorderColor};
 `;
 
-const AddStepButton = styled(LayoutItemContainerButton)`
+const AddStepButton = styled(CollectionContainerButton)`
   border: 1px solid
-    ${props => props.theme.layoutBuilder.addStepButtonBorderColor};
+    ${(props) => props.theme.layoutBuilder.addStepButtonBorderColor};
   padding: 0 0.65rem;
 
   &:hover {
@@ -113,7 +114,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
     if (segment !== editorStoreContext.state.activeEditLayoutElement?.segment) {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
-        layoutSegment: segment
+        layoutSegment: segment,
       });
     }
   };
@@ -121,7 +122,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
   const onDeleteSegment = () => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_SEGMENT,
-      layoutSegment: segment
+      layoutSegment: segment,
     });
   };
 
@@ -130,7 +131,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.ADD_STEP,
       layoutSegment: segment,
-      layoutStep: newStep
+      layoutStep: newStep,
     });
   };
 
@@ -138,7 +139,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
     return (
       editorStoreContext.state.layout.layoutSegments &&
       editorStoreContext.state.layout.layoutSegments.findIndex(
-        segment => segment.name === segmentName
+        (segment) => segment.name === segmentName
       ) >= 0
     );
   };
@@ -168,12 +169,12 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
         </SegmentTitle>
       </SegmentContainerLi>
       <StepsContainer>
-        <LayoutItemContainerRow>
+        <CollectionContainerRow>
           <StepsContainerTitle>Steps</StepsContainerTitle>
           <AddStepButton onClick={onAddStep}>
             <PlusIcon size={20} color={theme.layoutBuilder.iconColor} />
           </AddStepButton>
-        </LayoutItemContainerRow>
+        </CollectionContainerRow>
         {segment.steps &&
           segment.steps.map((step: IStep, stepKey: any) => (
             <StepContainer

@@ -16,38 +16,38 @@
 
 import {
   LayoutEditorActionType,
-  useLayoutEditorStore
+  useLayoutEditorStore,
 } from "./LayoutEditorStore";
 import React, { useContext } from "react";
 import SegmentContainer from "./SegmentContainer";
 import styled, { ThemeContext } from "styled-components";
 import { PlusIcon } from "../../../../atoms/Icons";
 import {
-  LayoutItemContainer,
-  LayoutItemContainerButton,
-  LayoutItemContainerRow,
-  LayoutItemContainerTitle,
-  LayoutItemContainerList
-} from "../../../../atoms/LayoutItemContainer";
+  CollectionContainer,
+  CollectionContainerButton,
+  CollectionContainerRow,
+  CollectionContainerTitle,
+  CollectionContainerList,
+} from "../../../../atoms/Collection";
 
-const SegmentsContainer = styled(LayoutItemContainer)`
+const SegmentsContainer = styled(CollectionContainer)`
   flex-direction: column;
   border: 0;
   padding: 0 1rem;
   border: 1px solid
-    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
+    ${(props) => props.theme.layoutBuilder.segmentContainerBorderColor};
 `;
 
-const SegmentsContainerTitle = styled(LayoutItemContainerTitle)`
+const SegmentsContainerTitle = styled(CollectionContainerTitle)`
   font-size: 1rem;
   top: -1rem;
-  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${props =>
+  color: ${(props) => props.theme.layoutBuilder.segmentsContainerTitleColor};
+  background-color: ${(props) =>
     props.theme.layoutBuilder.segmentContainerTitleBgColor};
   padding: 0.25rem 2rem 0.4rem;
 `;
 
-const AddSegmentButton = styled(LayoutItemContainerButton)`
+const AddSegmentButton = styled(CollectionContainerButton)`
   right: 0;
 
   &:hover {
@@ -65,7 +65,7 @@ const LayoutEditor: React.FC = () => {
     const layoutElement = { name: "", steps: [] };
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.ADD_SEGMENT,
-      layoutSegment: layoutElement
+      layoutSegment: layoutElement,
     });
   };
 
@@ -74,19 +74,19 @@ const LayoutEditor: React.FC = () => {
   return (
     <ul>
       <SegmentsContainer>
-        <LayoutItemContainerRow>
+        <CollectionContainerRow>
           <SegmentsContainerTitle>Segments</SegmentsContainerTitle>
           <AddSegmentButton onClick={onAddSegment}>
             <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
           </AddSegmentButton>
-        </LayoutItemContainerRow>
-        <LayoutItemContainerList>
+        </CollectionContainerRow>
+        <CollectionContainerList>
           {layout.layoutSegments
             ? layout.layoutSegments.map((segment, _key) => (
                 <SegmentContainer key={segment.name} segment={segment} />
               ))
             : null}
-        </LayoutItemContainerList>
+        </CollectionContainerList>
       </SegmentsContainer>
     </ul>
   );

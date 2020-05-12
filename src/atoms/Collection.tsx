@@ -15,7 +15,7 @@
  */
 import styled from "styled-components";
 
-export const LayoutItemContainer = styled.li`
+export const CollectionContainer = styled.li`
   margin: 1rem 0 1rem;
   border: 1px solid #1779ba;
   display: flex;
@@ -40,21 +40,21 @@ export const BaseActionButton = styled.button`
   }
 `;
 
-export const LayoutItemContainerButton = styled.button`
+export const CollectionContainerButton = styled.button`
   position: relative;
   top: -1rem;
   background-color: #f1f1f1;
   border: 0;
 `;
 
-export const LayoutItemContainerRow = styled.div`
+export const CollectionContainerRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 `;
 
-export const LayoutItemContainerTitle = styled.header`
+export const CollectionContainerTitle = styled.header`
   position: relative;
   font-size: 0.9rem;
   top: -0.75rem;
@@ -62,7 +62,7 @@ export const LayoutItemContainerTitle = styled.header`
   display: inline-flex;
 `;
 
-export const LayoutItemContainerList = styled.ul`
+export const CollectionContainerList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
