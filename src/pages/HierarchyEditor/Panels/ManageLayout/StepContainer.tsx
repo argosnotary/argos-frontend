@@ -21,6 +21,7 @@ import styled, { ThemeContext } from "styled-components";
 import {
   ActionIconsContainer,
   BaseActionButton,
+  CollectionContainerSpan,
 } from "../../../../atoms/Collection";
 import LayoutElementNameEditor from "./LayoutElementNameEditor";
 import {
@@ -143,7 +144,7 @@ const StepContainer: React.FC<IStepContainer> = ({
             />
           ) : (
             <>
-              <span>{step.name}</span>
+              <CollectionContainerSpan>{step.name}</CollectionContainerSpan>
               <ActionIconsContainer>
                 <EditStepButton onClick={onSelectStep}>
                   <EditIcon size={26} color={theme.layoutBuilder.iconColor} />

@@ -28,6 +28,7 @@ import {
   CollectionContainerButton,
   CollectionContainerRow,
   CollectionContainerTitle,
+  CollectionContainerSpan,
 } from "../../../../atoms/Collection";
 import { PlusIcon } from "../../../../atoms/Icons";
 import StepContainer from "./StepContainer";
@@ -158,7 +159,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
             />
           ) : (
             <>
-              <span>{segment.name}</span>
+              <CollectionContainerSpan>{segment.name}</CollectionContainerSpan>
               <ActionIconsContainer>
                 <RemoveSegmentButton onClick={onDeleteSegment}>
                   <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />

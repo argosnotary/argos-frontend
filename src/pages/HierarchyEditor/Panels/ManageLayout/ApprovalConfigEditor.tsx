@@ -36,6 +36,7 @@ import {
   CollectionContainerList,
   ActionIconsContainer,
   BaseActionButton,
+  CollectionContainerSpan,
 } from "../../../../atoms/Collection";
 import { PlusIcon } from "../../../../atoms/Icons";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
@@ -230,9 +231,9 @@ const ApprovalConfigEditor: React.FC = () => {
     return (
       <CollectorContainerLi key={index}>
         <CollectorTitle>
-          <span>
+          <CollectionContainerSpan>
             {collector.type} - {collector.name} - {collector.uri}
-          </span>
+          </CollectionContainerSpan>
           <ActionIconsContainer>
             <EditCollectionButton onClick={() => setEditIndex(index)}>
               <EditIcon size={26} color={theme.layoutBuilder.iconColor} />

@@ -67,3 +67,9 @@ export const CollectionContainerList = styled.ul`
   flex-direction: column;
   width: 100%;
 `;
+
+export const CollectionContainerSpan = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
