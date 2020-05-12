@@ -105,13 +105,17 @@ const reducer = (
     case LayoutEditorActionType.SELECT_STEP:
       return handleSelectStep(state, action);
     case LayoutEditorActionType.DEACTIVATE_LAYOUT_ELEMENT:
-      return {...state, activeEditLayoutElement: undefined, detailPanelMode: DetailsPanelType.EMPTY};
+      return {
+        ...state,
+        activeEditLayoutElement: undefined,
+        detailPanelMode: DetailsPanelType.EMPTY
+      };
     case LayoutEditorActionType.ADD_SEGMENT:
       return handleAddSegment(action, state);
     case LayoutEditorActionType.UPDATE_NAME_ACTIVATE_LAYOUT_ELEMENT:
       return handleUpdateNameActiveLayoutElement(action, state);
     case LayoutEditorActionType.DELETE_SEGMENT:
-      return handleDeleteSegement(action, state);
+      return handleDeleteSegment(action, state);
     case LayoutEditorActionType.LAYOUT_HAS_VALIDATION_ERRORS:
       return handleLayoutHasValidationErrors(action, state);
     case LayoutEditorActionType.ADD_STEP:
@@ -151,25 +155,28 @@ export const createLayoutEditorStoreContext = (): ILayoutEditorStoreContext => {
 export const useLayoutEditorStore = () => useContext(LayoutEditorStoreContext);
 
 const createSelectedLayoutElement = (
-    state: ILayoutEditorState,
-    action: ILayoutEditorAction
+  state: ILayoutEditorState,
+  action: ILayoutEditorAction
 ): ILayoutElement => {
   return {
     segment: action.layoutSegment,
     step: action.layoutStep,
     approvalConfig:
-        action.layoutSegment && action.layoutStep
-            ? state.approvalConfigs.find(config => {
-              return (
-                  config.stepName === action.layoutStep?.name &&
-                  config.segmentName === action.layoutSegment?.name
-              );
-            })
-            : undefined
+      action.layoutSegment && action.layoutStep
+        ? state.approvalConfigs.find(config => {
+            return (
+              config.stepName === action.layoutStep?.name &&
+              config.segmentName === action.layoutSegment?.name
+            );
+          })
+        : undefined
   };
 };
 
-const handleUpdateLayout = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const handleUpdateLayout = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.layout) {
     return {
       ...state,
@@ -181,10 +188,13 @@ const handleUpdateLayout = (action: ILayoutEditorAction, state: ILayoutEditorSta
       validationErrors: undefined
     };
   }
-  return {...state};
-}
+  return { ...state };
+};
 
-const handleAddSegment = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const handleAddSegment = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.layoutSegment) {
     if (state.layout.layoutSegments === undefined) {
       state.layout.layoutSegments = [];
@@ -192,76 +202,155 @@ const handleAddSegment = (action: ILayoutEditorAction, state: ILayoutEditorState
     state.layout.layoutSegments.push(action.layoutSegment);
     return {
       ...state,
-      layout: {...state.layout},
+      layout: { ...state.layout },
       activeEditLayoutElement: createSelectedLayoutElement(state, action)
     };
   }
-  return {...state};
-}
+  return { ...state };
+};
 
-const handleUpdateNameActiveLayoutElement = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const handleUpdateNameActiveLayoutElement = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.layoutElementName && state.activeEditLayoutElement) {
-    if (state.activeEditLayoutElement.step) {
+    if (
+      state.activeEditLayoutElement.step &&
+      state.activeEditLayoutElement.segment
+    ) {
+      renameApprovalConfigStepName(
+        state,
+        state.activeEditLayoutElement.segment.name,
+        state.activeEditLayoutElement.step.name,
+        action.layoutElementName
+      );
       state.activeEditLayoutElement.step.name = action.layoutElementName;
     } else if (state.activeEditLayoutElement.segment) {
+      renameApprovalConfigSegmentName(
+        state,
+        state.activeEditLayoutElement.segment.name,
+        action.layoutElementName
+      );
       state.activeEditLayoutElement.segment.name = action.layoutElementName;
     }
     return {
       ...state,
       activeEditLayoutElement: undefined,
+      approvalConfigs: [...state.approvalConfigs],
       selectedLayoutElement: state.activeEditLayoutElement,
-      layout: {...state.layout},
+      layout: { ...state.layout },
       detailPanelMode: state.activeEditLayoutElement.step
-          ? DetailsPanelType.STEP_DETAILS
-          : DetailsPanelType.EMPTY
+        ? DetailsPanelType.STEP_DETAILS
+        : DetailsPanelType.EMPTY
     };
   }
-  return {...state};
-}
+  return { ...state };
+};
 
-const handleDeleteSegement = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const renameApprovalConfigStepName = (
+  state: ILayoutEditorState,
+  currentSegmentName: string,
+  currentStepName: string,
+  newStepName: string
+) => {
+  state.approvalConfigs
+    .filter(
+      config =>
+        config.stepName === currentStepName &&
+        config.segmentName === currentSegmentName
+    )
+    .forEach(config => (config.stepName = newStepName));
+};
+
+const renameApprovalConfigSegmentName = (
+  state: ILayoutEditorState,
+  currentSegmentName: string,
+  newSegmentName: string
+) => {
+  state.approvalConfigs
+    .filter(config => config.segmentName === currentSegmentName)
+    .forEach(config => (config.segmentName = newSegmentName));
+};
+
+const handleDeleteSegment = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.layoutSegment) {
     const segmentIndex = state.layout.layoutSegments.indexOf(
-        action.layoutSegment
+      action.layoutSegment
     );
     if (segmentIndex >= 0) {
       state.layout.layoutSegments.splice(segmentIndex, 1);
+      removeApprovalConfig(state, action.layoutSegment.name);
+      return {
+        ...state,
+        approvalConfigs: [...state.approvalConfigs],
+        layout: { ...state.layout },
+        selectedLayoutElement: undefined,
+        activeEditLayoutElement: undefined,
+        detailPanelMode: DetailsPanelType.EMPTY
+      };
     }
-    return {
-      ...state,
-      layout: {...state.layout},
-      selectedLayoutElement: undefined,
-      activeEditLayoutElement: undefined,
-      detailPanelMode: DetailsPanelType.EMPTY
-    };
   }
-  return {...state};
-}
+  return { ...state };
+};
 
-const handleDeleteStep = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const handleDeleteStep = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.layoutSegment && action.layoutStep) {
     const stepIndex = action.layoutSegment.steps.indexOf(action.layoutStep);
     if (stepIndex >= 0) {
       action.layoutSegment.steps.splice(stepIndex, 1);
+      removeApprovalConfig(
+        state,
+        action.layoutSegment.name,
+        action.layoutStep.name
+      );
+      return {
+        ...state,
+        approvalConfigs: [...state.approvalConfigs],
+        layout: { ...state.layout },
+        selectedLayoutElement: undefined,
+        activeEditLayoutElement: undefined,
+        detailPanelMode: DetailsPanelType.EMPTY
+      };
     }
-    return {
-      ...state,
-      layout: {...state.layout},
-      selectedLayoutElement: undefined,
-      activeEditLayoutElement: undefined,
-      detailPanelMode: DetailsPanelType.EMPTY
-    };
   }
-  return {...state};
-}
+  return { ...state };
+};
 
-const handleAddArtifactCollector = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const removeApprovalConfig = (
+  state: ILayoutEditorState,
+  segmentName?: string,
+  stepName?: string
+) => {
+  let indexesToRemove: number[] = [];
+  if (segmentName && stepName) {
+    indexesToRemove = state.approvalConfigs
+      .filter(
+        config =>
+          config.stepName === stepName && config.segmentName === segmentName
+      )
+      .map((_config, index) => index);
+  } else if (segmentName) {
+    indexesToRemove = state.approvalConfigs
+      .filter(config => config.segmentName === segmentName)
+      .map((_config, index) => index);
+  }
+  indexesToRemove.forEach(index => state.approvalConfigs.splice(index, 1));
+};
+
+const handleAddArtifactCollector = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.artifactCollector && state.selectedLayoutElement) {
     const selected = state.selectedLayoutElement;
     if (selected.approvalConfig) {
-      selected.approvalConfig.artifactCollectors.push(
-          action.artifactCollector
-      );
+      selected.approvalConfig.artifactCollectors.push(action.artifactCollector);
     } else {
       selected.approvalConfig = {
         segmentName: selected.segment?.name || "",
@@ -272,44 +361,62 @@ const handleAddArtifactCollector = (action: ILayoutEditorAction, state: ILayoutE
     }
     return {
       ...state,
-      selectedLayoutElement: {...state.selectedLayoutElement}
+      selectedLayoutElement: { ...state.selectedLayoutElement }
     };
-  } else return {...state};
-}
+  } else return { ...state };
+};
 
-const handleDeleteArtifactCollector = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const handleDeleteArtifactCollector = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (
-      action.artifactCollector &&
-      state.selectedLayoutElement &&
-      state.selectedLayoutElement.approvalConfig
+    action.artifactCollector &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.approvalConfig
   ) {
-    const collectorIndex = state.selectedLayoutElement.approvalConfig.artifactCollectors.indexOf(
-        action.artifactCollector
+    deleteArtifactCollector(
+      state.selectedLayoutElement.approvalConfig,
+      action.artifactCollector
+    );
+    return {
+      ...state,
+      selectedLayoutElement: { ...state.selectedLayoutElement }
+    };
+  }
+  return { ...state };
+};
+
+const deleteArtifactCollector = (
+  approvalConfig?: IApprovalConfig,
+  artifactCollector?: IArtifactCollector
+) => {
+  if (approvalConfig && artifactCollector) {
+    const collectorIndex = approvalConfig.artifactCollectors.indexOf(
+      artifactCollector
     );
     if (collectorIndex >= 0) {
-      state.selectedLayoutElement.approvalConfig.artifactCollectors.splice(
-          collectorIndex,
-          1
-      );
-      return {
-        ...state,
-        selectedLayoutElement: {...state.selectedLayoutElement}
-      };
+      approvalConfig.artifactCollectors.splice(collectorIndex, 1);
     }
   }
-  return {...state};
-}
+};
 
-const handleUpdateArtifactCollector = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const handleUpdateArtifactCollector = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.artifactCollector) {
     return {
       ...state,
-      selectedLayoutElement: {...state.selectedLayoutElement}
+      selectedLayoutElement: { ...state.selectedLayoutElement }
     };
-  } else return {...state};
-}
+  } else return { ...state };
+};
 
-const handleLayoutHasValidationErrors = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const handleLayoutHasValidationErrors = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.validationErrors) {
     return {
       ...state,
@@ -317,30 +424,40 @@ const handleLayoutHasValidationErrors = (action: ILayoutEditorAction, state: ILa
       detailPanelMode: DetailsPanelType.VALIDATION_ERRORS
     };
   }
-  return {...state};
-}
+  return { ...state };
+};
 
-const handleAddStep = (action: ILayoutEditorAction, state: ILayoutEditorState) => {
+const handleAddStep = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+) => {
   if (action.layoutSegment && action.layoutStep) {
     action.layoutSegment.steps.push(action.layoutStep);
-    return {...state, layout: {...state.layout}};
+    return { ...state, layout: { ...state.layout } };
   }
-  return {...state};
-}
+  return { ...state };
+};
 
-const handleEditLayoutElement = (state: ILayoutEditorState, action: ILayoutEditorAction) => {
+const handleEditLayoutElement = (
+  state: ILayoutEditorState,
+  action: ILayoutEditorAction
+) => {
   return {
     ...state,
-    activeEditLayoutElement: createSelectedLayoutElement(state, action)
+    activeEditLayoutElement: createSelectedLayoutElement(state, action),
+    selectedLayoutElement: undefined,
+    detailPanelMode: DetailsPanelType.EMPTY
   };
-}
+};
 
-const handleSelectStep = (state: ILayoutEditorState, action: ILayoutEditorAction) => {
+const handleSelectStep = (
+  state: ILayoutEditorState,
+  action: ILayoutEditorAction
+) => {
   return {
     ...state,
+    activeEditLayoutElement: undefined,
     selectedLayoutElement: createSelectedLayoutElement(state, action),
     detailPanelMode: DetailsPanelType.STEP_DETAILS
   };
-}
-
-
+};
