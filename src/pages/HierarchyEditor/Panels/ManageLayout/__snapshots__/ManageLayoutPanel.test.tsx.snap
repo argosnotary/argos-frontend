@@ -4326,7 +4326,6 @@ exports[`sign layout happy flow 1`] = `
                                                         </StyledComponent>
                                                       </styled.label>
                                                       <styled.input
-                                                        autoFocus={true}
                                                         disabled={false}
                                                         name="passphrase"
                                                         onBlur={[Function]}
@@ -4335,7 +4334,6 @@ exports[`sign layout happy flow 1`] = `
                                                         value=""
                                                       >
                                                         <StyledComponent
-                                                          autoFocus={true}
                                                           disabled={false}
                                                           forwardedComponent={
                                                             Object {
@@ -4404,7 +4402,6 @@ exports[`sign layout happy flow 1`] = `
                                                           value=""
                                                         >
                                                           <input
-                                                            autoFocus={true}
                                                             className="sc-chPdSV bYQaFH"
                                                             disabled={false}
                                                             name="passphrase"

@@ -74,7 +74,8 @@ export enum LayoutEditorActionType {
   DELETE_STEP,
   UPDATE_APPROVAL_CONFIGS,
   UPDATE_ARTIFACT_COLLECTOR,
-  ADD_ARTIFACT_COLLECTOR
+  ADD_ARTIFACT_COLLECTOR,
+  DELETE_ARTIFACT_COLLECTOR
 }
 
 export interface ILayoutEditorAction {
@@ -118,7 +119,15 @@ const reducer = (
       return { ...state, loading: false };
     case LayoutEditorActionType.UPDATE_LAYOUT:
       if (action.layout) {
-        return { ...state, layout: action.layout };
+        return {
+          ...state,
+          layout: action.layout,
+          selectedLayoutElement: undefined,
+          activeEditLayoutElement: undefined,
+          showSigningDialog: false,
+          detailPanelMode: DetailsPanelType.EMPTY,
+          validationErrors: undefined
+        };
       }
       return { ...state };
     case LayoutEditorActionType.EDIT_LAYOUT_ELEMENT:
@@ -249,6 +258,27 @@ const reducer = (
           selectedLayoutElement: { ...state.selectedLayoutElement }
         };
       } else return { ...state };
+    case LayoutEditorActionType.DELETE_ARTIFACT_COLLECTOR:
+      if (
+        action.artifactCollector &&
+        state.selectedLayoutElement &&
+        state.selectedLayoutElement.approvalConfig
+      ) {
+        const collectorIndex = state.selectedLayoutElement.approvalConfig.artifactCollectors.indexOf(
+          action.artifactCollector
+        );
+        if (collectorIndex >= 0) {
+          state.selectedLayoutElement.approvalConfig.artifactCollectors.splice(
+            collectorIndex,
+            1
+          );
+          return {
+            ...state,
+            selectedLayoutElement: { ...state.selectedLayoutElement }
+          };
+        }
+      }
+      return { ...state };
     default:
       throw new Error();
   }

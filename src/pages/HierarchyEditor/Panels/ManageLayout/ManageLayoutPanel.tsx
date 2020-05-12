@@ -101,8 +101,12 @@ const ManageLayoutPanel: React.FC = () => {
           approvalConfigs: approvalConfigs
         });
       },
-      cbFailure: (error): boolean => {
-        return error.response && error.response.status === 404;
+      cbFailure: (): boolean => {
+        editorStoreContext.dispatch({
+          type: LayoutEditorActionType.UPDATE_APPROVAL_CONFIGS,
+          approvalConfigs: []
+        });
+        return false;
       }
     };
 

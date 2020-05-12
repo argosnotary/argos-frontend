@@ -248,6 +248,9 @@ it("sign layout happy flow", async () => {
   mock.onGet("/api/personalaccount/me/key").reply(200, key);
 
   mock.onPost("/api/supplychain/supplyChainId/layout").reply(200);
+  mock
+    .onPost("/api/supplychain/supplyChainId/layout/approvalconfig")
+    .reply(200);
   mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(200);
 
   const root = createComponent();
@@ -288,7 +291,7 @@ it("sign layout happy flow", async () => {
       .simulate("submit");
 
     await waitFor(() => expect(mock.history.get.length).toBe(2));
-    await waitFor(() => expect(mock.history.post.length).toBe(2));
+    await waitFor(() => expect(mock.history.post.length).toBe(3));
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
     expect(mock.history.post[1].data).toBe(

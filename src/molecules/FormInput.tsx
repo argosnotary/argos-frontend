@@ -51,7 +51,6 @@ const FormInput: React.FC<IFormInputProps> = ({
   <FormInputContainer>
     {labelValue ? <InputLabel>{labelValue}</InputLabel> : null}
     <Input
-      autoFocus={true}
       disabled={disabled}
       name={name}
       {...(onBlur ? { onBlur } : "")}

@@ -26,6 +26,7 @@ import {
   ArtifactCollectorType,
   IArtifactCollector
 } from "../../../../interfaces/IApprovalConfig";
+import { isWebUri } from "valid-url";
 
 interface IFormFormValues {
   name: string;
@@ -51,6 +52,13 @@ const validateApprovalConfigForm = (values: IFormFormValues) => {
     errors.name =
       "Invalid name (only alphanumeric characters, hyphen and underscore allowed).";
   }
+
+  if (!values.uri) {
+    errors.uri = "Please fill in a url.";
+    //eslint-disable-next-line
+  } else if (isWebUri(values.uri) === undefined) {
+    errors.uri = "Invalid url";
+  }
   return errors;
 };
 
@@ -66,10 +74,10 @@ const ApprovalConfigEditor: React.FC = () => {
     setEditIndex(undefined);
     setAddMode(false);
     if (editorStoreContext.state.selectedLayoutElement?.approvalConfig) {
-      setCollectors(
-        editorStoreContext.state.selectedLayoutElement?.approvalConfig
+      setCollectors([
+        ...editorStoreContext.state.selectedLayoutElement?.approvalConfig
           .artifactCollectors
-      );
+      ]);
     } else {
       setCollectors([]);
     }
@@ -86,6 +94,7 @@ const ApprovalConfigEditor: React.FC = () => {
         type: LayoutEditorActionType.ADD_ARTIFACT_COLLECTOR,
         artifactCollector: artifactCollector
       });
+      setAddMode(false);
     } else {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.UPDATE_ARTIFACT_COLLECTOR,
@@ -95,6 +104,10 @@ const ApprovalConfigEditor: React.FC = () => {
   };
 
   const onCancel = () => {
+    if (addMode) {
+      collectors.splice(collectors.length - 1, 1);
+      setCollectors(collectors);
+    }
     setEditIndex(undefined);
   };
 
@@ -109,6 +122,51 @@ const ApprovalConfigEditor: React.FC = () => {
     setAddMode(true);
   };
 
+  const editorForm = (collector: IArtifactCollector) => {
+    return (
+      <>
+        <GenericForm
+          schema={approvalConfigFormSchema}
+          permission={FormPermissions.EDIT}
+          isLoading={false}
+          validate={validateApprovalConfigForm}
+          onCancel={onCancel}
+          onSubmit={form => onUpdateApprovalConfig(form, collector)}
+          initialValues={{ name: collector.name, uri: collector.uri }}
+          cancellationLabel={"Cancel"}
+          confirmationLabel={"Save"}
+        />
+      </>
+    );
+  };
+
+  const deleteCollector = (index: number) => {
+    editorStoreContext.dispatch({
+      type: LayoutEditorActionType.DELETE_ARTIFACT_COLLECTOR,
+      artifactCollector: collectors[index]
+    });
+  };
+
+  const collectorRow = (collector: IArtifactCollector, index: number) => {
+    return (
+      <>
+        <div key={index}>
+          {collector.name}
+          {collector.type}
+          {collector.uri}
+          <button
+            onClick={() => {
+              setEditIndex(index);
+            }}
+          >
+            edit
+          </button>
+          <button onClick={() => deleteCollector(index)}>delete</button>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       {editIndex === undefined ? (
@@ -116,40 +174,12 @@ const ApprovalConfigEditor: React.FC = () => {
           <button onClick={addCollector}>add</button>
         </div>
       ) : null}
-      {collectors.map((collector, key) => {
+      {collectors.map((collector, index) => {
         return (
           <>
-            {key === editIndex ? (
-              <>
-                <GenericForm
-                  key={key}
-                  schema={approvalConfigFormSchema}
-                  permission={FormPermissions.EDIT}
-                  isLoading={false}
-                  validate={validateApprovalConfigForm}
-                  onCancel={onCancel}
-                  onSubmit={form => onUpdateApprovalConfig(form, collector)}
-                  initialValues={{ name: collector.name, uri: collector.uri }}
-                  cancellationLabel={"Cancel"}
-                  confirmationLabel={"Save"}
-                />
-              </>
-            ) : (
-              <>
-                <div key={key}>
-                  {collector.name}
-                  {collector.type}
-                  {collector.uri}
-                  <button
-                    onClick={() => {
-                      setEditIndex(key);
-                    }}
-                  >
-                    edit
-                  </button>
-                </div>
-              </>
-            )}
+            {index === editIndex
+              ? editorForm(collector)
+              : collectorRow(collector, index)}
           </>
         );
       })}
