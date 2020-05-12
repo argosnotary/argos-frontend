@@ -16,15 +16,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
   LayoutEditorActionType,
-  useLayoutEditorStore,
+  useLayoutEditorStore
 } from "./LayoutEditorStore";
 import GenericForm, {
-  IGenericFormSchema,
+  IGenericFormSchema
 } from "../../../../organisms/GenericForm";
 import { FormPermissions } from "../../../../types/FormPermission";
 import {
   ArtifactCollectorType,
-  IArtifactCollector,
+  IArtifactCollector
 } from "../../../../interfaces/IApprovalConfig";
 import { isWebUri } from "valid-url";
 import styled, { ThemeContext } from "styled-components";
@@ -36,7 +36,7 @@ import {
   CollectionContainerList,
   ActionIconsContainer,
   BaseActionButton,
-  CollectionContainerSpan,
+  CollectionContainerSpan
 } from "../../../../atoms/Collection";
 import { PlusIcon } from "../../../../atoms/Icons";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
@@ -48,15 +48,15 @@ const CollectorsContainer = styled(CollectionContainer)`
   border: 0;
   padding: 0 1rem 1rem;
   border: 1px solid
-    ${(props) => props.theme.layoutBuilder.segmentContainerBorderColor};
+    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
 `;
 
 const CollectorsContainerTitle = styled(CollectionContainerTitle)`
   font-size: 0.85rem;
   top: -1rem;
-  color: ${(props) => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${(props) =>
-    props.theme.layoutBuilder.segmentContainerTitleBgColor};
+  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
+  background-color: ${props =>
+  props.theme.layoutBuilder.segmentContainerTitleBgColor};
   padding: 0.25rem 2rem 0.4rem;
 `;
 
@@ -75,7 +75,7 @@ const CollectorTitle = styled.header`
   padding: 0.5rem;
   width: 100%;
   margin: 0.2rem 0 0;
-  background-color: ${(props) => props.theme.layoutBuilder.segmentTitleBgColor};
+  background-color: ${props => props.theme.layoutBuilder.segmentTitleBgColor};
 
   display: flex;
   align-items: center;
@@ -98,8 +98,7 @@ const FormContainer = styled(CollectionContainer)`
   padding: 1rem;
   margin: 0 0 1rem;
   min-height: 10rem;
-  background-color: ${(props) =>
-    props.theme.layoutBuilder.stepContainerBgColor};
+  background-color: ${props => props.theme.layoutBuilder.stepContainerBgColor};
 `;
 
 const RemoveCollectorButton = styled(BaseActionButton)``;
@@ -113,13 +112,13 @@ const approvalConfigFormSchema: IGenericFormSchema = [
   {
     labelValue: "Name",
     name: "name",
-    formType: "text",
+    formType: "text"
   },
   {
     labelValue: "URI",
     name: "uri",
-    formType: "text",
-  },
+    formType: "text"
+  }
 ];
 
 const validateApprovalConfigForm = (values: IFormFormValues) => {
@@ -156,7 +155,7 @@ const ApprovalConfigEditor: React.FC = () => {
     if (editorStoreContext.state.selectedLayoutElement?.approvalConfig) {
       setCollectors([
         ...editorStoreContext.state.selectedLayoutElement?.approvalConfig
-          .artifactCollectors,
+          .artifactCollectors
       ]);
     } else {
       setCollectors([]);
@@ -172,13 +171,13 @@ const ApprovalConfigEditor: React.FC = () => {
     if (addMode) {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.ADD_ARTIFACT_COLLECTOR,
-        artifactCollector: artifactCollector,
+        artifactCollector: artifactCollector
       });
       setAddMode(false);
     } else {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.UPDATE_ARTIFACT_COLLECTOR,
-        artifactCollector: artifactCollector,
+        artifactCollector: artifactCollector
       });
     }
   };
@@ -195,7 +194,7 @@ const ApprovalConfigEditor: React.FC = () => {
     collectors.push({
       type: ArtifactCollectorType.XLDEPLOY,
       name: "",
-      uri: "",
+      uri: ""
     });
     setCollectors(collectors);
     setEditIndex(collectors.length - 1);
@@ -211,7 +210,7 @@ const ApprovalConfigEditor: React.FC = () => {
           isLoading={false}
           validate={validateApprovalConfigForm}
           onCancel={onCancel}
-          onSubmit={(form) => onUpdateApprovalConfig(form, collector)}
+          onSubmit={form => onUpdateApprovalConfig(form, collector)}
           initialValues={{ name: collector.name, uri: collector.uri }}
           cancellationLabel={"Cancel"}
           confirmationLabel={"Save"}
@@ -223,7 +222,7 @@ const ApprovalConfigEditor: React.FC = () => {
   const deleteCollector = (index: number) => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_ARTIFACT_COLLECTOR,
-      artifactCollector: collectors[index],
+      artifactCollector: collectors[index]
     });
   };
 
@@ -232,15 +231,15 @@ const ApprovalConfigEditor: React.FC = () => {
       <CollectorContainerLi key={index}>
         <CollectorTitle>
           <CollectionContainerSpan>
-            {collector.type} - {collector.name} - {collector.uri}
+            {collector.name} - {collector.type.toLowerCase()} - {collector.uri}
           </CollectionContainerSpan>
           <ActionIconsContainer>
             <EditCollectionButton onClick={() => setEditIndex(index)}>
-              <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
+              <EditIcon size={26} color={theme.layoutBuilder.iconColor}/>
             </EditCollectionButton>
 
             <RemoveCollectorButton onClick={() => deleteCollector(index)}>
-              <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
+              <RemoveIcon size={24} color={theme.layoutBuilder.iconColor}/>
             </RemoveCollectorButton>
           </ActionIconsContainer>
         </CollectorTitle>
@@ -254,7 +253,7 @@ const ApprovalConfigEditor: React.FC = () => {
         <CollectorsContainerTitle>Approval collectors</CollectorsContainerTitle>
         {editIndex === undefined ? (
           <AddCollectorButton onClick={addCollector}>
-            <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
+            <PlusIcon size={24} color={theme.layoutBuilder.iconColor}/>
           </AddCollectorButton>
         ) : null}
       </CollectionContainerRow>

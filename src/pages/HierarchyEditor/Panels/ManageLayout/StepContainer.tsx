@@ -21,12 +21,12 @@ import styled, { ThemeContext } from "styled-components";
 import {
   ActionIconsContainer,
   BaseActionButton,
-  CollectionContainerSpan,
+  CollectionContainerSpan
 } from "../../../../atoms/Collection";
 import LayoutElementNameEditor from "./LayoutElementNameEditor";
 import {
   LayoutEditorActionType,
-  useLayoutEditorStore,
+  useLayoutEditorStore
 } from "./LayoutEditorStore";
 import Input from "../../../../atoms/Input";
 import InputErrorLabel from "../../../../atoms/InputErrorLabel";
@@ -37,7 +37,7 @@ interface IStepTitleProps {
 
 const StepTitle = styled.header<IStepTitleProps>`
   border: 1px solid
-    ${(props) =>
+    ${props =>
       props.active
         ? props.theme.layoutBuilder.stepTitleHoverBorderColor
         : "transparent"};
@@ -45,7 +45,7 @@ const StepTitle = styled.header<IStepTitleProps>`
   padding: 0.5rem;
   width: 100%;
   margin: 0.5rem 0 0;
-  background-color: ${(props) => props.theme.layoutBuilder.stepTitleBgColor};
+  background-color: ${props => props.theme.layoutBuilder.stepTitleBgColor};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -65,7 +65,7 @@ const StepTitle = styled.header<IStepTitleProps>`
   &:hover {
     cursor: pointer;
     border: 1px solid
-      ${(props) => props.theme.layoutBuilder.stepTitleHoverBorderColor};
+      ${props => props.theme.layoutBuilder.stepTitleHoverBorderColor};
   }
 `;
 
@@ -86,7 +86,7 @@ interface IStepContainer {
 const StepContainer: React.FC<IStepContainer> = ({
   step,
   stepKey,
-  segment,
+  segment
 }) => {
   const editorStoreContext = useLayoutEditorStore();
 
@@ -98,7 +98,7 @@ const StepContainer: React.FC<IStepContainer> = ({
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
         layoutSegment: segment,
-        layoutStep: step,
+        layoutStep: step
       });
     }
   };
@@ -108,14 +108,14 @@ const StepContainer: React.FC<IStepContainer> = ({
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_STEP,
       layoutStep: step,
-      layoutSegment: segment,
+      layoutSegment: segment
     });
   };
 
   const stepNameExists = (stepName: string): boolean => {
     return (
       segment.steps &&
-      segment.steps.findIndex((step) => step.name === stepName) >= 0
+      segment.steps.findIndex(step => step.name === stepName) >= 0
     );
   };
 
@@ -124,7 +124,7 @@ const StepContainer: React.FC<IStepContainer> = ({
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.SELECT_STEP,
       layoutStep: step,
-      layoutSegment: segment,
+      layoutSegment: segment
     });
   };
 
@@ -135,8 +135,7 @@ const StepContainer: React.FC<IStepContainer> = ({
           active={
             step === editorStoreContext.state.selectedLayoutElement?.step ||
             step === editorStoreContext.state.activeEditLayoutElement?.step
-          }
-        >
+          }>
           {step === editorStoreContext.state.activeEditLayoutElement?.step ? (
             <LayoutElementNameEditor
               currentName={step.name}

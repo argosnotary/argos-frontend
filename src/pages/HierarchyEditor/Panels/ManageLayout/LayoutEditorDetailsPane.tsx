@@ -72,7 +72,7 @@ const LayoutEditorDetailsPane: React.FC = () => {
         return "Validation errors";
       case DetailsPanelType.STEP_DETAILS:
         return (
-          "config step " +
+          "Edit step " +
           editorStoreContext.state.selectedLayoutElement?.step?.name
         );
     }
