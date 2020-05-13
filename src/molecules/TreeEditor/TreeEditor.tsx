@@ -86,7 +86,7 @@ const renderTypeIcon = (theme: any, type: string) => {
       return <LabelIcon color={theme.treeEditor.iconColors.label} size={14} />;
     case "SUPPLY_CHAIN":
       return <ChainIcon color={theme.treeEditor.iconColors.chain} size={14} />;
-    case "NON_PERSONAL_ACCOUNT":
+    case "SERVICE_ACCOUNT":
       return <RobotIcon color={theme.treeEditor.iconColors.robot} size={14} />;
   }
 };

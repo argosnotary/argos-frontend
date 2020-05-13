@@ -98,11 +98,11 @@ const HierarchyEditor = () => {
   ) => {
     let userHasEditPermission = false;
     switch (paneActionType) {
-      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
-      case HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE:
         userHasEditPermission =
           node.permissions !== undefined &&
-          node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0;
+          node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >= 0;
         break;
       case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
         userHasEditPermission =
@@ -160,10 +160,10 @@ const HierarchyEditor = () => {
       }
     },
     {
-      type: "NON_PERSONAL_ACCOUNT",
+      type: "SERVICE_ACCOUNT",
       callback: (node: ITreeNode) => {
         treeContextMenuCb(
-          HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
+          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE,
           node
         );
       }
@@ -205,17 +205,17 @@ const HierarchyEditor = () => {
           }
         },
         {
-          label: "Add npa",
+          label: "Add service account",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
+              HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE,
               node
             );
           },
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0
+              node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >= 0
             );
           }
         },
@@ -258,20 +258,20 @@ const HierarchyEditor = () => {
       ]
     },
     {
-      type: "NON_PERSONAL_ACCOUNT",
+      type: "SERVICE_ACCOUNT",
       menuitems: [
         {
-          label: "Generate new key for npa",
+          label: "Generate new key for service account",
           callback: (node: ITreeNode) => {
             treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
+              HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL,
               node
             );
           },
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.NPA_EDIT) >= 0
+              node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >= 0
             );
           }
         }
@@ -314,9 +314,9 @@ const HierarchyEditor = () => {
       case HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
       case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
         return <ManageSupplyChain />;
-      case HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
-      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
-      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
+      case HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE:
+      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL:
         return <ManageNpa />;
       case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
         return <ManageLabelPermissions />;
@@ -331,7 +331,7 @@ const HierarchyEditor = () => {
     if (
       (state.dataAction &&
         state.dataAction === HierarchyEditorDataActionTypes.POST_NEW_LABEL) ||
-      state.dataAction === HierarchyEditorDataActionTypes.POST_NEW_NPA ||
+      state.dataAction === HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT ||
       state.dataAction === HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN
     ) {
       const hierarchyDataRequest: DataRequest = {
@@ -361,7 +361,7 @@ const HierarchyEditor = () => {
       state.dataAction &&
       (state.dataAction === HierarchyEditorDataActionTypes.PUT_LABEL ||
         state.dataAction === HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN ||
-        state.dataAction === HierarchyEditorDataActionTypes.PUT_NPA)
+        state.dataAction === HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT)
     ) {
       updateObjectInTree(treeState, treeDispatch, dispatch, state.data);
     }
