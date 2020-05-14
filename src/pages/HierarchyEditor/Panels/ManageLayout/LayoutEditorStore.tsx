@@ -433,7 +433,7 @@ const handleAddStep = (
 ) => {
   if (action.layoutSegment && action.layoutStep) {
     action.layoutSegment.steps.push(action.layoutStep);
-    return { ...state, layout: { ...state.layout } };
+    return { ...state, layout: { ...state.layout }, activeEditLayoutElement: createSelectedLayoutElement(state, action) };
   }
   return { ...state };
 };
