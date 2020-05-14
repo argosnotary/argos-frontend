@@ -27,7 +27,7 @@ interface IFormTextAreaProps {
   defaultValue?: string;
   value?: string;
   onBlur?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onInput?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   formType: string;
   disabled?: boolean;
   height?: string;
@@ -44,7 +44,7 @@ const FormInput: React.FC<IFormTextAreaProps> = ({
   placeHolder,
   value,
   onBlur,
-  onInput,
+  onChange,
   name,
   defaultValue,
   disabled,
@@ -58,7 +58,7 @@ const FormInput: React.FC<IFormTextAreaProps> = ({
       disabled={disabled}
       name={name}
       {...(onBlur ? { onBlur } : "")}
-      {...(onInput ? { onInput } : "")}
+      {...(onChange ? { onChange } : "")}
       value={value}
       defaultValue={defaultValue}
       {...(placeHolder ? { placeholder: placeHolder } : "")}
