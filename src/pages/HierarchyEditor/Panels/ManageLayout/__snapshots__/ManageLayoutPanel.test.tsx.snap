@@ -741,10 +741,26 @@ exports[`renders correctly with existing layout 1`] = `
                               disabled={false}
                               formType="textArea"
                               height="25rem"
+                              innerRef={
+                                Object {
+                                  "current": <textarea
+                                    class="sc-dxgOiQ doXLWY"
+                                    height="25rem"
+                                    name="layout"
+                                  >
+                                    {
+  "authorizedKeyIds": [],
+  "expectedEndProducts": [],
+  "keys": [],
+  "layoutSegments": []
+}
+                                  </textarea>,
+                                }
+                              }
                               labelValue="Layout*"
                               name="layout"
                               onBlur={[Function]}
-                              onInput={[Function]}
+                              onChange={[Function]}
                               value="{
   \\"authorizedKeyIds\\": [],
   \\"expectedEndProducts\\": [],
@@ -827,7 +843,7 @@ exports[`renders correctly with existing layout 1`] = `
                                       height="25rem"
                                       name="layout"
                                       onBlur={[Function]}
-                                      onInput={[Function]}
+                                      onChange={[Function]}
                                       value="{
   \\"authorizedKeyIds\\": [],
   \\"expectedEndProducts\\": [],
@@ -896,11 +912,26 @@ exports[`renders correctly with existing layout 1`] = `
                                             "withComponent": [Function],
                                           }
                                         }
-                                        forwardedRef={null}
+                                        forwardedRef={
+                                          Object {
+                                            "current": <textarea
+                                              class="sc-dxgOiQ doXLWY"
+                                              height="25rem"
+                                              name="layout"
+                                            >
+                                              {
+  "authorizedKeyIds": [],
+  "expectedEndProducts": [],
+  "keys": [],
+  "layoutSegments": []
+}
+                                            </textarea>,
+                                          }
+                                        }
                                         height="25rem"
                                         name="layout"
                                         onBlur={[Function]}
-                                        onInput={[Function]}
+                                        onChange={[Function]}
                                         value="{
   \\"authorizedKeyIds\\": [],
   \\"expectedEndProducts\\": [],
@@ -914,7 +945,7 @@ exports[`renders correctly with existing layout 1`] = `
                                           height="25rem"
                                           name="layout"
                                           onBlur={[Function]}
-                                          onInput={[Function]}
+                                          onChange={[Function]}
                                           value="{
   \\"authorizedKeyIds\\": [],
   \\"expectedEndProducts\\": [],
@@ -2274,10 +2305,21 @@ exports[`renders correctly with non existing layout 1`] = `
                               disabled={false}
                               formType="textArea"
                               height="25rem"
+                              innerRef={
+                                Object {
+                                  "current": <textarea
+                                    class="sc-dxgOiQ doXLWY"
+                                    height="25rem"
+                                    name="layout"
+                                  >
+                                    {}
+                                  </textarea>,
+                                }
+                              }
                               labelValue="Layout*"
                               name="layout"
                               onBlur={[Function]}
-                              onInput={[Function]}
+                              onChange={[Function]}
                               value="{}"
                             >
                               <styled.div>
@@ -2355,7 +2397,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                       height="25rem"
                                       name="layout"
                                       onBlur={[Function]}
-                                      onInput={[Function]}
+                                      onChange={[Function]}
                                       value="{}"
                                     >
                                       <StyledComponent
@@ -2419,11 +2461,21 @@ exports[`renders correctly with non existing layout 1`] = `
                                             "withComponent": [Function],
                                           }
                                         }
-                                        forwardedRef={null}
+                                        forwardedRef={
+                                          Object {
+                                            "current": <textarea
+                                              class="sc-dxgOiQ doXLWY"
+                                              height="25rem"
+                                              name="layout"
+                                            >
+                                              {}
+                                            </textarea>,
+                                          }
+                                        }
                                         height="25rem"
                                         name="layout"
                                         onBlur={[Function]}
-                                        onInput={[Function]}
+                                        onChange={[Function]}
                                         value="{}"
                                       >
                                         <textarea
@@ -2432,7 +2484,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                           height="25rem"
                                           name="layout"
                                           onBlur={[Function]}
-                                          onInput={[Function]}
+                                          onChange={[Function]}
                                           value="{}"
                                         />
                                       </StyledComponent>
@@ -3636,10 +3688,21 @@ exports[`sign layout happy flow 1`] = `
                               disabled={false}
                               formType="textArea"
                               height="25rem"
+                              innerRef={
+                                Object {
+                                  "current": <textarea
+                                    class="sc-dxgOiQ doXLWY"
+                                    height="25rem"
+                                    name="layout"
+                                  >
+                                    {}
+                                  </textarea>,
+                                }
+                              }
                               labelValue="Layout*"
                               name="layout"
                               onBlur={[Function]}
-                              onInput={[Function]}
+                              onChange={[Function]}
                               value="{}"
                             >
                               <styled.div>
@@ -3717,7 +3780,7 @@ exports[`sign layout happy flow 1`] = `
                                       height="25rem"
                                       name="layout"
                                       onBlur={[Function]}
-                                      onInput={[Function]}
+                                      onChange={[Function]}
                                       value="{}"
                                     >
                                       <StyledComponent
@@ -3781,11 +3844,21 @@ exports[`sign layout happy flow 1`] = `
                                             "withComponent": [Function],
                                           }
                                         }
-                                        forwardedRef={null}
+                                        forwardedRef={
+                                          Object {
+                                            "current": <textarea
+                                              class="sc-dxgOiQ doXLWY"
+                                              height="25rem"
+                                              name="layout"
+                                            >
+                                              {}
+                                            </textarea>,
+                                          }
+                                        }
                                         height="25rem"
                                         name="layout"
                                         onBlur={[Function]}
-                                        onInput={[Function]}
+                                        onChange={[Function]}
                                         value="{}"
                                       >
                                         <textarea
@@ -3794,7 +3867,7 @@ exports[`sign layout happy flow 1`] = `
                                           height="25rem"
                                           name="layout"
                                           onBlur={[Function]}
-                                          onInput={[Function]}
+                                          onChange={[Function]}
                                           value="{}"
                                         />
                                       </StyledComponent>
@@ -4249,6 +4322,16 @@ exports[`sign layout happy flow 1`] = `
                                               <FormInput
                                                 disabled={false}
                                                 formType="password"
+                                                innerRef={
+                                                  Object {
+                                                    "current": <input
+                                                      class="sc-kgoBCf bliced"
+                                                      name="passphrase"
+                                                      type="password"
+                                                      value=""
+                                                    />,
+                                                  }
+                                                }
                                                 labelValue="Passphrase*"
                                                 name="passphrase"
                                                 onBlur={[Function]}
@@ -4394,7 +4477,16 @@ exports[`sign layout happy flow 1`] = `
                                                               "withComponent": [Function],
                                                             }
                                                           }
-                                                          forwardedRef={null}
+                                                          forwardedRef={
+                                                            Object {
+                                                              "current": <input
+                                                                class="sc-kgoBCf bliced"
+                                                                name="passphrase"
+                                                                type="password"
+                                                                value=""
+                                                              />,
+                                                            }
+                                                          }
                                                           name="passphrase"
                                                           onBlur={[Function]}
                                                           onChange={[Function]}
@@ -5652,10 +5744,22 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               disabled={true}
                               formType="textArea"
                               height="25rem"
+                              innerRef={
+                                Object {
+                                  "current": <textarea
+                                    class="sc-dxgOiQ ALWmo"
+                                    disabled=""
+                                    height="25rem"
+                                    name="layout"
+                                  >
+                                    {}
+                                  </textarea>,
+                                }
+                              }
                               labelValue="Layout*"
                               name="layout"
                               onBlur={[Function]}
-                              onInput={[Function]}
+                              onChange={[Function]}
                               value="{}"
                             >
                               <styled.div>
@@ -5733,7 +5837,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       height="25rem"
                                       name="layout"
                                       onBlur={[Function]}
-                                      onInput={[Function]}
+                                      onChange={[Function]}
                                       value="{}"
                                     >
                                       <StyledComponent
@@ -5797,11 +5901,22 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                             "withComponent": [Function],
                                           }
                                         }
-                                        forwardedRef={null}
+                                        forwardedRef={
+                                          Object {
+                                            "current": <textarea
+                                              class="sc-dxgOiQ ALWmo"
+                                              disabled=""
+                                              height="25rem"
+                                              name="layout"
+                                            >
+                                              {}
+                                            </textarea>,
+                                          }
+                                        }
                                         height="25rem"
                                         name="layout"
                                         onBlur={[Function]}
-                                        onInput={[Function]}
+                                        onChange={[Function]}
                                         value="{}"
                                       >
                                         <textarea
@@ -5810,7 +5925,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           height="25rem"
                                           name="layout"
                                           onBlur={[Function]}
-                                          onInput={[Function]}
+                                          onChange={[Function]}
                                           value="{}"
                                         />
                                       </StyledComponent>

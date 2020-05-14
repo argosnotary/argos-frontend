@@ -129,7 +129,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
-                onInput={formik.handleChange}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name]}
                 disabled={permission === FormPermissions.READ ? true : false}
