@@ -151,8 +151,7 @@ const ManageSupplyChain = () => {
         updateMode
           ? "Update selected supply chain"
           : "Add child supply chain to selected label"
-      }
-    >
+      }>
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -191,7 +190,7 @@ const ManageSupplyChain = () => {
           }
         }}
         confirmationLabel={
-          !updateMode ? "Add supply chain" : "Update supply chaiin"
+          !updateMode ? "Add supply chain" : "Update supply chain"
         }
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}

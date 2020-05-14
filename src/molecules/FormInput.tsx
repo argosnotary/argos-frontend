@@ -30,6 +30,7 @@ interface IFormInputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   formType: string;
   disabled?: boolean;
+  innerRef?: React.RefObject<HTMLInputElement>;
 }
 
 const FormInputContainer = styled.div`
@@ -46,7 +47,8 @@ const FormInput: React.FC<IFormInputProps> = ({
   name,
   formType,
   defaultValue,
-  disabled
+  disabled,
+  innerRef
 }) => (
   <FormInputContainer>
     {labelValue ? <InputLabel>{labelValue}</InputLabel> : null}
@@ -59,6 +61,7 @@ const FormInput: React.FC<IFormInputProps> = ({
       defaultValue={defaultValue}
       {...(placeHolder ? { placeholder: placeHolder } : "")}
       type={formType}
+      ref={innerRef}
     />
   </FormInputContainer>
 );

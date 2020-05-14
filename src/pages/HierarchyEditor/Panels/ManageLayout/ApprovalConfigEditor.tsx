@@ -56,7 +56,7 @@ const CollectorsContainerTitle = styled(CollectionContainerTitle)`
   top: -1rem;
   color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
   background-color: ${props =>
-  props.theme.layoutBuilder.segmentContainerTitleBgColor};
+    props.theme.layoutBuilder.segmentContainerTitleBgColor};
   padding: 0.25rem 2rem 0.4rem;
 `;
 
@@ -214,6 +214,7 @@ const ApprovalConfigEditor: React.FC = () => {
           initialValues={{ name: collector.name, uri: collector.uri }}
           cancellationLabel={"Cancel"}
           confirmationLabel={"Save"}
+          autoFocus={true}
         />
       </FormContainer>
     );
@@ -235,11 +236,11 @@ const ApprovalConfigEditor: React.FC = () => {
           </CollectionContainerSpan>
           <ActionIconsContainer>
             <EditCollectionButton onClick={() => setEditIndex(index)}>
-              <EditIcon size={26} color={theme.layoutBuilder.iconColor}/>
+              <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
             </EditCollectionButton>
 
             <RemoveCollectorButton onClick={() => deleteCollector(index)}>
-              <RemoveIcon size={24} color={theme.layoutBuilder.iconColor}/>
+              <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
             </RemoveCollectorButton>
           </ActionIconsContainer>
         </CollectorTitle>
@@ -253,7 +254,7 @@ const ApprovalConfigEditor: React.FC = () => {
         <CollectorsContainerTitle>Approval collectors</CollectorsContainerTitle>
         {editIndex === undefined ? (
           <AddCollectorButton onClick={addCollector}>
-            <PlusIcon size={24} color={theme.layoutBuilder.iconColor}/>
+            <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
           </AddCollectorButton>
         ) : null}
       </CollectionContainerRow>

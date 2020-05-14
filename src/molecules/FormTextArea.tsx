@@ -31,6 +31,7 @@ interface IFormTextAreaProps {
   formType: string;
   disabled?: boolean;
   height?: string;
+  innerRef?: React.RefObject<HTMLTextAreaElement>;
 }
 
 const FormTextAreaContainer = styled.div`
@@ -47,7 +48,8 @@ const FormInput: React.FC<IFormTextAreaProps> = ({
   name,
   defaultValue,
   disabled,
-  height
+  height,
+  innerRef
 }) => (
   <FormTextAreaContainer>
     {labelValue ? <InputLabel>{labelValue}</InputLabel> : null}
@@ -60,6 +62,7 @@ const FormInput: React.FC<IFormTextAreaProps> = ({
       value={value}
       defaultValue={defaultValue}
       {...(placeHolder ? { placeholder: placeHolder } : "")}
+      ref={innerRef}
     />
   </FormTextAreaContainer>
 );

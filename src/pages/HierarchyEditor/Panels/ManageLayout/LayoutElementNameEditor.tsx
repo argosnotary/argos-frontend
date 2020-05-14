@@ -82,6 +82,7 @@ const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
         onSubmit={onUpdateSegmentName}
         initialValues={{ name: currentName }}
         onValidChange={onUpdateSegmentName}
+        autoFocus={true}
       />
     </>
   );

@@ -151,8 +151,7 @@ const ManageLabel = () => {
         updateMode
           ? "Update selected label"
           : "Add child label to selected label"
-      }
-    >
+      }>
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -193,6 +192,7 @@ const ManageLabel = () => {
         confirmationLabel={!updateMode ? "Add label" : "Update label"}
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}
+        autoFocus={!updateMode}
       />
     </Panel>
   );
