@@ -68,7 +68,7 @@ const permissionTypes = [
   { id: "TREE_EDIT", label: "change tree" },
   { id: "READ", label: "read" },
   { id: "VERIFY", label: "verify supply chains" },
-  { id: "NPA_EDIT", label: "add npa" }
+  { id: "SERVICE_ACCOUNT_EDIT", label: "add service account" }
 ];
 
 const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> = ({

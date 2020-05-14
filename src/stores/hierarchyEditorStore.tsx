@@ -37,9 +37,9 @@ export enum HierarchyEditorDataActionTypes {
   PUT_LABEL = "PUT_LABEL",
   POST_SUPPLY_CHAIN = "POST_SUPPLY_CHAIN",
   PUT_SUPPLY_CHAIN = "PUT_SUPPLY_CHAIN",
-  POST_NEW_NPA = "POST_NEW_NPA",
-  POST_NEW_NPA_KEY = "POST_NEW_NPA_KEY",
-  PUT_NPA = "PUT_NPA",
+  POST_NEW_SERVICE_ACCOUNT = "POST_NEW_SERVICE_ACCOUNT",
+  POST_NEW_SERVICE_ACCOUNT_KEY = "POST_NEW_SERVICE_ACCOUNT_KEY",
+  PUT_SERVICE_ACCOUNT = "PUT_SERVICE_ACCOUNT",
   DATA_ACTION_COMPLETED = "DATA_ACTION_COMPLETED",
   STORE_SEARCHED_USER = "STORE_SEARCHED_USER",
   REMOVE_SEARCHED_USER = "DELETE_SEARCHED_USER"
@@ -52,10 +52,10 @@ export enum HierarchyEditorPaneActionTypes {
   SHOW_MANAGE_LABEL_PERMISSIONS = "SHOW_MANAGE_LABEL_PERMISSIONS",
   SHOW_ADD_SUPPLY_CHAIN_PANE = "SHOW_ADD_SUPPLY_CHAIN_PANE",
   SHOW_UPDATE_SUPPLY_CHAIN_PANE = "SHOW_UPDATE_SUPPLY_CHAIN_PANE",
-  SHOW_ADD_NPA_PANE = "SHOW_ADD_NPA_PANE",
-  SHOW_UPDATE_NPA_PANE = "SHOW_UPDATE_NPA_PANE",
-  SHOW_NPA_PASSPHRASE = "SHOW_NPA_PASSPHRASE",
-  SHOW_UPDATE_NPA_KEY_MODAL = "SHOW_UPDATE_NPA_KEY_MODAL",
+  SHOW_ADD_SERVICE_ACCOUNT_PANE = "SHOW_ADD_SERVICE_ACCOUNT_PANE",
+  SHOW_UPDATE_SERVICE_ACCOUNT_PANE = "SHOW_UPDATE_SERVICE_ACCOUNT_PANE",
+  SHOW_SERVICE_ACCOUNT_PASSPHRASE = "SHOW_SERVICE_ACCOUNT_PASSPHRASE",
+  SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL = "SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL",
   SHOW_MANAGE_LAYOUT = "SHOW_MANAGE_LAYOUT",
   RESET_PANE = "RESET_PANE"
 }
@@ -66,10 +66,10 @@ export type LayoutEditorPaneActionType =
   | HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
   | HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
   | HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
-  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
+  | HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE
+  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE
+  | HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE
+  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL
   | HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT
   | HierarchyEditorPaneActionTypes.RESET_PANE;
 
@@ -114,7 +114,7 @@ export type HierarchyEditorPaneAction =
       panePermission: FormPermission;
     }
   | {
-      type: HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE;
+      type: HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE;
       nodeReferenceId: string;
       breadcrumb: string;
       selectedNodeName: string;
@@ -122,16 +122,16 @@ export type HierarchyEditorPaneAction =
       panePermission: FormPermission;
     }
   | {
-      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
+      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE;
       nodeReferenceId: string;
       nodeParentId: string;
       breadcrumb: string;
       selectedNodeName: string;
       panePermission: FormPermission;
     }
-  | { type: HierarchyEditorPaneActionTypes.SHOW_NPA_PASSPHRASE }
+  | { type: HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE }
   | {
-      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL;
+      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL;
       nodeReferenceId: string;
       nodeParentId: string;
       breadcrumb: string;
@@ -176,15 +176,15 @@ export type HierarchyEditorDataAction =
       supplyChain: ISupplyChainApiResponse;
     }
   | {
-      type: HierarchyEditorDataActionTypes.POST_NEW_NPA;
-      npa: INpaApiResponse;
+      type: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT;
+      serviceaccount: INpaApiResponse;
     }
   | {
-      type: HierarchyEditorDataActionTypes.POST_NEW_NPA_KEY;
+      type: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT_KEY;
     }
   | {
-      type: HierarchyEditorDataActionTypes.PUT_NPA;
-      npa: INpaApiResponse;
+      type: HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT;
+      serviceaccount: INpaApiResponse;
     }
   | {
       type: HierarchyEditorDataActionTypes.STORE_SEARCHED_USER;
@@ -252,35 +252,35 @@ const layoutEditorReducer = (
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE:
+    case HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE:
       return {
         ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE,
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE:
+    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE:
       return {
         ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE,
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
         panePermission: action.panePermission
       };
-    case HierarchyEditorPaneActionTypes.SHOW_NPA_PASSPHRASE:
+    case HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE:
       return {
         ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_NPA_PASSPHRASE
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE
       };
-    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL:
+    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL:
       return {
         ...state,
         firstPanelView:
-          HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL,
+          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
@@ -310,10 +310,10 @@ const layoutEditorReducer = (
         dataAction: HierarchyEditorDataActionTypes.POST_NEW_LABEL,
         data: action.label
       };
-    case HierarchyEditorDataActionTypes.POST_NEW_NPA_KEY:
+    case HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT_KEY:
       return {
         ...state,
-        dataAction: HierarchyEditorDataActionTypes.POST_NEW_NPA_KEY
+        dataAction: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT_KEY
       };
     case HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED: {
       return {
@@ -341,17 +341,17 @@ const layoutEditorReducer = (
         dataAction: HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN,
         data: action.supplyChain
       };
-    case HierarchyEditorDataActionTypes.POST_NEW_NPA:
+    case HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT:
       return {
         ...state,
-        dataAction: HierarchyEditorDataActionTypes.POST_NEW_NPA,
-        data: action.npa
+        dataAction: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT,
+        data: action.serviceaccount
       };
-    case HierarchyEditorDataActionTypes.PUT_NPA:
+    case HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT:
       return {
         ...state,
-        dataAction: HierarchyEditorDataActionTypes.PUT_NPA,
-        data: action.npa
+        dataAction: HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT,
+        data: action.serviceaccount
       };
     case HierarchyEditorDataActionTypes.STORE_SEARCHED_USER:
       return {

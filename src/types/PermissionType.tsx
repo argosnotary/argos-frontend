@@ -21,7 +21,7 @@ export enum PermissionTypes {
   LINK_ADD = "LINK_ADD",
   LAYOUT_ADD = "LAYOUT_ADD",
   VERIFY = "VERIFY",
-  NPA_EDIT = "NPA_EDIT"
+  SERVICE_ACCOUNT_EDIT = "SERVICE_ACCOUNT_EDIT"
 }
 
 export type PermissionType =
@@ -32,4 +32,4 @@ export type PermissionType =
   | PermissionTypes.LINK_ADD
   | PermissionTypes.LAYOUT_ADD
   | PermissionTypes.VERIFY
-  | PermissionTypes.NPA_EDIT;
+  | PermissionTypes.SERVICE_ACCOUNT_EDIT;
