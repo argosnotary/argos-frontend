@@ -38,7 +38,7 @@ const FormContainer = styled(FlexColumn)`
 `;
 
 export interface IGenericFormInput {
-  labelValue: string;
+  labelValue?: string;
   name: string;
   formType: string;
 }
@@ -46,18 +46,21 @@ export interface IGenericFormInput {
 export type IGenericFormSchema = Array<IGenericFormInput>;
 
 interface IGenericForm {
+  dataTesthookId?: string;
   schema: IGenericFormSchema;
   permission: FormPermission;
   validate: (values: any) => void;
   onSubmit: (values: any) => void;
   onCancel: () => void;
   isLoading: boolean;
-  confirmationLabel: string;
-  cancellationLabel: string;
+  confirmationLabel?: string;
+  cancellationLabel?: string;
   initialValues: FormikValues;
+  onValidChange?: (values: any) => void;
 }
 
 const GenericForm: React.FC<IGenericForm> = ({
+  dataTesthookId,
   schema,
   permission,
   validate,
@@ -66,7 +69,8 @@ const GenericForm: React.FC<IGenericForm> = ({
   isLoading,
   confirmationLabel,
   cancellationLabel,
-  initialValues
+  initialValues,
+  onValidChange
 }) => {
   const formik = useFormik({
     initialValues,
@@ -76,7 +80,6 @@ const GenericForm: React.FC<IGenericForm> = ({
     },
     validate
   });
-
   useEffect(() => {
     formik.setValues(initialValues);
   }, [initialValues]);
@@ -129,22 +132,35 @@ const GenericForm: React.FC<IGenericForm> = ({
 
   return (
     <FormContainer>
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        data-testhook-id={dataTesthookId}
+        onSubmit={formik.handleSubmit}
+        onBlur={() => {
+          if (onValidChange && formik.isValid) {
+            onValidChange(formik.values);
+          }
+        }}
+      >
         {renderFormElements(formik, schema)}
-        {permission === FormPermissions.EDIT ? (
+        {permission === FormPermissions.EDIT &&
+        (confirmationLabel || cancellationLabel) ? (
           <>
             <ContentSeparator />
             <FlexRow>
-              <LoaderButton buttonType="submit" loading={isLoading}>
-                {confirmationLabel}
-              </LoaderButton>
-              <CustomCancelButton
-                data-testhook="cancel-button"
-                type="button"
-                onClick={() => onCancel()}
-              >
-                {cancellationLabel}
-              </CustomCancelButton>
+              {confirmationLabel ? (
+                <LoaderButton buttonType="submit" loading={isLoading}>
+                  {confirmationLabel}
+                </LoaderButton>
+              ) : null}
+              {cancellationLabel ? (
+                <CustomCancelButton
+                  data-testhook="cancel-button"
+                  type="button"
+                  onClick={() => onCancel()}
+                >
+                  {cancellationLabel}
+                </CustomCancelButton>
+              ) : null}
             </FlexRow>
           </>
         ) : null}

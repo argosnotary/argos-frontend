@@ -88,3 +88,14 @@ export enum RuleDestinationTypeEnum {
   PRODUCTS = "PRODUCTS",
   MATERIALS = "MATERIALS"
 }
+
+export enum ILayoutValidationMessageTypes {
+  DATA_INPUT = "DATA_INPUT",
+  MODEL_CONSISTENCY = "MODEL_CONSISTENCY"
+}
+
+export interface ILayoutValidationMessage {
+  field?: string;
+  type: ILayoutValidationMessageTypes;
+  message: string;
+}

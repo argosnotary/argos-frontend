@@ -91,6 +91,19 @@
       "SUCCESS": "green"
     }
   },
+  "layoutBuilder": {
+    "segmentContainerBorderColor": "#1779ba",
+    "segmentContainerTitleBgColor": "#1779ba",
+    "iconColor": "#1779ba",
+    "stepContainerBgColor": "#e0e0e0",
+    "stepContainerTitleBorderColor": "#1779ba",
+    "addStepButtonBorderColor": "#1779ba",
+    "segmentTitleBgColor": "#fff",
+    "segmentTitleHoverBorderColor": "#1779ba",
+    "stepTitleBgColor": "#fff",
+    "stepTitleHoverBorderColor": "#1779ba",
+    "segmentsContainerTitleColor": "#fff"
+  },
   "treeEditor": {
     "textColor": "#2e2e2e",
     "bgColor": "#f1f1f1",

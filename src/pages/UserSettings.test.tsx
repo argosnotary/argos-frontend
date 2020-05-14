@@ -27,7 +27,7 @@ import { MemoryRouter } from "react-router-dom";
 import {
   PROFILE_STATE,
   UserProfile,
-  UserProfileContext,
+  UserProfileContext
 } from "../stores/UserProfile";
 import IPersonalAccount from "../interfaces/IPersonalAccount";
 import { PermissionTypes } from "../types/PermissionType";
@@ -38,16 +38,16 @@ const mockUrl = "/api/personalaccount/me";
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useHistory: () => ({
-    push: jest.fn(),
+    push: jest.fn()
   }),
-  useRouteMatch: () => ({ url: "/" }),
+  useRouteMatch: () => ({ url: "/" })
 }));
 
 interface IWrappedUserSettings {
   personalAccount: IPersonalAccount;
 }
 
-const WrappedUserSettings: React.FC<IWrappedUserSettings> = (props) => (
+const WrappedUserSettings: React.FC<IWrappedUserSettings> = props => (
   <ThemeProvider theme={theme}>
     <MemoryRouter keyLength={0}>
       <UserProfileContext.Provider
@@ -56,7 +56,7 @@ const WrappedUserSettings: React.FC<IWrappedUserSettings> = (props) => (
           setToken: jest.fn(),
           state: PROFILE_STATE.READY,
           token: "token",
-          setUserProfile: jest.fn(),
+          setUserProfile: jest.fn()
         }}
       >
         <UserSettings />
@@ -79,10 +79,10 @@ describe("UserSettings", () => {
             PermissionTypes.READ,
             PermissionTypes.LOCAL_PERMISSION_EDIT,
             PermissionTypes.TREE_EDIT,
-            PermissionTypes.VERIFY,
-          ],
-        },
-      ],
+            PermissionTypes.VERIFY
+          ]
+        }
+      ]
     };
 
     const root = mount(
@@ -90,7 +90,7 @@ describe("UserSettings", () => {
     );
 
     await act(() =>
-      new Promise((resolve) => setImmediate(resolve)).then(() => {
+      new Promise(resolve => setImmediate(resolve)).then(() => {
         root.update();
 
         expect(root.find(UserSettings)).toMatchSnapshot();
@@ -114,10 +114,10 @@ describe("UserSettings", () => {
             PermissionTypes.LOCAL_PERMISSION_EDIT,
             PermissionTypes.TREE_EDIT,
             PermissionTypes.VERIFY,
-            PermissionTypes.ASSIGN_ROLE,
-          ],
-        },
-      ],
+            PermissionTypes.ASSIGN_ROLE
+          ]
+        }
+      ]
     };
 
     const root = mount(
@@ -125,7 +125,7 @@ describe("UserSettings", () => {
     );
 
     await act(() =>
-      new Promise((resolve) => setImmediate(resolve)).then(() => {
+      new Promise(resolve => setImmediate(resolve)).then(() => {
         root.update();
 
         expect(root.find(UserSettings)).toMatchSnapshot();

@@ -21,7 +21,7 @@ import InputLabel from "../atoms/InputLabel";
 import TextArea from "../atoms/TextArea";
 
 interface IFormTextAreaProps {
-  labelValue: string;
+  labelValue?: string;
   placeHolder?: string;
   name: string;
   defaultValue?: string;
@@ -50,7 +50,7 @@ const FormInput: React.FC<IFormTextAreaProps> = ({
   height
 }) => (
   <FormTextAreaContainer>
-    <InputLabel>{labelValue}</InputLabel>
+    {labelValue ? <InputLabel>{labelValue}</InputLabel> : null}
     <TextArea
       height={height}
       disabled={disabled}
