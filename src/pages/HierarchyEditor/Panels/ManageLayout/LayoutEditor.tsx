@@ -76,14 +76,20 @@ const LayoutEditor: React.FC = () => {
       <SegmentsContainer>
         <CollectionContainerRow>
           <SegmentsContainerTitle>Segments</SegmentsContainerTitle>
-          <AddSegmentButton onClick={onAddSegment}>
+          <AddSegmentButton
+            data-testhook-id={"add-segment"}
+            onClick={onAddSegment}>
             <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
           </AddSegmentButton>
         </CollectionContainerRow>
         <CollectionContainerList>
           {layout.layoutSegments
-            ? layout.layoutSegments.map((segment, _key) => (
-                <SegmentContainer key={segment.name} segment={segment} />
+            ? layout.layoutSegments.map((segment, index) => (
+                <SegmentContainer
+                  index={index}
+                  key={segment.name}
+                  segment={segment}
+                />
               ))
             : null}
         </CollectionContainerList>

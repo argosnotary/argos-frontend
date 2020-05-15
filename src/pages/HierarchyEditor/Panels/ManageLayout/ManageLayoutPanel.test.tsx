@@ -262,7 +262,7 @@ it("sign layout happy flow", async () => {
     });
 
     updateField(
-      root.find(TextArea).first(),
+      root.find('textarea[data-testhook-id="layout-json-form-field-0"]'),
       "layout",
       JSON.stringify({
         keys: [],
@@ -272,6 +272,54 @@ it("sign layout happy flow", async () => {
       })
     );
 
+    root.find('button[data-testhook-id="add-segment"]').simulate("click");
+
+    root.find('form[data-testhook-id="segment0-name-form"]').simulate("submit");
+    updateField(
+      root.find('input[data-testhook-id="segment0-name-form-field-0"]'),
+      "name",
+      "jenkins"
+    );
+    root.find('form[data-testhook-id="segment0-name-form"]').simulate("submit");
+
+    await waitFor(() => {
+      root.update();
+      expect(
+        root
+          .find('textarea[data-testhook-id="layout-json-form-field-0"]')
+          .text()
+      ).toContain("jenkins");
+    });
+
+    root.find('button[data-testhook-id="segment0-add-step"]').simulate("click");
+
+    root
+      .find('section[data-testhook-id="jenkins-0-edit-step"]')
+      .simulate("click");
+
+    root
+      .find('form[data-testhook-id="jenkins-0-name-form"]')
+      .simulate("submit");
+
+    updateField(
+      root.find('input[data-testhook-id="jenkins-0-name-form-field-0"]'),
+      "name",
+      "approve"
+    );
+    root
+      .find('form[data-testhook-id="jenkins-0-name-form"]')
+      .simulate("submit");
+    await waitFor(() => {
+      root.update();
+      expect(
+        root
+          .find('textarea[data-testhook-id="layout-json-form-field-0"]')
+          .text()
+      ).toContain("approve");
+    });
+
+    root.find('button[data-testhook-id="add-collector"]').simulate("click");
+
     root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
 
     await waitFor(() => {
@@ -279,7 +327,7 @@ it("sign layout happy flow", async () => {
       expect(root.find(Modal).length >= 1).toBe(true);
     });
 
-    expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
+    //  expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
     updateField(
       root.find('input[name="passphrase"]').first(),
       "passphrase",
@@ -292,6 +340,21 @@ it("sign layout happy flow", async () => {
 
     await waitFor(() => expect(mock.history.get.length).toBe(2));
     await waitFor(() => expect(mock.history.post.length).toBe(3));
+
+    expect(mock.history.post[0].data).toEqual(
+      "{\n" +
+        '  "layoutSegments": [\n' +
+        "    {\n" +
+        '      "name": "jenkins",\n' +
+        '      "steps": [\n' +
+        "        {\n" +
+        '          "name": "approve"\n' +
+        "        }\n" +
+        "      ]\n" +
+        "    }\n" +
+        "  ]\n" +
+        "}"
+    );
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
     expect(mock.history.post[1].data).toBe(

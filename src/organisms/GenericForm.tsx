@@ -108,6 +108,7 @@ const GenericForm: React.FC<IGenericForm> = ({
           return (
             <React.Fragment key={`${entry.name}-${index}`}>
               <FormInput
+                dataTesthookId={dataTesthookId + "-field-" + index}
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
@@ -126,6 +127,7 @@ const GenericForm: React.FC<IGenericForm> = ({
           return (
             <React.Fragment key={`${entry.name}-${index}`}>
               <FormTextArea
+                dataTesthookId={dataTesthookId + "-field-" + index}
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}

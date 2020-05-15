@@ -17,7 +17,7 @@ export interface IApprovalConfig {
   approvalConfigurationId?: string;
   stepName: string;
   segmentName: string;
-  artifactCollectors: Array<IArtifactCollector>;
+  artifactCollectorSpecifications: Array<IArtifactCollector>;
 }
 
 export enum ArtifactCollectorType {

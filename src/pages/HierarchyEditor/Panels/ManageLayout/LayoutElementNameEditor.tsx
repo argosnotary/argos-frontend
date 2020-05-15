@@ -37,11 +37,13 @@ const segmentFormSchema: IGenericFormSchema = [
 interface ILayoutElementNameEditorProps {
   nameExists: (name: string) => boolean;
   currentName: string;
+  dataTesthookId?: string;
 }
 
 const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
   nameExists,
-  currentName
+  currentName,
+  dataTesthookId
 }) => {
   const editorStoreContext = useLayoutEditorStore();
 
@@ -74,6 +76,7 @@ const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
   return (
     <>
       <GenericForm
+        dataTesthookId={dataTesthookId}
         schema={segmentFormSchema}
         permission={FormPermissions.EDIT}
         isLoading={false}

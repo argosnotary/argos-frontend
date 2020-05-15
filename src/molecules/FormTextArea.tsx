@@ -21,6 +21,7 @@ import InputLabel from "../atoms/InputLabel";
 import TextArea from "../atoms/TextArea";
 
 interface IFormTextAreaProps {
+  dataTesthookId?: string;
   labelValue?: string;
   placeHolder?: string;
   name: string;
@@ -40,6 +41,7 @@ const FormTextAreaContainer = styled.div`
 `;
 
 const FormInput: React.FC<IFormTextAreaProps> = ({
+  dataTesthookId,
   labelValue,
   placeHolder,
   value,
@@ -54,6 +56,7 @@ const FormInput: React.FC<IFormTextAreaProps> = ({
   <FormTextAreaContainer>
     {labelValue ? <InputLabel>{labelValue}</InputLabel> : null}
     <TextArea
+      data-testhook-id={dataTesthookId}
       height={height}
       disabled={disabled}
       name={name}

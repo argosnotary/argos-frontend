@@ -103,9 +103,13 @@ const SegmentContainerLi = styled.li`
 
 interface ISegmentContainerProps {
   segment: ILayoutSegment;
+  index: number;
 }
 
-const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
+const SegmentContainer: React.FC<ISegmentContainerProps> = ({
+  segment,
+  index
+}) => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
@@ -139,7 +143,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
     return (
       editorStoreContext.state.layout.layoutSegments &&
       editorStoreContext.state.layout.layoutSegments.findIndex(
-        segment => segment.name === segmentName
+        seg => seg.name === segmentName
       ) >= 0
     );
   };
@@ -147,7 +151,9 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
   return (
     <>
       <SegmentContainerLi>
-        <SegmentTitle onClick={onEditSegment}>
+        <SegmentTitle
+          data-testhook-id={"segment" + index + "-edit"}
+          onClick={onEditSegment}>
           {editorStoreContext.state.activeEditLayoutElement?.step ===
             undefined &&
           segment ===
@@ -155,12 +161,15 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
             <LayoutElementNameEditor
               currentName={segment.name}
               nameExists={segmentNameExists}
+              dataTesthookId={"segment" + index + "-name-form"}
             />
           ) : (
             <>
               <CollectionContainerSpan>{segment.name}</CollectionContainerSpan>
               <ActionIconsContainer>
-                <RemoveSegmentButton onClick={onDeleteSegment}>
+                <RemoveSegmentButton
+                  data-testhook-id={"segment" + index + "-delete"}
+                  onClick={onDeleteSegment}>
                   <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
                 </RemoveSegmentButton>
               </ActionIconsContainer>
@@ -171,16 +180,18 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({ segment }) => {
       <StepsContainer>
         <CollectionContainerRow>
           <StepsContainerTitle>Steps</StepsContainerTitle>
-          <AddStepButton onClick={onAddStep}>
+          <AddStepButton
+            data-testhook-id={"segment" + index + "-add-step"}
+            onClick={onAddStep}>
             <PlusIcon size={20} color={theme.layoutBuilder.iconColor} />
           </AddStepButton>
         </CollectionContainerRow>
         {segment.steps &&
-          segment.steps.map((step: IStep, stepKey: any) => (
+          segment.steps.map((step: IStep, segmentIndex: number) => (
             <StepContainer
-              key={stepKey}
+              key={segmentIndex}
               step={step}
-              stepKey={stepKey}
+              index={segmentIndex}
               segment={segment}
             />
           ))}

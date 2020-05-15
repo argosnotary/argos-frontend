@@ -155,7 +155,7 @@ const ApprovalConfigEditor: React.FC = () => {
     if (editorStoreContext.state.selectedLayoutElement?.approvalConfig) {
       setCollectors([
         ...editorStoreContext.state.selectedLayoutElement?.approvalConfig
-          .artifactCollectors
+          .artifactCollectorSpecifications
       ]);
     } else {
       setCollectors([]);
@@ -201,10 +201,11 @@ const ApprovalConfigEditor: React.FC = () => {
     setAddMode(true);
   };
 
-  const editorForm = (collector: IArtifactCollector) => {
+  const editorForm = (collector: IArtifactCollector, index: number) => {
     return (
-      <FormContainer>
+      <FormContainer key={index}>
         <GenericForm
+          dataTesthookId={"collector-edit-form"}
           schema={approvalConfigFormSchema}
           permission={FormPermissions.EDIT}
           isLoading={false}
@@ -235,11 +236,14 @@ const ApprovalConfigEditor: React.FC = () => {
             {collector.name} - {collector.type.toLowerCase()} - {collector.uri}
           </CollectionContainerSpan>
           <ActionIconsContainer>
-            <EditCollectionButton onClick={() => setEditIndex(index)}>
+            <EditCollectionButton
+              data-testhook-id={"edit-collector-" + index}
+              onClick={() => setEditIndex(index)}>
               <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
             </EditCollectionButton>
-
-            <RemoveCollectorButton onClick={() => deleteCollector(index)}>
+            <RemoveCollectorButton
+              data-testhook-id={"delete-collector-" + index}
+              onClick={() => deleteCollector(index)}>
               <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
             </RemoveCollectorButton>
           </ActionIconsContainer>
@@ -253,7 +257,9 @@ const ApprovalConfigEditor: React.FC = () => {
       <CollectionContainerRow>
         <CollectorsContainerTitle>Approval collectors</CollectorsContainerTitle>
         {editIndex === undefined ? (
-          <AddCollectorButton onClick={addCollector}>
+          <AddCollectorButton
+            data-testhook-id={"add-collector"}
+            onClick={addCollector}>
             <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
           </AddCollectorButton>
         ) : null}
@@ -263,7 +269,7 @@ const ApprovalConfigEditor: React.FC = () => {
           return (
             <>
               {index === editIndex
-                ? editorForm(collector)
+                ? editorForm(collector, index)
                 : collectorRow(collector, index)}
             </>
           );

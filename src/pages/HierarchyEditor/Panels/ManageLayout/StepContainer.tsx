@@ -80,14 +80,10 @@ const RemoveStepButton = styled(BaseActionButton)``;
 interface IStepContainer {
   segment: ILayoutSegment;
   step: IStep;
-  stepKey: string;
+  index: number;
 }
 
-const StepContainer: React.FC<IStepContainer> = ({
-  step,
-  stepKey,
-  segment
-}) => {
+const StepContainer: React.FC<IStepContainer> = ({ step, index, segment }) => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
@@ -130,7 +126,10 @@ const StepContainer: React.FC<IStepContainer> = ({
 
   return (
     <>
-      <Step key={stepKey} onClick={onEditStep}>
+      <Step
+        key={index}
+        data-testhook-id={segment.name + "-" + index + "-edit-step"}
+        onClick={onEditStep}>
         <StepTitle
           active={
             step === editorStoreContext.state.selectedLayoutElement?.step ||
@@ -140,15 +139,20 @@ const StepContainer: React.FC<IStepContainer> = ({
             <LayoutElementNameEditor
               currentName={step.name}
               nameExists={stepNameExists}
+              dataTesthookId={segment.name + "-" + index + "-name-form"}
             />
           ) : (
             <>
               <CollectionContainerSpan>{step.name}</CollectionContainerSpan>
               <ActionIconsContainer>
-                <EditStepButton onClick={onSelectStep}>
+                <EditStepButton
+                  data-testhook-id={segment.name + "-" + index + "-select-step"}
+                  onClick={onSelectStep}>
                   <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
                 </EditStepButton>
-                <RemoveStepButton onClick={onDeleteStep}>
+                <RemoveStepButton
+                  data-testhook-id={segment.name + "-" + index + "-delete-step"}
+                  onClick={onDeleteStep}>
                   <RemoveIcon size={20} color={theme.layoutBuilder.iconColor} />
                 </RemoveStepButton>
               </ActionIconsContainer>
