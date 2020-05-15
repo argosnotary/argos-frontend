@@ -20,7 +20,7 @@
               "children": [
                 {
                   "name": "jenkins",
-                  "type": "NON_PERSONAL_ACCOUNT",
+                  "type": "SERVICE_ACCOUNT",
                   "referenceId": "979d710c-7ab4-4851-9f19-b26c0fb7b6ce",
                   "hasChildren": false,
                   "children": [],
@@ -109,7 +109,7 @@
         },
         {
           "name": "xl_deploy",
-          "type": "NON_PERSONAL_ACCOUNT",
+          "type": "SERVICE_ACCOUNT",
           "referenceId": "1d24fe9d-6679-4bc8-97be-20513a1ac0aa",
           "hasChildren": false,
           "children": [],

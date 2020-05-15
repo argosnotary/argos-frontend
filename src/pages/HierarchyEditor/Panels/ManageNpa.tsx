@@ -51,7 +51,7 @@ import {
 import { useUserProfileContext } from "../../../stores/UserProfile";
 
 interface INpaFormValues {
-  npaname: string;
+  serviceaccountname: string;
 }
 
 enum WizardStates {
@@ -66,8 +66,8 @@ const CloseButton = styled(CancelButton)`
 
 const formSchema: IGenericFormSchema = [
   {
-    labelValue: "Non personal account name*",
-    name: "npaname",
+    labelValue: "Service account name*",
+    name: "serviceaccountname",
     formType: "text"
   }
 ];
@@ -75,11 +75,11 @@ const formSchema: IGenericFormSchema = [
 const validate = (values: INpaFormValues) => {
   const errors = {} as any;
 
-  if (!values.npaname) {
-    errors.npaname = "Please fill in a npa name.";
-  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.npaname)) {
-    errors.npaname =
-      "Invalid npa name (only lowercase alphanumeric characters and underscore allowed).";
+  if (!values.serviceaccountname) {
+    errors.serviceaccountname = "Please fill in a service account name.";
+  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.serviceaccountname)) {
+    errors.serviceaccountname =
+      "Invalid serviceaccount name (only lowercase alphanumeric characters and underscore allowed).";
   }
 
   return errors;
@@ -103,8 +103,8 @@ const clipboardWrapperCss = css`
 const ManageNpa = () => {
   const { token } = useUserProfileContext();
   const [state, dispatch] = useContext(StateContext);
-  const [npaPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
-  const [_npaGetRequestState, setNpaGetRequest] = useDataApi(
+  const [serviceAccountPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
+  const [_serviceAccountGetRequestState, setNpaGetRequest] = useDataApi(
     genericDataFetchReducer
   );
 
@@ -112,7 +112,7 @@ const ManageNpa = () => {
     {} as INpaFormValues
   );
 
-  const [npaKey, setNpaKey] = useState({} as IPublicKey);
+  const [serviceAccountKey, setNpaKey] = useState({} as IPublicKey);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, setWizardState] = useState(
     cryptoAvailable()
@@ -126,7 +126,7 @@ const ManageNpa = () => {
   const postNewNpa = (values: INpaFormValues) => {
     const data: any = {};
 
-    data.name = values.npaname;
+    data.name = values.serviceaccountname;
 
     if (state.nodeReferenceId !== "") {
       data.parentLabelId = state.nodeReferenceId;
@@ -136,8 +136,8 @@ const ManageNpa = () => {
       data,
       method: "post",
       token,
-      url: "/api/nonpersonalaccount",
-      cbSuccess: async (npa: INpaApiResponse) => {
+      url: "/api/serviceaccount",
+      cbSuccess: async (serviceaccount: INpaApiResponse) => {
         try {
           const generatedKeys = await generateKey(true);
 
@@ -145,7 +145,7 @@ const ManageNpa = () => {
             data: generatedKeys.keys,
             method: "post",
             token,
-            url: `/api/nonpersonalaccount/${npa.id}/key`,
+            url: `/api/serviceaccount/${serviceaccount.id}/key`,
             cbSuccess: () => {
               setGeneratedPassword(generatedKeys.password);
 
@@ -155,8 +155,8 @@ const ManageNpa = () => {
               });
 
               dispatch({
-                type: HierarchyEditorDataActionTypes.POST_NEW_NPA,
-                npa: { ...npa, keyId: generatedKeys.keys.keyId }
+                type: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT,
+                serviceaccount: { ...serviceaccount, keyId: generatedKeys.keys.keyId }
               });
             }
           };
@@ -175,10 +175,10 @@ const ManageNpa = () => {
   const updateNpa = (values: INpaFormValues) => {
     const data: any = {};
 
-    data.name = values.npaname;
+    data.name = values.serviceaccountname;
 
     if (state.nodeReferenceId !== "") {
-      data.nonPersonalAccountId = state.nodeReferenceId;
+      data.serviceAccountId = state.nodeReferenceId;
     }
 
     if (state.nodeParentId !== "") {
@@ -189,11 +189,11 @@ const ManageNpa = () => {
       data,
       method: "put",
       token,
-      url: `/api/nonpersonalaccount/${state.nodeReferenceId}`,
-      cbSuccess: (npa: INpaApiResponse) => {
+      url: `/api/serviceaccount/${state.nodeReferenceId}`,
+      cbSuccess: (serviceaccount: INpaApiResponse) => {
         dispatch({
-          type: HierarchyEditorDataActionTypes.PUT_NPA,
-          npa
+          type: HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT,
+          serviceaccount
         });
       }
     };
@@ -205,7 +205,7 @@ const ManageNpa = () => {
     const dataRequest: DataRequest = {
       method: "get",
       token,
-      url: `/api/nonpersonalaccount/${id}/key`,
+      url: `/api/serviceaccount/${id}/key`,
       cbSuccess: (n: IPublicKey) => {
         setNpaKey(n);
       }
@@ -217,21 +217,21 @@ const ManageNpa = () => {
   useEffect(() => {
     if (
       state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE
     ) {
-      setInitialFormValues({ npaname: state.selectedNodeName });
+      setInitialFormValues({ serviceaccountname: state.selectedNodeName });
       getKeyId(state.nodeReferenceId);
     }
 
     if (
-      state.firstPanelView === HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE
+      state.firstPanelView === HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE
     ) {
-      setInitialFormValues({ npaname: "" });
+      setInitialFormValues({ serviceaccountname: "" });
     }
 
     if (
       state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL
     ) {
       setDisplayModal(true);
     }
@@ -239,7 +239,7 @@ const ManageNpa = () => {
 
   const updateMode =
     state.firstPanelView ===
-    HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE;
+    HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE;
 
   if (
     state.dataAction === HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED
@@ -250,7 +250,7 @@ const ManageNpa = () => {
         resizable={false}
         last={true}
         title={
-          updateMode ? "Update selected npa" : "Add child npa to selected label"
+          updateMode ? "Update selected service account" : "Add child service account to selected label"
         }
       >
         <NodesBreadCrumb>
@@ -261,9 +261,9 @@ const ManageNpa = () => {
           </LastBreadCrumb>
         </NodesBreadCrumb>
         <ContentSeparator />
-        {Object.keys(npaKey).length ? (
+        {Object.keys(serviceAccountKey).length ? (
           <KeyContainer
-            publicKey={npaKey}
+            publicKey={serviceAccountKey}
             clipboardIconSize={16}
             clipboardWrapperCss={clipboardWrapperCss}
             inputCss={copyInputCss}
@@ -300,7 +300,7 @@ const ManageNpa = () => {
           data: generatedKeys.keys,
           method: "post",
           token,
-          url: `/api/nonpersonalaccount/${state.nodeReferenceId}/key`,
+          url: `/api/serviceaccount/${state.nodeReferenceId}/key`,
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
 
@@ -362,7 +362,7 @@ const ManageNpa = () => {
 
   if (
     state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_KEY_MODAL &&
+      HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL &&
     displayModal
   ) {
     return (
@@ -380,7 +380,7 @@ const ManageNpa = () => {
       resizable={false}
       last={true}
       title={
-        updateMode ? "Update selected npa" : "Add child npa to selected label"
+        updateMode ? "Update selected service account" : "Add child service account to selected label"
       }
     >
       {state.selectedNodeName !== "" ? (
@@ -395,10 +395,10 @@ const ManageNpa = () => {
           <ContentSeparator />
         </>
       ) : null}
-      {Object.keys(npaKey).length ? (
+      {Object.keys(serviceAccountKey).length ? (
         <>
           <KeyContainer
-            publicKey={npaKey}
+            publicKey={serviceAccountKey}
             clipboardIconSize={16}
             clipboardWrapperCss={clipboardWrapperCss}
             inputCss={copyInputCss}
@@ -416,7 +416,7 @@ const ManageNpa = () => {
             ? state.panePermission
             : FormPermissions.READ
         }
-        isLoading={npaPostState.isLoading}
+        isLoading={serviceAccountPostState.isLoading}
         validate={validate}
         onCancel={() => {
           dispatch({
@@ -426,19 +426,19 @@ const ManageNpa = () => {
         onSubmit={values => {
           if (
             state.firstPanelView ===
-            HierarchyEditorPaneActionTypes.SHOW_ADD_NPA_PANE
+            HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE
           ) {
             postNewNpa(values);
           }
 
           if (
             state.firstPanelView ===
-            HierarchyEditorPaneActionTypes.SHOW_UPDATE_NPA_PANE
+            HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE
           ) {
             updateNpa(values);
           }
         }}
-        confirmationLabel={updateMode ? "Update NPA" : "Add NPA"}
+        confirmationLabel={updateMode ? "Update Service Account" : "Add Service Account"}
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}
       />
