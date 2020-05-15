@@ -15,7 +15,7 @@
  */
 import styled from "styled-components";
 
-export const CollectionContainer = styled.li`
+export const CollectionContainer = styled.section`
   margin: 1rem 0 1rem;
   border: 1px solid #1779ba;
   display: flex;

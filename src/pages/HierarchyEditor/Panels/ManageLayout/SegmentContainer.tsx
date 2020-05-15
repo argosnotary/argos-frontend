@@ -189,7 +189,7 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({
         {segment.steps &&
           segment.steps.map((step: IStep, segmentIndex: number) => (
             <StepContainer
-              key={segmentIndex}
+              key={"stepContainer" + segmentIndex}
               step={step}
               index={segmentIndex}
               segment={segment}

@@ -24,7 +24,7 @@ import theme from "../../../../theme/base.json";
 import { act } from "react-dom/test-utils";
 import ManageLayoutPanel from "./ManageLayoutPanel";
 import { FormPermissions } from "../../../../types/FormPermission";
-import { ILayoutMetaBlock } from "../../../../interfaces/ILayout";
+import { ILayoutMetaBlock, IStep } from "../../../../interfaces/ILayout";
 import TextArea from "../../../../atoms/TextArea";
 import { waitFor } from "@testing-library/dom";
 import { Modal } from "../../../../atoms/Modal";
@@ -36,6 +36,10 @@ import * as layoutService from "../../LayoutService";
 import { Notification } from "../../../../molecules/NotificationsList";
 import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
 import { StateContext } from "../../HierarchyEditor";
+import {
+  ArtifactCollectorType,
+  IApprovalConfig
+} from "../../../../interfaces/IApprovalConfig";
 
 const mock = new MockAdapter(Axios);
 
@@ -116,22 +120,62 @@ it("renders correctly with existing layout", async () => {
       authorizedKeyIds: [],
       expectedEndProducts: [],
       keys: [],
-      layoutSegments: []
+      layoutSegments: [
+        {
+          name: "jenkins",
+          steps: [
+            {
+              name: "approve"
+            } as IStep
+          ]
+        }
+      ]
     }
   };
 
   mock
     .onGet("/api/supplychain/supplyChainId/layout")
     .reply(200, layoutMetaBlock);
+
+  const approveConfigs: Array<IApprovalConfig> = [
+    {
+      segmentName: "jenkins",
+      stepName: "approve",
+      artifactCollectorSpecifications: [
+        {
+          uri: "http://collecet:454/service",
+          type: ArtifactCollectorType.XLDEPLOY,
+          name: "collector1"
+        }
+      ]
+    }
+  ];
+
+  mock
+    .onGet("/api/supplychain/supplyChainId/layout/approvalconfig")
+    .reply(200, approveConfigs);
+
   const root = createComponent();
 
-  await act(() =>
-    new Promise(resolve => setImmediate(resolve)).then(() => {
+  await act(async () => {
+    await waitFor(() => {
       root.update();
+      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+    });
 
-      expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
-    })
-  );
+    root
+      .find('button[data-testhook-id="jenkins-0-select-step"]')
+      .simulate("click");
+
+    await waitFor(() => {
+      root.update();
+      return expect(
+        root.find('button[data-testhook-id="edit-collector-0"]').length
+      ).toBe(1);
+    });
+
+    expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
+  });
 });
 
 it("renders correctly with existing layout without crypto support", async () => {
@@ -320,6 +364,27 @@ it("sign layout happy flow", async () => {
 
     root.find('button[data-testhook-id="add-collector"]').simulate("click");
 
+    root
+      .find('form[data-testhook-id="collector-edit-form"]')
+      .simulate("submit");
+    updateField(
+      root.find('input[data-testhook-id="collector-edit-form-field-0"]'),
+      "name",
+      "xlCollect"
+    );
+
+    updateField(
+      root.find('input[data-testhook-id="collector-edit-form-field-1"]'),
+      "uri",
+      "https://collect.org"
+    );
+
+    root
+      .find('form[data-testhook-id="collector-edit-form"]')
+      .simulate("submit");
+
+    expect(root).toMatchSnapshot();
+
     root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
 
     await waitFor(() => {
@@ -354,6 +419,10 @@ it("sign layout happy flow", async () => {
         "    }\n" +
         "  ]\n" +
         "}"
+    );
+
+    expect(mock.history.post[2].data).toEqual(
+      '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"type":"XLDEPLOY","name":"xlCollect","uri":"https://collect.org"}]}]'
     );
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });

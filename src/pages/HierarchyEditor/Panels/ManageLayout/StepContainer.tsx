@@ -127,7 +127,6 @@ const StepContainer: React.FC<IStepContainer> = ({ step, index, segment }) => {
   return (
     <>
       <Step
-        key={index}
         data-testhook-id={segment.name + "-" + index + "-edit-step"}
         onClick={onEditStep}>
         <StepTitle

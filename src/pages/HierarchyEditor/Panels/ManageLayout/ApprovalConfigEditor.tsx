@@ -86,7 +86,7 @@ const CollectorTitle = styled.header`
   }
 `;
 
-const CollectorContainerLi = styled.li`
+const CollectorContainerSection = styled.section`
   width: 100%;
   margin: 0 0 1rem;
 `;
@@ -115,7 +115,7 @@ const approvalConfigFormSchema: IGenericFormSchema = [
     formType: "text"
   },
   {
-    labelValue: "URI",
+    labelValue: "Service URL",
     name: "uri",
     formType: "text"
   }
@@ -132,7 +132,6 @@ const validateApprovalConfigForm = (values: IFormFormValues) => {
 
   if (!values.uri) {
     errors.uri = "Please fill in a url.";
-    //eslint-disable-next-line
   } else if (isWebUri(values.uri) === undefined) {
     errors.uri = "Invalid url";
   }
@@ -201,9 +200,9 @@ const ApprovalConfigEditor: React.FC = () => {
     setAddMode(true);
   };
 
-  const editorForm = (collector: IArtifactCollector, index: number) => {
+  const editorForm = (collector: IArtifactCollector) => {
     return (
-      <FormContainer key={index}>
+      <FormContainer>
         <GenericForm
           dataTesthookId={"collector-edit-form"}
           schema={approvalConfigFormSchema}
@@ -230,7 +229,7 @@ const ApprovalConfigEditor: React.FC = () => {
 
   const collectorRow = (collector: IArtifactCollector, index: number) => {
     return (
-      <CollectorContainerLi key={index}>
+      <CollectorContainerSection>
         <CollectorTitle>
           <CollectionContainerSpan>
             {collector.name} - {collector.type.toLowerCase()} - {collector.uri}
@@ -248,7 +247,7 @@ const ApprovalConfigEditor: React.FC = () => {
             </RemoveCollectorButton>
           </ActionIconsContainer>
         </CollectorTitle>
-      </CollectorContainerLi>
+      </CollectorContainerSection>
     );
   };
 
@@ -267,11 +266,11 @@ const ApprovalConfigEditor: React.FC = () => {
       <CollectionContainerList>
         {collectors.map((collector, index) => {
           return (
-            <>
+            <li key={"collector-row-" + index}>
               {index === editIndex
-                ? editorForm(collector, index)
+                ? editorForm(collector)
                 : collectorRow(collector, index)}
-            </>
+            </li>
           );
         })}
       </CollectionContainerList>
