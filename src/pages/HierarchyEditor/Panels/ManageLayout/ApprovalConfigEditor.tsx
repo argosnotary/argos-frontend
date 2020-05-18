@@ -148,6 +148,8 @@ const ApprovalConfigEditor: React.FC = () => {
   const [collectors, setCollectors] = useState<Array<IArtifactCollector>>([]);
   const [addMode, setAddMode] = useState(false);
 
+  const [approvalStep, setApprovalStep] = useState(false);
+
   useEffect(() => {
     setEditIndex(undefined);
     setAddMode(false);
@@ -160,6 +162,10 @@ const ApprovalConfigEditor: React.FC = () => {
       setCollectors([]);
     }
   }, [editorStoreContext.state.selectedLayoutElement]);
+
+  useEffect(() => {
+    setApprovalStep(collectors.length > 0);
+  }, [collectors]);
 
   const onUpdateApprovalConfig = (
     formValues: any,
@@ -184,7 +190,7 @@ const ApprovalConfigEditor: React.FC = () => {
   const onCancel = () => {
     if (addMode) {
       collectors.splice(collectors.length - 1, 1);
-      setCollectors(collectors);
+      setCollectors([...collectors]);
     }
     setEditIndex(undefined);
   };
@@ -195,7 +201,7 @@ const ApprovalConfigEditor: React.FC = () => {
       name: "",
       uri: ""
     });
-    setCollectors(collectors);
+    setCollectors([...collectors]);
     setEditIndex(collectors.length - 1);
     setAddMode(true);
   };
@@ -252,29 +258,50 @@ const ApprovalConfigEditor: React.FC = () => {
   };
 
   return (
-    <CollectorsContainer>
-      <CollectionContainerRow>
-        <CollectorsContainerTitle>Approval collectors</CollectorsContainerTitle>
-        {editIndex === undefined ? (
-          <AddCollectorButton
-            data-testhook-id={"add-collector"}
-            onClick={addCollector}>
-            <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
-          </AddCollectorButton>
-        ) : null}
-      </CollectionContainerRow>
-      <CollectionContainerList>
-        {collectors.map((collector, index) => {
-          return (
-            <li key={"collector-row-" + index}>
-              {index === editIndex
-                ? editorForm(collector)
-                : collectorRow(collector, index)}
-            </li>
-          );
-        })}
-      </CollectionContainerList>
-    </CollectorsContainer>
+    <>
+      {approvalStep ? (
+        <>
+          <CollectorsContainer>
+            <CollectionContainerRow>
+              <CollectorsContainerTitle>
+                Approval collectors
+              </CollectorsContainerTitle>
+              {editIndex === undefined ? (
+                <AddCollectorButton
+                  data-testhook-id={"add-collector"}
+                  onClick={addCollector}>
+                  <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
+                </AddCollectorButton>
+              ) : null}
+            </CollectionContainerRow>
+            <CollectionContainerList>
+              {collectors.map((collector, index) => {
+                return (
+                  <li key={"collector-row-" + index}>
+                    {index === editIndex
+                      ? editorForm(collector)
+                      : collectorRow(collector, index)}
+                  </li>
+                );
+              })}
+            </CollectionContainerList>
+          </CollectorsContainer>
+        </>
+      ) : (
+        <>
+          <label>Approval Step</label>
+          <input
+            data-testhook-id={"make-approval-step"}
+            type={"checkbox"}
+            checked={approvalStep}
+            onChange={() => {
+              addCollector();
+              setApprovalStep(true);
+            }}
+          />
+        </>
+      )}
+    </>
   );
 };
 

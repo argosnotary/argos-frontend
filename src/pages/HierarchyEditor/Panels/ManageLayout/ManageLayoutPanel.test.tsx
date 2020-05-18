@@ -362,7 +362,9 @@ it("sign layout happy flow", async () => {
       ).toContain("approve");
     });
 
-    root.find('button[data-testhook-id="add-collector"]').simulate("click");
+    root
+      .find('input[data-testhook-id="make-approval-step"]')
+      .simulate("change", { target: { checked: true } });
 
     root
       .find('form[data-testhook-id="collector-edit-form"]')
@@ -392,7 +394,6 @@ it("sign layout happy flow", async () => {
       expect(root.find(Modal).length >= 1).toBe(true);
     });
 
-    //  expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
     updateField(
       root.find('input[name="passphrase"]').first(),
       "passphrase",

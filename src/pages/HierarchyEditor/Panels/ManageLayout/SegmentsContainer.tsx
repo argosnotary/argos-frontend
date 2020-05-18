@@ -19,7 +19,7 @@ import {
   useLayoutEditorStore
 } from "./LayoutEditorStore";
 import React, { useContext } from "react";
-import SegmentContainer from "./SegmentContainer";
+import Segment from "./Segment";
 import styled, { ThemeContext } from "styled-components";
 import { PlusIcon } from "../../../../atoms/Icons";
 import {
@@ -30,7 +30,7 @@ import {
   CollectionContainerList
 } from "../../../../atoms/Collection";
 
-const SegmentsContainer = styled(CollectionContainer)`
+const SegmentsContainerSection = styled(CollectionContainer)`
   flex-direction: column;
   border: 0;
   padding: 0 1rem;
@@ -56,7 +56,7 @@ const AddSegmentButton = styled(CollectionContainerButton)`
   }
 `;
 
-const LayoutEditor: React.FC = () => {
+const SegmentsContainer: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
@@ -73,7 +73,7 @@ const LayoutEditor: React.FC = () => {
 
   return (
     <ul>
-      <SegmentsContainer>
+      <SegmentsContainerSection>
         <CollectionContainerRow>
           <SegmentsContainerTitle>Segments</SegmentsContainerTitle>
           <AddSegmentButton
@@ -85,17 +85,13 @@ const LayoutEditor: React.FC = () => {
         <CollectionContainerList>
           {layout.layoutSegments
             ? layout.layoutSegments.map((segment, index) => (
-                <SegmentContainer
-                  index={index}
-                  key={segment.name}
-                  segment={segment}
-                />
+                <Segment index={index} key={segment.name} segment={segment} />
               ))
             : null}
         </CollectionContainerList>
-      </SegmentsContainer>
+      </SegmentsContainerSection>
     </ul>
   );
 };
 
-export default LayoutEditor;
+export default SegmentsContainer;

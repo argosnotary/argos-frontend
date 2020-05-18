@@ -26,7 +26,7 @@ import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { Panel } from "../../../../molecules/Panel";
 import { cryptoAvailable } from "../../../../security";
 import DataRequest from "../../../../types/DataRequest";
-import LayoutEditor from "./LayoutEditor";
+import SegmentsContainer from "./SegmentsContainer";
 import {
   createLayoutEditorStoreContext,
   LayoutEditorActionType,
@@ -129,7 +129,7 @@ const ManageLayoutPanel: React.FC = () => {
               <ContentSeparator />
             </>
           ) : null}
-          <LayoutEditor />
+          <SegmentsContainer />
           <PageSpecificContentSeparator />
           <LayoutJsonEditor />
           <LayoutSigner />

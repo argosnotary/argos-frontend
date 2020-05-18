@@ -15,7 +15,7 @@
  */
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
+import { ILayoutSegment } from "../../../../interfaces/ILayout";
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
@@ -24,17 +24,12 @@ import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import {
   ActionIconsContainer,
   BaseActionButton,
-  CollectionContainer,
-  CollectionContainerButton,
-  CollectionContainerRow,
-  CollectionContainerTitle,
   CollectionContainerSpan
 } from "../../../../atoms/Collection";
-import { PlusIcon } from "../../../../atoms/Icons";
-import StepContainer from "./StepContainer";
 import LayoutElementNameEditor from "./LayoutElementNameEditor";
 import InputErrorLabel from "../../../../atoms/InputErrorLabel";
 import Input from "../../../../atoms/Input";
+import StepsContainer from "./StepsContainer";
 
 const SegmentTitle = styled.header`
   border: 1px solid transparent;
@@ -67,33 +62,6 @@ const SegmentTitle = styled.header`
   }
 `;
 
-const StepsContainer = styled(CollectionContainer)`
-  flex-direction: column;
-  padding: 0 1rem 1rem;
-  margin: 1rem 0;
-  min-height: 10rem;
-  background-color: ${props => props.theme.layoutBuilder.stepContainerBgColor};
-`;
-
-const StepsContainerTitle = styled(CollectionContainerTitle)`
-  top: -1rem;
-  margin: 0 auto;
-  padding: 0.25rem 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.stepContainerTitleBorderColor};
-`;
-
-const AddStepButton = styled(CollectionContainerButton)`
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.addStepButtonBorderColor};
-  padding: 0 0.65rem;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.9);
-  }
-`;
-
 const RemoveSegmentButton = styled(BaseActionButton)``;
 
 const SegmentContainerLi = styled.li`
@@ -106,10 +74,7 @@ interface ISegmentContainerProps {
   index: number;
 }
 
-const SegmentContainer: React.FC<ISegmentContainerProps> = ({
-  segment,
-  index
-}) => {
+const Segment: React.FC<ISegmentContainerProps> = ({ segment, index }) => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
@@ -127,15 +92,6 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_SEGMENT,
       layoutSegment: segment
-    });
-  };
-
-  const onAddStep = () => {
-    const newStep = { name: "" } as IStep;
-    editorStoreContext.dispatch({
-      type: LayoutEditorActionType.ADD_STEP,
-      layoutSegment: segment,
-      layoutStep: newStep
     });
   };
 
@@ -177,27 +133,9 @@ const SegmentContainer: React.FC<ISegmentContainerProps> = ({
           )}
         </SegmentTitle>
       </SegmentContainerLi>
-      <StepsContainer>
-        <CollectionContainerRow>
-          <StepsContainerTitle>Steps</StepsContainerTitle>
-          <AddStepButton
-            data-testhook-id={"segment" + index + "-add-step"}
-            onClick={onAddStep}>
-            <PlusIcon size={20} color={theme.layoutBuilder.iconColor} />
-          </AddStepButton>
-        </CollectionContainerRow>
-        {segment.steps &&
-          segment.steps.map((step: IStep, segmentIndex: number) => (
-            <StepContainer
-              key={"stepContainer" + segmentIndex}
-              step={step}
-              index={segmentIndex}
-              segment={segment}
-            />
-          ))}
-      </StepsContainer>
+      <StepsContainer segment={segment} index={index} />
     </>
   );
 };
 
-export default SegmentContainer;
+export default Segment;

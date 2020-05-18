@@ -69,7 +69,7 @@ const StepTitle = styled.header<IStepTitleProps>`
   }
 `;
 
-const Step = styled.section`
+const StepSection = styled.section`
   width: 100%;
   margin: 0 0 1rem;
 `;
@@ -83,7 +83,7 @@ interface IStepContainer {
   index: number;
 }
 
-const StepContainer: React.FC<IStepContainer> = ({ step, index, segment }) => {
+const Step: React.FC<IStepContainer> = ({ step, index, segment }) => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
@@ -126,7 +126,7 @@ const StepContainer: React.FC<IStepContainer> = ({ step, index, segment }) => {
 
   return (
     <>
-      <Step
+      <StepSection
         data-testhook-id={segment.name + "-" + index + "-edit-step"}
         onClick={onEditStep}>
         <StepTitle
@@ -158,9 +158,9 @@ const StepContainer: React.FC<IStepContainer> = ({ step, index, segment }) => {
             </>
           )}
         </StepTitle>
-      </Step>
+      </StepSection>
     </>
   );
 };
 
-export default StepContainer;
+export default Step;

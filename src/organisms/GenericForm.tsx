@@ -172,7 +172,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 <CustomCancelButton
                   data-testhook="cancel-button"
                   type="button"
-                  onClick={() => onCancel()}>
+                  onMouseDown={() => onCancel()}>
                   {cancellationLabel}
                 </CustomCancelButton>
               ) : null}
