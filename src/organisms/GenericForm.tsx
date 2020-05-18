@@ -92,8 +92,12 @@ const GenericForm: React.FC<IGenericForm> = ({
 
   useEffect(() => {
     if (autoFocus) {
-      firstTextInput.current?.focus();
-      firstTextAreaInput.current?.focus();
+      if (firstTextInput.current) {
+        firstTextInput.current.focus();
+      }
+      if (firstTextAreaInput.current) {
+        firstTextAreaInput.current.focus();
+      }
     }
   }, []);
 

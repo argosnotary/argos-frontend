@@ -111,7 +111,9 @@ const Step: React.FC<IStepContainer> = ({ step, index, segment }) => {
   const stepNameExists = (stepName: string): boolean => {
     return (
       segment.steps &&
-      segment.steps.findIndex(step => step.name === stepName) >= 0
+      segment.steps.findIndex(
+        stepPredicate => stepPredicate.name === stepName
+      ) >= 0
     );
   };
 
