@@ -117,6 +117,8 @@ export const NodeContextMenuContainer = styled.ul<INodeContextContainerProps>`
 `;
 
 export const NodeContextMenuItem = styled.li`
+  display: flex;
+  align-items: center;
   background-color: ${props =>
     props.theme.treeEditor.nodeContextMenuItem.bgColor};
   font-size: 0.9rem;
@@ -129,6 +131,8 @@ export const NodeContextMenuItem = styled.li`
       props.theme.treeEditor.nodeContextMenuItem.hover.bgColor};
   }
 `;
+
+export const NodeContextMenuItemLabel = styled.span``;
 
 const NodeContextMenuItemSeparator = styled.hr`
   border: 0;
@@ -145,6 +149,20 @@ const NodeContextMenuClickCatcher = styled.div`
   left: 0;
 `;
 
+const NodeContextMenuItemIconContainer = styled.div`
+  display: flex;
+  position: relative;
+  top: -1px;
+`;
+
+const NodeContextMenuItemIconSeparator = styled.span`
+  display: flex;
+  border-right: 1px solid
+    ${props => props.theme.treeEditor.nodeContextMenuIconSeparator.borderColor};
+  height: 1rem;
+  margin: 0 0.5rem;
+`;
+
 const renderContextMenu = (
   node: ITreeNode,
   dispatch: Dispatch<TreeReducerAction>,
@@ -159,9 +177,18 @@ const renderContextMenu = (
           onClick={() => {
             item.callback(node);
             dispatch({ type: TreeReducerActionTypes.HIDECONTEXTMENU });
-          }}
-        >
-          {item.label}
+          }}>
+          {item.icon ? (
+            <>
+              <NodeContextMenuItemIconContainer>
+                {item.icon}
+              </NodeContextMenuItemIconContainer>
+              <NodeContextMenuItemIconSeparator />
+            </>
+          ) : (
+            ""
+          )}
+          <NodeContextMenuItemLabel>{item.label}</NodeContextMenuItemLabel>
         </NodeContextMenuItem>
         {menuitems.length > 1 && index < menuitems.length - 1 ? (
           <NodeContextMenuItemSeparator />
@@ -184,8 +211,7 @@ const NodeContextMenu: React.FC<INodeContextMenu> = ({ node }) => {
       />
       <NodeContextMenuContainer
         x={treeContext.treeState.contextMenu.x}
-        y={treeContext.treeState.contextMenu.y}
-      >
+        y={treeContext.treeState.contextMenu.y}>
         {treeContext.treeContextMenu.map(item =>
           item.type === node.type
             ? renderContextMenu(node, treeContext.treeDispatch, item.menuitems)
@@ -232,8 +258,7 @@ export const ParentNode: React.FC<IParentNodeProps> = ({ depth, node }) => {
             if (node.children && node.children.length === 0) {
               treeContext.cbGetNodeChildren(node.referenceId);
             }
-          }}
-        >
+          }}>
           {treeContext.isLoading &&
           node.referenceId ===
             treeContext.treeState.toggledNodes[
@@ -298,8 +323,7 @@ export const AddAdditionalRootNodes = () => {
         </IconContainer>
         <TreeHeadLabelSpan
           selected={false}
-          onClick={treeContext.cbCreateRootNode}
-        >
+          onClick={treeContext.cbCreateRootNode}>
           {treeContext.treeStringList.createrootnode}
         </TreeHeadLabelSpan>
       </TreeNodeContainer>

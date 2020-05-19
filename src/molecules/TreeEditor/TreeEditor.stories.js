@@ -20,6 +20,8 @@ import TreeEditor from "./TreeEditor";
 import json from "./sampleData.json";
 import { treeReducer, initialTreeState } from "../../stores/treeEditorStore";
 
+import ApproveIcon from "../../atoms/Icons/Approve";
+
 export default {
   title: "TreeEditor"
 };
@@ -42,7 +44,28 @@ const treeContextMenu = [
     type: "LABEL",
     menuitems: [
       {
-        label: "Add child label",
+        label: "Add label",
+        visible: () => true,
+        callback: () => {
+          alert("adding child label");
+        }
+      }
+    ]
+  },
+  {
+    type: "SUPPLY_CHAIN",
+    menuitems: [
+      {
+        label: "Approve step",
+        icon: <ApproveIcon size={16} color={"gray"} />,
+        visible: () => true,
+        callback: () => {
+          alert("adding child label");
+        }
+      },
+      {
+        label: "Gerard",
+        visible: () => true,
         callback: () => {
           alert("adding child label");
         }
@@ -68,6 +91,7 @@ const DummyParent = () => {
     treeStringList,
     treeContextMenu,
     treeClickHandlers,
+    canCreateRootNode: () => true,
     cbCreateRootNode,
     cbGetNodeChildren,
     isLoading: false,
