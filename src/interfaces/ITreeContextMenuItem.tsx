@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 import ITreeNode from "./ITreeNode";
+import { ReactNode } from "react";
 
 export default interface ITreeContextMenuItem {
   label: string;
+  icon?: ReactNode;
   callback: (node: ITreeNode) => void;
   visible: (node: ITreeNode) => boolean;
 }

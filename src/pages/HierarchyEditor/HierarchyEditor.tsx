@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useContext } from "react";
 
 import DataRequest from "../../types/DataRequest";
 import FlexColumn from "../../atoms/FlexColumn";
@@ -55,6 +55,8 @@ import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
 import { useUserProfileContext } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
+import ApproveIcon from "../../atoms/Icons/Approve";
+import { ThemeContext } from "styled-components";
 
 const HierarchyEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
@@ -65,6 +67,8 @@ const HierarchyEditor = () => {
     selectedNodeName: "",
     panePermission: FormPermissions.READ
   });
+
+  const theme = useContext(ThemeContext);
 
   const { token } = useUserProfileContext();
   const getTreeDataRequest: DataRequest = {
@@ -215,7 +219,8 @@ const HierarchyEditor = () => {
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >= 0
+              node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >=
+                0
             );
           }
         },
@@ -254,6 +259,25 @@ const HierarchyEditor = () => {
               node.permissions.indexOf(PermissionTypes.LAYOUT_ADD) >= 0
             );
           }
+        },
+        {
+          icon: (
+            <ApproveIcon
+              size={16}
+              color={theme.treeEditor.nodeContextMenuItem.iconColor}
+            />
+          ),
+          label: "Approve step",
+          callback: (node: ITreeNode) => {
+            // action
+            return node;
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.LINK_ADD) >= 0
+            );
+          }
         }
       ]
     },
@@ -271,7 +295,8 @@ const HierarchyEditor = () => {
           visible: (node: ITreeNode) => {
             return (
               node.permissions !== undefined &&
-              node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >= 0
+              node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >=
+                0
             );
           }
         }
@@ -331,7 +356,8 @@ const HierarchyEditor = () => {
     if (
       (state.dataAction &&
         state.dataAction === HierarchyEditorDataActionTypes.POST_NEW_LABEL) ||
-      state.dataAction === HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT ||
+      state.dataAction ===
+        HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT ||
       state.dataAction === HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN
     ) {
       const hierarchyDataRequest: DataRequest = {
@@ -400,8 +426,7 @@ const HierarchyEditor = () => {
                 width={"25vw"}
                 title={"Hierarchy"}
                 disableFlexGrow={true}
-                resizable={true}
-              >
+                resizable={true}>
                 <TreeEditor
                   data={treeDataState.data}
                   loading={treeDataState.isLoading}
