@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 import React, { useContext } from "react";
-import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
-import EditIcon from "../../../../atoms/Icons/EditIcon";
-import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import styled, { ThemeContext } from "styled-components";
+import Input from "./Input";
+import InputErrorLabel from "./InputErrorLabel";
 import {
-  ActionIconsContainer,
-  BaseActionButton
-} from "../../../../atoms/LayoutItemContainer";
-import LayoutElementNameEditor from "./LayoutElementNameEditor";
+  BaseActionButton,
+  CollectionContainerSpan,
+  ActionIconsContainer
+} from "./Collection";
+import { ILayoutSegment, IStep } from "../interfaces/ILayout";
 import {
-  LayoutEditorActionType,
-  useLayoutEditorStore
-} from "./LayoutEditorStore";
-import Input from "../../../../atoms/Input";
-import InputErrorLabel from "../../../../atoms/InputErrorLabel";
+  useLayoutEditorStore,
+  LayoutEditorActionType
+} from "../stores/LayoutEditorStore";
+import LayoutElementNameEditor from "../pages/HierarchyEditor/Panels/ManageLayout/LayoutElementNameEditor";
+import EditIcon from "./Icons/EditIcon";
+import RemoveIcon from "./Icons/RemoveIcon";
 
 interface IStepTitleProps {
   active: boolean;
@@ -68,7 +69,7 @@ const StepTitle = styled.header<IStepTitleProps>`
   }
 `;
 
-const Step = styled.section`
+const StepSection = styled.section`
   width: 100%;
   margin: 0 0 1rem;
 `;
@@ -79,24 +80,21 @@ const RemoveStepButton = styled(BaseActionButton)``;
 interface IStepContainer {
   segment: ILayoutSegment;
   step: IStep;
-  stepKey: string;
+  index: number;
 }
 
-const StepContainer: React.FC<IStepContainer> = ({
-  step,
-  stepKey,
-  segment
-}) => {
+const Step: React.FC<IStepContainer> = ({ step, index, segment }) => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
 
   const onEditStep = (e: any) => {
-    if (step !== editorStoreContext.state.activeEditLayoutElement) {
+    if (step !== editorStoreContext.state.activeEditLayoutElement?.step) {
       e.stopPropagation();
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.EDIT_LAYOUT_ELEMENT,
-        layoutElement: step
+        layoutSegment: segment,
+        layoutStep: step
       });
     }
   };
@@ -104,61 +102,67 @@ const StepContainer: React.FC<IStepContainer> = ({
   const onDeleteStep = (e: any) => {
     e.stopPropagation();
     editorStoreContext.dispatch({
-      type: LayoutEditorActionType.SELECT_LAYOUT_ELEMENT,
-      layoutElement: segment
-    });
-    editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_STEP,
-      layoutElement: step
+      layoutStep: step,
+      layoutSegment: segment
     });
   };
 
   const stepNameExists = (stepName: string): boolean => {
     return (
       segment.steps &&
-      segment.steps.findIndex(step => step.name === stepName) >= 0
+      segment.steps.findIndex(
+        stepPredicate => stepPredicate.name === stepName
+      ) >= 0
     );
   };
 
   const onSelectStep = (e: any) => {
     e.stopPropagation();
     editorStoreContext.dispatch({
-      type: LayoutEditorActionType.SELECT_LAYOUT_ELEMENT,
-      layoutElement: step
+      type: LayoutEditorActionType.SELECT_STEP,
+      layoutStep: step,
+      layoutSegment: segment
     });
   };
 
   return (
     <>
-      <Step key={stepKey} onClick={onEditStep}>
+      <StepSection
+        data-testhook-id={segment.name + "-" + index + "-edit-step"}
+        onClick={onEditStep}>
         <StepTitle
           active={
-            step === editorStoreContext.state.selectedLayoutElement ||
-            step === editorStoreContext.state.activeEditLayoutElement
-          }
-        >
-          {step === editorStoreContext.state.activeEditLayoutElement ? (
+            step === editorStoreContext.state.selectedLayoutElement?.step ||
+            step === editorStoreContext.state.activeEditLayoutElement?.step
+          }>
+          {step === editorStoreContext.state.activeEditLayoutElement?.step ? (
             <LayoutElementNameEditor
               currentName={step.name}
               nameExists={stepNameExists}
+              dataTesthookId={segment.name + "-" + index + "-name-form"}
             />
           ) : (
             <>
-              <span>{step.name}</span>
+              <CollectionContainerSpan>{step.name}</CollectionContainerSpan>
               <ActionIconsContainer>
-                <EditStepButton onClick={onSelectStep}>
+                <EditStepButton
+                  data-testhook-id={segment.name + "-" + index + "-select-step"}
+                  onClick={onSelectStep}>
                   <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
                 </EditStepButton>
-                <RemoveStepButton onClick={onDeleteStep}>
+                <RemoveStepButton
+                  data-testhook-id={segment.name + "-" + index + "-delete-step"}
+                  onClick={onDeleteStep}>
                   <RemoveIcon size={20} color={theme.layoutBuilder.iconColor} />
                 </RemoveStepButton>
               </ActionIconsContainer>
             </>
           )}
         </StepTitle>
-      </Step>
+      </StepSection>
     </>
   );
 };
 
-export default StepContainer;
+export default Step;

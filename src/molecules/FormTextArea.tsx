@@ -21,16 +21,18 @@ import InputLabel from "../atoms/InputLabel";
 import TextArea from "../atoms/TextArea";
 
 interface IFormTextAreaProps {
+  dataTesthookId?: string;
   labelValue?: string;
   placeHolder?: string;
   name: string;
   defaultValue?: string;
   value?: string;
   onBlur?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onInput?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   formType: string;
   disabled?: boolean;
   height?: string;
+  innerRef?: React.RefObject<HTMLTextAreaElement>;
 }
 
 const FormTextAreaContainer = styled.div`
@@ -39,27 +41,31 @@ const FormTextAreaContainer = styled.div`
 `;
 
 const FormInput: React.FC<IFormTextAreaProps> = ({
+  dataTesthookId,
   labelValue,
   placeHolder,
   value,
   onBlur,
-  onInput,
+  onChange,
   name,
   defaultValue,
   disabled,
-  height
+  height,
+  innerRef
 }) => (
   <FormTextAreaContainer>
     {labelValue ? <InputLabel>{labelValue}</InputLabel> : null}
     <TextArea
+      data-testhook-id={dataTesthookId}
       height={height}
       disabled={disabled}
       name={name}
       {...(onBlur ? { onBlur } : "")}
-      {...(onInput ? { onInput } : "")}
+      {...(onChange ? { onChange } : "")}
       value={value}
       defaultValue={defaultValue}
       {...(placeHolder ? { placeholder: placeHolder } : "")}
+      ref={innerRef}
     />
   </FormTextAreaContainer>
 );

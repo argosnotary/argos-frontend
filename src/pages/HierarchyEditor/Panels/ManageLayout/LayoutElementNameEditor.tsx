@@ -21,7 +21,7 @@ import { FormPermissions } from "../../../../types/FormPermission";
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
-} from "./LayoutEditorStore";
+} from "../../../../stores/LayoutEditorStore";
 
 interface IFormFormValues {
   name: string;
@@ -37,11 +37,13 @@ const segmentFormSchema: IGenericFormSchema = [
 interface ILayoutElementNameEditorProps {
   nameExists: (name: string) => boolean;
   currentName: string;
+  dataTesthookId?: string;
 }
 
 const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
   nameExists,
-  currentName
+  currentName,
+  dataTesthookId
 }) => {
   const editorStoreContext = useLayoutEditorStore();
 
@@ -74,6 +76,7 @@ const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
   return (
     <>
       <GenericForm
+        dataTesthookId={dataTesthookId}
         schema={segmentFormSchema}
         permission={FormPermissions.EDIT}
         isLoading={false}
@@ -82,6 +85,7 @@ const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
         onSubmit={onUpdateSegmentName}
         initialValues={{ name: currentName }}
         onValidChange={onUpdateSegmentName}
+        autoFocus={true}
       />
     </>
   );

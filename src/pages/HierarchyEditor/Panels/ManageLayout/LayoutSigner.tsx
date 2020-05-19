@@ -38,7 +38,7 @@ import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer"
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
-} from "./LayoutEditorStore";
+} from "../../../../stores/LayoutEditorStore";
 import { CryptoExceptionWarning } from "../../../../molecules/CryptoExceptionWarning";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
 
@@ -100,13 +100,7 @@ const LayoutSigner: React.FC = () => {
   const { token } = useUserProfileContext();
   const [cryptoException, setCryptoException] = useState(false);
 
-  const [responsePostLayout, setDataRequestPostLayout] = useDataApi(
-    genericDataFetchReducer
-  );
-
-  const [responseRequestKey, setDataRequestKey] = useDataApi(
-    genericDataFetchReducer
-  );
+  const [response, setRequest] = useDataApi(genericDataFetchReducer);
 
   const postNewLayout = () => {
     const dataRequest: DataRequest = {
@@ -121,14 +115,25 @@ const LayoutSigner: React.FC = () => {
           editorStoreContext.state.layout
         )
           .then(layoutMetaBlock => {
-            setDataRequestPostLayout({
+            setRequest({
               data: layoutMetaBlock,
               method: "post",
               token,
               url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
               cbSuccess: () => {
-                dispatch({
-                  type: HierarchyEditorPaneActionTypes.RESET_PANE
+                setRequest({
+                  data: editorStoreContext.state.approvalConfigs,
+                  url:
+                    "/api/supplychain/" +
+                    state.nodeReferenceId +
+                    "/layout/approvalconfig",
+                  method: "post",
+                  token,
+                  cbSuccess: () => {
+                    dispatch({
+                      type: HierarchyEditorPaneActionTypes.RESET_PANE
+                    });
+                  }
                 });
               }
             });
@@ -144,7 +149,7 @@ const LayoutSigner: React.FC = () => {
           });
       }
     };
-    setDataRequestKey(dataRequest);
+    setRequest(dataRequest);
   };
 
   useEffect(() => {
@@ -171,7 +176,7 @@ const LayoutSigner: React.FC = () => {
                 setShowWarning(false);
                 setPassphrase("");
               },
-              responseRequestKey.isLoading || responsePostLayout.isLoading,
+              response.isLoading,
               showWarning,
               passphrase
             )}

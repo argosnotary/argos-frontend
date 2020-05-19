@@ -21,6 +21,7 @@ import Input from "../atoms/Input";
 import InputLabel from "../atoms/InputLabel";
 
 interface IFormInputProps {
+  dataTesthookId?: string;
   labelValue?: string;
   placeHolder?: string;
   name: string;
@@ -30,6 +31,7 @@ interface IFormInputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   formType: string;
   disabled?: boolean;
+  innerRef?: React.RefObject<HTMLInputElement>;
 }
 
 const FormInputContainer = styled.div`
@@ -38,6 +40,7 @@ const FormInputContainer = styled.div`
 `;
 
 const FormInput: React.FC<IFormInputProps> = ({
+  dataTesthookId,
   labelValue,
   placeHolder,
   value,
@@ -46,12 +49,13 @@ const FormInput: React.FC<IFormInputProps> = ({
   name,
   formType,
   defaultValue,
-  disabled
+  disabled,
+  innerRef
 }) => (
   <FormInputContainer>
     {labelValue ? <InputLabel>{labelValue}</InputLabel> : null}
     <Input
-      autoFocus={true}
+      data-testhook-id={dataTesthookId}
       disabled={disabled}
       name={name}
       {...(onBlur ? { onBlur } : "")}
@@ -60,6 +64,7 @@ const FormInput: React.FC<IFormInputProps> = ({
       defaultValue={defaultValue}
       {...(placeHolder ? { placeholder: placeHolder } : "")}
       type={formType}
+      ref={innerRef}
     />
   </FormInputContainer>
 );

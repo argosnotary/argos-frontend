@@ -26,7 +26,7 @@ import GenericForm, {
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
-} from "./LayoutEditorStore";
+} from "../../../../stores/LayoutEditorStore";
 import DataRequest from "../../../../types/DataRequest";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";

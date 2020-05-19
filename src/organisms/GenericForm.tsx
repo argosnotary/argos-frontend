@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useFormik, FormikValues } from "formik";
 
@@ -57,6 +57,7 @@ interface IGenericForm {
   cancellationLabel?: string;
   initialValues: FormikValues;
   onValidChange?: (values: any) => void;
+  autoFocus?: boolean;
 }
 
 const GenericForm: React.FC<IGenericForm> = ({
@@ -70,6 +71,7 @@ const GenericForm: React.FC<IGenericForm> = ({
   confirmationLabel,
   cancellationLabel,
   initialValues,
+  autoFocus,
   onValidChange
 }) => {
   const formik = useFormik({
@@ -80,9 +82,24 @@ const GenericForm: React.FC<IGenericForm> = ({
     },
     validate
   });
+
+  const firstTextInput: React.RefObject<HTMLInputElement> = useRef(null);
+  const firstTextAreaInput: React.RefObject<HTMLTextAreaElement> = useRef(null);
+
   useEffect(() => {
     formik.setValues(initialValues);
   }, [initialValues]);
+
+  useEffect(() => {
+    if (autoFocus) {
+      if (firstTextInput.current) {
+        firstTextInput.current.focus();
+      }
+      if (firstTextAreaInput.current) {
+        firstTextAreaInput.current.focus();
+      }
+    }
+  }, []);
 
   const renderFormElements = (
     formik: IFormik<FormikValues>,
@@ -95,6 +112,7 @@ const GenericForm: React.FC<IGenericForm> = ({
           return (
             <React.Fragment key={`${entry.name}-${index}`}>
               <FormInput
+                dataTesthookId={dataTesthookId + "-field-" + index}
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
@@ -102,6 +120,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name]}
                 disabled={permission === FormPermissions.READ ? true : false}
+                {...(index == 0 ? { innerRef: firstTextInput } : null)}
               />
               {formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
@@ -112,14 +131,16 @@ const GenericForm: React.FC<IGenericForm> = ({
           return (
             <React.Fragment key={`${entry.name}-${index}`}>
               <FormTextArea
+                dataTesthookId={dataTesthookId + "-field-" + index}
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
-                onInput={formik.handleChange}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name]}
                 disabled={permission === FormPermissions.READ ? true : false}
                 height={"25rem"}
+                {...(index == 0 ? { innerRef: firstTextAreaInput } : null)}
               />
               {formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
@@ -139,8 +160,7 @@ const GenericForm: React.FC<IGenericForm> = ({
           if (onValidChange && formik.isValid) {
             onValidChange(formik.values);
           }
-        }}
-      >
+        }}>
         {renderFormElements(formik, schema)}
         {permission === FormPermissions.EDIT &&
         (confirmationLabel || cancellationLabel) ? (
@@ -156,8 +176,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 <CustomCancelButton
                   data-testhook="cancel-button"
                   type="button"
-                  onClick={() => onCancel()}
-                >
+                  onMouseDown={() => onCancel()}>
                   {cancellationLabel}
                 </CustomCancelButton>
               ) : null}

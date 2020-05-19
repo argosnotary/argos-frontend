@@ -246,13 +246,11 @@ exports[`renders correctly 1`] = `
                                   </StyledComponent>
                                 </styled.label>
                                 <styled.input
-                                  autoFocus={true}
                                   name="searchinput"
                                   onChange={[Function]}
                                   type="text"
                                 >
                                   <StyledComponent
-                                    autoFocus={true}
                                     forwardedComponent={
                                       Object {
                                         "$$typeof": Symbol(react.forward_ref),
@@ -318,7 +316,6 @@ exports[`renders correctly 1`] = `
                                     type="text"
                                   >
                                     <input
-                                      autoFocus={true}
                                       className="sc-bwzfXH fQcSTW"
                                       name="searchinput"
                                       onChange={[Function]}

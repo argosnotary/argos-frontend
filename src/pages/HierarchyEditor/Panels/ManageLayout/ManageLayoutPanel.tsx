@@ -26,18 +26,19 @@ import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { Panel } from "../../../../molecules/Panel";
 import { cryptoAvailable } from "../../../../security";
 import DataRequest from "../../../../types/DataRequest";
-import LayoutEditor from "./LayoutEditor";
+import SegmentsContainer from "../../../../molecules/SegmentsContainer";
 import {
   createLayoutEditorStoreContext,
   LayoutEditorActionType,
   LayoutEditorStoreContext
-} from "./LayoutEditorStore";
+} from "../../../../stores/LayoutEditorStore";
 import LayoutJsonEditor from "./LayoutJsonEditor";
 import LayoutSigner from "./LayoutSigner";
 import LayoutEditorDetailsPane from "./LayoutEditorDetailsPane";
 import { StateContext } from "../../HierarchyEditor";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
 import styled from "styled-components";
+import { IApprovalConfig } from "../../../../interfaces/IApprovalConfig";
 
 const PageSpecificContentSeparator = styled(ContentSeparator)`
   margin: 0.7rem 0 1rem;
@@ -53,6 +54,11 @@ const ManageLayoutPanel: React.FC = () => {
   const [layoutApiResponse, setLayoutApiRequest] = useDataApi(
     genericDataFetchReducer
   );
+
+  const [
+    _approvalConfigsApiResponse,
+    setApprovalConfigsApiRequest
+  ] = useDataApi(genericDataFetchReducer);
 
   useEffect(() => {
     editorStoreContext.dispatch({
@@ -83,6 +89,28 @@ const ManageLayoutPanel: React.FC = () => {
       }
     };
     setLayoutApiRequest(getLayoutRequest);
+
+    const getGetApprovalConfigsRequest: DataRequest = {
+      method: "get",
+      token,
+      url:
+        "/api/supplychain/" + state.nodeReferenceId + "/layout/approvalconfig",
+      cbSuccess: (approvalConfigs: Array<IApprovalConfig>) => {
+        editorStoreContext.dispatch({
+          type: LayoutEditorActionType.UPDATE_APPROVAL_CONFIGS,
+          approvalConfigs: approvalConfigs
+        });
+      },
+      cbFailure: (): boolean => {
+        editorStoreContext.dispatch({
+          type: LayoutEditorActionType.UPDATE_APPROVAL_CONFIGS,
+          approvalConfigs: []
+        });
+        return false;
+      }
+    };
+
+    setApprovalConfigsApiRequest(getGetApprovalConfigsRequest);
   }, [state.nodeReferenceId]);
 
   return (
@@ -101,7 +129,7 @@ const ManageLayoutPanel: React.FC = () => {
               <ContentSeparator />
             </>
           ) : null}
-          <LayoutEditor />
+          <SegmentsContainer />
           <PageSpecificContentSeparator />
           <LayoutJsonEditor />
           <LayoutSigner />

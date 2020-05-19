@@ -24,7 +24,7 @@ import theme from "../../../../theme/base.json";
 import { act } from "react-dom/test-utils";
 import ManageLayoutPanel from "./ManageLayoutPanel";
 import { FormPermissions } from "../../../../types/FormPermission";
-import { ILayoutMetaBlock } from "../../../../interfaces/ILayout";
+import { ILayoutMetaBlock, IStep } from "../../../../interfaces/ILayout";
 import TextArea from "../../../../atoms/TextArea";
 import { waitFor } from "@testing-library/dom";
 import { Modal } from "../../../../atoms/Modal";
@@ -36,6 +36,10 @@ import * as layoutService from "../../LayoutService";
 import { Notification } from "../../../../molecules/NotificationsList";
 import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
 import { StateContext } from "../../HierarchyEditor";
+import {
+  ArtifactCollectorType,
+  IApprovalConfig
+} from "../../../../interfaces/IApprovalConfig";
 
 const mock = new MockAdapter(Axios);
 
@@ -116,22 +120,62 @@ it("renders correctly with existing layout", async () => {
       authorizedKeyIds: [],
       expectedEndProducts: [],
       keys: [],
-      layoutSegments: []
+      layoutSegments: [
+        {
+          name: "jenkins",
+          steps: [
+            {
+              name: "approve"
+            } as IStep
+          ]
+        }
+      ]
     }
   };
 
   mock
     .onGet("/api/supplychain/supplyChainId/layout")
     .reply(200, layoutMetaBlock);
+
+  const approveConfigs: Array<IApprovalConfig> = [
+    {
+      segmentName: "jenkins",
+      stepName: "approve",
+      artifactCollectorSpecifications: [
+        {
+          uri: "http://collecet:454/service",
+          type: ArtifactCollectorType.XLDEPLOY,
+          name: "collector1"
+        }
+      ]
+    }
+  ];
+
+  mock
+    .onGet("/api/supplychain/supplyChainId/layout/approvalconfig")
+    .reply(200, approveConfigs);
+
   const root = createComponent();
 
-  await act(() =>
-    new Promise(resolve => setImmediate(resolve)).then(() => {
+  await act(async () => {
+    await waitFor(() => {
       root.update();
+      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+    });
 
-      expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
-    })
-  );
+    root
+      .find('button[data-testhook-id="jenkins-0-select-step"]')
+      .simulate("click");
+
+    await waitFor(() => {
+      root.update();
+      return expect(
+        root.find('button[data-testhook-id="edit-collector-0"]').length
+      ).toBe(1);
+    });
+
+    expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
+  });
 });
 
 it("renders correctly with existing layout without crypto support", async () => {
@@ -248,6 +292,9 @@ it("sign layout happy flow", async () => {
   mock.onGet("/api/personalaccount/me/key").reply(200, key);
 
   mock.onPost("/api/supplychain/supplyChainId/layout").reply(200);
+  mock
+    .onPost("/api/supplychain/supplyChainId/layout/approvalconfig")
+    .reply(200);
   mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(200);
 
   const root = createComponent();
@@ -259,7 +306,7 @@ it("sign layout happy flow", async () => {
     });
 
     updateField(
-      root.find(TextArea).first(),
+      root.find('textarea[data-testhook-id="layout-json-form-field-0"]'),
       "layout",
       JSON.stringify({
         keys: [],
@@ -269,6 +316,77 @@ it("sign layout happy flow", async () => {
       })
     );
 
+    root.find('button[data-testhook-id="add-segment"]').simulate("click");
+
+    root.find('form[data-testhook-id="segment0-name-form"]').simulate("submit");
+    updateField(
+      root.find('input[data-testhook-id="segment0-name-form-field-0"]'),
+      "name",
+      "jenkins"
+    );
+    root.find('form[data-testhook-id="segment0-name-form"]').simulate("submit");
+
+    await waitFor(() => {
+      root.update();
+      expect(
+        root
+          .find('textarea[data-testhook-id="layout-json-form-field-0"]')
+          .text()
+      ).toContain("jenkins");
+    });
+
+    root.find('button[data-testhook-id="segment0-add-step"]').simulate("click");
+
+    root
+      .find('section[data-testhook-id="jenkins-0-edit-step"]')
+      .simulate("click");
+
+    root
+      .find('form[data-testhook-id="jenkins-0-name-form"]')
+      .simulate("submit");
+
+    updateField(
+      root.find('input[data-testhook-id="jenkins-0-name-form-field-0"]'),
+      "name",
+      "approve"
+    );
+    root
+      .find('form[data-testhook-id="jenkins-0-name-form"]')
+      .simulate("submit");
+    await waitFor(() => {
+      root.update();
+      expect(
+        root
+          .find('textarea[data-testhook-id="layout-json-form-field-0"]')
+          .text()
+      ).toContain("approve");
+    });
+
+    root
+      .find('input[data-testhook-id="make-approval-step"]')
+      .simulate("change", { target: { checked: true } });
+
+    root
+      .find('form[data-testhook-id="collector-edit-form"]')
+      .simulate("submit");
+    updateField(
+      root.find('input[data-testhook-id="collector-edit-form-field-0"]'),
+      "name",
+      "xlCollect"
+    );
+
+    updateField(
+      root.find('input[data-testhook-id="collector-edit-form-field-1"]'),
+      "uri",
+      "https://collect.org"
+    );
+
+    root
+      .find('form[data-testhook-id="collector-edit-form"]')
+      .simulate("submit");
+
+    expect(root).toMatchSnapshot();
+
     root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
 
     await waitFor(() => {
@@ -276,7 +394,6 @@ it("sign layout happy flow", async () => {
       expect(root.find(Modal).length >= 1).toBe(true);
     });
 
-    expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
     updateField(
       root.find('input[name="passphrase"]').first(),
       "passphrase",
@@ -288,7 +405,26 @@ it("sign layout happy flow", async () => {
       .simulate("submit");
 
     await waitFor(() => expect(mock.history.get.length).toBe(2));
-    await waitFor(() => expect(mock.history.post.length).toBe(2));
+    await waitFor(() => expect(mock.history.post.length).toBe(3));
+
+    expect(mock.history.post[0].data).toEqual(
+      "{\n" +
+        '  "layoutSegments": [\n' +
+        "    {\n" +
+        '      "name": "jenkins",\n' +
+        '      "steps": [\n' +
+        "        {\n" +
+        '          "name": "approve"\n' +
+        "        }\n" +
+        "      ]\n" +
+        "    }\n" +
+        "  ]\n" +
+        "}"
+    );
+
+    expect(mock.history.post[2].data).toEqual(
+      '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"type":"XLDEPLOY","name":"xlCollect","uri":"https://collect.org"}]}]'
+    );
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
     expect(mock.history.post[1].data).toBe(
