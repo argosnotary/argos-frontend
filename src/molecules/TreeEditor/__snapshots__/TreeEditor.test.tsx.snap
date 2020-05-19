@@ -63,9 +63,11 @@ exports[`TreeEditor onContextMenu node with context options, contextmenu must be
               "componentStyle": ComponentStyle {
                 "componentId": "sc-gzVnrw",
                 "isStatic": false,
-                "lastClassName": "kUkUh",
+                "lastClassName": "gvlNoR",
                 "rules": Array [
                   "
+  display: flex;
+  align-items: center;
   background-color: ",
                   [Function],
                   ";
@@ -96,10 +98,40 @@ exports[`TreeEditor onContextMenu node with context options, contextmenu must be
           onClick={[Function]}
         >
           <li
-            className="sc-gzVnrw kUkUh"
+            className="sc-gzVnrw gvlNoR"
             onClick={[Function]}
           >
-            Add child label
+            <styled.span>
+              <StyledComponent
+                forwardedComponent={
+                  Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "attrs": Array [],
+                    "componentStyle": ComponentStyle {
+                      "componentId": "sc-htoDjs",
+                      "isStatic": false,
+                      "lastClassName": "bZzhDu",
+                      "rules": Array [],
+                    },
+                    "displayName": "styled.span",
+                    "foldedComponentIds": Array [],
+                    "render": [Function],
+                    "styledComponentId": "sc-htoDjs",
+                    "target": "span",
+                    "toString": [Function],
+                    "warnTooManyClasses": [Function],
+                    "withComponent": [Function],
+                  }
+                }
+                forwardedRef={null}
+              >
+                <span
+                  className="sc-htoDjs bZzhDu"
+                >
+                  Add child label
+                </span>
+              </StyledComponent>
+            </styled.span>
           </li>
         </StyledComponent>
       </styled.li>
@@ -110,9 +142,9 @@ exports[`TreeEditor onContextMenu node with context options, contextmenu must be
               "$$typeof": Symbol(react.forward_ref),
               "attrs": Array [],
               "componentStyle": ComponentStyle {
-                "componentId": "sc-htoDjs",
+                "componentId": "sc-dnqmqq",
                 "isStatic": false,
-                "lastClassName": "htlLmw",
+                "lastClassName": "jJCKHP",
                 "rules": Array [
                   "
   border: 0;
@@ -127,7 +159,7 @@ exports[`TreeEditor onContextMenu node with context options, contextmenu must be
               "displayName": "styled.hr",
               "foldedComponentIds": Array [],
               "render": [Function],
-              "styledComponentId": "sc-htoDjs",
+              "styledComponentId": "sc-dnqmqq",
               "target": "hr",
               "toString": [Function],
               "warnTooManyClasses": [Function],
@@ -137,7 +169,7 @@ exports[`TreeEditor onContextMenu node with context options, contextmenu must be
           forwardedRef={null}
         >
           <hr
-            className="sc-htoDjs htlLmw"
+            className="sc-dnqmqq jJCKHP"
           />
         </StyledComponent>
       </styled.hr>
@@ -845,9 +877,9 @@ exports[`TreeEditor renders initial data correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-gqjmRU",
+            "componentId": "sc-fjdhpX",
             "isStatic": false,
-            "lastClassName": "kkNkaN",
+            "lastClassName": "jedYvy",
             "rules": Array [
               "
   height: 100vh;
@@ -864,7 +896,7 @@ exports[`TreeEditor renders initial data correctly 1`] = `
           "displayName": "styled.aside",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-gqjmRU",
+          "styledComponentId": "sc-fjdhpX",
           "target": "aside",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -874,7 +906,7 @@ exports[`TreeEditor renders initial data correctly 1`] = `
       forwardedRef={null}
     >
       <aside
-        className="sc-gqjmRU kkNkaN"
+        className="sc-fjdhpX jedYvy"
       >
         <styled.ul>
           <StyledComponent
@@ -883,9 +915,9 @@ exports[`TreeEditor renders initial data correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-iwsKbI",
+                  "componentId": "sc-VigVT",
                   "isStatic": false,
-                  "lastClassName": "kGIsiM",
+                  "lastClassName": "DDkSG",
                   "rules": Array [
                     "
   display: flex;
@@ -897,7 +929,7 @@ exports[`TreeEditor renders initial data correctly 1`] = `
                 "displayName": "styled.ul",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-iwsKbI",
+                "styledComponentId": "sc-VigVT",
                 "target": "ul",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -907,7 +939,7 @@ exports[`TreeEditor renders initial data correctly 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-iwsKbI kGIsiM"
+              className="sc-VigVT DDkSG"
             >
               <AddAdditionalRootNodes>
                 <styled.li
@@ -956,9 +988,9 @@ exports[`TreeEditor renders initial data correctly 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-gZMcBi",
+                                "componentId": "sc-jTzLTM",
                                 "isStatic": false,
-                                "lastClassName": "injDMq",
+                                "lastClassName": "eYliSP",
                                 "rules": Array [
                                   "
   display: inline-flex;
@@ -969,7 +1001,7 @@ exports[`TreeEditor renders initial data correctly 1`] = `
                               "displayName": "styled.div",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-gZMcBi",
+                              "styledComponentId": "sc-jTzLTM",
                               "target": "div",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -979,7 +1011,7 @@ exports[`TreeEditor renders initial data correctly 1`] = `
                           forwardedRef={null}
                         >
                           <div
-                            className="sc-gZMcBi injDMq"
+                            className="sc-jTzLTM eYliSP"
                           >
                             <AltPlusIcon
                               color="#1779ba"
@@ -3185,9 +3217,9 @@ exports[`TreeEditor renders initial data correctly without add base label 1`] = 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-gqjmRU",
+            "componentId": "sc-fjdhpX",
             "isStatic": false,
-            "lastClassName": "kkNkaN",
+            "lastClassName": "jedYvy",
             "rules": Array [
               "
   height: 100vh;
@@ -3204,7 +3236,7 @@ exports[`TreeEditor renders initial data correctly without add base label 1`] = 
           "displayName": "styled.aside",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-gqjmRU",
+          "styledComponentId": "sc-fjdhpX",
           "target": "aside",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -3214,7 +3246,7 @@ exports[`TreeEditor renders initial data correctly without add base label 1`] = 
       forwardedRef={null}
     >
       <aside
-        className="sc-gqjmRU kkNkaN"
+        className="sc-fjdhpX jedYvy"
       >
         <styled.ul>
           <StyledComponent
@@ -3223,9 +3255,9 @@ exports[`TreeEditor renders initial data correctly without add base label 1`] = 
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-iwsKbI",
+                  "componentId": "sc-VigVT",
                   "isStatic": false,
-                  "lastClassName": "kGIsiM",
+                  "lastClassName": "DDkSG",
                   "rules": Array [
                     "
   display: flex;
@@ -3237,7 +3269,7 @@ exports[`TreeEditor renders initial data correctly without add base label 1`] = 
                 "displayName": "styled.ul",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-iwsKbI",
+                "styledComponentId": "sc-VigVT",
                 "target": "ul",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -3247,7 +3279,7 @@ exports[`TreeEditor renders initial data correctly without add base label 1`] = 
             forwardedRef={null}
           >
             <ul
-              className="sc-iwsKbI kGIsiM"
+              className="sc-VigVT DDkSG"
             >
               <AddAdditionalRootNodes />
               <ParentNode
