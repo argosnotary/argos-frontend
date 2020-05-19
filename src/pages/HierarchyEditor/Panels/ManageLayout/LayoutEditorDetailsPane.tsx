@@ -19,7 +19,10 @@ import NotificationsList, {
   NotificationTypes
 } from "../../../../molecules/NotificationsList";
 import { Panel } from "../../../../molecules/Panel";
-import { DetailsPanelType, useLayoutEditorStore } from "./LayoutEditorStore";
+import {
+  DetailsPanelType,
+  useLayoutEditorStore
+} from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 import ApprovalConfigEditor from "./ApprovalConfigEditor";
 
@@ -71,10 +74,7 @@ const LayoutEditorDetailsPane: React.FC = () => {
       case DetailsPanelType.VALIDATION_ERRORS:
         return "Validation errors";
       case DetailsPanelType.STEP_DETAILS:
-        return (
-          "Edit step " +
-          editorStoreContext.state.selectedLayoutElement?.step?.name
-        );
+        return `Edit step ${editorStoreContext.state.selectedLayoutElement?.step?.name} configuration`;
     }
 
     return "";

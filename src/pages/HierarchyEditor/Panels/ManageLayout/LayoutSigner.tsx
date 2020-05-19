@@ -38,7 +38,7 @@ import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer"
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
-} from "./LayoutEditorStore";
+} from "../../../../stores/LayoutEditorStore";
 import { CryptoExceptionWarning } from "../../../../molecules/CryptoExceptionWarning";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
 

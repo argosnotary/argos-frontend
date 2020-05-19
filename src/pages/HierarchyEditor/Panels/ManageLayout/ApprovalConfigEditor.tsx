@@ -17,7 +17,7 @@ import React, { useEffect, useState, useContext } from "react";
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
-} from "./LayoutEditorStore";
+} from "../../../../stores/LayoutEditorStore";
 import GenericForm, {
   IGenericFormSchema
 } from "../../../../organisms/GenericForm";
@@ -41,6 +41,15 @@ import {
 import { PlusIcon } from "../../../../atoms/Icons";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
+import FlexRow from "../../../../atoms/FlexRow";
+
+const CustomFlexRow = styled(FlexRow)`
+  align-items: center;
+`;
+
+const ApprovalCheckbox = styled.input`
+  margin-right: 1rem;
+`;
 
 const CollectorsContainer = styled(CollectionContainer)`
   min-height: 0;
@@ -288,9 +297,8 @@ const ApprovalConfigEditor: React.FC = () => {
           </CollectorsContainer>
         </>
       ) : (
-        <>
-          <label>Approval Step</label>
-          <input
+        <CustomFlexRow>
+          <ApprovalCheckbox
             data-testhook-id={"make-approval-step"}
             type={"checkbox"}
             checked={approvalStep}
@@ -299,7 +307,8 @@ const ApprovalConfigEditor: React.FC = () => {
               setApprovalStep(true);
             }}
           />
-        </>
+          <label>Approval Step</label>
+        </CustomFlexRow>
       )}
     </>
   );

@@ -17,18 +17,19 @@
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
-} from "./LayoutEditorStore";
+} from "../stores/LayoutEditorStore";
 import React, { useContext } from "react";
-import Segment from "./Segment";
+import Segment from "../atoms/Segment";
 import styled, { ThemeContext } from "styled-components";
-import { PlusIcon } from "../../../../atoms/Icons";
+import { PlusIcon } from "../atoms/Icons";
 import {
   CollectionContainer,
   CollectionContainerButton,
   CollectionContainerRow,
   CollectionContainerTitle,
   CollectionContainerList
-} from "../../../../atoms/Collection";
+} from "../atoms/Collection";
+import { ILayoutSegment } from "../interfaces/ILayout";
 
 const SegmentsContainerSection = styled(CollectionContainer)`
   flex-direction: column;
@@ -84,9 +85,11 @@ const SegmentsContainer: React.FC = () => {
         </CollectionContainerRow>
         <CollectionContainerList>
           {layout.layoutSegments
-            ? layout.layoutSegments.map((segment, index) => (
-                <Segment index={index} key={segment.name} segment={segment} />
-              ))
+            ? layout.layoutSegments.map(
+                (segment: ILayoutSegment, index: number) => (
+                  <Segment index={index} key={segment.name} segment={segment} />
+                )
+              )
             : null}
         </CollectionContainerList>
       </SegmentsContainerSection>

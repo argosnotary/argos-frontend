@@ -15,21 +15,21 @@
  */
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { ILayoutSegment } from "../../../../interfaces/ILayout";
+import InputErrorLabel from "./InputErrorLabel";
+import Input from "./Input";
 import {
-  LayoutEditorActionType,
-  useLayoutEditorStore
-} from "./LayoutEditorStore";
-import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
-import {
-  ActionIconsContainer,
   BaseActionButton,
-  CollectionContainerSpan
-} from "../../../../atoms/Collection";
-import LayoutElementNameEditor from "./LayoutElementNameEditor";
-import InputErrorLabel from "../../../../atoms/InputErrorLabel";
-import Input from "../../../../atoms/Input";
-import StepsContainer from "./StepsContainer";
+  CollectionContainerSpan,
+  ActionIconsContainer
+} from "./Collection";
+import { ILayoutSegment } from "../interfaces/ILayout";
+import {
+  useLayoutEditorStore,
+  LayoutEditorActionType
+} from "../stores/LayoutEditorStore";
+import LayoutElementNameEditor from "../pages/HierarchyEditor/Panels/ManageLayout/LayoutElementNameEditor";
+import RemoveIcon from "./Icons/RemoveIcon";
+import StepsContainer from "../molecules/StepsContainer";
 
 const SegmentTitle = styled.header`
   border: 1px solid transparent;
@@ -99,7 +99,7 @@ const Segment: React.FC<ISegmentContainerProps> = ({ segment, index }) => {
     return (
       editorStoreContext.state.layout.layoutSegments &&
       editorStoreContext.state.layout.layoutSegments.findIndex(
-        seg => seg.name === segmentName
+        (seg: ILayoutSegment) => seg.name === segmentName
       ) >= 0
     );
   };

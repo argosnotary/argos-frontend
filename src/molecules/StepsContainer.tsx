@@ -17,18 +17,18 @@
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
-} from "./LayoutEditorStore";
+} from "../stores/LayoutEditorStore";
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { PlusIcon } from "../../../../atoms/Icons";
+import { PlusIcon } from "../atoms/Icons";
 import {
   CollectionContainer,
   CollectionContainerButton,
   CollectionContainerRow,
   CollectionContainerTitle
-} from "../../../../atoms/Collection";
-import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
-import Step from "./Step";
+} from "../atoms/Collection";
+import { ILayoutSegment, IStep } from "../interfaces/ILayout";
+import Step from "../atoms/Step";
 
 const StepsContainerSection = styled(CollectionContainer)`
   flex-direction: column;

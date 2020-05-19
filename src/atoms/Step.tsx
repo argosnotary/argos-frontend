@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 import React, { useContext } from "react";
-import { ILayoutSegment, IStep } from "../../../../interfaces/ILayout";
-import EditIcon from "../../../../atoms/Icons/EditIcon";
-import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import styled, { ThemeContext } from "styled-components";
+import Input from "./Input";
+import InputErrorLabel from "./InputErrorLabel";
 import {
-  ActionIconsContainer,
   BaseActionButton,
-  CollectionContainerSpan
-} from "../../../../atoms/Collection";
-import LayoutElementNameEditor from "./LayoutElementNameEditor";
+  CollectionContainerSpan,
+  ActionIconsContainer
+} from "./Collection";
+import { ILayoutSegment, IStep } from "../interfaces/ILayout";
 import {
-  LayoutEditorActionType,
-  useLayoutEditorStore
-} from "./LayoutEditorStore";
-import Input from "../../../../atoms/Input";
-import InputErrorLabel from "../../../../atoms/InputErrorLabel";
+  useLayoutEditorStore,
+  LayoutEditorActionType
+} from "../stores/LayoutEditorStore";
+import LayoutElementNameEditor from "../pages/HierarchyEditor/Panels/ManageLayout/LayoutElementNameEditor";
+import EditIcon from "./Icons/EditIcon";
+import RemoveIcon from "./Icons/RemoveIcon";
 
 interface IStepTitleProps {
   active: boolean;

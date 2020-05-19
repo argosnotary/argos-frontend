@@ -19,11 +19,11 @@ import {
   ILayoutSegment,
   ILayoutValidationMessage,
   IStep
-} from "../../../../interfaces/ILayout";
+} from "../interfaces/ILayout";
 import {
   IApprovalConfig,
   IArtifactCollector
-} from "../../../../interfaces/IApprovalConfig";
+} from "../interfaces/IApprovalConfig";
 
 export enum DetailsPanelType {
   EMPTY,

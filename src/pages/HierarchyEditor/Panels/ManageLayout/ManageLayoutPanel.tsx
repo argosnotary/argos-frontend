@@ -26,12 +26,12 @@ import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { Panel } from "../../../../molecules/Panel";
 import { cryptoAvailable } from "../../../../security";
 import DataRequest from "../../../../types/DataRequest";
-import SegmentsContainer from "./SegmentsContainer";
+import SegmentsContainer from "../../../../molecules/SegmentsContainer";
 import {
   createLayoutEditorStoreContext,
   LayoutEditorActionType,
   LayoutEditorStoreContext
-} from "./LayoutEditorStore";
+} from "../../../../stores/LayoutEditorStore";
 import LayoutJsonEditor from "./LayoutJsonEditor";
 import LayoutSigner from "./LayoutSigner";
 import LayoutEditorDetailsPane from "./LayoutEditorDetailsPane";

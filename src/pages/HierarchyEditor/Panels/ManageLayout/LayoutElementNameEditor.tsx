@@ -21,7 +21,7 @@ import { FormPermissions } from "../../../../types/FormPermission";
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
-} from "./LayoutEditorStore";
+} from "../../../../stores/LayoutEditorStore";
 
 interface IFormFormValues {
   name: string;
