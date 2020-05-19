@@ -13,14 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useEffect, useState, useContext } from "react";
-import {
-  LayoutEditorActionType,
-  useLayoutEditorStore
-} from "../../../../stores/LayoutEditorStore";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../../organisms/GenericForm";
+
+import React, { useContext, useEffect, useState } from "react";
 import { FormPermissions } from "../../../../types/FormPermission";
 import {
   ArtifactCollectorType,
@@ -29,19 +23,26 @@ import {
 import { isWebUri } from "valid-url";
 import styled, { ThemeContext } from "styled-components";
 import {
-  CollectionContainer,
-  CollectionContainerTitle,
-  CollectionContainerButton,
-  CollectionContainerRow,
-  CollectionContainerList,
   ActionIconsContainer,
   BaseActionButton,
-  CollectionContainerSpan
+  CollectionContainer,
+  CollectionContainerButton,
+  CollectionContainerList,
+  CollectionContainerRow,
+  CollectionContainerSpan,
+  CollectionContainerTitle
 } from "../../../../atoms/Collection";
 import { PlusIcon } from "../../../../atoms/Icons";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import FlexRow from "../../../../atoms/FlexRow";
+import GenericForm, {
+  IGenericFormSchema
+} from "../../../../organisms/GenericForm";
+import {
+  LayoutEditorActionType,
+  useLayoutEditorStore
+} from "../../../../stores/LayoutEditorStore";
 
 const CustomFlexRow = styled(FlexRow)`
   align-items: center;
@@ -115,9 +116,10 @@ const RemoveCollectorButton = styled(BaseActionButton)``;
 interface IFormFormValues {
   name: string;
   uri: string;
+  applicationName?: string;
 }
 
-const approvalConfigFormSchema: IGenericFormSchema = [
+const defaultApprovalConfigFormSchema: IGenericFormSchema = [
   {
     labelValue: "Name",
     name: "name",
@@ -130,7 +132,27 @@ const approvalConfigFormSchema: IGenericFormSchema = [
   }
 ];
 
-const validateApprovalConfigForm = (values: IFormFormValues) => {
+const getApprovalConfigFormSchema = (
+  type: ArtifactCollectorType
+): IGenericFormSchema => {
+  if (type === ArtifactCollectorType.XLDEPLOY) {
+    return [
+      ...defaultApprovalConfigFormSchema,
+      {
+        labelValue: "Application Name",
+        name: "applicationName",
+        formType: "text"
+      }
+    ];
+  }
+
+  return [];
+};
+
+const validateApprovalConfigForm = (
+  values: IFormFormValues,
+  type: ArtifactCollectorType
+) => {
   const errors = {} as IFormFormValues;
   if (!values.name) {
     errors.name = "Please fill in a name.";
@@ -144,7 +166,26 @@ const validateApprovalConfigForm = (values: IFormFormValues) => {
   } else if (isWebUri(values.uri) === undefined) {
     errors.uri = "Invalid url";
   }
+
+  if (type === ArtifactCollectorType.XLDEPLOY) {
+    if (!values.applicationName) {
+      errors.applicationName = "Please fill in a application name.";
+    }
+  }
+
   return errors;
+};
+
+const getInitialValues = (collector: IArtifactCollector) => {
+  if (collector.type === ArtifactCollectorType.XLDEPLOY) {
+    return {
+      name: collector.name,
+      uri: collector.uri,
+      applicationName: collector.context.applicationName
+    };
+  }
+
+  return {};
 };
 
 const ApprovalConfigEditor: React.FC = () => {
@@ -182,6 +223,13 @@ const ApprovalConfigEditor: React.FC = () => {
   ): void => {
     artifactCollector.uri = formValues.uri;
     artifactCollector.name = formValues.name;
+
+    if (artifactCollector.type === ArtifactCollectorType.XLDEPLOY) {
+      artifactCollector.context = {
+        applicationName: formValues.applicationName
+      };
+    }
+
     if (addMode) {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.ADD_ARTIFACT_COLLECTOR,
@@ -208,7 +256,8 @@ const ApprovalConfigEditor: React.FC = () => {
     collectors.push({
       type: ArtifactCollectorType.XLDEPLOY,
       name: "",
-      uri: ""
+      uri: "",
+      context: { applicationName: "" }
     });
     setCollectors([...collectors]);
     setEditIndex(collectors.length - 1);
@@ -220,13 +269,15 @@ const ApprovalConfigEditor: React.FC = () => {
       <FormContainer>
         <GenericForm
           dataTesthookId={"collector-edit-form"}
-          schema={approvalConfigFormSchema}
+          schema={getApprovalConfigFormSchema(collector.type)}
           permission={FormPermissions.EDIT}
           isLoading={false}
-          validate={validateApprovalConfigForm}
+          validate={values =>
+            validateApprovalConfigForm(values, collector.type)
+          }
           onCancel={onCancel}
           onSubmit={form => onUpdateApprovalConfig(form, collector)}
-          initialValues={{ name: collector.name, uri: collector.uri }}
+          initialValues={getInitialValues(collector)}
           cancellationLabel={"Cancel"}
           confirmationLabel={"Save"}
           autoFocus={true}
