@@ -403,7 +403,7 @@ exports[`renders correctly with existing layout 1`] = `
                             },
                             "displayName": "Styled(styled.section)",
                             "foldedComponentIds": Array [
-                              "sc-gqjmRU",
+                              "sc-jTzLTM",
                             ],
                             "render": [Function],
                             "styledComponentId": "sc-Rmtcm",
@@ -416,7 +416,7 @@ exports[`renders correctly with existing layout 1`] = `
                         forwardedRef={null}
                       >
                         <section
-                          className="sc-gqjmRU sc-Rmtcm YiEyn"
+                          className="sc-jTzLTM sc-Rmtcm YiEyn"
                         >
                           <styled.div>
                             <StyledComponent
@@ -425,9 +425,9 @@ exports[`renders correctly with existing layout 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jzJRlG",
+                                    "componentId": "sc-kAzzGY",
                                     "isStatic": false,
-                                    "lastClassName": "cxVXxp",
+                                    "lastClassName": "crApAj",
                                     "rules": Array [
                                       "
   display: flex;
@@ -440,7 +440,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   "displayName": "styled.div",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jzJRlG",
+                                  "styledComponentId": "sc-kAzzGY",
                                   "target": "div",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -450,7 +450,7 @@ exports[`renders correctly with existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <div
-                                className="sc-jzJRlG cxVXxp"
+                                className="sc-kAzzGY crApAj"
                               >
                                 <Styled(styled.header)>
                                   <StyledComponent
@@ -485,7 +485,7 @@ exports[`renders correctly with existing layout 1`] = `
                                         },
                                         "displayName": "Styled(styled.header)",
                                         "foldedComponentIds": Array [
-                                          "sc-cSHVUG",
+                                          "sc-chPdSV",
                                         ],
                                         "render": [Function],
                                         "styledComponentId": "sc-bRBYWo",
@@ -498,7 +498,7 @@ exports[`renders correctly with existing layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <header
-                                      className="sc-cSHVUG sc-bRBYWo dyXggM"
+                                      className="sc-chPdSV sc-bRBYWo dyXggM"
                                     >
                                       Segments
                                     </header>
@@ -537,7 +537,7 @@ exports[`renders correctly with existing layout 1`] = `
                                         },
                                         "displayName": "Styled(styled.button)",
                                         "foldedComponentIds": Array [
-                                          "sc-fjdhpX",
+                                          "sc-cSHVUG",
                                         ],
                                         "render": [Function],
                                         "styledComponentId": "sc-hzDkRC",
@@ -551,7 +551,7 @@ exports[`renders correctly with existing layout 1`] = `
                                     onClick={[Function]}
                                   >
                                     <button
-                                      className="sc-fjdhpX sc-hzDkRC bJmeCP"
+                                      className="sc-cSHVUG sc-hzDkRC bJmeCP"
                                       data-testhook-id="add-segment"
                                       onClick={[Function]}
                                     >
@@ -588,9 +588,9 @@ exports[`renders correctly with existing layout 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-kAzzGY",
+                                    "componentId": "sc-kgoBCf",
                                     "isStatic": false,
-                                    "lastClassName": "gpXzbO",
+                                    "lastClassName": "HSZXE",
                                     "rules": Array [
                                       "
   display: flex;
@@ -602,7 +602,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   "displayName": "styled.ul",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-kAzzGY",
+                                  "styledComponentId": "sc-kgoBCf",
                                   "target": "ul",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -612,7 +612,7 @@ exports[`renders correctly with existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <ul
-                                className="sc-kAzzGY gpXzbO"
+                                className="sc-kgoBCf HSZXE"
                               >
                                 <Segment
                                   index={0}
@@ -673,7 +673,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                 "componentStyle": ComponentStyle {
                                                   "componentId": "sc-jlyJG",
                                                   "isStatic": false,
-                                                  "lastClassName": "mZUEn",
+                                                  "lastClassName": "bqNltO",
                                                   "rules": Array [
                                                     "
   border: 1px solid transparent;
@@ -694,13 +694,13 @@ exports[`renders correctly with existing layout 1`] = `
   }
 
   ",
-                                                    ".sc-kgoBCf",
+                                                    ".sc-VigVT",
                                                     " {
     margin: 0;
   }
 
   ",
-                                                    ".sc-jKJlTe",
+                                                    ".sc-gqjmRU",
                                                     " {
     margin: 0.5rem 0 0;
   }
@@ -729,7 +729,7 @@ exports[`renders correctly with existing layout 1`] = `
                                             onClick={[Function]}
                                           >
                                             <header
-                                              className="sc-jlyJG mZUEn"
+                                              className="sc-jlyJG bqNltO"
                                               data-testhook-id="segment0-edit"
                                               onClick={[Function]}
                                             >
@@ -740,9 +740,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                       "$$typeof": Symbol(react.forward_ref),
                                                       "attrs": Array [],
                                                       "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-chPdSV",
+                                                        "componentId": "sc-kGXeez",
                                                         "isStatic": false,
-                                                        "lastClassName": "kItouk",
+                                                        "lastClassName": "NdeQu",
                                                         "rules": Array [
                                                           "
   white-space: nowrap;
@@ -754,7 +754,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                       "displayName": "styled.span",
                                                       "foldedComponentIds": Array [],
                                                       "render": [Function],
-                                                      "styledComponentId": "sc-chPdSV",
+                                                      "styledComponentId": "sc-kGXeez",
                                                       "target": "span",
                                                       "toString": [Function],
                                                       "warnTooManyClasses": [Function],
@@ -764,7 +764,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                   forwardedRef={null}
                                                 >
                                                   <span
-                                                    className="sc-chPdSV kItouk"
+                                                    className="sc-kGXeez NdeQu"
                                                   >
                                                     jenkins
                                                   </span>
@@ -777,9 +777,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                       "$$typeof": Symbol(react.forward_ref),
                                                       "attrs": Array [],
                                                       "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-VigVT",
+                                                        "componentId": "sc-fjdhpX",
                                                         "isStatic": false,
-                                                        "lastClassName": "cQowiX",
+                                                        "lastClassName": "jJAgek",
                                                         "rules": Array [
                                                           "
   display: flex;
@@ -790,7 +790,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                       "displayName": "styled.div",
                                                       "foldedComponentIds": Array [],
                                                       "render": [Function],
-                                                      "styledComponentId": "sc-VigVT",
+                                                      "styledComponentId": "sc-fjdhpX",
                                                       "target": "div",
                                                       "toString": [Function],
                                                       "warnTooManyClasses": [Function],
@@ -800,7 +800,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                   forwardedRef={null}
                                                 >
                                                   <div
-                                                    className="sc-VigVT cQowiX"
+                                                    className="sc-fjdhpX jJAgek"
                                                   >
                                                     <Styled(styled.button)
                                                       data-testhook-id="segment0-delete"
@@ -831,7 +831,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                             },
                                                             "displayName": "Styled(styled.button)",
                                                             "foldedComponentIds": Array [
-                                                              "sc-jTzLTM",
+                                                              "sc-jzJRlG",
                                                             ],
                                                             "render": [Function],
                                                             "styledComponentId": "sc-gipzik",
@@ -845,7 +845,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                         onClick={[Function]}
                                                       >
                                                         <button
-                                                          className="sc-jTzLTM sc-gipzik hUPiAy"
+                                                          className="sc-jzJRlG sc-gipzik hUPiAy"
                                                           data-testhook-id="segment0-delete"
                                                           onClick={[Function]}
                                                         >
@@ -927,7 +927,7 @@ exports[`renders correctly with existing layout 1`] = `
                                               },
                                               "displayName": "Styled(styled.section)",
                                               "foldedComponentIds": Array [
-                                                "sc-gqjmRU",
+                                                "sc-jTzLTM",
                                               ],
                                               "render": [Function],
                                               "styledComponentId": "sc-jDwBTQ",
@@ -940,7 +940,7 @@ exports[`renders correctly with existing layout 1`] = `
                                           forwardedRef={null}
                                         >
                                           <section
-                                            className="sc-gqjmRU sc-jDwBTQ iZURLY"
+                                            className="sc-jTzLTM sc-jDwBTQ iZURLY"
                                           >
                                             <styled.div>
                                               <StyledComponent
@@ -949,9 +949,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                     "$$typeof": Symbol(react.forward_ref),
                                                     "attrs": Array [],
                                                     "componentStyle": ComponentStyle {
-                                                      "componentId": "sc-jzJRlG",
+                                                      "componentId": "sc-kAzzGY",
                                                       "isStatic": false,
-                                                      "lastClassName": "cxVXxp",
+                                                      "lastClassName": "crApAj",
                                                       "rules": Array [
                                                         "
   display: flex;
@@ -964,7 +964,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                     "displayName": "styled.div",
                                                     "foldedComponentIds": Array [],
                                                     "render": [Function],
-                                                    "styledComponentId": "sc-jzJRlG",
+                                                    "styledComponentId": "sc-kAzzGY",
                                                     "target": "div",
                                                     "toString": [Function],
                                                     "warnTooManyClasses": [Function],
@@ -974,7 +974,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                 forwardedRef={null}
                                               >
                                                 <div
-                                                  className="sc-jzJRlG cxVXxp"
+                                                  className="sc-kAzzGY crApAj"
                                                 >
                                                   <Styled(styled.header)>
                                                     <StyledComponent
@@ -1007,7 +1007,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                           },
                                                           "displayName": "Styled(styled.header)",
                                                           "foldedComponentIds": Array [
-                                                            "sc-cSHVUG",
+                                                            "sc-chPdSV",
                                                           ],
                                                           "render": [Function],
                                                           "styledComponentId": "sc-gPEVay",
@@ -1020,7 +1020,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                       forwardedRef={null}
                                                     >
                                                       <header
-                                                        className="sc-cSHVUG sc-gPEVay kxjIwe"
+                                                        className="sc-chPdSV sc-gPEVay kxjIwe"
                                                       >
                                                         Steps
                                                       </header>
@@ -1063,7 +1063,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                           },
                                                           "displayName": "Styled(styled.button)",
                                                           "foldedComponentIds": Array [
-                                                            "sc-fjdhpX",
+                                                            "sc-cSHVUG",
                                                           ],
                                                           "render": [Function],
                                                           "styledComponentId": "sc-iRbamj",
@@ -1077,7 +1077,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                       onClick={[Function]}
                                                     >
                                                       <button
-                                                        className="sc-fjdhpX sc-iRbamj eoEveZ"
+                                                        className="sc-cSHVUG sc-iRbamj eoEveZ"
                                                         data-testhook-id="segment0-add-step"
                                                         onClick={[Function]}
                                                       >
@@ -1177,7 +1177,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                             "componentStyle": ComponentStyle {
                                                               "componentId": "sc-jWBwVP",
                                                               "isStatic": false,
-                                                              "lastClassName": "cScZKN",
+                                                              "lastClassName": "fYAbyO",
                                                               "rules": Array [
                                                                 "
   border: 1px solid
@@ -1200,13 +1200,13 @@ exports[`renders correctly with existing layout 1`] = `
   }
 
   ",
-                                                                ".sc-kgoBCf",
+                                                                ".sc-VigVT",
                                                                 " {
     margin: 0;
   }
 
   ",
-                                                                ".sc-jKJlTe",
+                                                                ".sc-gqjmRU",
                                                                 " {
     margin: 0.5rem 0 0;
   }
@@ -1234,7 +1234,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                         forwardedRef={null}
                                                       >
                                                         <header
-                                                          className="sc-jWBwVP cScZKN"
+                                                          className="sc-jWBwVP fYAbyO"
                                                         >
                                                           <styled.span>
                                                             <StyledComponent
@@ -1243,9 +1243,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                                   "$$typeof": Symbol(react.forward_ref),
                                                                   "attrs": Array [],
                                                                   "componentStyle": ComponentStyle {
-                                                                    "componentId": "sc-chPdSV",
+                                                                    "componentId": "sc-kGXeez",
                                                                     "isStatic": false,
-                                                                    "lastClassName": "kItouk",
+                                                                    "lastClassName": "NdeQu",
                                                                     "rules": Array [
                                                                       "
   white-space: nowrap;
@@ -1257,7 +1257,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                                   "displayName": "styled.span",
                                                                   "foldedComponentIds": Array [],
                                                                   "render": [Function],
-                                                                  "styledComponentId": "sc-chPdSV",
+                                                                  "styledComponentId": "sc-kGXeez",
                                                                   "target": "span",
                                                                   "toString": [Function],
                                                                   "warnTooManyClasses": [Function],
@@ -1267,7 +1267,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                               forwardedRef={null}
                                                             >
                                                               <span
-                                                                className="sc-chPdSV kItouk"
+                                                                className="sc-kGXeez NdeQu"
                                                               >
                                                                 approve
                                                               </span>
@@ -1280,9 +1280,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                                   "$$typeof": Symbol(react.forward_ref),
                                                                   "attrs": Array [],
                                                                   "componentStyle": ComponentStyle {
-                                                                    "componentId": "sc-VigVT",
+                                                                    "componentId": "sc-fjdhpX",
                                                                     "isStatic": false,
-                                                                    "lastClassName": "cQowiX",
+                                                                    "lastClassName": "jJAgek",
                                                                     "rules": Array [
                                                                       "
   display: flex;
@@ -1293,7 +1293,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                                   "displayName": "styled.div",
                                                                   "foldedComponentIds": Array [],
                                                                   "render": [Function],
-                                                                  "styledComponentId": "sc-VigVT",
+                                                                  "styledComponentId": "sc-fjdhpX",
                                                                   "target": "div",
                                                                   "toString": [Function],
                                                                   "warnTooManyClasses": [Function],
@@ -1303,7 +1303,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                               forwardedRef={null}
                                                             >
                                                               <div
-                                                                className="sc-VigVT cQowiX"
+                                                                className="sc-fjdhpX jJAgek"
                                                               >
                                                                 <Styled(styled.button)
                                                                   data-testhook-id="jenkins-0-select-step"
@@ -1334,7 +1334,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                                         },
                                                                         "displayName": "Styled(styled.button)",
                                                                         "foldedComponentIds": Array [
-                                                                          "sc-jTzLTM",
+                                                                          "sc-jzJRlG",
                                                                         ],
                                                                         "render": [Function],
                                                                         "styledComponentId": "sc-cMljjf",
@@ -1348,7 +1348,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                                     onClick={[Function]}
                                                                   >
                                                                     <button
-                                                                      className="sc-jTzLTM sc-cMljjf bolPsX"
+                                                                      className="sc-jzJRlG sc-cMljjf bolPsX"
                                                                       data-testhook-id="jenkins-0-select-step"
                                                                       onClick={[Function]}
                                                                     >
@@ -1401,7 +1401,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                                         },
                                                                         "displayName": "Styled(styled.button)",
                                                                         "foldedComponentIds": Array [
-                                                                          "sc-jTzLTM",
+                                                                          "sc-jzJRlG",
                                                                         ],
                                                                         "render": [Function],
                                                                         "styledComponentId": "sc-jAaTju",
@@ -1415,7 +1415,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                                     onClick={[Function]}
                                                                   >
                                                                     <button
-                                                                      className="sc-jTzLTM sc-jAaTju kIQGJX"
+                                                                      className="sc-jzJRlG sc-jAaTju kIQGJX"
                                                                       data-testhook-id="jenkins-0-delete-step"
                                                                       onClick={[Function]}
                                                                     >
@@ -1473,9 +1473,9 @@ exports[`renders correctly with existing layout 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-hZSUBg",
+                          "componentId": "sc-iuJeZd",
                           "isStatic": false,
-                          "lastClassName": "keKaWG",
+                          "lastClassName": "hJHFef",
                           "rules": Array [
                             "
   padding: 0;
@@ -1496,7 +1496,7 @@ exports[`renders correctly with existing layout 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-hZSUBg",
+                        "styledComponentId": "sc-iuJeZd",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -1506,7 +1506,7 @@ exports[`renders correctly with existing layout 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-hZSUBg keKaWG"
+                      className="sc-htpNat sc-iuJeZd hJHFef"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
@@ -1602,7 +1602,7 @@ exports[`renders correctly with existing layout 1`] = `
                               innerRef={
                                 Object {
                                   "current": <textarea
-                                    class="sc-dxgOiQ doXLWY"
+                                    class="sc-ckVGcZ gmOKFw"
                                     data-testhook-id="layout-json-form-field-0"
                                     height="25rem"
                                     name="layout"
@@ -1652,9 +1652,9 @@ exports[`renders correctly with existing layout 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-ckVGcZ",
+                                        "componentId": "sc-jKJlTe",
                                         "isStatic": false,
-                                        "lastClassName": "bxAWbg",
+                                        "lastClassName": "cJqkLF",
                                         "rules": Array [
                                           "
   display: flex;
@@ -1665,7 +1665,7 @@ exports[`renders correctly with existing layout 1`] = `
                                       "displayName": "styled.div",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-ckVGcZ",
+                                      "styledComponentId": "sc-jKJlTe",
                                       "target": "div",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -1675,7 +1675,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   forwardedRef={null}
                                 >
                                   <div
-                                    className="sc-ckVGcZ bxAWbg"
+                                    className="sc-jKJlTe cJqkLF"
                                   >
                                     <styled.label>
                                       <StyledComponent
@@ -1684,9 +1684,9 @@ exports[`renders correctly with existing layout 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-kGXeez",
+                                              "componentId": "sc-kpOJdX",
                                               "isStatic": false,
-                                              "lastClassName": "jvxjlk",
+                                              "lastClassName": "iYzRxv",
                                               "rules": Array [
                                                 "
   font-size: 0.875rem;
@@ -1699,7 +1699,7 @@ exports[`renders correctly with existing layout 1`] = `
                                             "displayName": "styled.label",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-kGXeez",
+                                            "styledComponentId": "sc-kpOJdX",
                                             "target": "label",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -1709,7 +1709,7 @@ exports[`renders correctly with existing layout 1`] = `
                                         forwardedRef={null}
                                       >
                                         <label
-                                          className="sc-kGXeez jvxjlk"
+                                          className="sc-kpOJdX iYzRxv"
                                         >
                                           Layout*
                                         </label>
@@ -1746,9 +1746,9 @@ exports[`renders correctly with existing layout 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-dxgOiQ",
+                                              "componentId": "sc-ckVGcZ",
                                               "isStatic": false,
-                                              "lastClassName": "doXLWY",
+                                              "lastClassName": "gmOKFw",
                                               "rules": Array [
                                                 "
   ",
@@ -1793,7 +1793,7 @@ exports[`renders correctly with existing layout 1`] = `
                                             "displayName": "styled.textarea",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-dxgOiQ",
+                                            "styledComponentId": "sc-ckVGcZ",
                                             "target": "textarea",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -1803,7 +1803,7 @@ exports[`renders correctly with existing layout 1`] = `
                                         forwardedRef={
                                           Object {
                                             "current": <textarea
-                                              class="sc-dxgOiQ doXLWY"
+                                              class="sc-ckVGcZ gmOKFw"
                                               data-testhook-id="layout-json-form-field-0"
                                               height="25rem"
                                               name="layout"
@@ -1847,7 +1847,7 @@ exports[`renders correctly with existing layout 1`] = `
 }"
                                       >
                                         <textarea
-                                          className="sc-dxgOiQ doXLWY"
+                                          className="sc-ckVGcZ gmOKFw"
                                           data-testhook-id="layout-json-form-field-0"
                                           disabled={false}
                                           height="25rem"
@@ -2143,7 +2143,7 @@ exports[`renders correctly with existing layout 1`] = `
   <LayoutEditorDetailsPane>
     <Panel
       last={true}
-      title="Edit step approve"
+      title="Edit step approve configuration"
       width="37.5vw"
     >
       <styled.section
@@ -2268,7 +2268,7 @@ exports[`renders correctly with existing layout 1`] = `
                       <p
                         className="sc-dnqmqq jLpowZ"
                       >
-                        Edit step approve
+                        Edit step approve configuration
                       </p>
                     </StyledComponent>
                   </styled.p>
@@ -2335,9 +2335,9 @@ exports[`renders correctly with existing layout 1`] = `
                             "$$typeof": Symbol(react.forward_ref),
                             "attrs": Array [],
                             "componentStyle": ComponentStyle {
-                              "componentId": "sc-kgAjT",
+                              "componentId": "sc-ksYbfQ",
                               "isStatic": false,
-                              "lastClassName": "hYJfCL",
+                              "lastClassName": "DFzZQ",
                               "rules": Array [
                                 "
   margin: 1rem 0 1rem;
@@ -2361,10 +2361,10 @@ exports[`renders correctly with existing layout 1`] = `
                             },
                             "displayName": "Styled(styled.section)",
                             "foldedComponentIds": Array [
-                              "sc-gqjmRU",
+                              "sc-jTzLTM",
                             ],
                             "render": [Function],
-                            "styledComponentId": "sc-kgAjT",
+                            "styledComponentId": "sc-ksYbfQ",
                             "target": "section",
                             "toString": [Function],
                             "warnTooManyClasses": [Function],
@@ -2374,7 +2374,7 @@ exports[`renders correctly with existing layout 1`] = `
                         forwardedRef={null}
                       >
                         <section
-                          className="sc-gqjmRU sc-kgAjT hYJfCL"
+                          className="sc-jTzLTM sc-ksYbfQ DFzZQ"
                         >
                           <styled.div>
                             <StyledComponent
@@ -2383,9 +2383,9 @@ exports[`renders correctly with existing layout 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jzJRlG",
+                                    "componentId": "sc-kAzzGY",
                                     "isStatic": false,
-                                    "lastClassName": "cxVXxp",
+                                    "lastClassName": "crApAj",
                                     "rules": Array [
                                       "
   display: flex;
@@ -2398,7 +2398,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   "displayName": "styled.div",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jzJRlG",
+                                  "styledComponentId": "sc-kAzzGY",
                                   "target": "div",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -2408,7 +2408,7 @@ exports[`renders correctly with existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <div
-                                className="sc-jzJRlG cxVXxp"
+                                className="sc-kAzzGY crApAj"
                               >
                                 <Styled(styled.header)>
                                   <StyledComponent
@@ -2417,9 +2417,9 @@ exports[`renders correctly with existing layout 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-cJSrbW",
+                                          "componentId": "sc-hmzhuo",
                                           "isStatic": false,
-                                          "lastClassName": "belJRW",
+                                          "lastClassName": "iBDszQ",
                                           "rules": Array [
                                             "
   position: relative;
@@ -2443,10 +2443,10 @@ exports[`renders correctly with existing layout 1`] = `
                                         },
                                         "displayName": "Styled(styled.header)",
                                         "foldedComponentIds": Array [
-                                          "sc-cSHVUG",
+                                          "sc-chPdSV",
                                         ],
                                         "render": [Function],
-                                        "styledComponentId": "sc-cJSrbW",
+                                        "styledComponentId": "sc-hmzhuo",
                                         "target": "header",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -2456,7 +2456,7 @@ exports[`renders correctly with existing layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <header
-                                      className="sc-cSHVUG sc-cJSrbW belJRW"
+                                      className="sc-chPdSV sc-hmzhuo iBDszQ"
                                     >
                                       Approval collectors
                                     </header>
@@ -2473,9 +2473,9 @@ exports[`renders correctly with existing layout 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-ksYbfQ",
+                                          "componentId": "sc-frDJqD",
                                           "isStatic": false,
-                                          "lastClassName": "kOVpFT",
+                                          "lastClassName": "iLonym",
                                           "rules": Array [
                                             "
   position: relative;
@@ -2495,10 +2495,10 @@ exports[`renders correctly with existing layout 1`] = `
                                         },
                                         "displayName": "Styled(styled.button)",
                                         "foldedComponentIds": Array [
-                                          "sc-fjdhpX",
+                                          "sc-cSHVUG",
                                         ],
                                         "render": [Function],
-                                        "styledComponentId": "sc-ksYbfQ",
+                                        "styledComponentId": "sc-frDJqD",
                                         "target": "button",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -2509,7 +2509,7 @@ exports[`renders correctly with existing layout 1`] = `
                                     onClick={[Function]}
                                   >
                                     <button
-                                      className="sc-fjdhpX sc-ksYbfQ kOVpFT"
+                                      className="sc-cSHVUG sc-frDJqD iLonym"
                                       data-testhook-id="add-collector"
                                       onClick={[Function]}
                                     >
@@ -2546,9 +2546,9 @@ exports[`renders correctly with existing layout 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-kAzzGY",
+                                    "componentId": "sc-kgoBCf",
                                     "isStatic": false,
-                                    "lastClassName": "gpXzbO",
+                                    "lastClassName": "HSZXE",
                                     "rules": Array [
                                       "
   display: flex;
@@ -2560,7 +2560,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   "displayName": "styled.ul",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-kAzzGY",
+                                  "styledComponentId": "sc-kgoBCf",
                                   "target": "ul",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -2570,7 +2570,7 @@ exports[`renders correctly with existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <ul
-                                className="sc-kAzzGY gpXzbO"
+                                className="sc-kgoBCf HSZXE"
                               >
                                 <li
                                   key="collector-row-0"
@@ -2582,9 +2582,9 @@ exports[`renders correctly with existing layout 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-frDJqD",
+                                            "componentId": "sc-hqyNC",
                                             "isStatic": false,
-                                            "lastClassName": "dSWxLW",
+                                            "lastClassName": "kASDuq",
                                             "rules": Array [
                                               "
   width: 100%;
@@ -2595,7 +2595,7 @@ exports[`renders correctly with existing layout 1`] = `
                                           "displayName": "styled.section",
                                           "foldedComponentIds": Array [],
                                           "render": [Function],
-                                          "styledComponentId": "sc-frDJqD",
+                                          "styledComponentId": "sc-hqyNC",
                                           "target": "section",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -2605,7 +2605,7 @@ exports[`renders correctly with existing layout 1`] = `
                                       forwardedRef={null}
                                     >
                                       <section
-                                        className="sc-frDJqD dSWxLW"
+                                        className="sc-hqyNC kASDuq"
                                       >
                                         <styled.header>
                                           <StyledComponent
@@ -2614,9 +2614,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                 "$$typeof": Symbol(react.forward_ref),
                                                 "attrs": Array [],
                                                 "componentStyle": ComponentStyle {
-                                                  "componentId": "sc-hmzhuo",
+                                                  "componentId": "sc-kvZOFW",
                                                   "isStatic": false,
-                                                  "lastClassName": "fGGZPg",
+                                                  "lastClassName": "eFAcbR",
                                                   "rules": Array [
                                                     "
   border: 1px solid transparent;
@@ -2641,7 +2641,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                 "displayName": "styled.header",
                                                 "foldedComponentIds": Array [],
                                                 "render": [Function],
-                                                "styledComponentId": "sc-hmzhuo",
+                                                "styledComponentId": "sc-kvZOFW",
                                                 "target": "header",
                                                 "toString": [Function],
                                                 "warnTooManyClasses": [Function],
@@ -2651,7 +2651,7 @@ exports[`renders correctly with existing layout 1`] = `
                                             forwardedRef={null}
                                           >
                                             <header
-                                              className="sc-hmzhuo fGGZPg"
+                                              className="sc-kvZOFW eFAcbR"
                                             >
                                               <styled.span>
                                                 <StyledComponent
@@ -2660,9 +2660,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                       "$$typeof": Symbol(react.forward_ref),
                                                       "attrs": Array [],
                                                       "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-chPdSV",
+                                                        "componentId": "sc-kGXeez",
                                                         "isStatic": false,
-                                                        "lastClassName": "kItouk",
+                                                        "lastClassName": "NdeQu",
                                                         "rules": Array [
                                                           "
   white-space: nowrap;
@@ -2674,7 +2674,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                       "displayName": "styled.span",
                                                       "foldedComponentIds": Array [],
                                                       "render": [Function],
-                                                      "styledComponentId": "sc-chPdSV",
+                                                      "styledComponentId": "sc-kGXeez",
                                                       "target": "span",
                                                       "toString": [Function],
                                                       "warnTooManyClasses": [Function],
@@ -2684,7 +2684,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                   forwardedRef={null}
                                                 >
                                                   <span
-                                                    className="sc-chPdSV kItouk"
+                                                    className="sc-kGXeez NdeQu"
                                                   >
                                                     collector1
                                                      - 
@@ -2701,9 +2701,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                       "$$typeof": Symbol(react.forward_ref),
                                                       "attrs": Array [],
                                                       "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-VigVT",
+                                                        "componentId": "sc-fjdhpX",
                                                         "isStatic": false,
-                                                        "lastClassName": "cQowiX",
+                                                        "lastClassName": "jJAgek",
                                                         "rules": Array [
                                                           "
   display: flex;
@@ -2714,7 +2714,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                       "displayName": "styled.div",
                                                       "foldedComponentIds": Array [],
                                                       "render": [Function],
-                                                      "styledComponentId": "sc-VigVT",
+                                                      "styledComponentId": "sc-fjdhpX",
                                                       "target": "div",
                                                       "toString": [Function],
                                                       "warnTooManyClasses": [Function],
@@ -2724,7 +2724,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                   forwardedRef={null}
                                                 >
                                                   <div
-                                                    className="sc-VigVT cQowiX"
+                                                    className="sc-fjdhpX jJAgek"
                                                   >
                                                     <Styled(styled.button)
                                                       data-testhook-id="edit-collector-0"
@@ -2737,9 +2737,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                             "$$typeof": Symbol(react.forward_ref),
                                                             "attrs": Array [],
                                                             "componentStyle": ComponentStyle {
-                                                              "componentId": "sc-kvZOFW",
+                                                              "componentId": "sc-jbKcbu",
                                                               "isStatic": false,
-                                                              "lastClassName": "jPBArd",
+                                                              "lastClassName": "ejmdGF",
                                                               "rules": Array [
                                                                 "
   display: inline-flex;
@@ -2755,10 +2755,10 @@ exports[`renders correctly with existing layout 1`] = `
                                                             },
                                                             "displayName": "Styled(styled.button)",
                                                             "foldedComponentIds": Array [
-                                                              "sc-jTzLTM",
+                                                              "sc-jzJRlG",
                                                             ],
                                                             "render": [Function],
-                                                            "styledComponentId": "sc-kvZOFW",
+                                                            "styledComponentId": "sc-jbKcbu",
                                                             "target": "button",
                                                             "toString": [Function],
                                                             "warnTooManyClasses": [Function],
@@ -2769,7 +2769,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                         onClick={[Function]}
                                                       >
                                                         <button
-                                                          className="sc-jTzLTM sc-kvZOFW jPBArd"
+                                                          className="sc-jzJRlG sc-jbKcbu ejmdGF"
                                                           data-testhook-id="edit-collector-0"
                                                           onClick={[Function]}
                                                         >
@@ -2804,9 +2804,9 @@ exports[`renders correctly with existing layout 1`] = `
                                                             "$$typeof": Symbol(react.forward_ref),
                                                             "attrs": Array [],
                                                             "componentStyle": ComponentStyle {
-                                                              "componentId": "sc-jbKcbu",
+                                                              "componentId": "sc-jqCOkK",
                                                               "isStatic": false,
-                                                              "lastClassName": "ejmdGF",
+                                                              "lastClassName": "ehnjFa",
                                                               "rules": Array [
                                                                 "
   display: inline-flex;
@@ -2822,10 +2822,10 @@ exports[`renders correctly with existing layout 1`] = `
                                                             },
                                                             "displayName": "Styled(styled.button)",
                                                             "foldedComponentIds": Array [
-                                                              "sc-jTzLTM",
+                                                              "sc-jzJRlG",
                                                             ],
                                                             "render": [Function],
-                                                            "styledComponentId": "sc-jbKcbu",
+                                                            "styledComponentId": "sc-jqCOkK",
                                                             "target": "button",
                                                             "toString": [Function],
                                                             "warnTooManyClasses": [Function],
@@ -2836,7 +2836,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                         onClick={[Function]}
                                                       >
                                                         <button
-                                                          className="sc-jTzLTM sc-jbKcbu ejmdGF"
+                                                          className="sc-jzJRlG sc-jqCOkK ehnjFa"
                                                           data-testhook-id="delete-collector-0"
                                                           onClick={[Function]}
                                                         >
@@ -3445,7 +3445,7 @@ exports[`renders correctly with non existing layout 1`] = `
                             },
                             "displayName": "Styled(styled.section)",
                             "foldedComponentIds": Array [
-                              "sc-gqjmRU",
+                              "sc-jTzLTM",
                             ],
                             "render": [Function],
                             "styledComponentId": "sc-Rmtcm",
@@ -3458,7 +3458,7 @@ exports[`renders correctly with non existing layout 1`] = `
                         forwardedRef={null}
                       >
                         <section
-                          className="sc-gqjmRU sc-Rmtcm YiEyn"
+                          className="sc-jTzLTM sc-Rmtcm YiEyn"
                         >
                           <styled.div>
                             <StyledComponent
@@ -3467,9 +3467,9 @@ exports[`renders correctly with non existing layout 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jzJRlG",
+                                    "componentId": "sc-kAzzGY",
                                     "isStatic": false,
-                                    "lastClassName": "cxVXxp",
+                                    "lastClassName": "crApAj",
                                     "rules": Array [
                                       "
   display: flex;
@@ -3482,7 +3482,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                   "displayName": "styled.div",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jzJRlG",
+                                  "styledComponentId": "sc-kAzzGY",
                                   "target": "div",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -3492,7 +3492,7 @@ exports[`renders correctly with non existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <div
-                                className="sc-jzJRlG cxVXxp"
+                                className="sc-kAzzGY crApAj"
                               >
                                 <Styled(styled.header)>
                                   <StyledComponent
@@ -3527,7 +3527,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                         },
                                         "displayName": "Styled(styled.header)",
                                         "foldedComponentIds": Array [
-                                          "sc-cSHVUG",
+                                          "sc-chPdSV",
                                         ],
                                         "render": [Function],
                                         "styledComponentId": "sc-bRBYWo",
@@ -3540,7 +3540,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <header
-                                      className="sc-cSHVUG sc-bRBYWo dyXggM"
+                                      className="sc-chPdSV sc-bRBYWo dyXggM"
                                     >
                                       Segments
                                     </header>
@@ -3579,7 +3579,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                         },
                                         "displayName": "Styled(styled.button)",
                                         "foldedComponentIds": Array [
-                                          "sc-fjdhpX",
+                                          "sc-cSHVUG",
                                         ],
                                         "render": [Function],
                                         "styledComponentId": "sc-hzDkRC",
@@ -3593,7 +3593,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                     onClick={[Function]}
                                   >
                                     <button
-                                      className="sc-fjdhpX sc-hzDkRC bJmeCP"
+                                      className="sc-cSHVUG sc-hzDkRC bJmeCP"
                                       data-testhook-id="add-segment"
                                       onClick={[Function]}
                                     >
@@ -3630,9 +3630,9 @@ exports[`renders correctly with non existing layout 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-kAzzGY",
+                                    "componentId": "sc-kgoBCf",
                                     "isStatic": false,
-                                    "lastClassName": "gpXzbO",
+                                    "lastClassName": "HSZXE",
                                     "rules": Array [
                                       "
   display: flex;
@@ -3644,7 +3644,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                   "displayName": "styled.ul",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-kAzzGY",
+                                  "styledComponentId": "sc-kgoBCf",
                                   "target": "ul",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -3654,7 +3654,7 @@ exports[`renders correctly with non existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <ul
-                                className="sc-kAzzGY gpXzbO"
+                                className="sc-kgoBCf HSZXE"
                               />
                             </StyledComponent>
                           </styled.ul>
@@ -3670,9 +3670,9 @@ exports[`renders correctly with non existing layout 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-hZSUBg",
+                          "componentId": "sc-iuJeZd",
                           "isStatic": false,
-                          "lastClassName": "keKaWG",
+                          "lastClassName": "hJHFef",
                           "rules": Array [
                             "
   padding: 0;
@@ -3693,7 +3693,7 @@ exports[`renders correctly with non existing layout 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-hZSUBg",
+                        "styledComponentId": "sc-iuJeZd",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -3703,7 +3703,7 @@ exports[`renders correctly with non existing layout 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-hZSUBg keKaWG"
+                      className="sc-htpNat sc-iuJeZd hJHFef"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
@@ -3785,7 +3785,7 @@ exports[`renders correctly with non existing layout 1`] = `
                               innerRef={
                                 Object {
                                   "current": <textarea
-                                    class="sc-dxgOiQ doXLWY"
+                                    class="sc-ckVGcZ gmOKFw"
                                     data-testhook-id="layout-json-form-field-0"
                                     height="25rem"
                                     name="layout"
@@ -3807,9 +3807,9 @@ exports[`renders correctly with non existing layout 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-ckVGcZ",
+                                        "componentId": "sc-jKJlTe",
                                         "isStatic": false,
-                                        "lastClassName": "bxAWbg",
+                                        "lastClassName": "cJqkLF",
                                         "rules": Array [
                                           "
   display: flex;
@@ -3820,7 +3820,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                       "displayName": "styled.div",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-ckVGcZ",
+                                      "styledComponentId": "sc-jKJlTe",
                                       "target": "div",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -3830,7 +3830,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                   forwardedRef={null}
                                 >
                                   <div
-                                    className="sc-ckVGcZ bxAWbg"
+                                    className="sc-jKJlTe cJqkLF"
                                   >
                                     <styled.label>
                                       <StyledComponent
@@ -3839,9 +3839,9 @@ exports[`renders correctly with non existing layout 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-kGXeez",
+                                              "componentId": "sc-kpOJdX",
                                               "isStatic": false,
-                                              "lastClassName": "jvxjlk",
+                                              "lastClassName": "iYzRxv",
                                               "rules": Array [
                                                 "
   font-size: 0.875rem;
@@ -3854,7 +3854,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                             "displayName": "styled.label",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-kGXeez",
+                                            "styledComponentId": "sc-kpOJdX",
                                             "target": "label",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -3864,7 +3864,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                         forwardedRef={null}
                                       >
                                         <label
-                                          className="sc-kGXeez jvxjlk"
+                                          className="sc-kpOJdX iYzRxv"
                                         >
                                           Layout*
                                         </label>
@@ -3887,9 +3887,9 @@ exports[`renders correctly with non existing layout 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-dxgOiQ",
+                                              "componentId": "sc-ckVGcZ",
                                               "isStatic": false,
-                                              "lastClassName": "doXLWY",
+                                              "lastClassName": "gmOKFw",
                                               "rules": Array [
                                                 "
   ",
@@ -3934,7 +3934,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                             "displayName": "styled.textarea",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-dxgOiQ",
+                                            "styledComponentId": "sc-ckVGcZ",
                                             "target": "textarea",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -3944,7 +3944,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                         forwardedRef={
                                           Object {
                                             "current": <textarea
-                                              class="sc-dxgOiQ doXLWY"
+                                              class="sc-ckVGcZ gmOKFw"
                                               data-testhook-id="layout-json-form-field-0"
                                               height="25rem"
                                               name="layout"
@@ -3960,7 +3960,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                         value="{}"
                                       >
                                         <textarea
-                                          className="sc-dxgOiQ doXLWY"
+                                          className="sc-ckVGcZ gmOKFw"
                                           data-testhook-id="layout-json-form-field-0"
                                           disabled={false}
                                           height="25rem"
@@ -5075,7 +5075,7 @@ exports[`sign layout happy flow 1`] = `
                               },
                               "displayName": "Styled(styled.section)",
                               "foldedComponentIds": Array [
-                                "sc-gqjmRU",
+                                "sc-jTzLTM",
                               ],
                               "render": [Function],
                               "styledComponentId": "sc-Rmtcm",
@@ -5088,7 +5088,7 @@ exports[`sign layout happy flow 1`] = `
                           forwardedRef={null}
                         >
                           <section
-                            className="sc-gqjmRU sc-Rmtcm YiEyn"
+                            className="sc-jTzLTM sc-Rmtcm YiEyn"
                           >
                             <styled.div>
                               <StyledComponent
@@ -5097,9 +5097,9 @@ exports[`sign layout happy flow 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-jzJRlG",
+                                      "componentId": "sc-kAzzGY",
                                       "isStatic": false,
-                                      "lastClassName": "cxVXxp",
+                                      "lastClassName": "crApAj",
                                       "rules": Array [
                                         "
   display: flex;
@@ -5112,7 +5112,7 @@ exports[`sign layout happy flow 1`] = `
                                     "displayName": "styled.div",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-jzJRlG",
+                                    "styledComponentId": "sc-kAzzGY",
                                     "target": "div",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -5122,7 +5122,7 @@ exports[`sign layout happy flow 1`] = `
                                 forwardedRef={null}
                               >
                                 <div
-                                  className="sc-jzJRlG cxVXxp"
+                                  className="sc-kAzzGY crApAj"
                                 >
                                   <Styled(styled.header)>
                                     <StyledComponent
@@ -5157,7 +5157,7 @@ exports[`sign layout happy flow 1`] = `
                                           },
                                           "displayName": "Styled(styled.header)",
                                           "foldedComponentIds": Array [
-                                            "sc-cSHVUG",
+                                            "sc-chPdSV",
                                           ],
                                           "render": [Function],
                                           "styledComponentId": "sc-bRBYWo",
@@ -5170,7 +5170,7 @@ exports[`sign layout happy flow 1`] = `
                                       forwardedRef={null}
                                     >
                                       <header
-                                        className="sc-cSHVUG sc-bRBYWo dyXggM"
+                                        className="sc-chPdSV sc-bRBYWo dyXggM"
                                       >
                                         Segments
                                       </header>
@@ -5209,7 +5209,7 @@ exports[`sign layout happy flow 1`] = `
                                           },
                                           "displayName": "Styled(styled.button)",
                                           "foldedComponentIds": Array [
-                                            "sc-fjdhpX",
+                                            "sc-cSHVUG",
                                           ],
                                           "render": [Function],
                                           "styledComponentId": "sc-hzDkRC",
@@ -5223,7 +5223,7 @@ exports[`sign layout happy flow 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-fjdhpX sc-hzDkRC bJmeCP"
+                                        className="sc-cSHVUG sc-hzDkRC bJmeCP"
                                         data-testhook-id="add-segment"
                                         onClick={[Function]}
                                       >
@@ -5260,9 +5260,9 @@ exports[`sign layout happy flow 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-kAzzGY",
+                                      "componentId": "sc-kgoBCf",
                                       "isStatic": false,
-                                      "lastClassName": "gpXzbO",
+                                      "lastClassName": "HSZXE",
                                       "rules": Array [
                                         "
   display: flex;
@@ -5274,7 +5274,7 @@ exports[`sign layout happy flow 1`] = `
                                     "displayName": "styled.ul",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-kAzzGY",
+                                    "styledComponentId": "sc-kgoBCf",
                                     "target": "ul",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -5284,7 +5284,7 @@ exports[`sign layout happy flow 1`] = `
                                 forwardedRef={null}
                               >
                                 <ul
-                                  className="sc-kAzzGY gpXzbO"
+                                  className="sc-kgoBCf HSZXE"
                                 >
                                   <Segment
                                     index={0}
@@ -5345,7 +5345,7 @@ exports[`sign layout happy flow 1`] = `
                                                   "componentStyle": ComponentStyle {
                                                     "componentId": "sc-jlyJG",
                                                     "isStatic": false,
-                                                    "lastClassName": "mZUEn",
+                                                    "lastClassName": "bqNltO",
                                                     "rules": Array [
                                                       "
   border: 1px solid transparent;
@@ -5366,13 +5366,13 @@ exports[`sign layout happy flow 1`] = `
   }
 
   ",
-                                                      ".sc-kgoBCf",
+                                                      ".sc-VigVT",
                                                       " {
     margin: 0;
   }
 
   ",
-                                                      ".sc-jKJlTe",
+                                                      ".sc-gqjmRU",
                                                       " {
     margin: 0.5rem 0 0;
   }
@@ -5401,7 +5401,7 @@ exports[`sign layout happy flow 1`] = `
                                               onClick={[Function]}
                                             >
                                               <header
-                                                className="sc-jlyJG mZUEn"
+                                                className="sc-jlyJG bqNltO"
                                                 data-testhook-id="segment0-edit"
                                                 onClick={[Function]}
                                               >
@@ -5412,9 +5412,9 @@ exports[`sign layout happy flow 1`] = `
                                                         "$$typeof": Symbol(react.forward_ref),
                                                         "attrs": Array [],
                                                         "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-chPdSV",
+                                                          "componentId": "sc-kGXeez",
                                                           "isStatic": false,
-                                                          "lastClassName": "kItouk",
+                                                          "lastClassName": "NdeQu",
                                                           "rules": Array [
                                                             "
   white-space: nowrap;
@@ -5426,7 +5426,7 @@ exports[`sign layout happy flow 1`] = `
                                                         "displayName": "styled.span",
                                                         "foldedComponentIds": Array [],
                                                         "render": [Function],
-                                                        "styledComponentId": "sc-chPdSV",
+                                                        "styledComponentId": "sc-kGXeez",
                                                         "target": "span",
                                                         "toString": [Function],
                                                         "warnTooManyClasses": [Function],
@@ -5436,7 +5436,7 @@ exports[`sign layout happy flow 1`] = `
                                                     forwardedRef={null}
                                                   >
                                                     <span
-                                                      className="sc-chPdSV kItouk"
+                                                      className="sc-kGXeez NdeQu"
                                                     >
                                                       jenkins
                                                     </span>
@@ -5449,9 +5449,9 @@ exports[`sign layout happy flow 1`] = `
                                                         "$$typeof": Symbol(react.forward_ref),
                                                         "attrs": Array [],
                                                         "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-VigVT",
+                                                          "componentId": "sc-fjdhpX",
                                                           "isStatic": false,
-                                                          "lastClassName": "cQowiX",
+                                                          "lastClassName": "jJAgek",
                                                           "rules": Array [
                                                             "
   display: flex;
@@ -5462,7 +5462,7 @@ exports[`sign layout happy flow 1`] = `
                                                         "displayName": "styled.div",
                                                         "foldedComponentIds": Array [],
                                                         "render": [Function],
-                                                        "styledComponentId": "sc-VigVT",
+                                                        "styledComponentId": "sc-fjdhpX",
                                                         "target": "div",
                                                         "toString": [Function],
                                                         "warnTooManyClasses": [Function],
@@ -5472,7 +5472,7 @@ exports[`sign layout happy flow 1`] = `
                                                     forwardedRef={null}
                                                   >
                                                     <div
-                                                      className="sc-VigVT cQowiX"
+                                                      className="sc-fjdhpX jJAgek"
                                                     >
                                                       <Styled(styled.button)
                                                         data-testhook-id="segment0-delete"
@@ -5503,7 +5503,7 @@ exports[`sign layout happy flow 1`] = `
                                                               },
                                                               "displayName": "Styled(styled.button)",
                                                               "foldedComponentIds": Array [
-                                                                "sc-jTzLTM",
+                                                                "sc-jzJRlG",
                                                               ],
                                                               "render": [Function],
                                                               "styledComponentId": "sc-gipzik",
@@ -5517,7 +5517,7 @@ exports[`sign layout happy flow 1`] = `
                                                           onClick={[Function]}
                                                         >
                                                           <button
-                                                            className="sc-jTzLTM sc-gipzik hUPiAy"
+                                                            className="sc-jzJRlG sc-gipzik hUPiAy"
                                                             data-testhook-id="segment0-delete"
                                                             onClick={[Function]}
                                                           >
@@ -5599,7 +5599,7 @@ exports[`sign layout happy flow 1`] = `
                                                 },
                                                 "displayName": "Styled(styled.section)",
                                                 "foldedComponentIds": Array [
-                                                  "sc-gqjmRU",
+                                                  "sc-jTzLTM",
                                                 ],
                                                 "render": [Function],
                                                 "styledComponentId": "sc-jDwBTQ",
@@ -5612,7 +5612,7 @@ exports[`sign layout happy flow 1`] = `
                                             forwardedRef={null}
                                           >
                                             <section
-                                              className="sc-gqjmRU sc-jDwBTQ iZURLY"
+                                              className="sc-jTzLTM sc-jDwBTQ iZURLY"
                                             >
                                               <styled.div>
                                                 <StyledComponent
@@ -5621,9 +5621,9 @@ exports[`sign layout happy flow 1`] = `
                                                       "$$typeof": Symbol(react.forward_ref),
                                                       "attrs": Array [],
                                                       "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-jzJRlG",
+                                                        "componentId": "sc-kAzzGY",
                                                         "isStatic": false,
-                                                        "lastClassName": "cxVXxp",
+                                                        "lastClassName": "crApAj",
                                                         "rules": Array [
                                                           "
   display: flex;
@@ -5636,7 +5636,7 @@ exports[`sign layout happy flow 1`] = `
                                                       "displayName": "styled.div",
                                                       "foldedComponentIds": Array [],
                                                       "render": [Function],
-                                                      "styledComponentId": "sc-jzJRlG",
+                                                      "styledComponentId": "sc-kAzzGY",
                                                       "target": "div",
                                                       "toString": [Function],
                                                       "warnTooManyClasses": [Function],
@@ -5646,7 +5646,7 @@ exports[`sign layout happy flow 1`] = `
                                                   forwardedRef={null}
                                                 >
                                                   <div
-                                                    className="sc-jzJRlG cxVXxp"
+                                                    className="sc-kAzzGY crApAj"
                                                   >
                                                     <Styled(styled.header)>
                                                       <StyledComponent
@@ -5679,7 +5679,7 @@ exports[`sign layout happy flow 1`] = `
                                                             },
                                                             "displayName": "Styled(styled.header)",
                                                             "foldedComponentIds": Array [
-                                                              "sc-cSHVUG",
+                                                              "sc-chPdSV",
                                                             ],
                                                             "render": [Function],
                                                             "styledComponentId": "sc-gPEVay",
@@ -5692,7 +5692,7 @@ exports[`sign layout happy flow 1`] = `
                                                         forwardedRef={null}
                                                       >
                                                         <header
-                                                          className="sc-cSHVUG sc-gPEVay kxjIwe"
+                                                          className="sc-chPdSV sc-gPEVay kxjIwe"
                                                         >
                                                           Steps
                                                         </header>
@@ -5735,7 +5735,7 @@ exports[`sign layout happy flow 1`] = `
                                                             },
                                                             "displayName": "Styled(styled.button)",
                                                             "foldedComponentIds": Array [
-                                                              "sc-fjdhpX",
+                                                              "sc-cSHVUG",
                                                             ],
                                                             "render": [Function],
                                                             "styledComponentId": "sc-iRbamj",
@@ -5749,7 +5749,7 @@ exports[`sign layout happy flow 1`] = `
                                                         onClick={[Function]}
                                                       >
                                                         <button
-                                                          className="sc-fjdhpX sc-iRbamj eoEveZ"
+                                                          className="sc-cSHVUG sc-iRbamj eoEveZ"
                                                           data-testhook-id="segment0-add-step"
                                                           onClick={[Function]}
                                                         >
@@ -5849,7 +5849,7 @@ exports[`sign layout happy flow 1`] = `
                                                               "componentStyle": ComponentStyle {
                                                                 "componentId": "sc-jWBwVP",
                                                                 "isStatic": false,
-                                                                "lastClassName": "cScZKN",
+                                                                "lastClassName": "fYAbyO",
                                                                 "rules": Array [
                                                                   "
   border: 1px solid
@@ -5872,13 +5872,13 @@ exports[`sign layout happy flow 1`] = `
   }
 
   ",
-                                                                  ".sc-kgoBCf",
+                                                                  ".sc-VigVT",
                                                                   " {
     margin: 0;
   }
 
   ",
-                                                                  ".sc-jKJlTe",
+                                                                  ".sc-gqjmRU",
                                                                   " {
     margin: 0.5rem 0 0;
   }
@@ -5906,7 +5906,7 @@ exports[`sign layout happy flow 1`] = `
                                                           forwardedRef={null}
                                                         >
                                                           <header
-                                                            className="sc-jWBwVP cScZKN"
+                                                            className="sc-jWBwVP fYAbyO"
                                                           >
                                                             <styled.span>
                                                               <StyledComponent
@@ -5915,9 +5915,9 @@ exports[`sign layout happy flow 1`] = `
                                                                     "$$typeof": Symbol(react.forward_ref),
                                                                     "attrs": Array [],
                                                                     "componentStyle": ComponentStyle {
-                                                                      "componentId": "sc-chPdSV",
+                                                                      "componentId": "sc-kGXeez",
                                                                       "isStatic": false,
-                                                                      "lastClassName": "kItouk",
+                                                                      "lastClassName": "NdeQu",
                                                                       "rules": Array [
                                                                         "
   white-space: nowrap;
@@ -5929,7 +5929,7 @@ exports[`sign layout happy flow 1`] = `
                                                                     "displayName": "styled.span",
                                                                     "foldedComponentIds": Array [],
                                                                     "render": [Function],
-                                                                    "styledComponentId": "sc-chPdSV",
+                                                                    "styledComponentId": "sc-kGXeez",
                                                                     "target": "span",
                                                                     "toString": [Function],
                                                                     "warnTooManyClasses": [Function],
@@ -5939,7 +5939,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 forwardedRef={null}
                                                               >
                                                                 <span
-                                                                  className="sc-chPdSV kItouk"
+                                                                  className="sc-kGXeez NdeQu"
                                                                 >
                                                                   approve
                                                                 </span>
@@ -5952,9 +5952,9 @@ exports[`sign layout happy flow 1`] = `
                                                                     "$$typeof": Symbol(react.forward_ref),
                                                                     "attrs": Array [],
                                                                     "componentStyle": ComponentStyle {
-                                                                      "componentId": "sc-VigVT",
+                                                                      "componentId": "sc-fjdhpX",
                                                                       "isStatic": false,
-                                                                      "lastClassName": "cQowiX",
+                                                                      "lastClassName": "jJAgek",
                                                                       "rules": Array [
                                                                         "
   display: flex;
@@ -5965,7 +5965,7 @@ exports[`sign layout happy flow 1`] = `
                                                                     "displayName": "styled.div",
                                                                     "foldedComponentIds": Array [],
                                                                     "render": [Function],
-                                                                    "styledComponentId": "sc-VigVT",
+                                                                    "styledComponentId": "sc-fjdhpX",
                                                                     "target": "div",
                                                                     "toString": [Function],
                                                                     "warnTooManyClasses": [Function],
@@ -5975,7 +5975,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 forwardedRef={null}
                                                               >
                                                                 <div
-                                                                  className="sc-VigVT cQowiX"
+                                                                  className="sc-fjdhpX jJAgek"
                                                                 >
                                                                   <Styled(styled.button)
                                                                     data-testhook-id="jenkins-0-select-step"
@@ -6006,7 +6006,7 @@ exports[`sign layout happy flow 1`] = `
                                                                           },
                                                                           "displayName": "Styled(styled.button)",
                                                                           "foldedComponentIds": Array [
-                                                                            "sc-jTzLTM",
+                                                                            "sc-jzJRlG",
                                                                           ],
                                                                           "render": [Function],
                                                                           "styledComponentId": "sc-cMljjf",
@@ -6020,7 +6020,7 @@ exports[`sign layout happy flow 1`] = `
                                                                       onClick={[Function]}
                                                                     >
                                                                       <button
-                                                                        className="sc-jTzLTM sc-cMljjf bolPsX"
+                                                                        className="sc-jzJRlG sc-cMljjf bolPsX"
                                                                         data-testhook-id="jenkins-0-select-step"
                                                                         onClick={[Function]}
                                                                       >
@@ -6073,7 +6073,7 @@ exports[`sign layout happy flow 1`] = `
                                                                           },
                                                                           "displayName": "Styled(styled.button)",
                                                                           "foldedComponentIds": Array [
-                                                                            "sc-jTzLTM",
+                                                                            "sc-jzJRlG",
                                                                           ],
                                                                           "render": [Function],
                                                                           "styledComponentId": "sc-jAaTju",
@@ -6087,7 +6087,7 @@ exports[`sign layout happy flow 1`] = `
                                                                       onClick={[Function]}
                                                                     >
                                                                       <button
-                                                                        className="sc-jTzLTM sc-jAaTju kIQGJX"
+                                                                        className="sc-jzJRlG sc-jAaTju kIQGJX"
                                                                         data-testhook-id="jenkins-0-delete-step"
                                                                         onClick={[Function]}
                                                                       >
@@ -6145,9 +6145,9 @@ exports[`sign layout happy flow 1`] = `
                           "$$typeof": Symbol(react.forward_ref),
                           "attrs": Array [],
                           "componentStyle": ComponentStyle {
-                            "componentId": "sc-hZSUBg",
+                            "componentId": "sc-iuJeZd",
                             "isStatic": false,
-                            "lastClassName": "keKaWG",
+                            "lastClassName": "hJHFef",
                             "rules": Array [
                               "
   padding: 0;
@@ -6168,7 +6168,7 @@ exports[`sign layout happy flow 1`] = `
                             "sc-htpNat",
                           ],
                           "render": [Function],
-                          "styledComponentId": "sc-hZSUBg",
+                          "styledComponentId": "sc-iuJeZd",
                           "target": "hr",
                           "toString": [Function],
                           "warnTooManyClasses": [Function],
@@ -6178,7 +6178,7 @@ exports[`sign layout happy flow 1`] = `
                       forwardedRef={null}
                     >
                       <hr
-                        className="sc-htpNat sc-hZSUBg keKaWG"
+                        className="sc-htpNat sc-iuJeZd hJHFef"
                       />
                     </StyledComponent>
                   </Styled(styled.hr)>
@@ -6271,7 +6271,7 @@ exports[`sign layout happy flow 1`] = `
                                 innerRef={
                                   Object {
                                     "current": <textarea
-                                      class="sc-dxgOiQ doXLWY"
+                                      class="sc-ckVGcZ gmOKFw"
                                       data-testhook-id="layout-json-form-field-0"
                                       height="25rem"
                                       name="layout"
@@ -6315,9 +6315,9 @@ exports[`sign layout happy flow 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-ckVGcZ",
+                                          "componentId": "sc-jKJlTe",
                                           "isStatic": false,
-                                          "lastClassName": "bxAWbg",
+                                          "lastClassName": "cJqkLF",
                                           "rules": Array [
                                             "
   display: flex;
@@ -6328,7 +6328,7 @@ exports[`sign layout happy flow 1`] = `
                                         "displayName": "styled.div",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-ckVGcZ",
+                                        "styledComponentId": "sc-jKJlTe",
                                         "target": "div",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -6338,7 +6338,7 @@ exports[`sign layout happy flow 1`] = `
                                     forwardedRef={null}
                                   >
                                     <div
-                                      className="sc-ckVGcZ bxAWbg"
+                                      className="sc-jKJlTe cJqkLF"
                                     >
                                       <styled.label>
                                         <StyledComponent
@@ -6347,9 +6347,9 @@ exports[`sign layout happy flow 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-kGXeez",
+                                                "componentId": "sc-kpOJdX",
                                                 "isStatic": false,
-                                                "lastClassName": "jvxjlk",
+                                                "lastClassName": "iYzRxv",
                                                 "rules": Array [
                                                   "
   font-size: 0.875rem;
@@ -6362,7 +6362,7 @@ exports[`sign layout happy flow 1`] = `
                                               "displayName": "styled.label",
                                               "foldedComponentIds": Array [],
                                               "render": [Function],
-                                              "styledComponentId": "sc-kGXeez",
+                                              "styledComponentId": "sc-kpOJdX",
                                               "target": "label",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -6372,7 +6372,7 @@ exports[`sign layout happy flow 1`] = `
                                           forwardedRef={null}
                                         >
                                           <label
-                                            className="sc-kGXeez jvxjlk"
+                                            className="sc-kpOJdX iYzRxv"
                                           >
                                             Layout*
                                           </label>
@@ -6406,9 +6406,9 @@ exports[`sign layout happy flow 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-dxgOiQ",
+                                                "componentId": "sc-ckVGcZ",
                                                 "isStatic": false,
-                                                "lastClassName": "doXLWY",
+                                                "lastClassName": "gmOKFw",
                                                 "rules": Array [
                                                   "
   ",
@@ -6453,7 +6453,7 @@ exports[`sign layout happy flow 1`] = `
                                               "displayName": "styled.textarea",
                                               "foldedComponentIds": Array [],
                                               "render": [Function],
-                                              "styledComponentId": "sc-dxgOiQ",
+                                              "styledComponentId": "sc-ckVGcZ",
                                               "target": "textarea",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -6463,7 +6463,7 @@ exports[`sign layout happy flow 1`] = `
                                           forwardedRef={
                                             Object {
                                               "current": <textarea
-                                                class="sc-dxgOiQ doXLWY"
+                                                class="sc-ckVGcZ gmOKFw"
                                                 data-testhook-id="layout-json-form-field-0"
                                                 height="25rem"
                                                 name="layout"
@@ -6501,7 +6501,7 @@ exports[`sign layout happy flow 1`] = `
 }"
                                         >
                                           <textarea
-                                            className="sc-dxgOiQ doXLWY"
+                                            className="sc-ckVGcZ gmOKFw"
                                             data-testhook-id="layout-json-form-field-0"
                                             disabled={false}
                                             height="25rem"
@@ -6794,7 +6794,7 @@ exports[`sign layout happy flow 1`] = `
     <LayoutEditorDetailsPane>
       <Panel
         last={true}
-        title="Edit step approve"
+        title="Edit step approve configuration"
         width="37.5vw"
       >
         <styled.section
@@ -6919,7 +6919,7 @@ exports[`sign layout happy flow 1`] = `
                         <p
                           className="sc-dnqmqq jLpowZ"
                         >
-                          Edit step approve
+                          Edit step approve configuration
                         </p>
                       </StyledComponent>
                     </styled.p>
@@ -6986,9 +6986,9 @@ exports[`sign layout happy flow 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-kgAjT",
+                                "componentId": "sc-ksYbfQ",
                                 "isStatic": false,
-                                "lastClassName": "hYJfCL",
+                                "lastClassName": "DFzZQ",
                                 "rules": Array [
                                   "
   margin: 1rem 0 1rem;
@@ -7012,10 +7012,10 @@ exports[`sign layout happy flow 1`] = `
                               },
                               "displayName": "Styled(styled.section)",
                               "foldedComponentIds": Array [
-                                "sc-gqjmRU",
+                                "sc-jTzLTM",
                               ],
                               "render": [Function],
-                              "styledComponentId": "sc-kgAjT",
+                              "styledComponentId": "sc-ksYbfQ",
                               "target": "section",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -7025,7 +7025,7 @@ exports[`sign layout happy flow 1`] = `
                           forwardedRef={null}
                         >
                           <section
-                            className="sc-gqjmRU sc-kgAjT hYJfCL"
+                            className="sc-jTzLTM sc-ksYbfQ DFzZQ"
                           >
                             <styled.div>
                               <StyledComponent
@@ -7034,9 +7034,9 @@ exports[`sign layout happy flow 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-jzJRlG",
+                                      "componentId": "sc-kAzzGY",
                                       "isStatic": false,
-                                      "lastClassName": "cxVXxp",
+                                      "lastClassName": "crApAj",
                                       "rules": Array [
                                         "
   display: flex;
@@ -7049,7 +7049,7 @@ exports[`sign layout happy flow 1`] = `
                                     "displayName": "styled.div",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-jzJRlG",
+                                    "styledComponentId": "sc-kAzzGY",
                                     "target": "div",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -7059,7 +7059,7 @@ exports[`sign layout happy flow 1`] = `
                                 forwardedRef={null}
                               >
                                 <div
-                                  className="sc-jzJRlG cxVXxp"
+                                  className="sc-kAzzGY crApAj"
                                 >
                                   <Styled(styled.header)>
                                     <StyledComponent
@@ -7068,9 +7068,9 @@ exports[`sign layout happy flow 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-cJSrbW",
+                                            "componentId": "sc-hmzhuo",
                                             "isStatic": false,
-                                            "lastClassName": "belJRW",
+                                            "lastClassName": "iBDszQ",
                                             "rules": Array [
                                               "
   position: relative;
@@ -7094,10 +7094,10 @@ exports[`sign layout happy flow 1`] = `
                                           },
                                           "displayName": "Styled(styled.header)",
                                           "foldedComponentIds": Array [
-                                            "sc-cSHVUG",
+                                            "sc-chPdSV",
                                           ],
                                           "render": [Function],
-                                          "styledComponentId": "sc-cJSrbW",
+                                          "styledComponentId": "sc-hmzhuo",
                                           "target": "header",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -7107,7 +7107,7 @@ exports[`sign layout happy flow 1`] = `
                                       forwardedRef={null}
                                     >
                                       <header
-                                        className="sc-cSHVUG sc-cJSrbW belJRW"
+                                        className="sc-chPdSV sc-hmzhuo iBDszQ"
                                       >
                                         Approval collectors
                                       </header>
@@ -7123,9 +7123,9 @@ exports[`sign layout happy flow 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-kAzzGY",
+                                      "componentId": "sc-kgoBCf",
                                       "isStatic": false,
-                                      "lastClassName": "gpXzbO",
+                                      "lastClassName": "HSZXE",
                                       "rules": Array [
                                         "
   display: flex;
@@ -7137,7 +7137,7 @@ exports[`sign layout happy flow 1`] = `
                                     "displayName": "styled.ul",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-kAzzGY",
+                                    "styledComponentId": "sc-kgoBCf",
                                     "target": "ul",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -7147,7 +7147,7 @@ exports[`sign layout happy flow 1`] = `
                                 forwardedRef={null}
                               >
                                 <ul
-                                  className="sc-kAzzGY gpXzbO"
+                                  className="sc-kgoBCf HSZXE"
                                 >
                                   <li
                                     key="collector-row-0"
@@ -7159,9 +7159,9 @@ exports[`sign layout happy flow 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-hqyNC",
+                                              "componentId": "sc-dNLxif",
                                               "isStatic": false,
-                                              "lastClassName": "jMXxXb",
+                                              "lastClassName": "cYOoGC",
                                               "rules": Array [
                                                 "
   margin: 1rem 0 1rem;
@@ -7184,10 +7184,10 @@ exports[`sign layout happy flow 1`] = `
                                             },
                                             "displayName": "Styled(styled.section)",
                                             "foldedComponentIds": Array [
-                                              "sc-gqjmRU",
+                                              "sc-jTzLTM",
                                             ],
                                             "render": [Function],
-                                            "styledComponentId": "sc-hqyNC",
+                                            "styledComponentId": "sc-dNLxif",
                                             "target": "section",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -7197,7 +7197,7 @@ exports[`sign layout happy flow 1`] = `
                                         forwardedRef={null}
                                       >
                                         <section
-                                          className="sc-gqjmRU sc-hqyNC jMXxXb"
+                                          className="sc-jTzLTM sc-dNLxif cYOoGC"
                                         >
                                           <GenericForm
                                             autoFocus={true}
@@ -7281,7 +7281,7 @@ exports[`sign layout happy flow 1`] = `
                                                       innerRef={
                                                         Object {
                                                           "current": <input
-                                                            class="sc-kgoBCf bliced"
+                                                            class="sc-VigVT cBJosH"
                                                             data-testhook-id="collector-edit-form-field-0"
                                                             name="name"
                                                             type="text"
@@ -7302,9 +7302,9 @@ exports[`sign layout happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kpOJdX",
+                                                                "componentId": "sc-dxgOiQ",
                                                                 "isStatic": false,
-                                                                "lastClassName": "dGWCjw",
+                                                                "lastClassName": "cnAnsE",
                                                                 "rules": Array [
                                                                   "
   display: flex;
@@ -7315,7 +7315,7 @@ exports[`sign layout happy flow 1`] = `
                                                               "displayName": "styled.div",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-kpOJdX",
+                                                              "styledComponentId": "sc-dxgOiQ",
                                                               "target": "div",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -7325,7 +7325,7 @@ exports[`sign layout happy flow 1`] = `
                                                           forwardedRef={null}
                                                         >
                                                           <div
-                                                            className="sc-kpOJdX dGWCjw"
+                                                            className="sc-dxgOiQ cnAnsE"
                                                           >
                                                             <styled.label>
                                                               <StyledComponent
@@ -7334,9 +7334,9 @@ exports[`sign layout happy flow 1`] = `
                                                                     "$$typeof": Symbol(react.forward_ref),
                                                                     "attrs": Array [],
                                                                     "componentStyle": ComponentStyle {
-                                                                      "componentId": "sc-kGXeez",
+                                                                      "componentId": "sc-kpOJdX",
                                                                       "isStatic": false,
-                                                                      "lastClassName": "jvxjlk",
+                                                                      "lastClassName": "iYzRxv",
                                                                       "rules": Array [
                                                                         "
   font-size: 0.875rem;
@@ -7349,7 +7349,7 @@ exports[`sign layout happy flow 1`] = `
                                                                     "displayName": "styled.label",
                                                                     "foldedComponentIds": Array [],
                                                                     "render": [Function],
-                                                                    "styledComponentId": "sc-kGXeez",
+                                                                    "styledComponentId": "sc-kpOJdX",
                                                                     "target": "label",
                                                                     "toString": [Function],
                                                                     "warnTooManyClasses": [Function],
@@ -7359,7 +7359,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 forwardedRef={null}
                                                               >
                                                                 <label
-                                                                  className="sc-kGXeez jvxjlk"
+                                                                  className="sc-kpOJdX iYzRxv"
                                                                 >
                                                                   Name
                                                                 </label>
@@ -7382,9 +7382,9 @@ exports[`sign layout happy flow 1`] = `
                                                                     "$$typeof": Symbol(react.forward_ref),
                                                                     "attrs": Array [],
                                                                     "componentStyle": ComponentStyle {
-                                                                      "componentId": "sc-kgoBCf",
+                                                                      "componentId": "sc-VigVT",
                                                                       "isStatic": false,
-                                                                      "lastClassName": "bliced",
+                                                                      "lastClassName": "cBJosH",
                                                                       "rules": Array [
                                                                         "
   ",
@@ -7429,7 +7429,7 @@ exports[`sign layout happy flow 1`] = `
                                                                     "displayName": "styled.input",
                                                                     "foldedComponentIds": Array [],
                                                                     "render": [Function],
-                                                                    "styledComponentId": "sc-kgoBCf",
+                                                                    "styledComponentId": "sc-VigVT",
                                                                     "target": "input",
                                                                     "toString": [Function],
                                                                     "warnTooManyClasses": [Function],
@@ -7439,7 +7439,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 forwardedRef={
                                                                   Object {
                                                                     "current": <input
-                                                                      class="sc-kgoBCf bliced"
+                                                                      class="sc-VigVT cBJosH"
                                                                       data-testhook-id="collector-edit-form-field-0"
                                                                       name="name"
                                                                       type="text"
@@ -7454,7 +7454,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 value="xlCollect"
                                                               >
                                                                 <input
-                                                                  className="sc-kgoBCf bliced"
+                                                                  className="sc-VigVT cBJosH"
                                                                   data-testhook-id="collector-edit-form-field-0"
                                                                   disabled={false}
                                                                   name="name"
@@ -7486,9 +7486,9 @@ exports[`sign layout happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kpOJdX",
+                                                                "componentId": "sc-dxgOiQ",
                                                                 "isStatic": false,
-                                                                "lastClassName": "dGWCjw",
+                                                                "lastClassName": "cnAnsE",
                                                                 "rules": Array [
                                                                   "
   display: flex;
@@ -7499,7 +7499,7 @@ exports[`sign layout happy flow 1`] = `
                                                               "displayName": "styled.div",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-kpOJdX",
+                                                              "styledComponentId": "sc-dxgOiQ",
                                                               "target": "div",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -7509,7 +7509,7 @@ exports[`sign layout happy flow 1`] = `
                                                           forwardedRef={null}
                                                         >
                                                           <div
-                                                            className="sc-kpOJdX dGWCjw"
+                                                            className="sc-dxgOiQ cnAnsE"
                                                           >
                                                             <styled.label>
                                                               <StyledComponent
@@ -7518,9 +7518,9 @@ exports[`sign layout happy flow 1`] = `
                                                                     "$$typeof": Symbol(react.forward_ref),
                                                                     "attrs": Array [],
                                                                     "componentStyle": ComponentStyle {
-                                                                      "componentId": "sc-kGXeez",
+                                                                      "componentId": "sc-kpOJdX",
                                                                       "isStatic": false,
-                                                                      "lastClassName": "jvxjlk",
+                                                                      "lastClassName": "iYzRxv",
                                                                       "rules": Array [
                                                                         "
   font-size: 0.875rem;
@@ -7533,7 +7533,7 @@ exports[`sign layout happy flow 1`] = `
                                                                     "displayName": "styled.label",
                                                                     "foldedComponentIds": Array [],
                                                                     "render": [Function],
-                                                                    "styledComponentId": "sc-kGXeez",
+                                                                    "styledComponentId": "sc-kpOJdX",
                                                                     "target": "label",
                                                                     "toString": [Function],
                                                                     "warnTooManyClasses": [Function],
@@ -7543,7 +7543,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 forwardedRef={null}
                                                               >
                                                                 <label
-                                                                  className="sc-kGXeez jvxjlk"
+                                                                  className="sc-kpOJdX iYzRxv"
                                                                 >
                                                                   Service URL
                                                                 </label>
@@ -7566,9 +7566,9 @@ exports[`sign layout happy flow 1`] = `
                                                                     "$$typeof": Symbol(react.forward_ref),
                                                                     "attrs": Array [],
                                                                     "componentStyle": ComponentStyle {
-                                                                      "componentId": "sc-kgoBCf",
+                                                                      "componentId": "sc-VigVT",
                                                                       "isStatic": false,
-                                                                      "lastClassName": "bliced",
+                                                                      "lastClassName": "cBJosH",
                                                                       "rules": Array [
                                                                         "
   ",
@@ -7613,7 +7613,7 @@ exports[`sign layout happy flow 1`] = `
                                                                     "displayName": "styled.input",
                                                                     "foldedComponentIds": Array [],
                                                                     "render": [Function],
-                                                                    "styledComponentId": "sc-kgoBCf",
+                                                                    "styledComponentId": "sc-VigVT",
                                                                     "target": "input",
                                                                     "toString": [Function],
                                                                     "warnTooManyClasses": [Function],
@@ -7628,7 +7628,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 value="https://collect.org"
                                                               >
                                                                 <input
-                                                                  className="sc-kgoBCf bliced"
+                                                                  className="sc-VigVT cBJosH"
                                                                   data-testhook-id="collector-edit-form-field-1"
                                                                   disabled={false}
                                                                   name="uri"
@@ -8324,7 +8324,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                             },
                             "displayName": "Styled(styled.section)",
                             "foldedComponentIds": Array [
-                              "sc-gqjmRU",
+                              "sc-jTzLTM",
                             ],
                             "render": [Function],
                             "styledComponentId": "sc-Rmtcm",
@@ -8337,7 +8337,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                         forwardedRef={null}
                       >
                         <section
-                          className="sc-gqjmRU sc-Rmtcm YiEyn"
+                          className="sc-jTzLTM sc-Rmtcm YiEyn"
                         >
                           <styled.div>
                             <StyledComponent
@@ -8346,9 +8346,9 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jzJRlG",
+                                    "componentId": "sc-kAzzGY",
                                     "isStatic": false,
-                                    "lastClassName": "cxVXxp",
+                                    "lastClassName": "crApAj",
                                     "rules": Array [
                                       "
   display: flex;
@@ -8361,7 +8361,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                   "displayName": "styled.div",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jzJRlG",
+                                  "styledComponentId": "sc-kAzzGY",
                                   "target": "div",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -8371,7 +8371,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               forwardedRef={null}
                             >
                               <div
-                                className="sc-jzJRlG cxVXxp"
+                                className="sc-kAzzGY crApAj"
                               >
                                 <Styled(styled.header)>
                                   <StyledComponent
@@ -8406,7 +8406,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         },
                                         "displayName": "Styled(styled.header)",
                                         "foldedComponentIds": Array [
-                                          "sc-cSHVUG",
+                                          "sc-chPdSV",
                                         ],
                                         "render": [Function],
                                         "styledComponentId": "sc-bRBYWo",
@@ -8419,7 +8419,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                     forwardedRef={null}
                                   >
                                     <header
-                                      className="sc-cSHVUG sc-bRBYWo dyXggM"
+                                      className="sc-chPdSV sc-bRBYWo dyXggM"
                                     >
                                       Segments
                                     </header>
@@ -8458,7 +8458,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         },
                                         "displayName": "Styled(styled.button)",
                                         "foldedComponentIds": Array [
-                                          "sc-fjdhpX",
+                                          "sc-cSHVUG",
                                         ],
                                         "render": [Function],
                                         "styledComponentId": "sc-hzDkRC",
@@ -8472,7 +8472,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                     onClick={[Function]}
                                   >
                                     <button
-                                      className="sc-fjdhpX sc-hzDkRC bJmeCP"
+                                      className="sc-cSHVUG sc-hzDkRC bJmeCP"
                                       data-testhook-id="add-segment"
                                       onClick={[Function]}
                                     >
@@ -8509,9 +8509,9 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-kAzzGY",
+                                    "componentId": "sc-kgoBCf",
                                     "isStatic": false,
-                                    "lastClassName": "gpXzbO",
+                                    "lastClassName": "HSZXE",
                                     "rules": Array [
                                       "
   display: flex;
@@ -8523,7 +8523,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                   "displayName": "styled.ul",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-kAzzGY",
+                                  "styledComponentId": "sc-kgoBCf",
                                   "target": "ul",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -8533,7 +8533,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               forwardedRef={null}
                             >
                               <ul
-                                className="sc-kAzzGY gpXzbO"
+                                className="sc-kgoBCf HSZXE"
                               />
                             </StyledComponent>
                           </styled.ul>
@@ -8549,9 +8549,9 @@ exports[`validates a faulty layout and returns errors 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-hZSUBg",
+                          "componentId": "sc-iuJeZd",
                           "isStatic": false,
-                          "lastClassName": "keKaWG",
+                          "lastClassName": "hJHFef",
                           "rules": Array [
                             "
   padding: 0;
@@ -8572,7 +8572,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-hZSUBg",
+                        "styledComponentId": "sc-iuJeZd",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -8582,7 +8582,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-hZSUBg keKaWG"
+                      className="sc-htpNat sc-iuJeZd hJHFef"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
@@ -8664,7 +8664,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               innerRef={
                                 Object {
                                   "current": <textarea
-                                    class="sc-dxgOiQ ALWmo"
+                                    class="sc-ckVGcZ dzcivS"
                                     data-testhook-id="layout-json-form-field-0"
                                     disabled=""
                                     height="25rem"
@@ -8687,9 +8687,9 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-ckVGcZ",
+                                        "componentId": "sc-jKJlTe",
                                         "isStatic": false,
-                                        "lastClassName": "bxAWbg",
+                                        "lastClassName": "cJqkLF",
                                         "rules": Array [
                                           "
   display: flex;
@@ -8700,7 +8700,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       "displayName": "styled.div",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-ckVGcZ",
+                                      "styledComponentId": "sc-jKJlTe",
                                       "target": "div",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -8710,7 +8710,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                   forwardedRef={null}
                                 >
                                   <div
-                                    className="sc-ckVGcZ bxAWbg"
+                                    className="sc-jKJlTe cJqkLF"
                                   >
                                     <styled.label>
                                       <StyledComponent
@@ -8719,9 +8719,9 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-kGXeez",
+                                              "componentId": "sc-kpOJdX",
                                               "isStatic": false,
-                                              "lastClassName": "jvxjlk",
+                                              "lastClassName": "iYzRxv",
                                               "rules": Array [
                                                 "
   font-size: 0.875rem;
@@ -8734,7 +8734,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                             "displayName": "styled.label",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-kGXeez",
+                                            "styledComponentId": "sc-kpOJdX",
                                             "target": "label",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -8744,7 +8744,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         forwardedRef={null}
                                       >
                                         <label
-                                          className="sc-kGXeez jvxjlk"
+                                          className="sc-kpOJdX iYzRxv"
                                         >
                                           Layout*
                                         </label>
@@ -8767,9 +8767,9 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-dxgOiQ",
+                                              "componentId": "sc-ckVGcZ",
                                               "isStatic": false,
-                                              "lastClassName": "ALWmo",
+                                              "lastClassName": "dzcivS",
                                               "rules": Array [
                                                 "
   ",
@@ -8814,7 +8814,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                             "displayName": "styled.textarea",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-dxgOiQ",
+                                            "styledComponentId": "sc-ckVGcZ",
                                             "target": "textarea",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -8824,7 +8824,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         forwardedRef={
                                           Object {
                                             "current": <textarea
-                                              class="sc-dxgOiQ ALWmo"
+                                              class="sc-ckVGcZ dzcivS"
                                               data-testhook-id="layout-json-form-field-0"
                                               disabled=""
                                               height="25rem"
@@ -8841,7 +8841,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         value="{}"
                                       >
                                         <textarea
-                                          className="sc-dxgOiQ ALWmo"
+                                          className="sc-ckVGcZ dzcivS"
                                           data-testhook-id="layout-json-form-field-0"
                                           disabled={true}
                                           height="25rem"
