@@ -55,7 +55,7 @@ import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
 import { useUserProfileContext } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
-import ApproveIcon from "../../atoms/Icons/Approve";
+import ApproveIcon from "../../atoms/Icons/ApproveIcon";
 import { ThemeContext } from "styled-components";
 
 const HierarchyEditor = () => {
