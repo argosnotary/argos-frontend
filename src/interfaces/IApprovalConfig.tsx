@@ -28,4 +28,9 @@ export interface IArtifactCollector {
   name: string;
   type: ArtifactCollectorType;
   uri: string;
+  context: IXLDeployContext;
+}
+
+export interface IXLDeployContext {
+  applicationName: string;
 }

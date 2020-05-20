@@ -378,6 +378,7 @@ const handleDeleteArtifactCollector = (
     state.selectedLayoutElement.approvalConfig
   ) {
     deleteArtifactCollector(
+      state,
       state.selectedLayoutElement.approvalConfig,
       action.artifactCollector
     );
@@ -390,6 +391,7 @@ const handleDeleteArtifactCollector = (
 };
 
 const deleteArtifactCollector = (
+  state: ILayoutEditorState,
   approvalConfig?: IApprovalConfig,
   artifactCollector?: IArtifactCollector
 ) => {
@@ -399,6 +401,13 @@ const deleteArtifactCollector = (
     );
     if (collectorIndex >= 0) {
       approvalConfig.artifactCollectorSpecifications.splice(collectorIndex, 1);
+      if (approvalConfig.artifactCollectorSpecifications.length == 0) {
+        removeApprovalConfig(
+          state,
+          approvalConfig.segmentName,
+          approvalConfig.stepName
+        );
+      }
     }
   }
 };
