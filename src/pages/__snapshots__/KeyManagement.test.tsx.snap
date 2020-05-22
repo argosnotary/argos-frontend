@@ -2022,6 +2022,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                                 >
                                                   <styled.input
                                                     readOnly={true}
+                                                    value=""
                                                   >
                                                     <StyledComponent
                                                       forwardedComponent={
@@ -2059,10 +2060,12 @@ exports[`when Continue is clicked on modal window it should show password view m
                                                         }
                                                       }
                                                       readOnly={true}
+                                                      value=""
                                                     >
                                                       <input
                                                         className="sc-gqjmRU fktYVK"
                                                         readOnly={true}
+                                                        value=""
                                                       />
                                                     </StyledComponent>
                                                   </styled.input>
@@ -4777,6 +4780,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                                 >
                                                   <styled.input
                                                     readOnly={true}
+                                                    value=""
                                                   >
                                                     <StyledComponent
                                                       forwardedComponent={
@@ -4814,10 +4818,12 @@ exports[`when create key is clicked and no key is present it should display pass
                                                         }
                                                       }
                                                       readOnly={true}
+                                                      value=""
                                                     >
                                                       <input
                                                         className="sc-gqjmRU fktYVK"
                                                         readOnly={true}
+                                                        value=""
                                                       />
                                                     </StyledComponent>
                                                   </styled.input>
