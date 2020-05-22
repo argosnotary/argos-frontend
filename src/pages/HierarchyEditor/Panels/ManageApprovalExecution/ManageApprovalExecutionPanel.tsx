@@ -12,6 +12,7 @@ import {
   ApprovalExecutionStoreContext,
   createApprovalExecutionStoreContext
 } from "../../../../stores/ApprovalExecutionStore";
+import ApprovalExecutionDetailsPanel from "./ApprovalExecutionDetailsPanel";
 
 interface IApprovalStepsResponse {
   isLoading: boolean;
@@ -57,16 +58,15 @@ const ManageApprovalExecutionPanel: React.FC = () => {
       <ApprovalExecutionStoreContext.Provider
         value={approvalExecutionStoreContext}>
         <Panel
-          maxWidth={"37.5vw"}
-          resizable={false}
-          last={true}
-          title="select approval to execute">
+          width={"37.5vw"}
+          resizable={true}
+          title={"Select step to approve"}>
           {approvalStepsResponse.isLoading ? (
             <AlternateLoader size={32} color={theme.alternateLoader.color} />
           ) : null}
           {renderApprovalStepList(approvalStepsResponse)}
         </Panel>
-        <div>right form</div>
+        <ApprovalExecutionDetailsPanel />
       </ApprovalExecutionStoreContext.Provider>
     </>
   );
