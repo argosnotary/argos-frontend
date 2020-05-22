@@ -20,4 +20,8 @@ export enum TreeNodeTypes {
   SERVICE_ACCOUNT = "SERVICE_ACCOUNT"
 }
 
-export type TreeNodeType = TreeNodeTypes.UNSPECIFIED | TreeNodeTypes.LABEL | TreeNodeTypes.SUPPLY_CHAIN | TreeNodeTypes.SERVICE_ACCOUNT
+export type TreeNodeType =
+  | TreeNodeTypes.UNSPECIFIED
+  | TreeNodeTypes.LABEL
+  | TreeNodeTypes.SUPPLY_CHAIN
+  | TreeNodeTypes.SERVICE_ACCOUNT;

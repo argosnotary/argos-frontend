@@ -57,6 +57,7 @@ export enum HierarchyEditorPaneActionTypes {
   SHOW_SERVICE_ACCOUNT_PASSPHRASE = "SHOW_SERVICE_ACCOUNT_PASSPHRASE",
   SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL = "SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL",
   SHOW_MANAGE_LAYOUT = "SHOW_MANAGE_LAYOUT",
+  SHOW_EXECUTE_APPROVAL = "SHOW_EXECUTE_APPROVAL",
   RESET_PANE = "RESET_PANE"
 }
 
@@ -71,6 +72,7 @@ export type LayoutEditorPaneActionType =
   | HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE
   | HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL
   | HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT
+  | HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL
   | HierarchyEditorPaneActionTypes.RESET_PANE;
 
 export type HierarchyEditorPaneAction =
@@ -139,6 +141,14 @@ export type HierarchyEditorPaneAction =
     }
   | {
       type: HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT;
+      nodeParentId: string;
+      nodeReferenceId: string;
+      breadcrumb: string;
+      selectedNodeName: string;
+      panePermission: FormPermission;
+    }
+  | {
+      type: HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL;
       nodeParentId: string;
       nodeReferenceId: string;
       breadcrumb: string;
@@ -255,7 +265,8 @@ const layoutEditorReducer = (
     case HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE:
       return {
         ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE,
+        firstPanelView:
+          HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE,
         nodeReferenceId: action.nodeReferenceId,
         breadcrumb: action.breadcrumb,
         selectedNodeName: action.selectedNodeName,
@@ -264,7 +275,8 @@ const layoutEditorReducer = (
     case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE:
       return {
         ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE,
+        firstPanelView:
+          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,
@@ -274,7 +286,8 @@ const layoutEditorReducer = (
     case HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE:
       return {
         ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE
+        firstPanelView:
+          HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE
       };
     case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL:
       return {
@@ -291,6 +304,17 @@ const layoutEditorReducer = (
       return {
         ...state,
         firstPanelView: HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
+        nodeReferenceId: action.nodeReferenceId,
+        nodeParentId: action.nodeParentId,
+        breadcrumb: action.breadcrumb,
+        selectedNodeName: action.selectedNodeName,
+        panePermission: action.panePermission
+      };
+
+    case HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL:
+      return {
+        ...state,
+        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL,
         nodeReferenceId: action.nodeReferenceId,
         nodeParentId: action.nodeParentId,
         breadcrumb: action.breadcrumb,

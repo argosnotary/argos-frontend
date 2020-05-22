@@ -103,7 +103,9 @@ const clipboardWrapperCss = css`
 const ManageNpa = () => {
   const { token } = useUserProfileContext();
   const [state, dispatch] = useContext(StateContext);
-  const [serviceAccountPostState, setNpaPostRequest] = useDataApi(genericDataFetchReducer);
+  const [serviceAccountPostState, setNpaPostRequest] = useDataApi(
+    genericDataFetchReducer
+  );
   const [_serviceAccountGetRequestState, setNpaGetRequest] = useDataApi(
     genericDataFetchReducer
   );
@@ -156,7 +158,10 @@ const ManageNpa = () => {
 
               dispatch({
                 type: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT,
-                serviceaccount: { ...serviceaccount, keyId: generatedKeys.keys.keyId }
+                serviceaccount: {
+                  ...serviceaccount,
+                  keyId: generatedKeys.keys.keyId
+                }
               });
             }
           };
@@ -224,7 +229,8 @@ const ManageNpa = () => {
     }
 
     if (
-      state.firstPanelView === HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE
+      state.firstPanelView ===
+      HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE
     ) {
       setInitialFormValues({ serviceaccountname: "" });
     }
@@ -250,9 +256,10 @@ const ManageNpa = () => {
         resizable={false}
         last={true}
         title={
-          updateMode ? "Update selected service account" : "Add child service account to selected label"
-        }
-      >
+          updateMode
+            ? "Update selected service account"
+            : "Add child service account to selected label"
+        }>
         <NodesBreadCrumb>
           Selected: {state.breadcrumb}
           <LastBreadCrumb>
@@ -279,8 +286,7 @@ const ManageNpa = () => {
               dispatch({
                 type: HierarchyEditorPaneActionTypes.RESET_PANE
               })
-            }
-          >
+            }>
             Close
           </CloseButton>
         </FlexRow>
@@ -380,9 +386,10 @@ const ManageNpa = () => {
       resizable={false}
       last={true}
       title={
-        updateMode ? "Update selected service account" : "Add child service account to selected label"
-      }
-    >
+        updateMode
+          ? "Update selected service account"
+          : "Add child service account to selected label"
+      }>
       {state.selectedNodeName !== "" ? (
         <>
           <NodesBreadCrumb>
@@ -438,7 +445,9 @@ const ManageNpa = () => {
             updateNpa(values);
           }
         }}
-        confirmationLabel={updateMode ? "Update Service Account" : "Add Service Account"}
+        confirmationLabel={
+          updateMode ? "Update Service Account" : "Add Service Account"
+        }
         cancellationLabel={"Cancel"}
         initialValues={initialFormValues}
       />

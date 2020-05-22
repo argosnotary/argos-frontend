@@ -167,8 +167,7 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
           return;
         }
         getLocalPermissions();
-      }}
-    >
+      }}>
       <AuthorizationContainer>
         <form
           onSubmit={e => {
@@ -180,8 +179,7 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
               permissions.push(value as string);
             }
             putLocalPermissions([...permissions]);
-          }}
-        >
+          }}>
           {permissionsApiResponse.isLoading ? (
             <AlternateLoader size={32} color={theme.alternateLoader.color} />
           ) : null}

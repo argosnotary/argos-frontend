@@ -57,8 +57,7 @@ const WrappedUserSettings: React.FC<IWrappedUserSettings> = props => (
           state: PROFILE_STATE.READY,
           token: "token",
           setUserProfile: jest.fn()
-        }}
-      >
+        }}>
         <UserSettings />
       </UserProfileContext.Provider>
     </MemoryRouter>

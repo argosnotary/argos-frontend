@@ -57,6 +57,7 @@ import { useUserProfileContext } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
 import ApproveIcon from "../../atoms/Icons/Approve";
 import { ThemeContext } from "styled-components";
+import ApproveStepPanel from "./Panels/ApproveStepPanel";
 
 const HierarchyEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {
@@ -269,8 +270,10 @@ const HierarchyEditor = () => {
           ),
           label: "Approve step",
           callback: (node: ITreeNode) => {
-            // action
-            return node;
+            treeContextMenuCb(
+              HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL,
+              node
+            );
           },
           visible: (node: ITreeNode) => {
             return (
@@ -347,6 +350,8 @@ const HierarchyEditor = () => {
         return <ManageLabelPermissions />;
       case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
         return <ManageLayoutPanel />;
+      case HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL:
+        return <ApproveStepPanel />;
       default:
         return null;
     }

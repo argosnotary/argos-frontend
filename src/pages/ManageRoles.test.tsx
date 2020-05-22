@@ -110,8 +110,7 @@ it("renders correctly", async () => {
           state: PROFILE_STATE.READY,
           token: "token",
           setUserProfile: jest.fn()
-        }}
-      >
+        }}>
         <ManageRoles />
       </UserProfileContext.Provider>
     </ThemeProvider>

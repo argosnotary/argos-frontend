@@ -167,8 +167,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
           return;
         }
         getGlobalRoles();
-      }}
-    >
+      }}>
       <AuthorizationContainer>
         <form
           onSubmit={e => {
@@ -180,8 +179,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
             }
 
             putGlobalRoles([...permissions]);
-          }}
-        >
+          }}>
           {rolesApiResponse.isLoading ? (
             <AlternateLoader size={32} color={theme.alternateLoader.color} />
           ) : null}
