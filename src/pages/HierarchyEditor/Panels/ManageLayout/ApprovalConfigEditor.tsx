@@ -170,9 +170,12 @@ const validateApprovalConfigForm = (
   if (type === ArtifactCollectorType.XLDEPLOY) {
     if (!values.applicationName) {
       errors.applicationName = "Please fill in a application name.";
-// eslint-disable-next-line
-    } else if (!new RegExp("^[^\\\\/\\]\\[:\|,*]+$").test(values.applicationName)) {
-      errors.applicationName = "Please enter only valid characters for the application name (no `/`, `\\`, `:`, `[`, `]`, `|`, `,` or `*`)"
+      // eslint-disable-next-line
+    } else if (
+      !new RegExp("^[^\\\\/\\]\\[:|,*]+$").test(values.applicationName)
+    ) {
+      errors.applicationName =
+        "Please enter only valid characters for the application name (no `/`, `\\`, `:`, `[`, `]`, `|`, `,` or `*`)";
     }
   }
 
@@ -236,13 +239,12 @@ const ApprovalConfigEditor: React.FC = () => {
     if (addMode) {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.ADD_ARTIFACT_COLLECTOR,
-        artifactCollector: artifactCollector
+        artifactCollector
       });
-      setAddMode(false);
     } else {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.UPDATE_ARTIFACT_COLLECTOR,
-        artifactCollector: artifactCollector
+        artifactCollector
       });
     }
   };
