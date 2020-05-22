@@ -352,7 +352,7 @@ const HierarchyEditor = () => {
       case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
         return <ManageLayoutPanel />;
       case HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL:
-        return <ApproveStepPanel />;
+        return <ManageApprovalExecutionPanel />;
       default:
         return null;
     }
