@@ -55,8 +55,7 @@ import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
 import { useUserProfileContext } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
-import { ThemeContext } from "styled-components";
-import ApproveStepPanel from "./Panels/ApproveStepPanel";
+import ManageApprovalExecutionPanel from "./Panels/ManageApprovalExecution/ManageApprovalExecutionPanel";
 import ApproveIcon from "../../atoms/Icons/ApproveIcon";
 import { ThemeContext } from "styled-components";
 
