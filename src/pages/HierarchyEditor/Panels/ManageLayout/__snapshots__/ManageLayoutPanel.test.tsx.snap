@@ -1473,9 +1473,9 @@ exports[`renders correctly with existing layout 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-bsbRJL",
+                          "componentId": "sc-iuJeZd",
                           "isStatic": false,
-                          "lastClassName": "guZPMD",
+                          "lastClassName": "hJHFef",
                           "rules": Array [
                             "
   padding: 0;
@@ -1496,7 +1496,7 @@ exports[`renders correctly with existing layout 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-bsbRJL",
+                        "styledComponentId": "sc-iuJeZd",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -1506,7 +1506,7 @@ exports[`renders correctly with existing layout 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-bsbRJL guZPMD"
+                      className="sc-htpNat sc-iuJeZd hJHFef"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
@@ -3670,9 +3670,9 @@ exports[`renders correctly with non existing layout 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-bsbRJL",
+                          "componentId": "sc-iuJeZd",
                           "isStatic": false,
-                          "lastClassName": "guZPMD",
+                          "lastClassName": "hJHFef",
                           "rules": Array [
                             "
   padding: 0;
@@ -3693,7 +3693,7 @@ exports[`renders correctly with non existing layout 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-bsbRJL",
+                        "styledComponentId": "sc-iuJeZd",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -3703,7 +3703,7 @@ exports[`renders correctly with non existing layout 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-bsbRJL guZPMD"
+                      className="sc-htpNat sc-iuJeZd hJHFef"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
@@ -4640,11 +4640,15 @@ exports[`sign layout happy flow 1`] = `
           "bgColor": "fff",
           "borderColor": "#e5e5e5",
         },
+        "nodeContextMenuIconSeparator": Object {
+          "borderColor": "#8D99AE",
+        },
         "nodeContextMenuItem": Object {
           "bgColor": "#fff",
           "hover": Object {
             "bgColor": "#e8feff",
           },
+          "iconColor": "#8D99AE",
         },
         "nodeContextMenuItemSeparator": Object {
           "borderColor": "#e5e5e5",
@@ -6141,9 +6145,9 @@ exports[`sign layout happy flow 1`] = `
                           "$$typeof": Symbol(react.forward_ref),
                           "attrs": Array [],
                           "componentStyle": ComponentStyle {
-                            "componentId": "sc-bsbRJL",
+                            "componentId": "sc-iuJeZd",
                             "isStatic": false,
-                            "lastClassName": "guZPMD",
+                            "lastClassName": "hJHFef",
                             "rules": Array [
                               "
   padding: 0;
@@ -6164,7 +6168,7 @@ exports[`sign layout happy flow 1`] = `
                             "sc-htpNat",
                           ],
                           "render": [Function],
-                          "styledComponentId": "sc-bsbRJL",
+                          "styledComponentId": "sc-iuJeZd",
                           "target": "hr",
                           "toString": [Function],
                           "warnTooManyClasses": [Function],
@@ -6174,7 +6178,7 @@ exports[`sign layout happy flow 1`] = `
                       forwardedRef={null}
                     >
                       <hr
-                        className="sc-htpNat sc-bsbRJL guZPMD"
+                        className="sc-htpNat sc-iuJeZd hJHFef"
                       />
                     </StyledComponent>
                   </Styled(styled.hr)>
@@ -8725,9 +8729,9 @@ exports[`validates a faulty layout and returns errors 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-bsbRJL",
+                          "componentId": "sc-iuJeZd",
                           "isStatic": false,
-                          "lastClassName": "guZPMD",
+                          "lastClassName": "hJHFef",
                           "rules": Array [
                             "
   padding: 0;
@@ -8748,7 +8752,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-bsbRJL",
+                        "styledComponentId": "sc-iuJeZd",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -8758,7 +8762,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-bsbRJL guZPMD"
+                      className="sc-htpNat sc-iuJeZd hJHFef"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
