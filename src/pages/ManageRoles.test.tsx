@@ -33,6 +33,7 @@ import {
 } from "../stores/UserProfile";
 import { CollapseButton } from "../atoms/CollapsibleContainer";
 import DataCheckbox from "../atoms/DataCheckbox";
+import ChevronIcon from "../atoms/Icons/ChevronIcon";
 
 const mock = new MockAdapter(Axios);
 const mockPersonalAccountApiUrl = "/api/personalaccount";
@@ -185,6 +186,17 @@ it("renders correctly", async () => {
           .props().parentIsLoading
       ).toBe(false);
     });
+
+    await waitFor(() => {
+      root.update();
+      expect(
+        root
+          .find(ChevronIcon)
+          .at(1)
+          .props().transform
+      ).toBe("rotate(180)");
+    });
+
     expect(root.find(ManageRoles)).toMatchSnapshot();
   });
 });

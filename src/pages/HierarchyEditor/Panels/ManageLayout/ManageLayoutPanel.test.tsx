@@ -273,7 +273,10 @@ it("validates a faulty layout and returns errors", async () => {
 
     root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
 
-    await waitFor(() => expect(root.find(Notification).length == 4).toBe(true));
+    await waitFor(() => {
+      root.update();
+      expect(root.find(Notification).length).toBe(4);
+    });
     expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
   });
 });

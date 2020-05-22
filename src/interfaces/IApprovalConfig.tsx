@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 export interface IApprovalConfig {
-  approvalConfigurationId?: string;
   stepName: string;
   segmentName: string;
   artifactCollectorSpecifications: Array<IArtifactCollector>;
