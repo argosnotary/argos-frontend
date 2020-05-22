@@ -55,9 +55,10 @@ import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
 import { useUserProfileContext } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
-import ApproveIcon from "../../atoms/Icons/Approve";
 import { ThemeContext } from "styled-components";
 import ApproveStepPanel from "./Panels/ApproveStepPanel";
+import ApproveIcon from "../../atoms/Icons/ApproveIcon";
+import { ThemeContext } from "styled-components";
 
 const HierarchyEditor = () => {
   const [state, dispatch] = useReducer(layoutEditorReducer, {

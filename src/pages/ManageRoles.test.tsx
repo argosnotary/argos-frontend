@@ -109,7 +109,8 @@ it("renders correctly", async () => {
           setToken: jest.fn(),
           state: PROFILE_STATE.READY,
           token: "token",
-          setUserProfile: jest.fn()
+          setUserProfile: jest.fn(),
+          setError: jest.fn()
         }}>
         <ManageRoles />
       </UserProfileContext.Provider>
@@ -174,6 +175,16 @@ it("renders correctly", async () => {
     expect(mock.history.put[0].data).toBe(
       JSON.stringify(["administrator", "user"])
     );
+
+    await waitFor(() => {
+      root.update();
+      expect(
+        root
+          .find(DataCheckbox)
+          .at(1)
+          .props().parentIsLoading
+      ).toBe(false);
+    });
     expect(root.find(ManageRoles)).toMatchSnapshot();
   });
 });

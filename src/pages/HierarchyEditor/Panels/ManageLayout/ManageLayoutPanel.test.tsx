@@ -145,7 +145,8 @@ it("renders correctly with existing layout", async () => {
         {
           uri: "http://collecet:454/service",
           type: ArtifactCollectorType.XLDEPLOY,
-          name: "collector1"
+          name: "collector1",
+          context: { applicationName: "appName" }
         }
       ]
     }
@@ -381,6 +382,11 @@ it("sign layout happy flow", async () => {
       "https://collect.org"
     );
 
+    updateField(
+      root.find('input[data-testhook-id="collector-edit-form-field-2"]'),
+      "applicationName",
+      "appName"
+    );
     root
       .find('form[data-testhook-id="collector-edit-form"]')
       .simulate("submit");
@@ -423,7 +429,7 @@ it("sign layout happy flow", async () => {
     );
 
     expect(mock.history.post[2].data).toEqual(
-      '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"type":"XLDEPLOY","name":"xlCollect","uri":"https://collect.org"}]}]'
+      '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"type":"XLDEPLOY","name":"xlCollect","uri":"https://collect.org","context":{"applicationName":"appName"}}]}]'
     );
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });

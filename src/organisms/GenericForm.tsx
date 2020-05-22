@@ -119,7 +119,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name]}
-                disabled={permission === FormPermissions.READ ? true : false}
+                disabled={permission === FormPermissions.READ}
                 {...(index == 0 ? { innerRef: firstTextInput } : null)}
               />
               {formik.touched[entry.name] && formik.errors[entry.name] ? (
@@ -138,7 +138,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name]}
-                disabled={permission === FormPermissions.READ ? true : false}
+                disabled={permission === FormPermissions.READ}
                 height={"25rem"}
                 {...(index == 0 ? { innerRef: firstTextAreaInput } : null)}
               />

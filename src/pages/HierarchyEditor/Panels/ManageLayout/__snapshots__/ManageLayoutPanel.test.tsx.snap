@@ -7206,6 +7206,7 @@ exports[`sign layout happy flow 1`] = `
                                             dataTesthookId="collector-edit-form"
                                             initialValues={
                                               Object {
+                                                "applicationName": "",
                                                 "name": "",
                                                 "uri": "",
                                               }
@@ -7225,6 +7226,11 @@ exports[`sign layout happy flow 1`] = `
                                                   "formType": "text",
                                                   "labelValue": "Service URL",
                                                   "name": "uri",
+                                                },
+                                                Object {
+                                                  "formType": "text",
+                                                  "labelValue": "Application Name",
+                                                  "name": "applicationName",
                                                 },
                                               ]
                                             }
@@ -7636,6 +7642,180 @@ exports[`sign layout happy flow 1`] = `
                                                                   onChange={[Function]}
                                                                   type="text"
                                                                   value="https://collect.org"
+                                                                />
+                                                              </StyledComponent>
+                                                            </styled.input>
+                                                          </div>
+                                                        </StyledComponent>
+                                                      </styled.div>
+                                                    </FormInput>
+                                                    <FormInput
+                                                      dataTesthookId="collector-edit-form-field-2"
+                                                      disabled={false}
+                                                      formType="text"
+                                                      labelValue="Application Name"
+                                                      name="applicationName"
+                                                      onBlur={[Function]}
+                                                      onChange={[Function]}
+                                                      value="appName"
+                                                    >
+                                                      <styled.div>
+                                                        <StyledComponent
+                                                          forwardedComponent={
+                                                            Object {
+                                                              "$$typeof": Symbol(react.forward_ref),
+                                                              "attrs": Array [],
+                                                              "componentStyle": ComponentStyle {
+                                                                "componentId": "sc-dxgOiQ",
+                                                                "isStatic": false,
+                                                                "lastClassName": "cnAnsE",
+                                                                "rules": Array [
+                                                                  "
+  display: flex;
+  flex-direction: column;
+",
+                                                                ],
+                                                              },
+                                                              "displayName": "styled.div",
+                                                              "foldedComponentIds": Array [],
+                                                              "render": [Function],
+                                                              "styledComponentId": "sc-dxgOiQ",
+                                                              "target": "div",
+                                                              "toString": [Function],
+                                                              "warnTooManyClasses": [Function],
+                                                              "withComponent": [Function],
+                                                            }
+                                                          }
+                                                          forwardedRef={null}
+                                                        >
+                                                          <div
+                                                            className="sc-dxgOiQ cnAnsE"
+                                                          >
+                                                            <styled.label>
+                                                              <StyledComponent
+                                                                forwardedComponent={
+                                                                  Object {
+                                                                    "$$typeof": Symbol(react.forward_ref),
+                                                                    "attrs": Array [],
+                                                                    "componentStyle": ComponentStyle {
+                                                                      "componentId": "sc-kpOJdX",
+                                                                      "isStatic": false,
+                                                                      "lastClassName": "iYzRxv",
+                                                                      "rules": Array [
+                                                                        "
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.8;
+  color: #0a0a0a;
+",
+                                                                      ],
+                                                                    },
+                                                                    "displayName": "styled.label",
+                                                                    "foldedComponentIds": Array [],
+                                                                    "render": [Function],
+                                                                    "styledComponentId": "sc-kpOJdX",
+                                                                    "target": "label",
+                                                                    "toString": [Function],
+                                                                    "warnTooManyClasses": [Function],
+                                                                    "withComponent": [Function],
+                                                                  }
+                                                                }
+                                                                forwardedRef={null}
+                                                              >
+                                                                <label
+                                                                  className="sc-kpOJdX iYzRxv"
+                                                                >
+                                                                  Application Name
+                                                                </label>
+                                                              </StyledComponent>
+                                                            </styled.label>
+                                                            <styled.input
+                                                              data-testhook-id="collector-edit-form-field-2"
+                                                              disabled={false}
+                                                              name="applicationName"
+                                                              onBlur={[Function]}
+                                                              onChange={[Function]}
+                                                              type="text"
+                                                              value="appName"
+                                                            >
+                                                              <StyledComponent
+                                                                data-testhook-id="collector-edit-form-field-2"
+                                                                disabled={false}
+                                                                forwardedComponent={
+                                                                  Object {
+                                                                    "$$typeof": Symbol(react.forward_ref),
+                                                                    "attrs": Array [],
+                                                                    "componentStyle": ComponentStyle {
+                                                                      "componentId": "sc-VigVT",
+                                                                      "isStatic": false,
+                                                                      "lastClassName": "cBJosH",
+                                                                      "rules": Array [
+                                                                        "
+  ",
+                                                                        "
+  overflow: visible;
+  box-sizing: border-box;
+  height: ",
+                                                                        [Function],
+                                                                        ";
+  margin: 0 0 1rem;
+  padding: 0.5rem;
+  border: 1px solid #cacaca;
+  border-radius: 0;
+  background-color: ",
+                                                                        [Function],
+                                                                        ";
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #0a0a0a;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
+    -webkit-box-shadow 0.5s;
+
+  &:hover {
+    cursor: ",
+                                                                        [Function],
+                                                                        ";
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid #8a8a8a;
+    box-shadow: 0 0 5px #cacaca;
+  }
+",
+                                                                        "
+",
+                                                                      ],
+                                                                    },
+                                                                    "displayName": "styled.input",
+                                                                    "foldedComponentIds": Array [],
+                                                                    "render": [Function],
+                                                                    "styledComponentId": "sc-VigVT",
+                                                                    "target": "input",
+                                                                    "toString": [Function],
+                                                                    "warnTooManyClasses": [Function],
+                                                                    "withComponent": [Function],
+                                                                  }
+                                                                }
+                                                                forwardedRef={null}
+                                                                name="applicationName"
+                                                                onBlur={[Function]}
+                                                                onChange={[Function]}
+                                                                type="text"
+                                                                value="appName"
+                                                              >
+                                                                <input
+                                                                  className="sc-VigVT cBJosH"
+                                                                  data-testhook-id="collector-edit-form-field-2"
+                                                                  disabled={false}
+                                                                  name="applicationName"
+                                                                  onBlur={[Function]}
+                                                                  onChange={[Function]}
+                                                                  type="text"
+                                                                  value="appName"
                                                                 />
                                                               </StyledComponent>
                                                             </styled.input>

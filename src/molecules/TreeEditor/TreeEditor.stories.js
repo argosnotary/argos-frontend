@@ -20,7 +20,7 @@ import TreeEditor from "./TreeEditor";
 import json from "./sampleData.json";
 import { treeReducer, initialTreeState } from "../../stores/treeEditorStore";
 
-import ApproveIcon from "../../atoms/Icons/Approve";
+import ApproveIcon from "../../atoms/Icons/ApproveIcon";
 
 export default {
   title: "TreeEditor"
