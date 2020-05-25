@@ -59,7 +59,7 @@ const ManageApprovalExecutionPanel: React.FC = () => {
         return <ul>
           {approvalExecutionStoreContext.state?.availableApprovalConfigs.map(approvalStep => <li
               onSelect={() => cbSelectApproval(approvalStep)}>
-            {approvalStep.segmentName} {approvalStep.stepName}
+            {approvalStep.segmentName} {approvalStep.stepName} {approvalStep == approvalExecutionStoreContext.state.selectedApprovalConfig ? "selected": null }
           </li>)}
         </ul>;
     };
