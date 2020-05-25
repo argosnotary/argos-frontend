@@ -273,7 +273,10 @@ it("validates a faulty layout and returns errors", async () => {
 
     root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
 
-    await waitFor(() => expect(root.find(Notification).length == 4).toBe(true));
+    await waitFor(() => {
+      root.update();
+      expect(root.find(Notification).length).toBe(4);
+    });
     expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
   });
 });
@@ -413,20 +416,20 @@ it("sign layout happy flow", async () => {
     await waitFor(() => expect(mock.history.get.length).toBe(2));
     await waitFor(() => expect(mock.history.post.length).toBe(3));
 
-    expect(mock.history.post[0].data).toEqual(
-      "{\n" +
-        '  "layoutSegments": [\n' +
-        "    {\n" +
-        '      "name": "jenkins",\n' +
-        '      "steps": [\n' +
-        "        {\n" +
-        '          "name": "approve"\n' +
-        "        }\n" +
-        "      ]\n" +
-        "    }\n" +
-        "  ]\n" +
-        "}"
-    );
+    const expectedPost = {
+      layoutSegments: [
+        {
+          name: "jenkins",
+          steps: [
+            {
+              name: "approve"
+            }
+          ]
+        }
+      ]
+    };
+
+    expect(JSON.parse(mock.history.post[0].data)).toEqual(expectedPost);
 
     expect(mock.history.post[2].data).toEqual(
       '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"type":"XLDEPLOY","name":"xlCollect","uri":"https://collect.org","context":{"applicationName":"appName"}}]}]'

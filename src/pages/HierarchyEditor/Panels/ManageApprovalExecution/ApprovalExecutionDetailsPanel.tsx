@@ -13,17 +13,85 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
+import React, { useState } from "react";
 import { Panel } from "../../../../molecules/Panel";
+import {
+  ArtifactCollectorType,
+  IApprovalConfig
+} from "../../../../interfaces/IApprovalConfig";
+import { useApprovalExecutionStore } from "../../../../stores/ApprovalExecutionStore";
 
 const ApprovalExecutionDetailsPanel: React.FC = () => {
+  const _approvalContext = useApprovalExecutionStore();
 
-  return (
-    <>
-      <Panel width={"37.5vw"} last={true} title="approval details">
-        ApprovalExecutionDetailsPanel
+  //const approvalConfig = approvalContext.state.selectedApprovalConfig;
+  const approvalConfig: IApprovalConfig = {
+    stepName: "stepName",
+    segmentName: "segmentName",
+    artifactCollectorSpecifications: [
+      {
+        type: ArtifactCollectorType.XLDEPLOY,
+        name: "collector 1",
+        uri: "https://someservice",
+        context: {
+          applicationName: "app name"
+        }
+      },
+      {
+        type: ArtifactCollectorType.XLDEPLOY,
+        name: "collector 2",
+        uri: "https://someservice2",
+        context: {
+          applicationName: "app name"
+        }
+      }
+    ]
+  };
+
+  const [activeCollector, setActiveCollector] = useState<number>(0);
+
+  if (approvalConfig) {
+    return (
+      <Panel
+        width={"37.5vw"}
+        last={true}
+        title={
+          "approve " +
+          approvalConfig.segmentName +
+          " - " +
+          approvalConfig.stepName
+        }>
+        <ul>
+          {approvalConfig.artifactCollectorSpecifications.map(
+            (collector, index) => {
+              return (
+                <li key={index}>
+                  <div onClick={() => setActiveCollector(index)}>
+                    header for {collector.name}
+                  </div>
+
+                  {activeCollector === index ? (
+                    <>
+                      <div>active</div>
+                    </>
+                  ) : (
+                    <>
+                      <div>not active</div>
+                    </>
+                  )}
+                </li>
+              );
+            }
+          )}
+        </ul>
       </Panel>
-    </>
+    );
+  }
+  return (
+    <Panel width={"37.5vw"} last={true} title="">
+      <div />
+    </Panel>
   );
 };
+
 export default ApprovalExecutionDetailsPanel;

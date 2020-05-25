@@ -104,23 +104,28 @@ const CopyInput: React.FC<ICopyInputProps> = ({
     }
   };
 
+  const getInputValue = (): string => {
+    if (tempMessage.length > 0) {
+      return tempMessage;
+    }
+
+    if (value) {
+      return value;
+    }
+
+    return "";
+  };
+
   return (
     <>
-      <Input
-        readOnly={true}
-        value={tempMessage.length > 0 ? tempMessage : value}
-        ref={inputRef}
-      />
+      <Input readOnly={true} value={getInputValue()} ref={inputRef} />
       <ModifiedFlexRow disableWrap={true}>
-        <InputDisplay inputCss={inputCss}>
-          {tempMessage.length > 0 ? tempMessage : value}
-        </InputDisplay>
+        <InputDisplay inputCss={inputCss}>{getInputValue()}</InputDisplay>
 
         <ClipboardWrapper
           clipboardWrapperCss={clipboardWrapperCss}
           title="Copy value to clipboard"
-          onClick={copyInputToClipboard}
-        >
+          onClick={copyInputToClipboard}>
           <ClipboardIcon
             size={clipboardIconSize}
             color={theme.passwordView.clipboardIcon.color}

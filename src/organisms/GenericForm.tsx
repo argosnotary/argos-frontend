@@ -77,8 +77,8 @@ const GenericForm: React.FC<IGenericForm> = ({
   const formik = useFormik({
     initialValues,
     onSubmit: (values: any) => {
-      onSubmit(values);
       formik.resetForm();
+      onSubmit(values);
     },
     validate
   });
@@ -118,7 +118,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 formType={entry.formType}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values[entry.name]}
+                value={formik.values[entry.name] || ""}
                 disabled={permission === FormPermissions.READ}
                 {...(index == 0 ? { innerRef: firstTextInput } : null)}
               />
@@ -137,7 +137,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 formType={entry.formType}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values[entry.name]}
+                value={formik.values[entry.name] || ""}
                 disabled={permission === FormPermissions.READ}
                 height={"25rem"}
                 {...(index == 0 ? { innerRef: firstTextAreaInput } : null)}

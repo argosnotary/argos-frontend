@@ -239,13 +239,12 @@ const ApprovalConfigEditor: React.FC = () => {
     if (addMode) {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.ADD_ARTIFACT_COLLECTOR,
-        artifactCollector: artifactCollector
+        artifactCollector
       });
-      setAddMode(false);
     } else {
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.UPDATE_ARTIFACT_COLLECTOR,
-        artifactCollector: artifactCollector
+        artifactCollector
       });
     }
   };
