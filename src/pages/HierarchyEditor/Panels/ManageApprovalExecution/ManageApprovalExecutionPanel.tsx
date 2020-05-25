@@ -60,7 +60,7 @@ const ManageApprovalExecutionPanel: React.FC = () => {
 
   const renderApprovalStepList = () => {
     if (!approvalExecutionStoreContext.state.availableApprovalConfigs.length) {
-      return null;
+      return <>no approval steps where found</>;
     }
     return (
       <ul>
