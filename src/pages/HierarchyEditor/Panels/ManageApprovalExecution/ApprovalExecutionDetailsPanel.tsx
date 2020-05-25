@@ -18,7 +18,6 @@ import { Panel } from "../../../../molecules/Panel";
 import { useApprovalExecutionStore } from "../../../../stores/ApprovalExecutionStore";
 
 const ApprovalExecutionDetailsPanel: React.FC = () => {
-
   const approvalContext = useApprovalExecutionStore();
   const approvalConfig = approvalContext.state.selectedApprovalConfig;
   const [activeCollector, setActiveCollector] = useState<number>(0);
