@@ -60,11 +60,13 @@ const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
     return errors;
   };
 
-  const onUpdateSegmentName = (formValues: IFormFormValues) => {
-    editorStoreContext.dispatch({
-      type: LayoutEditorActionType.UPDATE_NAME_ACTIVATE_LAYOUT_ELEMENT,
-      layoutElementName: formValues.name
-    });
+  const onUpdateSegmentName = (valid: boolean, formValues: IFormFormValues) => {
+    if (valid) {
+      editorStoreContext.dispatch({
+        type: LayoutEditorActionType.UPDATE_NAME_ACTIVATE_LAYOUT_ELEMENT,
+        layoutElementName: formValues.name
+      });
+    }
   };
 
   const onCancel = () => {
@@ -82,9 +84,9 @@ const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
         isLoading={false}
         validate={validateSegmentForm}
         onCancel={onCancel}
-        onSubmit={onUpdateSegmentName}
+        onSubmit={form => onUpdateSegmentName(true, form)}
         initialValues={{ name: currentName }}
-        onValidChange={onUpdateSegmentName}
+        onChange={onUpdateSegmentName}
         autoFocus={true}
       />
     </>

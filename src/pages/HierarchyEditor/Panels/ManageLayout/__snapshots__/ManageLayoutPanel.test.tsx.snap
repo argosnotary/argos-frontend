@@ -1536,8 +1536,8 @@ exports[`renders correctly with existing layout 1`] = `
                     }
                     isLoading={false}
                     onCancel={[Function]}
+                    onChange={[Function]}
                     onSubmit={[Function]}
-                    onValidChange={[Function]}
                     permission="EDIT"
                     schema={
                       Array [
@@ -3719,8 +3719,8 @@ exports[`renders correctly with non existing layout 1`] = `
                     }
                     isLoading={false}
                     onCancel={[Function]}
+                    onChange={[Function]}
                     onSubmit={[Function]}
-                    onValidChange={[Function]}
                     permission="EDIT"
                     schema={
                       Array [
@@ -6205,8 +6205,8 @@ exports[`sign layout happy flow 1`] = `
                       }
                       isLoading={false}
                       onCancel={[Function]}
+                      onChange={[Function]}
                       onSubmit={[Function]}
-                      onValidChange={[Function]}
                       permission="EDIT"
                       schema={
                         Array [
@@ -8778,8 +8778,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                     }
                     isLoading={false}
                     onCancel={[Function]}
+                    onChange={[Function]}
                     onSubmit={[Function]}
-                    onValidChange={[Function]}
                     permission="READ"
                     schema={
                       Array [

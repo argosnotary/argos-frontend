@@ -133,12 +133,14 @@ const LayoutJsonEditor: React.FC = () => {
       confirmationLabel={"Sign and Submit"}
       cancellationLabel={"Cancel"}
       initialValues={{ layout: layoutJson }}
-      onValidChange={values =>
-        editorStoreContext.dispatch({
-          type: LayoutEditorActionType.UPDATE_LAYOUT,
-          layout: JSON.parse(values.layout)
-        })
-      }
+      onChange={(valid, values) => {
+        if (valid) {
+          editorStoreContext.dispatch({
+            type: LayoutEditorActionType.UPDATE_LAYOUT,
+            layout: JSON.parse(values.layout)
+          });
+        }
+      }}
     />
   );
 };

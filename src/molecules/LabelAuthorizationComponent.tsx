@@ -160,6 +160,7 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
 
   return (
     <CollapsibleContainerComponent
+      enabled={true}
       collapsedByDefault={collapsedByDefault}
       title={`Permissions for ${accountName}`}
       onCollapse={() => {

@@ -54,9 +54,11 @@ const ManageApprovalExecutionPanel: React.FC = () => {
     } as ISelectApprovalAction);
   };
 
-  const isSelected = (approvalStep: IApprovalConfig): boolean =>{
-      return  approvalStep== approvalExecutionStoreContext.state.selectedApprovalConfig;
-  }
+  const isSelected = (approvalStep: IApprovalConfig): boolean => {
+    return (
+      approvalStep == approvalExecutionStoreContext.state.selectedApprovalConfig
+    );
+  };
 
   const renderApprovalStepList = () => {
     if (!approvalExecutionStoreContext.state.availableApprovalConfigs.length) {
@@ -65,9 +67,12 @@ const ManageApprovalExecutionPanel: React.FC = () => {
     return (
       <ul>
         {approvalExecutionStoreContext.state?.availableApprovalConfigs.map(
-          approvalStep => (
-            <li onClick={() => cbSelectApproval(approvalStep)}>
-              {approvalStep.segmentName} {approvalStep.stepName}  {isSelected(approvalStep) ? " [selected]" : null}
+          (approvalStep, index) => (
+            <li
+              key={"approvalStep" + index}
+              onClick={() => cbSelectApproval(approvalStep)}>
+              {approvalStep.segmentName} {approvalStep.stepName}{" "}
+              {isSelected(approvalStep) ? " [selected]" : null}
             </li>
           )
         )}

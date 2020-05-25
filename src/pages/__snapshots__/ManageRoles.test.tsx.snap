@@ -356,6 +356,7 @@ exports[`renders correctly 1`] = `
               >
                 <CollapsibleContainerComponent
                   collapsedByDefault={true}
+                  enabled={true}
                   onCollapse={[Function]}
                   title="Luke Skywalker"
                 >
@@ -840,6 +841,7 @@ exports[`renders correctly 1`] = `
               >
                 <CollapsibleContainerComponent
                   collapsedByDefault={true}
+                  enabled={true}
                   onCollapse={[Function]}
                   title="Anikan Skywalker"
                 >

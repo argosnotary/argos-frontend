@@ -51,12 +51,12 @@ interface IGenericForm {
   permission: FormPermission;
   validate: (values: any) => void;
   onSubmit: (values: any) => void;
-  onCancel: () => void;
+  onCancel?: () => void;
   isLoading: boolean;
   confirmationLabel?: string;
   cancellationLabel?: string;
   initialValues: FormikValues;
-  onValidChange?: (values: any) => void;
+  onChange?: (valid: boolean, values: any) => void;
   autoFocus?: boolean;
 }
 
@@ -72,7 +72,7 @@ const GenericForm: React.FC<IGenericForm> = ({
   cancellationLabel,
   initialValues,
   autoFocus,
-  onValidChange
+  onChange
 }) => {
   const formik = useFormik({
     initialValues,
@@ -120,7 +120,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name] || ""}
                 disabled={permission === FormPermissions.READ}
-                {...(index == 0 ? { innerRef: firstTextInput } : null)}
+                {...(index === 0 ? { innerRef: firstTextInput } : null)}
               />
               {formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
@@ -142,7 +142,8 @@ const GenericForm: React.FC<IGenericForm> = ({
                 height={"25rem"}
                 {...(index == 0 ? { innerRef: firstTextAreaInput } : null)}
               />
-              {formik.touched[entry.name] && formik.errors[entry.name] ? (
+              {formik.touched[entry.name] ||
+              (!formik.dirty && formik.errors[entry.name]) ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
@@ -157,8 +158,8 @@ const GenericForm: React.FC<IGenericForm> = ({
         data-testhook-id={dataTesthookId}
         onSubmit={formik.handleSubmit}
         onBlur={() => {
-          if (onValidChange && formik.isValid) {
-            onValidChange(formik.values);
+          if (onChange) {
+            onChange(formik.isValid, formik.values);
           }
         }}>
         {renderFormElements(formik, schema)}
@@ -176,7 +177,11 @@ const GenericForm: React.FC<IGenericForm> = ({
                 <CustomCancelButton
                   data-testhook="cancel-button"
                   type="button"
-                  onMouseDown={() => onCancel()}>
+                  onMouseDown={() => {
+                    if (onCancel) {
+                      onCancel();
+                    }
+                  }}>
                   {cancellationLabel}
                 </CustomCancelButton>
               ) : null}

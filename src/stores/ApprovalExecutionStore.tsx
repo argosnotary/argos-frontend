@@ -26,7 +26,7 @@ export const ApprovalExecutionStoreContext = React.createContext<
   IApprovalExecutionStoreContext
 >({} as IApprovalExecutionStoreContext);
 
-interface IApprovalExecutionStoreContext {
+export interface IApprovalExecutionStoreContext {
   state: IApprovalExecutionState;
   dispatch: Dispatch<IApprovalExecutionAction>;
 }
@@ -45,7 +45,8 @@ export interface ILoadApprovalAction extends IApprovalExecutionAction {
 
 export enum ApprovalExecutionActionType {
   LOAD_APPROVAL_STEPS,
-  SELECT_APPROVAL_STEP
+  SELECT_APPROVAL_STEP,
+  DESELECT_APPROVAL_STEP
 }
 
 const reducer = (
@@ -65,6 +66,11 @@ const reducer = (
         ...state,
         selectedApprovalConfig: (action as ISelectApprovalAction)
           .selectedApprovalConfig
+      };
+    case ApprovalExecutionActionType.DESELECT_APPROVAL_STEP:
+      return {
+        ...state,
+        selectedApprovalConfig: undefined
       };
     default:
       throw new Error();

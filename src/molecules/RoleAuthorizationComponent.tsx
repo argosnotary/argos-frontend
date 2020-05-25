@@ -160,6 +160,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
 
   return (
     <CollapsibleContainerComponent
+      enabled={true}
       collapsedByDefault={collapsedByDefault}
       title={`${accountName}`}
       onCollapse={() => {

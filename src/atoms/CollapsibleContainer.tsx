@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import ChevronIcon from "./Icons/ChevronIcon";
 
@@ -57,16 +57,24 @@ interface ICollapseContainerComponentProps {
   collapsedByDefault: boolean;
   title: string;
   onCollapse?: () => void;
+  onExpand?: () => void;
+  enabled: boolean;
 }
 
 const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> = ({
   children,
   collapsedByDefault,
   onCollapse,
-  title
+  onExpand,
+  title,
+  enabled
 }) => {
   const [toggled, setToggled] = useState(collapsedByDefault);
   const theme = useContext(ThemeContext);
+
+  useEffect(() => {
+    setToggled(collapsedByDefault);
+  }, [collapsedByDefault]);
 
   return (
     <CollapsibleContainer>
@@ -74,13 +82,18 @@ const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> 
         {title}
         <CollapseButton
           onClick={() => {
-            if (onCollapse) {
-              onCollapse();
-            }
+            if (enabled) {
+              if (onCollapse) {
+                onCollapse();
+              }
 
-            setToggled(!toggled);
-          }}
-        >
+              if (onExpand && toggled) {
+                onExpand();
+              }
+
+              setToggled(!toggled);
+            }
+          }}>
           <ChevronIcon
             color={theme.collapsibleContainer.iconColor}
             size={16}
