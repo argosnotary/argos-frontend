@@ -13,77 +13,87 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Panel } from "../../../../molecules/Panel";
-import React, { useContext, useEffect } from "react";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
+import {Panel} from "../../../../molecules/Panel";
+import React, {useContext, useEffect} from "react";
+import {useUserProfileContext} from "../../../../stores/UserProfile";
 import DataRequest from "../../../../types/DataRequest";
-import { StateContext } from "../../../../stores/hierarchyEditorStore";
+import {StateContext} from "../../../../stores/hierarchyEditorStore";
 import useDataApi from "../../../../hooks/useDataApi";
-import { customGenericDataFetchReducer } from "../../../../stores/genericDataFetchReducer";
+import {customGenericDataFetchReducer} from "../../../../stores/genericDataFetchReducer";
 import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
-import { ThemeContext } from "styled-components";
-import { IApprovalConfig } from "../../../../interfaces/IApprovalConfig";
+import {ThemeContext} from "styled-components";
+import {IApprovalConfig} from "../../../../interfaces/IApprovalConfig";
 import {
-  ApprovalExecutionStoreContext,
-  createApprovalExecutionStoreContext
+    ApprovalExecutionActionType,
+    ApprovalExecutionStoreContext,
+    createApprovalExecutionStoreContext,
+    ILoadApprovalAction,
+    ISelectApprovalAction
 } from "../../../../stores/ApprovalExecutionStore";
 import ApprovalExecutionDetailsPanel from "./ApprovalExecutionDetailsPanel";
 
 interface IApprovalStepsResponse {
-  isLoading: boolean;
-  data: Array<IApprovalConfig>;
+    isLoading: boolean;
+    data: Array<IApprovalConfig>;
 }
 
 const ManageApprovalExecutionPanel: React.FC = () => {
-  const theme = useContext(ThemeContext);
-  const { token } = useUserProfileContext();
-  const [state, _dispatch] = useContext(StateContext);
-  const [approvalStepsResponse, setApprovalSteps] = useDataApi<
-    IApprovalStepsResponse,
-    Array<IApprovalConfig>
-  >(customGenericDataFetchReducer);
-  const approvalExecutionStoreContext = createApprovalExecutionStoreContext();
-  const renderApprovalStepList = (
-    approvalStepsResponse: IApprovalStepsResponse
-  ) => {
-    if (!approvalStepsResponse.data) {
-      return null;
-    }
-    return (
-      <ul>
-        {approvalStepsResponse?.data.map(approvalStep => (
-          <li>
-            {approvalStep.segmentName} {approvalStep.stepName}
-          </li>
-        ))}
-      </ul>
-    );
-  };
-  useEffect(() => {
-    const dataRequest: DataRequest = {
-      method: "get",
-      token,
-      url: `/api/supplychain/${state.nodeReferenceId}/layout/approvalconfig/me`
-    };
-    setApprovalSteps(dataRequest);
-  }, [state.nodeReferenceId]);
+    const theme = useContext(ThemeContext);
+    const {token} = useUserProfileContext();
+    const [state, _dispatch] = useContext(StateContext);
+    const [approvalStepsResponse, setApprovalSteps] = useDataApi<IApprovalStepsResponse,
+        Array<IApprovalConfig>>(customGenericDataFetchReducer);
+    const approvalExecutionStoreContext = createApprovalExecutionStoreContext();
 
-  return (
-    <>
-      <ApprovalExecutionStoreContext.Provider
-        value={approvalExecutionStoreContext}>
-        <Panel
-          width={"37.5vw"}
-          resizable={true}
-          title={"Select step to approve"}>
-          {approvalStepsResponse.isLoading ? (
-            <AlternateLoader size={32} color={theme.alternateLoader.color} />
-          ) : null}
-          {renderApprovalStepList(approvalStepsResponse)}
-        </Panel>
-        <ApprovalExecutionDetailsPanel />
-      </ApprovalExecutionStoreContext.Provider>
-    </>
-  );
+     const cbSelectApproval= (approvalStep: IApprovalConfig) => {
+        approvalExecutionStoreContext.dispatch({
+            type: ApprovalExecutionActionType.SELECT_APPROVAL_STEP,
+            selectedApprovalConfig: approvalStep
+        } as ISelectApprovalAction);
+    }
+
+    const renderApprovalStepList = () => {
+        if (!approvalExecutionStoreContext.state.availableApprovalConfigs.length) {
+            return null;
+        }
+        return <ul>
+          {approvalExecutionStoreContext.state?.availableApprovalConfigs.map(approvalStep => <li
+              onSelect={() => cbSelectApproval(approvalStep)}>
+            {approvalStep.segmentName} {approvalStep.stepName}
+          </li>)}
+        </ul>;
+    };
+    useEffect(() => {
+        const dataRequest: DataRequest = {
+            method: "get",
+            token,
+            url: `/api/supplychain/${state.nodeReferenceId}/layout/approvalconfig/me`,
+            cbSuccess: (approvalConfigs: Array<IApprovalConfig>) => {
+                approvalExecutionStoreContext.dispatch({
+                    type: ApprovalExecutionActionType.LOAD_APPROVAL_STEPS,
+                    availableApprovalConfigs: approvalConfigs
+                } as ILoadApprovalAction)
+            }
+        };
+        setApprovalSteps(dataRequest);
+    }, [state.nodeReferenceId]);
+
+    return (
+        <>
+            <ApprovalExecutionStoreContext.Provider
+                value={approvalExecutionStoreContext}>
+                <Panel
+                    width={"37.5vw"}
+                    resizable={true}
+                    title={"Select step to approve"}>
+                    {approvalStepsResponse.isLoading ? (
+                        <AlternateLoader size={32} color={theme.alternateLoader.color}/>
+                    ) : null}
+                    {renderApprovalStepList()}
+                </Panel>
+                <ApprovalExecutionDetailsPanel/>
+            </ApprovalExecutionStoreContext.Provider>
+        </>
+    );
 };
 export default ManageApprovalExecutionPanel;

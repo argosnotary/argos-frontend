@@ -33,10 +33,18 @@ interface IApprovalExecutionStoreContext {
 
 export interface IApprovalExecutionAction {
   type: ApprovalExecutionActionType;
+}
+
+export interface ISelectApprovalAction extends IApprovalExecutionAction{
   selectedApprovalConfig: IApprovalConfig;
 }
 
+export interface ILoadApprovalAction extends IApprovalExecutionAction{
+  availableApprovalConfigs: Array<IApprovalConfig>;
+}
+
 export enum ApprovalExecutionActionType {
+  LOAD_APPROVAL_STEPS,
   SELECT_APPROVAL_STEP
 }
 
@@ -45,10 +53,16 @@ const reducer = (
   action: IApprovalExecutionAction
 ): IApprovalExecutionState => {
   switch (action.type) {
+    case ApprovalExecutionActionType.LOAD_APPROVAL_STEPS:
+      return {
+        ...state,
+        availableApprovalConfigs: (action as ILoadApprovalAction).availableApprovalConfigs,
+      };
+
     case ApprovalExecutionActionType.SELECT_APPROVAL_STEP:
       return {
         ...state,
-        selectedApprovalConfig: action.selectedApprovalConfig
+        selectedApprovalConfig: (action as ISelectApprovalAction).selectedApprovalConfig,
       };
     default:
       throw new Error();
