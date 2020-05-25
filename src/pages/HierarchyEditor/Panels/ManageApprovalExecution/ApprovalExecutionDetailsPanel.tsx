@@ -15,39 +15,12 @@
  */
 import React, { useState } from "react";
 import { Panel } from "../../../../molecules/Panel";
-import {
-  ArtifactCollectorType,
-  IApprovalConfig
-} from "../../../../interfaces/IApprovalConfig";
 import { useApprovalExecutionStore } from "../../../../stores/ApprovalExecutionStore";
 
 const ApprovalExecutionDetailsPanel: React.FC = () => {
-  const _approvalContext = useApprovalExecutionStore();
 
-  //const approvalConfig = approvalContext.state.selectedApprovalConfig;
-  const approvalConfig: IApprovalConfig = {
-    stepName: "stepName",
-    segmentName: "segmentName",
-    artifactCollectorSpecifications: [
-      {
-        type: ArtifactCollectorType.XLDEPLOY,
-        name: "collector 1",
-        uri: "https://someservice",
-        context: {
-          applicationName: "app name"
-        }
-      },
-      {
-        type: ArtifactCollectorType.XLDEPLOY,
-        name: "collector 2",
-        uri: "https://someservice2",
-        context: {
-          applicationName: "app name"
-        }
-      }
-    ]
-  };
-
+  const approvalContext = useApprovalExecutionStore();
+  const approvalConfig = approvalContext.state.selectedApprovalConfig;
   const [activeCollector, setActiveCollector] = useState<number>(0);
 
   if (approvalConfig) {
