@@ -17,8 +17,8 @@ import React, { useEffect, useState } from "react";
 import { Panel } from "../../../../molecules/Panel";
 import {
   ApprovalExecutionActionType,
-  IApprovalExecutionAction,
   IApprovalExecutionStoreContext,
+  ISignArtifactsAction,
   useApprovalExecutionStore
 } from "../../../../stores/ApprovalExecutionStore";
 import GenericForm, {
@@ -110,6 +110,33 @@ const createExecutionContexts = (context: IApprovalExecutionStoreContext) => {
   }
 };
 
+const validateApprovalExecutionForm = (
+  values: IFormValues,
+  type: ArtifactCollectorType
+) => {
+  const errors = {} as IFormValues;
+
+  if (!values.username) {
+    errors.username = "Please fill in a username";
+  }
+
+  if (!values.password) {
+    errors.password = "Please fill in a password";
+  }
+
+  if (type === ArtifactCollectorType.XLDEPLOY) {
+    if (!values.applicationVersion) {
+      errors.applicationVersion = "Please fill in a application name.";
+    } else if (
+      !new RegExp("^[^\\\\/\\]\\[:|,*]+$").test(values.applicationVersion)
+    ) {
+      errors.applicationVersion =
+        "Please enter only valid characters for the application version (no `/`, `\\`, `:`, `[`, `]`, `|`, `,` or `*`)";
+    }
+  }
+  return errors;
+};
+
 const ApprovalExecutionDetailsPanel: React.FC = () => {
   const approvalContext = useApprovalExecutionStore();
   const [activeCollector, setActiveCollector] = useState<number>(0);
@@ -135,33 +162,6 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
 
   const getInitialValues = (_collector: IArtifactCollector, index: number) => {
     return executionContexts[index].executionValues;
-  };
-
-  const validateApprovalExecutionForm = (
-    values: IFormValues,
-    type: ArtifactCollectorType
-  ) => {
-    const errors = {} as IFormValues;
-
-    if (!values.username) {
-      errors.username = "Please fill in a username";
-    }
-
-    if (!values.password) {
-      errors.password = "Please fill in a password";
-    }
-
-    if (type === ArtifactCollectorType.XLDEPLOY) {
-      if (!values.applicationVersion) {
-        errors.applicationVersion = "Please fill in a application name.";
-      } else if (
-        !new RegExp("^[^\\\\/\\]\\[:|,*]+$").test(values.applicationVersion)
-      ) {
-        errors.applicationVersion =
-          "Please enter only valid characters for the application version (no `/`, `\\`, `:`, `[`, `]`, `|`, `,` or `*`)";
-      }
-    }
-    return errors;
   };
 
   const [collectorServiceApiResponse, setArtifactsRequest] = useDataApi(
@@ -192,8 +192,18 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
         } else {
           approvalContext.dispatch({
             type: ApprovalExecutionActionType.SIGN_ARTIFACTS,
-            artifactsToSign: artifacts
-          } as IApprovalExecutionAction);
+            approvalSigningContext: {
+              runId:
+                context.config.context.applicationName +
+                "/" +
+                context.executionValues.applicationVersion,
+              stepName:
+                approvalContext.state.selectedApprovalConfig?.stepName || "",
+              segmentName:
+                approvalContext.state.selectedApprovalConfig?.segmentName || "",
+              artifactsToSign: artifacts
+            }
+          } as ISignArtifactsAction);
         }
       }
     };

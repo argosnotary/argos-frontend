@@ -28,6 +28,7 @@ import PassphraseDialogBox from "../../../../organisms/PassphraseDialogBox";
 import {
   ApprovalExecutionActionType,
   IApprovalExecutionAction,
+  IApprovalSigningContext,
   useApprovalExecutionStore
 } from "../../../../stores/ApprovalExecutionStore";
 import { signLink } from "../../LinkSigningService";
@@ -49,21 +50,19 @@ const LinkSigner: React.FC = () => {
       token: token,
       url: "/api/personalaccount/me/key",
       cbSuccess: (key: IPersonalAccountKeyPair) => {
-        const stepName =
-          approvalContext.state.selectedApprovalConfig?.stepName || "";
-        const segmentName =
-          approvalContext.state.selectedApprovalConfig?.segmentName || "";
+        const signingContext = approvalContext.state
+          .approvalSigningContext as IApprovalSigningContext;
         signLink(
           passphrase,
           key.keyId,
           key.encryptedPrivateKey,
           {
-            layoutSegmentName: segmentName,
-            stepName: stepName,
-            runId: "runId",
+            layoutSegmentName: signingContext.segmentName,
+            stepName: signingContext.stepName,
+            runId: signingContext.runId,
             command: [],
             products: [],
-            materials: approvalContext.state.artifactsToSign
+            materials: signingContext.artifactsToSign
           },
           state.nodeReferenceId
         )
@@ -103,7 +102,7 @@ const LinkSigner: React.FC = () => {
   return (
     <>
       <PassphraseDialogBox
-        showDialog={approvalContext.state.artifactsToSign.length > 0}
+        showDialog={approvalContext.state.approvalSigningContext !== undefined}
         passphrase={passphrase}
         onCancel={() => {
           approvalContext.dispatch({

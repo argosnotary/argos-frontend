@@ -18,9 +18,9 @@ import React, { Dispatch, useContext, useReducer } from "react";
 import { IArtifact } from "../interfaces/ILink";
 
 interface IApprovalExecutionState {
-  selectedApprovalConfig: IApprovalConfig | undefined;
+  selectedApprovalConfig?: IApprovalConfig;
   availableApprovalConfigs: Array<IApprovalConfig>;
-  artifactsToSign: Array<IArtifact>;
+  approvalSigningContext?: IApprovalSigningContext;
   loading: boolean;
 }
 
@@ -45,8 +45,15 @@ export interface ILoadApprovalAction extends IApprovalExecutionAction {
   availableApprovalConfigs: Array<IApprovalConfig>;
 }
 
-export interface ISignArtifactsAction extends IApprovalExecutionAction {
+export interface IApprovalSigningContext {
   artifactsToSign: Array<IArtifact>;
+  segmentName: string;
+  stepName: string;
+  runId: string;
+}
+
+export interface ISignArtifactsAction extends IApprovalExecutionAction {
+  approvalSigningContext: IApprovalSigningContext;
 }
 
 export enum ApprovalExecutionActionType {
@@ -64,6 +71,7 @@ const reducer = (
     case ApprovalExecutionActionType.LOAD_APPROVAL_STEPS:
       return {
         ...state,
+        approvalSigningContext: undefined,
         availableApprovalConfigs: (action as ILoadApprovalAction)
           .availableApprovalConfigs
       };
@@ -71,18 +79,21 @@ const reducer = (
     case ApprovalExecutionActionType.SELECT_APPROVAL_STEP:
       return {
         ...state,
+        approvalSigningContext: undefined,
         selectedApprovalConfig: (action as ISelectApprovalAction)
           .selectedApprovalConfig
       };
     case ApprovalExecutionActionType.DESELECT_APPROVAL_STEP:
       return {
         ...state,
+        approvalSigningContext: undefined,
         selectedApprovalConfig: undefined
       };
     case ApprovalExecutionActionType.SIGN_ARTIFACTS:
       return {
         ...state,
-        artifactsToSign: (action as ISignArtifactsAction).artifactsToSign
+        approvalSigningContext: (action as ISignArtifactsAction)
+          .approvalSigningContext
       };
     default:
       throw new Error();
@@ -93,8 +104,7 @@ export const createApprovalExecutionStoreContext = (): IApprovalExecutionStoreCo
   const [state, dispatch] = useReducer(reducer, {
     selectedApprovalConfig: undefined,
     availableApprovalConfigs: [],
-    loading: false,
-    artifactsToSign: []
+    loading: false
   });
   return { state: state, dispatch: dispatch };
 };
