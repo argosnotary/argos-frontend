@@ -42,3 +42,8 @@ services:
     image: mongo:4.2.1-bionic
     ports:
       - 27017:27017
+
+  collector:
+    image: argosnotary/argos-collector-service-snapshot:master
+    ports:
+      - 8888:8080

@@ -15,10 +15,12 @@
  */
 import { IApprovalConfig } from "../interfaces/IApprovalConfig";
 import React, { Dispatch, useContext, useReducer } from "react";
+import { IArtifact } from "../interfaces/ILink";
 
 interface IApprovalExecutionState {
   selectedApprovalConfig: IApprovalConfig | undefined;
   availableApprovalConfigs: Array<IApprovalConfig>;
+  artifactsToSign: Array<IArtifact>;
   loading: boolean;
 }
 
@@ -43,10 +45,15 @@ export interface ILoadApprovalAction extends IApprovalExecutionAction {
   availableApprovalConfigs: Array<IApprovalConfig>;
 }
 
+export interface ISignArtifactsAction extends IApprovalExecutionAction {
+  artifactsToSign: Array<IArtifact>;
+}
+
 export enum ApprovalExecutionActionType {
   LOAD_APPROVAL_STEPS,
   SELECT_APPROVAL_STEP,
-  DESELECT_APPROVAL_STEP
+  DESELECT_APPROVAL_STEP,
+  SIGN_ARTIFACTS
 }
 
 const reducer = (
@@ -72,6 +79,11 @@ const reducer = (
         ...state,
         selectedApprovalConfig: undefined
       };
+    case ApprovalExecutionActionType.SIGN_ARTIFACTS:
+      return {
+        ...state,
+        artifactsToSign: (action as ISignArtifactsAction).artifactsToSign
+      };
     default:
       throw new Error();
   }
@@ -81,7 +93,8 @@ export const createApprovalExecutionStoreContext = (): IApprovalExecutionStoreCo
   const [state, dispatch] = useReducer(reducer, {
     selectedApprovalConfig: undefined,
     availableApprovalConfigs: [],
-    loading: false
+    loading: false,
+    artifactsToSign: []
   });
   return { state: state, dispatch: dispatch };
 };

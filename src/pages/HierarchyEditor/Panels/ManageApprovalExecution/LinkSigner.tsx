@@ -16,7 +16,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import DataRequest from "../../../../types/DataRequest";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
-import { signLayout } from "../../LayoutService";
 import {
   HierarchyEditorPaneActionTypes,
   StateContext
@@ -24,15 +23,18 @@ import {
 import { WRONG_PASSWORD } from "../../../../security";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
-import {
-  LayoutEditorActionType,
-  useLayoutEditorStore
-} from "../../../../stores/LayoutEditorStore";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
 import PassphraseDialogBox from "../../../../organisms/PassphraseDialogBox";
+import {
+  ApprovalExecutionActionType,
+  IApprovalExecutionAction,
+  useApprovalExecutionStore
+} from "../../../../stores/ApprovalExecutionStore";
+import { signLink } from "../../LinkSigningService";
+import { ILinkMetaBlock } from "../../../../interfaces/ILink";
 
-const LayoutSigner: React.FC = () => {
-  const editorStoreContext = useLayoutEditorStore();
+const LinkSigner: React.FC = () => {
+  const approvalContext = useApprovalExecutionStore();
   const [state, dispatch] = useContext(StateContext);
   const [showWarning, setShowWarning] = useState(false);
   const [passphrase, setPassphrase] = useState("");
@@ -47,32 +49,33 @@ const LayoutSigner: React.FC = () => {
       token: token,
       url: "/api/personalaccount/me/key",
       cbSuccess: (key: IPersonalAccountKeyPair) => {
-        signLayout(
+        const stepName =
+          approvalContext.state.selectedApprovalConfig?.stepName || "";
+        const segmentName =
+          approvalContext.state.selectedApprovalConfig?.segmentName || "";
+        signLink(
           passphrase,
           key.keyId,
           key.encryptedPrivateKey,
-          editorStoreContext.state.layout
+          {
+            layoutSegmentName: segmentName,
+            stepName: stepName,
+            runId: "runId",
+            command: [],
+            products: [],
+            materials: approvalContext.state.artifactsToSign
+          },
+          state.nodeReferenceId
         )
-          .then(layoutMetaBlock => {
+          .then((linkMetaBlock: ILinkMetaBlock) => {
             setRequest({
-              data: layoutMetaBlock,
+              data: linkMetaBlock,
               method: "post",
               token,
-              url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
+              url: "/api/supplychain/" + state.nodeReferenceId + "/link",
               cbSuccess: () => {
-                setRequest({
-                  data: editorStoreContext.state.approvalConfigs,
-                  url:
-                    "/api/supplychain/" +
-                    state.nodeReferenceId +
-                    "/layout/approvalconfig",
-                  method: "post",
-                  token,
-                  cbSuccess: () => {
-                    dispatch({
-                      type: HierarchyEditorPaneActionTypes.RESET_PANE
-                    });
-                  }
+                dispatch({
+                  type: HierarchyEditorPaneActionTypes.RESET_PANE
                 });
               }
             });
@@ -100,12 +103,13 @@ const LayoutSigner: React.FC = () => {
   return (
     <>
       <PassphraseDialogBox
-        showDialog={editorStoreContext.state.showSigningDialog}
+        showDialog={approvalContext.state.artifactsToSign.length > 0}
         passphrase={passphrase}
         onCancel={() => {
-          editorStoreContext.dispatch({
-            type: LayoutEditorActionType.STOP_SIGNING
-          });
+          approvalContext.dispatch({
+            type: ApprovalExecutionActionType.SIGN_ARTIFACTS,
+            artifactsToSign: []
+          } as IApprovalExecutionAction);
           setShowWarning(false);
           setPassphrase("");
         }}
@@ -121,4 +125,4 @@ const LayoutSigner: React.FC = () => {
   );
 };
 
-export default LayoutSigner;
+export default LinkSigner;

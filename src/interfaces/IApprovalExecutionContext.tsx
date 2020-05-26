@@ -16,5 +16,7 @@
 
 export interface IXLDeployExecutionContext {
   applicationName: string;
-  applicationVersion: string;
+  version: string;
+  username: string;
+  password: string;
 }

@@ -53,6 +53,8 @@ interface ILoaderButtonProps {
   children: string;
   loading: boolean;
   buttonType: "button" | "submit" | "reset";
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
 const LoaderIconButton = styled(Button)`
@@ -62,7 +64,9 @@ const LoaderIconButton = styled(Button)`
 const LoaderButton: React.FC<ILoaderButtonProps> = ({
   children,
   loading,
-  buttonType
+  buttonType,
+  onClick,
+  disabled
 }) => {
   const theme = useContext(ThemeContext);
 
@@ -73,7 +77,11 @@ const LoaderButton: React.FC<ILoaderButtonProps> = ({
       </LoaderIconButton>
     );
   }
-  return <Button type={buttonType}>{children}</Button>;
+  return (
+    <Button disabled={disabled} onClick={onClick} type={buttonType}>
+      {children}
+    </Button>
+  );
 };
 
 const CancelButton = styled(Button)`

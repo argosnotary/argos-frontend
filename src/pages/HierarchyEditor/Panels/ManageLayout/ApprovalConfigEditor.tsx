@@ -170,7 +170,6 @@ const validateApprovalConfigForm = (
   if (type === ArtifactCollectorType.XLDEPLOY) {
     if (!values.applicationName) {
       errors.applicationName = "Please fill in a application name.";
-      // eslint-disable-next-line
     } else if (
       !new RegExp("^[^\\\\/\\]\\[:|,*]+$").test(values.applicationName)
     ) {
