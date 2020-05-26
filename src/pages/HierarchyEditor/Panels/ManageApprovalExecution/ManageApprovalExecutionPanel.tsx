@@ -48,33 +48,6 @@ const ManageApprovalExecutionPanel: React.FC = () => {
   >(customGenericDataFetchReducer);
   const approvalExecutionStoreContext = createApprovalExecutionStoreContext();
 
-  const cbSelectApproval = (approvalStep: IApprovalConfig) => {
-    approvalExecutionStoreContext.dispatch({
-      type: ApprovalExecutionActionType.SELECT_APPROVAL_STEP,
-      selectedApprovalConfig: approvalStep
-    } as ISelectApprovalAction);
-  };
-
-  const renderApprovalStepList = () => {
-    if (!approvalExecutionStoreContext.state.availableApprovalConfigs.length) {
-      return <>no approval steps where found</>;
-    }
-    return (
-      <SelectList>
-        {approvalExecutionStoreContext.state?.availableApprovalConfigs.map(
-          (approvalStep, index) => (
-            <SelectListItem
-              fieldName={"approval-step-choice"}
-              fieldValue={`${approvalStep.segmentName}-${approvalStep.stepName}`}
-              key={`approvalStep-${index}`}
-              onSelect={() => cbSelectApproval(approvalStep)}>
-              {approvalStep.segmentName} - {approvalStep.stepName}
-            </SelectListItem>
-          )
-        )}
-      </SelectList>
-    );
-  };
   useEffect(() => {
     const dataRequest: DataRequest = {
       method: "get",
@@ -89,6 +62,41 @@ const ManageApprovalExecutionPanel: React.FC = () => {
     };
     setApprovalSteps(dataRequest);
   }, [state.nodeReferenceId]);
+
+  const cbSelectApproval = (approvalStep: IApprovalConfig) => {
+    approvalExecutionStoreContext.dispatch({
+      type: ApprovalExecutionActionType.SELECT_APPROVAL_STEP,
+      selectedApprovalConfig: approvalStep
+    } as ISelectApprovalAction);
+  };
+
+  const isSelected = (approvalStep: IApprovalConfig): boolean => {
+    return (
+      approvalStep == approvalExecutionStoreContext.state.selectedApprovalConfig
+    );
+  };
+
+  const renderApprovalStepList = () => {
+    if (!approvalExecutionStoreContext.state.availableApprovalConfigs.length) {
+      return <p>No approval steps were found</p>;
+    }
+    return (
+      <SelectList>
+        {approvalExecutionStoreContext.state?.availableApprovalConfigs.map(
+          (approvalStep, index) => (
+            <SelectListItem
+              fieldName={"approval-step-choice"}
+              fieldValue={`${approvalStep.segmentName}-${approvalStep.stepName}`}
+              key={`approvalStep-${index}`}
+              onSelect={() => cbSelectApproval(approvalStep)}
+              checked={isSelected(approvalStep)}>
+              {approvalStep.segmentName} - {approvalStep.stepName}
+            </SelectListItem>
+          )
+        )}
+      </SelectList>
+    );
+  };
 
   return (
     <>

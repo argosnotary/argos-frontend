@@ -53,6 +53,7 @@ interface ISelectListItemProps {
   fieldValue: string;
   children: ReactNode;
   onSelect?: () => void;
+  checked?: boolean;
 }
 
 export const SelectListItem: React.FC<ISelectListItemProps> = props => {
@@ -65,6 +66,7 @@ export const SelectListItem: React.FC<ISelectListItemProps> = props => {
         id={`id-${props.fieldValue}`}
         name={props.fieldName}
         value={props.fieldValue}
+        {...(props.checked ? { checked: props.checked } : "")}
       />
       <Label htmlFor={`id-${props.fieldValue}`} onClick={props.onSelect}>
         <HoverArrow>
