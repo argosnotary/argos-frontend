@@ -51,6 +51,10 @@
     "headerBgColor": "#e0e0e0",
     "bodyBorderColor": "#e0e0e0"
   },
+  "selectList": {
+    "selectedItemBgColor": "#e8feff",
+    "iconColor": "#8d99ae"
+  },
   "panel": {
     "icons": {
       "shrinkIcon": {
