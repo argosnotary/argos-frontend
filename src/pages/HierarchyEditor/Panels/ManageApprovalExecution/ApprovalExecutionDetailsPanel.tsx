@@ -30,6 +30,20 @@ import {
 } from "../../../../interfaces/IApprovalConfig";
 import CollapsibleContainerComponent from "../../../../atoms/CollapsibleContainer";
 import { Button, CancelButton } from "../../../../atoms/Button";
+import FlexRow from "../../../../atoms/FlexRow";
+import styled from "styled-components";
+
+const ApproveButtonContainer = styled(FlexRow)`
+  margin: 1rem 0;
+
+  ${Button} {
+    margin: 0 1rem;
+
+    &:first-of-type {
+      margin: 0;
+    }
+  }
+`;
 
 const defaultApprovalConfigFormSchema: IGenericFormSchema = [
   {
@@ -208,14 +222,16 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
             );
           })}
         </ul>
-        <Button
-          onClick={handleApprove}
-          disabled={
-            executionContexts.findIndex(context => !context.valid) >= 0
-          }>
-          Approve
-        </Button>
-        <CancelButton onMouseDown={onCancel}>Cancel</CancelButton>
+        <ApproveButtonContainer>
+          <Button
+            onClick={handleApprove}
+            disabled={
+              executionContexts.findIndex(context => !context.valid) >= 0
+            }>
+            Approve
+          </Button>
+          <CancelButton onMouseDown={onCancel}>Cancel</CancelButton>
+        </ApproveButtonContainer>
       </Panel>
     );
   }

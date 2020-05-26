@@ -18,8 +18,14 @@ const HoverArrow = styled.div`
 
 const Label = styled.label`
   display: flex;
+  background-color: ${props => props.theme.selectList.defaultItemBgColor};
+  margin: 0.5rem 0;
   align-items: center;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
+
+  &:first-of-type {
+    margin: 0 0 0.5rem;
+  }
 
   &:hover {
     cursor: pointer;
@@ -45,7 +51,7 @@ const Input = styled.input`
 interface ISelectListItemProps {
   fieldName: string;
   fieldValue: string;
-  labelValue: string;
+  children: ReactNode;
   onSelect?: () => void;
 }
 
@@ -64,7 +70,7 @@ export const SelectListItem: React.FC<ISelectListItemProps> = props => {
         <HoverArrow>
           <ChevronIcon size={14} color={theme.selectList.iconColor} />
         </HoverArrow>
-        <span>{props.labelValue}</span>
+        <span>{props.children}</span>
       </Label>
     </>
   );

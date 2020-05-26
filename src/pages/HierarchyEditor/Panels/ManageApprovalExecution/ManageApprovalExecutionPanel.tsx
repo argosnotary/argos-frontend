@@ -31,6 +31,7 @@ import {
   ISelectApprovalAction
 } from "../../../../stores/ApprovalExecutionStore";
 import ApprovalExecutionDetailsPanel from "./ApprovalExecutionDetailsPanel";
+import SelectList, { SelectListItem } from "../../../../atoms/SelectList";
 
 interface IApprovalStepsResponse {
   isLoading: boolean;
@@ -54,29 +55,24 @@ const ManageApprovalExecutionPanel: React.FC = () => {
     } as ISelectApprovalAction);
   };
 
-  const isSelected = (approvalStep: IApprovalConfig): boolean => {
-    return (
-      approvalStep == approvalExecutionStoreContext.state.selectedApprovalConfig
-    );
-  };
-
   const renderApprovalStepList = () => {
     if (!approvalExecutionStoreContext.state.availableApprovalConfigs.length) {
       return <>no approval steps where found</>;
     }
     return (
-      <ul>
+      <SelectList>
         {approvalExecutionStoreContext.state?.availableApprovalConfigs.map(
           (approvalStep, index) => (
-            <li
-              key={"approvalStep" + index}
-              onClick={() => cbSelectApproval(approvalStep)}>
-              {approvalStep.segmentName} {approvalStep.stepName}{" "}
-              {isSelected(approvalStep) ? " [selected]" : null}
-            </li>
+            <SelectListItem
+              fieldName={"approval-step-choice"}
+              fieldValue={`${approvalStep.segmentName}-${approvalStep.stepName}`}
+              key={`approvalStep-${index}`}
+              onSelect={() => cbSelectApproval(approvalStep)}>
+              {approvalStep.segmentName} - {approvalStep.stepName}
+            </SelectListItem>
           )
         )}
-      </ul>
+      </SelectList>
     );
   };
   useEffect(() => {

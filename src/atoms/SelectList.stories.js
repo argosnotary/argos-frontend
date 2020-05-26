@@ -37,11 +37,11 @@ export const defaultList = () => (
           key={index}
           fieldName={entry.fieldName}
           fieldValue={entry.fieldValue}
-          labelValue={entry.labelValue}
           onSelect={() => {
             alert(entry.fieldValue);
-          }}
-        />
+          }}>
+          {entry.labelValue}
+        </SelectListItem>
       ))}
     </SelectList>
   </StoryContainer>

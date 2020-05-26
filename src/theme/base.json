@@ -52,6 +52,7 @@
     "bodyBorderColor": "#e0e0e0"
   },
   "selectList": {
+    "defaultItemBgColor": "#fff",
     "selectedItemBgColor": "#e8feff",
     "iconColor": "#8d99ae"
   },
