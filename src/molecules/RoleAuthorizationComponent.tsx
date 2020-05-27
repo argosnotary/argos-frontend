@@ -160,14 +160,14 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
 
   return (
     <CollapsibleContainerComponent
-      enabled={true}
       collapsedByDefault={collapsedByDefault}
       title={`${accountName}`}
       onCollapse={() => {
         if (rolesApiResponse && rolesApiResponse.data) {
-          return;
+          return true;
         }
         getGlobalRoles();
+        return true;
       }}>
       <AuthorizationContainer>
         <form

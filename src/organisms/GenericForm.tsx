@@ -58,6 +58,7 @@ interface IGenericForm {
   initialValues: FormikValues;
   onChange?: (valid: boolean, values: any) => void;
   autoFocus?: boolean;
+  validateNow?: boolean;
 }
 
 const GenericForm: React.FC<IGenericForm> = ({
@@ -72,7 +73,8 @@ const GenericForm: React.FC<IGenericForm> = ({
   cancellationLabel,
   initialValues,
   autoFocus,
-  onChange
+  onChange,
+  validateNow
 }) => {
   const formik = useFormik({
     initialValues,
@@ -91,6 +93,12 @@ const GenericForm: React.FC<IGenericForm> = ({
   useEffect(() => {
     formik.setValues(initialValues);
   }, [initialValues]);
+
+  useEffect(() => {
+    if (validateNow) {
+      setCanValidate(validateNow);
+    }
+  });
 
   useEffect(() => {
     if (autoFocus) {
@@ -124,7 +132,8 @@ const GenericForm: React.FC<IGenericForm> = ({
                 disabled={permission === FormPermissions.READ}
                 {...(index === 0 ? { innerRef: firstTextInput } : null)}
               />
-              {canValidate && formik.errors[entry.name] ? (
+              {(canValidate || formik.touched[entry.name]) &&
+              formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
@@ -144,8 +153,8 @@ const GenericForm: React.FC<IGenericForm> = ({
                 height={"25rem"}
                 {...(index == 0 ? { innerRef: firstTextAreaInput } : null)}
               />
-              {formik.touched[entry.name] ||
-              (!formik.dirty && formik.errors[entry.name]) ? (
+              {(canValidate || formik.touched[entry.name]) &&
+              formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
@@ -159,18 +168,10 @@ const GenericForm: React.FC<IGenericForm> = ({
       <form
         data-testhook-id={dataTesthookId}
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-          if (!canValidate) {
-            setCanValidate(true);
-          }
-
           formik.handleSubmit(e);
         }}
         onBlur={() => {
           if (onChange) {
-            schema.map((entry: IGenericFormInput) => {
-              formik.touched[entry.name] = true;
-            });
-
             onChange(formik.isValid, formik.values);
           }
         }}>
@@ -181,7 +182,10 @@ const GenericForm: React.FC<IGenericForm> = ({
             <ContentSeparator />
             <FlexRow>
               {confirmationLabel ? (
-                <LoaderButton buttonType="submit" loading={isLoading}>
+                <LoaderButton
+                  buttonType="submit"
+                  loading={isLoading}
+                  onMouseDown={() => setCanValidate(true)}>
                   {confirmationLabel}
                 </LoaderButton>
               ) : null}

@@ -356,12 +356,15 @@ exports[`renders correctly 1`] = `
               >
                 <CollapsibleContainerComponent
                   collapsedByDefault={true}
-                  enabled={true}
                   onCollapse={[Function]}
                   title="Luke Skywalker"
                 >
-                  <styled.section>
+                  <styled.section
+                    className=""
+                    onAnimationEnd={[Function]}
+                  >
                     <StyledComponent
+                      className=""
                       forwardedComponent={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
@@ -369,8 +372,38 @@ exports[`renders correctly 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-cSHVUG",
                             "isStatic": false,
-                            "lastClassName": "CAuLq",
-                            "rules": Array [],
+                            "lastClassName": "iPwzXc",
+                            "rules": Array [
+                              "
+  &.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+",
+                            ],
                           },
                           "displayName": "styled.section",
                           "foldedComponentIds": Array [],
@@ -383,9 +416,11 @@ exports[`renders correctly 1`] = `
                         }
                       }
                       forwardedRef={null}
+                      onAnimationEnd={[Function]}
                     >
                       <section
-                        className="sc-cSHVUG CAuLq"
+                        className="sc-cSHVUG iPwzXc"
+                        onAnimationEnd={[Function]}
                       >
                         <styled.header>
                           <StyledComponent
@@ -503,7 +538,7 @@ exports[`renders correctly 1`] = `
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-chPdSV",
                                   "isStatic": false,
-                                  "lastClassName": "dWigFp",
+                                  "lastClassName": "hMQlJo",
                                   "rules": Array [
                                     "
   border: ",
@@ -841,12 +876,15 @@ exports[`renders correctly 1`] = `
               >
                 <CollapsibleContainerComponent
                   collapsedByDefault={true}
-                  enabled={true}
                   onCollapse={[Function]}
                   title="Anikan Skywalker"
                 >
-                  <styled.section>
+                  <styled.section
+                    className=""
+                    onAnimationEnd={[Function]}
+                  >
                     <StyledComponent
+                      className=""
                       forwardedComponent={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
@@ -854,8 +892,38 @@ exports[`renders correctly 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-cSHVUG",
                             "isStatic": false,
-                            "lastClassName": "CAuLq",
-                            "rules": Array [],
+                            "lastClassName": "iPwzXc",
+                            "rules": Array [
+                              "
+  &.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+",
+                            ],
                           },
                           "displayName": "styled.section",
                           "foldedComponentIds": Array [],
@@ -868,9 +936,11 @@ exports[`renders correctly 1`] = `
                         }
                       }
                       forwardedRef={null}
+                      onAnimationEnd={[Function]}
                     >
                       <section
-                        className="sc-cSHVUG CAuLq"
+                        className="sc-cSHVUG iPwzXc"
+                        onAnimationEnd={[Function]}
                       >
                         <styled.header>
                           <StyledComponent
@@ -954,11 +1024,11 @@ exports[`renders correctly 1`] = `
                                     <ChevronIcon
                                       color="gray"
                                       size={16}
-                                      transform="rotate(180)"
+                                      transform=""
                                     >
                                       <svg
                                         height={16}
-                                        transform="rotate(180)"
+                                        transform=""
                                         version="1.1"
                                         viewBox="0 0 28 28"
                                         width={16}
@@ -977,10 +1047,10 @@ exports[`renders correctly 1`] = `
                           </StyledComponent>
                         </styled.header>
                         <styled.main
-                          collapsed={false}
+                          collapsed={true}
                         >
                           <StyledComponent
-                            collapsed={false}
+                            collapsed={true}
                             forwardedComponent={
                               Object {
                                 "$$typeof": Symbol(react.forward_ref),
@@ -988,7 +1058,7 @@ exports[`renders correctly 1`] = `
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-chPdSV",
                                   "isStatic": false,
-                                  "lastClassName": "dWigFp",
+                                  "lastClassName": "hMQlJo",
                                   "rules": Array [
                                     "
   border: ",
@@ -1018,7 +1088,7 @@ exports[`renders correctly 1`] = `
                             forwardedRef={null}
                           >
                             <main
-                              className="sc-chPdSV dWigFp"
+                              className="sc-chPdSV hMQlJo"
                             >
                               <styled.div>
                                 <StyledComponent

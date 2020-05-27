@@ -144,6 +144,8 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
     Array<ICollectorExecutionContext>
   >(createExecutionContexts(approvalContext));
 
+  const [validateNow, setValidateNow] = useState(false);
+
   useEffect(() => {
     setExecutionContexts(createExecutionContexts(approvalContext));
   }, [approvalContext.state.selectedApprovalConfig]);
@@ -236,6 +238,7 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
           initialValues={getInitialValues(collector, index)}
           confirmationLabel={"Next"}
           autoFocus={true}
+          validateNow={validateNow}
         />
       </>
     );
@@ -248,14 +251,29 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
     return (
       <li key={"executionContext" + index}>
         <CollapsibleContainerComponent
-          enabled={
-            executionContexts[activeCollector] &&
-            executionContexts[activeCollector].valid
-          }
           collapsedByDefault={activeCollector !== index}
           title={executionContext.config.name}
           onExpand={() => {
-            setActiveCollector(index);
+            if (executionContexts[activeCollector]) {
+              if (executionContexts[activeCollector].valid) {
+                setValidateNow(false);
+                setActiveCollector(index);
+                return true;
+              } else {
+                return false;
+              }
+            } else {
+              setValidateNow(false);
+              setActiveCollector(index);
+              return true;
+            }
+          }}
+          onCollapse={() => {
+            setValidateNow(true);
+            return (
+              executionContexts[activeCollector] &&
+              executionContexts[activeCollector].valid
+            );
           }}>
           {activeCollector === index
             ? renderForm(index, executionContext.config)

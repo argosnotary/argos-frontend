@@ -1953,8 +1953,10 @@ exports[`renders correctly with existing layout 1`] = `
                                   <LoaderButton
                                     buttonType="submit"
                                     loading={false}
+                                    onMouseDown={[Function]}
                                   >
                                     <styled.button
+                                      onMouseDown={[Function]}
                                       type="submit"
                                     >
                                       <StyledComponent
@@ -1965,7 +1967,7 @@ exports[`renders correctly with existing layout 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-eNQAEJ",
                                               "isStatic": false,
-                                              "lastClassName": "geYAxA",
+                                              "lastClassName": "fEgkVN",
                                               "rules": Array [
                                                 "
   ",
@@ -1996,6 +1998,19 @@ exports[`renders correctly with existing layout 1`] = `
   }
 ",
                                                 "
+
+  background-color: ",
+                                                [Function],
+                                                ";
+
+  &:hover {
+    background-color: ",
+                                                [Function],
+                                                ";
+    cursor: ",
+                                                [Function],
+                                                "
+  }
 ",
                                               ],
                                             },
@@ -2010,10 +2025,12 @@ exports[`renders correctly with existing layout 1`] = `
                                           }
                                         }
                                         forwardedRef={null}
+                                        onMouseDown={[Function]}
                                         type="submit"
                                       >
                                         <button
-                                          className="sc-eNQAEJ geYAxA"
+                                          className="sc-eNQAEJ fEgkVN"
+                                          onMouseDown={[Function]}
                                           type="submit"
                                         >
                                           Sign and Submit
@@ -2035,7 +2052,7 @@ exports[`renders correctly with existing layout 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "tTjA",
+                                            "lastClassName": "kTQQpi",
                                             "rules": Array [
                                               "
   ",
@@ -2066,6 +2083,19 @@ exports[`renders correctly with existing layout 1`] = `
   }
 ",
                                               "
+
+  background-color: ",
+                                              [Function],
+                                              ";
+
+  &:hover {
+    background-color: ",
+                                              [Function],
+                                              ";
+    cursor: ",
+                                              [Function],
+                                              "
+  }
 ",
                                               "
   background-color: ",
@@ -2074,7 +2104,7 @@ exports[`renders correctly with existing layout 1`] = `
   color: ",
                                               [Function],
                                               ";
-  border: 1px solid ",
+  border: ",
                                               [Function],
                                               ";
 
@@ -2114,7 +2144,7 @@ exports[`renders correctly with existing layout 1`] = `
                                       type="button"
                                     >
                                       <button
-                                        className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL tTjA"
+                                        className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL kTQQpi"
                                         data-testhook="cancel-button"
                                         onMouseDown={[Function]}
                                         type="button"
@@ -4061,8 +4091,10 @@ exports[`renders correctly with non existing layout 1`] = `
                                   <LoaderButton
                                     buttonType="submit"
                                     loading={false}
+                                    onMouseDown={[Function]}
                                   >
                                     <styled.button
+                                      onMouseDown={[Function]}
                                       type="submit"
                                     >
                                       <StyledComponent
@@ -4073,7 +4105,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-eNQAEJ",
                                               "isStatic": false,
-                                              "lastClassName": "geYAxA",
+                                              "lastClassName": "fEgkVN",
                                               "rules": Array [
                                                 "
   ",
@@ -4104,6 +4136,19 @@ exports[`renders correctly with non existing layout 1`] = `
   }
 ",
                                                 "
+
+  background-color: ",
+                                                [Function],
+                                                ";
+
+  &:hover {
+    background-color: ",
+                                                [Function],
+                                                ";
+    cursor: ",
+                                                [Function],
+                                                "
+  }
 ",
                                               ],
                                             },
@@ -4118,10 +4163,12 @@ exports[`renders correctly with non existing layout 1`] = `
                                           }
                                         }
                                         forwardedRef={null}
+                                        onMouseDown={[Function]}
                                         type="submit"
                                       >
                                         <button
-                                          className="sc-eNQAEJ geYAxA"
+                                          className="sc-eNQAEJ fEgkVN"
+                                          onMouseDown={[Function]}
                                           type="submit"
                                         >
                                           Sign and Submit
@@ -4143,7 +4190,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "tTjA",
+                                            "lastClassName": "kTQQpi",
                                             "rules": Array [
                                               "
   ",
@@ -4174,6 +4221,19 @@ exports[`renders correctly with non existing layout 1`] = `
   }
 ",
                                               "
+
+  background-color: ",
+                                              [Function],
+                                              ";
+
+  &:hover {
+    background-color: ",
+                                              [Function],
+                                              ";
+    cursor: ",
+                                              [Function],
+                                              "
+  }
 ",
                                               "
   background-color: ",
@@ -4182,7 +4242,7 @@ exports[`renders correctly with non existing layout 1`] = `
   color: ",
                                               [Function],
                                               ";
-  border: 1px solid ",
+  border: ",
                                               [Function],
                                               ";
 
@@ -4222,7 +4282,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                       type="button"
                                     >
                                       <button
-                                        className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL tTjA"
+                                        className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL kTQQpi"
                                         data-testhook="cancel-button"
                                         onMouseDown={[Function]}
                                         type="button"
@@ -4469,6 +4529,7 @@ exports[`sign layout happy flow 1`] = `
       },
       "button": Object {
         "bgColor": "#1779ba",
+        "disabledBgColor": "#e0e0e0",
         "textColor": "#fff",
       },
       "cancelButton": Object {
@@ -6627,8 +6688,10 @@ exports[`sign layout happy flow 1`] = `
                                     <LoaderButton
                                       buttonType="submit"
                                       loading={false}
+                                      onMouseDown={[Function]}
                                     >
                                       <styled.button
+                                        onMouseDown={[Function]}
                                         type="submit"
                                       >
                                         <StyledComponent
@@ -6639,7 +6702,7 @@ exports[`sign layout happy flow 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-eNQAEJ",
                                                 "isStatic": false,
-                                                "lastClassName": "geYAxA",
+                                                "lastClassName": "fEgkVN",
                                                 "rules": Array [
                                                   "
   ",
@@ -6670,6 +6733,19 @@ exports[`sign layout happy flow 1`] = `
   }
 ",
                                                   "
+
+  background-color: ",
+                                                  [Function],
+                                                  ";
+
+  &:hover {
+    background-color: ",
+                                                  [Function],
+                                                  ";
+    cursor: ",
+                                                  [Function],
+                                                  "
+  }
 ",
                                                 ],
                                               },
@@ -6684,10 +6760,12 @@ exports[`sign layout happy flow 1`] = `
                                             }
                                           }
                                           forwardedRef={null}
+                                          onMouseDown={[Function]}
                                           type="submit"
                                         >
                                           <button
-                                            className="sc-eNQAEJ geYAxA"
+                                            className="sc-eNQAEJ fEgkVN"
+                                            onMouseDown={[Function]}
                                             type="submit"
                                           >
                                             Sign and Submit
@@ -6709,7 +6787,7 @@ exports[`sign layout happy flow 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-eHgmQL",
                                               "isStatic": false,
-                                              "lastClassName": "tTjA",
+                                              "lastClassName": "kTQQpi",
                                               "rules": Array [
                                                 "
   ",
@@ -6740,6 +6818,19 @@ exports[`sign layout happy flow 1`] = `
   }
 ",
                                                 "
+
+  background-color: ",
+                                                [Function],
+                                                ";
+
+  &:hover {
+    background-color: ",
+                                                [Function],
+                                                ";
+    cursor: ",
+                                                [Function],
+                                                "
+  }
 ",
                                                 "
   background-color: ",
@@ -6748,7 +6839,7 @@ exports[`sign layout happy flow 1`] = `
   color: ",
                                                 [Function],
                                                 ";
-  border: 1px solid ",
+  border: ",
                                                 [Function],
                                                 ";
 
@@ -6788,7 +6879,7 @@ exports[`sign layout happy flow 1`] = `
                                         type="button"
                                       >
                                         <button
-                                          className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL tTjA"
+                                          className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL kTQQpi"
                                           data-testhook="cancel-button"
                                           onMouseDown={[Function]}
                                           type="button"
@@ -7251,17 +7342,17 @@ exports[`sign layout happy flow 1`] = `
                                               Array [
                                                 Object {
                                                   "formType": "text",
-                                                  "labelValue": "Name",
+                                                  "labelValue": "Name*",
                                                   "name": "name",
                                                 },
                                                 Object {
                                                   "formType": "text",
-                                                  "labelValue": "Service URL",
+                                                  "labelValue": "Service URL*",
                                                   "name": "uri",
                                                 },
                                                 Object {
                                                   "formType": "text",
-                                                  "labelValue": "Application Name",
+                                                  "labelValue": "Application Name*",
                                                   "name": "applicationName",
                                                 },
                                               ]
@@ -7327,7 +7418,7 @@ exports[`sign layout happy flow 1`] = `
                                                           />,
                                                         }
                                                       }
-                                                      labelValue="Name"
+                                                      labelValue="Name*"
                                                       name="name"
                                                       onBlur={[Function]}
                                                       onChange={[Function]}
@@ -7399,7 +7490,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 <label
                                                                   className="sc-kpOJdX iYzRxv"
                                                                 >
-                                                                  Name
+                                                                  Name*
                                                                 </label>
                                                               </StyledComponent>
                                                             </styled.label>
@@ -7511,7 +7602,7 @@ exports[`sign layout happy flow 1`] = `
                                                       dataTesthookId="collector-edit-form-field-1"
                                                       disabled={false}
                                                       formType="text"
-                                                      labelValue="Service URL"
+                                                      labelValue="Service URL*"
                                                       name="uri"
                                                       onBlur={[Function]}
                                                       onChange={[Function]}
@@ -7583,7 +7674,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 <label
                                                                   className="sc-kpOJdX iYzRxv"
                                                                 >
-                                                                  Service URL
+                                                                  Service URL*
                                                                 </label>
                                                               </StyledComponent>
                                                             </styled.label>
@@ -7685,7 +7776,7 @@ exports[`sign layout happy flow 1`] = `
                                                       dataTesthookId="collector-edit-form-field-2"
                                                       disabled={false}
                                                       formType="text"
-                                                      labelValue="Application Name"
+                                                      labelValue="Application Name*"
                                                       name="applicationName"
                                                       onBlur={[Function]}
                                                       onChange={[Function]}
@@ -7757,7 +7848,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 <label
                                                                   className="sc-kpOJdX iYzRxv"
                                                                 >
-                                                                  Application Name
+                                                                  Application Name*
                                                                 </label>
                                                               </StyledComponent>
                                                             </styled.label>
@@ -7932,8 +8023,10 @@ exports[`sign layout happy flow 1`] = `
                                                           <LoaderButton
                                                             buttonType="submit"
                                                             loading={false}
+                                                            onMouseDown={[Function]}
                                                           >
                                                             <styled.button
+                                                              onMouseDown={[Function]}
                                                               type="submit"
                                                             >
                                                               <StyledComponent
@@ -7944,7 +8037,7 @@ exports[`sign layout happy flow 1`] = `
                                                                     "componentStyle": ComponentStyle {
                                                                       "componentId": "sc-eNQAEJ",
                                                                       "isStatic": false,
-                                                                      "lastClassName": "geYAxA",
+                                                                      "lastClassName": "fEgkVN",
                                                                       "rules": Array [
                                                                         "
   ",
@@ -7975,6 +8068,19 @@ exports[`sign layout happy flow 1`] = `
   }
 ",
                                                                         "
+
+  background-color: ",
+                                                                        [Function],
+                                                                        ";
+
+  &:hover {
+    background-color: ",
+                                                                        [Function],
+                                                                        ";
+    cursor: ",
+                                                                        [Function],
+                                                                        "
+  }
 ",
                                                                       ],
                                                                     },
@@ -7989,10 +8095,12 @@ exports[`sign layout happy flow 1`] = `
                                                                   }
                                                                 }
                                                                 forwardedRef={null}
+                                                                onMouseDown={[Function]}
                                                                 type="submit"
                                                               >
                                                                 <button
-                                                                  className="sc-eNQAEJ geYAxA"
+                                                                  className="sc-eNQAEJ fEgkVN"
+                                                                  onMouseDown={[Function]}
                                                                   type="submit"
                                                                 >
                                                                   Save
@@ -8014,7 +8122,7 @@ exports[`sign layout happy flow 1`] = `
                                                                   "componentStyle": ComponentStyle {
                                                                     "componentId": "sc-eHgmQL",
                                                                     "isStatic": false,
-                                                                    "lastClassName": "tTjA",
+                                                                    "lastClassName": "kTQQpi",
                                                                     "rules": Array [
                                                                       "
   ",
@@ -8045,6 +8153,19 @@ exports[`sign layout happy flow 1`] = `
   }
 ",
                                                                       "
+
+  background-color: ",
+                                                                      [Function],
+                                                                      ";
+
+  &:hover {
+    background-color: ",
+                                                                      [Function],
+                                                                      ";
+    cursor: ",
+                                                                      [Function],
+                                                                      "
+  }
 ",
                                                                       "
   background-color: ",
@@ -8053,7 +8174,7 @@ exports[`sign layout happy flow 1`] = `
   color: ",
                                                                       [Function],
                                                                       ";
-  border: 1px solid ",
+  border: ",
                                                                       [Function],
                                                                       ";
 
@@ -8093,7 +8214,7 @@ exports[`sign layout happy flow 1`] = `
                                                               type="button"
                                                             >
                                                               <button
-                                                                className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL tTjA"
+                                                                className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL kTQQpi"
                                                                 data-testhook="cancel-button"
                                                                 onMouseDown={[Function]}
                                                                 type="button"

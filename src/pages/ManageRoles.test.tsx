@@ -194,7 +194,7 @@ it("renders correctly", async () => {
           .find(ChevronIcon)
           .at(1)
           .props().transform
-      ).toBe("rotate(180)");
+      ).toBe("");
     });
 
     expect(root.find(ManageRoles)).toMatchSnapshot();

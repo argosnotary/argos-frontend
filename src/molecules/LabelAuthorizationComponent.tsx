@@ -160,14 +160,14 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
 
   return (
     <CollapsibleContainerComponent
-      enabled={true}
       collapsedByDefault={collapsedByDefault}
       title={`Permissions for ${accountName}`}
       onCollapse={() => {
         if (permissionsApiResponse && permissionsApiResponse.data) {
-          return;
+          return true;
         }
         getLocalPermissions();
+        return true;
       }}>
       <AuthorizationContainer>
         <form

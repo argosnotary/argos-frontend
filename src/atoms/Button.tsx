@@ -68,6 +68,7 @@ interface ILoaderButtonProps {
   buttonType: "button" | "submit" | "reset";
   onClick?: () => void;
   disabled?: boolean;
+  onMouseDown?: () => void;
 }
 
 const LoaderIconButton = styled(Button)`
@@ -79,7 +80,8 @@ const LoaderButton: React.FC<ILoaderButtonProps> = ({
   loading,
   buttonType,
   onClick,
-  disabled
+  disabled,
+  onMouseDown
 }) => {
   const theme = useContext(ThemeContext);
 
@@ -91,7 +93,11 @@ const LoaderButton: React.FC<ILoaderButtonProps> = ({
     );
   }
   return (
-    <Button disabled={disabled} onClick={onClick} type={buttonType}>
+    <Button
+      disabled={disabled}
+      onClick={onClick}
+      onMouseDown={onMouseDown}
+      type={buttonType}>
       {children}
     </Button>
   );

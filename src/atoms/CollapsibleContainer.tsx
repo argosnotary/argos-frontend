@@ -84,9 +84,8 @@ interface ICollapseContainerComponentProps {
   children: React.ReactNode;
   collapsedByDefault: boolean;
   title: string;
-  onCollapse?: () => void;
-  onExpand?: () => void;
-  enabled: boolean;
+  onCollapse?: () => boolean;
+  onExpand?: () => boolean;
 }
 
 const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> = ({
@@ -94,15 +93,14 @@ const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> 
   collapsedByDefault,
   onCollapse,
   onExpand,
-  title,
-  enabled
+  title
 }) => {
-  const [toggled, setToggled] = useState(collapsedByDefault);
+  const [collapsed, setCollapsed] = useState(collapsedByDefault);
   const theme = useContext(ThemeContext);
   const [shake, setShake] = useState(false);
 
   useEffect(() => {
-    setToggled(collapsedByDefault);
+    setCollapsed(collapsedByDefault);
   }, [collapsedByDefault]);
 
   return (
@@ -115,28 +113,36 @@ const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> 
         {title}
         <CollapseButton
           onClick={() => {
-            if (enabled) {
+            if (!collapsed) {
               if (onCollapse) {
-                onCollapse();
+                if (onCollapse()) {
+                  setCollapsed(true);
+                } else {
+                  setShake(true);
+                }
+              } else {
+                setCollapsed(true);
               }
-
-              if (onExpand && toggled) {
-                onExpand();
-              }
-
-              setToggled(!toggled);
             } else {
-              setShake(true);
+              if (onExpand) {
+                if (onExpand()) {
+                  setCollapsed(false);
+                } else {
+                  setShake(true);
+                }
+              } else {
+                setCollapsed(false);
+              }
             }
           }}>
           <ChevronIcon
             color={theme.collapsibleContainer.iconColor}
             size={16}
-            transform={!toggled ? "rotate(180)" : ""}
+            transform={!collapsed ? "rotate(180)" : ""}
           />
         </CollapseButton>
       </CollapsibleContainerHeader>
-      <CollapsibleContainerBody collapsed={toggled}>
+      <CollapsibleContainerBody collapsed={collapsed}>
         {children}
       </CollapsibleContainerBody>
     </CollapsibleContainer>
