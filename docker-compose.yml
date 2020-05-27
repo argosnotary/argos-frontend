@@ -44,6 +44,12 @@ services:
       - 27017:27017
 
   collector:
-    image: argosnotary/argos-collector-service-snapshot:master
+    image: argosnotary/argos-collector-service-snapshot:implement-xldeploy-collector
+    environment:
+      spring.profiles.active: XLDEPLOY
+      argos-collector.collectortypes.xldeploy.baseurl: http://xl-deploy-stub:8080
     ports:
       - 8888:8080
+
+  xl-deploy-stub:
+    image: argosnotary/argos-collector-xl-deploy-stub:implement-xldeploy-collector

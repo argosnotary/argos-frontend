@@ -13,32 +13,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {signString} from "../../security";
-import {ILink, ILinkMetaBlock} from "../../interfaces/ILink";
+import { signString } from "../../security";
+import { IArtifact, ILink, ILinkMetaBlock } from "../../interfaces/ILink";
 import stringify from "json-stable-stringify";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const signLink = async (
-    password: string,
-    keyId: string,
-    encryptedPrivateKey: string,
-    link: ILink,
-    supplyChainId: string
+  password: string,
+  keyId: string,
+  encryptedPrivateKey: string,
+  link: ILink,
+  supplyChainId: string
 ): Promise<ILinkMetaBlock> => {
-    const signature = await signString(
-        password,
-        encryptedPrivateKey,
-        serialize(link)
-    );
-    return {
-        supplyChainId: supplyChainId,
-        signature: { signature: signature, keyId: keyId },
-        link: link
-    };
+  const signature = await signString(
+    password,
+    encryptedPrivateKey,
+    serialize(link)
+  );
+  return {
+    supplyChainId: supplyChainId,
+    signature: { signature: signature, keyId: keyId },
+    link: link
+  };
 };
 
 const serialize = (link: ILink): string => {
-    return stringify(link);
+  const cloneLink: ILink = {
+    ...link,
+    materials: sort(link.materials),
+    products: sort(link.products)
+  };
+  return stringify(cloneLink);
 };
 
-export { serialize,  signLink};
+const sort = (artifacts: Array<IArtifact>) => {
+  return artifacts.sort((n1, n2) => {
+    if (n1.uri > n2.uri) {
+      return 1;
+    }
+
+    if (n1.uri < n2.uri) {
+      return -1;
+    }
+
+    return 0;
+  });
+};
+
+export { serialize, signLink };
