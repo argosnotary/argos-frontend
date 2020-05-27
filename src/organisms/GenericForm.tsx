@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useFormik, FormikValues } from "formik";
 
@@ -86,6 +86,8 @@ const GenericForm: React.FC<IGenericForm> = ({
   const firstTextInput: React.RefObject<HTMLInputElement> = useRef(null);
   const firstTextAreaInput: React.RefObject<HTMLTextAreaElement> = useRef(null);
 
+  const [canValidate, setCanValidate] = useState(false);
+
   useEffect(() => {
     formik.setValues(initialValues);
   }, [initialValues]);
@@ -122,7 +124,7 @@ const GenericForm: React.FC<IGenericForm> = ({
                 disabled={permission === FormPermissions.READ}
                 {...(index === 0 ? { innerRef: firstTextInput } : null)}
               />
-              {formik.touched[entry.name] && formik.errors[entry.name] ? (
+              {canValidate && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
@@ -156,9 +158,19 @@ const GenericForm: React.FC<IGenericForm> = ({
     <FormContainer>
       <form
         data-testhook-id={dataTesthookId}
-        onSubmit={formik.handleSubmit}
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+          if (!canValidate) {
+            setCanValidate(true);
+          }
+
+          formik.handleSubmit(e);
+        }}
         onBlur={() => {
           if (onChange) {
+            schema.map((entry: IGenericFormInput) => {
+              formik.touched[entry.name] = true;
+            });
+
             onChange(formik.isValid, formik.values);
           }
         }}>

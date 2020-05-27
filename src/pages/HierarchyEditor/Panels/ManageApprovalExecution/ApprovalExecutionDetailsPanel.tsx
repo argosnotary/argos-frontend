@@ -54,12 +54,12 @@ const ApproveButtonContainer = styled(FlexRow)`
 
 const defaultApprovalConfigFormSchema: IGenericFormSchema = [
   {
-    labelValue: "Username",
+    labelValue: "Username*",
     name: "username",
     formType: "text"
   },
   {
-    labelValue: "Password",
+    labelValue: "Password*",
     name: "password",
     formType: "password"
   }
@@ -72,7 +72,7 @@ const getApprovalExecutionFormSchema = (
     return [
       ...defaultApprovalConfigFormSchema,
       {
-        labelValue: "Application Version",
+        labelValue: "Application Version*",
         name: "applicationVersion",
         formType: "text"
       }

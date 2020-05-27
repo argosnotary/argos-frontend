@@ -80,7 +80,7 @@ export const SelectListItem: React.FC<ISelectListItemProps> = props => {
         type="radio"
         id={`id-${props.fieldValue}`}
         name={props.fieldName}
-        value={props.fieldValue}
+        value={props.fieldValue || ""}
         {...(props.checked ? { checked: props.checked } : "")}
       />
       <Label htmlFor={`id-${props.fieldValue}`} onClick={props.onSelect}>

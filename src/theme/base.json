@@ -3,6 +3,7 @@
   "fontFile": "/fonts/fira-sans-v10-latin-regular",
   "button": {
     "bgColor": "#1779ba",
+    "disabledBgColor": "#e0e0e0",
     "textColor": "#fff"
   },
   "cancelButton": {

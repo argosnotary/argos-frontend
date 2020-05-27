@@ -43,6 +43,19 @@ const BaseButtonStyle = css`
 
 const Button = styled.button`
   ${BaseButtonStyle}
+
+  background-color: ${props =>
+    props.disabled
+      ? props.theme.button.disabledBgColor
+      : props.theme.button.bgColor};
+
+  &:hover {
+    background-color: ${props =>
+      props.disabled
+        ? props.theme.button.disabledBgColor
+        : props.theme.button.bgColor};
+    cursor: ${props => (props.disabled ? "not-allowed" : "pointer")}
+  }
 `;
 
 const AnchorButton = styled.a`
@@ -84,10 +97,17 @@ const LoaderButton: React.FC<ILoaderButtonProps> = ({
   );
 };
 
-const CancelButton = styled(Button)`
+interface ICancelButtonProps {
+  noBorder?: boolean;
+}
+
+const CancelButton = styled(Button)<ICancelButtonProps>`
   background-color: ${props => props.theme.cancelButton.bgColor};
   color: ${props => props.theme.cancelButton.textColor};
-  border: 1px solid ${props => props.theme.cancelButton.borderColor};
+  border: ${props =>
+    props.noBorder
+      ? "none"
+      : `1px solid ${props.theme.cancelButton.borderColor}`};
 
   &:hover {
     background-color: ${props => props.theme.cancelButton.hover.bgColor};

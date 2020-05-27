@@ -17,7 +17,35 @@ import React, { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import ChevronIcon from "./Icons/ChevronIcon";
 
-const CollapsibleContainer = styled.section``;
+const CollapsibleContainer = styled.section`
+  &.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+`;
 
 const CollapsibleContainerHeader = styled.header`
   display: flex;
@@ -71,13 +99,18 @@ const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> 
 }) => {
   const [toggled, setToggled] = useState(collapsedByDefault);
   const theme = useContext(ThemeContext);
+  const [shake, setShake] = useState(false);
 
   useEffect(() => {
     setToggled(collapsedByDefault);
   }, [collapsedByDefault]);
 
   return (
-    <CollapsibleContainer>
+    <CollapsibleContainer
+      className={shake ? "shake" : ""}
+      onAnimationEnd={() => {
+        setShake(false);
+      }}>
       <CollapsibleContainerHeader>
         {title}
         <CollapseButton
@@ -92,6 +125,8 @@ const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> 
               }
 
               setToggled(!toggled);
+            } else {
+              setShake(true);
             }
           }}>
           <ChevronIcon
