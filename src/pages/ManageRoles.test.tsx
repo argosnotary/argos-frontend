@@ -192,7 +192,7 @@ it("renders correctly", async () => {
       expect(
         root
           .find(ChevronIcon)
-          .at(1)
+          .at(0)
           .props().transform
       ).toBe("");
     });
