@@ -162,7 +162,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
     <CollapsibleContainerComponent
       collapsedByDefault={collapsedByDefault}
       title={`${accountName}`}
-      onCollapse={() => {
+      onExpand={() => {
         if (rolesApiResponse && rolesApiResponse.data) {
           return true;
         }

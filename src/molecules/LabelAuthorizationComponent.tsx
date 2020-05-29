@@ -162,7 +162,7 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
     <CollapsibleContainerComponent
       collapsedByDefault={collapsedByDefault}
       title={`Permissions for ${accountName}`}
-      onCollapse={() => {
+      onExpand={() => {
         if (permissionsApiResponse && permissionsApiResponse.data) {
           return true;
         }
