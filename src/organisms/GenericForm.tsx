@@ -183,6 +183,7 @@ const GenericForm: React.FC<IGenericForm> = ({
             <FlexRow>
               {confirmationLabel ? (
                 <LoaderButton
+                  dataTesthookId={dataTesthookId + "-submit-button"}
                   buttonType="submit"
                   loading={isLoading}
                   onMouseDown={() => setCanValidate(true)}>

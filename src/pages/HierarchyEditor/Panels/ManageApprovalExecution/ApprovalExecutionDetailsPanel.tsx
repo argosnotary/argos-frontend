@@ -126,7 +126,7 @@ const validateApprovalExecutionForm = (
 
   if (type === ArtifactCollectorType.XLDEPLOY) {
     if (!values.applicationVersion) {
-      errors.applicationVersion = "Please fill in a application name.";
+      errors.applicationVersion = "Please fill in a application version.";
     } else if (
       !new RegExp("^[^\\\\/\\]\\[:|,*]+$").test(values.applicationVersion)
     ) {
@@ -232,7 +232,8 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
           onChange={(valid, form) =>
             onUpdateExecutionValues(form, index, valid)
           }
-          onSubmit={() => {
+          onSubmit={form => {
+            onUpdateExecutionValues(form, index, true);
             setActiveCollector(index + 1);
           }}
           initialValues={getInitialValues(collector, index)}
@@ -302,6 +303,7 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
         </ul>
         <ApproveButtonContainer>
           <LoaderButton
+            dataTesthookId={"approve-button"}
             onClick={handleApprove}
             loading={collectorServiceApiResponse.isLoading}
             buttonType={"button"}

@@ -69,6 +69,7 @@ interface ILoaderButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   onMouseDown?: () => void;
+  dataTesthookId?: string;
 }
 
 const LoaderIconButton = styled(Button)`
@@ -81,7 +82,8 @@ const LoaderButton: React.FC<ILoaderButtonProps> = ({
   buttonType,
   onClick,
   disabled,
-  onMouseDown
+  onMouseDown,
+  dataTesthookId
 }) => {
   const theme = useContext(ThemeContext);
 
@@ -94,6 +96,7 @@ const LoaderButton: React.FC<ILoaderButtonProps> = ({
   }
   return (
     <Button
+      data-testhook-id={dataTesthookId}
       disabled={disabled}
       onClick={onClick}
       onMouseDown={onMouseDown}

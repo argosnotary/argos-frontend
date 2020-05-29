@@ -32,6 +32,8 @@ import {
 } from "../../../../stores/ApprovalExecutionStore";
 import ApprovalExecutionDetailsPanel from "./ApprovalExecutionDetailsPanel";
 import SelectList, { SelectListItem } from "../../../../atoms/SelectList";
+import { cryptoAvailable } from "../../../../security";
+import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 
 interface IApprovalStepsResponse {
   isLoading: boolean;
@@ -62,7 +64,6 @@ const ManageApprovalExecutionPanel: React.FC = () => {
     };
     setApprovalSteps(dataRequest);
   }, [state.nodeReferenceId]);
-
   const cbSelectApproval = (approvalStep: IApprovalConfig) => {
     approvalExecutionStoreContext.dispatch({
       type: ApprovalExecutionActionType.SELECT_APPROVAL_STEP,
@@ -78,7 +79,9 @@ const ManageApprovalExecutionPanel: React.FC = () => {
 
   const renderApprovalStepList = () => {
     if (!approvalExecutionStoreContext.state.availableApprovalConfigs.length) {
-      return <p>No approval steps were found</p>;
+      return (
+        <p data-testhook-id={"no-approvals"}>No approval steps were found</p>
+      );
     }
     return (
       <SelectList>
@@ -106,10 +109,19 @@ const ManageApprovalExecutionPanel: React.FC = () => {
           width={"37.5vw"}
           resizable={true}
           title={"Select step to approve"}>
-          {approvalStepsResponse.isLoading ? (
-            <AlternateLoader size={32} color={theme.alternateLoader.color} />
-          ) : null}
-          {renderApprovalStepList()}
+          {cryptoAvailable() ? (
+            <>
+              {approvalStepsResponse.isLoading ? (
+                <AlternateLoader
+                  size={32}
+                  color={theme.alternateLoader.color}
+                />
+              ) : null}
+              {renderApprovalStepList()}
+            </>
+          ) : (
+            <NoCryptoWarning />
+          )}
         </Panel>
         <ApprovalExecutionDetailsPanel />
       </ApprovalExecutionStoreContext.Provider>

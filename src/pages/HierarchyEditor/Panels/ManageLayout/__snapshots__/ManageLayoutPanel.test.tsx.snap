@@ -1952,14 +1952,17 @@ exports[`renders correctly with existing layout 1`] = `
                                 >
                                   <LoaderButton
                                     buttonType="submit"
+                                    dataTesthookId="layout-json-form-submit-button"
                                     loading={false}
                                     onMouseDown={[Function]}
                                   >
                                     <styled.button
+                                      data-testhook-id="layout-json-form-submit-button"
                                       onMouseDown={[Function]}
                                       type="submit"
                                     >
                                       <StyledComponent
+                                        data-testhook-id="layout-json-form-submit-button"
                                         forwardedComponent={
                                           Object {
                                             "$$typeof": Symbol(react.forward_ref),
@@ -2030,6 +2033,7 @@ exports[`renders correctly with existing layout 1`] = `
                                       >
                                         <button
                                           className="sc-eNQAEJ fEgkVN"
+                                          data-testhook-id="layout-json-form-submit-button"
                                           onMouseDown={[Function]}
                                           type="submit"
                                         >
@@ -4090,14 +4094,17 @@ exports[`renders correctly with non existing layout 1`] = `
                                 >
                                   <LoaderButton
                                     buttonType="submit"
+                                    dataTesthookId="layout-json-form-submit-button"
                                     loading={false}
                                     onMouseDown={[Function]}
                                   >
                                     <styled.button
+                                      data-testhook-id="layout-json-form-submit-button"
                                       onMouseDown={[Function]}
                                       type="submit"
                                     >
                                       <StyledComponent
+                                        data-testhook-id="layout-json-form-submit-button"
                                         forwardedComponent={
                                           Object {
                                             "$$typeof": Symbol(react.forward_ref),
@@ -4168,6 +4175,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                       >
                                         <button
                                           className="sc-eNQAEJ fEgkVN"
+                                          data-testhook-id="layout-json-form-submit-button"
                                           onMouseDown={[Function]}
                                           type="submit"
                                         >
@@ -6687,14 +6695,17 @@ exports[`sign layout happy flow 1`] = `
                                   >
                                     <LoaderButton
                                       buttonType="submit"
+                                      dataTesthookId="layout-json-form-submit-button"
                                       loading={false}
                                       onMouseDown={[Function]}
                                     >
                                       <styled.button
+                                        data-testhook-id="layout-json-form-submit-button"
                                         onMouseDown={[Function]}
                                         type="submit"
                                       >
                                         <StyledComponent
+                                          data-testhook-id="layout-json-form-submit-button"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -6765,6 +6776,7 @@ exports[`sign layout happy flow 1`] = `
                                         >
                                           <button
                                             className="sc-eNQAEJ fEgkVN"
+                                            data-testhook-id="layout-json-form-submit-button"
                                             onMouseDown={[Function]}
                                             type="submit"
                                           >
@@ -8022,14 +8034,17 @@ exports[`sign layout happy flow 1`] = `
                                                         >
                                                           <LoaderButton
                                                             buttonType="submit"
+                                                            dataTesthookId="collector-edit-form-submit-button"
                                                             loading={false}
                                                             onMouseDown={[Function]}
                                                           >
                                                             <styled.button
+                                                              data-testhook-id="collector-edit-form-submit-button"
                                                               onMouseDown={[Function]}
                                                               type="submit"
                                                             >
                                                               <StyledComponent
+                                                                data-testhook-id="collector-edit-form-submit-button"
                                                                 forwardedComponent={
                                                                   Object {
                                                                     "$$typeof": Symbol(react.forward_ref),
@@ -8100,6 +8115,7 @@ exports[`sign layout happy flow 1`] = `
                                                               >
                                                                 <button
                                                                   className="sc-eNQAEJ fEgkVN"
+                                                                  data-testhook-id="collector-edit-form-submit-button"
                                                                   onMouseDown={[Function]}
                                                                   type="submit"
                                                                 >

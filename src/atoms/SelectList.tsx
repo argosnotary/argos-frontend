@@ -83,7 +83,10 @@ export const SelectListItem: React.FC<ISelectListItemProps> = props => {
         value={props.fieldValue || ""}
         {...(props.checked ? { checked: props.checked } : "")}
       />
-      <Label htmlFor={`id-${props.fieldValue}`} onClick={props.onSelect}>
+      <Label
+        data-testhook-id={`select-list-item-${props.fieldValue}`}
+        htmlFor={`id-${props.fieldValue}`}
+        onClick={props.onSelect}>
         <HoverArrow>
           <ChevronIcon size={14} color={theme.selectList.iconColor} />
         </HoverArrow>
