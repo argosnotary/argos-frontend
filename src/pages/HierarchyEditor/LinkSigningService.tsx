@@ -17,7 +17,6 @@ import { signString } from "../../security";
 import { IArtifact, ILink, ILinkMetaBlock } from "../../interfaces/ILink";
 import stringify from "json-stable-stringify";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const signLink = async (
   password: string,
   keyId: string,

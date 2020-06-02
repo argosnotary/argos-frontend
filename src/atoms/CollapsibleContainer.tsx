@@ -103,6 +103,30 @@ const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> 
     setCollapsed(collapsedByDefault);
   }, [collapsedByDefault]);
 
+  const handleExpand = () => {
+    if (onExpand) {
+      if (onExpand()) {
+        setCollapsed(false);
+      } else {
+        setShake(true);
+      }
+    } else {
+      setCollapsed(false);
+    }
+  };
+
+  const handleCollapse = () => {
+    if (onCollapse) {
+      if (onCollapse()) {
+        setCollapsed(true);
+      } else {
+        setShake(true);
+      }
+    } else {
+      setCollapsed(true);
+    }
+  };
+
   return (
     <CollapsibleContainer
       className={shake ? "shake" : ""}
@@ -114,25 +138,9 @@ const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> 
         <CollapseButton
           onClick={() => {
             if (!collapsed) {
-              if (onCollapse) {
-                if (onCollapse()) {
-                  setCollapsed(true);
-                } else {
-                  setShake(true);
-                }
-              } else {
-                setCollapsed(true);
-              }
+              handleCollapse();
             } else {
-              if (onExpand) {
-                if (onExpand()) {
-                  setCollapsed(false);
-                } else {
-                  setShake(true);
-                }
-              } else {
-                setCollapsed(false);
-              }
+              handleExpand();
             }
           }}>
           <ChevronIcon
