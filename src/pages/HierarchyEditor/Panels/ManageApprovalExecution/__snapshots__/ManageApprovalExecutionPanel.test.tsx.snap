@@ -295,6 +295,7 @@ exports[`approval happy flow 1`] = `
                             checked={true}
                             id="id-segment1-step1"
                             name="approval-step-choice"
+                            onChange={[Function]}
                             type="radio"
                             value="segment1-step1"
                           >
@@ -341,6 +342,7 @@ exports[`approval happy flow 1`] = `
                               forwardedRef={null}
                               id="id-segment1-step1"
                               name="approval-step-choice"
+                              onChange={[Function]}
                               type="radio"
                               value="segment1-step1"
                             >
@@ -349,6 +351,7 @@ exports[`approval happy flow 1`] = `
                                 className="sc-gqPbQI erkAEX"
                                 id="id-segment1-step1"
                                 name="approval-step-choice"
+                                onChange={[Function]}
                                 type="radio"
                                 value="segment1-step1"
                               />
@@ -488,12 +491,15 @@ exports[`approval happy flow 1`] = `
                           onSelect={[Function]}
                         >
                           <styled.input
+                            checked={false}
                             id="id-segment2-step1"
                             name="approval-step-choice"
+                            onChange={[Function]}
                             type="radio"
                             value="segment2-step1"
                           >
                             <StyledComponent
+                              checked={false}
                               forwardedComponent={
                                 Object {
                                   "$$typeof": Symbol(react.forward_ref),
@@ -535,13 +541,16 @@ exports[`approval happy flow 1`] = `
                               forwardedRef={null}
                               id="id-segment2-step1"
                               name="approval-step-choice"
+                              onChange={[Function]}
                               type="radio"
                               value="segment2-step1"
                             >
                               <input
+                                checked={false}
                                 className="sc-gqPbQI erkAEX"
                                 id="id-segment2-step1"
                                 name="approval-step-choice"
+                                onChange={[Function]}
                                 type="radio"
                                 value="segment2-step1"
                               />
@@ -2691,12 +2700,15 @@ exports[`renders correctly with existing approvals 1`] = `
                           onSelect={[Function]}
                         >
                           <styled.input
+                            checked={false}
                             id="id-segment1-step1"
                             name="approval-step-choice"
+                            onChange={[Function]}
                             type="radio"
                             value="segment1-step1"
                           >
                             <StyledComponent
+                              checked={false}
                               forwardedComponent={
                                 Object {
                                   "$$typeof": Symbol(react.forward_ref),
@@ -2738,13 +2750,16 @@ exports[`renders correctly with existing approvals 1`] = `
                               forwardedRef={null}
                               id="id-segment1-step1"
                               name="approval-step-choice"
+                              onChange={[Function]}
                               type="radio"
                               value="segment1-step1"
                             >
                               <input
+                                checked={false}
                                 className="sc-gqPbQI erkAEX"
                                 id="id-segment1-step1"
                                 name="approval-step-choice"
+                                onChange={[Function]}
                                 type="radio"
                                 value="segment1-step1"
                               />
@@ -2884,12 +2899,15 @@ exports[`renders correctly with existing approvals 1`] = `
                           onSelect={[Function]}
                         >
                           <styled.input
+                            checked={false}
                             id="id-segment2-step1"
                             name="approval-step-choice"
+                            onChange={[Function]}
                             type="radio"
                             value="segment2-step1"
                           >
                             <StyledComponent
+                              checked={false}
                               forwardedComponent={
                                 Object {
                                   "$$typeof": Symbol(react.forward_ref),
@@ -2931,13 +2949,16 @@ exports[`renders correctly with existing approvals 1`] = `
                               forwardedRef={null}
                               id="id-segment2-step1"
                               name="approval-step-choice"
+                              onChange={[Function]}
                               type="radio"
                               value="segment2-step1"
                             >
                               <input
+                                checked={false}
                                 className="sc-gqPbQI erkAEX"
                                 id="id-segment2-step1"
                                 name="approval-step-choice"
+                                onChange={[Function]}
                                 type="radio"
                                 value="segment2-step1"
                               />

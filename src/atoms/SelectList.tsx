@@ -81,7 +81,10 @@ export const SelectListItem: React.FC<ISelectListItemProps> = props => {
         id={`id-${props.fieldValue}`}
         name={props.fieldName}
         value={props.fieldValue || ""}
-        {...(props.checked ? { checked: props.checked } : "")}
+        checked={props.checked}
+        onChange={() => {
+          return;
+        }}
       />
       <Label
         data-testhook-id={`select-list-item-${props.fieldValue}`}
