@@ -31,23 +31,33 @@ export const example = () => (
     <FlexColumn>
       <p>Expanded by default: </p>
       <CollapsibleContainerComponent
+        enabled={true}
         collapsedByDefault={false}
         title={`Title`}
         onCollapse={() => {
           alert("On collapse!");
-        }}
-      >
+        }}>
         Content
       </CollapsibleContainerComponent>
       <p>&nbsp;</p>
       <p>Collapsed by default: </p>
       <CollapsibleContainerComponent
         collapsedByDefault={true}
+        enabled={true}
         title={`Title`}
         onCollapse={() => {
           alert("Click!");
-        }}
-      >
+        }}>
+        Content
+      </CollapsibleContainerComponent>
+      <p>Shake on click: </p>
+      <CollapsibleContainerComponent
+        enabled={false}
+        collapsedByDefault={true}
+        title={`Title`}
+        onCollapse={() => {
+          alert("Click!");
+        }}>
         Content
       </CollapsibleContainerComponent>
     </FlexColumn>

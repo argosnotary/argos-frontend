@@ -13,11 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import ChevronIcon from "./Icons/ChevronIcon";
 
-const CollapsibleContainer = styled.section``;
+const CollapsibleContainer = styled.section`
+  &.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+`;
 
 const CollapsibleContainerHeader = styled.header`
   display: flex;
@@ -56,39 +84,73 @@ interface ICollapseContainerComponentProps {
   children: React.ReactNode;
   collapsedByDefault: boolean;
   title: string;
-  onCollapse?: () => void;
+  onCollapse?: () => boolean;
+  onExpand?: () => boolean;
 }
 
 const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> = ({
   children,
   collapsedByDefault,
   onCollapse,
+  onExpand,
   title
 }) => {
-  const [toggled, setToggled] = useState(collapsedByDefault);
+  const [collapsed, setCollapsed] = useState(collapsedByDefault);
   const theme = useContext(ThemeContext);
+  const [shake, setShake] = useState(false);
+
+  useEffect(() => {
+    setCollapsed(collapsedByDefault);
+  }, [collapsedByDefault]);
+
+  const handleExpand = () => {
+    if (onExpand) {
+      if (onExpand()) {
+        setCollapsed(false);
+      } else {
+        setShake(true);
+      }
+    } else {
+      setCollapsed(false);
+    }
+  };
+
+  const handleCollapse = () => {
+    if (onCollapse) {
+      if (onCollapse()) {
+        setCollapsed(true);
+      } else {
+        setShake(true);
+      }
+    } else {
+      setCollapsed(true);
+    }
+  };
 
   return (
-    <CollapsibleContainer>
+    <CollapsibleContainer
+      className={shake ? "shake" : ""}
+      onAnimationEnd={() => {
+        setShake(false);
+      }}>
       <CollapsibleContainerHeader>
         {title}
         <CollapseButton
           onClick={() => {
-            if (onCollapse) {
-              onCollapse();
+            if (!collapsed) {
+              handleCollapse();
+            } else {
+              handleExpand();
             }
-
-            setToggled(!toggled);
-          }}
-        >
+          }}>
           <ChevronIcon
             color={theme.collapsibleContainer.iconColor}
             size={16}
-            transform={!toggled ? "rotate(180)" : ""}
+            transform={!collapsed ? "rotate(180)" : ""}
           />
         </CollapseButton>
       </CollapsibleContainerHeader>
-      <CollapsibleContainerBody collapsed={toggled}>
+      <CollapsibleContainerBody collapsed={collapsed}>
         {children}
       </CollapsibleContainerBody>
     </CollapsibleContainer>

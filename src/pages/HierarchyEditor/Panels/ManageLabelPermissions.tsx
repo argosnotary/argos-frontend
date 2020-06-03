@@ -191,8 +191,7 @@ const ManageLabelPermissions = () => {
       maxWidth={"37.5vw"}
       resizable={false}
       last={true}
-      title={"Manage label permissions"}
-    >
+      title={"Manage label permissions"}>
       <NodesBreadCrumb>
         Selected: {state.breadcrumb}
         <LastBreadCrumb>

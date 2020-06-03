@@ -33,6 +33,7 @@ import {
 } from "../stores/UserProfile";
 import { CollapseButton } from "../atoms/CollapsibleContainer";
 import DataCheckbox from "../atoms/DataCheckbox";
+import ChevronIcon from "../atoms/Icons/ChevronIcon";
 
 const mock = new MockAdapter(Axios);
 const mockPersonalAccountApiUrl = "/api/personalaccount";
@@ -123,19 +124,23 @@ it("renders correctly", async () => {
       expect(root.find(RoleAuthorizationComponent).length > 0).toBe(true);
     });
 
+    root
+      .find(CollapseButton)
+      .at(0)
+      .simulate("click");
+
     await waitFor(() => {
-      root
-        .find(CollapseButton)
-        .at(0)
-        .simulate("click");
+      root.update();
       expect(root.find(DataCheckbox).length >= 2).toBe(true);
     });
 
+    root
+      .find(CollapseButton)
+      .at(1)
+      .simulate("click");
+
     await waitFor(() => {
-      root
-        .find(CollapseButton)
-        .at(1)
-        .simulate("click");
+      root.update();
       expect(root.find(DataCheckbox).length >= 4).toBe(true);
     });
 
@@ -185,6 +190,7 @@ it("renders correctly", async () => {
           .props().parentIsLoading
       ).toBe(false);
     });
+
     expect(root.find(ManageRoles)).toMatchSnapshot();
   });
 });

@@ -19,7 +19,7 @@ version: '3.1'
 services:
 
   argos-service:
-    image: argosnotary/argos-service-snapshot:collector-context-field
+    image: argosnotary/argos-service-snapshot:master
     environment:
       spring.data.mongodb.uri: mongodb://mongodb/test
       spring.security.oauth2.client.registration.azure.clientId: client-id
@@ -42,3 +42,14 @@ services:
     image: mongo:4.2.1-bionic
     ports:
       - 27017:27017
+
+  collector:
+    image: argosnotary/argos-collector-service-snapshot:master
+    environment:
+      spring.profiles.active: XLDEPLOY
+      argos-collector.collectortypes.xldeploy.baseurl: http://xl-deploy-stub:8080
+    ports:
+      - 8888:8080
+
+  xl-deploy-stub:
+    image: argosnotary/argos-collector-xl-deploy-stub:implement-xldeploy-collector

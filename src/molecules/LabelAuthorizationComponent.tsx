@@ -162,13 +162,13 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
     <CollapsibleContainerComponent
       collapsedByDefault={collapsedByDefault}
       title={`Permissions for ${accountName}`}
-      onCollapse={() => {
+      onExpand={() => {
         if (permissionsApiResponse && permissionsApiResponse.data) {
-          return;
+          return true;
         }
         getLocalPermissions();
-      }}
-    >
+        return true;
+      }}>
       <AuthorizationContainer>
         <form
           onSubmit={e => {
@@ -180,8 +180,7 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
               permissions.push(value as string);
             }
             putLocalPermissions([...permissions]);
-          }}
-        >
+          }}>
           {permissionsApiResponse.isLoading ? (
             <AlternateLoader size={32} color={theme.alternateLoader.color} />
           ) : null}

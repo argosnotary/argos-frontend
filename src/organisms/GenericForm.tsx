@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useFormik, FormikValues } from "formik";
 
@@ -51,13 +51,14 @@ interface IGenericForm {
   permission: FormPermission;
   validate: (values: any) => void;
   onSubmit: (values: any) => void;
-  onCancel: () => void;
+  onCancel?: () => void;
   isLoading: boolean;
   confirmationLabel?: string;
   cancellationLabel?: string;
   initialValues: FormikValues;
-  onValidChange?: (values: any) => void;
+  onChange?: (valid: boolean, values: any) => void;
   autoFocus?: boolean;
+  validateNow?: boolean;
 }
 
 const GenericForm: React.FC<IGenericForm> = ({
@@ -72,7 +73,8 @@ const GenericForm: React.FC<IGenericForm> = ({
   cancellationLabel,
   initialValues,
   autoFocus,
-  onValidChange
+  onChange,
+  validateNow
 }) => {
   const formik = useFormik({
     initialValues,
@@ -86,9 +88,17 @@ const GenericForm: React.FC<IGenericForm> = ({
   const firstTextInput: React.RefObject<HTMLInputElement> = useRef(null);
   const firstTextAreaInput: React.RefObject<HTMLTextAreaElement> = useRef(null);
 
+  const [canValidate, setCanValidate] = useState(false);
+
   useEffect(() => {
     formik.setValues(initialValues);
   }, [initialValues]);
+
+  useEffect(() => {
+    if (validateNow) {
+      setCanValidate(validateNow);
+    }
+  });
 
   useEffect(() => {
     if (autoFocus) {
@@ -120,9 +130,10 @@ const GenericForm: React.FC<IGenericForm> = ({
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name] || ""}
                 disabled={permission === FormPermissions.READ}
-                {...(index == 0 ? { innerRef: firstTextInput } : null)}
+                {...(index === 0 ? { innerRef: firstTextInput } : null)}
               />
-              {formik.touched[entry.name] && formik.errors[entry.name] ? (
+              {(canValidate || formik.touched[entry.name]) &&
+              formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
@@ -142,7 +153,8 @@ const GenericForm: React.FC<IGenericForm> = ({
                 height={"25rem"}
                 {...(index == 0 ? { innerRef: firstTextAreaInput } : null)}
               />
-              {formik.touched[entry.name] && formik.errors[entry.name] ? (
+              {(canValidate || formik.touched[entry.name]) &&
+              formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
@@ -155,10 +167,12 @@ const GenericForm: React.FC<IGenericForm> = ({
     <FormContainer>
       <form
         data-testhook-id={dataTesthookId}
-        onSubmit={formik.handleSubmit}
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+          formik.handleSubmit(e);
+        }}
         onBlur={() => {
-          if (onValidChange && formik.isValid) {
-            onValidChange(formik.values);
+          if (onChange) {
+            onChange(formik.isValid, formik.values);
           }
         }}>
         {renderFormElements(formik, schema)}
@@ -168,7 +182,11 @@ const GenericForm: React.FC<IGenericForm> = ({
             <ContentSeparator />
             <FlexRow>
               {confirmationLabel ? (
-                <LoaderButton buttonType="submit" loading={isLoading}>
+                <LoaderButton
+                  dataTesthookId={dataTesthookId + "-submit-button"}
+                  buttonType="submit"
+                  loading={isLoading}
+                  onMouseDown={() => setCanValidate(true)}>
                   {confirmationLabel}
                 </LoaderButton>
               ) : null}
@@ -176,7 +194,11 @@ const GenericForm: React.FC<IGenericForm> = ({
                 <CustomCancelButton
                   data-testhook="cancel-button"
                   type="button"
-                  onMouseDown={() => onCancel()}>
+                  onMouseDown={() => {
+                    if (onCancel) {
+                      onCancel();
+                    }
+                  }}>
                   {cancellationLabel}
                 </CustomCancelButton>
               ) : null}

@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export interface IApprovalConfig {
-  stepName: string;
-  segmentName: string;
-  artifactCollectorSpecifications: Array<IArtifactCollector>;
+import {ISignature} from "./ILayout";
+
+export interface ILink {
+    runId: string;
+    layoutSegmentName: string;
+    stepName: string;
+    command: string[];
+    materials: IArtifact[];
+    products: IArtifact[];
 }
 
-export enum ArtifactCollectorType {
-  XLDEPLOY = "XLDEPLOY"
+export interface IArtifact {
+    uri: string;
+    hash: string;
 }
 
-export interface IArtifactCollector {
-  name: string;
-  type: ArtifactCollectorType;
-  uri: string;
-  context: IXLDeployContext;
-}
-
-export interface IXLDeployContext {
-  applicationName: string;
+export interface ILinkMetaBlock {
+    supplyChainId: string;
+    signature: ISignature;
+    link: ILink;
 }

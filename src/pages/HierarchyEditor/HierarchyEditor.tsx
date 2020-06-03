@@ -55,6 +55,7 @@ import { PermissionTypes } from "../../types/PermissionType";
 import { FormPermissions } from "../../types/FormPermission";
 import { useUserProfileContext } from "../../stores/UserProfile";
 import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
+import ManageApprovalExecutionPanel from "./Panels/ManageApprovalExecution/ManageApprovalExecutionPanel";
 import ApproveIcon from "../../atoms/Icons/ApproveIcon";
 import { ThemeContext } from "styled-components";
 
@@ -269,8 +270,10 @@ const HierarchyEditor = () => {
           ),
           label: "Approve step",
           callback: (node: ITreeNode) => {
-            // action
-            return node;
+            treeContextMenuCb(
+              HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL,
+              node
+            );
           },
           visible: (node: ITreeNode) => {
             return (
@@ -347,6 +350,8 @@ const HierarchyEditor = () => {
         return <ManageLabelPermissions />;
       case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
         return <ManageLayoutPanel />;
+      case HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL:
+        return <ManageApprovalExecutionPanel />;
       default:
         return null;
     }

@@ -162,13 +162,13 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
     <CollapsibleContainerComponent
       collapsedByDefault={collapsedByDefault}
       title={`${accountName}`}
-      onCollapse={() => {
+      onExpand={() => {
         if (rolesApiResponse && rolesApiResponse.data) {
-          return;
+          return true;
         }
         getGlobalRoles();
-      }}
-    >
+        return true;
+      }}>
       <AuthorizationContainer>
         <form
           onSubmit={e => {
@@ -180,8 +180,7 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
             }
 
             putGlobalRoles([...permissions]);
-          }}
-        >
+          }}>
           {rolesApiResponse.isLoading ? (
             <AlternateLoader size={32} color={theme.alternateLoader.color} />
           ) : null}

@@ -154,8 +154,7 @@ export const UserProfileStoreProvider: React.FC<IUserProfileStoreProviderProps> 
             setToken,
             state,
             setError
-          }}
-        >
+          }}>
           {children}
         </UserProfileContext.Provider>
       </>

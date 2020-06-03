@@ -43,6 +43,19 @@ const BaseButtonStyle = css`
 
 const Button = styled.button`
   ${BaseButtonStyle}
+
+  background-color: ${props =>
+    props.disabled
+      ? props.theme.button.disabledBgColor
+      : props.theme.button.bgColor};
+
+  &:hover {
+    background-color: ${props =>
+      props.disabled
+        ? props.theme.button.disabledBgColor
+        : props.theme.button.bgColor};
+    cursor: ${props => (props.disabled ? "not-allowed" : "pointer")}
+  }
 `;
 
 const AnchorButton = styled.a`
@@ -53,6 +66,10 @@ interface ILoaderButtonProps {
   children: string;
   loading: boolean;
   buttonType: "button" | "submit" | "reset";
+  onClick?: () => void;
+  disabled?: boolean;
+  onMouseDown?: () => void;
+  dataTesthookId?: string;
 }
 
 const LoaderIconButton = styled(Button)`
@@ -62,7 +79,11 @@ const LoaderIconButton = styled(Button)`
 const LoaderButton: React.FC<ILoaderButtonProps> = ({
   children,
   loading,
-  buttonType
+  buttonType,
+  onClick,
+  disabled,
+  onMouseDown,
+  dataTesthookId
 }) => {
   const theme = useContext(ThemeContext);
 
@@ -73,13 +94,29 @@ const LoaderButton: React.FC<ILoaderButtonProps> = ({
       </LoaderIconButton>
     );
   }
-  return <Button type={buttonType}>{children}</Button>;
+  return (
+    <Button
+      data-testhook-id={dataTesthookId}
+      disabled={disabled}
+      onClick={onClick}
+      onMouseDown={onMouseDown}
+      type={buttonType}>
+      {children}
+    </Button>
+  );
 };
 
-const CancelButton = styled(Button)`
+interface ICancelButtonProps {
+  noBorder?: boolean;
+}
+
+const CancelButton = styled(Button)<ICancelButtonProps>`
   background-color: ${props => props.theme.cancelButton.bgColor};
   color: ${props => props.theme.cancelButton.textColor};
-  border: 1px solid ${props => props.theme.cancelButton.borderColor};
+  border: ${props =>
+    props.noBorder
+      ? "none"
+      : `1px solid ${props.theme.cancelButton.borderColor}`};
 
   &:hover {
     background-color: ${props => props.theme.cancelButton.hover.bgColor};

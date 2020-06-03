@@ -121,12 +121,12 @@ interface IFormFormValues {
 
 const defaultApprovalConfigFormSchema: IGenericFormSchema = [
   {
-    labelValue: "Name",
+    labelValue: "Name*",
     name: "name",
     formType: "text"
   },
   {
-    labelValue: "Service URL",
+    labelValue: "Service URL*",
     name: "uri",
     formType: "text"
   }
@@ -139,7 +139,7 @@ const getApprovalConfigFormSchema = (
     return [
       ...defaultApprovalConfigFormSchema,
       {
-        labelValue: "Application Name",
+        labelValue: "Application Name*",
         name: "applicationName",
         formType: "text"
       }
@@ -170,7 +170,6 @@ const validateApprovalConfigForm = (
   if (type === ArtifactCollectorType.XLDEPLOY) {
     if (!values.applicationName) {
       errors.applicationName = "Please fill in a application name.";
-      // eslint-disable-next-line
     } else if (
       !new RegExp("^[^\\\\/\\]\\[:|,*]+$").test(values.applicationName)
     ) {

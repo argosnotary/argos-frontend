@@ -3,6 +3,7 @@
   "fontFile": "/fonts/fira-sans-v10-latin-regular",
   "button": {
     "bgColor": "#1779ba",
+    "disabledBgColor": "#e0e0e0",
     "textColor": "#fff"
   },
   "cancelButton": {
@@ -50,6 +51,11 @@
     "iconColor": "gray",
     "headerBgColor": "#e0e0e0",
     "bodyBorderColor": "#e0e0e0"
+  },
+  "selectList": {
+    "defaultItemBgColor": "#fff",
+    "selectedItemBgColor": "#e8feff",
+    "iconColor": "#8d99ae"
   },
   "panel": {
     "icons": {

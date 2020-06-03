@@ -13,23 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export interface IApprovalConfig {
-  stepName: string;
-  segmentName: string;
-  artifactCollectorSpecifications: Array<IArtifactCollector>;
-}
 
-export enum ArtifactCollectorType {
-  XLDEPLOY = "XLDEPLOY"
-}
-
-export interface IArtifactCollector {
-  name: string;
-  type: ArtifactCollectorType;
-  uri: string;
-  context: IXLDeployContext;
-}
-
-export interface IXLDeployContext {
+export interface IXLDeployExecutionContext {
   applicationName: string;
+  version: string;
+  username: string;
+  password: string;
 }

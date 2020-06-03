@@ -1473,9 +1473,9 @@ exports[`renders correctly with existing layout 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-iuJeZd",
+                          "componentId": "sc-gqPbQI",
                           "isStatic": false,
-                          "lastClassName": "hJHFef",
+                          "lastClassName": "djwgEy",
                           "rules": Array [
                             "
   padding: 0;
@@ -1496,7 +1496,7 @@ exports[`renders correctly with existing layout 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-iuJeZd",
+                        "styledComponentId": "sc-gqPbQI",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -1506,7 +1506,7 @@ exports[`renders correctly with existing layout 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-iuJeZd hJHFef"
+                      className="sc-htpNat sc-gqPbQI djwgEy"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
@@ -1536,8 +1536,8 @@ exports[`renders correctly with existing layout 1`] = `
                     }
                     isLoading={false}
                     onCancel={[Function]}
+                    onChange={[Function]}
                     onSubmit={[Function]}
-                    onValidChange={[Function]}
                     permission="EDIT"
                     schema={
                       Array [
@@ -1952,12 +1952,17 @@ exports[`renders correctly with existing layout 1`] = `
                                 >
                                   <LoaderButton
                                     buttonType="submit"
+                                    dataTesthookId="layout-json-form-submit-button"
                                     loading={false}
+                                    onMouseDown={[Function]}
                                   >
                                     <styled.button
+                                      data-testhook-id="layout-json-form-submit-button"
+                                      onMouseDown={[Function]}
                                       type="submit"
                                     >
                                       <StyledComponent
+                                        data-testhook-id="layout-json-form-submit-button"
                                         forwardedComponent={
                                           Object {
                                             "$$typeof": Symbol(react.forward_ref),
@@ -1965,7 +1970,7 @@ exports[`renders correctly with existing layout 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-eNQAEJ",
                                               "isStatic": false,
-                                              "lastClassName": "geYAxA",
+                                              "lastClassName": "fEgkVN",
                                               "rules": Array [
                                                 "
   ",
@@ -1996,6 +2001,19 @@ exports[`renders correctly with existing layout 1`] = `
   }
 ",
                                                 "
+
+  background-color: ",
+                                                [Function],
+                                                ";
+
+  &:hover {
+    background-color: ",
+                                                [Function],
+                                                ";
+    cursor: ",
+                                                [Function],
+                                                "
+  }
 ",
                                               ],
                                             },
@@ -2010,10 +2028,13 @@ exports[`renders correctly with existing layout 1`] = `
                                           }
                                         }
                                         forwardedRef={null}
+                                        onMouseDown={[Function]}
                                         type="submit"
                                       >
                                         <button
-                                          className="sc-eNQAEJ geYAxA"
+                                          className="sc-eNQAEJ fEgkVN"
+                                          data-testhook-id="layout-json-form-submit-button"
+                                          onMouseDown={[Function]}
                                           type="submit"
                                         >
                                           Sign and Submit
@@ -2035,7 +2056,7 @@ exports[`renders correctly with existing layout 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "tTjA",
+                                            "lastClassName": "kTQQpi",
                                             "rules": Array [
                                               "
   ",
@@ -2066,6 +2087,19 @@ exports[`renders correctly with existing layout 1`] = `
   }
 ",
                                               "
+
+  background-color: ",
+                                              [Function],
+                                              ";
+
+  &:hover {
+    background-color: ",
+                                              [Function],
+                                              ";
+    cursor: ",
+                                              [Function],
+                                              "
+  }
 ",
                                               "
   background-color: ",
@@ -2074,7 +2108,7 @@ exports[`renders correctly with existing layout 1`] = `
   color: ",
                                               [Function],
                                               ";
-  border: 1px solid ",
+  border: ",
                                               [Function],
                                               ";
 
@@ -2114,7 +2148,7 @@ exports[`renders correctly with existing layout 1`] = `
                                       type="button"
                                     >
                                       <button
-                                        className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL tTjA"
+                                        className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL kTQQpi"
                                         data-testhook="cancel-button"
                                         onMouseDown={[Function]}
                                         type="button"
@@ -2132,7 +2166,16 @@ exports[`renders correctly with existing layout 1`] = `
                     </Styled(styled.div)>
                   </GenericForm>
                 </LayoutJsonEditor>
-                <LayoutSigner />
+                <LayoutSigner>
+                  <PassphraseDialogBox
+                    onCancel={[Function]}
+                    onConfirm={[Function]}
+                    passphrase=""
+                    showCryptoExceptionMessage={false}
+                    showDialog={false}
+                    showInvalidPassphraseMessage={false}
+                  />
+                </LayoutSigner>
               </main>
             </StyledComponent>
           </styled.main>
@@ -3670,9 +3713,9 @@ exports[`renders correctly with non existing layout 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-iuJeZd",
+                          "componentId": "sc-gqPbQI",
                           "isStatic": false,
-                          "lastClassName": "hJHFef",
+                          "lastClassName": "djwgEy",
                           "rules": Array [
                             "
   padding: 0;
@@ -3693,7 +3736,7 @@ exports[`renders correctly with non existing layout 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-iuJeZd",
+                        "styledComponentId": "sc-gqPbQI",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -3703,7 +3746,7 @@ exports[`renders correctly with non existing layout 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-iuJeZd hJHFef"
+                      className="sc-htpNat sc-gqPbQI djwgEy"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
@@ -3719,8 +3762,8 @@ exports[`renders correctly with non existing layout 1`] = `
                     }
                     isLoading={false}
                     onCancel={[Function]}
+                    onChange={[Function]}
                     onSubmit={[Function]}
-                    onValidChange={[Function]}
                     permission="EDIT"
                     schema={
                       Array [
@@ -4051,12 +4094,17 @@ exports[`renders correctly with non existing layout 1`] = `
                                 >
                                   <LoaderButton
                                     buttonType="submit"
+                                    dataTesthookId="layout-json-form-submit-button"
                                     loading={false}
+                                    onMouseDown={[Function]}
                                   >
                                     <styled.button
+                                      data-testhook-id="layout-json-form-submit-button"
+                                      onMouseDown={[Function]}
                                       type="submit"
                                     >
                                       <StyledComponent
+                                        data-testhook-id="layout-json-form-submit-button"
                                         forwardedComponent={
                                           Object {
                                             "$$typeof": Symbol(react.forward_ref),
@@ -4064,7 +4112,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-eNQAEJ",
                                               "isStatic": false,
-                                              "lastClassName": "geYAxA",
+                                              "lastClassName": "fEgkVN",
                                               "rules": Array [
                                                 "
   ",
@@ -4095,6 +4143,19 @@ exports[`renders correctly with non existing layout 1`] = `
   }
 ",
                                                 "
+
+  background-color: ",
+                                                [Function],
+                                                ";
+
+  &:hover {
+    background-color: ",
+                                                [Function],
+                                                ";
+    cursor: ",
+                                                [Function],
+                                                "
+  }
 ",
                                               ],
                                             },
@@ -4109,10 +4170,13 @@ exports[`renders correctly with non existing layout 1`] = `
                                           }
                                         }
                                         forwardedRef={null}
+                                        onMouseDown={[Function]}
                                         type="submit"
                                       >
                                         <button
-                                          className="sc-eNQAEJ geYAxA"
+                                          className="sc-eNQAEJ fEgkVN"
+                                          data-testhook-id="layout-json-form-submit-button"
+                                          onMouseDown={[Function]}
                                           type="submit"
                                         >
                                           Sign and Submit
@@ -4134,7 +4198,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "tTjA",
+                                            "lastClassName": "kTQQpi",
                                             "rules": Array [
                                               "
   ",
@@ -4165,6 +4229,19 @@ exports[`renders correctly with non existing layout 1`] = `
   }
 ",
                                               "
+
+  background-color: ",
+                                              [Function],
+                                              ";
+
+  &:hover {
+    background-color: ",
+                                              [Function],
+                                              ";
+    cursor: ",
+                                              [Function],
+                                              "
+  }
 ",
                                               "
   background-color: ",
@@ -4173,7 +4250,7 @@ exports[`renders correctly with non existing layout 1`] = `
   color: ",
                                               [Function],
                                               ";
-  border: 1px solid ",
+  border: ",
                                               [Function],
                                               ";
 
@@ -4213,7 +4290,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                       type="button"
                                     >
                                       <button
-                                        className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL tTjA"
+                                        className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL kTQQpi"
                                         data-testhook="cancel-button"
                                         onMouseDown={[Function]}
                                         type="button"
@@ -4231,7 +4308,16 @@ exports[`renders correctly with non existing layout 1`] = `
                     </Styled(styled.div)>
                   </GenericForm>
                 </LayoutJsonEditor>
-                <LayoutSigner />
+                <LayoutSigner>
+                  <PassphraseDialogBox
+                    onCancel={[Function]}
+                    onConfirm={[Function]}
+                    passphrase=""
+                    showCryptoExceptionMessage={false}
+                    showDialog={false}
+                    showInvalidPassphraseMessage={false}
+                  />
+                </LayoutSigner>
               </main>
             </StyledComponent>
           </styled.main>
@@ -4451,6 +4537,7 @@ exports[`sign layout happy flow 1`] = `
       },
       "button": Object {
         "bgColor": "#1779ba",
+        "disabledBgColor": "#e0e0e0",
         "textColor": "#fff",
       },
       "cancelButton": Object {
@@ -4599,6 +4686,11 @@ exports[`sign layout happy flow 1`] = `
         "searchResultsBgColor": "#fff",
         "searchResultsBorderColor": "#e0e0e0",
         "selectedEntryBorderColor": "#e0e0e0",
+      },
+      "selectList": Object {
+        "defaultItemBgColor": "#fff",
+        "iconColor": "#8d99ae",
+        "selectedItemBgColor": "#e8feff",
       },
       "transparentButton": Object {
         "default": Object {
@@ -6145,9 +6237,9 @@ exports[`sign layout happy flow 1`] = `
                           "$$typeof": Symbol(react.forward_ref),
                           "attrs": Array [],
                           "componentStyle": ComponentStyle {
-                            "componentId": "sc-iuJeZd",
+                            "componentId": "sc-gqPbQI",
                             "isStatic": false,
-                            "lastClassName": "hJHFef",
+                            "lastClassName": "djwgEy",
                             "rules": Array [
                               "
   padding: 0;
@@ -6168,7 +6260,7 @@ exports[`sign layout happy flow 1`] = `
                             "sc-htpNat",
                           ],
                           "render": [Function],
-                          "styledComponentId": "sc-iuJeZd",
+                          "styledComponentId": "sc-gqPbQI",
                           "target": "hr",
                           "toString": [Function],
                           "warnTooManyClasses": [Function],
@@ -6178,7 +6270,7 @@ exports[`sign layout happy flow 1`] = `
                       forwardedRef={null}
                     >
                       <hr
-                        className="sc-htpNat sc-iuJeZd hJHFef"
+                        className="sc-htpNat sc-gqPbQI djwgEy"
                       />
                     </StyledComponent>
                   </Styled(styled.hr)>
@@ -6205,8 +6297,8 @@ exports[`sign layout happy flow 1`] = `
                       }
                       isLoading={false}
                       onCancel={[Function]}
+                      onChange={[Function]}
                       onSubmit={[Function]}
-                      onValidChange={[Function]}
                       permission="EDIT"
                       schema={
                         Array [
@@ -6603,12 +6695,17 @@ exports[`sign layout happy flow 1`] = `
                                   >
                                     <LoaderButton
                                       buttonType="submit"
+                                      dataTesthookId="layout-json-form-submit-button"
                                       loading={false}
+                                      onMouseDown={[Function]}
                                     >
                                       <styled.button
+                                        data-testhook-id="layout-json-form-submit-button"
+                                        onMouseDown={[Function]}
                                         type="submit"
                                       >
                                         <StyledComponent
+                                          data-testhook-id="layout-json-form-submit-button"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -6616,7 +6713,7 @@ exports[`sign layout happy flow 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-eNQAEJ",
                                                 "isStatic": false,
-                                                "lastClassName": "geYAxA",
+                                                "lastClassName": "fEgkVN",
                                                 "rules": Array [
                                                   "
   ",
@@ -6647,6 +6744,19 @@ exports[`sign layout happy flow 1`] = `
   }
 ",
                                                   "
+
+  background-color: ",
+                                                  [Function],
+                                                  ";
+
+  &:hover {
+    background-color: ",
+                                                  [Function],
+                                                  ";
+    cursor: ",
+                                                  [Function],
+                                                  "
+  }
 ",
                                                 ],
                                               },
@@ -6661,10 +6771,13 @@ exports[`sign layout happy flow 1`] = `
                                             }
                                           }
                                           forwardedRef={null}
+                                          onMouseDown={[Function]}
                                           type="submit"
                                         >
                                           <button
-                                            className="sc-eNQAEJ geYAxA"
+                                            className="sc-eNQAEJ fEgkVN"
+                                            data-testhook-id="layout-json-form-submit-button"
+                                            onMouseDown={[Function]}
                                             type="submit"
                                           >
                                             Sign and Submit
@@ -6686,7 +6799,7 @@ exports[`sign layout happy flow 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-eHgmQL",
                                               "isStatic": false,
-                                              "lastClassName": "tTjA",
+                                              "lastClassName": "kTQQpi",
                                               "rules": Array [
                                                 "
   ",
@@ -6717,6 +6830,19 @@ exports[`sign layout happy flow 1`] = `
   }
 ",
                                                 "
+
+  background-color: ",
+                                                [Function],
+                                                ";
+
+  &:hover {
+    background-color: ",
+                                                [Function],
+                                                ";
+    cursor: ",
+                                                [Function],
+                                                "
+  }
 ",
                                                 "
   background-color: ",
@@ -6725,7 +6851,7 @@ exports[`sign layout happy flow 1`] = `
   color: ",
                                                 [Function],
                                                 ";
-  border: 1px solid ",
+  border: ",
                                                 [Function],
                                                 ";
 
@@ -6765,7 +6891,7 @@ exports[`sign layout happy flow 1`] = `
                                         type="button"
                                       >
                                         <button
-                                          className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL tTjA"
+                                          className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL kTQQpi"
                                           data-testhook="cancel-button"
                                           onMouseDown={[Function]}
                                           type="button"
@@ -6783,7 +6909,16 @@ exports[`sign layout happy flow 1`] = `
                       </Styled(styled.div)>
                     </GenericForm>
                   </LayoutJsonEditor>
-                  <LayoutSigner />
+                  <LayoutSigner>
+                    <PassphraseDialogBox
+                      onCancel={[Function]}
+                      onConfirm={[Function]}
+                      passphrase=""
+                      showCryptoExceptionMessage={false}
+                      showDialog={false}
+                      showInvalidPassphraseMessage={false}
+                    />
+                  </LayoutSigner>
                 </main>
               </StyledComponent>
             </styled.main>
@@ -7219,17 +7354,17 @@ exports[`sign layout happy flow 1`] = `
                                               Array [
                                                 Object {
                                                   "formType": "text",
-                                                  "labelValue": "Name",
+                                                  "labelValue": "Name*",
                                                   "name": "name",
                                                 },
                                                 Object {
                                                   "formType": "text",
-                                                  "labelValue": "Service URL",
+                                                  "labelValue": "Service URL*",
                                                   "name": "uri",
                                                 },
                                                 Object {
                                                   "formType": "text",
-                                                  "labelValue": "Application Name",
+                                                  "labelValue": "Application Name*",
                                                   "name": "applicationName",
                                                 },
                                               ]
@@ -7295,7 +7430,7 @@ exports[`sign layout happy flow 1`] = `
                                                           />,
                                                         }
                                                       }
-                                                      labelValue="Name"
+                                                      labelValue="Name*"
                                                       name="name"
                                                       onBlur={[Function]}
                                                       onChange={[Function]}
@@ -7367,7 +7502,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 <label
                                                                   className="sc-kpOJdX iYzRxv"
                                                                 >
-                                                                  Name
+                                                                  Name*
                                                                 </label>
                                                               </StyledComponent>
                                                             </styled.label>
@@ -7479,7 +7614,7 @@ exports[`sign layout happy flow 1`] = `
                                                       dataTesthookId="collector-edit-form-field-1"
                                                       disabled={false}
                                                       formType="text"
-                                                      labelValue="Service URL"
+                                                      labelValue="Service URL*"
                                                       name="uri"
                                                       onBlur={[Function]}
                                                       onChange={[Function]}
@@ -7551,7 +7686,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 <label
                                                                   className="sc-kpOJdX iYzRxv"
                                                                 >
-                                                                  Service URL
+                                                                  Service URL*
                                                                 </label>
                                                               </StyledComponent>
                                                             </styled.label>
@@ -7653,7 +7788,7 @@ exports[`sign layout happy flow 1`] = `
                                                       dataTesthookId="collector-edit-form-field-2"
                                                       disabled={false}
                                                       formType="text"
-                                                      labelValue="Application Name"
+                                                      labelValue="Application Name*"
                                                       name="applicationName"
                                                       onBlur={[Function]}
                                                       onChange={[Function]}
@@ -7725,7 +7860,7 @@ exports[`sign layout happy flow 1`] = `
                                                                 <label
                                                                   className="sc-kpOJdX iYzRxv"
                                                                 >
-                                                                  Application Name
+                                                                  Application Name*
                                                                 </label>
                                                               </StyledComponent>
                                                             </styled.label>
@@ -7899,12 +8034,17 @@ exports[`sign layout happy flow 1`] = `
                                                         >
                                                           <LoaderButton
                                                             buttonType="submit"
+                                                            dataTesthookId="collector-edit-form-submit-button"
                                                             loading={false}
+                                                            onMouseDown={[Function]}
                                                           >
                                                             <styled.button
+                                                              data-testhook-id="collector-edit-form-submit-button"
+                                                              onMouseDown={[Function]}
                                                               type="submit"
                                                             >
                                                               <StyledComponent
+                                                                data-testhook-id="collector-edit-form-submit-button"
                                                                 forwardedComponent={
                                                                   Object {
                                                                     "$$typeof": Symbol(react.forward_ref),
@@ -7912,7 +8052,7 @@ exports[`sign layout happy flow 1`] = `
                                                                     "componentStyle": ComponentStyle {
                                                                       "componentId": "sc-eNQAEJ",
                                                                       "isStatic": false,
-                                                                      "lastClassName": "geYAxA",
+                                                                      "lastClassName": "fEgkVN",
                                                                       "rules": Array [
                                                                         "
   ",
@@ -7943,6 +8083,19 @@ exports[`sign layout happy flow 1`] = `
   }
 ",
                                                                         "
+
+  background-color: ",
+                                                                        [Function],
+                                                                        ";
+
+  &:hover {
+    background-color: ",
+                                                                        [Function],
+                                                                        ";
+    cursor: ",
+                                                                        [Function],
+                                                                        "
+  }
 ",
                                                                       ],
                                                                     },
@@ -7957,10 +8110,13 @@ exports[`sign layout happy flow 1`] = `
                                                                   }
                                                                 }
                                                                 forwardedRef={null}
+                                                                onMouseDown={[Function]}
                                                                 type="submit"
                                                               >
                                                                 <button
-                                                                  className="sc-eNQAEJ geYAxA"
+                                                                  className="sc-eNQAEJ fEgkVN"
+                                                                  data-testhook-id="collector-edit-form-submit-button"
+                                                                  onMouseDown={[Function]}
                                                                   type="submit"
                                                                 >
                                                                   Save
@@ -7982,7 +8138,7 @@ exports[`sign layout happy flow 1`] = `
                                                                   "componentStyle": ComponentStyle {
                                                                     "componentId": "sc-eHgmQL",
                                                                     "isStatic": false,
-                                                                    "lastClassName": "tTjA",
+                                                                    "lastClassName": "kTQQpi",
                                                                     "rules": Array [
                                                                       "
   ",
@@ -8013,6 +8169,19 @@ exports[`sign layout happy flow 1`] = `
   }
 ",
                                                                       "
+
+  background-color: ",
+                                                                      [Function],
+                                                                      ";
+
+  &:hover {
+    background-color: ",
+                                                                      [Function],
+                                                                      ";
+    cursor: ",
+                                                                      [Function],
+                                                                      "
+  }
 ",
                                                                       "
   background-color: ",
@@ -8021,7 +8190,7 @@ exports[`sign layout happy flow 1`] = `
   color: ",
                                                                       [Function],
                                                                       ";
-  border: 1px solid ",
+  border: ",
                                                                       [Function],
                                                                       ";
 
@@ -8061,7 +8230,7 @@ exports[`sign layout happy flow 1`] = `
                                                               type="button"
                                                             >
                                                               <button
-                                                                className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL tTjA"
+                                                                className="sc-eNQAEJ sc-kkGfuU sc-eHgmQL kTQQpi"
                                                                 data-testhook="cancel-button"
                                                                 onMouseDown={[Function]}
                                                                 type="button"
@@ -8729,9 +8898,9 @@ exports[`validates a faulty layout and returns errors 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-iuJeZd",
+                          "componentId": "sc-gqPbQI",
                           "isStatic": false,
-                          "lastClassName": "hJHFef",
+                          "lastClassName": "djwgEy",
                           "rules": Array [
                             "
   padding: 0;
@@ -8752,7 +8921,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                           "sc-htpNat",
                         ],
                         "render": [Function],
-                        "styledComponentId": "sc-iuJeZd",
+                        "styledComponentId": "sc-gqPbQI",
                         "target": "hr",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -8762,7 +8931,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                     forwardedRef={null}
                   >
                     <hr
-                      className="sc-htpNat sc-iuJeZd hJHFef"
+                      className="sc-htpNat sc-gqPbQI djwgEy"
                     />
                   </StyledComponent>
                 </Styled(styled.hr)>
@@ -8778,8 +8947,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                     }
                     isLoading={false}
                     onCancel={[Function]}
+                    onChange={[Function]}
                     onSubmit={[Function]}
-                    onValidChange={[Function]}
                     permission="READ"
                     schema={
                       Array [
@@ -9042,7 +9211,16 @@ exports[`validates a faulty layout and returns errors 1`] = `
                     </Styled(styled.div)>
                   </GenericForm>
                 </LayoutJsonEditor>
-                <LayoutSigner />
+                <LayoutSigner>
+                  <PassphraseDialogBox
+                    onCancel={[Function]}
+                    onConfirm={[Function]}
+                    passphrase=""
+                    showCryptoExceptionMessage={false}
+                    showDialog={false}
+                    showInvalidPassphraseMessage={false}
+                  />
+                </LayoutSigner>
                 <NoCryptoWarning>
                   <Warning
                     message="The web crypto api is not present in the browser your using. Argos Notary is only supported by a recent version of Chrome, Firefox, Safari or Edge"
