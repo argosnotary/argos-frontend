@@ -233,8 +233,6 @@ const ApprovalConfigEditor: React.FC = () => {
     ArtifactCollectorType | "select"
   >("select");
 
-  useEffect(() => {}, [selectedCollectorType]);
-
   useEffect(() => {
     setEditIndex(undefined);
     setAddMode(false);
