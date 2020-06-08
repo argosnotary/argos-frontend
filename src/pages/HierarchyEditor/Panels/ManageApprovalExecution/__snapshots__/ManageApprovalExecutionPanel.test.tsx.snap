@@ -1111,397 +1111,215 @@ exports[`approval happy flow 1`] = `
                                   <main
                                     className="sc-jnlKLf krKmDf"
                                   >
-                                    <GenericForm
-                                      autoFocus={true}
-                                      confirmationLabel="Next"
-                                      dataTesthookId="collector-execution-form-0"
-                                      initialValues={
-                                        Object {
-                                          "password": "",
-                                          "username": "",
-                                        }
-                                      }
-                                      isLoading={false}
-                                      onChange={[Function]}
+                                    <XLDeployApprovalForm
+                                      index={0}
+                                      initialValues={Object {}}
                                       onSubmit={[Function]}
-                                      permission="EDIT"
-                                      schema={
-                                        Array [
-                                          Object {
-                                            "formType": "text",
-                                            "labelValue": "Username*",
-                                            "name": "username",
-                                          },
-                                          Object {
-                                            "formType": "password",
-                                            "labelValue": "Password*",
-                                            "name": "password",
-                                          },
-                                          Object {
-                                            "formType": "text",
-                                            "labelValue": "Application Version*",
-                                            "name": "applicationVersion",
-                                          },
-                                        ]
-                                      }
-                                      validate={[Function]}
+                                      onUpdateExecutionValues={[Function]}
                                       validateNow={false}
                                     >
-                                      <Styled(styled.div)>
-                                        <StyledComponent
-                                          forwardedComponent={
+                                      <GenericForm
+                                        autoFocus={true}
+                                        confirmationLabel="Next"
+                                        dataTesthookId="xl-deploy-collector-execution-form-0"
+                                        initialValues={Object {}}
+                                        isLoading={false}
+                                        onChange={[Function]}
+                                        onSubmit={[Function]}
+                                        permission="EDIT"
+                                        schema={
+                                          Array [
                                             Object {
-                                              "$$typeof": Symbol(react.forward_ref),
-                                              "attrs": Array [],
-                                              "componentStyle": ComponentStyle {
-                                                "componentId": "sc-cvbbAY",
-                                                "isStatic": false,
-                                                "lastClassName": "emdpGB",
-                                                "rules": Array [
-                                                  "
+                                              "formType": "text",
+                                              "labelValue": "Username*",
+                                              "name": "username",
+                                            },
+                                            Object {
+                                              "formType": "password",
+                                              "labelValue": "Password*",
+                                              "name": "password",
+                                            },
+                                            Object {
+                                              "formType": "text",
+                                              "labelValue": "Application Version*",
+                                              "name": "applicationVersion",
+                                            },
+                                          ]
+                                        }
+                                        validate={[Function]}
+                                        validateNow={false}
+                                      >
+                                        <Styled(styled.div)>
+                                          <StyledComponent
+                                            forwardedComponent={
+                                              Object {
+                                                "$$typeof": Symbol(react.forward_ref),
+                                                "attrs": Array [],
+                                                "componentStyle": ComponentStyle {
+                                                  "componentId": "sc-cvbbAY",
+                                                  "isStatic": false,
+                                                  "lastClassName": "emdpGB",
+                                                  "rules": Array [
+                                                    "
   display: flex;
   flex-direction: column;
 ",
-                                                  "
+                                                    "
   display: flex;
   flex-direction: column;
   width: 100%;
 ",
+                                                  ],
+                                                },
+                                                "displayName": "Styled(styled.div)",
+                                                "foldedComponentIds": Array [
+                                                  "sc-bdVaJa",
                                                 ],
-                                              },
-                                              "displayName": "Styled(styled.div)",
-                                              "foldedComponentIds": Array [
-                                                "sc-bdVaJa",
-                                              ],
-                                              "render": [Function],
-                                              "styledComponentId": "sc-cvbbAY",
-                                              "target": "div",
-                                              "toString": [Function],
-                                              "warnTooManyClasses": [Function],
-                                              "withComponent": [Function],
+                                                "render": [Function],
+                                                "styledComponentId": "sc-cvbbAY",
+                                                "target": "div",
+                                                "toString": [Function],
+                                                "warnTooManyClasses": [Function],
+                                                "withComponent": [Function],
+                                              }
                                             }
-                                          }
-                                          forwardedRef={null}
-                                        >
-                                          <div
-                                            className="sc-bdVaJa sc-cvbbAY emdpGB"
+                                            forwardedRef={null}
                                           >
-                                            <form
-                                              data-testhook-id="collector-execution-form-0"
-                                              onBlur={[Function]}
-                                              onSubmit={[Function]}
+                                            <div
+                                              className="sc-bdVaJa sc-cvbbAY emdpGB"
                                             >
-                                              <FormInput
-                                                dataTesthookId="collector-execution-form-0-field-0"
-                                                disabled={false}
-                                                formType="text"
-                                                innerRef={
-                                                  Object {
-                                                    "current": <input
-                                                      class="sc-kpOJdX naqzc"
-                                                      data-testhook-id="collector-execution-form-0-field-0"
-                                                      name="username"
-                                                      type="text"
-                                                      value=""
-                                                    />,
-                                                  }
-                                                }
-                                                labelValue="Username*"
-                                                name="username"
+                                              <form
+                                                data-testhook-id="xl-deploy-collector-execution-form-0"
                                                 onBlur={[Function]}
-                                                onChange={[Function]}
-                                                value=""
+                                                onSubmit={[Function]}
                                               >
-                                                <styled.div>
-                                                  <StyledComponent
-                                                    forwardedComponent={
-                                                      Object {
-                                                        "$$typeof": Symbol(react.forward_ref),
-                                                        "attrs": Array [],
-                                                        "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-ckVGcZ",
-                                                          "isStatic": false,
-                                                          "lastClassName": "bxAWbg",
-                                                          "rules": Array [
-                                                            "
+                                                <FormInput
+                                                  dataTesthookId="xl-deploy-collector-execution-form-0-field-0"
+                                                  disabled={false}
+                                                  formType="text"
+                                                  innerRef={
+                                                    Object {
+                                                      "current": <input
+                                                        class="sc-kpOJdX naqzc"
+                                                        data-testhook-id="xl-deploy-collector-execution-form-0-field-0"
+                                                        name="username"
+                                                        type="text"
+                                                        value=""
+                                                      />,
+                                                    }
+                                                  }
+                                                  labelValue="Username*"
+                                                  name="username"
+                                                  onBlur={[Function]}
+                                                  onChange={[Function]}
+                                                  value=""
+                                                >
+                                                  <styled.div>
+                                                    <StyledComponent
+                                                      forwardedComponent={
+                                                        Object {
+                                                          "$$typeof": Symbol(react.forward_ref),
+                                                          "attrs": Array [],
+                                                          "componentStyle": ComponentStyle {
+                                                            "componentId": "sc-ckVGcZ",
+                                                            "isStatic": false,
+                                                            "lastClassName": "bxAWbg",
+                                                            "rules": Array [
+                                                              "
   display: flex;
   flex-direction: column;
 ",
-                                                          ],
-                                                        },
-                                                        "displayName": "styled.div",
-                                                        "foldedComponentIds": Array [],
-                                                        "render": [Function],
-                                                        "styledComponentId": "sc-ckVGcZ",
-                                                        "target": "div",
-                                                        "toString": [Function],
-                                                        "warnTooManyClasses": [Function],
-                                                        "withComponent": [Function],
+                                                            ],
+                                                          },
+                                                          "displayName": "styled.div",
+                                                          "foldedComponentIds": Array [],
+                                                          "render": [Function],
+                                                          "styledComponentId": "sc-ckVGcZ",
+                                                          "target": "div",
+                                                          "toString": [Function],
+                                                          "warnTooManyClasses": [Function],
+                                                          "withComponent": [Function],
+                                                        }
                                                       }
-                                                    }
-                                                    forwardedRef={null}
-                                                  >
-                                                    <div
-                                                      className="sc-ckVGcZ bxAWbg"
+                                                      forwardedRef={null}
                                                     >
-                                                      <styled.label>
-                                                        <StyledComponent
-                                                          forwardedComponent={
-                                                            Object {
-                                                              "$$typeof": Symbol(react.forward_ref),
-                                                              "attrs": Array [],
-                                                              "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-dxgOiQ",
-                                                                "isStatic": false,
-                                                                "lastClassName": "TStFD",
-                                                                "rules": Array [
-                                                                  "
+                                                      <div
+                                                        className="sc-ckVGcZ bxAWbg"
+                                                      >
+                                                        <styled.label>
+                                                          <StyledComponent
+                                                            forwardedComponent={
+                                                              Object {
+                                                                "$$typeof": Symbol(react.forward_ref),
+                                                                "attrs": Array [],
+                                                                "componentStyle": ComponentStyle {
+                                                                  "componentId": "sc-dxgOiQ",
+                                                                  "isStatic": false,
+                                                                  "lastClassName": "TStFD",
+                                                                  "rules": Array [
+                                                                    "
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
   color: #0a0a0a;
 ",
-                                                                ],
-                                                              },
-                                                              "displayName": "styled.label",
-                                                              "foldedComponentIds": Array [],
-                                                              "render": [Function],
-                                                              "styledComponentId": "sc-dxgOiQ",
-                                                              "target": "label",
-                                                              "toString": [Function],
-                                                              "warnTooManyClasses": [Function],
-                                                              "withComponent": [Function],
+                                                                  ],
+                                                                },
+                                                                "displayName": "styled.label",
+                                                                "foldedComponentIds": Array [],
+                                                                "render": [Function],
+                                                                "styledComponentId": "sc-dxgOiQ",
+                                                                "target": "label",
+                                                                "toString": [Function],
+                                                                "warnTooManyClasses": [Function],
+                                                                "withComponent": [Function],
+                                                              }
                                                             }
-                                                          }
-                                                          forwardedRef={null}
-                                                        >
-                                                          <label
-                                                            className="sc-dxgOiQ TStFD"
+                                                            forwardedRef={null}
                                                           >
-                                                            Username*
-                                                          </label>
-                                                        </StyledComponent>
-                                                      </styled.label>
-                                                      <styled.input
-                                                        data-testhook-id="collector-execution-form-0-field-0"
-                                                        disabled={false}
-                                                        name="username"
-                                                        onBlur={[Function]}
-                                                        onChange={[Function]}
-                                                        type="text"
-                                                        value=""
-                                                      >
-                                                        <StyledComponent
-                                                          data-testhook-id="collector-execution-form-0-field-0"
+                                                            <label
+                                                              className="sc-dxgOiQ TStFD"
+                                                            >
+                                                              Username*
+                                                            </label>
+                                                          </StyledComponent>
+                                                        </styled.label>
+                                                        <styled.input
+                                                          data-testhook-id="xl-deploy-collector-execution-form-0-field-0"
                                                           disabled={false}
-                                                          forwardedComponent={
-                                                            Object {
-                                                              "$$typeof": Symbol(react.forward_ref),
-                                                              "attrs": Array [],
-                                                              "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kpOJdX",
-                                                                "isStatic": false,
-                                                                "lastClassName": "naqzc",
-                                                                "rules": Array [
-                                                                  "
-  ",
-                                                                  "
-  overflow: visible;
-  box-sizing: border-box;
-  height: ",
-                                                                  [Function],
-                                                                  ";
-  margin: 0 0 1rem;
-  padding: 0.5rem;
-  border: 1px solid #cacaca;
-  border-radius: 0;
-  background-color: ",
-                                                                  [Function],
-                                                                  ";
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1.5;
-  color: #0a0a0a;
-  transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
-    -webkit-box-shadow 0.5s;
-
-  &:hover {
-    cursor: ",
-                                                                  [Function],
-                                                                  ";
-  }
-
-  &:focus {
-    outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
-  }
-",
-                                                                  "
-",
-                                                                ],
-                                                              },
-                                                              "displayName": "styled.input",
-                                                              "foldedComponentIds": Array [],
-                                                              "render": [Function],
-                                                              "styledComponentId": "sc-kpOJdX",
-                                                              "target": "input",
-                                                              "toString": [Function],
-                                                              "warnTooManyClasses": [Function],
-                                                              "withComponent": [Function],
-                                                            }
-                                                          }
-                                                          forwardedRef={
-                                                            Object {
-                                                              "current": <input
-                                                                class="sc-kpOJdX naqzc"
-                                                                data-testhook-id="collector-execution-form-0-field-0"
-                                                                name="username"
-                                                                type="text"
-                                                                value=""
-                                                              />,
-                                                            }
-                                                          }
                                                           name="username"
                                                           onBlur={[Function]}
                                                           onChange={[Function]}
                                                           type="text"
                                                           value=""
                                                         >
-                                                          <input
-                                                            className="sc-kpOJdX naqzc"
-                                                            data-testhook-id="collector-execution-form-0-field-0"
+                                                          <StyledComponent
+                                                            data-testhook-id="xl-deploy-collector-execution-form-0-field-0"
                                                             disabled={false}
-                                                            name="username"
-                                                            onBlur={[Function]}
-                                                            onChange={[Function]}
-                                                            type="text"
-                                                            value=""
-                                                          />
-                                                        </StyledComponent>
-                                                      </styled.input>
-                                                    </div>
-                                                  </StyledComponent>
-                                                </styled.div>
-                                              </FormInput>
-                                              <FormInput
-                                                dataTesthookId="collector-execution-form-0-field-1"
-                                                disabled={false}
-                                                formType="password"
-                                                labelValue="Password*"
-                                                name="password"
-                                                onBlur={[Function]}
-                                                onChange={[Function]}
-                                                value=""
-                                              >
-                                                <styled.div>
-                                                  <StyledComponent
-                                                    forwardedComponent={
-                                                      Object {
-                                                        "$$typeof": Symbol(react.forward_ref),
-                                                        "attrs": Array [],
-                                                        "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-ckVGcZ",
-                                                          "isStatic": false,
-                                                          "lastClassName": "bxAWbg",
-                                                          "rules": Array [
-                                                            "
-  display: flex;
-  flex-direction: column;
-",
-                                                          ],
-                                                        },
-                                                        "displayName": "styled.div",
-                                                        "foldedComponentIds": Array [],
-                                                        "render": [Function],
-                                                        "styledComponentId": "sc-ckVGcZ",
-                                                        "target": "div",
-                                                        "toString": [Function],
-                                                        "warnTooManyClasses": [Function],
-                                                        "withComponent": [Function],
-                                                      }
-                                                    }
-                                                    forwardedRef={null}
-                                                  >
-                                                    <div
-                                                      className="sc-ckVGcZ bxAWbg"
-                                                    >
-                                                      <styled.label>
-                                                        <StyledComponent
-                                                          forwardedComponent={
-                                                            Object {
-                                                              "$$typeof": Symbol(react.forward_ref),
-                                                              "attrs": Array [],
-                                                              "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-dxgOiQ",
-                                                                "isStatic": false,
-                                                                "lastClassName": "TStFD",
-                                                                "rules": Array [
-                                                                  "
-  font-size: 0.875rem;
-  font-weight: normal;
-  line-height: 1.8;
-  color: #0a0a0a;
-",
-                                                                ],
-                                                              },
-                                                              "displayName": "styled.label",
-                                                              "foldedComponentIds": Array [],
-                                                              "render": [Function],
-                                                              "styledComponentId": "sc-dxgOiQ",
-                                                              "target": "label",
-                                                              "toString": [Function],
-                                                              "warnTooManyClasses": [Function],
-                                                              "withComponent": [Function],
-                                                            }
-                                                          }
-                                                          forwardedRef={null}
-                                                        >
-                                                          <label
-                                                            className="sc-dxgOiQ TStFD"
-                                                          >
-                                                            Password*
-                                                          </label>
-                                                        </StyledComponent>
-                                                      </styled.label>
-                                                      <styled.input
-                                                        data-testhook-id="collector-execution-form-0-field-1"
-                                                        disabled={false}
-                                                        name="password"
-                                                        onBlur={[Function]}
-                                                        onChange={[Function]}
-                                                        type="password"
-                                                        value=""
-                                                      >
-                                                        <StyledComponent
-                                                          data-testhook-id="collector-execution-form-0-field-1"
-                                                          disabled={false}
-                                                          forwardedComponent={
-                                                            Object {
-                                                              "$$typeof": Symbol(react.forward_ref),
-                                                              "attrs": Array [],
-                                                              "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kpOJdX",
-                                                                "isStatic": false,
-                                                                "lastClassName": "naqzc",
-                                                                "rules": Array [
-                                                                  "
+                                                            forwardedComponent={
+                                                              Object {
+                                                                "$$typeof": Symbol(react.forward_ref),
+                                                                "attrs": Array [],
+                                                                "componentStyle": ComponentStyle {
+                                                                  "componentId": "sc-kpOJdX",
+                                                                  "isStatic": false,
+                                                                  "lastClassName": "naqzc",
+                                                                  "rules": Array [
+                                                                    "
   ",
-                                                                  "
+                                                                    "
   overflow: visible;
   box-sizing: border-box;
   height: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
   margin: 0 0 1rem;
   padding: 0.5rem;
   border: 1px solid #cacaca;
   border-radius: 0;
   background-color: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   font-size: 1rem;
@@ -1513,8 +1331,8 @@ exports[`approval happy flow 1`] = `
 
   &:hover {
     cursor: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
   }
 
   &:focus {
@@ -1523,159 +1341,169 @@ exports[`approval happy flow 1`] = `
     box-shadow: 0 0 5px #cacaca;
   }
 ",
-                                                                  "
+                                                                    "
 ",
-                                                                ],
-                                                              },
-                                                              "displayName": "styled.input",
-                                                              "foldedComponentIds": Array [],
-                                                              "render": [Function],
-                                                              "styledComponentId": "sc-kpOJdX",
-                                                              "target": "input",
-                                                              "toString": [Function],
-                                                              "warnTooManyClasses": [Function],
-                                                              "withComponent": [Function],
+                                                                  ],
+                                                                },
+                                                                "displayName": "styled.input",
+                                                                "foldedComponentIds": Array [],
+                                                                "render": [Function],
+                                                                "styledComponentId": "sc-kpOJdX",
+                                                                "target": "input",
+                                                                "toString": [Function],
+                                                                "warnTooManyClasses": [Function],
+                                                                "withComponent": [Function],
+                                                              }
                                                             }
-                                                          }
-                                                          forwardedRef={null}
+                                                            forwardedRef={
+                                                              Object {
+                                                                "current": <input
+                                                                  class="sc-kpOJdX naqzc"
+                                                                  data-testhook-id="xl-deploy-collector-execution-form-0-field-0"
+                                                                  name="username"
+                                                                  type="text"
+                                                                  value=""
+                                                                />,
+                                                              }
+                                                            }
+                                                            name="username"
+                                                            onBlur={[Function]}
+                                                            onChange={[Function]}
+                                                            type="text"
+                                                            value=""
+                                                          >
+                                                            <input
+                                                              className="sc-kpOJdX naqzc"
+                                                              data-testhook-id="xl-deploy-collector-execution-form-0-field-0"
+                                                              disabled={false}
+                                                              name="username"
+                                                              onBlur={[Function]}
+                                                              onChange={[Function]}
+                                                              type="text"
+                                                              value=""
+                                                            />
+                                                          </StyledComponent>
+                                                        </styled.input>
+                                                      </div>
+                                                    </StyledComponent>
+                                                  </styled.div>
+                                                </FormInput>
+                                                <FormInput
+                                                  dataTesthookId="xl-deploy-collector-execution-form-0-field-1"
+                                                  disabled={false}
+                                                  formType="password"
+                                                  labelValue="Password*"
+                                                  name="password"
+                                                  onBlur={[Function]}
+                                                  onChange={[Function]}
+                                                  value=""
+                                                >
+                                                  <styled.div>
+                                                    <StyledComponent
+                                                      forwardedComponent={
+                                                        Object {
+                                                          "$$typeof": Symbol(react.forward_ref),
+                                                          "attrs": Array [],
+                                                          "componentStyle": ComponentStyle {
+                                                            "componentId": "sc-ckVGcZ",
+                                                            "isStatic": false,
+                                                            "lastClassName": "bxAWbg",
+                                                            "rules": Array [
+                                                              "
+  display: flex;
+  flex-direction: column;
+",
+                                                            ],
+                                                          },
+                                                          "displayName": "styled.div",
+                                                          "foldedComponentIds": Array [],
+                                                          "render": [Function],
+                                                          "styledComponentId": "sc-ckVGcZ",
+                                                          "target": "div",
+                                                          "toString": [Function],
+                                                          "warnTooManyClasses": [Function],
+                                                          "withComponent": [Function],
+                                                        }
+                                                      }
+                                                      forwardedRef={null}
+                                                    >
+                                                      <div
+                                                        className="sc-ckVGcZ bxAWbg"
+                                                      >
+                                                        <styled.label>
+                                                          <StyledComponent
+                                                            forwardedComponent={
+                                                              Object {
+                                                                "$$typeof": Symbol(react.forward_ref),
+                                                                "attrs": Array [],
+                                                                "componentStyle": ComponentStyle {
+                                                                  "componentId": "sc-dxgOiQ",
+                                                                  "isStatic": false,
+                                                                  "lastClassName": "TStFD",
+                                                                  "rules": Array [
+                                                                    "
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.8;
+  color: #0a0a0a;
+",
+                                                                  ],
+                                                                },
+                                                                "displayName": "styled.label",
+                                                                "foldedComponentIds": Array [],
+                                                                "render": [Function],
+                                                                "styledComponentId": "sc-dxgOiQ",
+                                                                "target": "label",
+                                                                "toString": [Function],
+                                                                "warnTooManyClasses": [Function],
+                                                                "withComponent": [Function],
+                                                              }
+                                                            }
+                                                            forwardedRef={null}
+                                                          >
+                                                            <label
+                                                              className="sc-dxgOiQ TStFD"
+                                                            >
+                                                              Password*
+                                                            </label>
+                                                          </StyledComponent>
+                                                        </styled.label>
+                                                        <styled.input
+                                                          data-testhook-id="xl-deploy-collector-execution-form-0-field-1"
+                                                          disabled={false}
                                                           name="password"
                                                           onBlur={[Function]}
                                                           onChange={[Function]}
                                                           type="password"
                                                           value=""
                                                         >
-                                                          <input
-                                                            className="sc-kpOJdX naqzc"
-                                                            data-testhook-id="collector-execution-form-0-field-1"
+                                                          <StyledComponent
+                                                            data-testhook-id="xl-deploy-collector-execution-form-0-field-1"
                                                             disabled={false}
-                                                            name="password"
-                                                            onBlur={[Function]}
-                                                            onChange={[Function]}
-                                                            type="password"
-                                                            value=""
-                                                          />
-                                                        </StyledComponent>
-                                                      </styled.input>
-                                                    </div>
-                                                  </StyledComponent>
-                                                </styled.div>
-                                              </FormInput>
-                                              <FormInput
-                                                dataTesthookId="collector-execution-form-0-field-2"
-                                                disabled={false}
-                                                formType="text"
-                                                labelValue="Application Version*"
-                                                name="applicationVersion"
-                                                onBlur={[Function]}
-                                                onChange={[Function]}
-                                                value=""
-                                              >
-                                                <styled.div>
-                                                  <StyledComponent
-                                                    forwardedComponent={
-                                                      Object {
-                                                        "$$typeof": Symbol(react.forward_ref),
-                                                        "attrs": Array [],
-                                                        "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-ckVGcZ",
-                                                          "isStatic": false,
-                                                          "lastClassName": "bxAWbg",
-                                                          "rules": Array [
-                                                            "
-  display: flex;
-  flex-direction: column;
-",
-                                                          ],
-                                                        },
-                                                        "displayName": "styled.div",
-                                                        "foldedComponentIds": Array [],
-                                                        "render": [Function],
-                                                        "styledComponentId": "sc-ckVGcZ",
-                                                        "target": "div",
-                                                        "toString": [Function],
-                                                        "warnTooManyClasses": [Function],
-                                                        "withComponent": [Function],
-                                                      }
-                                                    }
-                                                    forwardedRef={null}
-                                                  >
-                                                    <div
-                                                      className="sc-ckVGcZ bxAWbg"
-                                                    >
-                                                      <styled.label>
-                                                        <StyledComponent
-                                                          forwardedComponent={
-                                                            Object {
-                                                              "$$typeof": Symbol(react.forward_ref),
-                                                              "attrs": Array [],
-                                                              "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-dxgOiQ",
-                                                                "isStatic": false,
-                                                                "lastClassName": "TStFD",
-                                                                "rules": Array [
-                                                                  "
-  font-size: 0.875rem;
-  font-weight: normal;
-  line-height: 1.8;
-  color: #0a0a0a;
-",
-                                                                ],
-                                                              },
-                                                              "displayName": "styled.label",
-                                                              "foldedComponentIds": Array [],
-                                                              "render": [Function],
-                                                              "styledComponentId": "sc-dxgOiQ",
-                                                              "target": "label",
-                                                              "toString": [Function],
-                                                              "warnTooManyClasses": [Function],
-                                                              "withComponent": [Function],
-                                                            }
-                                                          }
-                                                          forwardedRef={null}
-                                                        >
-                                                          <label
-                                                            className="sc-dxgOiQ TStFD"
-                                                          >
-                                                            Application Version*
-                                                          </label>
-                                                        </StyledComponent>
-                                                      </styled.label>
-                                                      <styled.input
-                                                        data-testhook-id="collector-execution-form-0-field-2"
-                                                        disabled={false}
-                                                        name="applicationVersion"
-                                                        onBlur={[Function]}
-                                                        onChange={[Function]}
-                                                        type="text"
-                                                        value=""
-                                                      >
-                                                        <StyledComponent
-                                                          data-testhook-id="collector-execution-form-0-field-2"
-                                                          disabled={false}
-                                                          forwardedComponent={
-                                                            Object {
-                                                              "$$typeof": Symbol(react.forward_ref),
-                                                              "attrs": Array [],
-                                                              "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kpOJdX",
-                                                                "isStatic": false,
-                                                                "lastClassName": "naqzc",
-                                                                "rules": Array [
-                                                                  "
+                                                            forwardedComponent={
+                                                              Object {
+                                                                "$$typeof": Symbol(react.forward_ref),
+                                                                "attrs": Array [],
+                                                                "componentStyle": ComponentStyle {
+                                                                  "componentId": "sc-kpOJdX",
+                                                                  "isStatic": false,
+                                                                  "lastClassName": "naqzc",
+                                                                  "rules": Array [
+                                                                    "
   ",
-                                                                  "
+                                                                    "
   overflow: visible;
   box-sizing: border-box;
   height: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
   margin: 0 0 1rem;
   padding: 0.5rem;
   border: 1px solid #cacaca;
   border-radius: 0;
   background-color: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   font-size: 1rem;
@@ -1687,8 +1515,8 @@ exports[`approval happy flow 1`] = `
 
   &:hover {
     cursor: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
   }
 
   &:focus {
@@ -1697,142 +1525,316 @@ exports[`approval happy flow 1`] = `
     box-shadow: 0 0 5px #cacaca;
   }
 ",
-                                                                  "
+                                                                    "
 ",
-                                                                ],
-                                                              },
-                                                              "displayName": "styled.input",
-                                                              "foldedComponentIds": Array [],
-                                                              "render": [Function],
-                                                              "styledComponentId": "sc-kpOJdX",
-                                                              "target": "input",
-                                                              "toString": [Function],
-                                                              "warnTooManyClasses": [Function],
-                                                              "withComponent": [Function],
+                                                                  ],
+                                                                },
+                                                                "displayName": "styled.input",
+                                                                "foldedComponentIds": Array [],
+                                                                "render": [Function],
+                                                                "styledComponentId": "sc-kpOJdX",
+                                                                "target": "input",
+                                                                "toString": [Function],
+                                                                "warnTooManyClasses": [Function],
+                                                                "withComponent": [Function],
+                                                              }
                                                             }
-                                                          }
-                                                          forwardedRef={null}
+                                                            forwardedRef={null}
+                                                            name="password"
+                                                            onBlur={[Function]}
+                                                            onChange={[Function]}
+                                                            type="password"
+                                                            value=""
+                                                          >
+                                                            <input
+                                                              className="sc-kpOJdX naqzc"
+                                                              data-testhook-id="xl-deploy-collector-execution-form-0-field-1"
+                                                              disabled={false}
+                                                              name="password"
+                                                              onBlur={[Function]}
+                                                              onChange={[Function]}
+                                                              type="password"
+                                                              value=""
+                                                            />
+                                                          </StyledComponent>
+                                                        </styled.input>
+                                                      </div>
+                                                    </StyledComponent>
+                                                  </styled.div>
+                                                </FormInput>
+                                                <FormInput
+                                                  dataTesthookId="xl-deploy-collector-execution-form-0-field-2"
+                                                  disabled={false}
+                                                  formType="text"
+                                                  labelValue="Application Version*"
+                                                  name="applicationVersion"
+                                                  onBlur={[Function]}
+                                                  onChange={[Function]}
+                                                  value=""
+                                                >
+                                                  <styled.div>
+                                                    <StyledComponent
+                                                      forwardedComponent={
+                                                        Object {
+                                                          "$$typeof": Symbol(react.forward_ref),
+                                                          "attrs": Array [],
+                                                          "componentStyle": ComponentStyle {
+                                                            "componentId": "sc-ckVGcZ",
+                                                            "isStatic": false,
+                                                            "lastClassName": "bxAWbg",
+                                                            "rules": Array [
+                                                              "
+  display: flex;
+  flex-direction: column;
+",
+                                                            ],
+                                                          },
+                                                          "displayName": "styled.div",
+                                                          "foldedComponentIds": Array [],
+                                                          "render": [Function],
+                                                          "styledComponentId": "sc-ckVGcZ",
+                                                          "target": "div",
+                                                          "toString": [Function],
+                                                          "warnTooManyClasses": [Function],
+                                                          "withComponent": [Function],
+                                                        }
+                                                      }
+                                                      forwardedRef={null}
+                                                    >
+                                                      <div
+                                                        className="sc-ckVGcZ bxAWbg"
+                                                      >
+                                                        <styled.label>
+                                                          <StyledComponent
+                                                            forwardedComponent={
+                                                              Object {
+                                                                "$$typeof": Symbol(react.forward_ref),
+                                                                "attrs": Array [],
+                                                                "componentStyle": ComponentStyle {
+                                                                  "componentId": "sc-dxgOiQ",
+                                                                  "isStatic": false,
+                                                                  "lastClassName": "TStFD",
+                                                                  "rules": Array [
+                                                                    "
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.8;
+  color: #0a0a0a;
+",
+                                                                  ],
+                                                                },
+                                                                "displayName": "styled.label",
+                                                                "foldedComponentIds": Array [],
+                                                                "render": [Function],
+                                                                "styledComponentId": "sc-dxgOiQ",
+                                                                "target": "label",
+                                                                "toString": [Function],
+                                                                "warnTooManyClasses": [Function],
+                                                                "withComponent": [Function],
+                                                              }
+                                                            }
+                                                            forwardedRef={null}
+                                                          >
+                                                            <label
+                                                              className="sc-dxgOiQ TStFD"
+                                                            >
+                                                              Application Version*
+                                                            </label>
+                                                          </StyledComponent>
+                                                        </styled.label>
+                                                        <styled.input
+                                                          data-testhook-id="xl-deploy-collector-execution-form-0-field-2"
+                                                          disabled={false}
                                                           name="applicationVersion"
                                                           onBlur={[Function]}
                                                           onChange={[Function]}
                                                           type="text"
                                                           value=""
                                                         >
-                                                          <input
-                                                            className="sc-kpOJdX naqzc"
-                                                            data-testhook-id="collector-execution-form-0-field-2"
+                                                          <StyledComponent
+                                                            data-testhook-id="xl-deploy-collector-execution-form-0-field-2"
                                                             disabled={false}
+                                                            forwardedComponent={
+                                                              Object {
+                                                                "$$typeof": Symbol(react.forward_ref),
+                                                                "attrs": Array [],
+                                                                "componentStyle": ComponentStyle {
+                                                                  "componentId": "sc-kpOJdX",
+                                                                  "isStatic": false,
+                                                                  "lastClassName": "naqzc",
+                                                                  "rules": Array [
+                                                                    "
+  ",
+                                                                    "
+  overflow: visible;
+  box-sizing: border-box;
+  height: ",
+                                                                    [Function],
+                                                                    ";
+  margin: 0 0 1rem;
+  padding: 0.5rem;
+  border: 1px solid #cacaca;
+  border-radius: 0;
+  background-color: ",
+                                                                    [Function],
+                                                                    ";
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #0a0a0a;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
+    -webkit-box-shadow 0.5s;
+
+  &:hover {
+    cursor: ",
+                                                                    [Function],
+                                                                    ";
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid #8a8a8a;
+    box-shadow: 0 0 5px #cacaca;
+  }
+",
+                                                                    "
+",
+                                                                  ],
+                                                                },
+                                                                "displayName": "styled.input",
+                                                                "foldedComponentIds": Array [],
+                                                                "render": [Function],
+                                                                "styledComponentId": "sc-kpOJdX",
+                                                                "target": "input",
+                                                                "toString": [Function],
+                                                                "warnTooManyClasses": [Function],
+                                                                "withComponent": [Function],
+                                                              }
+                                                            }
+                                                            forwardedRef={null}
                                                             name="applicationVersion"
                                                             onBlur={[Function]}
                                                             onChange={[Function]}
                                                             type="text"
                                                             value=""
-                                                          />
-                                                        </StyledComponent>
-                                                      </styled.input>
-                                                    </div>
-                                                  </StyledComponent>
-                                                </styled.div>
-                                              </FormInput>
-                                              <styled.hr>
-                                                <StyledComponent
-                                                  forwardedComponent={
-                                                    Object {
-                                                      "$$typeof": Symbol(react.forward_ref),
-                                                      "attrs": Array [],
-                                                      "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-kGXeez",
-                                                        "isStatic": false,
-                                                        "lastClassName": "faHWag",
-                                                        "rules": Array [
-                                                          "
+                                                          >
+                                                            <input
+                                                              className="sc-kpOJdX naqzc"
+                                                              data-testhook-id="xl-deploy-collector-execution-form-0-field-2"
+                                                              disabled={false}
+                                                              name="applicationVersion"
+                                                              onBlur={[Function]}
+                                                              onChange={[Function]}
+                                                              type="text"
+                                                              value=""
+                                                            />
+                                                          </StyledComponent>
+                                                        </styled.input>
+                                                      </div>
+                                                    </StyledComponent>
+                                                  </styled.div>
+                                                </FormInput>
+                                                <styled.hr>
+                                                  <StyledComponent
+                                                    forwardedComponent={
+                                                      Object {
+                                                        "$$typeof": Symbol(react.forward_ref),
+                                                        "attrs": Array [],
+                                                        "componentStyle": ComponentStyle {
+                                                          "componentId": "sc-kGXeez",
+                                                          "isStatic": false,
+                                                          "lastClassName": "faHWag",
+                                                          "rules": Array [
+                                                            "
   padding: 0;
   margin: 0 0 1rem;
   border: 0;
   border-bottom: 1px solid
     ",
-                                                          [Function],
-                                                          ";
+                                                            [Function],
+                                                            ";
 ",
-                                                        ],
-                                                      },
-                                                      "displayName": "styled.hr",
-                                                      "foldedComponentIds": Array [],
-                                                      "render": [Function],
-                                                      "styledComponentId": "sc-kGXeez",
-                                                      "target": "hr",
-                                                      "toString": [Function],
-                                                      "warnTooManyClasses": [Function],
-                                                      "withComponent": [Function],
+                                                          ],
+                                                        },
+                                                        "displayName": "styled.hr",
+                                                        "foldedComponentIds": Array [],
+                                                        "render": [Function],
+                                                        "styledComponentId": "sc-kGXeez",
+                                                        "target": "hr",
+                                                        "toString": [Function],
+                                                        "warnTooManyClasses": [Function],
+                                                        "withComponent": [Function],
+                                                      }
                                                     }
-                                                  }
-                                                  forwardedRef={null}
-                                                >
-                                                  <hr
-                                                    className="sc-kGXeez faHWag"
-                                                  />
-                                                </StyledComponent>
-                                              </styled.hr>
-                                              <styled.div>
-                                                <StyledComponent
-                                                  forwardedComponent={
-                                                    Object {
-                                                      "$$typeof": Symbol(react.forward_ref),
-                                                      "attrs": Array [],
-                                                      "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-bwzfXH",
-                                                        "isStatic": false,
-                                                        "lastClassName": "fnOeuT",
-                                                        "rules": Array [
-                                                          "
+                                                    forwardedRef={null}
+                                                  >
+                                                    <hr
+                                                      className="sc-kGXeez faHWag"
+                                                    />
+                                                  </StyledComponent>
+                                                </styled.hr>
+                                                <styled.div>
+                                                  <StyledComponent
+                                                    forwardedComponent={
+                                                      Object {
+                                                        "$$typeof": Symbol(react.forward_ref),
+                                                        "attrs": Array [],
+                                                        "componentStyle": ComponentStyle {
+                                                          "componentId": "sc-bwzfXH",
+                                                          "isStatic": false,
+                                                          "lastClassName": "fnOeuT",
+                                                          "rules": Array [
+                                                            "
   display: flex;
   flex-direction: row;
   flex-wrap: ",
-                                                          [Function],
-                                                          ";
+                                                            [Function],
+                                                            ";
 ",
-                                                        ],
-                                                      },
-                                                      "displayName": "styled.div",
-                                                      "foldedComponentIds": Array [],
-                                                      "render": [Function],
-                                                      "styledComponentId": "sc-bwzfXH",
-                                                      "target": "div",
-                                                      "toString": [Function],
-                                                      "warnTooManyClasses": [Function],
-                                                      "withComponent": [Function],
+                                                          ],
+                                                        },
+                                                        "displayName": "styled.div",
+                                                        "foldedComponentIds": Array [],
+                                                        "render": [Function],
+                                                        "styledComponentId": "sc-bwzfXH",
+                                                        "target": "div",
+                                                        "toString": [Function],
+                                                        "warnTooManyClasses": [Function],
+                                                        "withComponent": [Function],
+                                                      }
                                                     }
-                                                  }
-                                                  forwardedRef={null}
-                                                >
-                                                  <div
-                                                    className="sc-bwzfXH fnOeuT"
+                                                    forwardedRef={null}
                                                   >
-                                                    <LoaderButton
-                                                      buttonType="submit"
-                                                      dataTesthookId="collector-execution-form-0-submit-button"
-                                                      loading={false}
-                                                      onMouseDown={[Function]}
+                                                    <div
+                                                      className="sc-bwzfXH fnOeuT"
                                                     >
-                                                      <styled.button
-                                                        data-testhook-id="collector-execution-form-0-submit-button"
+                                                      <LoaderButton
+                                                        buttonType="submit"
+                                                        dataTesthookId="xl-deploy-collector-execution-form-0-submit-button"
+                                                        loading={false}
                                                         onMouseDown={[Function]}
-                                                        type="submit"
                                                       >
-                                                        <StyledComponent
-                                                          data-testhook-id="collector-execution-form-0-submit-button"
-                                                          forwardedComponent={
-                                                            Object {
-                                                              "$$typeof": Symbol(react.forward_ref),
-                                                              "attrs": Array [],
-                                                              "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kEYyzF",
-                                                                "isStatic": false,
-                                                                "lastClassName": "exYZF",
-                                                                "rules": Array [
-                                                                  "
+                                                        <styled.button
+                                                          data-testhook-id="xl-deploy-collector-execution-form-0-submit-button"
+                                                          onMouseDown={[Function]}
+                                                          type="submit"
+                                                        >
+                                                          <StyledComponent
+                                                            data-testhook-id="xl-deploy-collector-execution-form-0-submit-button"
+                                                            forwardedComponent={
+                                                              Object {
+                                                                "$$typeof": Symbol(react.forward_ref),
+                                                                "attrs": Array [],
+                                                                "componentStyle": ComponentStyle {
+                                                                  "componentId": "sc-kEYyzF",
+                                                                  "isStatic": false,
+                                                                  "lastClassName": "exYZF",
+                                                                  "rules": Array [
+                                                                    "
   ",
-                                                                  "
+                                                                    "
   display: inline-block;
   vertical-align: middle;
   margin: 0 0 1rem 0;
@@ -1843,71 +1845,72 @@ exports[`approval happy flow 1`] = `
   font-size: 0.9rem;
   font-family: inherit;
   background-color: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
   color: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
   outline: 0;
   transition: background-color 0.25s ease-out, color 0.25s ease-out;
 
   &:hover {
     background-color: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
     cursor: pointer;
   }
 ",
-                                                                  "
+                                                                    "
 
   background-color: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
 
   &:hover {
     background-color: ",
-                                                                  [Function],
-                                                                  ";
+                                                                    [Function],
+                                                                    ";
     cursor: ",
-                                                                  [Function],
-                                                                  "
+                                                                    [Function],
+                                                                    "
   }
 ",
-                                                                ],
-                                                              },
-                                                              "displayName": "styled.button",
-                                                              "foldedComponentIds": Array [],
-                                                              "render": [Function],
-                                                              "styledComponentId": "sc-kEYyzF",
-                                                              "target": "button",
-                                                              "toString": [Function],
-                                                              "warnTooManyClasses": [Function],
-                                                              "withComponent": [Function],
+                                                                  ],
+                                                                },
+                                                                "displayName": "styled.button",
+                                                                "foldedComponentIds": Array [],
+                                                                "render": [Function],
+                                                                "styledComponentId": "sc-kEYyzF",
+                                                                "target": "button",
+                                                                "toString": [Function],
+                                                                "warnTooManyClasses": [Function],
+                                                                "withComponent": [Function],
+                                                              }
                                                             }
-                                                          }
-                                                          forwardedRef={null}
-                                                          onMouseDown={[Function]}
-                                                          type="submit"
-                                                        >
-                                                          <button
-                                                            className="sc-kEYyzF exYZF"
-                                                            data-testhook-id="collector-execution-form-0-submit-button"
+                                                            forwardedRef={null}
                                                             onMouseDown={[Function]}
                                                             type="submit"
                                                           >
-                                                            Next
-                                                          </button>
-                                                        </StyledComponent>
-                                                      </styled.button>
-                                                    </LoaderButton>
-                                                  </div>
-                                                </StyledComponent>
-                                              </styled.div>
-                                            </form>
-                                          </div>
-                                        </StyledComponent>
-                                      </Styled(styled.div)>
-                                    </GenericForm>
+                                                            <button
+                                                              className="sc-kEYyzF exYZF"
+                                                              data-testhook-id="xl-deploy-collector-execution-form-0-submit-button"
+                                                              onMouseDown={[Function]}
+                                                              type="submit"
+                                                            >
+                                                              Next
+                                                            </button>
+                                                          </StyledComponent>
+                                                        </styled.button>
+                                                      </LoaderButton>
+                                                    </div>
+                                                  </StyledComponent>
+                                                </styled.div>
+                                              </form>
+                                            </div>
+                                          </StyledComponent>
+                                        </Styled(styled.div)>
+                                      </GenericForm>
+                                    </XLDeployApprovalForm>
                                   </main>
                                 </StyledComponent>
                               </styled.main>

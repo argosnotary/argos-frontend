@@ -20,3 +20,12 @@ export interface IXLDeployExecutionContext {
   username: string;
   password: string;
 }
+
+export interface IGitExecutionContext {
+  repository: string;
+  username?: string;
+  password?: string;
+  branch?: string;
+  tag?: string;
+  commitHash?: string;
+}

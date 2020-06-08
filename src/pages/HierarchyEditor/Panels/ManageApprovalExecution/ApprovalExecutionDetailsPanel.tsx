@@ -21,13 +21,10 @@ import {
   ISignArtifactsAction,
   useApprovalExecutionStore
 } from "../../../../stores/ApprovalExecutionStore";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../../organisms/GenericForm";
-import { FormPermissions } from "../../../../types/FormPermission";
 import {
   ArtifactCollectorType,
   IArtifactCollector,
+  IGitContext,
   IXLDeployContext
 } from "../../../../interfaces/IApprovalConfig";
 import CollapsibleContainerComponent from "../../../../atoms/CollapsibleContainer";
@@ -35,12 +32,15 @@ import FlexRow from "../../../../atoms/FlexRow";
 import styled from "styled-components";
 import useDataApi from "../../../../hooks/useDataApi";
 import DataRequest from "../../../../types/DataRequest";
-import { IXLDeployExecutionContext } from "../../../../interfaces/IApprovalExecutionContext";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
 import { IArtifact } from "../../../../interfaces/ILink";
 import LinkSigner from "./LinkSigner";
 import { Button, CancelButton, LoaderButton } from "../../../../atoms/Button";
 import { Warning } from "../../../../atoms/Alerts";
+import XLDeployApprovalForm, {
+  IXLDeployFormValues
+} from "./XLDeployApprovalForm";
+import GitApprovalForm, { IGitFormValues } from "./GitApprovalForm";
 
 const ApproveButtonContainer = styled(FlexRow)`
   margin: 1rem 0;
@@ -54,45 +54,9 @@ const ApproveButtonContainer = styled(FlexRow)`
   }
 `;
 
-const defaultApprovalConfigFormSchema: IGenericFormSchema = [
-  {
-    labelValue: "Username*",
-    name: "username",
-    formType: "text"
-  },
-  {
-    labelValue: "Password*",
-    name: "password",
-    formType: "password"
-  }
-];
-
-const getApprovalExecutionFormSchema = (
-  type: ArtifactCollectorType
-): IGenericFormSchema => {
-  if (type === ArtifactCollectorType.XLDEPLOY) {
-    return [
-      ...defaultApprovalConfigFormSchema,
-      {
-        labelValue: "Application Version*",
-        name: "applicationVersion",
-        formType: "text"
-      }
-    ];
-  }
-
-  return [];
-};
-
-interface IFormValues {
-  username: string;
-  password: string;
-  applicationVersion?: string;
-}
-
 interface ICollectorExecutionContext {
   config: IArtifactCollector;
-  executionValues: IFormValues;
+  executionValues: IXLDeployFormValues | IGitFormValues;
   valid: boolean;
 }
 
@@ -102,7 +66,7 @@ const createExecutionContexts = (context: IApprovalExecutionStoreContext) => {
       collector => {
         return {
           config: collector,
-          executionValues: { username: "", password: "" },
+          executionValues: {} as IXLDeployFormValues,
           valid: false
         };
       }
@@ -110,33 +74,6 @@ const createExecutionContexts = (context: IApprovalExecutionStoreContext) => {
   } else {
     return [];
   }
-};
-
-const validateApprovalExecutionForm = (
-  values: IFormValues,
-  type: ArtifactCollectorType
-) => {
-  const errors = {} as IFormValues;
-
-  if (!values.username) {
-    errors.username = "Please fill in a username";
-  }
-
-  if (!values.password) {
-    errors.password = "Please fill in a password";
-  }
-
-  if (type === ArtifactCollectorType.XLDEPLOY) {
-    if (!values.applicationVersion) {
-      errors.applicationVersion = "Please fill in a application version.";
-    } else if (
-      !new RegExp("^[^\\\\/\\]\\[:|,*]+$").test(values.applicationVersion)
-    ) {
-      errors.applicationVersion =
-        "Please enter only valid characters for the application version (no `/`, `\\`, `:`, `[`, `]`, `|`, `,` or `*`)";
-    }
-  }
-  return errors;
 };
 
 const ApprovalExecutionDetailsPanel: React.FC = () => {
@@ -160,14 +97,8 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
     valid: boolean
   ): void => {
     executionContexts[index].valid = valid;
-    if (valid) {
-      executionContexts[index].executionValues = formValues;
-    }
+    executionContexts[index].executionValues = formValues;
     setExecutionContexts([...executionContexts]);
-  };
-
-  const getInitialValues = (_collector: IArtifactCollector, index: number) => {
-    return executionContexts[index].executionValues;
   };
 
   const [collectorServiceApiResponse, setArtifactsRequest] = useDataApi(
@@ -177,6 +108,33 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
   const handleApprove = () => {
     setCollectorError(undefined);
     requestArtifacts([], 0);
+  };
+
+  const determineRunIdForGit = (values: IGitFormValues): string => {
+    return values.branch !== undefined
+      ? values.branch
+      : values.tag !== undefined
+      ? values.tag
+      : values.commitHash !== undefined
+      ? values.commitHash
+      : "";
+  };
+
+  const determineRunId = (context: ICollectorExecutionContext): string => {
+    switch (context.config.type) {
+      case ArtifactCollectorType.XLDEPLOY:
+        return (
+          (context.config.context as IXLDeployContext).applicationName +
+          "/" +
+          (context.executionValues as IXLDeployFormValues).applicationVersion
+        );
+      case ArtifactCollectorType.GIT:
+        return (
+          (context.config.context as IGitContext).repository +
+          "/" +
+          determineRunIdForGit(context.executionValues as IGitFormValues)
+        );
+    }
   };
 
   const requestArtifacts = (artifacts: Array<IArtifact>, index: number) => {
@@ -191,10 +149,7 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
         approvalContext.dispatch({
           type: ApprovalExecutionActionType.SIGN_ARTIFACTS,
           approvalSigningContext: {
-            runId:
-              (context.config.context as IXLDeployContext).applicationName +
-              "/" +
-              context.executionValues.applicationVersion,
+            runId: determineRunId(context),
             stepName:
               approvalContext.state.selectedApprovalConfig?.stepName || "",
             segmentName:
@@ -208,12 +163,9 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
     const artifactsRequest: DataRequest = {
       method: "post",
       data: {
-        applicationName: (context.config.context as IXLDeployContext)
-          .applicationName,
-        version: context.executionValues.applicationVersion,
-        username: context.executionValues.username,
-        password: context.executionValues.password
-      } as IXLDeployExecutionContext,
+        ...context.config.context,
+        ...context.executionValues
+      },
       token: "",
       url: context.config.uri + "/api/collector/artifacts",
       cbSuccess: handleReceivedArtifacts,
@@ -238,31 +190,45 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
     });
   };
 
+  const onSubmit = (index: number) => {
+    setActiveCollector(index + 1);
+  };
+
   const renderForm = (index: number, collector: IArtifactCollector) => {
-    return (
-      <>
-        <GenericForm
-          dataTesthookId={"collector-execution-form-" + index}
-          schema={getApprovalExecutionFormSchema(collector.type)}
-          permission={FormPermissions.EDIT}
-          isLoading={false}
-          validate={values =>
-            validateApprovalExecutionForm(values, collector.type)
-          }
-          onChange={(valid, form) =>
-            onUpdateExecutionValues(form, index, valid)
-          }
-          onSubmit={form => {
-            onUpdateExecutionValues(form, index, true);
-            setActiveCollector(index + 1);
-          }}
-          initialValues={getInitialValues(collector, index)}
-          confirmationLabel={"Next"}
-          autoFocus={true}
-          validateNow={validateNow}
-        />
-      </>
-    );
+    switch (collector.type) {
+      case ArtifactCollectorType.XLDEPLOY:
+        return (
+          <>
+            <XLDeployApprovalForm
+              index={index}
+              validateNow={validateNow}
+              initialValues={
+                executionContexts[index].executionValues as IXLDeployFormValues
+              }
+              onUpdateExecutionValues={(form, valid) =>
+                onUpdateExecutionValues(form, index, valid)
+              }
+              onSubmit={() => onSubmit(index)}
+            />
+          </>
+        );
+      case ArtifactCollectorType.GIT:
+        return (
+          <>
+            <GitApprovalForm
+              index={index}
+              validateNow={validateNow}
+              initialValues={
+                executionContexts[index].executionValues as IGitFormValues
+              }
+              onUpdateExecutionValues={(form, valid) =>
+                onUpdateExecutionValues(form, index, valid)
+              }
+              onSubmit={() => onSubmit(index)}
+            />
+          </>
+        );
+    }
   };
 
   const renderCollectorRow = (
