@@ -7334,18 +7334,39 @@ exports[`sign layout happy flow 1`] = `
                                         <section
                                           className="sc-jTzLTM sc-dNLxif cYOoGC"
                                         >
+                                          <label
+                                            htmlFor="collectorType"
+                                          >
+                                            Collector type:
+                                          </label>
+                                          <select
+                                            id="collectorType"
+                                            name="collectorType"
+                                            onChange={[Function]}
+                                            value="XLDEPLOY"
+                                          >
+                                            <option
+                                              value="select"
+                                            >
+                                              select...
+                                            </option>
+                                            <option
+                                              value="XLDEPLOY"
+                                            >
+                                              XL deploy
+                                            </option>
+                                            <option
+                                              value="GIT"
+                                            >
+                                              git
+                                            </option>
+                                          </select>
                                           <GenericForm
                                             autoFocus={true}
                                             cancellationLabel="Cancel"
                                             confirmationLabel="Save"
                                             dataTesthookId="collector-edit-form"
-                                            initialValues={
-                                              Object {
-                                                "applicationName": "",
-                                                "name": "",
-                                                "uri": "",
-                                              }
-                                            }
+                                            initialValues={Object {}}
                                             isLoading={false}
                                             onCancel={[Function]}
                                             onSubmit={[Function]}

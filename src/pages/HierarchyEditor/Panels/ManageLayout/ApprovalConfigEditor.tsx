@@ -18,7 +18,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { FormPermissions } from "../../../../types/FormPermission";
 import {
   ArtifactCollectorType,
-  IArtifactCollector
+  IArtifactCollector,
+  IGitContext,
+  IXLDeployContext
 } from "../../../../interfaces/IApprovalConfig";
 import { isWebUri } from "valid-url";
 import styled, { ThemeContext } from "styled-components";
@@ -117,6 +119,7 @@ interface IFormFormValues {
   name: string;
   uri: string;
   applicationName?: string;
+  repository?: string;
 }
 
 const defaultApprovalConfigFormSchema: IGenericFormSchema = [
@@ -141,6 +144,15 @@ const getApprovalConfigFormSchema = (
       {
         labelValue: "Application Name*",
         name: "applicationName",
+        formType: "text"
+      }
+    ];
+  } else if (type === ArtifactCollectorType.GIT) {
+    return [
+      ...defaultApprovalConfigFormSchema,
+      {
+        labelValue: "Repository path*",
+        name: "repository",
         formType: "text"
       }
     ];
@@ -176,20 +188,32 @@ const validateApprovalConfigForm = (
       errors.applicationName =
         "Please enter only valid characters for the application name (no `/`, `\\`, `:`, `[`, `]`, `|`, `,` or `*`)";
     }
+  } else if (type === ArtifactCollectorType.GIT) {
+    if (!values.repository) {
+      errors.repository = "Please fill in a repository path.";
+    } else if (!new RegExp("^[A-Za-z0-9_.\\-/]*$").test(values.repository)) {
+      errors.repository = "Please enter a valid repository path.";
+    }
   }
-
   return errors;
 };
 
-const getInitialValues = (collector: IArtifactCollector) => {
+const getInitialValues = (
+  collector: IArtifactCollector
+): IFormFormValues | {} => {
   if (collector.type === ArtifactCollectorType.XLDEPLOY) {
     return {
       name: collector.name,
       uri: collector.uri,
-      applicationName: collector.context.applicationName
+      applicationName: (collector.context as IXLDeployContext).applicationName
+    };
+  } else if (collector.type === ArtifactCollectorType.GIT) {
+    return {
+      name: collector.name,
+      uri: collector.uri,
+      repository: (collector.context as IGitContext).repository
     };
   }
-
   return {};
 };
 
@@ -205,6 +229,12 @@ const ApprovalConfigEditor: React.FC = () => {
 
   const [approvalStep, setApprovalStep] = useState(false);
 
+  const [selectedCollectorType, setSelectedCollectorType] = useState<
+    ArtifactCollectorType | "select"
+  >("select");
+
+  useEffect(() => {}, [selectedCollectorType]);
+
   useEffect(() => {
     setEditIndex(undefined);
     setAddMode(false);
@@ -219,19 +249,34 @@ const ApprovalConfigEditor: React.FC = () => {
   }, [editorStoreContext.state.selectedLayoutElement]);
 
   useEffect(() => {
+    if (editIndex !== undefined && collectors[editIndex] !== undefined) {
+      if (collectors[editIndex].type !== undefined) {
+        setSelectedCollectorType(collectors[editIndex].type);
+      } else {
+        setSelectedCollectorType("select");
+      }
+    }
+  }, [editIndex]);
+
+  useEffect(() => {
     setApprovalStep(collectors.length > 0);
   }, [collectors]);
 
   const onUpdateApprovalConfig = (
-    formValues: any,
+    formValues: IFormFormValues,
     artifactCollector: IArtifactCollector
   ): void => {
     artifactCollector.uri = formValues.uri;
     artifactCollector.name = formValues.name;
+    artifactCollector.type = selectedCollectorType as ArtifactCollectorType;
 
     if (artifactCollector.type === ArtifactCollectorType.XLDEPLOY) {
       artifactCollector.context = {
-        applicationName: formValues.applicationName
+        applicationName: formValues.applicationName || ""
+      };
+    } else if (artifactCollector.type === ArtifactCollectorType.GIT) {
+      artifactCollector.context = {
+        repository: formValues.repository || ""
       };
     }
 
@@ -257,35 +302,46 @@ const ApprovalConfigEditor: React.FC = () => {
   };
 
   const addCollector = () => {
-    collectors.push({
-      type: ArtifactCollectorType.XLDEPLOY,
-      name: "",
-      uri: "",
-      context: { applicationName: "" }
-    });
+    collectors.push({} as IArtifactCollector);
     setCollectors([...collectors]);
-    setEditIndex(collectors.length - 1);
     setAddMode(true);
+    setEditIndex(collectors.length - 1);
+  };
+
+  const selectCollectorType = (e: any) => {
+    setSelectedCollectorType(e.target.value);
   };
 
   const editorForm = (collector: IArtifactCollector) => {
     return (
       <FormContainer>
-        <GenericForm
-          dataTesthookId={"collector-edit-form"}
-          schema={getApprovalConfigFormSchema(collector.type)}
-          permission={FormPermissions.EDIT}
-          isLoading={false}
-          validate={values =>
-            validateApprovalConfigForm(values, collector.type)
-          }
-          onCancel={onCancel}
-          onSubmit={form => onUpdateApprovalConfig(form, collector)}
-          initialValues={getInitialValues(collector)}
-          cancellationLabel={"Cancel"}
-          confirmationLabel={"Save"}
-          autoFocus={true}
-        />
+        <label htmlFor="collectorType">Collector type:</label>
+        <select
+          onChange={selectCollectorType}
+          value={selectedCollectorType}
+          name="collectorType"
+          id="collectorType">
+          <option value={"select"}>select...</option>
+          <option value={ArtifactCollectorType.XLDEPLOY}>XL deploy</option>
+          <option value={ArtifactCollectorType.GIT}>git</option>
+        </select>
+        {selectedCollectorType !== "select" ? (
+          <GenericForm
+            dataTesthookId={"collector-edit-form"}
+            schema={getApprovalConfigFormSchema(selectedCollectorType)}
+            permission={FormPermissions.EDIT}
+            isLoading={false}
+            validate={values =>
+              validateApprovalConfigForm(values, selectedCollectorType)
+            }
+            onCancel={onCancel}
+            onSubmit={form => onUpdateApprovalConfig(form, collector)}
+            initialValues={getInitialValues(collector)}
+            cancellationLabel={"Cancel"}
+            confirmationLabel={"Save"}
+            autoFocus={true}
+          />
+        ) : null}
       </FormContainer>
     );
   };

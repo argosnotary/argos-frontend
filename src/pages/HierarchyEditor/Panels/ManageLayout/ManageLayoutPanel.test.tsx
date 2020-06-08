@@ -370,6 +370,25 @@ it("sign layout happy flow", async () => {
       .find('input[data-testhook-id="make-approval-step"]')
       .simulate("change", { target: { checked: true } });
 
+    //
+
+    await waitFor(() => {
+      root
+        .find('select[id="collectorType"]')
+        .simulate("change", {
+          target: {
+            name: "collectorType",
+            value: ArtifactCollectorType.XLDEPLOY
+          }
+        });
+      root.update();
+
+      // console.log(root.debug())
+      expect(root.find('select[id="collectorType"]').props().value).toBe(
+        "XLDEPLOY"
+      );
+    });
+
     root
       .find('form[data-testhook-id="collector-edit-form"]')
       .simulate("submit");
@@ -432,7 +451,7 @@ it("sign layout happy flow", async () => {
     expect(JSON.parse(mock.history.post[0].data)).toEqual(expectedPost);
 
     expect(mock.history.post[2].data).toEqual(
-      '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"type":"XLDEPLOY","name":"xlCollect","uri":"https://collect.org","context":{"applicationName":"appName"}}]}]'
+      '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"uri":"https://collect.org","name":"xlCollect","type":"XLDEPLOY","context":{"applicationName":"appName"}}]}]'
     );
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });

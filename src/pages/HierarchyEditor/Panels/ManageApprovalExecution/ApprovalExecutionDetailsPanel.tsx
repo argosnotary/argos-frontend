@@ -27,7 +27,8 @@ import GenericForm, {
 import { FormPermissions } from "../../../../types/FormPermission";
 import {
   ArtifactCollectorType,
-  IArtifactCollector
+  IArtifactCollector,
+  IXLDeployContext
 } from "../../../../interfaces/IApprovalConfig";
 import CollapsibleContainerComponent from "../../../../atoms/CollapsibleContainer";
 import FlexRow from "../../../../atoms/FlexRow";
@@ -191,7 +192,7 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
           type: ApprovalExecutionActionType.SIGN_ARTIFACTS,
           approvalSigningContext: {
             runId:
-              context.config.context.applicationName +
+              (context.config.context as IXLDeployContext).applicationName +
               "/" +
               context.executionValues.applicationVersion,
             stepName:
@@ -207,7 +208,8 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
     const artifactsRequest: DataRequest = {
       method: "post",
       data: {
-        applicationName: context.config.context.applicationName,
+        applicationName: (context.config.context as IXLDeployContext)
+          .applicationName,
         version: context.executionValues.applicationVersion,
         username: context.executionValues.username,
         password: context.executionValues.password
