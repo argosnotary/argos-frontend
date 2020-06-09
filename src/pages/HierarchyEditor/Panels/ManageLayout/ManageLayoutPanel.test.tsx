@@ -19,11 +19,8 @@ import { mount, ReactWrapper } from "enzyme";
 
 import MockAdapter from "axios-mock-adapter";
 import Axios from "axios";
-import { ThemeProvider } from "styled-components";
-import theme from "../../../../theme/base.json";
 import { act } from "react-dom/test-utils";
 import ManageLayoutPanel from "./ManageLayoutPanel";
-import { FormPermissions } from "../../../../types/FormPermission";
 import { ILayoutMetaBlock, IStep } from "../../../../interfaces/ILayout";
 import TextArea from "../../../../atoms/TextArea";
 import { waitFor } from "@testing-library/dom";
@@ -38,13 +35,7 @@ import {
   ArtifactCollectorType,
   IApprovalConfig
 } from "../../../../interfaces/IApprovalConfig";
-import {
-  HierarchyEditorStateContext,
-  HierarchyEditorPanelModes,
-  HierarchyEditorPanelTypes
-} from "../../../../stores/hierarchyEditorStore";
-import ITreeNode from "../../../../interfaces/ITreeNode";
-import { ITreeReducerState } from "../../../../stores/treeEditorStore";
+import HierarchyEditorTestWrapper from "../../../../test/utils";
 
 const mock = new MockAdapter(Axios);
 
@@ -83,40 +74,10 @@ jest
 const addItem = jest.fn();
 
 function createComponent() {
-  const node: ITreeNode = {
-    name: "layout",
-    parentId: "",
-    referenceId: "supplyChainId",
-    hasChildren: false,
-    type: "SUPPLY_CHAIN"
-  };
-
-  const state = {
-    editor: {
-      breadcrumb: "label / ",
-      mode: HierarchyEditorPanelModes.DEFAULT,
-      panel: HierarchyEditorPanelTypes.EXECUTE_APPROVAL,
-      node,
-      permission: FormPermissions.EDIT
-    },
-    tree: {} as ITreeReducerState
-  };
-
   return mount(
-    <ThemeProvider theme={theme}>
-      <HierarchyEditorStateContext.Provider
-        value={[
-          state,
-          {
-            editor: addItem,
-            tree: () => {
-              return;
-            }
-          }
-        ]}>
-        <ManageLayoutPanel />
-      </HierarchyEditorStateContext.Provider>
-    </ThemeProvider>
+    <HierarchyEditorTestWrapper mockedDispatch={addItem}>
+      <ManageLayoutPanel />
+    </HierarchyEditorTestWrapper>
   );
 }
 

@@ -19,10 +19,7 @@ import { mount, ReactWrapper } from "enzyme";
 
 import MockAdapter from "axios-mock-adapter";
 import Axios from "axios";
-import { ThemeProvider } from "styled-components";
-import theme from "../../../../theme/base.json";
 import { act } from "react-dom/test-utils";
-import { FormPermissions } from "../../../../types/FormPermission";
 import { waitFor } from "@testing-library/dom";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
 import { cryptoAvailable } from "../../../../security";
@@ -34,13 +31,7 @@ import {
 import ManageApprovalExecutionPanel from "./ManageApprovalExecutionPanel";
 import { SelectListItem } from "../../../../atoms/SelectList";
 import { IArtifact, ILinkMetaBlock } from "../../../../interfaces/ILink";
-import ITreeNode from "../../../../interfaces/ITreeNode";
-import {
-  HierarchyEditorPanelTypes,
-  HierarchyEditorPanelModes,
-  HierarchyEditorStateContext
-} from "../../../../stores/hierarchyEditorStore";
-import { ITreeReducerState } from "../../../../stores/treeEditorStore";
+import HierarchyEditorTestWrapper from "../../../../test/utils";
 
 const mock = new MockAdapter(Axios);
 
@@ -80,40 +71,10 @@ jest
 const addItem = jest.fn();
 
 function createComponent() {
-  const node: ITreeNode = {
-    name: "layout",
-    parentId: "",
-    referenceId: "supplyChainId",
-    hasChildren: false,
-    type: "SUPPLY_CHAIN"
-  };
-
-  const state = {
-    editor: {
-      breadcrumb: "label / ",
-      mode: HierarchyEditorPanelModes.DEFAULT,
-      panel: HierarchyEditorPanelTypes.EXECUTE_APPROVAL,
-      node,
-      permission: FormPermissions.EDIT
-    },
-    tree: {} as ITreeReducerState
-  };
-
   return mount(
-    <ThemeProvider theme={theme}>
-      <HierarchyEditorStateContext.Provider
-        value={[
-          state,
-          {
-            editor: addItem,
-            tree: () => {
-              return;
-            }
-          }
-        ]}>
-        <ManageApprovalExecutionPanel />
-      </HierarchyEditorStateContext.Provider>
-    </ThemeProvider>
+    <HierarchyEditorTestWrapper mockedDispatch={addItem}>
+      <ManageApprovalExecutionPanel />
+    </HierarchyEditorTestWrapper>
   );
 }
 
