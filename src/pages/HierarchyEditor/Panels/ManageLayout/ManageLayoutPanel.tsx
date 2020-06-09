@@ -39,6 +39,7 @@ import { useUserProfileContext } from "../../../../stores/UserProfile";
 import styled from "styled-components";
 import { IApprovalConfig } from "../../../../interfaces/IApprovalConfig";
 import { HierarchyEditorStateContext } from "../../../../stores/hierarchyEditorStore";
+import PanelBreadCrumb from "../../../../molecules/PanelBreadCrumb";
 
 const PageSpecificContentSeparator = styled(ContentSeparator)`
   margin: 0.7rem 0 1rem;
@@ -122,20 +123,10 @@ const ManageLayoutPanel: React.FC = () => {
     <>
       <LayoutEditorStoreContext.Provider value={editorStoreContext}>
         <Panel width={"37.5vw"} resizable={true} title={"Manage layout"}>
-          {hierarchyEditorState.editor.breadcrumb.length > 0 ? (
-            <>
-              <NodesBreadCrumb>
-                Selected: {hierarchyEditorState.editor.breadcrumb}
-                <LastBreadCrumb>
-                  {hierarchyEditorState.editor.breadcrumb.length > 0
-                    ? " / "
-                    : ""}
-                  {hierarchyEditorState.editor.node.name}
-                </LastBreadCrumb>
-              </NodesBreadCrumb>
-              <ContentSeparator />
-            </>
-          ) : null}
+          <PanelBreadCrumb
+            node={hierarchyEditorState.editor.node}
+            breadcrumb={hierarchyEditorState.editor.breadcrumb}
+          />
           <SegmentsContainer />
           <PageSpecificContentSeparator />
           <LayoutJsonEditor />

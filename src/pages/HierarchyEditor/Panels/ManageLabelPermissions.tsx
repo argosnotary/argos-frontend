@@ -27,6 +27,7 @@ import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationCo
 import { Panel } from "../../../molecules/Panel";
 import { useUserProfileContext } from "../../../stores/UserProfile";
 import { HierarchyEditorStateContext } from "../../../stores/hierarchyEditorStore";
+import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
@@ -192,15 +193,10 @@ const ManageLabelPermissions = () => {
       resizable={false}
       last={true}
       title={"Manage label permissions"}>
-      <NodesBreadCrumb>
-        Selected: {hierarchyEditorState.editor.breadcrumb}
-        <LastBreadCrumb>
-          {hierarchyEditorState.editor.breadcrumb.length > 0 ? " / " : ""}
-          {hierarchyEditorState.editor.node.name}
-        </LastBreadCrumb>
-      </NodesBreadCrumb>
-
-      <ContentSeparator />
+      <PanelBreadCrumb
+        node={hierarchyEditorState.editor.node}
+        breadcrumb={hierarchyEditorState.editor.breadcrumb}
+      />
       <UserPermissions
         selectedLabelId={hierarchyEditorState.editor.node.referenceId}
       />

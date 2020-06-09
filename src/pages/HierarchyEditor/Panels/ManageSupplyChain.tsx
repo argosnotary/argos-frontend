@@ -33,6 +33,7 @@ import {
 } from "../../../stores/hierarchyEditorStore";
 import ITreeNode from "../../../interfaces/ITreeNode";
 import { addObjectToTree, updateTreeObject } from "../utils";
+import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -185,18 +186,10 @@ const ManageSupplyChain = () => {
           ? "Update selected supply chain"
           : "Add child supply chain to selected label"
       }>
-      {hierarchyEditorState.editor.breadcrumb.length > 0 ? (
-        <>
-          <NodesBreadCrumb>
-            Selected: {hierarchyEditorState.editor.breadcrumb}
-            <LastBreadCrumb>
-              {hierarchyEditorState.editor.breadcrumb.length > 0 ? " / " : ""}
-              {hierarchyEditorState.editor.node.name}
-            </LastBreadCrumb>
-          </NodesBreadCrumb>
-          <ContentSeparator />
-        </>
-      ) : null}
+      <PanelBreadCrumb
+        node={hierarchyEditorState.editor.node}
+        breadcrumb={hierarchyEditorState.editor.breadcrumb}
+      />
       <GenericForm
         schema={formSchema}
         permission={hierarchyEditorState.editor.permission}

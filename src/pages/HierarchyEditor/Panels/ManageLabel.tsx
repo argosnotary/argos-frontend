@@ -33,6 +33,7 @@ import {
 } from "../../../stores/hierarchyEditorStore";
 import ITreeNode from "../../../interfaces/ITreeNode";
 import { updateTreeObject, addObjectToTree } from "../utils";
+import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
 interface ILabelNameFormValues {
   labelname: string;
@@ -186,18 +187,10 @@ const ManageLabel = () => {
           ? "Update selected label"
           : "Add child label to selected label"
       }>
-      {hierarchyEditorState.editor.breadcrumb.length > 0 ? (
-        <>
-          <NodesBreadCrumb>
-            Selected: {hierarchyEditorState.editor.breadcrumb}
-            <LastBreadCrumb>
-              {hierarchyEditorState.editor.breadcrumb.length > 0 ? " / " : ""}
-              {hierarchyEditorState.editor.node.name}
-            </LastBreadCrumb>
-          </NodesBreadCrumb>
-          <ContentSeparator />
-        </>
-      ) : null}
+      <PanelBreadCrumb
+        node={hierarchyEditorState.editor.node}
+        breadcrumb={hierarchyEditorState.editor.breadcrumb}
+      />
       <GenericForm
         schema={formSchema}
         permission={hierarchyEditorState.editor.permission}

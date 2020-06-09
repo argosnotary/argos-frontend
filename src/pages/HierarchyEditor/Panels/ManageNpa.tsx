@@ -53,6 +53,7 @@ import {
 import { addObjectToTree, updateTreeObject } from "../utils";
 import ITreeNode from "../../../interfaces/ITreeNode";
 import { LoaderIcon } from "../../../atoms/Icons";
+import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
 interface INpaFormValues {
   serviceaccountname: string;
@@ -386,18 +387,10 @@ const ManageNpa = () => {
             ? "Update selected service account"
             : "Add child service account to selected label"
         }>
-        {hierarchyEditorState.editor.breadcrumb.length > 0 ? (
-          <>
-            <NodesBreadCrumb>
-              Selected: {hierarchyEditorState.editor.breadcrumb}
-              <LastBreadCrumb>
-                {hierarchyEditorState.editor.breadcrumb.length > 0 ? " / " : ""}
-                {hierarchyEditorState.editor.node.name}
-              </LastBreadCrumb>
-            </NodesBreadCrumb>
-            <ContentSeparator />
-          </>
-        ) : null}
+        <PanelBreadCrumb
+          node={hierarchyEditorState.editor.node}
+          breadcrumb={hierarchyEditorState.editor.breadcrumb}
+        />
         {Object.keys(serviceAccountKey).length ? (
           <KeyContainer
             publicKey={serviceAccountKey}
@@ -440,18 +433,10 @@ const ManageNpa = () => {
             ? "Update selected service account"
             : "Add child service account to selected label"
         }>
-        {hierarchyEditorState.editor.breadcrumb.length > 0 ? (
-          <>
-            <NodesBreadCrumb>
-              Selected: {hierarchyEditorState.editor.breadcrumb}
-              <LastBreadCrumb>
-                {hierarchyEditorState.editor.breadcrumb.length > 0 ? " / " : ""}
-                {hierarchyEditorState.editor.node.name}
-              </LastBreadCrumb>
-            </NodesBreadCrumb>
-            <ContentSeparator />
-          </>
-        ) : null}
+        <PanelBreadCrumb
+          node={hierarchyEditorState.editor.node}
+          breadcrumb={hierarchyEditorState.editor.breadcrumb}
+        />
         {Object.keys(serviceAccountKey).length ? (
           <>
             <KeyContainer
