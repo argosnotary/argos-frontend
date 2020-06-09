@@ -27,8 +27,6 @@ import { waitFor } from "@testing-library/dom";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
 import { cryptoAvailable } from "../../../../security";
 import * as linkSigningService from "../../LinkSigningService";
-import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
-import { StateContext } from "../../HierarchyEditor";
 import {
   ArtifactCollectorType,
   IApprovalConfig
@@ -36,6 +34,13 @@ import {
 import ManageApprovalExecutionPanel from "./ManageApprovalExecutionPanel";
 import { SelectListItem } from "../../../../atoms/SelectList";
 import { IArtifact, ILinkMetaBlock } from "../../../../interfaces/ILink";
+import ITreeNode from "../../../../interfaces/ITreeNode";
+import {
+  HierarchyEditorPanelTypes,
+  HierarchyEditorPanelModes,
+  HierarchyEditorStateContext
+} from "../../../../stores/hierarchyEditorStore";
+import { ITreeReducerState } from "../../../../stores/treeEditorStore";
 
 const mock = new MockAdapter(Axios);
 
@@ -75,20 +80,39 @@ jest
 const addItem = jest.fn();
 
 function createComponent() {
+  const node: ITreeNode = {
+    name: "layout",
+    parentId: "",
+    referenceId: "supplyChainId",
+    hasChildren: false,
+    type: "SUPPLY_CHAIN"
+  };
+
   const state = {
-    firstPanelView: HierarchyEditorPaneActionTypes.NONE,
-    nodeReferenceId: "supplyChainId",
-    nodeParentId: "",
-    breadcrumb: "label / ",
-    selectedNodeName: "layout",
-    panePermission: FormPermissions.EDIT
+    editor: {
+      breadcrumb: "label / ",
+      mode: HierarchyEditorPanelModes.DEFAULT,
+      panel: HierarchyEditorPanelTypes.EXECUTE_APPROVAL,
+      node,
+      permission: FormPermissions.EDIT
+    },
+    tree: {} as ITreeReducerState
   };
 
   return mount(
     <ThemeProvider theme={theme}>
-      <StateContext.Provider value={[state, addItem]}>
+      <HierarchyEditorStateContext.Provider
+        value={[
+          state,
+          {
+            editor: addItem,
+            tree: () => {
+              return;
+            }
+          }
+        ]}>
         <ManageApprovalExecutionPanel />
-      </StateContext.Provider>
+      </HierarchyEditorStateContext.Provider>
     </ThemeProvider>
   );
 }
@@ -327,7 +351,7 @@ it("approval happy flow", async () => {
     );
 
     expect(mock.history.post[2].data).toBe(JSON.stringify(mockLinkMetaBlock()));
-    expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
+    expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET" });
   });
 });
 

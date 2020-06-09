@@ -25,8 +25,8 @@ import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationComponent";
 import { Panel } from "../../../molecules/Panel";
-import { StateContext } from "../HierarchyEditor";
 import { useUserProfileContext } from "../../../stores/UserProfile";
+import { HierarchyEditorStateContext } from "../../../stores/hierarchyEditorStore";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
@@ -184,7 +184,7 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
 };
 
 const ManageLabelPermissions = () => {
-  const [state] = useContext(StateContext);
+  const [hierarchyEditorState] = useContext(HierarchyEditorStateContext);
 
   return (
     <Panel
@@ -193,14 +193,17 @@ const ManageLabelPermissions = () => {
       last={true}
       title={"Manage label permissions"}>
       <NodesBreadCrumb>
-        Selected: {state.breadcrumb}
+        Selected: {hierarchyEditorState.editor.breadcrumb}
         <LastBreadCrumb>
-          {state.breadcrumb.length > 0 ? " / " : ""}
-          {state.selectedNodeName}
+          {hierarchyEditorState.editor.breadcrumb.length > 0 ? " / " : ""}
+          {hierarchyEditorState.editor.node.name}
         </LastBreadCrumb>
       </NodesBreadCrumb>
+
       <ContentSeparator />
-      <UserPermissions selectedLabelId={state.nodeReferenceId} />
+      <UserPermissions
+        selectedLabelId={hierarchyEditorState.editor.node.referenceId}
+      />
     </Panel>
   );
 };

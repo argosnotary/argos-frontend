@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, ThemeContext } from "styled-components";
 
 import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import { CancelButton } from "../../../atoms/Button";
@@ -43,12 +43,16 @@ import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
 import { FormPermissions } from "../../../types/FormPermission";
 import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
 import { Panel } from "../../../molecules/Panel";
-import { StateContext } from "../HierarchyEditor";
-import {
-  HierarchyEditorDataActionTypes,
-  HierarchyEditorPaneActionTypes
-} from "../../../stores/hierarchyEditorStore";
 import { useUserProfileContext } from "../../../stores/UserProfile";
+import {
+  HierarchyEditorPanelModes,
+  HierarchyEditorStateContext,
+  HierarchyEditorActionTypes,
+  HierarchyEditorPanelTypes
+} from "../../../stores/hierarchyEditorStore";
+import { addObjectToTree, updateTreeObject } from "../utils";
+import ITreeNode from "../../../interfaces/ITreeNode";
+import { LoaderIcon } from "../../../atoms/Icons";
 
 interface INpaFormValues {
   serviceaccountname: string;
@@ -56,6 +60,7 @@ interface INpaFormValues {
 
 enum WizardStates {
   KEY_OVERRIDE_WARNING,
+  LOADING,
   NO_CRYPTO_SUPPORT,
   CRYPTO_EXCEPTION
 }
@@ -102,12 +107,15 @@ const clipboardWrapperCss = css`
 
 const ManageNpa = () => {
   const { token } = useUserProfileContext();
-  const [state, dispatch] = useContext(StateContext);
   const [serviceAccountPostState, setNpaPostRequest] = useDataApi(
     genericDataFetchReducer
   );
   const [_serviceAccountGetRequestState, setNpaGetRequest] = useDataApi(
     genericDataFetchReducer
+  );
+
+  const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
+    HierarchyEditorStateContext
   );
 
   const [initialFormValues, setInitialFormValues] = useState(
@@ -125,13 +133,23 @@ const ManageNpa = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [cryptoException, setCryptoException] = useState(false);
 
+  const generateNode = (serviceaccount: INpaApiResponse) => {
+    const node = {} as ITreeNode;
+    node.referenceId = serviceaccount.id;
+    node.parentId = serviceaccount.parentLabelId;
+    node.name = serviceaccount.name;
+    node.type = HierarchyEditorPanelTypes.SERVICE_ACCOUNT;
+
+    return node;
+  };
+
   const postNewNpa = (values: INpaFormValues) => {
     const data: any = {};
 
     data.name = values.serviceaccountname;
 
-    if (state.nodeReferenceId !== "") {
-      data.parentLabelId = state.nodeReferenceId;
+    if (hierarchyEditorState.editor.node.referenceId !== "") {
+      data.parentLabelId = hierarchyEditorState.editor.node.referenceId;
     }
 
     const dataRequest: DataRequest = {
@@ -156,13 +174,13 @@ const ManageNpa = () => {
                 keyId: generatedKeys.keys.keyId
               });
 
-              dispatch({
-                type: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT,
-                serviceaccount: {
-                  ...serviceaccount,
-                  keyId: generatedKeys.keys.keyId
-                }
-              });
+              const node = generateNode(serviceaccount);
+
+              addObjectToTree(
+                hierarchyEditorState,
+                hierarchyEditorDispatch,
+                node
+              );
             }
           };
 
@@ -182,23 +200,31 @@ const ManageNpa = () => {
 
     data.name = values.serviceaccountname;
 
-    if (state.nodeReferenceId !== "") {
-      data.serviceAccountId = state.nodeReferenceId;
+    if (hierarchyEditorState.editor.node.referenceId !== "") {
+      data.labelId = hierarchyEditorState.editor.node.referenceId;
     }
 
-    if (state.nodeParentId !== "") {
-      data.parentLabelId = state.nodeParentId;
+    if (hierarchyEditorState.editor.node.parentId !== "") {
+      data.parentLabelId = hierarchyEditorState.editor.node.parentId;
     }
 
     const dataRequest: DataRequest = {
       data,
       method: "put",
       token,
-      url: `/api/serviceaccount/${state.nodeReferenceId}`,
+      url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
       cbSuccess: (serviceaccount: INpaApiResponse) => {
-        dispatch({
-          type: HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT,
-          serviceaccount
+        const node = generateNode(serviceaccount);
+
+        updateTreeObject(
+          hierarchyEditorState.tree,
+          hierarchyEditorDispatch.tree,
+          node
+        );
+
+        hierarchyEditorDispatch.editor({
+          type: HierarchyEditorActionTypes.UPDATE_NODE,
+          node
         });
       }
     };
@@ -220,100 +246,61 @@ const ManageNpa = () => {
   };
 
   useEffect(() => {
-    if (
-      state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE
-    ) {
-      setInitialFormValues({ serviceaccountname: state.selectedNodeName });
-      getKeyId(state.nodeReferenceId);
+    if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
+      setInitialFormValues({
+        serviceaccountname: hierarchyEditorState.editor.node.name
+      });
+      getKeyId(hierarchyEditorState.editor.node.referenceId);
     }
 
-    if (
-      state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE
-    ) {
+    if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       setInitialFormValues({ serviceaccountname: "" });
     }
 
     if (
-      state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL
+      hierarchyEditorState.editor.panel ===
+        HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR &&
+      hierarchyEditorState.editor.mode
     ) {
       setDisplayModal(true);
     }
-  }, [state.selectedNodeName, state.firstPanelView]);
+  }, [
+    hierarchyEditorState.editor.node,
+    hierarchyEditorState.editor.mode,
+    hierarchyEditorState.editor.panel
+  ]);
 
   const updateMode =
-    state.firstPanelView ===
-    HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE;
-
-  if (
-    state.dataAction === HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED
-  ) {
-    return (
-      <Panel
-        maxWidth={"37.5vw"}
-        resizable={false}
-        last={true}
-        title={
-          updateMode
-            ? "Update selected service account"
-            : "Add child service account to selected label"
-        }>
-        <NodesBreadCrumb>
-          Selected: {state.breadcrumb}
-          <LastBreadCrumb>
-            {state.breadcrumb.length > 0 ? " / " : ""}
-            {state.selectedNodeName}
-          </LastBreadCrumb>
-        </NodesBreadCrumb>
-        <ContentSeparator />
-        {Object.keys(serviceAccountKey).length ? (
-          <KeyContainer
-            publicKey={serviceAccountKey}
-            clipboardIconSize={16}
-            clipboardWrapperCss={clipboardWrapperCss}
-            inputCss={copyInputCss}
-            copyInputWrapperCss={copyInputWrapperCss}
-          />
-        ) : null}
-        <ContentSeparator />
-        <PasswordView password={generatedPassword} margin={"0 0 1rem"} />
-        <FlexRow>
-          <CloseButton
-            type="button"
-            onClick={() =>
-              dispatch({
-                type: HierarchyEditorPaneActionTypes.RESET_PANE
-              })
-            }>
-            Close
-          </CloseButton>
-        </FlexRow>
-      </Panel>
-    );
-  }
+    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
   const getModalContent = (currentWizardState: number) => {
+    const theme = useContext(ThemeContext);
+
     const cancelHandler = () => {
-      dispatch({ type: HierarchyEditorPaneActionTypes.RESET_PANE });
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
     };
 
     const continueHandler = async () => {
+      setWizardState(WizardStates.LOADING);
+
       try {
         const generatedKeys = await generateKey(true);
         const dataRequest: DataRequest = {
           data: generatedKeys.keys,
           method: "post",
           token,
-          url: `/api/serviceaccount/${state.nodeReferenceId}/key`,
+          url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}/key`,
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
 
-            dispatch({
-              type: HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED,
-              data: { keyId: generatedKeys.keys.keyId }
+            setNpaKey({
+              publicKey: generatedKeys.keys.publicKey,
+              keyId: generatedKeys.keys.keyId
             });
+
+            setDisplayModal(false);
           }
         };
 
@@ -325,6 +312,14 @@ const ManageNpa = () => {
     };
 
     switch (currentWizardState) {
+      case WizardStates.LOADING:
+        return (
+          <>
+            <ModalBody>
+              <LoaderIcon color={theme.loaderIcon.color} size={64} />
+            </ModalBody>
+          </>
+        );
       case WizardStates.KEY_OVERRIDE_WARNING:
         return (
           <>
@@ -366,11 +361,7 @@ const ManageNpa = () => {
     }
   };
 
-  if (
-    state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL &&
-    displayModal
-  ) {
+  if (displayModal) {
     return (
       <Modal>
         <ModalFlexColumWrapper>
@@ -380,30 +371,34 @@ const ManageNpa = () => {
     );
   }
 
-  return (
-    <Panel
-      maxWidth={"37.5vw"}
-      resizable={false}
-      last={true}
-      title={
-        updateMode
-          ? "Update selected service account"
-          : "Add child service account to selected label"
-      }>
-      {state.selectedNodeName !== "" ? (
-        <>
-          <NodesBreadCrumb>
-            Selected: {state.breadcrumb}
-            <LastBreadCrumb>
-              {state.breadcrumb.length > 0 ? " / " : ""}
-              {state.selectedNodeName}
-            </LastBreadCrumb>
-          </NodesBreadCrumb>
-          <ContentSeparator />
-        </>
-      ) : null}
-      {Object.keys(serviceAccountKey).length ? (
-        <>
+  if (
+    generatedPassword.length > 0 &&
+    hierarchyEditorState.editor.panel ===
+      HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR
+  ) {
+    return (
+      <Panel
+        maxWidth={"37.5vw"}
+        resizable={false}
+        last={true}
+        title={
+          updateMode
+            ? "Update selected service account"
+            : "Add child service account to selected label"
+        }>
+        {hierarchyEditorState.editor.breadcrumb.length > 0 ? (
+          <>
+            <NodesBreadCrumb>
+              Selected: {hierarchyEditorState.editor.breadcrumb}
+              <LastBreadCrumb>
+                {hierarchyEditorState.editor.breadcrumb.length > 0 ? " / " : ""}
+                {hierarchyEditorState.editor.node.name}
+              </LastBreadCrumb>
+            </NodesBreadCrumb>
+            <ContentSeparator />
+          </>
+        ) : null}
+        {Object.keys(serviceAccountKey).length ? (
           <KeyContainer
             publicKey={serviceAccountKey}
             clipboardIconSize={16}
@@ -411,50 +406,102 @@ const ManageNpa = () => {
             inputCss={copyInputCss}
             copyInputWrapperCss={copyInputWrapperCss}
           />
-          <ContentSeparator />
-        </>
-      ) : null}
-      <GenericForm
-        schema={formSchema}
-        permission={
-          updateMode
-            ? state.panePermission
-            : cryptoAvailable()
-            ? state.panePermission
-            : FormPermissions.READ
-        }
-        isLoading={serviceAccountPostState.isLoading}
-        validate={validate}
-        onCancel={() => {
-          dispatch({
-            type: HierarchyEditorPaneActionTypes.RESET_PANE
-          });
-        }}
-        onSubmit={values => {
-          if (
-            state.firstPanelView ===
-            HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE
-          ) {
-            postNewNpa(values);
-          }
+        ) : null}
+        <ContentSeparator />
+        <PasswordView password={generatedPassword} margin={"0 0 1rem"} />
+        <FlexRow>
+          <CloseButton
+            type="button"
+            onClick={() =>
+              hierarchyEditorDispatch.editor({
+                type: HierarchyEditorActionTypes.RESET
+              })
+            }>
+            Close
+          </CloseButton>
+        </FlexRow>
+      </Panel>
+    );
+  }
 
-          if (
-            state.firstPanelView ===
-            HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE
-          ) {
-            updateNpa(values);
+  if (
+    hierarchyEditorState.editor.panel ===
+      HierarchyEditorPanelTypes.SERVICE_ACCOUNT ||
+    hierarchyEditorState.editor.panel ===
+      HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR
+  ) {
+    return (
+      <Panel
+        maxWidth={"37.5vw"}
+        resizable={false}
+        last={true}
+        title={
+          updateMode
+            ? "Update selected service account"
+            : "Add child service account to selected label"
+        }>
+        {hierarchyEditorState.editor.breadcrumb.length > 0 ? (
+          <>
+            <NodesBreadCrumb>
+              Selected: {hierarchyEditorState.editor.breadcrumb}
+              <LastBreadCrumb>
+                {hierarchyEditorState.editor.breadcrumb.length > 0 ? " / " : ""}
+                {hierarchyEditorState.editor.node.name}
+              </LastBreadCrumb>
+            </NodesBreadCrumb>
+            <ContentSeparator />
+          </>
+        ) : null}
+        {Object.keys(serviceAccountKey).length ? (
+          <>
+            <KeyContainer
+              publicKey={serviceAccountKey}
+              clipboardIconSize={16}
+              clipboardWrapperCss={clipboardWrapperCss}
+              inputCss={copyInputCss}
+              copyInputWrapperCss={copyInputWrapperCss}
+            />
+            <ContentSeparator />
+          </>
+        ) : null}
+        <GenericForm
+          schema={formSchema}
+          permission={
+            updateMode
+              ? hierarchyEditorState.editor.permission
+              : cryptoAvailable()
+              ? hierarchyEditorState.editor.permission
+              : FormPermissions.READ
           }
-        }}
-        confirmationLabel={
-          updateMode ? "Update Service Account" : "Add Service Account"
-        }
-        cancellationLabel={"Cancel"}
-        initialValues={initialFormValues}
-      />
-      {!updateMode && !cryptoAvailable() ? <NoCryptoWarning /> : null}
-      {cryptoException ? <CryptoExceptionWarning /> : null}
-    </Panel>
-  );
+          isLoading={serviceAccountPostState.isLoading}
+          validate={validate}
+          onCancel={() => {
+            hierarchyEditorDispatch.editor({
+              type: HierarchyEditorActionTypes.RESET
+            });
+          }}
+          onSubmit={values => {
+            if (!updateMode) {
+              postNewNpa(values);
+            }
+
+            if (updateMode) {
+              updateNpa(values);
+            }
+          }}
+          confirmationLabel={
+            updateMode ? "Update Service Account" : "Add Service Account"
+          }
+          cancellationLabel={"Cancel"}
+          initialValues={initialFormValues}
+        />
+        {!updateMode && !cryptoAvailable() ? <NoCryptoWarning /> : null}
+        {cryptoException ? <CryptoExceptionWarning /> : null}
+      </Panel>
+    );
+  }
+
+  return null;
 };
 
 export default ManageNpa;

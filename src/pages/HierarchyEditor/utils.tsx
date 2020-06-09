@@ -16,7 +16,6 @@
 import {
   appendNodeChildrenToParent,
   appendSingleNode,
-  findNode,
   updateSingleNode
 } from "../../molecules/TreeEditor/utils";
 import {
@@ -25,12 +24,12 @@ import {
   TreeReducerActionTypes
 } from "../../stores/treeEditorStore";
 import ITreeNode from "../../interfaces/ITreeNode";
-import ILabelPostResponse from "../../interfaces/ILabelPostResponse";
 import {
-  HierarchyEditorAction,
-  HierarchyEditorPaneActionTypes
+  IHierarchyEditorStateContextState,
+  IHierarchyEditorStateContextDispatch,
+  HierarchyEditorActionTypes,
+  HierarchyEditorPanelModes
 } from "../../stores/hierarchyEditorStore";
-import ISupplyChainApiResponse from "../../interfaces/ISupplyChainApiResponse";
 
 const appendLabelChildrenToTree = (
   treeState: ITreeReducerState,
@@ -50,45 +49,50 @@ const appendLabelChildrenToTree = (
   }
 };
 
-const appendObjectToTree = (
-  treeState: ITreeReducerState,
-  treeDispatch: (msg: TreeReducerAction) => void,
-  node: ITreeNode,
-  parentLabelId?: string
+const addObjectToTree = (
+  hierarchyEditorState: IHierarchyEditorStateContextState,
+  hierarchyEditorDispatch: IHierarchyEditorStateContextDispatch,
+  node: ITreeNode
 ) => {
-  const newState = appendSingleNode(node, parentLabelId);
+  if (hierarchyEditorState.editor.node.referenceId) {
+    node.parentId = hierarchyEditorState.editor.node.referenceId;
+  }
 
-  treeDispatch({
+  const newState = appendSingleNode(node, node.parentId);
+
+  hierarchyEditorDispatch.tree({
     type: TreeReducerActionTypes.STOREDATA,
-    data: newState(treeState).data
+    data: newState(hierarchyEditorState.tree).data
   });
 
-  treeDispatch({
+  hierarchyEditorDispatch.tree({
     type: TreeReducerActionTypes.UPDATETOGGLEDNODES,
-    id: parentLabelId || ""
+    id: node.parentId || ""
+  });
+
+  hierarchyEditorDispatch.editor({
+    type: HierarchyEditorActionTypes.UPDATE_NODE,
+    node
+  });
+
+  hierarchyEditorDispatch.editor({
+    type: HierarchyEditorActionTypes.UPDATE_PANEL_MODE,
+    mode: HierarchyEditorPanelModes.UPDATE
   });
 };
 
-const updateObjectInTree = (
+const updateTreeObject = (
   treeState: ITreeReducerState,
   treeDispatch: (msg: TreeReducerAction) => void,
-  stateDispatch: (msg: HierarchyEditorAction) => void,
-  object: ILabelPostResponse | ISupplyChainApiResponse
+  node: ITreeNode
 ) => {
-  const currentNode = findNode(treeState.data, object.id);
-  const parsedNode = Object.assign({}, currentNode);
-  parsedNode.name = object.name;
-
-  const newState = updateSingleNode(parsedNode);
+  const newState = updateSingleNode(node);
+  const data = newState(treeState).data;
 
   treeDispatch({
     type: TreeReducerActionTypes.STOREDATA,
-    data: newState(treeState).data
-  });
-
-  stateDispatch({
-    type: HierarchyEditorPaneActionTypes.RESET_PANE
+    data
   });
 };
 
-export { appendObjectToTree, appendLabelChildrenToTree, updateObjectInTree };
+export { addObjectToTree, appendLabelChildrenToTree, updateTreeObject };

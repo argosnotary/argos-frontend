@@ -34,12 +34,17 @@ import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { cryptoAvailable } from "../../../../security";
 import * as layoutService from "../../LayoutService";
 import { Notification } from "../../../../molecules/NotificationsList";
-import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
-import { StateContext } from "../../HierarchyEditor";
 import {
   ArtifactCollectorType,
   IApprovalConfig
 } from "../../../../interfaces/IApprovalConfig";
+import {
+  HierarchyEditorStateContext,
+  HierarchyEditorPanelModes,
+  HierarchyEditorPanelTypes
+} from "../../../../stores/hierarchyEditorStore";
+import ITreeNode from "../../../../interfaces/ITreeNode";
+import { ITreeReducerState } from "../../../../stores/treeEditorStore";
 
 const mock = new MockAdapter(Axios);
 
@@ -78,20 +83,39 @@ jest
 const addItem = jest.fn();
 
 function createComponent() {
+  const node: ITreeNode = {
+    name: "layout",
+    parentId: "",
+    referenceId: "supplyChainId",
+    hasChildren: false,
+    type: "SUPPLY_CHAIN"
+  };
+
   const state = {
-    firstPanelView: HierarchyEditorPaneActionTypes.NONE,
-    nodeReferenceId: "supplyChainId",
-    nodeParentId: "",
-    breadcrumb: "label / ",
-    selectedNodeName: "layout",
-    panePermission: FormPermissions.EDIT
+    editor: {
+      breadcrumb: "label / ",
+      mode: HierarchyEditorPanelModes.DEFAULT,
+      panel: HierarchyEditorPanelTypes.EXECUTE_APPROVAL,
+      node,
+      permission: FormPermissions.EDIT
+    },
+    tree: {} as ITreeReducerState
   };
 
   return mount(
     <ThemeProvider theme={theme}>
-      <StateContext.Provider value={[state, addItem]}>
+      <HierarchyEditorStateContext.Provider
+        value={[
+          state,
+          {
+            editor: addItem,
+            tree: () => {
+              return;
+            }
+          }
+        ]}>
         <ManageLayoutPanel />
-      </StateContext.Provider>
+      </HierarchyEditorStateContext.Provider>
     </ThemeProvider>
   );
 }
@@ -435,7 +459,7 @@ it("sign layout happy flow", async () => {
       '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"type":"XLDEPLOY","name":"xlCollect","uri":"https://collect.org","context":{"applicationName":"appName"}}]}]'
     );
 
-    expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
+    expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET" });
     expect(mock.history.post[1].data).toBe(
       JSON.stringify(mockLayoutMetaBlock())
     );

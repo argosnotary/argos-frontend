@@ -1,403 +1,119 @@
-/*
- * Copyright (C) 2019 - 2020 Rabobank Nederland
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import React, { Dispatch } from "react";
-import ILabelPostResponse from "../interfaces/ILabelPostResponse";
-import ISupplyChainApiResponse from "../interfaces/ISupplyChainApiResponse";
-import INpaApiResponse from "../interfaces/INpaApiResponse";
+
+import ITreeNode from "../interfaces/ITreeNode";
 import { FormPermission } from "../types/FormPermission";
+import { ITreeReducerState, TreeReducerAction } from "./treeEditorStore";
 
-interface IHierarchyEditorState {
-  panePermission: FormPermission;
-  nodeParentId: string;
-  nodeReferenceId: string;
-  firstPanelView: string;
+export enum HierarchyEditorPanelTypes {
+  NONE = "",
+  LABEL = "LABEL",
+  SUPPLY_CHAIN = "SUPPLY_CHAIN",
+  SERVICE_ACCOUNT = "SERVICE_ACCOUNT",
+  SERVICE_ACCOUNT_KEY_GENERATOR = "SERVICE_ACCOUNT_KEY_GENERATOR",
+  MANAGE_LABEL_PERMISSIONS = "MANAGE_LABEL_PERMISSIONS",
+  MANAGE_LAYOUT = "MANAGE_LAYOUT",
+  EXECUTE_APPROVAL = "EXECUTE_APPROVAL"
+}
+
+export enum HierarchyEditorPanelModes {
+  DEFAULT = "DEFAULT",
+  CREATE = "CREATE",
+  UPDATE = "UPDATE"
+}
+
+export interface IHierarchyEditorState {
+  node: ITreeNode;
   breadcrumb: string;
-  selectedNodeName: string;
-  data?: any;
-  dataAction?: string;
-  user?: any;
+  mode: HierarchyEditorPanelModes;
+  panel: HierarchyEditorPanelTypes;
+  permission: FormPermission;
 }
 
-export enum HierarchyEditorDataActionTypes {
-  NONE = "",
-  POST_NEW_LABEL = "POST_NEW_LABEL",
-  PUT_LABEL = "PUT_LABEL",
-  POST_SUPPLY_CHAIN = "POST_SUPPLY_CHAIN",
-  PUT_SUPPLY_CHAIN = "PUT_SUPPLY_CHAIN",
-  POST_NEW_SERVICE_ACCOUNT = "POST_NEW_SERVICE_ACCOUNT",
-  POST_NEW_SERVICE_ACCOUNT_KEY = "POST_NEW_SERVICE_ACCOUNT_KEY",
-  PUT_SERVICE_ACCOUNT = "PUT_SERVICE_ACCOUNT",
-  DATA_ACTION_COMPLETED = "DATA_ACTION_COMPLETED",
-  STORE_SEARCHED_USER = "STORE_SEARCHED_USER",
-  REMOVE_SEARCHED_USER = "DELETE_SEARCHED_USER"
+export enum HierarchyEditorActionTypes {
+  RESET = "RESET",
+  SET_PANEL = "SET_PANEL",
+  UPDATE_NODE = "UPDATE_NODE",
+  UPDATE_PANEL_MODE = "UPDATE_PANEL_MODE"
 }
 
-export enum HierarchyEditorPaneActionTypes {
-  NONE = "",
-  SHOW_ADD_LABEL_PANE = "SHOW_ADD_LABEL_PANE",
-  SHOW_UPDATE_LABEL_PANE = "SHOW_UPDATE_LABEL_PANE",
-  SHOW_MANAGE_LABEL_PERMISSIONS = "SHOW_MANAGE_LABEL_PERMISSIONS",
-  SHOW_ADD_SUPPLY_CHAIN_PANE = "SHOW_ADD_SUPPLY_CHAIN_PANE",
-  SHOW_UPDATE_SUPPLY_CHAIN_PANE = "SHOW_UPDATE_SUPPLY_CHAIN_PANE",
-  SHOW_ADD_SERVICE_ACCOUNT_PANE = "SHOW_ADD_SERVICE_ACCOUNT_PANE",
-  SHOW_UPDATE_SERVICE_ACCOUNT_PANE = "SHOW_UPDATE_SERVICE_ACCOUNT_PANE",
-  SHOW_SERVICE_ACCOUNT_PASSPHRASE = "SHOW_SERVICE_ACCOUNT_PASSPHRASE",
-  SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL = "SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL",
-  SHOW_MANAGE_LAYOUT = "SHOW_MANAGE_LAYOUT",
-  SHOW_EXECUTE_APPROVAL = "SHOW_EXECUTE_APPROVAL",
-  RESET_PANE = "RESET_PANE"
-}
-
-export type LayoutEditorPaneActionType =
-  | HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS
-  | HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE
-  | HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE
-  | HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL
-  | HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT
-  | HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL
-  | HierarchyEditorPaneActionTypes.RESET_PANE;
-
-export type HierarchyEditorPaneAction =
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE;
-      nodeParentId: string;
-      nodeReferenceId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-      panePermission: FormPermission;
-    }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS;
-      nodeParentId: string;
-      nodeReferenceId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-    }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
-      nodeReferenceId: string;
-      nodeParentId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-      panePermission: FormPermission;
-    }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE;
-      nodeReferenceId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-      nodeParentId: string;
-      panePermission: FormPermission;
-    }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
-      nodeReferenceId: string;
-      nodeParentId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-      panePermission: FormPermission;
-    }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE;
-      nodeReferenceId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-      nodeParentId: string;
-      panePermission: FormPermission;
-    }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE;
-      nodeReferenceId: string;
-      nodeParentId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-      panePermission: FormPermission;
-    }
-  | { type: HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL;
-      nodeReferenceId: string;
-      nodeParentId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-    }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT;
-      nodeParentId: string;
-      nodeReferenceId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-      panePermission: FormPermission;
-    }
-  | {
-      type: HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL;
-      nodeParentId: string;
-      nodeReferenceId: string;
-      breadcrumb: string;
-      selectedNodeName: string;
-      panePermission: FormPermission;
-    }
-  | { type: HierarchyEditorPaneActionTypes.RESET_PANE };
-
-interface IDataActionCompleted {
-  type: HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED;
-  data: any;
-}
-
-interface IStoredSearchedUser {
-  id: string;
-  name: string;
-}
-
-export type HierarchyEditorDataAction =
-  | IDataActionCompleted
-  | {
-      type: HierarchyEditorDataActionTypes.POST_NEW_LABEL;
-      label: ILabelPostResponse;
-    }
-  | {
-      type: HierarchyEditorDataActionTypes.PUT_LABEL;
-      label: ILabelPostResponse;
-    }
-  | {
-      type: HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN;
-      supplyChain: ISupplyChainApiResponse;
-    }
-  | {
-      type: HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN;
-      supplyChain: ISupplyChainApiResponse;
-    }
-  | {
-      type: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT;
-      serviceaccount: INpaApiResponse;
-    }
-  | {
-      type: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT_KEY;
-    }
-  | {
-      type: HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT;
-      serviceaccount: INpaApiResponse;
-    }
-  | {
-      type: HierarchyEditorDataActionTypes.STORE_SEARCHED_USER;
-      user: IStoredSearchedUser;
-    }
-  | {
-      type: HierarchyEditorDataActionTypes.REMOVE_SEARCHED_USER;
-    };
+export type HierarchyEditorActions =
+  | HierarchyEditorActionTypes.SET_PANEL
+  | HierarchyEditorActionTypes.RESET
+  | HierarchyEditorActionTypes.UPDATE_NODE
+  | HierarchyEditorActionTypes.UPDATE_PANEL_MODE;
 
 export type HierarchyEditorAction =
-  | HierarchyEditorPaneAction
-  | HierarchyEditorDataAction;
-
-const layoutEditorReducer = (
+  | {
+      type: HierarchyEditorActionTypes.SET_PANEL;
+      node: ITreeNode;
+      panel: HierarchyEditorPanelTypes;
+      mode: HierarchyEditorPanelModes;
+      breadcrumb: string;
+      permission: FormPermission;
+    }
+  | { type: HierarchyEditorActionTypes.RESET }
+  | { type: HierarchyEditorActionTypes.UPDATE_NODE; node: ITreeNode }
+  | {
+      type: HierarchyEditorActionTypes.UPDATE_PANEL_MODE;
+      mode: HierarchyEditorPanelModes;
+    };
+const hierarchyEditorReducer = (
   state: IHierarchyEditorState,
   action: HierarchyEditorAction
 ) => {
   switch (action.type) {
-    case HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
+    case HierarchyEditorActionTypes.SET_PANEL:
       return {
         ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
-        nodeReferenceId: action.nodeReferenceId,
+        node: action.node,
+        mode: action.mode,
         breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
+        panel: action.panel,
+        permission: action.permission
       };
-    case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
+    case HierarchyEditorActionTypes.RESET:
       return {
         ...state,
-        firstPanelView:
-          HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
-        nodeReferenceId: action.nodeReferenceId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
+        panel: HierarchyEditorPanelTypes.NONE
       };
-    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
+    case HierarchyEditorActionTypes.UPDATE_NODE:
       return {
         ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
-        nodeReferenceId: action.nodeReferenceId,
-        nodeParentId: action.nodeParentId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
+        node: action.node
       };
-    case HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
+    case HierarchyEditorActionTypes.UPDATE_PANEL_MODE:
       return {
         ...state,
-        firstPanelView:
-          HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
-        nodeReferenceId: action.nodeReferenceId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
+        mode: action.mode
       };
-    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
-      return {
-        ...state,
-        firstPanelView:
-          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
-        nodeReferenceId: action.nodeReferenceId,
-        nodeParentId: action.nodeParentId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
-      };
-    case HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE:
-      return {
-        ...state,
-        firstPanelView:
-          HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE,
-        nodeReferenceId: action.nodeReferenceId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
-      };
-    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE:
-      return {
-        ...state,
-        firstPanelView:
-          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE,
-        nodeReferenceId: action.nodeReferenceId,
-        nodeParentId: action.nodeParentId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
-      };
-    case HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE:
-      return {
-        ...state,
-        firstPanelView:
-          HierarchyEditorPaneActionTypes.SHOW_SERVICE_ACCOUNT_PASSPHRASE
-      };
-    case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL:
-      return {
-        ...state,
-        firstPanelView:
-          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL,
-        nodeReferenceId: action.nodeReferenceId,
-        nodeParentId: action.nodeParentId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName
-      };
-
-    case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
-      return {
-        ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
-        nodeReferenceId: action.nodeReferenceId,
-        nodeParentId: action.nodeParentId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
-      };
-
-    case HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL:
-      return {
-        ...state,
-        firstPanelView: HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL,
-        nodeReferenceId: action.nodeReferenceId,
-        nodeParentId: action.nodeParentId,
-        breadcrumb: action.breadcrumb,
-        selectedNodeName: action.selectedNodeName,
-        panePermission: action.panePermission
-      };
-    case HierarchyEditorPaneActionTypes.RESET_PANE:
-      return {
-        ...state,
-        firstPanelView: "",
-        nodeReferenceId: "",
-        dataAction: ""
-      };
-    case HierarchyEditorDataActionTypes.POST_NEW_LABEL:
-      return {
-        ...state,
-        dataAction: HierarchyEditorDataActionTypes.POST_NEW_LABEL,
-        data: action.label
-      };
-    case HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT_KEY:
-      return {
-        ...state,
-        dataAction: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT_KEY
-      };
-    case HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED: {
-      return {
-        ...state,
-        dataAction: HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED,
-        data: action.data
-      };
-    }
-    case HierarchyEditorDataActionTypes.PUT_LABEL: {
-      return {
-        ...state,
-        dataAction: HierarchyEditorDataActionTypes.PUT_LABEL,
-        data: action.label
-      };
-    }
-    case HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN:
-      return {
-        ...state,
-        dataAction: HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN,
-        data: action.supplyChain
-      };
-    case HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN:
-      return {
-        ...state,
-        dataAction: HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN,
-        data: action.supplyChain
-      };
-    case HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT:
-      return {
-        ...state,
-        dataAction: HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT,
-        data: action.serviceaccount
-      };
-    case HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT:
-      return {
-        ...state,
-        dataAction: HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT,
-        data: action.serviceaccount
-      };
-    case HierarchyEditorDataActionTypes.STORE_SEARCHED_USER:
-      return {
-        ...state,
-        user: action.user
-      };
-    case HierarchyEditorDataActionTypes.REMOVE_SEARCHED_USER: {
-      const stateCopy = Object.assign({}, state);
-      delete stateCopy["user"];
-
-      return stateCopy;
-    }
   }
 };
 
-const StateContext = React.createContext<
-  [IHierarchyEditorState, Dispatch<HierarchyEditorAction>]
+export interface IHierarchyEditorStateContextState {
+  editor: IHierarchyEditorState;
+  tree: ITreeReducerState;
+}
+
+export interface IHierarchyEditorStateContextDispatch {
+  editor: Dispatch<HierarchyEditorAction>;
+  tree: Dispatch<TreeReducerAction>;
+}
+
+const HierarchyEditorStateContext = React.createContext<
+  [IHierarchyEditorStateContextState, IHierarchyEditorStateContextDispatch]
 >([
-  {} as IHierarchyEditorState,
-  () => {
-    return;
+  {
+    tree: {} as ITreeReducerState,
+    editor: {} as IHierarchyEditorState
+  },
+  {
+    tree: () => {
+      return;
+    },
+    editor: () => {
+      return;
+    }
   }
 ]);
 
-export { layoutEditorReducer, StateContext };
+export { hierarchyEditorReducer, HierarchyEditorStateContext };

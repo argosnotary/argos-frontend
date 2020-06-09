@@ -35,18 +35,16 @@ import {
 import LayoutJsonEditor from "./LayoutJsonEditor";
 import LayoutSigner from "./LayoutSigner";
 import LayoutEditorDetailsPane from "./LayoutEditorDetailsPane";
-import { StateContext } from "../../HierarchyEditor";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
 import styled from "styled-components";
 import { IApprovalConfig } from "../../../../interfaces/IApprovalConfig";
+import { HierarchyEditorStateContext } from "../../../../stores/hierarchyEditorStore";
 
 const PageSpecificContentSeparator = styled(ContentSeparator)`
   margin: 0.7rem 0 1rem;
 `;
 
 const ManageLayoutPanel: React.FC = () => {
-  const [state, _dispatch] = useContext(StateContext);
-
   const editorStoreContext = createLayoutEditorStoreContext();
 
   const { token } = useUserProfileContext();
@@ -54,6 +52,8 @@ const ManageLayoutPanel: React.FC = () => {
   const [layoutApiResponse, setLayoutApiRequest] = useDataApi(
     genericDataFetchReducer
   );
+
+  const [hierarchyEditorState] = useContext(HierarchyEditorStateContext);
 
   const [
     _approvalConfigsApiResponse,
@@ -80,7 +80,10 @@ const ManageLayoutPanel: React.FC = () => {
     const getLayoutRequest: DataRequest = {
       method: "get",
       token,
-      url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
+      url:
+        "/api/supplychain/" +
+        hierarchyEditorState.editor.node.referenceId +
+        "/layout",
       cbSuccess: (layoutMetaBlock: ILayoutMetaBlock) => {
         setLayout(layoutMetaBlock.layout);
       },
@@ -94,7 +97,9 @@ const ManageLayoutPanel: React.FC = () => {
       method: "get",
       token,
       url:
-        "/api/supplychain/" + state.nodeReferenceId + "/layout/approvalconfig",
+        "/api/supplychain/" +
+        hierarchyEditorState.editor.node.referenceId +
+        "/layout/approvalconfig",
       cbSuccess: (approvalConfigs: Array<IApprovalConfig>) => {
         editorStoreContext.dispatch({
           type: LayoutEditorActionType.UPDATE_APPROVAL_CONFIGS,
@@ -111,19 +116,21 @@ const ManageLayoutPanel: React.FC = () => {
     };
 
     setApprovalConfigsApiRequest(getGetApprovalConfigsRequest);
-  }, [state.nodeReferenceId]);
+  }, [hierarchyEditorState.editor.node.referenceId]);
 
   return (
     <>
       <LayoutEditorStoreContext.Provider value={editorStoreContext}>
         <Panel width={"37.5vw"} resizable={true} title={"Manage layout"}>
-          {state.selectedNodeName !== "" ? (
+          {hierarchyEditorState.editor.breadcrumb.length > 0 ? (
             <>
               <NodesBreadCrumb>
-                Selected: {state.breadcrumb}
+                Selected: {hierarchyEditorState.editor.breadcrumb}
                 <LastBreadCrumb>
-                  {state.breadcrumb.length > 0 ? " / " : ""}
-                  {state.selectedNodeName}
+                  {hierarchyEditorState.editor.breadcrumb.length > 0
+                    ? " / "
+                    : ""}
+                  {hierarchyEditorState.editor.node.name}
                 </LastBreadCrumb>
               </NodesBreadCrumb>
               <ContentSeparator />
