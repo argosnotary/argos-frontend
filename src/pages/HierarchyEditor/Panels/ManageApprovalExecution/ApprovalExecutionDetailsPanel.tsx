@@ -39,6 +39,7 @@ import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer"
 import { IArtifact } from "../../../../interfaces/ILink";
 import LinkSigner from "./LinkSigner";
 import { Button, CancelButton, LoaderButton } from "../../../../atoms/Button";
+import { Warning } from "../../../../atoms/Alerts";
 
 const ApproveButtonContainer = styled(FlexRow)`
   margin: 1rem 0;
@@ -143,11 +144,13 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
   const [executionContexts, setExecutionContexts] = useState<
     Array<ICollectorExecutionContext>
   >(createExecutionContexts(approvalContext));
+  const [collectError, setCollectorError] = useState<string | undefined>();
 
   const [validateNow, setValidateNow] = useState(false);
 
   useEffect(() => {
     setExecutionContexts(createExecutionContexts(approvalContext));
+    setCollectorError(undefined);
   }, [approvalContext.state.selectedApprovalConfig]);
 
   const onUpdateExecutionValues = (
@@ -171,11 +174,36 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
   );
 
   const handleApprove = () => {
+    setCollectorError(undefined);
     requestArtifacts([], 0);
   };
 
   const requestArtifacts = (artifacts: Array<IArtifact>, index: number) => {
     const context = executionContexts[index];
+
+    const handleReceivedArtifacts = (newArtifacts: Array<IArtifact>) => {
+      artifacts.push(...newArtifacts);
+      const newIndex = index + 1;
+      if (executionContexts[newIndex]) {
+        requestArtifacts(artifacts, newIndex);
+      } else {
+        approvalContext.dispatch({
+          type: ApprovalExecutionActionType.SIGN_ARTIFACTS,
+          approvalSigningContext: {
+            runId:
+              context.config.context.applicationName +
+              "/" +
+              context.executionValues.applicationVersion,
+            stepName:
+              approvalContext.state.selectedApprovalConfig?.stepName || "",
+            segmentName:
+              approvalContext.state.selectedApprovalConfig?.segmentName || "",
+            artifactsToSign: artifacts
+          }
+        } as ISignArtifactsAction);
+      }
+    };
+
     const artifactsRequest: DataRequest = {
       method: "post",
       data: {
@@ -186,27 +214,17 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
       } as IXLDeployExecutionContext,
       token: "",
       url: context.config.uri + "/api/collector/artifacts",
-      cbSuccess: (newArtifacts: Array<IArtifact>) => {
-        artifacts.push(...newArtifacts);
-        const newIndex = index + 1;
-        if (executionContexts[newIndex]) {
-          requestArtifacts(artifacts, newIndex);
-        } else {
-          approvalContext.dispatch({
-            type: ApprovalExecutionActionType.SIGN_ARTIFACTS,
-            approvalSigningContext: {
-              runId:
-                context.config.context.applicationName +
-                "/" +
-                context.executionValues.applicationVersion,
-              stepName:
-                approvalContext.state.selectedApprovalConfig?.stepName || "",
-              segmentName:
-                approvalContext.state.selectedApprovalConfig?.segmentName || "",
-              artifactsToSign: artifacts
-            }
-          } as ISignArtifactsAction);
+      cbSuccess: handleReceivedArtifacts,
+      cbFailure: (error: any) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setCollectorError(error.response.data.message);
+          return true;
         }
+        return false;
       }
     };
     setArtifactsRequest(artifactsRequest);
@@ -301,6 +319,7 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
             renderCollectorRow(executionContext, index)
           )}
         </ul>
+        {collectError ? <Warning message={collectError} /> : null}
         <ApproveButtonContainer>
           <LoaderButton
             dataTesthookId={"approve-button"}

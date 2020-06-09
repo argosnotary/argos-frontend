@@ -1,0 +1,33 @@
+{
+  "mappings": [
+    {
+      "priority": 1,
+      "request": {
+        "method": "POST",
+        "url": "/api/collector/artifacts",
+        "bodyPatterns" : [ {
+          "contains" : "error"
+        } ]
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": "{\n  \"message\": \"ERROR:root:ERROR: On Application [string] version [string] not found\"\n}"  }
+    },
+    {
+      "priority": 2,
+      "request": {
+        "method": "POST",
+        "url": "/api/collector/artifacts"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": "[\n  {\n    \"uri\": \"deployit-manifest.xml\",\n    \"hash\": \"995e418909d8402e93885fa30d212eca41754f51165486266978aedce0337c48\"\n  },\n  {\n    \"uri\": \"localFile/sprint review.odp\",\n    \"hash\": \"659289d6936a753e43bc4dc1cec2e19720c1426ea9fb98b935188449bba4c2a2\"\n  },\n  {\n    \"uri\": \"petclinic.war/petclinic.war\",\n    \"hash\": \"dea61ebf3c08110f9044cf6c48a45da742809d471c1e817fe9a6637aedab3f10\"\n  },\n  {\n    \"uri\": \"index.html\",\n    \"hash\": \"38ffd4972ae513a0c79a8be4573403edcd709f0f572105362b08ff50cf6de521\"\n  }\n]"  }
+    }
+  ]
+}

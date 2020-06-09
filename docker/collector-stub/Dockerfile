@@ -16,7 +16,7 @@
 
 FROM openjdk:8-jre-alpine
 
-ENV WIREMOCK_VERSION 2.25.1
+ENV WIREMOCK_VERSION 2.26.3
 
 RUN apk add --update openssl
 
