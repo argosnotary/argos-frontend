@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect } from "react";
-import { LastBreadCrumb, NodesBreadCrumb } from "../../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../../atoms/ContentSeparator";
 
 import useDataApi from "../../../../hooks/useDataApi";

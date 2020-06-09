@@ -16,7 +16,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 
-import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import { CancelButton } from "../../../atoms/Button";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import DataRequest from "../../../types/DataRequest";

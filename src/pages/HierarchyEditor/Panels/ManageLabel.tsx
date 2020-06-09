@@ -15,8 +15,6 @@
  */
 import React, { useContext, useEffect, useState } from "react";
 
-import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
-import ContentSeparator from "../../../atoms/ContentSeparator";
 import DataRequest from "../../../types/DataRequest";
 import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
 import useDataApi from "../../../hooks/useDataApi";

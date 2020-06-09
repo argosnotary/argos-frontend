@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect, useState } from "react";
-import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import ISearchResult from "../../../interfaces/ISearchResult";
 import SearchInput from "../../../atoms/SearchInput";
