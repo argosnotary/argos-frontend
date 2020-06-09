@@ -15,8 +15,6 @@
  */
 import React, { useContext, useEffect, useState } from "react";
 
-import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
-import ContentSeparator from "../../../atoms/ContentSeparator";
 import DataRequest from "../../../types/DataRequest";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
@@ -25,12 +23,15 @@ import GenericForm, {
   IGenericFormSchema
 } from "../../../organisms/GenericForm";
 import { Panel } from "../../../molecules/Panel";
-import { StateContext } from "../HierarchyEditor";
-import {
-  HierarchyEditorDataActionTypes,
-  HierarchyEditorPaneActionTypes
-} from "../../../stores/hierarchyEditorStore";
 import { useUserProfileContext } from "../../../stores/UserProfile";
+import {
+  HierarchyEditorStateContext,
+  HierarchyEditorActionTypes,
+  HierarchyEditorPanelModes
+} from "../../../stores/hierarchyEditorStore";
+import ITreeNode from "../../../interfaces/ITreeNode";
+import { addObjectToTree, updateTreeObject } from "../utils";
+import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -59,9 +60,16 @@ const validate = (values: ISupplyChainNameFormValues) => {
 
 const ManageSupplyChain = () => {
   const { token } = useUserProfileContext();
-  const [state, dispatch] = useContext(StateContext);
   const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
     genericDataFetchReducer
+  );
+
+  const [treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
+    genericDataFetchReducer
+  );
+
+  const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
+    HierarchyEditorStateContext
   );
 
   const [initialFormValues, setInitialFormValues] = useState(
@@ -73,8 +81,8 @@ const ManageSupplyChain = () => {
 
     data.name = values.supplychainname;
 
-    if (state.nodeReferenceId !== "") {
-      data.parentLabelId = state.nodeReferenceId;
+    if (hierarchyEditorState.editor.node.referenceId !== "") {
+      data.parentLabelId = hierarchyEditorState.editor.node.referenceId;
     }
 
     const dataRequest: DataRequest = {
@@ -83,10 +91,22 @@ const ManageSupplyChain = () => {
       token,
       url: "/api/supplychain",
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
-        dispatch({
-          type: HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN,
-          supplyChain
-        });
+        const hierarchyDataRequest: DataRequest = {
+          params: {
+            HierarchyMode: "NONE"
+          },
+          method: "get",
+          token,
+          url: `/api/hierarchy/${supplyChain.id}`,
+          cbSuccess: (node: ITreeNode) => {
+            addObjectToTree(
+              hierarchyEditorState,
+              hierarchyEditorDispatch,
+              node
+            );
+          }
+        };
+        setTreeChildrenApiRequest(hierarchyDataRequest);
       }
     };
 
@@ -98,24 +118,36 @@ const ManageSupplyChain = () => {
 
     data.name = values.supplychainname;
 
-    if (state.nodeReferenceId !== "") {
-      data.supplyChainId = state.nodeReferenceId;
+    if (hierarchyEditorState.editor.node.referenceId !== "") {
+      data.labelId = hierarchyEditorState.editor.node.referenceId;
     }
 
-    if (state.nodeParentId !== "") {
-      data.parentLabelId = state.nodeParentId;
+    if (hierarchyEditorState.editor.node.parentId !== "") {
+      data.parentLabelId = hierarchyEditorState.editor.node.parentId;
     }
 
     const dataRequest: DataRequest = {
       data,
       method: "put",
       token,
-      url: `/api/supplychain/${state.nodeReferenceId}`,
+      url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}`,
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
-        dispatch({
-          type: HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN,
-          supplyChain
-        });
+        const hierarchyDataRequest: DataRequest = {
+          params: {
+            HierarchyMode: "ALL"
+          },
+          method: "get",
+          token,
+          url: `/api/hierarchy/${supplyChain.id}`,
+          cbSuccess: (node: ITreeNode) => {
+            updateTreeObject(
+              hierarchyEditorState,
+              hierarchyEditorDispatch,
+              node
+            );
+          }
+        };
+        setTreeChildrenApiRequest(hierarchyDataRequest);
       }
     };
 
@@ -123,24 +155,19 @@ const ManageSupplyChain = () => {
   };
 
   useEffect(() => {
-    if (
-      state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
-    ) {
-      setInitialFormValues({ supplychainname: state.selectedNodeName });
+    if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
+      setInitialFormValues({
+        supplychainname: hierarchyEditorState.editor.node.name
+      });
     }
 
-    if (
-      state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
-    ) {
+    if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       setInitialFormValues({ supplychainname: "" });
     }
-  }, [state.selectedNodeName, state.firstPanelView]);
+  }, [hierarchyEditorState.editor.node, hierarchyEditorState.editor.mode]);
 
   const updateMode =
-    state.firstPanelView ===
-    HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE;
+    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
   return (
     <Panel
@@ -152,40 +179,29 @@ const ManageSupplyChain = () => {
           ? "Update selected supply chain"
           : "Add child supply chain to selected label"
       }>
-      {state.selectedNodeName !== "" ? (
-        <>
-          <NodesBreadCrumb>
-            Selected: {state.breadcrumb}
-            <LastBreadCrumb>
-              {state.breadcrumb.length > 0 ? " / " : ""}
-              {state.selectedNodeName}
-            </LastBreadCrumb>
-          </NodesBreadCrumb>
-          <ContentSeparator />
-        </>
-      ) : null}
+      <PanelBreadCrumb
+        node={hierarchyEditorState.editor.node}
+        breadcrumb={hierarchyEditorState.editor.breadcrumb}
+      />
       <GenericForm
         schema={formSchema}
-        permission={state.panePermission}
-        isLoading={supplyChainApiResponseState.isLoading}
+        permission={hierarchyEditorState.editor.permission}
+        isLoading={
+          supplyChainApiResponseState.isLoading ||
+          treeChildrenApiResponse.isLoading
+        }
         validate={validate}
         onCancel={() => {
-          dispatch({
-            type: HierarchyEditorPaneActionTypes.RESET_PANE
+          hierarchyEditorDispatch.editor({
+            type: HierarchyEditorActionTypes.RESET
           });
         }}
         onSubmit={values => {
-          if (
-            state.firstPanelView ===
-            HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE
-          ) {
+          if (!updateMode) {
             postSupplyChain(values);
           }
 
-          if (
-            state.firstPanelView ===
-            HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE
-          ) {
+          if (updateMode) {
             updateSupplyChain(values);
           }
         }}
