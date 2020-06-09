@@ -358,14 +358,12 @@ it("sign layout happy flow", async () => {
     //
 
     await waitFor(() => {
-      root
-        .find('select[id="collectorType"]')
-        .simulate("change", {
-          target: {
-            name: "collectorType",
-            value: ArtifactCollectorType.XLDEPLOY
-          }
-        });
+      root.find('select[id="collectorType"]').simulate("change", {
+        target: {
+          name: "collectorType",
+          value: ArtifactCollectorType.XLDEPLOY
+        }
+      });
       root.update();
 
       // console.log(root.debug())
