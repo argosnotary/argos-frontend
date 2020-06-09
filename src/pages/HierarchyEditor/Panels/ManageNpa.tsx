@@ -216,16 +216,7 @@ const ManageNpa = () => {
       cbSuccess: (serviceaccount: INpaApiResponse) => {
         const node = generateNode(serviceaccount);
 
-        updateTreeObject(
-          hierarchyEditorState.tree,
-          hierarchyEditorDispatch.tree,
-          node
-        );
-
-        hierarchyEditorDispatch.editor({
-          type: HierarchyEditorActionTypes.UPDATE_NODE,
-          node
-        });
+        updateTreeObject(hierarchyEditorState, hierarchyEditorDispatch, node);
       }
     };
 

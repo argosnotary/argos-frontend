@@ -82,16 +82,21 @@ const addObjectToTree = (
 };
 
 const updateTreeObject = (
-  treeState: ITreeReducerState,
-  treeDispatch: (msg: TreeReducerAction) => void,
+  hierarchyEditorState: IHierarchyEditorStateContextState,
+  hierarchyEditorDispatch: IHierarchyEditorStateContextDispatch,
   node: ITreeNode
 ) => {
   const newState = updateSingleNode(node);
-  const data = newState(treeState).data;
+  const data = newState(hierarchyEditorState.tree).data;
 
-  treeDispatch({
+  hierarchyEditorDispatch.tree({
     type: TreeReducerActionTypes.STOREDATA,
     data
+  });
+
+  hierarchyEditorDispatch.editor({
+    type: HierarchyEditorActionTypes.UPDATE_NODE,
+    node
   });
 };
 

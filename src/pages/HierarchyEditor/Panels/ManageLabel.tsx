@@ -142,15 +142,10 @@ const ManageLabel = () => {
           url: `/api/hierarchy/${label.id}`,
           cbSuccess: (node: ITreeNode) => {
             updateTreeObject(
-              hierarchyEditorState.tree,
-              hierarchyEditorDispatch.tree,
+              hierarchyEditorState,
+              hierarchyEditorDispatch,
               node
             );
-
-            hierarchyEditorDispatch.editor({
-              type: HierarchyEditorActionTypes.UPDATE_NODE,
-              node
-            });
           }
         };
         setTreeChildrenApiRequest(hierarchyDataRequest);
