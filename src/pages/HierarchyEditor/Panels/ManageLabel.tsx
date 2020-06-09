@@ -15,15 +15,8 @@
  */
 import React, { useContext, useEffect, useState } from "react";
 
-import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
-import ContentSeparator from "../../../atoms/ContentSeparator";
 import DataRequest from "../../../types/DataRequest";
 import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
-import {
-  StateContext,
-  HierarchyEditorDataActionTypes,
-  HierarchyEditorPaneActionTypes
-} from "../../../stores/hierarchyEditorStore";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import GenericForm, {
@@ -31,6 +24,14 @@ import GenericForm, {
 } from "../../../organisms/GenericForm";
 import { Panel } from "../../../molecules/Panel";
 import { useUserProfileContext } from "../../../stores/UserProfile";
+import {
+  HierarchyEditorStateContext,
+  HierarchyEditorPanelModes,
+  HierarchyEditorActionTypes
+} from "../../../stores/hierarchyEditorStore";
+import ITreeNode from "../../../interfaces/ITreeNode";
+import { updateTreeObject, addObjectToTree } from "../utils";
+import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
 interface ILabelNameFormValues {
   labelname: string;
@@ -59,9 +60,17 @@ const validate = (values: ILabelNameFormValues) => {
 
 const ManageLabel = () => {
   const { token } = useUserProfileContext();
-  const [state, dispatch] = useContext(StateContext);
+
+  const [treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
+    genericDataFetchReducer
+  );
+
   const [labelPostState, setLabelPostRequest] = useDataApi(
     genericDataFetchReducer
+  );
+
+  const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
+    HierarchyEditorStateContext
   );
 
   const [initialFormValues, setInitialFormValues] = useState(
@@ -73,8 +82,8 @@ const ManageLabel = () => {
 
     data.name = values.labelname;
 
-    if (state.nodeReferenceId !== "") {
-      data.parentLabelId = state.nodeReferenceId;
+    if (hierarchyEditorState.editor.node.referenceId !== "") {
+      data.parentLabelId = hierarchyEditorState.editor.node.referenceId;
     }
 
     const dataRequest: DataRequest = {
@@ -83,10 +92,22 @@ const ManageLabel = () => {
       token,
       url: "/api/label",
       cbSuccess: (label: ILabelPostResponse) => {
-        dispatch({
-          type: HierarchyEditorDataActionTypes.POST_NEW_LABEL,
-          label
-        });
+        const hierarchyDataRequest: DataRequest = {
+          params: {
+            HierarchyMode: "NONE"
+          },
+          method: "get",
+          token,
+          url: `/api/hierarchy/${label.id}`,
+          cbSuccess: (node: ITreeNode) => {
+            addObjectToTree(
+              hierarchyEditorState,
+              hierarchyEditorDispatch,
+              node
+            );
+          }
+        };
+        setTreeChildrenApiRequest(hierarchyDataRequest);
       }
     };
 
@@ -98,24 +119,36 @@ const ManageLabel = () => {
 
     data.name = values.labelname;
 
-    if (state.nodeReferenceId !== "") {
-      data.labelId = state.nodeReferenceId;
+    if (hierarchyEditorState.editor.node.referenceId !== "") {
+      data.labelId = hierarchyEditorState.editor.node.referenceId;
     }
 
-    if (state.nodeParentId !== "") {
-      data.parentLabelId = state.nodeParentId;
+    if (hierarchyEditorState.editor.node.parentId !== "") {
+      data.parentLabelId = hierarchyEditorState.editor.node.parentId;
     }
 
     const dataRequest: DataRequest = {
       data,
       method: "put",
       token,
-      url: `/api/label/${state.nodeReferenceId}`,
+      url: `/api/label/${hierarchyEditorState.editor.node.referenceId}`,
       cbSuccess: (label: ILabelPostResponse) => {
-        dispatch({
-          type: HierarchyEditorDataActionTypes.PUT_LABEL,
-          label
-        });
+        const hierarchyDataRequest: DataRequest = {
+          params: {
+            HierarchyMode: "ALL"
+          },
+          method: "get",
+          token,
+          url: `/api/hierarchy/${label.id}`,
+          cbSuccess: (node: ITreeNode) => {
+            updateTreeObject(
+              hierarchyEditorState,
+              hierarchyEditorDispatch,
+              node
+            );
+          }
+        };
+        setTreeChildrenApiRequest(hierarchyDataRequest);
       }
     };
 
@@ -123,24 +156,19 @@ const ManageLabel = () => {
   };
 
   useEffect(() => {
-    if (
-      state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
-    ) {
-      setInitialFormValues({ labelname: state.selectedNodeName });
+    if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
+      setInitialFormValues({
+        labelname: hierarchyEditorState.editor.node.name
+      });
     }
 
-    if (
-      state.firstPanelView ===
-      HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
-    ) {
+    if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       setInitialFormValues({ labelname: "" });
     }
-  }, [state.selectedNodeName, state.firstPanelView]);
+  }, [hierarchyEditorState.editor.node, hierarchyEditorState.editor.mode]);
 
   const updateMode =
-    state.firstPanelView ===
-    HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE;
+    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
   return (
     <Panel
@@ -152,40 +180,28 @@ const ManageLabel = () => {
           ? "Update selected label"
           : "Add child label to selected label"
       }>
-      {state.selectedNodeName !== "" ? (
-        <>
-          <NodesBreadCrumb>
-            Selected: {state.breadcrumb}
-            <LastBreadCrumb>
-              {state.breadcrumb.length > 0 ? " / " : ""}
-              {state.selectedNodeName}
-            </LastBreadCrumb>
-          </NodesBreadCrumb>
-          <ContentSeparator />
-        </>
-      ) : null}
+      <PanelBreadCrumb
+        node={hierarchyEditorState.editor.node}
+        breadcrumb={hierarchyEditorState.editor.breadcrumb}
+      />
       <GenericForm
         schema={formSchema}
-        permission={state.panePermission}
-        isLoading={labelPostState.isLoading}
+        permission={hierarchyEditorState.editor.permission}
+        isLoading={
+          labelPostState.isLoading || treeChildrenApiResponse.isLoading
+        }
         validate={validate}
         onCancel={() => {
-          dispatch({
-            type: HierarchyEditorPaneActionTypes.RESET_PANE
+          hierarchyEditorDispatch.editor({
+            type: HierarchyEditorActionTypes.RESET
           });
         }}
         onSubmit={values => {
-          if (
-            state.firstPanelView ===
-            HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE
-          ) {
+          if (!updateMode) {
             postNewLabel(values);
           }
 
-          if (
-            state.firstPanelView ===
-            HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE
-          ) {
+          if (updateMode) {
             updateLabel(values);
           }
         }}

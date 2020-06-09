@@ -13,13 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import DataRequest from "../../../../types/DataRequest";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
-import {
-  HierarchyEditorPaneActionTypes,
-  StateContext
-} from "../../../../stores/hierarchyEditorStore";
 import { WRONG_PASSWORD } from "../../../../security";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
@@ -33,10 +29,16 @@ import {
 } from "../../../../stores/ApprovalExecutionStore";
 import { signLink } from "../../LinkSigningService";
 import { ILinkMetaBlock } from "../../../../interfaces/ILink";
+import {
+  HierarchyEditorStateContext,
+  HierarchyEditorActionTypes
+} from "../../../../stores/hierarchyEditorStore";
 
 const LinkSigner: React.FC = () => {
   const approvalContext = useApprovalExecutionStore();
-  const [state, dispatch] = useContext(StateContext);
+  const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
+    HierarchyEditorStateContext
+  );
   const [showWarning, setShowWarning] = useState(false);
   const [passphrase, setPassphrase] = useState("");
   const { token } = useUserProfileContext();
@@ -64,17 +66,20 @@ const LinkSigner: React.FC = () => {
             products: signingContext.artifactsToSign,
             materials: []
           },
-          state.nodeReferenceId
+          hierarchyEditorState.editor.node.referenceId
         )
           .then((linkMetaBlock: ILinkMetaBlock) => {
             setRequest({
               data: linkMetaBlock,
               method: "post",
               token,
-              url: "/api/supplychain/" + state.nodeReferenceId + "/link",
+              url:
+                "/api/supplychain/" +
+                hierarchyEditorState.editor.node.referenceId +
+                "/link",
               cbSuccess: () => {
-                dispatch({
-                  type: HierarchyEditorPaneActionTypes.RESET_PANE
+                hierarchyEditorDispatch.editor({
+                  type: HierarchyEditorActionTypes.RESET
                 });
               }
             });

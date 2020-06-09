@@ -16,10 +16,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { cryptoAvailable } from "../../../../security";
 import { FormPermissions } from "../../../../types/FormPermission";
-import {
-  HierarchyEditorPaneActionTypes,
-  StateContext
-} from "../../../../stores/hierarchyEditorStore";
 import GenericForm, {
   IGenericFormSchema
 } from "../../../../organisms/GenericForm";
@@ -32,6 +28,10 @@ import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
+import {
+  HierarchyEditorStateContext,
+  HierarchyEditorActionTypes
+} from "../../../../stores/hierarchyEditorStore";
 
 interface ILayoutValidationErrorResponse {
   messages: Array<ILayoutValidationMessage>;
@@ -65,7 +65,9 @@ const validateLayout = (values: ILayoutFormValues) => {
 };
 
 const LayoutJsonEditor: React.FC = () => {
-  const [state, dispatch] = useContext(StateContext);
+  const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
+    HierarchyEditorStateContext
+  );
 
   const [layoutJson, setLayoutJson] = useState<string>("{}");
 
@@ -94,7 +96,10 @@ const LayoutJsonEditor: React.FC = () => {
       data: values.layout,
       method: "post",
       token: token,
-      url: "/api/supplychain/" + state.nodeReferenceId + "/layout/validate",
+      url:
+        "/api/supplychain/" +
+        hierarchyEditorState.editor.node.referenceId +
+        "/layout/validate",
       cbSuccess: () => {
         editorStoreContext.dispatch({
           type: LayoutEditorActionType.START_SIGNING
@@ -118,13 +123,15 @@ const LayoutJsonEditor: React.FC = () => {
       dataTesthookId={"layout-json-form"}
       schema={formSchema}
       permission={
-        cryptoAvailable() ? state.panePermission : FormPermissions.READ
+        cryptoAvailable()
+          ? hierarchyEditorState.editor.permission
+          : FormPermissions.READ
       }
       isLoading={editorStoreContext.state.loading}
       validate={validateLayout}
       onCancel={() => {
-        dispatch({
-          type: HierarchyEditorPaneActionTypes.RESET_PANE
+        hierarchyEditorDispatch.editor({
+          type: HierarchyEditorActionTypes.RESET
         });
       }}
       onSubmit={values => {

@@ -17,10 +17,6 @@ import React, { useContext, useEffect, useState } from "react";
 import DataRequest from "../../../../types/DataRequest";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
 import { signLayout } from "../../LayoutService";
-import {
-  HierarchyEditorPaneActionTypes,
-  StateContext
-} from "../../../../stores/hierarchyEditorStore";
 import { WRONG_PASSWORD } from "../../../../security";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
@@ -30,10 +26,16 @@ import {
 } from "../../../../stores/LayoutEditorStore";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
 import PassphraseDialogBox from "../../../../organisms/PassphraseDialogBox";
+import {
+  HierarchyEditorStateContext,
+  HierarchyEditorActionTypes
+} from "../../../../stores/hierarchyEditorStore";
 
 const LayoutSigner: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();
-  const [state, dispatch] = useContext(StateContext);
+  const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
+    HierarchyEditorStateContext
+  );
   const [showWarning, setShowWarning] = useState(false);
   const [passphrase, setPassphrase] = useState("");
   const { token } = useUserProfileContext();
@@ -58,19 +60,22 @@ const LayoutSigner: React.FC = () => {
               data: layoutMetaBlock,
               method: "post",
               token,
-              url: "/api/supplychain/" + state.nodeReferenceId + "/layout",
+              url:
+                "/api/supplychain/" +
+                hierarchyEditorState.editor.node.referenceId +
+                "/layout",
               cbSuccess: () => {
                 setRequest({
                   data: editorStoreContext.state.approvalConfigs,
                   url:
                     "/api/supplychain/" +
-                    state.nodeReferenceId +
+                    hierarchyEditorState.editor.node.referenceId +
                     "/layout/approvalconfig",
                   method: "post",
                   token,
                   cbSuccess: () => {
-                    dispatch({
-                      type: HierarchyEditorPaneActionTypes.RESET_PANE
+                    hierarchyEditorDispatch.editor({
+                      type: HierarchyEditorActionTypes.RESET
                     });
                   }
                 });

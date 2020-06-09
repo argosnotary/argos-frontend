@@ -19,16 +19,11 @@ import { mount, ReactWrapper } from "enzyme";
 
 import MockAdapter from "axios-mock-adapter";
 import Axios from "axios";
-import { ThemeProvider } from "styled-components";
-import theme from "../../../../theme/base.json";
 import { act } from "react-dom/test-utils";
-import { FormPermissions } from "../../../../types/FormPermission";
 import { waitFor } from "@testing-library/dom";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
 import { cryptoAvailable } from "../../../../security";
 import * as linkSigningService from "../../LinkSigningService";
-import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
-import { StateContext } from "../../HierarchyEditor";
 import {
   ArtifactCollectorType,
   IApprovalConfig
@@ -36,6 +31,7 @@ import {
 import ManageApprovalExecutionPanel from "./ManageApprovalExecutionPanel";
 import { SelectListItem } from "../../../../atoms/SelectList";
 import { IArtifact, ILinkMetaBlock } from "../../../../interfaces/ILink";
+import HierarchyEditorTestWrapper from "../../../../test/utils";
 
 const mock = new MockAdapter(Axios);
 
@@ -75,21 +71,10 @@ jest
 const addItem = jest.fn();
 
 function createComponent() {
-  const state = {
-    firstPanelView: HierarchyEditorPaneActionTypes.NONE,
-    nodeReferenceId: "supplyChainId",
-    nodeParentId: "",
-    breadcrumb: "label / ",
-    selectedNodeName: "layout",
-    panePermission: FormPermissions.EDIT
-  };
-
   return mount(
-    <ThemeProvider theme={theme}>
-      <StateContext.Provider value={[state, addItem]}>
-        <ManageApprovalExecutionPanel />
-      </StateContext.Provider>
-    </ThemeProvider>
+    <HierarchyEditorTestWrapper mockedDispatch={addItem}>
+      <ManageApprovalExecutionPanel />
+    </HierarchyEditorTestWrapper>
   );
 }
 
@@ -327,7 +312,7 @@ it("approval happy flow", async () => {
     );
 
     expect(mock.history.post[2].data).toBe(JSON.stringify(mockLinkMetaBlock()));
-    expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
+    expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET" });
   });
 });
 
