@@ -162,7 +162,9 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
         onChange={selectSearchOptionType}
         value={selectedSearchOption}
         name="selectSearchOptionType">
-        <option value={"select"}>select...</option>
+        {selectedSearchOption === "select" ? (
+          <option value={"select"}>select...</option>
+        ) : null}
         <option value={SearchOptionType.BRANCH}>branch</option>
         <option value={SearchOptionType.TAG}>tag</option>
         <option value={SearchOptionType.COMMIT_HASH}>commit hash</option>

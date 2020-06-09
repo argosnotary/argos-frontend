@@ -109,9 +109,9 @@ const approvels: Array<IApprovalConfig> = [
       {
         name: "collector2",
         uri: "/collector2",
-        type: ArtifactCollectorType.XLDEPLOY,
+        type: ArtifactCollectorType.GIT,
         context: {
-          applicationName: "applicationName2"
+          repository: "repository"
         }
       }
     ]
@@ -260,15 +260,43 @@ it("approval happy flow", async () => {
     await waitFor(() => {
       root.update();
       return expect(
-        root.find(
-          'input[data-testhook-id="xl-deploy-collector-execution-form-1-field-0"]'
-        ).length
+        root.find('select[id="git-collector-execution-form-select-1"]').length
       ).toBe(1);
     });
 
+    await waitFor(() => {
+      root
+        .find('select[id="git-collector-execution-form-select-1"]')
+        .simulate("change", {
+          target: {
+            name: "selectSearchOptionType",
+            value: "TAG"
+          }
+        });
+      root.update();
+
+      // console.log(root.debug())
+      expect(
+        root.find('select[id="git-collector-execution-form-select-1"]').props()
+          .value
+      ).toBe("TAG");
+    });
+
+    root
+      .find(
+        'button[data-testhook-id="git-collector-execution-form-1-submit-button"]'
+      )
+      .simulate("submit");
+
+    root
+      .find(
+        'button[data-testhook-id="git-collector-execution-form-1-submit-button"]'
+      )
+      .simulate("submit");
+
     updateField(
       root.find(
-        'input[data-testhook-id="xl-deploy-collector-execution-form-1-field-0"]'
+        'input[data-testhook-id="git-collector-execution-form-1-field-0"]'
       ),
       "username",
       "user2"
@@ -276,7 +304,7 @@ it("approval happy flow", async () => {
 
     updateField(
       root.find(
-        'input[data-testhook-id="xl-deploy-collector-execution-form-1-field-1"]'
+        'input[data-testhook-id="git-collector-execution-form-1-field-1"]'
       ),
       "password",
       "pass2"
@@ -284,18 +312,18 @@ it("approval happy flow", async () => {
 
     updateField(
       root.find(
-        'input[data-testhook-id="xl-deploy-collector-execution-form-1-field-2"]'
+        'input[data-testhook-id="git-collector-execution-form-1-field-2"]'
       ),
-      "applicationVersion",
-      "appversion2"
+      "branch",
+      "branch"
     );
-    root.update();
+
     root
-      .find('form[data-testhook-id="xl-deploy-collector-execution-form-1"]')
+      .find('form[data-testhook-id="git-collector-execution-form-1"]')
       .simulate("blur");
     root
       .find(
-        'button[data-testhook-id="xl-deploy-collector-execution-form-1-submit-button"]'
+        'button[data-testhook-id="git-collector-execution-form-1-submit-button"]'
       )
       .simulate("submit");
 
@@ -335,7 +363,7 @@ it("approval happy flow", async () => {
     );
 
     expect(mock.history.post[1].data).toBe(
-      '{"applicationName":"applicationName2","username":"user2","password":"pass2","applicationVersion":"appversion2"}'
+      '{"repository":"repository","username":"user2","password":"pass2","branch":"branch"}'
     );
 
     expect(mock.history.post[2].data).toBe(JSON.stringify(mockLinkMetaBlock()));
