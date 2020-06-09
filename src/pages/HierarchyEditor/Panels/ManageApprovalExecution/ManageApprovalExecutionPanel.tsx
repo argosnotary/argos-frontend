@@ -17,7 +17,6 @@ import { Panel } from "../../../../molecules/Panel";
 import React, { useContext, useEffect } from "react";
 import { useUserProfileContext } from "../../../../stores/UserProfile";
 import DataRequest from "../../../../types/DataRequest";
-import { StateContext } from "../../../../stores/hierarchyEditorStore";
 import useDataApi from "../../../../hooks/useDataApi";
 import { customGenericDataFetchReducer } from "../../../../stores/genericDataFetchReducer";
 import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
@@ -34,6 +33,7 @@ import ApprovalExecutionDetailsPanel from "./ApprovalExecutionDetailsPanel";
 import SelectList, { SelectListItem } from "../../../../atoms/SelectList";
 import { cryptoAvailable } from "../../../../security";
 import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
+import { HierarchyEditorStateContext } from "../../../../stores/hierarchyEditorStore";
 
 interface IApprovalStepsResponse {
   isLoading: boolean;
@@ -43,7 +43,7 @@ interface IApprovalStepsResponse {
 const ManageApprovalExecutionPanel: React.FC = () => {
   const theme = useContext(ThemeContext);
   const { token } = useUserProfileContext();
-  const [state, _dispatch] = useContext(StateContext);
+  const [hierarchyEditorState] = useContext(HierarchyEditorStateContext);
   const [approvalStepsResponse, setApprovalSteps] = useDataApi<
     IApprovalStepsResponse,
     Array<IApprovalConfig>
@@ -54,7 +54,7 @@ const ManageApprovalExecutionPanel: React.FC = () => {
     const dataRequest: DataRequest = {
       method: "get",
       token,
-      url: `/api/supplychain/${state.nodeReferenceId}/layout/approvalconfig/me`,
+      url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}/layout/approvalconfig/me`,
       cbSuccess: (approvalConfigs: Array<IApprovalConfig>) => {
         approvalExecutionStoreContext.dispatch({
           type: ApprovalExecutionActionType.LOAD_APPROVAL_STEPS,
@@ -63,7 +63,7 @@ const ManageApprovalExecutionPanel: React.FC = () => {
       }
     };
     setApprovalSteps(dataRequest);
-  }, [state.nodeReferenceId]);
+  }, [hierarchyEditorState.editor.node.referenceId]);
   const cbSelectApproval = (approvalStep: IApprovalConfig) => {
     approvalExecutionStoreContext.dispatch({
       type: ApprovalExecutionActionType.SELECT_APPROVAL_STEP,

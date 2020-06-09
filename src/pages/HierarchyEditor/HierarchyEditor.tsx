@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useReducer, useEffect, useContext } from "react";
+import React, { useReducer, useContext } from "react";
 
 import DataRequest from "../../types/DataRequest";
 import FlexColumn from "../../atoms/FlexColumn";
@@ -30,18 +30,7 @@ import {
 
 import { buildNodeTrail } from "../../molecules/TreeEditor/utils";
 
-import {
-  layoutEditorReducer,
-  StateContext,
-  HierarchyEditorDataActionTypes,
-  HierarchyEditorPaneActionTypes,
-  LayoutEditorPaneActionType
-} from "../../stores/hierarchyEditorStore";
-import {
-  appendObjectToTree,
-  appendLabelChildrenToTree,
-  updateObjectInTree
-} from "./utils";
+import { appendLabelChildrenToTree } from "./utils";
 import ManageLabel from "./Panels/ManageLabel";
 import genericDataFetchReducer, {
   customGenericDataFetchReducer
@@ -58,16 +47,20 @@ import ManageLayoutPanel from "./Panels/ManageLayout/ManageLayoutPanel";
 import ManageApprovalExecutionPanel from "./Panels/ManageApprovalExecution/ManageApprovalExecutionPanel";
 import ApproveIcon from "../../atoms/Icons/ApproveIcon";
 import { ThemeContext } from "styled-components";
+import {
+  hierarchyEditorReducer,
+  IHierarchyEditorState,
+  HierarchyEditorPanelTypes,
+  HierarchyEditorActionTypes,
+  HierarchyEditorStateContext,
+  HierarchyEditorPanelModes
+} from "../../stores/hierarchyEditorStore";
 
 const HierarchyEditor = () => {
-  const [state, dispatch] = useReducer(layoutEditorReducer, {
-    firstPanelView: HierarchyEditorPaneActionTypes.NONE,
-    nodeReferenceId: "",
-    nodeParentId: "",
-    breadcrumb: "",
-    selectedNodeName: "",
-    panePermission: FormPermissions.READ
-  });
+  const [hierarchyEditorState, hierarchyEditorDispatch] = useReducer(
+    hierarchyEditorReducer,
+    {} as IHierarchyEditorState
+  );
 
   const theme = useContext(ThemeContext);
 
@@ -97,22 +90,21 @@ const HierarchyEditor = () => {
     createrootnode: "Create base label..."
   };
 
-  const getPanePermission = (
+  const getPanelPermission = (
     node: ITreeNode,
-    paneActionType: HierarchyEditorPaneActionTypes
+    panelType: HierarchyEditorPanelTypes
   ) => {
     let userHasEditPermission = false;
-    switch (paneActionType) {
-      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE:
-      case HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE:
-        userHasEditPermission =
-          node.permissions !== undefined &&
-          node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >= 0;
-        break;
-      case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+    switch (panelType) {
+      case HierarchyEditorPanelTypes.MANAGE_LAYOUT:
         userHasEditPermission =
           node.permissions !== undefined &&
           node.permissions.indexOf(PermissionTypes.LAYOUT_ADD) >= 0;
+        break;
+      case HierarchyEditorPanelTypes.SERVICE_ACCOUNT:
+        userHasEditPermission =
+          node.permissions !== undefined &&
+          node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >= 0;
         break;
       default:
         userHasEditPermission =
@@ -123,25 +115,28 @@ const HierarchyEditor = () => {
     return userHasEditPermission ? FormPermissions.EDIT : FormPermissions.READ;
   };
 
-  const treeContextMenuCb = (
-    type: LayoutEditorPaneActionType,
+  const treeContextMenuCallback = (
+    panel: HierarchyEditorPanelTypes,
+    mode: HierarchyEditorPanelModes,
     node: ITreeNode
   ) => {
     const trail = buildNodeTrail([], treeState.data, node.referenceId);
     const breadcrumb = Array.from(trail.slice(0, -1), t => t.name).join(" / ");
-    const selectedNodeName = Array.from(trail.slice(-1))[0].name;
+    const extendedNode = { ...node };
 
-    dispatch({
-      type: HierarchyEditorPaneActionTypes.RESET_PANE
-    });
+    cbGetNodeChildren(node.referenceId);
 
-    dispatch({
-      type,
-      nodeReferenceId: node.referenceId,
-      nodeParentId: trail.length > 1 ? trail[trail.length - 2].referenceId : "",
+    if (trail.length > 1) {
+      extendedNode["parentId"] = trail[trail.length - 2].referenceId;
+    }
+
+    hierarchyEditorDispatch({
+      type: HierarchyEditorActionTypes.SET_PANEL,
+      node: extendedNode,
       breadcrumb,
-      panePermission: getPanePermission(node, type),
-      selectedNodeName
+      permission: getPanelPermission(node, panel),
+      panel,
+      mode
     });
   };
 
@@ -149,8 +144,9 @@ const HierarchyEditor = () => {
     {
       type: "LABEL",
       callback: (node: ITreeNode) => {
-        treeContextMenuCb(
-          HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE,
+        treeContextMenuCallback(
+          HierarchyEditorPanelTypes.LABEL,
+          HierarchyEditorPanelModes.UPDATE,
           node
         );
       }
@@ -158,8 +154,9 @@ const HierarchyEditor = () => {
     {
       type: "SUPPLY_CHAIN",
       callback: (node: ITreeNode) => {
-        treeContextMenuCb(
-          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE,
+        treeContextMenuCallback(
+          HierarchyEditorPanelTypes.SUPPLY_CHAIN,
+          HierarchyEditorPanelModes.UPDATE,
           node
         );
       }
@@ -167,8 +164,9 @@ const HierarchyEditor = () => {
     {
       type: "SERVICE_ACCOUNT",
       callback: (node: ITreeNode) => {
-        treeContextMenuCb(
-          HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE,
+        treeContextMenuCallback(
+          HierarchyEditorPanelTypes.SERVICE_ACCOUNT,
+          HierarchyEditorPanelModes.UPDATE,
           node
         );
       }
@@ -182,8 +180,9 @@ const HierarchyEditor = () => {
         {
           label: "Add child label",
           callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.LABEL,
+              HierarchyEditorPanelModes.CREATE,
               node
             );
           },
@@ -197,8 +196,9 @@ const HierarchyEditor = () => {
         {
           label: "Add supply chain",
           callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE,
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.SUPPLY_CHAIN,
+              HierarchyEditorPanelModes.CREATE,
               node
             );
           },
@@ -212,8 +212,9 @@ const HierarchyEditor = () => {
         {
           label: "Add service account",
           callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE,
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.SERVICE_ACCOUNT,
+              HierarchyEditorPanelModes.CREATE,
               node
             );
           },
@@ -228,8 +229,9 @@ const HierarchyEditor = () => {
         {
           label: "Manage permissions",
           callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS,
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.MANAGE_LABEL_PERMISSIONS,
+              HierarchyEditorPanelModes.DEFAULT,
               node
             );
           },
@@ -249,8 +251,9 @@ const HierarchyEditor = () => {
         {
           label: "manage layout",
           callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT,
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.MANAGE_LAYOUT,
+              HierarchyEditorPanelModes.DEFAULT,
               node
             );
           },
@@ -270,8 +273,9 @@ const HierarchyEditor = () => {
           ),
           label: "Approve step",
           callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL,
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.EXECUTE_APPROVAL,
+              HierarchyEditorPanelModes.DEFAULT,
               node
             );
           },
@@ -290,8 +294,9 @@ const HierarchyEditor = () => {
         {
           label: "Generate new key for service account",
           callback: (node: ITreeNode) => {
-            treeContextMenuCb(
-              HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL,
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
+              HierarchyEditorPanelModes.CREATE,
               node
             );
           },
@@ -308,13 +313,13 @@ const HierarchyEditor = () => {
   ];
 
   const cbCreateRootNode = () => {
-    dispatch({
-      type: HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE,
-      nodeReferenceId: "",
-      nodeParentId: "",
+    hierarchyEditorDispatch({
+      type: HierarchyEditorActionTypes.SET_PANEL,
+      node: {} as ITreeNode,
       breadcrumb: "",
-      selectedNodeName: "",
-      panePermission: FormPermissions.EDIT
+      permission: FormPermissions.EDIT,
+      panel: HierarchyEditorPanelTypes.LABEL,
+      mode: HierarchyEditorPanelModes.CREATE
     });
   };
 
@@ -334,69 +339,25 @@ const HierarchyEditor = () => {
     setTreeChildrenApiRequest(dataRequest);
   };
 
-  const renderPanel = (panelView: string) => {
-    switch (panelView) {
-      case HierarchyEditorPaneActionTypes.SHOW_ADD_LABEL_PANE:
-      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_LABEL_PANE:
+  const renderSelectedPanel = (panel: HierarchyEditorPanelTypes) => {
+    switch (panel) {
+      case HierarchyEditorPanelTypes.LABEL:
         return <ManageLabel />;
-      case HierarchyEditorPaneActionTypes.SHOW_ADD_SUPPLY_CHAIN_PANE:
-      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SUPPLY_CHAIN_PANE:
+      case HierarchyEditorPanelTypes.SUPPLY_CHAIN:
         return <ManageSupplyChain />;
-      case HierarchyEditorPaneActionTypes.SHOW_ADD_SERVICE_ACCOUNT_PANE:
-      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_PANE:
-      case HierarchyEditorPaneActionTypes.SHOW_UPDATE_SERVICE_ACCOUNT_KEY_MODAL:
+      case HierarchyEditorPanelTypes.SERVICE_ACCOUNT:
+      case HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR:
         return <ManageNpa />;
-      case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LABEL_PERMISSIONS:
+      case HierarchyEditorPanelTypes.MANAGE_LABEL_PERMISSIONS:
         return <ManageLabelPermissions />;
-      case HierarchyEditorPaneActionTypes.SHOW_MANAGE_LAYOUT:
+      case HierarchyEditorPanelTypes.MANAGE_LAYOUT:
         return <ManageLayoutPanel />;
-      case HierarchyEditorPaneActionTypes.SHOW_EXECUTE_APPROVAL:
+      case HierarchyEditorPanelTypes.EXECUTE_APPROVAL:
         return <ManageApprovalExecutionPanel />;
       default:
         return null;
     }
   };
-
-  useEffect(() => {
-    if (
-      (state.dataAction &&
-        state.dataAction === HierarchyEditorDataActionTypes.POST_NEW_LABEL) ||
-      state.dataAction ===
-        HierarchyEditorDataActionTypes.POST_NEW_SERVICE_ACCOUNT ||
-      state.dataAction === HierarchyEditorDataActionTypes.POST_SUPPLY_CHAIN
-    ) {
-      const hierarchyDataRequest: DataRequest = {
-        params: {
-          HierarchyMode: "NONE"
-        },
-        method: "get",
-        token,
-        url: `/api/hierarchy/${state.data.id}`,
-        cbSuccess: (node: ITreeNode) => {
-          appendObjectToTree(
-            treeState,
-            treeDispatch,
-            node,
-            state.data.parentLabelId
-          );
-          dispatch({
-            type: HierarchyEditorDataActionTypes.DATA_ACTION_COMPLETED,
-            data: state.data
-          });
-        }
-      };
-      setTreeChildrenApiRequest(hierarchyDataRequest);
-    }
-
-    if (
-      state.dataAction &&
-      (state.dataAction === HierarchyEditorDataActionTypes.PUT_LABEL ||
-        state.dataAction === HierarchyEditorDataActionTypes.PUT_SUPPLY_CHAIN ||
-        state.dataAction === HierarchyEditorDataActionTypes.PUT_SERVICE_ACCOUNT)
-    ) {
-      updateObjectInTree(treeState, treeDispatch, dispatch, state.data);
-    }
-  }, [state.data, state.dataAction]);
 
   const userProfile = useUserProfileContext();
 
@@ -418,13 +379,22 @@ const HierarchyEditor = () => {
     canCreateRootNode,
     cbGetNodeChildren,
     isLoading: treeChildrenApiResponse.isLoading,
-    selectedNodeReferenceId: state.nodeReferenceId
+    selectedNodeReferenceId: hierarchyEditorState.node
+      ? hierarchyEditorState.node.referenceId
+      : ""
   };
 
   return (
     <FlexColumn>
       <FlexRow disableWrap={true}>
-        <StateContext.Provider value={[state, dispatch]}>
+        <HierarchyEditorStateContext.Provider
+          value={[
+            {
+              tree: treeState,
+              editor: hierarchyEditorState
+            },
+            { editor: hierarchyEditorDispatch, tree: treeDispatch }
+          ]}>
           <PanelsContainer>
             <FlexRow disableWrap={true}>
               <Panel
@@ -438,14 +408,13 @@ const HierarchyEditor = () => {
                   context={treeContext}
                 />
               </Panel>
-              {renderPanel(state.firstPanelView)}
+              {renderSelectedPanel(hierarchyEditorState.panel)}
             </FlexRow>
           </PanelsContainer>
-        </StateContext.Provider>
+        </HierarchyEditorStateContext.Provider>
       </FlexRow>
     </FlexColumn>
   );
 };
 
 export default HierarchyEditor;
-export { StateContext };

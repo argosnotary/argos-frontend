@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect, useState } from "react";
-import { NodesBreadCrumb, LastBreadCrumb } from "../../../atoms/Breadcrumbs";
 import ContentSeparator from "../../../atoms/ContentSeparator";
 import ISearchResult from "../../../interfaces/ISearchResult";
 import SearchInput from "../../../atoms/SearchInput";
@@ -25,8 +24,9 @@ import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationComponent";
 import { Panel } from "../../../molecules/Panel";
-import { StateContext } from "../HierarchyEditor";
 import { useUserProfileContext } from "../../../stores/UserProfile";
+import { HierarchyEditorStateContext } from "../../../stores/hierarchyEditorStore";
+import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
 interface IEditSearchedUserPermissionsProps {
   selectedLabelId: string;
@@ -184,7 +184,7 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
 };
 
 const ManageLabelPermissions = () => {
-  const [state] = useContext(StateContext);
+  const [hierarchyEditorState] = useContext(HierarchyEditorStateContext);
 
   return (
     <Panel
@@ -192,15 +192,13 @@ const ManageLabelPermissions = () => {
       resizable={false}
       last={true}
       title={"Manage label permissions"}>
-      <NodesBreadCrumb>
-        Selected: {state.breadcrumb}
-        <LastBreadCrumb>
-          {state.breadcrumb.length > 0 ? " / " : ""}
-          {state.selectedNodeName}
-        </LastBreadCrumb>
-      </NodesBreadCrumb>
-      <ContentSeparator />
-      <UserPermissions selectedLabelId={state.nodeReferenceId} />
+      <PanelBreadCrumb
+        node={hierarchyEditorState.editor.node}
+        breadcrumb={hierarchyEditorState.editor.breadcrumb}
+      />
+      <UserPermissions
+        selectedLabelId={hierarchyEditorState.editor.node.referenceId}
+      />
     </Panel>
   );
 };

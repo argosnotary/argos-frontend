@@ -19,11 +19,8 @@ import { mount, ReactWrapper } from "enzyme";
 
 import MockAdapter from "axios-mock-adapter";
 import Axios from "axios";
-import { ThemeProvider } from "styled-components";
-import theme from "../../../../theme/base.json";
 import { act } from "react-dom/test-utils";
 import ManageLayoutPanel from "./ManageLayoutPanel";
-import { FormPermissions } from "../../../../types/FormPermission";
 import { ILayoutMetaBlock, IStep } from "../../../../interfaces/ILayout";
 import TextArea from "../../../../atoms/TextArea";
 import { waitFor } from "@testing-library/dom";
@@ -34,12 +31,11 @@ import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { cryptoAvailable } from "../../../../security";
 import * as layoutService from "../../LayoutService";
 import { Notification } from "../../../../molecules/NotificationsList";
-import { HierarchyEditorPaneActionTypes } from "../../../../stores/hierarchyEditorStore";
-import { StateContext } from "../../HierarchyEditor";
 import {
   ArtifactCollectorType,
   IApprovalConfig
 } from "../../../../interfaces/IApprovalConfig";
+import HierarchyEditorTestWrapper from "../../../../test/utils";
 
 const mock = new MockAdapter(Axios);
 
@@ -78,21 +74,10 @@ jest
 const addItem = jest.fn();
 
 function createComponent() {
-  const state = {
-    firstPanelView: HierarchyEditorPaneActionTypes.NONE,
-    nodeReferenceId: "supplyChainId",
-    nodeParentId: "",
-    breadcrumb: "label / ",
-    selectedNodeName: "layout",
-    panePermission: FormPermissions.EDIT
-  };
-
   return mount(
-    <ThemeProvider theme={theme}>
-      <StateContext.Provider value={[state, addItem]}>
-        <ManageLayoutPanel />
-      </StateContext.Provider>
-    </ThemeProvider>
+    <HierarchyEditorTestWrapper mockedDispatch={addItem}>
+      <ManageLayoutPanel />
+    </HierarchyEditorTestWrapper>
   );
 }
 
@@ -373,14 +358,12 @@ it("sign layout happy flow", async () => {
     //
 
     await waitFor(() => {
-      root
-        .find('select[id="collectorType"]')
-        .simulate("change", {
-          target: {
-            name: "collectorType",
-            value: ArtifactCollectorType.XLDEPLOY
-          }
-        });
+      root.find('select[id="collectorType"]').simulate("change", {
+        target: {
+          name: "collectorType",
+          value: ArtifactCollectorType.XLDEPLOY
+        }
+      });
       root.update();
 
       // console.log(root.debug())
@@ -454,7 +437,7 @@ it("sign layout happy flow", async () => {
       '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"uri":"https://collect.org","name":"xlCollect","type":"XLDEPLOY","context":{"applicationName":"appName"}}]}]'
     );
 
-    expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET_PANE" });
+    expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET" });
     expect(mock.history.post[1].data).toBe(
       JSON.stringify(mockLayoutMetaBlock())
     );
