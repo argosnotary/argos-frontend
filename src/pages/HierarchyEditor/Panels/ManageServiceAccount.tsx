@@ -21,7 +21,7 @@ import ContentSeparator from "../../../atoms/ContentSeparator";
 import DataRequest from "../../../types/DataRequest";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-import INpaApiResponse from "../../../interfaces/INpaApiResponse";
+import IServiceAccountApiResponse from "../../../interfaces/INpaApiResponse";
 import PasswordView from "../../../atoms/PasswordView";
 import FlexRow from "../../../atoms/FlexRow";
 import { cryptoAvailable, generateKey } from "../../../security";
@@ -54,7 +54,7 @@ import ITreeNode from "../../../interfaces/ITreeNode";
 import { LoaderIcon } from "../../../atoms/Icons";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
-interface INpaFormValues {
+interface IServiceAccountFormValues {
   serviceaccountname: string;
 }
 
@@ -77,7 +77,7 @@ const formSchema: IGenericFormSchema = [
   }
 ];
 
-const validate = (values: INpaFormValues) => {
+const validate = (values: IServiceAccountFormValues) => {
   const errors = {} as any;
 
   if (!values.serviceaccountname) {
@@ -105,12 +105,12 @@ const clipboardWrapperCss = css`
   height: 1.8rem;
 `;
 
-const ManageNpa = () => {
+const ManageServiceAccount = () => {
   const { token } = useUserProfileContext();
-  const [serviceAccountPostState, setNpaPostRequest] = useDataApi(
+  const [serviceAccountPostState, setServiceAccountPostRequest] = useDataApi(
     genericDataFetchReducer
   );
-  const [_serviceAccountGetRequestState, setNpaGetRequest] = useDataApi(
+  const [_serviceAccountGetRequestState, setServiceAccountGetRequest] = useDataApi(
     genericDataFetchReducer
   );
 
@@ -119,10 +119,10 @@ const ManageNpa = () => {
   );
 
   const [initialFormValues, setInitialFormValues] = useState(
-    {} as INpaFormValues
+    {} as IServiceAccountFormValues
   );
 
-  const [serviceAccountKey, setNpaKey] = useState({} as IPublicKey);
+  const [serviceAccountKey, setServiceAccountKey] = useState({} as IPublicKey);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, setWizardState] = useState(
     cryptoAvailable()
@@ -131,9 +131,10 @@ const ManageNpa = () => {
   );
 
   const [displayModal, setDisplayModal] = useState(false);
+  const [_deletewarningModal, setDeletewarningModal] = useState(false);
   const [cryptoException, setCryptoException] = useState(false);
 
-  const generateNode = (serviceaccount: INpaApiResponse) => {
+  const generateNode = (serviceaccount: IServiceAccountApiResponse) => {
     const node = {} as ITreeNode;
     node.referenceId = serviceaccount.id;
     node.parentId = serviceaccount.parentLabelId;
@@ -143,7 +144,7 @@ const ManageNpa = () => {
     return node;
   };
 
-  const postNewNpa = (values: INpaFormValues) => {
+  const postNewServiceAccount = (values: IServiceAccountFormValues) => {
     const data: any = {};
 
     data.name = values.serviceaccountname;
@@ -157,7 +158,7 @@ const ManageNpa = () => {
       method: "post",
       token,
       url: "/api/serviceaccount",
-      cbSuccess: async (serviceaccount: INpaApiResponse) => {
+      cbSuccess: async (serviceaccount: IServiceAccountApiResponse) => {
         try {
           const generatedKeys = await generateKey(true);
 
@@ -169,7 +170,7 @@ const ManageNpa = () => {
             cbSuccess: () => {
               setGeneratedPassword(generatedKeys.password);
 
-              setNpaKey({
+              setServiceAccountKey({
                 publicKey: generatedKeys.keys.publicKey,
                 keyId: generatedKeys.keys.keyId
               });
@@ -184,7 +185,7 @@ const ManageNpa = () => {
             }
           };
 
-          setNpaPostRequest(keyDataRequest);
+          setServiceAccountPostRequest(keyDataRequest);
         } catch (e) {
           setCryptoException(true);
           throw e;
@@ -192,10 +193,10 @@ const ManageNpa = () => {
       }
     };
 
-    setNpaPostRequest(dataRequest);
+    setServiceAccountPostRequest(dataRequest);
   };
 
-  const updateNpa = (values: INpaFormValues) => {
+  const updateNpa = (values: IServiceAccountFormValues) => {
     const data: any = {};
 
     data.name = values.serviceaccountname;
@@ -213,14 +214,13 @@ const ManageNpa = () => {
       method: "put",
       token,
       url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
-      cbSuccess: (serviceaccount: INpaApiResponse) => {
+      cbSuccess: (serviceaccount: IServiceAccountApiResponse) => {
         const node = generateNode(serviceaccount);
-
         updateTreeObject(hierarchyEditorState, hierarchyEditorDispatch, node);
       }
     };
 
-    setNpaPostRequest(dataRequest);
+    setServiceAccountPostRequest(dataRequest);
   };
 
   const getKeyId = (id: string) => {
@@ -229,11 +229,11 @@ const ManageNpa = () => {
       token,
       url: `/api/serviceaccount/${id}/key`,
       cbSuccess: (n: IPublicKey) => {
-        setNpaKey(n);
+        setServiceAccountKey(n);
       }
     };
 
-    setNpaGetRequest(dataRequest);
+    setServiceAccountGetRequest(dataRequest);
   };
 
   useEffect(() => {
@@ -247,7 +247,9 @@ const ManageNpa = () => {
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       setInitialFormValues({ serviceaccountname: "" });
     }
-
+    if(hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.DELETE){
+      setDeletewarningModal(true);
+    }
     if (
       hierarchyEditorState.editor.panel ===
         HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR &&
@@ -264,10 +266,34 @@ const ManageNpa = () => {
   const updateMode =
     hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
+  const _getDeleteWarningContent = ()=>{
+    const cancelHandler = () => {
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
+    };
+    return (
+        <>
+          <ModalBody>
+            <Warning
+                message={
+                  "This service account will be deleted are you sure?"
+                }
+            />
+          </ModalBody>
+          <ModalFooter>
+            <ModalButton onClick={cancelHandler}>No</ModalButton>
+            <ModalButton>Continue</ModalButton>
+          </ModalFooter>
+        </>
+    );
+
+  }
   const getModalContent = (currentWizardState: number) => {
     const theme = useContext(ThemeContext);
 
     const cancelHandler = () => {
+      setDeletewarningModal(false);
       hierarchyEditorDispatch.editor({
         type: HierarchyEditorActionTypes.RESET
       });
@@ -286,7 +312,7 @@ const ManageNpa = () => {
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
 
-            setNpaKey({
+            setServiceAccountKey({
               publicKey: generatedKeys.keys.publicKey,
               keyId: generatedKeys.keys.keyId
             });
@@ -295,7 +321,7 @@ const ManageNpa = () => {
           }
         };
 
-        setNpaPostRequest(dataRequest);
+        setServiceAccountPostRequest(dataRequest);
       } catch (e) {
         setWizardState(WizardStates.CRYPTO_EXCEPTION);
         throw e;
@@ -457,7 +483,7 @@ const ManageNpa = () => {
           }}
           onSubmit={values => {
             if (!updateMode) {
-              postNewNpa(values);
+              postNewServiceAccount(values);
             }
 
             if (updateMode) {
@@ -479,4 +505,4 @@ const ManageNpa = () => {
   return null;
 };
 
-export default ManageNpa;
+export default ManageServiceAccount;
