@@ -131,7 +131,7 @@ const ManageServiceAccount = () => {
   );
 
   const [displayModal, setDisplayModal] = useState(false);
-  const [_deletewarningModal, setDeletewarningModal] = useState(false);
+  const [deletewarningModal, setDeletewarningModal] = useState(false);
   const [cryptoException, setCryptoException] = useState(false);
 
   const generateNode = (serviceaccount: IServiceAccountApiResponse) => {
@@ -169,7 +169,6 @@ const ManageServiceAccount = () => {
             url: `/api/serviceaccount/${serviceaccount.id}/key`,
             cbSuccess: () => {
               setGeneratedPassword(generatedKeys.password);
-
               setServiceAccountKey({
                 publicKey: generatedKeys.keys.publicKey,
                 keyId: generatedKeys.keys.keyId
@@ -273,7 +272,7 @@ const ManageServiceAccount = () => {
   const updateMode =
     hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
-  const _getDeleteWarningContent = ()=>{
+  const getDeleteWarningContent = ()=>{
     const cancelHandler = () => {
       hierarchyEditorDispatch.editor({
         type: HierarchyEditorActionTypes.RESET
@@ -394,7 +393,16 @@ const ManageServiceAccount = () => {
       </Modal>
     );
   }
+if(deletewarningModal){
+  return (
+      <Modal>
+        <ModalFlexColumWrapper>
+          {getDeleteWarningContent()}
+        </ModalFlexColumWrapper>
+      </Modal>
+  );
 
+}
   if (
     generatedPassword.length > 0 &&
     hierarchyEditorState.editor.panel ===
