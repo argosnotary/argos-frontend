@@ -15,7 +15,8 @@
  */
 import {
   appendNodeChildrenToParent,
-  appendSingleNode, removeNode,
+  appendSingleNode,
+  removeNode,
   updateSingleNode
 } from "../../molecules/TreeEditor/utils";
 import {
@@ -49,10 +50,11 @@ const appendLabelChildrenToTree = (
   }
 };
 
-const removeObjectFromTree = (hierarchyEditorState: IHierarchyEditorStateContextState,
-                              hierarchyEditorDispatch: IHierarchyEditorStateContextDispatch
+const removeObjectFromTree = (
+  hierarchyEditorState: IHierarchyEditorStateContextState,
+  hierarchyEditorDispatch: IHierarchyEditorStateContextDispatch
 ) => {
-  const node: ITreeNode =  hierarchyEditorState.editor.node;
+  const node: ITreeNode = hierarchyEditorState.editor.node;
 
   const newState = removeNode(node, node.parentId);
   hierarchyEditorDispatch.tree({
@@ -65,12 +67,10 @@ const removeObjectFromTree = (hierarchyEditorState: IHierarchyEditorStateContext
     id: node.parentId || ""
   });
 
-
   hierarchyEditorDispatch.editor({
     type: HierarchyEditorActionTypes.UPDATE_PANEL_MODE,
     mode: HierarchyEditorPanelModes.UPDATE
   });
-
 };
 
 const addObjectToTree = (
@@ -124,4 +124,9 @@ const updateTreeObject = (
   });
 };
 
-export { addObjectToTree, appendLabelChildrenToTree, updateTreeObject,removeObjectFromTree };
+export {
+  addObjectToTree,
+  appendLabelChildrenToTree,
+  updateTreeObject,
+  removeObjectFromTree
+};

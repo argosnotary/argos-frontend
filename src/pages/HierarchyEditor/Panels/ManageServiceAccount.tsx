@@ -49,7 +49,11 @@ import {
   HierarchyEditorActionTypes,
   HierarchyEditorPanelTypes
 } from "../../../stores/hierarchyEditorStore";
-import {addObjectToTree, removeObjectFromTree, updateTreeObject} from "../utils";
+import {
+  addObjectToTree,
+  removeObjectFromTree,
+  updateTreeObject
+} from "../utils";
 import ITreeNode from "../../../interfaces/ITreeNode";
 import { LoaderIcon } from "../../../atoms/Icons";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
@@ -108,12 +112,14 @@ const clipboardWrapperCss = css`
 
 const ManageServiceAccount = () => {
   const { token } = useUserProfileContext();
-  const [serviceAccountDataRequestState, setServiceAccountDataRequest] = useDataApi(
-    genericDataFetchReducer
-  );
-  const [_serviceAccountGetRequestState, setServiceAccountGetRequest] = useDataApi(
-    genericDataFetchReducer
-  );
+  const [
+    serviceAccountDataRequestState,
+    setServiceAccountDataRequest
+  ] = useDataApi(genericDataFetchReducer);
+  const [
+    _serviceAccountGetRequestState,
+    setServiceAccountGetRequest
+  ] = useDataApi(genericDataFetchReducer);
 
   const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
     HierarchyEditorStateContext
@@ -162,7 +168,6 @@ const ManageServiceAccount = () => {
       cbSuccess: async (serviceaccount: IServiceAccountApiResponse) => {
         try {
           const generatedKeys = await generateKey(true);
-
           const keyDataRequest: DataRequest = {
             data: generatedKeys.keys,
             method: "post",
@@ -176,14 +181,13 @@ const ManageServiceAccount = () => {
               });
               const node = generateNode(serviceaccount);
               setWizardState(WizardStates.DEFAULT);
-              hierarchyEditorDispatch.editor(
-              {
-                  type: HierarchyEditorActionTypes.SET_PANEL,
-                  node: node,
-                  breadcrumb: "",
-                  permission: FormPermissions.EDIT,
-                  panel: HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
-                  mode: HierarchyEditorPanelModes.UPDATE
+              hierarchyEditorDispatch.editor({
+                type: HierarchyEditorActionTypes.SET_PANEL,
+                node: node,
+                breadcrumb: "",
+                permission: FormPermissions.EDIT,
+                panel: HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
+                mode: HierarchyEditorPanelModes.UPDATE
               });
               addObjectToTree(
                 hierarchyEditorState,
@@ -254,7 +258,7 @@ const ManageServiceAccount = () => {
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       setInitialFormValues({ serviceaccountname: "" });
     }
-    if(hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.DELETE){
+    if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.DELETE) {
       setDeletewarningModal(true);
     }
     if (
@@ -273,45 +277,41 @@ const ManageServiceAccount = () => {
   const updateMode =
     hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
-  const getDeleteWarningContent = ()=>{
-
+  const getDeleteWarningContent = () => {
     const cancelHandler = () => {
       hierarchyEditorDispatch.editor({
         type: HierarchyEditorActionTypes.RESET
       });
     };
     const continueHandler = () => {
-        const dataRequest: DataRequest = {
-          method: "delete",
-          token,
-          url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
-          cbSuccess: () => {
-            removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch );
-            hierarchyEditorDispatch.editor({
-              type: HierarchyEditorActionTypes.RESET
-            });
-          }
-        };
-        setServiceAccountGetRequest(dataRequest);
+      const dataRequest: DataRequest = {
+        method: "delete",
+        token,
+        url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
+        cbSuccess: () => {
+          removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);
+          hierarchyEditorDispatch.editor({
+            type: HierarchyEditorActionTypes.RESET
+          });
+        }
+      };
+      setServiceAccountGetRequest(dataRequest);
     };
 
     return (
-        <>
-          <ModalBody>
-            <Warning
-                message={
-                  "This service account will be deleted are you sure?"
-                }
-            />
-          </ModalBody>
-          <ModalFooter>
-            <ModalButton onClick={cancelHandler}>No</ModalButton>
-            <ModalButton onClick={continueHandler}>Continue</ModalButton>
-          </ModalFooter>
-        </>
+      <>
+        <ModalBody>
+          <Warning
+            message={"This service account will be deleted are you sure?"}
+          />
+        </ModalBody>
+        <ModalFooter>
+          <ModalButton onClick={cancelHandler}>No</ModalButton>
+          <ModalButton onClick={continueHandler}>Continue</ModalButton>
+        </ModalFooter>
+      </>
     );
-
-  }
+  };
   const getModalContent = (currentWizardState: number) => {
     const theme = useContext(ThemeContext);
 
@@ -349,7 +349,7 @@ const ManageServiceAccount = () => {
       }
     };
 
-    if(wizardState==WizardStates.DEFAULT){
+    if (wizardState == WizardStates.DEFAULT) {
       continueHandler();
     }
 
@@ -413,16 +413,15 @@ const ManageServiceAccount = () => {
     );
   }
 
-if(deletewarningModal){
-  return (
+  if (deletewarningModal) {
+    return (
       <Modal>
         <ModalFlexColumWrapper>
           {getDeleteWarningContent()}
         </ModalFlexColumWrapper>
       </Modal>
-  );
-
-}
+    );
+  }
   if (
     generatedPassword.length > 0 &&
     hierarchyEditorState.editor.panel ===
