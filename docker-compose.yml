@@ -19,7 +19,7 @@ version: '3.1'
 services:
 
   argos-service:
-    image: argosnotary/argos-service-snapshot:argos-service-snapshot
+    image: argosnotary/argos-service-snapshot:approval-config-git
     environment:
       spring.data.mongodb.uri: mongodb://mongodb/test
       spring.security.oauth2.client.registration.azure.clientId: client-id
@@ -48,3 +48,12 @@ services:
       context: docker/collector-stub
     ports:
       - 8888:8080
+
+  collector:
+    image: argosnotary/argos-collector-service-snapshot:git-collector
+    environment:
+      spring.profiles.active: GIT
+      argos-collector.collectortypes.git.baseurl: https://github.com
+      JAVA_OPTS: '-Xmx1g'
+    ports:
+      - 8889:8080

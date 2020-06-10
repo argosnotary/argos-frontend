@@ -94,9 +94,9 @@ const approvels: Array<IApprovalConfig> = [
       {
         name: "collector2",
         uri: "/collector2",
-        type: ArtifactCollectorType.XLDEPLOY,
+        type: ArtifactCollectorType.GIT,
         context: {
-          applicationName: "applicationName2"
+          repository: "repository"
         }
       }
     ]
@@ -202,7 +202,7 @@ it("approval happy flow", async () => {
       root.update();
       return expect(
         root.find(
-          'input[data-testhook-id="collector-execution-form-0-field-0"]'
+          'input[data-testhook-id="xl-deploy-collector-execution-form-0-field-0"]'
         ).length
       ).toBe(1);
     });
@@ -210,65 +210,105 @@ it("approval happy flow", async () => {
     expect(root.find(ManageApprovalExecutionPanel)).toMatchSnapshot();
 
     updateField(
-      root.find('input[data-testhook-id="collector-execution-form-0-field-0"]'),
+      root.find(
+        'input[data-testhook-id="xl-deploy-collector-execution-form-0-field-0"]'
+      ),
       "username",
       "user1"
     );
 
     updateField(
-      root.find('input[data-testhook-id="collector-execution-form-0-field-1"]'),
+      root.find(
+        'input[data-testhook-id="xl-deploy-collector-execution-form-0-field-1"]'
+      ),
       "password",
       "pass1"
     );
 
     updateField(
-      root.find('input[data-testhook-id="collector-execution-form-0-field-2"]'),
+      root.find(
+        'input[data-testhook-id="xl-deploy-collector-execution-form-0-field-2"]'
+      ),
       "applicationVersion",
       "appversion1"
     );
     root.update();
     root
-      .find('form[data-testhook-id="collector-execution-form-0"]')
+      .find('form[data-testhook-id="xl-deploy-collector-execution-form-0"]')
       .simulate("blur");
     root
       .find(
-        'button[data-testhook-id="collector-execution-form-0-submit-button"]'
+        'button[data-testhook-id="xl-deploy-collector-execution-form-0-submit-button"]'
       )
       .simulate("submit");
 
     await waitFor(() => {
       root.update();
       return expect(
-        root.find(
-          'input[data-testhook-id="collector-execution-form-1-field-0"]'
-        ).length
+        root.find('select[id="git-collector-execution-form-select-1"]').length
       ).toBe(1);
     });
 
+    await waitFor(() => {
+      root
+        .find('select[id="git-collector-execution-form-select-1"]')
+        .simulate("change", {
+          target: {
+            name: "selectSearchOptionType",
+            value: "TAG"
+          }
+        });
+      root.update();
+
+      // console.log(root.debug())
+      expect(
+        root.find('select[id="git-collector-execution-form-select-1"]').props()
+          .value
+      ).toBe("TAG");
+    });
+
+    root
+      .find(
+        'button[data-testhook-id="git-collector-execution-form-1-submit-button"]'
+      )
+      .simulate("submit");
+
+    root
+      .find(
+        'button[data-testhook-id="git-collector-execution-form-1-submit-button"]'
+      )
+      .simulate("submit");
+
     updateField(
-      root.find('input[data-testhook-id="collector-execution-form-1-field-0"]'),
+      root.find(
+        'input[data-testhook-id="git-collector-execution-form-1-field-0"]'
+      ),
       "username",
       "user2"
     );
 
     updateField(
-      root.find('input[data-testhook-id="collector-execution-form-1-field-1"]'),
+      root.find(
+        'input[data-testhook-id="git-collector-execution-form-1-field-1"]'
+      ),
       "password",
       "pass2"
     );
 
     updateField(
-      root.find('input[data-testhook-id="collector-execution-form-1-field-2"]'),
-      "applicationVersion",
-      "appversion2"
+      root.find(
+        'input[data-testhook-id="git-collector-execution-form-1-field-2"]'
+      ),
+      "branch",
+      "branch"
     );
-    root.update();
+
     root
-      .find('form[data-testhook-id="collector-execution-form-1"]')
+      .find('form[data-testhook-id="git-collector-execution-form-1"]')
       .simulate("blur");
     root
       .find(
-        'button[data-testhook-id="collector-execution-form-1-submit-button"]'
+        'button[data-testhook-id="git-collector-execution-form-1-submit-button"]'
       )
       .simulate("submit");
 
@@ -304,11 +344,11 @@ it("approval happy flow", async () => {
     await waitFor(() => expect(mock.history.post.length).toBe(3));
 
     expect(mock.history.post[0].data).toBe(
-      '{"applicationName":"applicationName1","version":"appversion1","username":"user1","password":"pass1"}'
+      '{"applicationName":"applicationName1","username":"user1","password":"pass1","applicationVersion":"appversion1"}'
     );
 
     expect(mock.history.post[1].data).toBe(
-      '{"applicationName":"applicationName2","version":"appversion2","username":"user2","password":"pass2"}'
+      '{"repository":"repository","username":"user2","password":"pass2","branch":"branch"}'
     );
 
     expect(mock.history.post[2].data).toBe(JSON.stringify(mockLinkMetaBlock()));
@@ -324,5 +364,4 @@ const updateField = (wrapper: ReactWrapper<any>, name: string, value: any) => {
       value
     }
   });
-  wrapper.simulate("blur");
 };

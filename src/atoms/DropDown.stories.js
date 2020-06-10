@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import React from "react";
+import { Select } from "./DropDown";
 
-export interface IXLDeployExecutionContext {
-  applicationName: string;
-  version: string;
-  username: string;
-  password: string;
-}
+export default {
+  title: "DropDown"
+};
 
-export interface IGitExecutionContext {
-  repository: string;
-  username?: string;
-  password?: string;
-  branch?: string;
-  tag?: string;
-  commitHash?: string;
-}
+export const defaultDropdown = () => (
+  <Select>
+    <option value="select">select...</option>
+    <option value="BRANCH">branch</option>
+    <option value="TAG">tag</option>
+    <option value="COMMIT_HASH">commit hash</option>
+  </Select>
+);
