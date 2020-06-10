@@ -49,7 +49,7 @@ import {
   HierarchyEditorActionTypes,
   HierarchyEditorPanelTypes
 } from "../../../stores/hierarchyEditorStore";
-import { addObjectToTree, updateTreeObject } from "../utils";
+import {addObjectToTree, removeObjectFromTree, updateTreeObject} from "../utils";
 import ITreeNode from "../../../interfaces/ITreeNode";
 import { LoaderIcon } from "../../../atoms/Icons";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
@@ -108,7 +108,7 @@ const clipboardWrapperCss = css`
 
 const ManageServiceAccount = () => {
   const { token } = useUserProfileContext();
-  const [serviceAccountPostState, setServiceAccountPostRequest] = useDataApi(
+  const [serviceAccountDataRequestState, setServiceAccountDataRequest] = useDataApi(
     genericDataFetchReducer
   );
   const [_serviceAccountGetRequestState, setServiceAccountGetRequest] = useDataApi(
@@ -178,7 +178,7 @@ const ManageServiceAccount = () => {
               setWizardState(WizardStates.DEFAULT);
               hierarchyEditorDispatch.editor(
               {
-                type: HierarchyEditorActionTypes.SET_PANEL,
+                  type: HierarchyEditorActionTypes.SET_PANEL,
                   node: node,
                   breadcrumb: "",
                   permission: FormPermissions.EDIT,
@@ -193,18 +193,17 @@ const ManageServiceAccount = () => {
             }
           };
 
-          setServiceAccountPostRequest(keyDataRequest);
+          setServiceAccountDataRequest(keyDataRequest);
         } catch (e) {
           setCryptoException(true);
           throw e;
         }
       }
     };
-
-    setServiceAccountPostRequest(dataRequest);
+    setServiceAccountDataRequest(dataRequest);
   };
 
-  const updateNpa = (values: IServiceAccountFormValues) => {
+  const updateServiceAccount = (values: IServiceAccountFormValues) => {
     const data: any = {};
 
     data.name = values.serviceaccountname;
@@ -228,7 +227,7 @@ const ManageServiceAccount = () => {
       }
     };
 
-    setServiceAccountPostRequest(dataRequest);
+    setServiceAccountDataRequest(dataRequest);
   };
 
   const getKeyId = (id: string) => {
@@ -275,11 +274,27 @@ const ManageServiceAccount = () => {
     hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
   const getDeleteWarningContent = ()=>{
+
     const cancelHandler = () => {
       hierarchyEditorDispatch.editor({
         type: HierarchyEditorActionTypes.RESET
       });
     };
+    const continueHandler = () => {
+        const dataRequest: DataRequest = {
+          method: "delete",
+          token,
+          url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
+          cbSuccess: () => {
+            removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch );
+            hierarchyEditorDispatch.editor({
+              type: HierarchyEditorActionTypes.RESET
+            });
+          }
+        };
+        setServiceAccountGetRequest(dataRequest);
+    };
+
     return (
         <>
           <ModalBody>
@@ -291,7 +306,7 @@ const ManageServiceAccount = () => {
           </ModalBody>
           <ModalFooter>
             <ModalButton onClick={cancelHandler}>No</ModalButton>
-            <ModalButton>Continue</ModalButton>
+            <ModalButton onClick={continueHandler}>Continue</ModalButton>
           </ModalFooter>
         </>
     );
@@ -309,7 +324,6 @@ const ManageServiceAccount = () => {
 
     const continueHandler = async () => {
       setWizardState(WizardStates.LOADING);
-
       try {
         const generatedKeys = await generateKey(true);
         const dataRequest: DataRequest = {
@@ -319,22 +333,22 @@ const ManageServiceAccount = () => {
           url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}/key`,
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
-
             setServiceAccountKey({
               publicKey: generatedKeys.keys.publicKey,
               keyId: generatedKeys.keys.keyId
             });
-
             setDisplayModal(false);
+            setWizardState(WizardStates.DEFAULT);
           }
         };
 
-        setServiceAccountPostRequest(dataRequest);
+        setServiceAccountDataRequest(dataRequest);
       } catch (e) {
         setWizardState(WizardStates.CRYPTO_EXCEPTION);
         throw e;
       }
     };
+
     if(wizardState==WizardStates.DEFAULT){
       continueHandler();
     }
@@ -398,6 +412,7 @@ const ManageServiceAccount = () => {
       </Modal>
     );
   }
+
 if(deletewarningModal){
   return (
       <Modal>
@@ -494,7 +509,7 @@ if(deletewarningModal){
               ? hierarchyEditorState.editor.permission
               : FormPermissions.READ
           }
-          isLoading={serviceAccountPostState.isLoading}
+          isLoading={serviceAccountDataRequestState.isLoading}
           validate={validate}
           onCancel={() => {
             hierarchyEditorDispatch.editor({
@@ -507,7 +522,7 @@ if(deletewarningModal){
             }
 
             if (updateMode) {
-              updateNpa(values);
+              updateServiceAccount(values);
             }
           }}
           confirmationLabel={
