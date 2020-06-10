@@ -45,6 +45,18 @@ import {
   LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
+import { Select } from "../../../../atoms/DropDown";
+
+const SelectionContainer = styled.section`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+
+  ${Select} {
+    margin: 0 0 0 1rem;
+  }
+`;
 
 const CustomFlexRow = styled(FlexRow)`
   align-items: center;
@@ -313,16 +325,18 @@ const ApprovalConfigEditor: React.FC = () => {
   const editorForm = (collector: IArtifactCollector) => {
     return (
       <FormContainer>
-        <label htmlFor="collectorType">Collector type:</label>
-        <select
-          onChange={selectCollectorType}
-          value={selectedCollectorType}
-          name="collectorType"
-          id="collectorType">
-          <option value={"select"}>select...</option>
-          <option value={ArtifactCollectorType.XLDEPLOY}>XL deploy</option>
-          <option value={ArtifactCollectorType.GIT}>git</option>
-        </select>
+        <SelectionContainer>
+          <label htmlFor="collectorType">Collector type:</label>
+          <Select
+            onChange={selectCollectorType}
+            value={selectedCollectorType}
+            name="collectorType"
+            id="collectorType">
+            <option value={"select"}>select...</option>
+            <option value={ArtifactCollectorType.XLDEPLOY}>XL deploy</option>
+            <option value={ArtifactCollectorType.GIT}>git</option>
+          </Select>
+        </SelectionContainer>
         {selectedCollectorType !== "select" ? (
           <GenericForm
             dataTesthookId={"collector-edit-form"}

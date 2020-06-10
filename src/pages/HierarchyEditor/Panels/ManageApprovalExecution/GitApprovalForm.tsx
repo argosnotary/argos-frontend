@@ -14,10 +14,25 @@
  * limitations under the License.
  */
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+
 import GenericForm, {
   IGenericFormSchema
 } from "../../../../organisms/GenericForm";
 import { FormPermissions } from "../../../../types/FormPermission";
+import { Select } from "../../../../atoms/DropDown";
+
+const SelectionContainer = styled.section`
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 1rem;
+  align-items: center;
+
+  ${Select} {
+    display: inline-flex;
+    margin: 0 0 0 1rem;
+  }
+`;
 
 export interface IGitFormValues {
   username?: string;
@@ -154,21 +169,23 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
 
   return (
     <>
-      <label htmlFor={"git-collector-execution-form-select-" + index}>
-        Collect based on:
-      </label>
-      <select
-        id={"git-collector-execution-form-select-" + index}
-        onChange={selectSearchOptionType}
-        value={selectedSearchOption}
-        name="selectSearchOptionType">
-        {selectedSearchOption === "select" ? (
-          <option value={"select"}>select...</option>
-        ) : null}
-        <option value={SearchOptionType.BRANCH}>branch</option>
-        <option value={SearchOptionType.TAG}>tag</option>
-        <option value={SearchOptionType.COMMIT_HASH}>commit hash</option>
-      </select>
+      <SelectionContainer>
+        <label htmlFor={"git-collector-execution-form-select-" + index}>
+          Collect based on:
+        </label>
+        <Select
+          id={"git-collector-execution-form-select-" + index}
+          onChange={selectSearchOptionType}
+          value={selectedSearchOption}
+          name="selectSearchOptionType">
+          {selectedSearchOption === "select" ? (
+            <option value={"select"}>select...</option>
+          ) : null}
+          <option value={SearchOptionType.BRANCH}>branch</option>
+          <option value={SearchOptionType.TAG}>tag</option>
+          <option value={SearchOptionType.COMMIT_HASH}>commit hash</option>
+        </Select>
+      </SelectionContainer>
       <GenericForm
         dataTesthookId={"git-collector-execution-form-" + index}
         schema={getApprovalExecutionFormSchema()}
