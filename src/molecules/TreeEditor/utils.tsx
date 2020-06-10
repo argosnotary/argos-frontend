@@ -79,7 +79,9 @@ const removeNode = (node: ITreeNode, parentLabelId?: string) => {
           parentNode.hasChildren = false;
         }
       } else {
-        draftState.data.filter(n => n.referenceId !== node.referenceId);
+        draftState.data = draftState.data.filter(
+          n => n.referenceId !== node.referenceId
+        );
       }
     }
   });
