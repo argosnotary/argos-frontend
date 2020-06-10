@@ -20,16 +20,21 @@ export interface IApprovalConfig {
 }
 
 export enum ArtifactCollectorType {
-  XLDEPLOY = "XLDEPLOY"
+  XLDEPLOY = "XLDEPLOY",
+  GIT = "GIT"
 }
 
 export interface IArtifactCollector {
   name: string;
   type: ArtifactCollectorType;
   uri: string;
-  context: IXLDeployContext;
+  context: IXLDeployContext | IGitContext;
 }
 
 export interface IXLDeployContext {
   applicationName: string;
+}
+
+export interface IGitContext {
+  repository: string;
 }
