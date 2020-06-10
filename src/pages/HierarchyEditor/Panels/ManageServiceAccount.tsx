@@ -62,7 +62,8 @@ enum WizardStates {
   KEY_OVERRIDE_WARNING,
   LOADING,
   NO_CRYPTO_SUPPORT,
-  CRYPTO_EXCEPTION
+  CRYPTO_EXCEPTION,
+  DEFAULT
 }
 
 const CloseButton = styled(CancelButton)`
@@ -174,6 +175,7 @@ const ManageServiceAccount = () => {
                 keyId: generatedKeys.keys.keyId
               });
               const node = generateNode(serviceaccount);
+              setWizardState(WizardStates.DEFAULT);
               hierarchyEditorDispatch.editor(
               {
                 type: HierarchyEditorActionTypes.SET_PANEL,
@@ -333,6 +335,9 @@ const ManageServiceAccount = () => {
         throw e;
       }
     };
+    if(wizardState==WizardStates.DEFAULT){
+      continueHandler();
+    }
 
     switch (currentWizardState) {
       case WizardStates.LOADING:
