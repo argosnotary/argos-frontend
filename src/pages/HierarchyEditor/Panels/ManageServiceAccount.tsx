@@ -25,13 +25,12 @@ import IServiceAccountApiResponse from "../../../interfaces/INpaApiResponse";
 import PasswordView from "../../../atoms/PasswordView";
 import FlexRow from "../../../atoms/FlexRow";
 import { cryptoAvailable, generateKey } from "../../../security";
-import { Warning } from "../../../atoms/Alerts";
 import {
+  Modal,
   ModalBody,
-  ModalFlexColumWrapper,
-  ModalFooter,
   ModalButton,
-  Modal
+  ModalFlexColumWrapper,
+  ModalFooter
 } from "../../../atoms/Modal";
 import GenericForm, {
   IGenericFormSchema
@@ -44,10 +43,10 @@ import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarnin
 import { Panel } from "../../../molecules/Panel";
 import { useUserProfileContext } from "../../../stores/UserProfile";
 import {
-  HierarchyEditorPanelModes,
-  HierarchyEditorStateContext,
   HierarchyEditorActionTypes,
-  HierarchyEditorPanelTypes
+  HierarchyEditorPanelModes,
+  HierarchyEditorPanelTypes,
+  HierarchyEditorStateContext
 } from "../../../stores/hierarchyEditorStore";
 import {
   addObjectToTree,
@@ -57,6 +56,7 @@ import {
 import ITreeNode from "../../../interfaces/ITreeNode";
 import { LoaderIcon } from "../../../atoms/Icons";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
+import WarningModal from "../../../molecules/WarningModal";
 
 interface IServiceAccountFormValues {
   serviceaccountname: string;
@@ -138,7 +138,7 @@ const ManageServiceAccount = () => {
   );
 
   const [displayModal, setDisplayModal] = useState(false);
-  const [deletewarningModal, setDeletewarningModal] = useState(false);
+  const [deleteWarningModal, setDeletewarningModal] = useState(false);
   const [cryptoException, setCryptoException] = useState(false);
 
   const generateNode = (serviceaccount: IServiceAccountApiResponse) => {
@@ -299,17 +299,11 @@ const ManageServiceAccount = () => {
     };
 
     return (
-      <>
-        <ModalBody>
-          <Warning
-            message={"This service account will be deleted are you sure?"}
-          />
-        </ModalBody>
-        <ModalFooter>
-          <ModalButton onClick={cancelHandler}>No</ModalButton>
-          <ModalButton onClick={continueHandler}>Continue</ModalButton>
-        </ModalFooter>
-      </>
+      <WarningModal
+        message="This service account will be deleted are you sure ?"
+        continueHandler={continueHandler}
+        cancelHandler={cancelHandler}
+      />
     );
   };
   const getModalContent = (currentWizardState: number) => {
@@ -364,19 +358,11 @@ const ManageServiceAccount = () => {
         );
       case WizardStates.KEY_OVERRIDE_WARNING:
         return (
-          <>
-            <ModalBody>
-              <Warning
-                message={
-                  "Existing key will be deactivated. Are you sure you want to continue?"
-                }
-              />
-            </ModalBody>
-            <ModalFooter>
-              <ModalButton onClick={cancelHandler}>No</ModalButton>
-              <ModalButton onClick={continueHandler}>Continue</ModalButton>
-            </ModalFooter>
-          </>
+          <WarningModal
+            message="Existing key will be deactivated. Are you sure you want to continue ?"
+            continueHandler={continueHandler}
+            cancelHandler={cancelHandler}
+          />
         );
       case WizardStates.NO_CRYPTO_SUPPORT:
         return (
@@ -413,7 +399,7 @@ const ManageServiceAccount = () => {
     );
   }
 
-  if (deletewarningModal) {
+  if (deleteWarningModal) {
     return (
       <Modal>
         <ModalFlexColumWrapper>
