@@ -140,7 +140,9 @@ const ManageServiceAccount = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [deleteWarningModal, setDeletewarningModal] = useState(false);
   const [cryptoException, setCryptoException] = useState(false);
-
+  const [_treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
+      genericDataFetchReducer
+  );
   const generateNode = (serviceaccount: IServiceAccountApiResponse) => {
     const node = {} as ITreeNode;
     node.referenceId = serviceaccount.id;
@@ -150,7 +152,6 @@ const ManageServiceAccount = () => {
 
     return node;
   };
-
   const postNewServiceAccount = (values: IServiceAccountFormValues) => {
     const data: any = {};
 
@@ -179,24 +180,33 @@ const ManageServiceAccount = () => {
                 publicKey: generatedKeys.keys.publicKey,
                 keyId: generatedKeys.keys.keyId
               });
-              const node = generateNode(serviceaccount);
+              const hierarchyDataRequest: DataRequest = {
+                params: {
+                  HierarchyMode: "NONE"
+                },
+                method: "get",
+                token,
+                url: `/api/hierarchy/${serviceaccount.id}`,
+                cbSuccess: (node: ITreeNode) => {
+                  hierarchyEditorDispatch.editor({
+                    type: HierarchyEditorActionTypes.SET_PANEL,
+                    node: node,
+                    breadcrumb: "",
+                    permission: FormPermissions.EDIT,
+                    panel: HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
+                    mode: HierarchyEditorPanelModes.UPDATE
+                  });
+                  addObjectToTree(
+                      hierarchyEditorState,
+                      hierarchyEditorDispatch,
+                      node
+                  );
+                }
+              };
+              setTreeChildrenApiRequest(hierarchyDataRequest);
               setWizardState(WizardStates.DEFAULT);
-              hierarchyEditorDispatch.editor({
-                type: HierarchyEditorActionTypes.SET_PANEL,
-                node: node,
-                breadcrumb: "",
-                permission: FormPermissions.EDIT,
-                panel: HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
-                mode: HierarchyEditorPanelModes.UPDATE
-              });
-              addObjectToTree(
-                hierarchyEditorState,
-                hierarchyEditorDispatch,
-                node
-              );
             }
           };
-
           setServiceAccountDataRequest(keyDataRequest);
         } catch (e) {
           setCryptoException(true);
