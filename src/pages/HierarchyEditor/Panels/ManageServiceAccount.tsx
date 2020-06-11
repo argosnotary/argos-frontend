@@ -141,7 +141,7 @@ const ManageServiceAccount = () => {
   const [deleteWarningModal, setDeletewarningModal] = useState(false);
   const [cryptoException, setCryptoException] = useState(false);
   const [_treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
-      genericDataFetchReducer
+    genericDataFetchReducer
   );
   const generateNode = (serviceaccount: IServiceAccountApiResponse) => {
     const node = {} as ITreeNode;
@@ -193,13 +193,14 @@ const ManageServiceAccount = () => {
                     node: node,
                     breadcrumb: "",
                     permission: FormPermissions.EDIT,
-                    panel: HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
+                    panel:
+                      HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
                     mode: HierarchyEditorPanelModes.UPDATE
                   });
                   addObjectToTree(
-                      hierarchyEditorState,
-                      hierarchyEditorDispatch,
-                      node
+                    hierarchyEditorState,
+                    hierarchyEditorDispatch,
+                    node
                   );
                 }
               };
