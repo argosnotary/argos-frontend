@@ -14,187 +14,245 @@
  * limitations under the License.
  */
 import {
-  findNode,
-  getNearestParent,
-  buildNodeTrail,
-  updateSingleNode,
-  appendSingleNode,
-  appendNodeChildrenToParent
+    appendNodeChildrenToParent,
+    appendSingleNode,
+    buildNodeTrail,
+    findNode,
+    getNearestParent,
+    removeNode,
+    updateSingleNode
 } from "./utils";
 
 import json from "./sampleData.json";
 
 describe("TreeEditor utils", () => {
-  describe("findNode", () => {
-    it("returns nested node from data tree based on reference id", () => {
-      const res = findNode(
-        json.sampleData,
-        "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
-      );
+    describe("findNode", () => {
+        it("returns nested node from data tree based on reference id", () => {
+            const res = findNode(
+                json.sampleData,
+                "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
+            );
 
-      const expectedNode = {
-        name: "label_e",
-        type: "LABEL",
-        referenceId: "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
-        hasChildren: false,
-        children: [],
-        permissions: [
-          "ASSIGN_ROLE",
-          "LOCAL_PERMISSION_EDIT",
-          "READ",
-          "TREE_EDIT",
-          "VERIFY"
-        ]
-      };
+            const expectedNode = {
+                name: "label_e",
+                type: "LABEL",
+                referenceId: "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                hasChildren: false,
+                children: [],
+                permissions: [
+                    "ASSIGN_ROLE",
+                    "LOCAL_PERMISSION_EDIT",
+                    "READ",
+                    "TREE_EDIT",
+                    "VERIFY"
+                ]
+            };
 
-      expect(res).toEqual(expectedNode);
+            expect(res).toEqual(expectedNode);
+        });
     });
-  });
-  describe("appendSingleNode", () => {
-    it("append a single node in provided tree state at root level, and returns immutable copy of tree state", () => {
-      const newNodeData = {
-        name: "neo",
-        type: "LABEL",
-        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
-        hasChildren: false,
-        children: []
-      };
+    describe("appendSingleNode", () => {
+        it("append a single node in provided tree state at root level, and returns immutable copy of tree state", () => {
+            const newNodeData = {
+                name: "neo",
+                type: "LABEL",
+                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+                hasChildren: false,
+                children: []
+            };
 
-      const newStateProducer = appendSingleNode(newNodeData);
-      const treeState = {
-        data: []
-      };
+            const newStateProducer = appendSingleNode(newNodeData);
+            const treeState = {
+                data: []
+            };
 
-      expect(newStateProducer(treeState).data).toContain(newNodeData);
-    });
+            expect(newStateProducer(treeState).data).toContain(newNodeData);
+        });
 
-    it("append a single node in provided tree state to parent, and returns immutable copy of tree state", () => {
-      const existingData = {
-        name: "neo",
-        type: "LABEL",
-        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
-        hasChildren: false,
-        children: []
-      };
+        it("append a single node in provided tree state to parent, and returns immutable copy of tree state", () => {
+            const existingData = {
+                name: "neo",
+                type: "LABEL",
+                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+                hasChildren: false,
+                children: []
+            };
 
-      const newNodeData = {
-        name: "trinity",
-        type: "LABEL",
-        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a22222",
-        hasChildren: false,
-        children: []
-      };
+            const newNodeData = {
+                name: "trinity",
+                type: "LABEL",
+                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a22222",
+                hasChildren: false,
+                children: []
+            };
 
-      const newStateProducer = appendSingleNode(
-        newNodeData,
-        existingData.referenceId
-      );
+            const newStateProducer = appendSingleNode(
+                newNodeData,
+                existingData.referenceId
+            );
 
-      const treeState = {
-        data: [existingData]
-      };
+            const treeState = {
+                data: [existingData]
+            };
 
-      expect(newStateProducer(treeState).data[0].children).toContain(
-        newNodeData
-      );
-    });
-  });
-  describe("updateSingleNode", () => {
-    it("finds, updates a node in provided tree state, and returns immutable copy of tree state", () => {
-      const newNodeData = {
-        name: "label_eee",
-        type: "LABEL",
-        referenceId: "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
-        hasChildren: false,
-        children: [],
-        permissions: [
-          "ASSIGN_ROLE",
-          "LOCAL_PERMISSION_EDIT",
-          "READ",
-          "TREE_EDIT",
-          "VERIFY"
-        ]
-      };
-
-      const newStateProducer = updateSingleNode(newNodeData);
-      const treeState = {
-        data: json.sampleData
-      };
-
-      const res = findNode(
-        newStateProducer(treeState).data,
-        "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
-      );
-
-      expect(res.name).toBe("label_eee");
-    });
-  });
-  describe("appendNodeChildrenToParent", () => {
-    it("appends child nodes in the parent node of the provided tree state, and returns immutable copy of tree state", () => {
-      const existingData = {
-        name: "neo",
-        type: "LABEL",
-        referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
-        hasChildren: false,
-        children: []
-      };
-
-      const newNodeData = [
-        {
-          name: "trinity",
-          type: "LABEL",
-          referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a22222",
-          hasChildren: false,
-          children: []
-        }
-      ];
-
-      const newStateProducer = appendNodeChildrenToParent(
-        existingData,
-        newNodeData
-      );
-
-      const treeState = {
-        data: [existingData]
-      };
-
-      expect(newStateProducer(treeState).data[0].children).toEqual(newNodeData);
-    });
-  });
-  describe("getNearestParent", () => {
-    it("returns parent node from tree as first entry in results array", () => {
-      const parent = getNearestParent(
-        [],
-        json.sampleData,
-        "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
-      )[0];
-
-      expect(parent).toEqual(json.sampleData[1]);
+            expect(newStateProducer(treeState).data[0].children).toContain(
+                newNodeData
+            );
+        });
     });
 
-    it("returns empty node when there is no parent to be found (i.e. in case of a root node)", () => {
-      const parent = getNearestParent(
-        [],
-        json.sampleData,
-        "c1e7e2ad-6754-40c1-9c83-8e43c3772f18"
-      )[0];
 
-      expect(parent.length).toBe(0);
+    describe("removeNode", () => {
+        it("delete child should return copy of state with child removed", () => {
+            const existingDataChild = {
+                name: "neochild",
+                type: "LABEL",
+                parentLabelId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff2",
+                hasChildren: false,
+                children: []
+            }
+
+            const existingData = {
+                name: "neo",
+                type: "LABEL",
+                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+                hasChildren: true,
+                children: [existingDataChild]
+            };
+
+            const newStateProducer = removeNode(
+                existingDataChild,
+                existingData.referenceId
+            );
+
+            const treeState = {
+                data: [existingData]
+            };
+            expect(newStateProducer(treeState).data[0].children.length).toBe(0);
+            expect(newStateProducer(treeState).data[0].hasChildren).toBe(false);
+        });
+
+        it("delete root node should return copy of state with root node removed", () => {
+            const existingData = {
+                name: "neo",
+                type: "LABEL",
+                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+                hasChildren: false,
+                children: []
+            };
+
+            const newStateProducer = removeNode(
+                existingData
+            );
+
+            const treeState = {
+                data: [existingData]
+            };
+
+            expect(newStateProducer(treeState).data.length).toBe(0);
+
+        });
+
+
     });
-  });
 
-  describe("buildNodeTrail", () => {
-    it("returns a breadcrumb trail of nodes based on selected node", () => {
-      const trail = Array.from(
-        buildNodeTrail(
-          [],
-          json.sampleData,
-          "d3cca05f-3b17-4c7e-8a80-ea2382c55f11"
-        ),
-        t => t.name
-      ).join(" / ");
+    describe("updateSingleNode", () => {
+        it("finds, updates a node in provided tree state, and returns immutable copy of tree state", () => {
+            const newNodeData = {
+                name: "label_eee",
+                type: "LABEL",
+                referenceId: "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
+                hasChildren: false,
+                children: [],
+                permissions: [
+                    "ASSIGN_ROLE",
+                    "LOCAL_PERMISSION_EDIT",
+                    "READ",
+                    "TREE_EDIT",
+                    "VERIFY"
+                ]
+            };
 
-      expect(trail).toEqual("label_a / label_c / label_d");
+            const newStateProducer = updateSingleNode(newNodeData);
+            const treeState = {
+                data: json.sampleData
+            };
+
+            const res = findNode(
+                newStateProducer(treeState).data,
+                "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
+            );
+
+            expect(res.name).toBe("label_eee");
+        });
     });
-  });
+    describe("appendNodeChildrenToParent", () => {
+        it("appends child nodes in the parent node of the provided tree state, and returns immutable copy of tree state", () => {
+            const existingData = {
+                name: "neo",
+                type: "LABEL",
+                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+                hasChildren: false,
+                children: []
+            };
+
+            const newNodeData = [
+                {
+                    name: "trinity",
+                    type: "LABEL",
+                    referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a22222",
+                    hasChildren: false,
+                    children: []
+                }
+            ];
+
+            const newStateProducer = appendNodeChildrenToParent(
+                existingData,
+                newNodeData
+            );
+
+            const treeState = {
+                data: [existingData]
+            };
+
+            expect(newStateProducer(treeState).data[0].children).toEqual(newNodeData);
+        });
+    });
+    describe("getNearestParent", () => {
+        it("returns parent node from tree as first entry in results array", () => {
+            const parent = getNearestParent(
+                [],
+                json.sampleData,
+                "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
+            )[0];
+
+            expect(parent).toEqual(json.sampleData[1]);
+        });
+
+        it("returns empty node when there is no parent to be found (i.e. in case of a root node)", () => {
+            const parent = getNearestParent(
+                [],
+                json.sampleData,
+                "c1e7e2ad-6754-40c1-9c83-8e43c3772f18"
+            )[0];
+
+            expect(parent.length).toBe(0);
+        });
+    });
+
+    describe("buildNodeTrail", () => {
+        it("returns a breadcrumb trail of nodes based on selected node", () => {
+            const trail = Array.from(
+                buildNodeTrail(
+                    [],
+                    json.sampleData,
+                    "d3cca05f-3b17-4c7e-8a80-ea2382c55f11"
+                ),
+                t => t.name
+            ).join(" / ");
+
+            expect(trail).toEqual("label_a / label_c / label_d");
+        });
+    });
 });
