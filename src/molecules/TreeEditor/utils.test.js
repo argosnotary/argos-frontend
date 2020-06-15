@@ -104,11 +104,21 @@ describe("TreeEditor utils", () => {
 
     describe("removeNode", () => {
         it("delete child should return copy of state with child removed", () => {
-            const existingDataChild = {
+            const ID = "1c41baf6-f9e4-4e06-8237-5c6a37a52ff2";
+            const existingDataChild1 = {
                 name: "neochild",
                 type: "LABEL",
                 parentLabelId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
-                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff2",
+                referenceId: ID,
+                hasChildren: false,
+                children: []
+            }
+
+            const existingDataChild2 = {
+                name: "neochild",
+                type: "LABEL",
+                parentLabelId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
+                referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff3",
                 hasChildren: false,
                 children: []
             }
@@ -118,23 +128,25 @@ describe("TreeEditor utils", () => {
                 type: "LABEL",
                 referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
                 hasChildren: true,
-                children: [existingDataChild]
+                children: [existingDataChild1,existingDataChild2]
             };
 
             const newStateProducer = removeNode(
-                existingDataChild,
+                existingDataChild2,
                 existingData.referenceId
             );
 
             const treeState = {
                 data: [existingData]
             };
-            expect(newStateProducer(treeState).data[0].children.length).toBe(0);
-            expect(newStateProducer(treeState).data[0].hasChildren).toBe(false);
+            expect(newStateProducer(treeState).data[0].children.length).toBe(1);
+            expect(newStateProducer(treeState).data[0].hasChildren).toBe(true);
+            expect(newStateProducer(treeState).data[0].children[0].referenceId).toBe(ID);
+
         });
 
         it("delete root node should return copy of state with root node removed", () => {
-            const existingData = {
+            const existingData1 = {
                 name: "neo",
                 type: "LABEL",
                 referenceId: "1c41baf6-f9e4-4e06-8237-5c6a37a52ff1",
@@ -142,15 +154,26 @@ describe("TreeEditor utils", () => {
                 children: []
             };
 
+
+            const ID = "1c41baf6-f9e4-4e06-8237-5c6a37a52ff2";
+            const existingData2 = {
+                name: "neo",
+                type: "LABEL",
+                referenceId: ID,
+                hasChildren: false,
+                children: []
+            };
+
             const newStateProducer = removeNode(
-                existingData
+                existingData1
             );
 
             const treeState = {
-                data: [existingData]
+                data: [existingData1,existingData2]
             };
 
-            expect(newStateProducer(treeState).data.length).toBe(0);
+            expect(newStateProducer(treeState).data.length).toBe(1);
+            expect(newStateProducer(treeState).data[0].referenceId).toBe(ID);
 
         });
 
