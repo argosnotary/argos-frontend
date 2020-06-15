@@ -21,17 +21,16 @@ import ContentSeparator from "../../../atoms/ContentSeparator";
 import DataRequest from "../../../types/DataRequest";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-import INpaApiResponse from "../../../interfaces/INpaApiResponse";
+import IServiceAccountApiResponse from "../../../interfaces/INpaApiResponse";
 import PasswordView from "../../../atoms/PasswordView";
 import FlexRow from "../../../atoms/FlexRow";
 import { cryptoAvailable, generateKey } from "../../../security";
-import { Warning } from "../../../atoms/Alerts";
 import {
+  Modal,
   ModalBody,
-  ModalFlexColumWrapper,
-  ModalFooter,
   ModalButton,
-  Modal
+  ModalFlexColumWrapper,
+  ModalFooter
 } from "../../../atoms/Modal";
 import GenericForm, {
   IGenericFormSchema
@@ -44,17 +43,22 @@ import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarnin
 import { Panel } from "../../../molecules/Panel";
 import { useUserProfileContext } from "../../../stores/UserProfile";
 import {
-  HierarchyEditorPanelModes,
-  HierarchyEditorStateContext,
   HierarchyEditorActionTypes,
-  HierarchyEditorPanelTypes
+  HierarchyEditorPanelModes,
+  HierarchyEditorPanelTypes,
+  HierarchyEditorStateContext
 } from "../../../stores/hierarchyEditorStore";
-import { addObjectToTree, updateTreeObject } from "../utils";
+import {
+  addObjectToTree,
+  removeObjectFromTree,
+  updateTreeObject
+} from "../utils";
 import ITreeNode from "../../../interfaces/ITreeNode";
 import { LoaderIcon } from "../../../atoms/Icons";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
+import WarningModal from "../../../molecules/WarningModal";
 
-interface INpaFormValues {
+interface IServiceAccountFormValues {
   serviceaccountname: string;
 }
 
@@ -62,7 +66,8 @@ enum WizardStates {
   KEY_OVERRIDE_WARNING,
   LOADING,
   NO_CRYPTO_SUPPORT,
-  CRYPTO_EXCEPTION
+  CRYPTO_EXCEPTION,
+  DEFAULT
 }
 
 const CloseButton = styled(CancelButton)`
@@ -77,7 +82,7 @@ const formSchema: IGenericFormSchema = [
   }
 ];
 
-const validate = (values: INpaFormValues) => {
+const validate = (values: IServiceAccountFormValues) => {
   const errors = {} as any;
 
   if (!values.serviceaccountname) {
@@ -105,24 +110,26 @@ const clipboardWrapperCss = css`
   height: 1.8rem;
 `;
 
-const ManageNpa = () => {
+const ManageServiceAccount = () => {
   const { token } = useUserProfileContext();
-  const [serviceAccountPostState, setNpaPostRequest] = useDataApi(
-    genericDataFetchReducer
-  );
-  const [_serviceAccountGetRequestState, setNpaGetRequest] = useDataApi(
-    genericDataFetchReducer
-  );
+  const [
+    serviceAccountDataRequestState,
+    setServiceAccountDataRequest
+  ] = useDataApi(genericDataFetchReducer);
+  const [
+    _serviceAccountGetRequestState,
+    setServiceAccountGetRequest
+  ] = useDataApi(genericDataFetchReducer);
 
   const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
     HierarchyEditorStateContext
   );
 
   const [initialFormValues, setInitialFormValues] = useState(
-    {} as INpaFormValues
+    {} as IServiceAccountFormValues
   );
 
-  const [serviceAccountKey, setNpaKey] = useState({} as IPublicKey);
+  const [serviceAccountKey, setServiceAccountKey] = useState({} as IPublicKey);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [wizardState, setWizardState] = useState(
     cryptoAvailable()
@@ -131,9 +138,12 @@ const ManageNpa = () => {
   );
 
   const [displayModal, setDisplayModal] = useState(false);
+  const [deleteWarningModal, setDeletewarningModal] = useState(false);
   const [cryptoException, setCryptoException] = useState(false);
-
-  const generateNode = (serviceaccount: INpaApiResponse) => {
+  const [_treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
+    genericDataFetchReducer
+  );
+  const generateNode = (serviceaccount: IServiceAccountApiResponse) => {
     const node = {} as ITreeNode;
     node.referenceId = serviceaccount.id;
     node.parentId = serviceaccount.parentLabelId;
@@ -142,8 +152,7 @@ const ManageNpa = () => {
 
     return node;
   };
-
-  const postNewNpa = (values: INpaFormValues) => {
+  const postNewServiceAccount = (values: IServiceAccountFormValues) => {
     const data: any = {};
 
     data.name = values.serviceaccountname;
@@ -157,10 +166,9 @@ const ManageNpa = () => {
       method: "post",
       token,
       url: "/api/serviceaccount",
-      cbSuccess: async (serviceaccount: INpaApiResponse) => {
+      cbSuccess: async (serviceaccount: IServiceAccountApiResponse) => {
         try {
           const generatedKeys = await generateKey(true);
-
           const keyDataRequest: DataRequest = {
             data: generatedKeys.keys,
             method: "post",
@@ -168,34 +176,49 @@ const ManageNpa = () => {
             url: `/api/serviceaccount/${serviceaccount.id}/key`,
             cbSuccess: () => {
               setGeneratedPassword(generatedKeys.password);
-
-              setNpaKey({
+              setServiceAccountKey({
                 publicKey: generatedKeys.keys.publicKey,
                 keyId: generatedKeys.keys.keyId
               });
-
-              const node = generateNode(serviceaccount);
-
-              addObjectToTree(
-                hierarchyEditorState,
-                hierarchyEditorDispatch,
-                node
-              );
+              const hierarchyDataRequest: DataRequest = {
+                params: {
+                  HierarchyMode: "NONE"
+                },
+                method: "get",
+                token,
+                url: `/api/hierarchy/${serviceaccount.id}`,
+                cbSuccess: (node: ITreeNode) => {
+                  hierarchyEditorDispatch.editor({
+                    type: HierarchyEditorActionTypes.SET_PANEL,
+                    node: node,
+                    breadcrumb: "",
+                    permission: FormPermissions.EDIT,
+                    panel:
+                      HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
+                    mode: HierarchyEditorPanelModes.UPDATE
+                  });
+                  addObjectToTree(
+                    hierarchyEditorState,
+                    hierarchyEditorDispatch,
+                    node
+                  );
+                }
+              };
+              setTreeChildrenApiRequest(hierarchyDataRequest);
+              setWizardState(WizardStates.DEFAULT);
             }
           };
-
-          setNpaPostRequest(keyDataRequest);
+          setServiceAccountDataRequest(keyDataRequest);
         } catch (e) {
           setCryptoException(true);
           throw e;
         }
       }
     };
-
-    setNpaPostRequest(dataRequest);
+    setServiceAccountDataRequest(dataRequest);
   };
 
-  const updateNpa = (values: INpaFormValues) => {
+  const updateServiceAccount = (values: IServiceAccountFormValues) => {
     const data: any = {};
 
     data.name = values.serviceaccountname;
@@ -213,14 +236,13 @@ const ManageNpa = () => {
       method: "put",
       token,
       url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
-      cbSuccess: (serviceaccount: INpaApiResponse) => {
+      cbSuccess: (serviceaccount: IServiceAccountApiResponse) => {
         const node = generateNode(serviceaccount);
-
         updateTreeObject(hierarchyEditorState, hierarchyEditorDispatch, node);
       }
     };
 
-    setNpaPostRequest(dataRequest);
+    setServiceAccountDataRequest(dataRequest);
   };
 
   const getKeyId = (id: string) => {
@@ -229,11 +251,11 @@ const ManageNpa = () => {
       token,
       url: `/api/serviceaccount/${id}/key`,
       cbSuccess: (n: IPublicKey) => {
-        setNpaKey(n);
+        setServiceAccountKey(n);
       }
     };
 
-    setNpaGetRequest(dataRequest);
+    setServiceAccountGetRequest(dataRequest);
   };
 
   useEffect(() => {
@@ -247,7 +269,9 @@ const ManageNpa = () => {
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       setInitialFormValues({ serviceaccountname: "" });
     }
-
+    if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.DELETE) {
+      setDeletewarningModal(true);
+    }
     if (
       hierarchyEditorState.editor.panel ===
         HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR &&
@@ -264,10 +288,40 @@ const ManageNpa = () => {
   const updateMode =
     hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
+  const getDeleteWarningContent = () => {
+    const cancelHandler = () => {
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
+    };
+    const continueHandler = () => {
+      const dataRequest: DataRequest = {
+        method: "delete",
+        token,
+        url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
+        cbSuccess: () => {
+          removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);
+          hierarchyEditorDispatch.editor({
+            type: HierarchyEditorActionTypes.RESET
+          });
+        }
+      };
+      setServiceAccountGetRequest(dataRequest);
+    };
+
+    return (
+      <WarningModal
+        message="This service account will be deleted are you sure ?"
+        continueHandler={continueHandler}
+        cancelHandler={cancelHandler}
+      />
+    );
+  };
   const getModalContent = (currentWizardState: number) => {
     const theme = useContext(ThemeContext);
 
     const cancelHandler = () => {
+      setDeletewarningModal(false);
       hierarchyEditorDispatch.editor({
         type: HierarchyEditorActionTypes.RESET
       });
@@ -275,7 +329,6 @@ const ManageNpa = () => {
 
     const continueHandler = async () => {
       setWizardState(WizardStates.LOADING);
-
       try {
         const generatedKeys = await generateKey(true);
         const dataRequest: DataRequest = {
@@ -285,22 +338,25 @@ const ManageNpa = () => {
           url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}/key`,
           cbSuccess: () => {
             setGeneratedPassword(generatedKeys.password);
-
-            setNpaKey({
+            setServiceAccountKey({
               publicKey: generatedKeys.keys.publicKey,
               keyId: generatedKeys.keys.keyId
             });
-
             setDisplayModal(false);
+            setWizardState(WizardStates.DEFAULT);
           }
         };
 
-        setNpaPostRequest(dataRequest);
+        setServiceAccountDataRequest(dataRequest);
       } catch (e) {
         setWizardState(WizardStates.CRYPTO_EXCEPTION);
         throw e;
       }
     };
+
+    if (wizardState == WizardStates.DEFAULT) {
+      continueHandler();
+    }
 
     switch (currentWizardState) {
       case WizardStates.LOADING:
@@ -313,19 +369,11 @@ const ManageNpa = () => {
         );
       case WizardStates.KEY_OVERRIDE_WARNING:
         return (
-          <>
-            <ModalBody>
-              <Warning
-                message={
-                  "Existing key will be deactivated. Are you sure you want to continue?"
-                }
-              />
-            </ModalBody>
-            <ModalFooter>
-              <ModalButton onClick={cancelHandler}>No</ModalButton>
-              <ModalButton onClick={continueHandler}>Continue</ModalButton>
-            </ModalFooter>
-          </>
+          <WarningModal
+            message="Existing key will be deactivated. Are you sure you want to continue ?"
+            continueHandler={continueHandler}
+            cancelHandler={cancelHandler}
+          />
         );
       case WizardStates.NO_CRYPTO_SUPPORT:
         return (
@@ -362,6 +410,15 @@ const ManageNpa = () => {
     );
   }
 
+  if (deleteWarningModal) {
+    return (
+      <Modal>
+        <ModalFlexColumWrapper>
+          {getDeleteWarningContent()}
+        </ModalFlexColumWrapper>
+      </Modal>
+    );
+  }
   if (
     generatedPassword.length > 0 &&
     hierarchyEditorState.editor.panel ===
@@ -448,7 +505,7 @@ const ManageNpa = () => {
               ? hierarchyEditorState.editor.permission
               : FormPermissions.READ
           }
-          isLoading={serviceAccountPostState.isLoading}
+          isLoading={serviceAccountDataRequestState.isLoading}
           validate={validate}
           onCancel={() => {
             hierarchyEditorDispatch.editor({
@@ -457,11 +514,11 @@ const ManageNpa = () => {
           }}
           onSubmit={values => {
             if (!updateMode) {
-              postNewNpa(values);
+              postNewServiceAccount(values);
             }
 
             if (updateMode) {
-              updateNpa(values);
+              updateServiceAccount(values);
             }
           }}
           confirmationLabel={
@@ -479,4 +536,4 @@ const ManageNpa = () => {
   return null;
 };
 
-export default ManageNpa;
+export default ManageServiceAccount;

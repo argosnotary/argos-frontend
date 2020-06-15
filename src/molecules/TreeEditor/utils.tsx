@@ -67,6 +67,26 @@ const buildNodeTrail = (
   return trail.reverse();
 };
 
+const removeNode = (node: ITreeNode, parentLabelId?: string) => {
+  return produce((draftState: ITreeReducerState) => {
+    if (parentLabelId) {
+      const parentNode = findNode(draftState.data, parentLabelId);
+      if (parentNode && parentNode.children) {
+        parentNode.children = parentNode.children.filter(
+          n => n.referenceId !== node.referenceId
+        );
+        if (parentNode.children.length == 0) {
+          parentNode.hasChildren = false;
+        }
+      }
+    } else {
+      draftState.data = draftState.data.filter(
+        n => n.referenceId !== node.referenceId
+      );
+    }
+  });
+};
+
 const appendSingleNode = (node: ITreeNode, parentLabelId?: string) => {
   return produce((draftState: ITreeReducerState) => {
     if (parentLabelId) {
@@ -109,5 +129,6 @@ export {
   findNode,
   getNearestParent,
   buildNodeTrail,
-  updateSingleNode
+  updateSingleNode,
+  removeNode
 };

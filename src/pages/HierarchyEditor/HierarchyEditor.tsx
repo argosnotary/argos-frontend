@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useReducer, useContext } from "react";
+import React, { useContext, useReducer } from "react";
 
 import DataRequest from "../../types/DataRequest";
 import FlexColumn from "../../atoms/FlexColumn";
@@ -36,8 +36,8 @@ import genericDataFetchReducer, {
   customGenericDataFetchReducer
 } from "../../stores/genericDataFetchReducer";
 import ManageSupplyChain from "./Panels/ManageSupplyChain";
-import ManageNpa from "./Panels/ManageNpa";
-import { PanelsContainer, Panel } from "../../molecules/Panel";
+import ManageServiceAccount from "./Panels/ManageServiceAccount";
+import { Panel, PanelsContainer } from "../../molecules/Panel";
 import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
 import { PermissionTypes } from "../../types/PermissionType";
@@ -48,12 +48,12 @@ import ManageApprovalExecutionPanel from "./Panels/ManageApprovalExecution/Manag
 import ApproveIcon from "../../atoms/Icons/ApproveIcon";
 import { ThemeContext } from "styled-components";
 import {
-  hierarchyEditorReducer,
-  IHierarchyEditorState,
-  HierarchyEditorPanelTypes,
   HierarchyEditorActionTypes,
+  HierarchyEditorPanelModes,
+  HierarchyEditorPanelTypes,
+  hierarchyEditorReducer,
   HierarchyEditorStateContext,
-  HierarchyEditorPanelModes
+  IHierarchyEditorState
 } from "../../stores/hierarchyEditorStore";
 
 const HierarchyEditor = () => {
@@ -226,6 +226,7 @@ const HierarchyEditor = () => {
             );
           }
         },
+
         {
           label: "Manage permissions",
           callback: (node: ITreeNode) => {
@@ -307,6 +308,23 @@ const HierarchyEditor = () => {
                 0
             );
           }
+        },
+        {
+          label: "Remove service account",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.SERVICE_ACCOUNT,
+              HierarchyEditorPanelModes.DELETE,
+              node
+            );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.SERVICE_ACCOUNT_EDIT) >=
+                0
+            );
+          }
         }
       ]
     }
@@ -347,7 +365,7 @@ const HierarchyEditor = () => {
         return <ManageSupplyChain />;
       case HierarchyEditorPanelTypes.SERVICE_ACCOUNT:
       case HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR:
-        return <ManageNpa />;
+        return <ManageServiceAccount />;
       case HierarchyEditorPanelTypes.MANAGE_LABEL_PERMISSIONS:
         return <ManageLabelPermissions />;
       case HierarchyEditorPanelTypes.MANAGE_LAYOUT:

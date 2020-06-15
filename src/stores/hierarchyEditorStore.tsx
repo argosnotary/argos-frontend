@@ -33,7 +33,8 @@ export enum HierarchyEditorPanelTypes {
 export enum HierarchyEditorPanelModes {
   DEFAULT = "DEFAULT",
   CREATE = "CREATE",
-  UPDATE = "UPDATE"
+  UPDATE = "UPDATE",
+  DELETE=  "DELETE",
 }
 
 export interface IHierarchyEditorState {

@@ -54,11 +54,18 @@ function useDataApi<S, T>(
         }
 
         switch (dataRequest.method) {
+          case "delete": {
+            const methodKey = "method";
+            requestConfig[methodKey] = "delete";
+            break;
+          }
+
           case "get": {
             const methodKey = "method";
             requestConfig[methodKey] = "get";
             break;
           }
+
           case "post": {
             const methodKey = "method";
             const dataKey = "data";
@@ -74,6 +81,7 @@ function useDataApi<S, T>(
             requestConfig[dataKey] = dataRequest.data;
             break;
           }
+
         }
 
         try {
