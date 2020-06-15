@@ -78,11 +78,11 @@ const removeNode = (node: ITreeNode, parentLabelId?: string) => {
         if (parentNode.children.length == 0) {
           parentNode.hasChildren = false;
         }
-      } else {
-        draftState.data = draftState.data.filter(
-          n => n.referenceId !== node.referenceId
-        );
       }
+    } else {
+      draftState.data = draftState.data.filter(
+        n => n.referenceId !== node.referenceId
+      );
     }
   });
 };
