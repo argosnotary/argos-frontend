@@ -18,17 +18,23 @@ import {
   ILayout,
   ILayoutSegment,
   ILayoutValidationMessage,
+  IPublicKey,
   IStep
 } from "../interfaces/ILayout";
 import {
   IApprovalConfig,
   IArtifactCollector
 } from "../interfaces/IApprovalConfig";
+import {
+  addLayoutAuthorizedKey,
+  deleteLayoutAuthorizedKey
+} from "./LayoutEditorService";
 
 export enum DetailsPanelType {
   EMPTY,
   VALIDATION_ERRORS,
-  STEP_DETAILS
+  STEP_DETAILS,
+  LAYOUT_DETAILS
 }
 
 interface ILayoutElement {
@@ -75,7 +81,9 @@ export enum LayoutEditorActionType {
   UPDATE_APPROVAL_CONFIGS,
   UPDATE_ARTIFACT_COLLECTOR,
   ADD_ARTIFACT_COLLECTOR,
-  DELETE_ARTIFACT_COLLECTOR
+  DELETE_ARTIFACT_COLLECTOR,
+  ADD_LAYOUT_AUTHORIZED_KEY,
+  DELETE_LAYOUT_AUTHORIZED_KEY
 }
 
 export interface ILayoutEditorAction {
@@ -87,6 +95,7 @@ export interface ILayoutEditorAction {
   validationErrors?: Array<ILayoutValidationMessage>;
   approvalConfigs?: Array<IApprovalConfig>;
   artifactCollector?: IArtifactCollector;
+  publicKey?: IPublicKey;
 }
 
 const reducer = (
@@ -134,6 +143,10 @@ const reducer = (
       return handleAddArtifactCollector(action, state);
     case LayoutEditorActionType.DELETE_ARTIFACT_COLLECTOR:
       return handleDeleteArtifactCollector(action, state);
+    case LayoutEditorActionType.ADD_LAYOUT_AUTHORIZED_KEY:
+      return handleAddLayoutAuthorizedKey(action, state);
+    case LayoutEditorActionType.DELETE_LAYOUT_AUTHORIZED_KEY:
+      return handleDeleteLayoutAuthorizedKey(action, state);
     default:
       throw new Error();
   }
@@ -173,6 +186,37 @@ const createSelectedLayoutElement = (
   };
 };
 
+const handleDeleteLayoutAuthorizedKey = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (action.publicKey) {
+    return {
+      ...state,
+      layout: deleteLayoutAuthorizedKey(state.layout, action.publicKey)
+    };
+  }
+
+  return {
+    ...state
+  };
+};
+
+const handleAddLayoutAuthorizedKey = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (action.publicKey) {
+    return {
+      ...state,
+      layout: addLayoutAuthorizedKey(state.layout, action.publicKey)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
 const handleUpdateLayout = (
   action: ILayoutEditorAction,
   state: ILayoutEditorState
@@ -184,7 +228,7 @@ const handleUpdateLayout = (
       selectedLayoutElement: undefined,
       activeEditLayoutElement: undefined,
       showSigningDialog: false,
-      detailPanelMode: DetailsPanelType.EMPTY,
+      detailPanelMode: DetailsPanelType.LAYOUT_DETAILS,
       validationErrors: undefined
     };
   }

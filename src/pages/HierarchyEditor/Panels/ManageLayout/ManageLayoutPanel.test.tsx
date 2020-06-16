@@ -366,7 +366,6 @@ it("sign layout happy flow", async () => {
       });
       root.update();
 
-      // console.log(root.debug())
       expect(root.find('select[id="collectorType"]').props().value).toBe(
         "XLDEPLOY"
       );
