@@ -286,6 +286,22 @@ const HierarchyEditor = () => {
               node.permissions.indexOf(PermissionTypes.LINK_ADD) >= 0
             );
           }
+        },
+        {
+          label: "Remove supply chain",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.SUPPLY_CHAIN,
+              HierarchyEditorPanelModes.DELETE,
+              node
+            );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.TREE_EDIT) >= 0
+            );
+          }
         }
       ]
     },

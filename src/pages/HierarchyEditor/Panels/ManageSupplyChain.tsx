@@ -30,8 +30,14 @@ import {
   HierarchyEditorPanelModes
 } from "../../../stores/hierarchyEditorStore";
 import ITreeNode from "../../../interfaces/ITreeNode";
-import { addObjectToTree, updateTreeObject } from "../utils";
+import {
+  addObjectToTree,
+  removeObjectFromTree,
+  updateTreeObject
+} from "../utils";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
+import WarningModal from "../../../molecules/WarningModal";
+import { Modal, ModalFlexColumWrapper } from "../../../atoms/Modal";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -169,50 +175,95 @@ const ManageSupplyChain = () => {
   const updateMode =
     hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
-  return (
-    <Panel
-      maxWidth={"37.5vw"}
-      resizable={false}
-      last={true}
-      title={
-        updateMode
-          ? "Update selected supply chain"
-          : "Add child supply chain to selected label"
-      }>
-      <PanelBreadCrumb
-        node={hierarchyEditorState.editor.node}
-        breadcrumb={hierarchyEditorState.editor.breadcrumb}
-      />
-      <GenericForm
-        schema={formSchema}
-        permission={hierarchyEditorState.editor.permission}
-        isLoading={
-          supplyChainApiResponseState.isLoading ||
-          treeChildrenApiResponse.isLoading
-        }
-        validate={validate}
-        onCancel={() => {
+  const getDeleteWarning = () => {
+    const cancelHandler = () => {
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
+    };
+    const continueHandler = () => {
+      const dataRequest: DataRequest = {
+        method: "delete",
+        token,
+        url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}`,
+        cbSuccess: () => {
+          removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);
           hierarchyEditorDispatch.editor({
             type: HierarchyEditorActionTypes.RESET
           });
-        }}
-        onSubmit={values => {
-          if (!updateMode) {
-            postSupplyChain(values);
-          }
-
-          if (updateMode) {
-            updateSupplyChain(values);
-          }
-        }}
-        confirmationLabel={
-          !updateMode ? "Add supply chain" : "Update supply chain"
         }
-        cancellationLabel={"Cancel"}
-        initialValues={initialFormValues}
-      />
-    </Panel>
-  );
+      };
+      setSupplyChainApiRequest(dataRequest);
+    };
+
+    return (
+      <Modal>
+        <ModalFlexColumWrapper>
+          <WarningModal
+            message={
+              hierarchyEditorState.editor.node.name +
+              " supply chain will be deleted are you sure ?"
+            }
+            continueHandler={continueHandler}
+            cancelHandler={cancelHandler}
+          />
+        </ModalFlexColumWrapper>
+      </Modal>
+    );
+  };
+
+  const getPanelWithForm = () => {
+    return (
+      <Panel
+        maxWidth={"37.5vw"}
+        resizable={false}
+        last={true}
+        title={
+          updateMode
+            ? "Update selected supply chain"
+            : "Add child supply chain to selected label"
+        }>
+        <PanelBreadCrumb
+          node={hierarchyEditorState.editor.node}
+          breadcrumb={hierarchyEditorState.editor.breadcrumb}
+        />
+        <GenericForm
+          schema={formSchema}
+          permission={hierarchyEditorState.editor.permission}
+          isLoading={
+            supplyChainApiResponseState.isLoading ||
+            treeChildrenApiResponse.isLoading
+          }
+          validate={validate}
+          onCancel={() => {
+            hierarchyEditorDispatch.editor({
+              type: HierarchyEditorActionTypes.RESET
+            });
+          }}
+          onSubmit={values => {
+            if (!updateMode) {
+              postSupplyChain(values);
+            }
+
+            if (updateMode) {
+              updateSupplyChain(values);
+            }
+          }}
+          confirmationLabel={
+            !updateMode ? "Add supply chain" : "Update supply chain"
+          }
+          cancellationLabel={"Cancel"}
+          initialValues={initialFormValues}
+        />
+      </Panel>
+    );
+  };
+
+  if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.DELETE) {
+    return getDeleteWarning();
+  } else {
+    return getPanelWithForm();
+  }
 };
 
 export default ManageSupplyChain;
