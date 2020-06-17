@@ -66,11 +66,14 @@ const isKeyIdDefined = (layout: ILayout, keyId: string): boolean => {
 };
 
 const isKeyIdUsedInSteps = (layout: ILayout, keyId: string): boolean => {
-  return (
-    layout.layoutSegments
-      .flatMap(segment => segment.steps)
-      .filter(step => step.authorizedKeyIds !== undefined)
-      .flatMap(step => step.authorizedKeyIds)
-      .indexOf(keyId) >= 0
-  );
+  if (layout.layoutSegments) {
+    return (
+      layout.layoutSegments
+        .flatMap(segment => segment.steps)
+        .filter(step => step.authorizedKeyIds !== undefined)
+        .flatMap(step => step.authorizedKeyIds)
+        .indexOf(keyId) >= 0
+    );
+  }
+  return false;
 };
