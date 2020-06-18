@@ -37,6 +37,7 @@ import {
 } from "../../../../interfaces/IApprovalConfig";
 import HierarchyEditorTestWrapper from "../../../../test/utils";
 import LayoutDetailsEditor from "./LayoutDetailsEditor";
+import { SearchResultEntry } from "../../../../atoms/SearchInput";
 
 const mock = new MockAdapter(Axios);
 
@@ -471,9 +472,58 @@ it("sign layout happy flow", async () => {
   });
 });
 
-it("", async () => {
+it("add authorized key to layout", async () => {
   mock.reset();
   (cryptoAvailable as jest.Mock).mockReturnValue(true);
 
+  const root = createComponent();
+
   mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
+
+  mock
+    .onGet("/api/personalaccount", {
+      params: { name: "accountName" }
+    })
+    .reply(200, [{ name: "accountName", id: "accountId" }]);
+
+  mock
+    .onGet("/api/personalaccount/accountId/key")
+    .reply(200, { key: "publicKey", id: "keyId" });
+
+  mock
+    .onGet("/api/personalaccount", {
+      params: { activeKeyIds: "keyId" }
+    })
+    .reply(200, [{ name: "accountName" }]);
+
+  await act(async () => {
+    await waitFor(() => {
+      root.update();
+      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+    });
+
+    root.find('button[data-testhook-id="add-item"]').simulate("click");
+
+    updateField(
+      root.find('input[name="searchinput"]').first(),
+      "searchinput",
+      "accountName"
+    );
+
+    await waitFor(() => {
+      root.update();
+      return expect(root.find(SearchResultEntry).length).toBe(1);
+    });
+
+    root.find(SearchResultEntry).simulate("click");
+
+    await waitFor(() => {
+      root.update();
+      return expect(
+        root.find('button[data-testhook-id="delete-item-0"]').length
+      ).toBe(1);
+    });
+
+    expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
+  });
 });
