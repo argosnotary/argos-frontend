@@ -36,6 +36,7 @@ import {
   IApprovalConfig
 } from "../../../../interfaces/IApprovalConfig";
 import HierarchyEditorTestWrapper from "../../../../test/utils";
+import LayoutDetailsEditor from "./LayoutDetailsEditor";
 
 const mock = new MockAdapter(Axios);
 
@@ -102,7 +103,7 @@ it("renders correctly with existing layout", async () => {
   const layoutMetaBlock: ILayoutMetaBlock = {
     signatures: [],
     layout: {
-      authorizedKeyIds: [],
+      authorizedKeyIds: ["authorizedKeyId1", "authorizedKeyId2"],
       expectedEndProducts: [],
       keys: [],
       layoutSegments: [
@@ -121,6 +122,22 @@ it("renders correctly with existing layout", async () => {
   mock
     .onGet("/api/supplychain/supplyChainId/layout")
     .reply(200, layoutMetaBlock);
+
+  mock
+    .onGet("/api/personalaccount", {
+      params: { activeKeyIds: "authorizedKeyId1" }
+    })
+    .reply(200, [{ name: "account 1" }]);
+  mock
+    .onGet("/api/personalaccount", {
+      params: { activeKeyIds: "authorizedKeyId2" }
+    })
+    .reply(200, []);
+  mock
+    .onGet("/api/personalaccount", {
+      params: { inactiveKeyIds: "authorizedKeyId2" }
+    })
+    .reply(200, [{ name: "account 2" }]);
 
   const approveConfigs: Array<IApprovalConfig> = [
     {
@@ -148,6 +165,17 @@ it("renders correctly with existing layout", async () => {
       root.update();
       return expect(root.find(GenericForm).props().isLoading).toBe(false);
     });
+
+    await waitFor(() => {
+      root.update();
+      return expect(
+        root.find('button[data-testhook-id="delete-item-1"]').length
+      ).toBe(1);
+    });
+
+    expect(root.find(LayoutDetailsEditor)).toMatchSnapshot(
+      "withLayoutDetailsEditor"
+    );
 
     root
       .find('button[data-testhook-id="jenkins-0-select-step"]')
@@ -441,4 +469,11 @@ it("sign layout happy flow", async () => {
       JSON.stringify(mockLayoutMetaBlock())
     );
   });
+});
+
+it("", async () => {
+  mock.reset();
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
+
+  mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
 });

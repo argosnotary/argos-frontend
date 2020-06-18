@@ -83,7 +83,8 @@ export enum LayoutEditorActionType {
   ADD_ARTIFACT_COLLECTOR,
   DELETE_ARTIFACT_COLLECTOR,
   ADD_LAYOUT_AUTHORIZED_KEY,
-  DELETE_LAYOUT_AUTHORIZED_KEY
+  DELETE_LAYOUT_AUTHORIZED_KEY,
+  EDIT_LAYOUT
 }
 
 export interface ILayoutEditorAction {
@@ -147,6 +148,12 @@ const reducer = (
       return handleAddLayoutAuthorizedKey(action, state);
     case LayoutEditorActionType.DELETE_LAYOUT_AUTHORIZED_KEY:
       return handleDeleteLayoutAuthorizedKey(action, state);
+    case LayoutEditorActionType.EDIT_LAYOUT:
+      return {
+        ...state,
+        selectedLayoutElement: undefined,
+        detailPanelMode: DetailsPanelType.LAYOUT_DETAILS
+      };
     default:
       throw new Error();
   }
@@ -247,6 +254,7 @@ const handleAddSegment = (
     return {
       ...state,
       layout: { ...state.layout },
+      detailPanelMode: DetailsPanelType.EMPTY,
       activeEditLayoutElement: createSelectedLayoutElement(state, action)
     };
   }

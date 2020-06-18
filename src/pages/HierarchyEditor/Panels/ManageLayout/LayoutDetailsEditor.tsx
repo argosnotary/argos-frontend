@@ -204,7 +204,7 @@ const LayoutDetailsEditor: React.FC = () => {
           </CollectionContainerSpan>
           <ActionIconsContainer>
             <RemoveItemButton
-              data-testhook-id={"delete-collector-" + index}
+              data-testhook-id={"delete-item-" + index}
               onClick={() => deleteCollector(account.keyId)}>
               <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
             </RemoveItemButton>
@@ -283,7 +283,7 @@ const LayoutDetailsEditor: React.FC = () => {
         <CollectionContainerRow>
           <ItemContainerTitle>Authorized Personal Accounts</ItemContainerTitle>
           <AddItemButton
-            data-testhook-id={"add-collector"}
+            data-testhook-id={"add-item"}
             onClick={() => setAddAccountMode(true)}>
             <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
           </AddItemButton>
@@ -296,9 +296,7 @@ const LayoutDetailsEditor: React.FC = () => {
           ) : null}
           {authorizedPersonalAccounts.map((account, index) => {
             return (
-              <li key={"collector-row-" + index}>
-                {collectorRow(account, index)}
-              </li>
+              <li key={"item-row-" + index}>{collectorRow(account, index)}</li>
             );
           })}
         </CollectionContainerList>

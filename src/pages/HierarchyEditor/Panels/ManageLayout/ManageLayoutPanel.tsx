@@ -39,6 +39,7 @@ import styled from "styled-components";
 import { IApprovalConfig } from "../../../../interfaces/IApprovalConfig";
 import { HierarchyEditorStateContext } from "../../../../stores/hierarchyEditorStore";
 import PanelBreadCrumb from "../../../../molecules/PanelBreadCrumb";
+import Layout from "../../../../atoms/Layout";
 
 const PageSpecificContentSeparator = styled(ContentSeparator)`
   margin: 0.7rem 0 1rem;
@@ -126,6 +127,7 @@ const ManageLayoutPanel: React.FC = () => {
             node={hierarchyEditorState.editor.node}
             breadcrumb={hierarchyEditorState.editor.breadcrumb}
           />
+          <Layout />
           <SegmentsContainer />
           <PageSpecificContentSeparator />
           <LayoutJsonEditor />
