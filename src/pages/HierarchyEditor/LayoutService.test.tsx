@@ -60,13 +60,11 @@ it("test serialize", () => {
               }
             ],
             authorizedKeyIds: ["key2", "key1"],
-            expectedCommand: ["command2", "command1"]
           },
           {
             name: "step a",
             authorizedKeyIds: ["step a key 2", "step a key 1"],
             requiredNumberOfLinks: 23,
-            expectedCommand: ["3", "2", "1"],
             expectedProducts: [
               {
                 ruleType: RuleRuleTypeEnum.DISALLOW,

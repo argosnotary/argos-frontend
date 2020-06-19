@@ -59,7 +59,6 @@ export interface IStep {
   name: string;
   authorizedKeyIds: string[];
   requiredNumberOfLinks: number;
-  expectedCommand: string[];
   expectedMaterials: IRule[];
   expectedProducts: IRule[];
 }

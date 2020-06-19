@@ -48,7 +48,6 @@ export namespace Domain {
     name: string;
     authorizedKeyIds: string[];
     requiredNumberOfLinks: number;
-    expectedCommand: string[];
     expectedMaterials: IRule[];
     expectedProducts: IRule[];
   }
