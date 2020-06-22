@@ -81,7 +81,6 @@ function useDataApi<S, T>(
             requestConfig[dataKey] = dataRequest.data;
             break;
           }
-
         }
 
         try {

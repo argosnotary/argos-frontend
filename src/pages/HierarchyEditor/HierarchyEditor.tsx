@@ -243,6 +243,23 @@ const HierarchyEditor = () => {
                 0
             );
           }
+        },
+        {
+          label: "Remove label",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.LABEL,
+              HierarchyEditorPanelModes.DELETE,
+              node
+            );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.LOCAL_PERMISSION_EDIT) >=
+                0
+            );
+          }
         }
       ]
     },
