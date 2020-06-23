@@ -165,11 +165,15 @@ const useFormBuilder = (
 
   const getRightSubmitButtonHandler = () => {
     if (config.buttonHandler === FormSubmitButtonHandlerTypes.CLICK) {
-      return { onClick: () => api.submitForm() };
+      return {
+        onClick: () => api.submitForm()
+      };
     }
 
     if (config.buttonHandler === FormSubmitButtonHandlerTypes.MOUSEDOWN) {
-      return { onMouseDown: () => api.submitForm() };
+      return {
+        onMouseDown: () => api.submitForm()
+      };
     }
   };
 

@@ -195,7 +195,9 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
   }, [initialValues]);
 
   useEffect(() => {
-    formAPI.submitForm();
+    if (validateNow) {
+      formAPI.submitForm();
+    }
   }, [validateNow]);
 
   return (

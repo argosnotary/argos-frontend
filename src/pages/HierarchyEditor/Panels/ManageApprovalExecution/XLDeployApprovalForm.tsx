@@ -46,6 +46,7 @@ const validateApprovalExecutionForm = (values: IXLDeployFormValues) => {
     errors.applicationVersion =
       "Please enter only valid characters for the application version (no `/`, `\\`, `:`, `[`, `]`, `|`, `,` or `*`)";
   }
+
   return errors;
 };
 
@@ -111,7 +112,9 @@ const XLDeployApprovalForm: React.FC<IXLDeployApprovalFormProps> = ({
   }, [initialValues]);
 
   useEffect(() => {
-    formAPI.submitForm();
+    if (validateNow) {
+      formAPI.submitForm();
+    }
   }, [validateNow]);
 
   return <>{formJSX}</>;

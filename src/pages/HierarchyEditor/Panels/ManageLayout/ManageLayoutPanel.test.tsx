@@ -443,6 +443,15 @@ it("sign layout happy flow", async () => {
       "passphrase",
       "password"
     );
+
+    root.update();
+    root
+      .find('input[name="passphrase"]')
+      .first()
+      .simulate("blur");
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     root
       .find('form[data-testhook-id="passphrase-form"]')
       .first()
@@ -504,7 +513,9 @@ it("add authorized key to layout", async () => {
   await act(async () => {
     await waitFor(() => {
       root.update();
-      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+      return expect(
+        root.find('button[data-testhook-id="add-item"]').length
+      ).toBe(1);
     });
 
     root.find('button[data-testhook-id="add-item"]').simulate("click");

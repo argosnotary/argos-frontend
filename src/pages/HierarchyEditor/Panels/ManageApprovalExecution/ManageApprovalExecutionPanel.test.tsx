@@ -197,6 +197,7 @@ it("approval happy flow", async () => {
     root
       .find('label[data-testhook-id="select-list-item-segment1-step1"]')
       .simulate("click");
+
     await waitFor(() => {
       root.update();
       return expect(
@@ -231,10 +232,14 @@ it("approval happy flow", async () => {
       "applicationVersion",
       "appversion1"
     );
+
     root.update();
     root
       .find('form[data-testhook-id="xl-deploy-collector-execution-form-0"]')
       .simulate("blur");
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     root
       .find(
         'button[data-testhook-id="xl-deploy-collector-execution-form-0-submit-button"]'
@@ -244,7 +249,8 @@ it("approval happy flow", async () => {
     await waitFor(() => {
       root.update();
       return expect(
-        root.find('select[id="git-collector-execution-form-select-1"]').length
+        root.find('form[data-testhook-id="git-collector-execution-form-1"]')
+          .length
       ).toBe(1);
     });
 
