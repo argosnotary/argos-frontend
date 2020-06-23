@@ -260,7 +260,6 @@ it("approval happy flow", async () => {
         });
       root.update();
 
-      // console.log(root.debug())
       expect(
         root.find('select[id="git-collector-execution-form-select-1"]').props()
           .value

@@ -36,6 +36,8 @@ import {
   IApprovalConfig
 } from "../../../../interfaces/IApprovalConfig";
 import HierarchyEditorTestWrapper from "../../../../test/utils";
+import LayoutDetailsEditor from "./LayoutDetailsEditor";
+import { SearchResultEntry } from "../../../../atoms/SearchInput";
 
 const mock = new MockAdapter(Axios);
 
@@ -102,7 +104,7 @@ it("renders correctly with existing layout", async () => {
   const layoutMetaBlock: ILayoutMetaBlock = {
     signatures: [],
     layout: {
-      authorizedKeyIds: [],
+      authorizedKeyIds: ["authorizedKeyId1", "authorizedKeyId2"],
       expectedEndProducts: [],
       keys: [],
       layoutSegments: [
@@ -121,6 +123,22 @@ it("renders correctly with existing layout", async () => {
   mock
     .onGet("/api/supplychain/supplyChainId/layout")
     .reply(200, layoutMetaBlock);
+
+  mock
+    .onGet("/api/personalaccount", {
+      params: { activeKeyIds: "authorizedKeyId1" }
+    })
+    .reply(200, [{ name: "account 1" }]);
+  mock
+    .onGet("/api/personalaccount", {
+      params: { activeKeyIds: "authorizedKeyId2" }
+    })
+    .reply(200, []);
+  mock
+    .onGet("/api/personalaccount", {
+      params: { inactiveKeyIds: "authorizedKeyId2" }
+    })
+    .reply(200, [{ name: "account 2" }]);
 
   const approveConfigs: Array<IApprovalConfig> = [
     {
@@ -148,6 +166,17 @@ it("renders correctly with existing layout", async () => {
       root.update();
       return expect(root.find(GenericForm).props().isLoading).toBe(false);
     });
+
+    await waitFor(() => {
+      root.update();
+      return expect(
+        root.find('button[data-testhook-id="delete-item-1"]').length
+      ).toBe(1);
+    });
+
+    expect(root.find(LayoutDetailsEditor)).toMatchSnapshot(
+      "withLayoutDetailsEditor"
+    );
 
     root
       .find('button[data-testhook-id="jenkins-0-select-step"]')
@@ -366,7 +395,6 @@ it("sign layout happy flow", async () => {
       });
       root.update();
 
-      // console.log(root.debug())
       expect(root.find('select[id="collectorType"]').props().value).toBe(
         "XLDEPLOY"
       );
@@ -441,5 +469,61 @@ it("sign layout happy flow", async () => {
     expect(mock.history.post[1].data).toBe(
       JSON.stringify(mockLayoutMetaBlock())
     );
+  });
+});
+
+it("add authorized key to layout", async () => {
+  mock.reset();
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
+
+  const root = createComponent();
+
+  mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
+
+  mock
+    .onGet("/api/personalaccount", {
+      params: { name: "accountName" }
+    })
+    .reply(200, [{ name: "accountName", id: "accountId" }]);
+
+  mock
+    .onGet("/api/personalaccount/accountId/key")
+    .reply(200, { key: "publicKey", id: "keyId" });
+
+  mock
+    .onGet("/api/personalaccount", {
+      params: { activeKeyIds: "keyId" }
+    })
+    .reply(200, [{ name: "accountName" }]);
+
+  await act(async () => {
+    await waitFor(() => {
+      root.update();
+      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+    });
+
+    root.find('button[data-testhook-id="add-item"]').simulate("click");
+
+    updateField(
+      root.find('input[name="searchinput"]').first(),
+      "searchinput",
+      "accountName"
+    );
+
+    await waitFor(() => {
+      root.update();
+      return expect(root.find(SearchResultEntry).length).toBe(1);
+    });
+
+    root.find(SearchResultEntry).simulate("click");
+
+    await waitFor(() => {
+      root.update();
+      return expect(
+        root.find('button[data-testhook-id="delete-item-0"]').length
+      ).toBe(1);
+    });
+
+    expect(root.find(ManageLayoutPanel)).toMatchSnapshot();
   });
 });
