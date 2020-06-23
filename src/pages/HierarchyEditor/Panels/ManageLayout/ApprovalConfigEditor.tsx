@@ -38,14 +38,16 @@ import { PlusIcon } from "../../../../atoms/Icons";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import FlexRow from "../../../../atoms/FlexRow";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../../organisms/GenericForm";
+import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import { Select } from "../../../../atoms/DropDown";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../../../../hooks/useFormBuilder";
 
 const SelectionContainer = styled.section`
   display: flex;
@@ -148,7 +150,7 @@ const defaultApprovalConfigFormSchema: IGenericFormSchema = [
 ];
 
 const getApprovalConfigFormSchema = (
-  type: ArtifactCollectorType
+  type: ArtifactCollectorType | "select"
 ): IGenericFormSchema => {
   if (type === ArtifactCollectorType.XLDEPLOY) {
     return [
@@ -175,7 +177,7 @@ const getApprovalConfigFormSchema = (
 
 const validateApprovalConfigForm = (
   values: IFormFormValues,
-  type: ArtifactCollectorType
+  type: ArtifactCollectorType | "select"
 ) => {
   const errors = {} as IFormFormValues;
   if (!values.name) {
@@ -322,7 +324,31 @@ const ApprovalConfigEditor: React.FC = () => {
     setSelectedCollectorType(e.target.value);
   };
 
-  const editorForm = (collector: IArtifactCollector) => {
+  const EditorForm: React.FC<{ collector: IArtifactCollector }> = ({
+    collector
+  }) => {
+    const formConfig: IFormBuilderConfig = {
+      dataTesthookId: "collector-edit-form",
+      schema: getApprovalConfigFormSchema(selectedCollectorType),
+      permission: FormPermissions.EDIT,
+      isLoading: false,
+      validate: values =>
+        validateApprovalConfigForm(values, selectedCollectorType),
+      onCancel,
+      onSubmit: form => onUpdateApprovalConfig(form, collector),
+      cancellationLabel: "Cancel",
+      confirmationLabel: "Save",
+      autoFocus: true,
+      buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN
+    };
+
+    const [formJSX, formAPI] = useFormBuilder(formConfig);
+
+    useEffect(() => {
+      const initialValues = getInitialValues(collector) as {};
+      formAPI.setInitialFormValues(initialValues);
+    }, [collector]);
+
     return (
       <FormContainer>
         <SelectionContainer>
@@ -337,23 +363,7 @@ const ApprovalConfigEditor: React.FC = () => {
             <option value={ArtifactCollectorType.GIT}>git</option>
           </Select>
         </SelectionContainer>
-        {selectedCollectorType !== "select" ? (
-          <GenericForm
-            dataTesthookId={"collector-edit-form"}
-            schema={getApprovalConfigFormSchema(selectedCollectorType)}
-            permission={FormPermissions.EDIT}
-            isLoading={false}
-            validate={values =>
-              validateApprovalConfigForm(values, selectedCollectorType)
-            }
-            onCancel={onCancel}
-            onSubmit={form => onUpdateApprovalConfig(form, collector)}
-            initialValues={getInitialValues(collector)}
-            cancellationLabel={"Cancel"}
-            confirmationLabel={"Save"}
-            autoFocus={true}
-          />
-        ) : null}
+        {selectedCollectorType !== "select" ? <>{formJSX}</> : null}
       </FormContainer>
     );
   };
@@ -410,9 +420,11 @@ const ApprovalConfigEditor: React.FC = () => {
               {collectors.map((collector, index) => {
                 return (
                   <li key={"collector-row-" + index}>
-                    {index === editIndex
-                      ? editorForm(collector)
-                      : collectorRow(collector, index)}
+                    {index === editIndex ? (
+                      <EditorForm collector={collector} />
+                    ) : (
+                      collectorRow(collector, index)
+                    )}
                   </li>
                 );
               })}

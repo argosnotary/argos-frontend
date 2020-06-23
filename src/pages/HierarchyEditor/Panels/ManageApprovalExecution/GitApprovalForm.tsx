@@ -16,11 +16,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../../organisms/GenericForm";
+import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
 import { FormPermissions } from "../../../../types/FormPermission";
 import { Select } from "../../../../atoms/DropDown";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../../../../hooks/useFormBuilder";
 
 const SelectionContainer = styled.section`
   display: flex;
@@ -85,8 +87,8 @@ const determineInitialSearchOption = (
 
 const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
   index,
-  validateNow,
   initialValues,
+  validateNow,
   onUpdateExecutionValues,
   onSubmit
 }) => {
@@ -167,6 +169,35 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
     setSelectedSearchOption(e.target.value);
   };
 
+  const formConfig: IFormBuilderConfig = {
+    dataTesthookId: "git-collector-execution-form-" + index,
+    schema: getApprovalExecutionFormSchema(),
+    permission: FormPermissions.EDIT,
+    isLoading: false,
+    validate: values => validateApprovalExecutionForm(values),
+    onChange: (valid, form) => onUpdateExecutionValues(form, valid),
+    onSubmit: form => {
+      if (selectedSearchOption !== "select") {
+        onUpdateExecutionValues(form, true);
+        onSubmit();
+      }
+    },
+    confirmationLabel: "Next",
+    autoFocus: true,
+    buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN
+  };
+
+  const [formJSX, formAPI] = useFormBuilder(formConfig);
+
+  useEffect(() => {
+    const values = initialValues as {};
+    formAPI.setInitialFormValues(values);
+  }, [initialValues]);
+
+  useEffect(() => {
+    formAPI.submitForm();
+  }, [validateNow]);
+
   return (
     <>
       <SelectionContainer>
@@ -186,24 +217,7 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
           <option value={SearchOptionType.COMMIT_HASH}>commit hash</option>
         </Select>
       </SelectionContainer>
-      <GenericForm
-        dataTesthookId={"git-collector-execution-form-" + index}
-        schema={getApprovalExecutionFormSchema()}
-        permission={FormPermissions.EDIT}
-        isLoading={false}
-        validate={values => validateApprovalExecutionForm(values)}
-        onChange={(valid, form) => onUpdateExecutionValues(form, valid)}
-        onSubmit={form => {
-          if (selectedSearchOption !== "select") {
-            onUpdateExecutionValues(form, true);
-            onSubmit();
-          }
-        }}
-        initialValues={initialValues}
-        confirmationLabel={"Next"}
-        autoFocus={true}
-        validateNow={validateNow}
-      />
+      {formJSX}
     </>
   );
 };

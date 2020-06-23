@@ -32,9 +32,7 @@ import {
   ModalFlexColumWrapper,
   ModalFooter
 } from "../../../atoms/Modal";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../organisms/GenericForm";
+import { IGenericFormSchema } from "../../../interfaces/IGenericFormSchema";
 import KeyContainer from "../../../atoms/KeyContainer";
 import { IPublicKey } from "../../../interfaces/IPublicKey";
 import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
@@ -57,6 +55,10 @@ import ITreeNode from "../../../interfaces/ITreeNode";
 import { LoaderIcon } from "../../../atoms/Icons";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 import WarningModal from "../../../molecules/WarningModal";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../../../hooks/useFormBuilder";
 
 interface IServiceAccountFormValues {
   serviceaccountname: string;
@@ -125,9 +127,8 @@ const ManageServiceAccount = () => {
     HierarchyEditorStateContext
   );
 
-  const [initialFormValues, setInitialFormValues] = useState(
-    {} as IServiceAccountFormValues
-  );
+  const updateMode =
+    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
   const [serviceAccountKey, setServiceAccountKey] = useState({} as IPublicKey);
   const [generatedPassword, setGeneratedPassword] = useState("");
@@ -143,6 +144,40 @@ const ManageServiceAccount = () => {
   const [_treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
     genericDataFetchReducer
   );
+
+  const formConfig: IFormBuilderConfig = {
+    schema: formSchema,
+    permission: updateMode
+      ? hierarchyEditorState.editor.permission
+      : cryptoAvailable()
+      ? hierarchyEditorState.editor.permission
+      : FormPermissions.READ,
+    isLoading: serviceAccountDataRequestState.isLoading,
+    validate,
+    onCancel: () => {
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
+    },
+    onSubmit: values => {
+      if (!updateMode) {
+        postNewServiceAccount(values);
+      }
+
+      if (updateMode) {
+        updateServiceAccount(values);
+      }
+    },
+    confirmationLabel: updateMode
+      ? "Update Service Account"
+      : "Add Service Account",
+    cancellationLabel: "Cancel",
+    autoFocus: true,
+    buttonHandler: FormSubmitButtonHandlerTypes.CLICK
+  };
+
+  const [formJSX, formApi] = useFormBuilder(formConfig);
+
   const generateNode = (serviceaccount: IServiceAccountApiResponse) => {
     const node = {} as ITreeNode;
     node.referenceId = serviceaccount.id;
@@ -152,6 +187,7 @@ const ManageServiceAccount = () => {
 
     return node;
   };
+
   const postNewServiceAccount = (values: IServiceAccountFormValues) => {
     const data: any = {};
 
@@ -260,14 +296,14 @@ const ManageServiceAccount = () => {
 
   useEffect(() => {
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
-      setInitialFormValues({
+      formApi.setInitialFormValues({
         serviceaccountname: hierarchyEditorState.editor.node.name
       });
       getKeyId(hierarchyEditorState.editor.node.referenceId);
     }
 
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
-      setInitialFormValues({ serviceaccountname: "" });
+      formApi.setInitialFormValues({ serviceaccountname: "" });
     }
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.DELETE) {
       setDeletewarningModal(true);
@@ -284,9 +320,6 @@ const ManageServiceAccount = () => {
     hierarchyEditorState.editor.mode,
     hierarchyEditorState.editor.panel
   ]);
-
-  const updateMode =
-    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
   const getDeleteWarningContent = () => {
     const cancelHandler = () => {
@@ -496,37 +529,7 @@ const ManageServiceAccount = () => {
             <ContentSeparator />
           </>
         ) : null}
-        <GenericForm
-          schema={formSchema}
-          permission={
-            updateMode
-              ? hierarchyEditorState.editor.permission
-              : cryptoAvailable()
-              ? hierarchyEditorState.editor.permission
-              : FormPermissions.READ
-          }
-          isLoading={serviceAccountDataRequestState.isLoading}
-          validate={validate}
-          onCancel={() => {
-            hierarchyEditorDispatch.editor({
-              type: HierarchyEditorActionTypes.RESET
-            });
-          }}
-          onSubmit={values => {
-            if (!updateMode) {
-              postNewServiceAccount(values);
-            }
-
-            if (updateMode) {
-              updateServiceAccount(values);
-            }
-          }}
-          confirmationLabel={
-            updateMode ? "Update Service Account" : "Add Service Account"
-          }
-          cancellationLabel={"Cancel"}
-          initialValues={initialFormValues}
-        />
+        {formJSX}
         {!updateMode && !cryptoAvailable() ? <NoCryptoWarning /> : null}
         {cryptoException ? <CryptoExceptionWarning /> : null}
       </Panel>

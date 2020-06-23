@@ -16,7 +16,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import GenericForm from "./GenericForm";
+import useFormBuilder from "../hooks/useFormBuilder";
+
 import FlexRow from "../atoms/FlexRow";
 
 const Container = styled(FlexRow)`
@@ -26,33 +27,33 @@ const Container = styled(FlexRow)`
 `;
 
 export default {
-  title: "Forms",
+  title: "Forms"
 };
 
 const dummyScheme = [
   {
     labelValue: "Name*",
     name: "name",
-    formType: "text",
+    formType: "text"
   },
   {
     labelValue: "Email*",
     name: "email",
-    formType: "text",
+    formType: "text"
   },
   {
     labelValue: "Phonenumber*",
     name: "phonenumber",
-    formType: "text",
+    formType: "text"
   },
   {
     labelValue: "Comments*",
     name: "comments",
-    formType: "textArea",
-  },
+    formType: "textArea"
+  }
 ];
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
 
   if (!values.name) {
@@ -78,20 +79,33 @@ const onSubmit = () => {
   alert("submitting form");
 };
 
-export const genericForm = () => (
-  <Container>
-    <GenericForm
-      schema={dummyScheme}
-      permission={"EDIT"}
-      validate={validate}
-      onSubmit={onSubmit}
-      onCancel={() => alert("Cancelled")}
-      confirmationLabel={"Submit"}
-      cancellationLabel={"Cancel"}
-      initialValues={{
-        name: "Luke",
-        email: "",
-      }}
-    />
-  </Container>
-);
+const HookForm = () => {
+  const config = {};
+
+  config.confirmationLabel = "Submit";
+  config.cancellationLabel = "Cancel";
+  config.validate = validate;
+  config.schema = dummyScheme;
+  config.permission = "EDIT";
+  config.onSubmit = onSubmit;
+  config.initialValues = {
+    name: "Luke",
+    email: ""
+  };
+
+  const [formJSX, formApi] = useFormBuilder(config);
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          formApi.submitForm();
+        }}>
+        Toggle
+      </button>
+      <Container>{formJSX}</Container>
+    </>
+  );
+};
+
+export const hookForm = () => <HookForm />;

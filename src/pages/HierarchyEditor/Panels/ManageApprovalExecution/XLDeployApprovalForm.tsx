@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../../organisms/GenericForm";
+import React, { useEffect } from "react";
+import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
 import { FormPermissions } from "../../../../types/FormPermission";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../../../../hooks/useFormBuilder";
 
 export interface IXLDeployFormValues {
   username: string;
@@ -80,31 +82,39 @@ interface IXLDeployApprovalFormProps {
 
 const XLDeployApprovalForm: React.FC<IXLDeployApprovalFormProps> = ({
   index,
-  validateNow,
   initialValues,
+  validateNow,
   onUpdateExecutionValues,
   onSubmit
 }) => {
-  return (
-    <>
-      <GenericForm
-        dataTesthookId={"xl-deploy-collector-execution-form-" + index}
-        schema={getApprovalExecutionFormSchema()}
-        permission={FormPermissions.EDIT}
-        isLoading={false}
-        validate={values => validateApprovalExecutionForm(values)}
-        onChange={(valid, form) => onUpdateExecutionValues(form, valid)}
-        onSubmit={form => {
-          onUpdateExecutionValues(form, true);
-          onSubmit();
-        }}
-        initialValues={initialValues}
-        confirmationLabel={"Next"}
-        autoFocus={true}
-        validateNow={validateNow}
-      />
-    </>
-  );
+  const formConfig: IFormBuilderConfig = {
+    dataTesthookId: "xl-deploy-collector-execution-form-" + index,
+    schema: getApprovalExecutionFormSchema(),
+    permission: FormPermissions.EDIT,
+    isLoading: false,
+    validate: values => validateApprovalExecutionForm(values),
+    onChange: (valid, form) => onUpdateExecutionValues(form, valid),
+    onSubmit: form => {
+      onUpdateExecutionValues(form, true);
+      onSubmit();
+    },
+    confirmationLabel: "Next",
+    autoFocus: true,
+    buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN
+  };
+
+  const [formJSX, formAPI] = useFormBuilder(formConfig);
+
+  useEffect(() => {
+    const values = initialValues as {};
+    formAPI.setInitialFormValues(values);
+  }, [initialValues]);
+
+  useEffect(() => {
+    formAPI.submitForm();
+  }, [validateNow]);
+
+  return <>{formJSX}</>;
 };
 
 export default XLDeployApprovalForm;

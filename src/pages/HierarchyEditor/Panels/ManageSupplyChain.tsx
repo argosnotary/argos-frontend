@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import DataRequest from "../../../types/DataRequest";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../organisms/GenericForm";
+import { IGenericFormSchema } from "../../../interfaces/IGenericFormSchema";
 import { Panel } from "../../../molecules/Panel";
 import { useUserProfileContext } from "../../../stores/UserProfile";
 import {
@@ -38,6 +36,10 @@ import {
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 import WarningModal from "../../../molecules/WarningModal";
 import { Modal, ModalFlexColumWrapper } from "../../../atoms/Modal";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../../../hooks/useFormBuilder";
 
 interface ISupplyChainNameFormValues {
   supplychainname: string;
@@ -78,9 +80,36 @@ const ManageSupplyChain = () => {
     HierarchyEditorStateContext
   );
 
-  const [initialFormValues, setInitialFormValues] = useState(
-    {} as ISupplyChainNameFormValues
-  );
+  const updateMode =
+    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
+
+  const formConfig: IFormBuilderConfig = {
+    schema: formSchema,
+    permission: hierarchyEditorState.editor.permission,
+    isLoading:
+      supplyChainApiResponseState.isLoading ||
+      treeChildrenApiResponse.isLoading,
+    validate,
+    onCancel: () => {
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
+    },
+    onSubmit: values => {
+      if (!updateMode) {
+        postSupplyChain(values);
+      }
+
+      if (updateMode) {
+        updateSupplyChain(values);
+      }
+    },
+    confirmationLabel: !updateMode ? "Add supply chain" : "Update supply chain",
+    cancellationLabel: "Cancel",
+    buttonHandler: FormSubmitButtonHandlerTypes.CLICK
+  };
+
+  const [formJSX, formApi] = useFormBuilder(formConfig);
 
   const postSupplyChain = (values: ISupplyChainNameFormValues) => {
     const data: any = {};
@@ -162,18 +191,15 @@ const ManageSupplyChain = () => {
 
   useEffect(() => {
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
-      setInitialFormValues({
+      formApi.setInitialFormValues({
         supplychainname: hierarchyEditorState.editor.node.name
       });
     }
 
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
-      setInitialFormValues({ supplychainname: "" });
+      formApi.setInitialFormValues({ supplychainname: "" });
     }
   }, [hierarchyEditorState.editor.node, hierarchyEditorState.editor.mode]);
-
-  const updateMode =
-    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
   const getDeleteWarning = () => {
     const cancelHandler = () => {
@@ -227,34 +253,7 @@ const ManageSupplyChain = () => {
           node={hierarchyEditorState.editor.node}
           breadcrumb={hierarchyEditorState.editor.breadcrumb}
         />
-        <GenericForm
-          schema={formSchema}
-          permission={hierarchyEditorState.editor.permission}
-          isLoading={
-            supplyChainApiResponseState.isLoading ||
-            treeChildrenApiResponse.isLoading
-          }
-          validate={validate}
-          onCancel={() => {
-            hierarchyEditorDispatch.editor({
-              type: HierarchyEditorActionTypes.RESET
-            });
-          }}
-          onSubmit={values => {
-            if (!updateMode) {
-              postSupplyChain(values);
-            }
-
-            if (updateMode) {
-              updateSupplyChain(values);
-            }
-          }}
-          confirmationLabel={
-            !updateMode ? "Add supply chain" : "Update supply chain"
-          }
-          cancellationLabel={"Cancel"}
-          initialValues={initialFormValues}
-        />
+        {formJSX}
       </Panel>
     );
   };

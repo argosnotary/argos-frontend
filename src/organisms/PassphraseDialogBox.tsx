@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
+import React, { useEffect } from "react";
 import { Warning } from "../atoms/Alerts";
 import {
   Modal,
@@ -21,9 +21,13 @@ import {
   ModalFlexColumWrapper,
   ModalFooter
 } from "../atoms/Modal";
-import GenericForm, { IGenericFormSchema } from "./GenericForm";
+import { IGenericFormSchema } from "../interfaces/IGenericFormSchema";
 import { FormPermissions } from "../types/FormPermission";
 import { CryptoExceptionWarning } from "../molecules/CryptoExceptionWarning";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../hooks/useFormBuilder";
 
 interface IPasswordFormValues {
   passphrase: string;
@@ -66,25 +70,31 @@ const PassphraseDialogBox: React.FC<IPassphraseDialogBoxProps> = ({
   showInvalidPassphraseMessage
 }) => {
   const getModalContent = () => {
+    const formConfig: IFormBuilderConfig = {
+      dataTesthookId: "passphrase-form",
+      schema: passPhraseFormSchema,
+      permission: FormPermissions.EDIT,
+      isLoading: loading,
+      validate: validatePassphrase,
+      onCancel,
+      onSubmit: values => onConfirm(values.passphrase),
+      confirmationLabel: "Confirm",
+      cancellationLabel: "Cancel",
+      buttonHandler: FormSubmitButtonHandlerTypes.CLICK
+    };
+
+    const [formJSX, formAPI] = useFormBuilder(formConfig);
+
+    useEffect(() => {
+      formAPI.setInitialFormValues({ passphrase });
+    }, [passphrase]);
+
     return (
       <>
         {showInvalidPassphraseMessage ? (
           <Warning message={"Incorrect passphrase"} />
         ) : null}
-        <ModalBody>
-          <GenericForm
-            dataTesthookId={"passphrase-form"}
-            schema={passPhraseFormSchema}
-            permission={FormPermissions.EDIT}
-            isLoading={loading}
-            validate={validatePassphrase}
-            onCancel={onCancel}
-            onSubmit={values => onConfirm(values.passphrase)}
-            confirmationLabel={"Confirm"}
-            cancellationLabel={"Cancel"}
-            initialValues={{ passphrase: passphrase }}
-          />
-        </ModalBody>
+        <ModalBody>{formJSX}</ModalBody>
         <ModalFooter />
       </>
     );

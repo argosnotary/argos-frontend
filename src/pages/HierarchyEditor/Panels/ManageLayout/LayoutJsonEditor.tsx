@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { cryptoAvailable } from "../../../../security";
 import { FormPermissions } from "../../../../types/FormPermission";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../../organisms/GenericForm";
+import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
@@ -32,6 +30,10 @@ import {
   HierarchyEditorStateContext,
   HierarchyEditorActionTypes
 } from "../../../../stores/hierarchyEditorStore";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../../../../hooks/useFormBuilder";
 
 interface ILayoutValidationErrorResponse {
   messages: Array<ILayoutValidationMessage>;
@@ -69,16 +71,47 @@ const LayoutJsonEditor: React.FC = () => {
     HierarchyEditorStateContext
   );
 
-  const [layoutJson, setLayoutJson] = useState<string>("{}");
-
   const editorStoreContext = useLayoutEditorStore();
 
   const [responseLayoutValidation, setLayoutValidationDataRequest] = useDataApi(
     genericDataFetchReducer
   );
 
+  const formConfig: IFormBuilderConfig = {
+    dataTesthookId: "layout-json-form",
+    schema: formSchema,
+    permission: cryptoAvailable()
+      ? hierarchyEditorState.editor.permission
+      : FormPermissions.READ,
+    isLoading: editorStoreContext.state.loading,
+    validate: validateLayout,
+    onCancel: () => {
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
+    },
+    onSubmit: values => {
+      requestLayoutValidation(values);
+    },
+    onChange: (valid, values) => {
+      if (valid) {
+        editorStoreContext.dispatch({
+          type: LayoutEditorActionType.UPDATE_LAYOUT,
+          layout: JSON.parse(values.layout)
+        });
+      }
+    },
+    confirmationLabel: "Sign and Submit",
+    cancellationLabel: "Cancel",
+    buttonHandler: FormSubmitButtonHandlerTypes.CLICK
+  };
+
+  const [formJSX, formApi] = useFormBuilder(formConfig);
+
   useEffect(() => {
-    setLayoutJson(JSON.stringify(editorStoreContext.state.layout, null, 2));
+    formApi.setInitialFormValues({
+      layout: JSON.stringify(editorStoreContext.state.layout, null, 2)
+    });
   }, [editorStoreContext.state.layout]);
 
   useEffect(() => {
@@ -107,6 +140,14 @@ const LayoutJsonEditor: React.FC = () => {
       },
       cbFailure: (error: any): boolean => {
         const response: ILayoutValidationErrorResponse = error.response.data;
+
+        if (formApi.isValid) {
+          editorStoreContext.dispatch({
+            type: LayoutEditorActionType.UPDATE_LAYOUT,
+            layout: JSON.parse(values.layout)
+          });
+        }
+
         editorStoreContext.dispatch({
           type: LayoutEditorActionType.LAYOUT_HAS_VALIDATION_ERRORS,
           validationErrors: response.messages
@@ -118,38 +159,7 @@ const LayoutJsonEditor: React.FC = () => {
     setLayoutValidationDataRequest(dataRequest);
   };
 
-  return (
-    <GenericForm
-      dataTesthookId={"layout-json-form"}
-      schema={formSchema}
-      permission={
-        cryptoAvailable()
-          ? hierarchyEditorState.editor.permission
-          : FormPermissions.READ
-      }
-      isLoading={editorStoreContext.state.loading}
-      validate={validateLayout}
-      onCancel={() => {
-        hierarchyEditorDispatch.editor({
-          type: HierarchyEditorActionTypes.RESET
-        });
-      }}
-      onSubmit={values => {
-        requestLayoutValidation(values);
-      }}
-      confirmationLabel={"Sign and Submit"}
-      cancellationLabel={"Cancel"}
-      initialValues={{ layout: layoutJson }}
-      onChange={(valid, values) => {
-        if (valid) {
-          editorStoreContext.dispatch({
-            type: LayoutEditorActionType.UPDATE_LAYOUT,
-            layout: JSON.parse(values.layout)
-          });
-        }
-      }}
-    />
-  );
+  return <>{formJSX}</>;
 };
 
 export default LayoutJsonEditor;
