@@ -30,8 +30,14 @@ import {
   HierarchyEditorActionTypes
 } from "../../../stores/hierarchyEditorStore";
 import ITreeNode from "../../../interfaces/ITreeNode";
-import { updateTreeObject, addObjectToTree } from "../utils";
+import {
+  updateTreeObject,
+  addObjectToTree,
+  removeObjectFromTree
+} from "../utils";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
+import { Modal, ModalFlexColumWrapper } from "../../../atoms/Modal";
+import WarningModal from "../../../molecules/WarningModal";
 
 interface ILabelNameFormValues {
   labelname: string;
@@ -170,48 +176,93 @@ const ManageLabel = () => {
   const updateMode =
     hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
-  return (
-    <Panel
-      maxWidth={"37.5vw"}
-      resizable={false}
-      last={true}
-      title={
-        updateMode
-          ? "Update selected label"
-          : "Add child label to selected label"
-      }>
-      <PanelBreadCrumb
-        node={hierarchyEditorState.editor.node}
-        breadcrumb={hierarchyEditorState.editor.breadcrumb}
-      />
-      <GenericForm
-        schema={formSchema}
-        permission={hierarchyEditorState.editor.permission}
-        isLoading={
-          labelPostState.isLoading || treeChildrenApiResponse.isLoading
-        }
-        validate={validate}
-        onCancel={() => {
+  const labelForm = () => {
+    return (
+      <Panel
+        maxWidth={"37.5vw"}
+        resizable={false}
+        last={true}
+        title={
+          updateMode
+            ? "Update selected label"
+            : "Add child label to selected label"
+        }>
+        <PanelBreadCrumb
+          node={hierarchyEditorState.editor.node}
+          breadcrumb={hierarchyEditorState.editor.breadcrumb}
+        />
+        <GenericForm
+          schema={formSchema}
+          permission={hierarchyEditorState.editor.permission}
+          isLoading={
+            labelPostState.isLoading || treeChildrenApiResponse.isLoading
+          }
+          validate={validate}
+          onCancel={() => {
+            hierarchyEditorDispatch.editor({
+              type: HierarchyEditorActionTypes.RESET
+            });
+          }}
+          onSubmit={values => {
+            if (!updateMode) {
+              postNewLabel(values);
+            }
+
+            if (updateMode) {
+              updateLabel(values);
+            }
+          }}
+          confirmationLabel={!updateMode ? "Add label" : "Update label"}
+          cancellationLabel={"Cancel"}
+          initialValues={initialFormValues}
+          autoFocus={!updateMode}
+        />
+      </Panel>
+    );
+  };
+
+  const deleteWarning = () => {
+    const cancelHandler = () => {
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
+    };
+    const continueHandler = () => {
+      const dataRequest: DataRequest = {
+        method: "delete",
+        token,
+        url: `/api/label/${hierarchyEditorState.editor.node.referenceId}`,
+        cbSuccess: () => {
+          removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);
           hierarchyEditorDispatch.editor({
             type: HierarchyEditorActionTypes.RESET
           });
-        }}
-        onSubmit={values => {
-          if (!updateMode) {
-            postNewLabel(values);
-          }
+        }
+      };
+      setLabelPostRequest(dataRequest);
+    };
 
-          if (updateMode) {
-            updateLabel(values);
-          }
-        }}
-        confirmationLabel={!updateMode ? "Add label" : "Update label"}
-        cancellationLabel={"Cancel"}
-        initialValues={initialFormValues}
-        autoFocus={!updateMode}
-      />
-    </Panel>
-  );
+    return (
+      <Modal>
+        <ModalFlexColumWrapper>
+          <WarningModal
+            message={
+              hierarchyEditorState.editor.node.name +
+              " label will be deleted are you sure ?"
+            }
+            continueHandler={continueHandler}
+            cancelHandler={cancelHandler}
+          />
+        </ModalFlexColumWrapper>
+      </Modal>
+    );
+  };
+
+  if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.DELETE) {
+    return deleteWarning();
+  } else {
+    return labelForm();
+  }
 };
 
 export default ManageLabel;
