@@ -19,7 +19,6 @@ export interface ILink {
     runId: string;
     layoutSegmentName: string;
     stepName: string;
-    command: string[];
     materials: IArtifact[];
     products: IArtifact[];
 }

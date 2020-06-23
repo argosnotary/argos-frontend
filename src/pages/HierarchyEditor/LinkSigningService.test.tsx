@@ -22,7 +22,6 @@ it("test serialize", () => {
     const seralized = serialize({
         runId: "69af2dd",
         layoutSegmentName: "segment1",
-        command: [],
         materials: [
             {
                 uri: "src/test/java/com/rabobank/argos/test/ArgosServiceTestIT.java",

@@ -56,7 +56,6 @@ function mockLinkMetaBlock(): ILinkMetaBlock {
     link: {
       products: [{ hash: "product1", uri: "productUri1" }],
       materials: [{ hash: "mat1", uri: "mapUri1" }],
-      command: [],
       runId: "runId",
       stepName: "stepName",
       layoutSegmentName: "layoutSegmentName"

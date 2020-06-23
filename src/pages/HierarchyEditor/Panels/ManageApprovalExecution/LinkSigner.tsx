@@ -62,7 +62,6 @@ const LinkSigner: React.FC = () => {
             layoutSegmentName: signingContext.segmentName,
             stepName: signingContext.stepName,
             runId: signingContext.runId,
-            command: [],
             products: signingContext.artifactsToSign,
             materials: []
           },
