@@ -27,10 +27,9 @@
         <artifactId>license-maven-plugin</artifactId>
         <version>3.0</version>
         <configuration>
-          <header>https://raw.github.com/argosnotary/argos-parent/master/docs/header.txt</header>
+          <header>https://github.com/argosnotary/argos/raw/master/docs/header.txt</header>
           <properties>
-            <owner>Mycila</owner>
-            <email>mathieu.carbou@gmail.com</email>
+            <lic.year>2020</lic.year>
           </properties>
           <excludes>
             <exclude>**/README</exclude>
@@ -48,9 +47,6 @@
             <exclude>node_modules/**/*</exclude>
             <exclude>mock/node_modules/**/*</exclude>
           </excludes>
-          <properties>
-            <lic.year>2020</lic.year>
-          </properties>
           <mapping>
             <ts>SLASHSTAR_STYLE</ts>
             <tsx>SLASHSTAR_STYLE</tsx>
