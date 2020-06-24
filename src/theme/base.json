@@ -40,6 +40,10 @@
   "dataCheckbox": {
     "loaderColor": "#1779ba"
   },
+  "labels": {
+    "inactive": "red",
+    "active": "green"
+  },
   "searchInput": {
     "searchResultsBgColor": "#fff",
     "searchResultEntryHoverBg": "#e8feff",

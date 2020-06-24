@@ -186,6 +186,7 @@ const ManageRoles = () => {
             isLoading={false}
             defaultLabel={"Search user"}
             onSelectLabel={"Selected user"}
+            placeHolder={"Name"}
           />
           {Object.keys(state.user).length > 0 ? (
             <RoleAuthorizationComponent
