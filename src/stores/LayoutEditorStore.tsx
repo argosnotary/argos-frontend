@@ -19,6 +19,7 @@ import {
   ILayoutSegment,
   ILayoutValidationMessage,
   IPublicKey,
+  IRule,
   IStep
 } from "../interfaces/ILayout";
 import {
@@ -26,8 +27,11 @@ import {
   IArtifactCollector
 } from "../interfaces/IApprovalConfig";
 import {
+  addExpectedEndProduct,
   addLayoutAuthorizedKey,
-  deleteLayoutAuthorizedKey
+  deleteLayoutAuthorizedKey,
+  editExpectedEndProduct,
+  removeExpectedEndProduct
 } from "./LayoutEditorService";
 
 export enum DetailsPanelType {
@@ -84,7 +88,10 @@ export enum LayoutEditorActionType {
   DELETE_ARTIFACT_COLLECTOR,
   ADD_LAYOUT_AUTHORIZED_KEY,
   DELETE_LAYOUT_AUTHORIZED_KEY,
-  EDIT_LAYOUT
+  EDIT_LAYOUT,
+  ADD_EXPECTED_END_PRODUCT,
+  REMOVE_EXPECTED_END_PRODUCT,
+  EDIT_EXPECTED_END_PRODUCT
 }
 
 export interface ILayoutEditorAction {
@@ -97,6 +104,7 @@ export interface ILayoutEditorAction {
   approvalConfigs?: Array<IApprovalConfig>;
   artifactCollector?: IArtifactCollector;
   publicKey?: IPublicKey;
+  rule?: IRule;
 }
 
 const reducer = (
@@ -154,6 +162,12 @@ const reducer = (
         selectedLayoutElement: undefined,
         detailPanelMode: DetailsPanelType.LAYOUT_DETAILS
       };
+    case LayoutEditorActionType.ADD_EXPECTED_END_PRODUCT:
+      return handleAddExpectedEndProduct(action, state);
+    case LayoutEditorActionType.EDIT_EXPECTED_END_PRODUCT:
+      return handleEditExpectedEndProduct(state);
+    case LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT:
+      return handleRemoveExpectedEndProduct(action, state);
     default:
       throw new Error();
   }
@@ -190,6 +204,45 @@ const createSelectedLayoutElement = (
             );
           })
         : undefined
+  };
+};
+
+const handleAddExpectedEndProduct = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (action.rule) {
+    return {
+      ...state,
+      layout: addExpectedEndProduct(state.layout, action.rule)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleEditExpectedEndProduct = (
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  return {
+    ...state,
+    layout: editExpectedEndProduct(state.layout)
+  };
+};
+
+const handleRemoveExpectedEndProduct = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (action.rule) {
+    return {
+      ...state,
+      layout: removeExpectedEndProduct(state.layout, action.rule)
+    };
+  }
+  return {
+    ...state
   };
 };
 

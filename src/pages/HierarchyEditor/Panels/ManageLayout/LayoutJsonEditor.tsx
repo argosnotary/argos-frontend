@@ -112,7 +112,11 @@ const LayoutJsonEditor: React.FC = () => {
     formApi.setInitialFormValues({
       layout: JSON.stringify(editorStoreContext.state.layout, null, 2)
     });
-  }, [editorStoreContext.state.layout]);
+  }, [
+    editorStoreContext.state.layout,
+    editorStoreContext.state.layout.expectedEndProducts,
+    editorStoreContext.state.layout.authorizedKeyIds
+  ]);
 
   useEffect(() => {
     editorStoreContext.dispatch({

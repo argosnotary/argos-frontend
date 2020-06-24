@@ -25,7 +25,8 @@ import {
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 import ApprovalConfigEditor from "./ApprovalConfigEditor";
-import LayoutDetailsEditor from "./LayoutDetailsEditor";
+import AuthorizedAccountEditor from "./AuthorizedAccountEditor";
+import RuleEditor from "./RuleEditor";
 
 const convertValidationMessagesToNotifications = (
   validationErrors?: Array<ILayoutValidationMessage>
@@ -62,7 +63,12 @@ const LayoutEditorDetailsPane: React.FC = () => {
       case DetailsPanelType.STEP_DETAILS:
         return <ApprovalConfigEditor />;
       case DetailsPanelType.LAYOUT_DETAILS:
-        return <LayoutDetailsEditor />;
+        return (
+          <>
+            <AuthorizedAccountEditor />
+            <RuleEditor />
+          </>
+        );
     }
   };
 
