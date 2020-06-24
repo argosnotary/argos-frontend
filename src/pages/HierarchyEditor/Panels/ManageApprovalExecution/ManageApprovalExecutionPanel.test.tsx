@@ -29,7 +29,7 @@ import {
   IApprovalConfig
 } from "../../../../interfaces/IApprovalConfig";
 import ManageApprovalExecutionPanel from "./ManageApprovalExecutionPanel";
-import SelectList, { SelectListItem } from "../../../../atoms/SelectList";
+import { SelectListItem } from "../../../../atoms/SelectList";
 import { IArtifact, ILinkMetaBlock } from "../../../../interfaces/ILink";
 import HierarchyEditorTestWrapper from "../../../../test/utils";
 
