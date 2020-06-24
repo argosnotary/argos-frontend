@@ -133,6 +133,7 @@ exports[`renders correctly 1`] = `
                 onCancel={[Function]}
                 onSelect={[Function]}
                 onSelectLabel="Selected user"
+                placeHolder="Name"
                 results={Array []}
               >
                 <styled.div>
@@ -174,6 +175,7 @@ exports[`renders correctly 1`] = `
                           labelValue="Search user"
                           name="searchinput"
                           onChange={[Function]}
+                          placeHolder="Name"
                         >
                           <styled.div>
                             <StyledComponent
@@ -248,6 +250,7 @@ exports[`renders correctly 1`] = `
                                 <styled.input
                                   name="searchinput"
                                   onChange={[Function]}
+                                  placeholder="Name"
                                   type="text"
                                 >
                                   <StyledComponent
@@ -313,12 +316,14 @@ exports[`renders correctly 1`] = `
                                     forwardedRef={null}
                                     name="searchinput"
                                     onChange={[Function]}
+                                    placeholder="Name"
                                     type="text"
                                   >
                                     <input
                                       className="sc-bwzfXH fQcSTW"
                                       name="searchinput"
                                       onChange={[Function]}
+                                      placeholder="Name"
                                       type="text"
                                     />
                                   </StyledComponent>
