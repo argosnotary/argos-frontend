@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../../organisms/GenericForm";
-import React from "react";
+import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
+import React, { useEffect } from "react";
 import { FormPermissions } from "../../../../types/FormPermission";
 import {
   LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../../../../hooks/useFormBuilder";
 
 interface IFormFormValues {
   name: string;
@@ -75,22 +77,26 @@ const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
     });
   };
 
-  return (
-    <>
-      <GenericForm
-        dataTesthookId={dataTesthookId}
-        schema={segmentFormSchema}
-        permission={FormPermissions.EDIT}
-        isLoading={false}
-        validate={validateSegmentForm}
-        onCancel={onCancel}
-        onSubmit={form => onUpdateSegmentName(true, form)}
-        initialValues={{ name: currentName }}
-        onChange={onUpdateSegmentName}
-        autoFocus={true}
-      />
-    </>
-  );
+  const formConfig: IFormBuilderConfig = {
+    dataTesthookId,
+    schema: segmentFormSchema,
+    permission: FormPermissions.EDIT,
+    isLoading: false,
+    validate: validateSegmentForm,
+    onCancel,
+    onSubmit: form => onUpdateSegmentName(true, form),
+    onChange: onUpdateSegmentName,
+    autoFocus: true,
+    buttonHandler: FormSubmitButtonHandlerTypes.CLICK
+  };
+
+  const [formJSX, formAPI] = useFormBuilder(formConfig);
+
+  useEffect(() => {
+    formAPI.setInitialFormValues({ name: currentName });
+  }, [currentName]);
+
+  return <>{formJSX}</>;
 };
 
 export default LayoutElementNameEditor;

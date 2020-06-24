@@ -66,7 +66,7 @@ interface ILoaderButtonProps {
   children: string;
   loading: boolean;
   buttonType: "button" | "submit" | "reset";
-  onClick?: () => void;
+  onClick?: (e: React.FormEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   onMouseDown?: () => void;
   dataTesthookId?: string;

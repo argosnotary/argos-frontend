@@ -25,7 +25,6 @@ import { ILayoutMetaBlock, IStep } from "../../../../interfaces/ILayout";
 import TextArea from "../../../../atoms/TextArea";
 import { waitFor } from "@testing-library/dom";
 import { Modal } from "../../../../atoms/Modal";
-import GenericForm from "../../../../organisms/GenericForm";
 import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyPair";
 import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { cryptoAvailable } from "../../../../security";
@@ -164,7 +163,9 @@ it("renders correctly with existing layout", async () => {
   await act(async () => {
     await waitFor(() => {
       root.update();
-      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+      return expect(
+        root.find('button[data-testhook-id="jenkins-0-select-step"]').length
+      ).toBe(1);
     });
 
     await waitFor(() => {
@@ -271,7 +272,9 @@ it("validates a faulty layout and returns errors", async () => {
   await act(async () => {
     await waitFor(() => {
       root.update();
-      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+      return expect(
+        root.find('form[data-testhook-id="layout-json-form"]').length
+      ).toBe(1);
     });
 
     updateField(
@@ -320,7 +323,9 @@ it("sign layout happy flow", async () => {
   await act(async () => {
     await waitFor(() => {
       root.update();
-      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+      return expect(
+        root.find('button[data-testhook-id="add-segment"]').length
+      ).toBe(1);
     });
 
     updateField(
@@ -438,6 +443,7 @@ it("sign layout happy flow", async () => {
       "passphrase",
       "password"
     );
+
     root
       .find('form[data-testhook-id="passphrase-form"]')
       .first()
@@ -499,7 +505,9 @@ it("add authorized key to layout", async () => {
   await act(async () => {
     await waitFor(() => {
       root.update();
-      return expect(root.find(GenericForm).props().isLoading).toBe(false);
+      return expect(
+        root.find('button[data-testhook-id="add-item"]').length
+      ).toBe(1);
     });
 
     root.find('button[data-testhook-id="add-item"]').simulate("click");

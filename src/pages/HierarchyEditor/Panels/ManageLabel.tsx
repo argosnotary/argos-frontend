@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import DataRequest from "../../../types/DataRequest";
 import ILabelPostResponse from "../../../interfaces/ILabelPostResponse";
 import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-import GenericForm, {
-  IGenericFormSchema
-} from "../../../organisms/GenericForm";
+import { IGenericFormSchema } from "../../../interfaces/IGenericFormSchema";
 import { Panel } from "../../../molecules/Panel";
 import { useUserProfileContext } from "../../../stores/UserProfile";
 import {
@@ -38,6 +36,10 @@ import {
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 import { Modal, ModalFlexColumWrapper } from "../../../atoms/Modal";
 import WarningModal from "../../../molecules/WarningModal";
+import useFormBuilder, {
+  IFormBuilderConfig,
+  FormSubmitButtonHandlerTypes
+} from "../../../hooks/useFormBuilder";
 
 interface ILabelNameFormValues {
   labelname: string;
@@ -79,9 +81,35 @@ const ManageLabel = () => {
     HierarchyEditorStateContext
   );
 
-  const [initialFormValues, setInitialFormValues] = useState(
-    {} as ILabelNameFormValues
-  );
+  const updateMode =
+    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
+
+  const formConfig: IFormBuilderConfig = {
+    schema: formSchema,
+    permission: hierarchyEditorState.editor.permission,
+    isLoading: labelPostState.isLoading || treeChildrenApiResponse.isLoading,
+    validate,
+    onCancel: () => {
+      hierarchyEditorDispatch.editor({
+        type: HierarchyEditorActionTypes.RESET
+      });
+    },
+    onSubmit: values => {
+      if (!updateMode) {
+        postNewLabel(values);
+      }
+
+      if (updateMode) {
+        updateLabel(values);
+      }
+    },
+    confirmationLabel: !updateMode ? "Add label" : "Update label",
+    cancellationLabel: "Cancel",
+    autoFocus: !updateMode,
+    buttonHandler: FormSubmitButtonHandlerTypes.CLICK
+  };
+
+  const [formJSX, formApi] = useFormBuilder(formConfig);
 
   const postNewLabel = (values: ILabelNameFormValues) => {
     const data: any = {};
@@ -163,18 +191,15 @@ const ManageLabel = () => {
 
   useEffect(() => {
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
-      setInitialFormValues({
+      formApi.setInitialFormValues({
         labelname: hierarchyEditorState.editor.node.name
       });
     }
 
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
-      setInitialFormValues({ labelname: "" });
+      formApi.setInitialFormValues({ labelname: "" });
     }
   }, [hierarchyEditorState.editor.node, hierarchyEditorState.editor.mode]);
-
-  const updateMode =
-    hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE;
 
   const labelForm = () => {
     return (
@@ -191,32 +216,7 @@ const ManageLabel = () => {
           node={hierarchyEditorState.editor.node}
           breadcrumb={hierarchyEditorState.editor.breadcrumb}
         />
-        <GenericForm
-          schema={formSchema}
-          permission={hierarchyEditorState.editor.permission}
-          isLoading={
-            labelPostState.isLoading || treeChildrenApiResponse.isLoading
-          }
-          validate={validate}
-          onCancel={() => {
-            hierarchyEditorDispatch.editor({
-              type: HierarchyEditorActionTypes.RESET
-            });
-          }}
-          onSubmit={values => {
-            if (!updateMode) {
-              postNewLabel(values);
-            }
-
-            if (updateMode) {
-              updateLabel(values);
-            }
-          }}
-          confirmationLabel={!updateMode ? "Add label" : "Update label"}
-          cancellationLabel={"Cancel"}
-          initialValues={initialFormValues}
-          autoFocus={!updateMode}
-        />
+        {formJSX}
       </Panel>
     );
   };

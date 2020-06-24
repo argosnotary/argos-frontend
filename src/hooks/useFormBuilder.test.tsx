@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
+import React, { useEffect } from "react";
 import theme from "../theme/base.json";
 
-import GenericForm from "./GenericForm";
 import { ThemeProvider } from "styled-components";
 import { FormPermissions } from "../types/FormPermission";
 import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 import FormInput from "../molecules/FormInput";
+import useFormBuilder, { IFormBuilderConfig } from "./useFormBuilder";
 
 const dummySchema = [
   {
@@ -59,48 +59,62 @@ const onSubmit = jest.fn();
 
 const onCancel = jest.fn();
 
-describe("GenericForm", () => {
+const DummyFormOne = () => {
+  const formConfig: IFormBuilderConfig = {
+    schema: dummySchema,
+    isLoading: false,
+    permission: FormPermissions.EDIT,
+    validate,
+    onSubmit,
+    onCancel,
+    confirmationLabel: "Submit",
+    cancellationLabel: "Cancel"
+  };
+
+  const [formJSX, formAPI] = useFormBuilder(formConfig);
+
+  useEffect(() => {
+    formAPI.setInitialFormValues({
+      name: "luke",
+      email: "luke@jedi.com"
+    });
+  }, []);
+
+  return <ThemeProvider theme={theme}>{formJSX}</ThemeProvider>;
+};
+
+const DummyFormTwo = () => {
+  const formConfig: IFormBuilderConfig = {
+    schema: dummySchema,
+    isLoading: false,
+    permission: FormPermissions.READ,
+    validate,
+    onSubmit,
+    onCancel,
+    confirmationLabel: "Submit",
+    cancellationLabel: "Cancel"
+  };
+
+  const [formJSX, formAPI] = useFormBuilder(formConfig);
+
+  useEffect(() => {
+    formAPI.setInitialFormValues({
+      name: "",
+      email: "luke@jedi.com"
+    });
+  }, []);
+
+  return <ThemeProvider theme={theme}>{formJSX}</ThemeProvider>;
+};
+
+describe("useFormBuilder", () => {
   let formWithEditPermission: any;
   let onlyReadForm: any;
 
   beforeAll(async () => {
-    formWithEditPermission = mount(
-      <ThemeProvider theme={theme}>
-        <GenericForm
-          schema={dummySchema}
-          isLoading={false}
-          permission={FormPermissions.EDIT}
-          validate={validate}
-          onSubmit={onSubmit}
-          onCancel={onCancel}
-          confirmationLabel={"Submit"}
-          cancellationLabel={"Cancel"}
-          initialValues={{
-            name: "luke",
-            email: "luke@jedi.com"
-          }}
-        />
-      </ThemeProvider>
-    );
+    formWithEditPermission = mount(<DummyFormOne />);
 
-    onlyReadForm = mount(
-      <ThemeProvider theme={theme}>
-        <GenericForm
-          schema={dummySchema}
-          isLoading={false}
-          permission={FormPermissions.READ}
-          validate={validate}
-          onSubmit={onSubmit}
-          onCancel={onCancel}
-          confirmationLabel={"Submit"}
-          cancellationLabel={"Cancel"}
-          initialValues={{
-            name: "",
-            email: "luke@jedi.com"
-          }}
-        />
-      </ThemeProvider>
-    );
+    onlyReadForm = mount(<DummyFormTwo />);
 
     await act(() =>
       new Promise(resolve => setImmediate(resolve)).then(() => {

@@ -13,39 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect } from "react";
 import { useFormik, FormikValues } from "formik";
-
+import { useRef } from "react";
+import IFormik from "../interfaces/IFormik";
+import {
+  IGenericFormSchema,
+  IGenericFormInput
+} from "../interfaces/IGenericFormSchema";
 import FormInput from "../molecules/FormInput";
 import FormTextArea from "../molecules/FormTextArea";
+import { FormPermissions, FormPermission } from "../types/FormPermission";
 import InputErrorLabel from "../atoms/InputErrorLabel";
-import { LoaderButton, CancelButton } from "../atoms/Button";
 import ContentSeparator from "../atoms/ContentSeparator";
-import { FormPermission, FormPermissions } from "../types/FormPermission";
-import IFormik from "../interfaces/IFormik";
-import FlexColumn from "../atoms/FlexColumn";
 import FlexRow from "../atoms/FlexRow";
+import { LoaderButton, CancelButton } from "../atoms/Button";
+import styled from "styled-components";
+import FlexColumn from "../atoms/FlexColumn";
 
 const CustomCancelButton = styled(CancelButton)`
   margin-left: 1rem;
 `;
 
-const FormContainer = styled(FlexColumn)`
+export enum FormSubmitButtonHandlerTypes {
+  CLICK = "CLICK",
+  MOUSEDOWN = "MOUSEDOWN"
+}
+
+type FormSubmitButtonHandlerType =
+  | FormSubmitButtonHandlerTypes.CLICK
+  | FormSubmitButtonHandlerTypes.MOUSEDOWN;
+
+export const FormContainer = styled(FlexColumn)`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-export interface IGenericFormInput {
-  labelValue?: string;
-  name: string;
-  formType: string;
+interface IFormApi {
+  setInitialFormValues: (fields: { [x: string]: string }) => void;
+  submitForm: () => void;
+  isValid: boolean;
 }
 
-export type IGenericFormSchema = Array<IGenericFormInput>;
-
-interface IGenericForm {
+export interface IFormBuilderConfig {
   dataTesthookId?: string;
   schema: IGenericFormSchema;
   permission: FormPermission;
@@ -55,53 +66,30 @@ interface IGenericForm {
   isLoading: boolean;
   confirmationLabel?: string;
   cancellationLabel?: string;
-  initialValues: FormikValues;
   onChange?: (valid: boolean, values: any) => void;
   autoFocus?: boolean;
-  validateNow?: boolean;
+  buttonHandler: FormSubmitButtonHandlerType;
 }
 
-const GenericForm: React.FC<IGenericForm> = ({
-  dataTesthookId,
-  schema,
-  permission,
-  validate,
-  onSubmit,
-  onCancel,
-  isLoading,
-  confirmationLabel,
-  cancellationLabel,
-  initialValues,
-  autoFocus,
-  onChange,
-  validateNow
-}) => {
+const useFormBuilder = (
+  config: IFormBuilderConfig
+): [React.ReactNode, IFormApi] => {
   const formik = useFormik({
-    initialValues,
+    initialValues: {},
     onSubmit: (values: any) => {
       formik.resetForm();
-      onSubmit(values);
+      config.onSubmit(values);
     },
-    validate
+    validate: config.validate
   });
 
   const firstTextInput: React.RefObject<HTMLInputElement> = useRef(null);
   const firstTextAreaInput: React.RefObject<HTMLTextAreaElement> = useRef(null);
 
-  const [canValidate, setCanValidate] = useState(false);
+  const api: IFormApi = {} as IFormApi;
 
   useEffect(() => {
-    formik.setValues(initialValues);
-  }, [initialValues]);
-
-  useEffect(() => {
-    if (validateNow) {
-      setCanValidate(validateNow);
-    }
-  });
-
-  useEffect(() => {
-    if (autoFocus) {
+    if (config.autoFocus) {
       if (firstTextInput.current) {
         firstTextInput.current.focus();
       }
@@ -110,6 +98,14 @@ const GenericForm: React.FC<IGenericForm> = ({
       }
     }
   }, []);
+
+  const disableInput = () => {
+    if (config.isLoading) {
+      return true;
+    }
+
+    return config.permission === FormPermissions.READ;
+  };
 
   const renderFormElements = (
     formik: IFormik<FormikValues>,
@@ -122,17 +118,18 @@ const GenericForm: React.FC<IGenericForm> = ({
           return (
             <React.Fragment key={`${entry.name}-${index}`}>
               <FormInput
-                dataTesthookId={dataTesthookId + "-field-" + index}
+                dataTesthookId={config.dataTesthookId + "-field-" + index}
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name] || ""}
-                disabled={permission === FormPermissions.READ}
+                disabled={disableInput()}
                 {...(index === 0 ? { innerRef: firstTextInput } : null)}
               />
-              {(canValidate || formik.touched[entry.name]) &&
+              {!config.isLoading &&
+              formik.touched[entry.name] &&
               formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
@@ -142,19 +139,18 @@ const GenericForm: React.FC<IGenericForm> = ({
           return (
             <React.Fragment key={`${entry.name}-${index}`}>
               <FormTextArea
-                dataTesthookId={dataTesthookId + "-field-" + index}
+                dataTesthookId={config.dataTesthookId + "-field-" + index}
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name] || ""}
-                disabled={permission === FormPermissions.READ}
+                disabled={disableInput()}
                 height={"25rem"}
                 {...(index == 0 ? { innerRef: firstTextAreaInput } : null)}
               />
-              {(canValidate || formik.touched[entry.name]) &&
-              formik.errors[entry.name] ? (
+              {formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
@@ -163,43 +159,78 @@ const GenericForm: React.FC<IGenericForm> = ({
     });
   };
 
-  return (
+  api.submitForm = () => {
+    formik.validateForm().then(errors => {
+      if (Object.keys(errors).length === 0) {
+        formik.submitForm();
+      } else {
+        const fields: any = {};
+        config.schema.forEach(
+          (entry: IGenericFormInput) => (fields[entry.name] = true)
+        );
+
+        formik.setTouched(fields);
+      }
+    });
+  };
+
+  api.setInitialFormValues = (fields: { [x: string]: string }) => {
+    formik.setValues(fields);
+  };
+
+  api.isValid = formik.isValid;
+
+  const getRightSubmitButtonHandler = () => {
+    if (config.buttonHandler === FormSubmitButtonHandlerTypes.CLICK) {
+      return {
+        onClick: () => api.submitForm()
+      };
+    }
+
+    if (config.buttonHandler === FormSubmitButtonHandlerTypes.MOUSEDOWN) {
+      return {
+        onMouseDown: () => api.submitForm()
+      };
+    }
+  };
+
+  const form = (
     <FormContainer>
       <form
-        data-testhook-id={dataTesthookId}
-        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-          formik.handleSubmit(e);
+        data-testhook-id={config.dataTesthookId}
+        onSubmit={() => {
+          api.submitForm();
         }}
         onBlur={() => {
-          if (onChange) {
-            onChange(formik.isValid, formik.values);
+          if (config.onChange) {
+            config.onChange(formik.isValid, formik.values);
           }
         }}>
-        {renderFormElements(formik, schema)}
-        {permission === FormPermissions.EDIT &&
-        (confirmationLabel || cancellationLabel) ? (
+        {renderFormElements(formik, config.schema)}
+        {config.permission === FormPermissions.EDIT &&
+        (config.confirmationLabel || config.cancellationLabel) ? (
           <>
             <ContentSeparator />
             <FlexRow>
-              {confirmationLabel ? (
+              {config.confirmationLabel ? (
                 <LoaderButton
-                  dataTesthookId={dataTesthookId + "-submit-button"}
-                  buttonType="submit"
-                  loading={isLoading}
-                  onMouseDown={() => setCanValidate(true)}>
-                  {confirmationLabel}
+                  dataTesthookId={config.dataTesthookId + "-submit-button"}
+                  buttonType="button"
+                  {...getRightSubmitButtonHandler()}
+                  loading={config.isLoading}>
+                  {config.confirmationLabel}
                 </LoaderButton>
               ) : null}
-              {cancellationLabel ? (
+              {config.cancellationLabel ? (
                 <CustomCancelButton
                   data-testhook="cancel-button"
                   type="button"
                   onMouseDown={() => {
-                    if (onCancel) {
-                      onCancel();
+                    if (config.onCancel) {
+                      config.onCancel();
                     }
                   }}>
-                  {cancellationLabel}
+                  {config.cancellationLabel}
                 </CustomCancelButton>
               ) : null}
             </FlexRow>
@@ -208,6 +239,8 @@ const GenericForm: React.FC<IGenericForm> = ({
       </form>
     </FormContainer>
   );
+
+  return [form, api];
 };
 
-export default GenericForm;
+export default useFormBuilder;
