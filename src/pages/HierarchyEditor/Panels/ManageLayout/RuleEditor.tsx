@@ -40,6 +40,10 @@ import useFormBuilder, {
 } from "../../../../hooks/useFormBuilder";
 import { FormPermissions } from "../../../../types/FormPermission";
 import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
+import {
+  getSegmentNames,
+  getStepNamesForSegment
+} from "../../../../stores/LayoutEditorService";
 
 const ItemContainer = styled(CollectionContainer)`
   min-height: 0;
@@ -102,45 +106,10 @@ interface IRuleFormValues {
   destinationStepName?: string;
 }
 
-const validateApprovalExecutionForm = (_values: IRuleFormValues) => {
+const validateRuleForm = (_values: IRuleFormValues) => {
   const errors = {} as IRuleFormValues;
 
   return errors;
-};
-
-const getApprovalExecutionFormSchema = (): IGenericFormSchema => {
-  return [
-    {
-      labelValue: "Pattern*",
-      name: "pattern",
-      formType: "text"
-    },
-    {
-      labelValue: "Source Path Prefix",
-      name: "sourcePathPrefix",
-      formType: "text"
-    },
-    {
-      labelValue: "Destination Path Prefix",
-      name: "destinationPathPrefix",
-      formType: "text"
-    },
-    {
-      labelValue: "Destination Type*",
-      name: "destinationType",
-      formType: "text"
-    },
-    {
-      labelValue: "Destination Segment Name*",
-      name: "destinationSegmentName",
-      formType: "text"
-    },
-    {
-      labelValue: "Destination Step Name*",
-      name: "destinationStepName",
-      formType: "text"
-    }
-  ];
 };
 
 const RuleEditor: React.FC = () => {
@@ -153,6 +122,30 @@ const RuleEditor: React.FC = () => {
   const [ruleToEdit, setRuleToEdit] = useState<IRule | undefined>(undefined);
 
   const [addMode, setAddMode] = useState(false);
+
+  const [steps, setSteps] = useState<Array<string>>([]);
+
+  const [selectedSegment, setSelectedSegment] = useState<string | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    if (ruleToEdit) {
+      setSelectedSegment(ruleToEdit.destinationSegmentName);
+    } else {
+      setSelectedSegment(undefined);
+    }
+  }, [ruleToEdit]);
+
+  useEffect(() => {
+    if (selectedSegment) {
+      setSteps(
+        getStepNamesForSegment(editorStoreContext.state.layout, selectedSegment)
+      );
+    } else {
+      setSteps([]);
+    }
+  }, [selectedSegment]);
 
   useEffect(() => {
     if (
@@ -189,7 +182,7 @@ const RuleEditor: React.FC = () => {
     if (ruleToEdit) {
       ruleToEdit.destinationPathPrefix = ruleForm.destinationPathPrefix;
       ruleToEdit.destinationType = ruleForm.destinationType as RuleDestinationTypeEnum;
-      ruleToEdit.destinationStepName = ruleForm.destinationSegmentName;
+      ruleToEdit.destinationStepName = ruleForm.destinationStepName;
       ruleToEdit.sourcePathPrefix = ruleForm.sourcePathPrefix;
       ruleToEdit.pattern = ruleForm.pattern;
       ruleToEdit.destinationSegmentName = ruleForm.destinationSegmentName;
@@ -208,14 +201,60 @@ const RuleEditor: React.FC = () => {
     }
   };
 
+  const getApprovalExecutionFormSchema = (): IGenericFormSchema => {
+    return [
+      {
+        labelValue: "Pattern*",
+        name: "pattern",
+        formType: "text"
+      },
+      {
+        labelValue: "Source Path Prefix",
+        name: "sourcePathPrefix",
+        formType: "text"
+      },
+      {
+        labelValue: "Destination Path Prefix",
+        name: "destinationPathPrefix",
+        formType: "text"
+      },
+      {
+        labelValue: "Destination Type*",
+        name: "destinationType",
+        formType: "select",
+        options: [
+          { name: "products", value: RuleDestinationTypeEnum.PRODUCTS },
+          { name: "materials", value: RuleDestinationTypeEnum.MATERIALS }
+        ]
+      },
+      {
+        labelValue: "Destination Segment Name*",
+        name: "destinationSegmentName",
+        formType: "select",
+        options: getSegmentNames(
+          editorStoreContext.state.layout
+        ).map(segmentName => ({ name: segmentName, value: segmentName }))
+      },
+      {
+        labelValue: "Destination Step Name*",
+        name: "destinationStepName",
+        formType: "select",
+        options: steps.map(stepName => ({ name: stepName, value: stepName }))
+      }
+    ];
+  };
+
   const formConfig: IFormBuilderConfig = {
     dataTesthookId: "rule-edit-form",
     schema: getApprovalExecutionFormSchema(),
     permission: FormPermissions.EDIT,
     isLoading: false,
-    validate: values => validateApprovalExecutionForm(values),
+    validate: values => validateRuleForm(values),
     onSubmit: form => {
       updateRule(form as IRuleFormValues);
+    },
+    onChange: (_valid: boolean, form: any) => {
+      setSelectedSegment(form.destinationSegmentName);
     },
     onCancel: () => {
       if (addMode) {

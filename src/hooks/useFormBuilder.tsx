@@ -30,6 +30,7 @@ import FlexRow from "../atoms/FlexRow";
 import { LoaderButton, CancelButton } from "../atoms/Button";
 import styled from "styled-components";
 import FlexColumn from "../atoms/FlexColumn";
+import FormSelect from "../molecules/FormSelect";
 
 const CustomCancelButton = styled(CancelButton)`
   margin-left: 1rem;
@@ -85,6 +86,7 @@ const useFormBuilder = (
 
   const firstTextInput: React.RefObject<HTMLInputElement> = useRef(null);
   const firstTextAreaInput: React.RefObject<HTMLTextAreaElement> = useRef(null);
+  const firstSelectInput: React.RefObject<HTMLSelectElement> = useRef(null);
 
   const api: IFormApi = {} as IFormApi;
 
@@ -95,6 +97,9 @@ const useFormBuilder = (
       }
       if (firstTextAreaInput.current) {
         firstTextAreaInput.current.focus();
+      }
+      if (firstSelectInput.current) {
+        firstSelectInput.current.focus();
       }
     }
   }, []);
@@ -153,6 +158,34 @@ const useFormBuilder = (
               {formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
+            </React.Fragment>
+          );
+        case "select":
+          return (
+            <React.Fragment key={`${entry.name}-${index}`}>
+              <FormSelect
+                dataTesthookId={config.dataTesthookId + "-field-" + index}
+                labelValue={entry.labelValue}
+                name={entry.name}
+                formType={entry.formType}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values[entry.name] || ""}
+                disabled={disableInput()}
+                {...(index === 0 ? { innerRef: firstSelectInput } : null)}>
+                <option value="" label={`Select ...`} />
+                {entry.options
+                  ? entry.options.map((option, index) => {
+                      return (
+                        <option
+                          key={`${config.dataTesthookId}-field-${index}-option-${index}`}
+                          value={option.value}
+                          label={option.name}
+                        />
+                      );
+                    })
+                  : null}
+              </FormSelect>
             </React.Fragment>
           );
       }

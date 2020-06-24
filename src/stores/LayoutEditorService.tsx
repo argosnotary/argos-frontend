@@ -58,6 +58,24 @@ export const deleteLayoutAuthorizedKey = (
   return layout;
 };
 
+export const getStepNamesForSegment = (
+  layout: ILayout,
+  segmentName: string
+) => {
+  return layout && layout.layoutSegments
+    ? layout.layoutSegments
+        .filter(segment => segment.name === segmentName)
+        .flatMap(segment => segment.steps)
+        .map(step => step.name)
+    : [];
+};
+
+export const getSegmentNames = (layout: ILayout) => {
+  return layout && layout.layoutSegments
+    ? layout.layoutSegments.map(segment => segment.name)
+    : [];
+};
+
 export const addExpectedEndProduct = (
   layout: ILayout,
   rule: IRule

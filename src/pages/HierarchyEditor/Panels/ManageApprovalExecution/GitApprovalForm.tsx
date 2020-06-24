@@ -18,11 +18,11 @@ import styled from "styled-components";
 
 import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
 import { FormPermissions } from "../../../../types/FormPermission";
-import { Select } from "../../../../atoms/DropDown";
 import useFormBuilder, {
   IFormBuilderConfig,
   FormSubmitButtonHandlerTypes
 } from "../../../../hooks/useFormBuilder";
+import Select from "../../../../atoms/Select";
 
 const SelectionContainer = styled.section`
   display: flex;

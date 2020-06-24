@@ -259,9 +259,9 @@ exports[`approval happy flow 1`] = `
                           "$$typeof": Symbol(react.forward_ref),
                           "attrs": Array [],
                           "componentStyle": ComponentStyle {
-                            "componentId": "sc-jDwBTQ",
+                            "componentId": "sc-gPEVay",
                             "isStatic": false,
-                            "lastClassName": "ifDvUS",
+                            "lastClassName": "dJwIjI",
                             "rules": Array [
                               "
   display: flex;
@@ -272,7 +272,7 @@ exports[`approval happy flow 1`] = `
                           "displayName": "styled.section",
                           "foldedComponentIds": Array [],
                           "render": [Function],
-                          "styledComponentId": "sc-jDwBTQ",
+                          "styledComponentId": "sc-gPEVay",
                           "target": "section",
                           "toString": [Function],
                           "warnTooManyClasses": [Function],
@@ -282,7 +282,7 @@ exports[`approval happy flow 1`] = `
                       forwardedRef={null}
                     >
                       <section
-                        className="sc-jDwBTQ ifDvUS"
+                        className="sc-gPEVay dJwIjI"
                       >
                         <SelectListItem
                           checked={true}
@@ -306,22 +306,22 @@ exports[`approval happy flow 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jlyJG",
+                                    "componentId": "sc-gipzik",
                                     "isStatic": false,
-                                    "lastClassName": "fHekbi",
+                                    "lastClassName": "kikrhi",
                                     "rules": Array [
                                       "
   display: none;
 
   &:checked + ",
-                                      ".sc-iRbamj",
+                                      ".sc-jlyJG",
                                       " {
     background-color: ",
                                       [Function],
                                       ";
 
     ",
-                                      ".sc-gPEVay",
+                                      ".sc-iRbamj",
                                       " {
       display: flex;
     }
@@ -332,7 +332,7 @@ exports[`approval happy flow 1`] = `
                                   "displayName": "styled.input",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jlyJG",
+                                  "styledComponentId": "sc-gipzik",
                                   "target": "input",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -348,7 +348,7 @@ exports[`approval happy flow 1`] = `
                             >
                               <input
                                 checked={true}
-                                className="sc-jlyJG fHekbi"
+                                className="sc-gipzik kikrhi"
                                 id="id-segment1-step1"
                                 name="approval-step-choice"
                                 onChange={[Function]}
@@ -369,9 +369,9 @@ exports[`approval happy flow 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-iRbamj",
+                                    "componentId": "sc-jlyJG",
                                     "isStatic": false,
-                                    "lastClassName": "bymngO",
+                                    "lastClassName": "ceHabY",
                                     "rules": Array [
                                       "
   display: flex;
@@ -390,7 +390,7 @@ exports[`approval happy flow 1`] = `
     cursor: pointer;
 
     ",
-                                      ".sc-gPEVay",
+                                      ".sc-iRbamj",
                                       " {
       display: flex;
     }
@@ -401,7 +401,7 @@ exports[`approval happy flow 1`] = `
                                   "displayName": "styled.label",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-iRbamj",
+                                  "styledComponentId": "sc-jlyJG",
                                   "target": "label",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -413,7 +413,7 @@ exports[`approval happy flow 1`] = `
                               onClick={[Function]}
                             >
                               <label
-                                className="sc-iRbamj bymngO"
+                                className="sc-jlyJG ceHabY"
                                 data-testhook-id="select-list-item-segment1-step1"
                                 htmlFor="id-segment1-step1"
                                 onClick={[Function]}
@@ -425,9 +425,9 @@ exports[`approval happy flow 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-gPEVay",
+                                          "componentId": "sc-iRbamj",
                                           "isStatic": false,
-                                          "lastClassName": "cqtexx",
+                                          "lastClassName": "eoatna",
                                           "rules": Array [
                                             "
   display: none;
@@ -442,7 +442,7 @@ exports[`approval happy flow 1`] = `
                                         "displayName": "styled.div",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-gPEVay",
+                                        "styledComponentId": "sc-iRbamj",
                                         "target": "div",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -452,7 +452,7 @@ exports[`approval happy flow 1`] = `
                                     forwardedRef={null}
                                   >
                                     <div
-                                      className="sc-gPEVay cqtexx"
+                                      className="sc-iRbamj eoatna"
                                     >
                                       <ChevronIcon
                                         color="#8d99ae"
@@ -505,22 +505,22 @@ exports[`approval happy flow 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jlyJG",
+                                    "componentId": "sc-gipzik",
                                     "isStatic": false,
-                                    "lastClassName": "fHekbi",
+                                    "lastClassName": "kikrhi",
                                     "rules": Array [
                                       "
   display: none;
 
   &:checked + ",
-                                      ".sc-iRbamj",
+                                      ".sc-jlyJG",
                                       " {
     background-color: ",
                                       [Function],
                                       ";
 
     ",
-                                      ".sc-gPEVay",
+                                      ".sc-iRbamj",
                                       " {
       display: flex;
     }
@@ -531,7 +531,7 @@ exports[`approval happy flow 1`] = `
                                   "displayName": "styled.input",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jlyJG",
+                                  "styledComponentId": "sc-gipzik",
                                   "target": "input",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -547,7 +547,7 @@ exports[`approval happy flow 1`] = `
                             >
                               <input
                                 checked={false}
-                                className="sc-jlyJG fHekbi"
+                                className="sc-gipzik kikrhi"
                                 id="id-segment2-step1"
                                 name="approval-step-choice"
                                 onChange={[Function]}
@@ -568,9 +568,9 @@ exports[`approval happy flow 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-iRbamj",
+                                    "componentId": "sc-jlyJG",
                                     "isStatic": false,
-                                    "lastClassName": "bymngO",
+                                    "lastClassName": "ceHabY",
                                     "rules": Array [
                                       "
   display: flex;
@@ -589,7 +589,7 @@ exports[`approval happy flow 1`] = `
     cursor: pointer;
 
     ",
-                                      ".sc-gPEVay",
+                                      ".sc-iRbamj",
                                       " {
       display: flex;
     }
@@ -600,7 +600,7 @@ exports[`approval happy flow 1`] = `
                                   "displayName": "styled.label",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-iRbamj",
+                                  "styledComponentId": "sc-jlyJG",
                                   "target": "label",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -612,7 +612,7 @@ exports[`approval happy flow 1`] = `
                               onClick={[Function]}
                             >
                               <label
-                                className="sc-iRbamj bymngO"
+                                className="sc-jlyJG ceHabY"
                                 data-testhook-id="select-list-item-segment2-step1"
                                 htmlFor="id-segment2-step1"
                                 onClick={[Function]}
@@ -624,9 +624,9 @@ exports[`approval happy flow 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-gPEVay",
+                                          "componentId": "sc-iRbamj",
                                           "isStatic": false,
-                                          "lastClassName": "cqtexx",
+                                          "lastClassName": "eoatna",
                                           "rules": Array [
                                             "
   display: none;
@@ -641,7 +641,7 @@ exports[`approval happy flow 1`] = `
                                         "displayName": "styled.div",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-gPEVay",
+                                        "styledComponentId": "sc-iRbamj",
                                         "target": "div",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -651,7 +651,7 @@ exports[`approval happy flow 1`] = `
                                     forwardedRef={null}
                                   >
                                     <div
-                                      className="sc-gPEVay cqtexx"
+                                      className="sc-iRbamj eoatna"
                                     >
                                       <ChevronIcon
                                         color="#8d99ae"
@@ -1125,9 +1125,9 @@ exports[`approval happy flow 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-jWBwVP",
+                                                "componentId": "sc-cMljjf",
                                                 "isStatic": false,
-                                                "lastClassName": "fiAjim",
+                                                "lastClassName": "TSQBP",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -1145,7 +1145,7 @@ exports[`approval happy flow 1`] = `
                                                 "sc-bZQynM",
                                               ],
                                               "render": [Function],
-                                              "styledComponentId": "sc-jWBwVP",
+                                              "styledComponentId": "sc-cMljjf",
                                               "target": "div",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -1155,7 +1155,7 @@ exports[`approval happy flow 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-bZQynM sc-jWBwVP fiAjim"
+                                            className="sc-bZQynM sc-cMljjf TSQBP"
                                           >
                                             <form
                                               data-testhook-id="xl-deploy-collector-execution-form-0"
@@ -2122,9 +2122,9 @@ exports[`approval happy flow 1`] = `
                           "$$typeof": Symbol(react.forward_ref),
                           "attrs": Array [],
                           "componentStyle": ComponentStyle {
-                            "componentId": "sc-jAaTju",
+                            "componentId": "sc-jDwBTQ",
                             "isStatic": false,
-                            "lastClassName": "jwHlbm",
+                            "lastClassName": "djgwiI",
                             "rules": Array [
                               "
   display: flex;
@@ -2153,7 +2153,7 @@ exports[`approval happy flow 1`] = `
                             "sc-VigVT",
                           ],
                           "render": [Function],
-                          "styledComponentId": "sc-jAaTju",
+                          "styledComponentId": "sc-jDwBTQ",
                           "target": "div",
                           "toString": [Function],
                           "warnTooManyClasses": [Function],
@@ -2163,7 +2163,7 @@ exports[`approval happy flow 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-VigVT sc-jAaTju jwHlbm"
+                        className="sc-VigVT sc-jDwBTQ djgwiI"
                       >
                         <LoaderButton
                           buttonType="button"
@@ -2638,9 +2638,9 @@ exports[`renders correctly with existing approvals 1`] = `
                           "$$typeof": Symbol(react.forward_ref),
                           "attrs": Array [],
                           "componentStyle": ComponentStyle {
-                            "componentId": "sc-jDwBTQ",
+                            "componentId": "sc-gPEVay",
                             "isStatic": false,
-                            "lastClassName": "ifDvUS",
+                            "lastClassName": "dJwIjI",
                             "rules": Array [
                               "
   display: flex;
@@ -2651,7 +2651,7 @@ exports[`renders correctly with existing approvals 1`] = `
                           "displayName": "styled.section",
                           "foldedComponentIds": Array [],
                           "render": [Function],
-                          "styledComponentId": "sc-jDwBTQ",
+                          "styledComponentId": "sc-gPEVay",
                           "target": "section",
                           "toString": [Function],
                           "warnTooManyClasses": [Function],
@@ -2661,7 +2661,7 @@ exports[`renders correctly with existing approvals 1`] = `
                       forwardedRef={null}
                     >
                       <section
-                        className="sc-jDwBTQ ifDvUS"
+                        className="sc-gPEVay dJwIjI"
                       >
                         <SelectListItem
                           checked={false}
@@ -2685,22 +2685,22 @@ exports[`renders correctly with existing approvals 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jlyJG",
+                                    "componentId": "sc-gipzik",
                                     "isStatic": false,
-                                    "lastClassName": "fHekbi",
+                                    "lastClassName": "kikrhi",
                                     "rules": Array [
                                       "
   display: none;
 
   &:checked + ",
-                                      ".sc-iRbamj",
+                                      ".sc-jlyJG",
                                       " {
     background-color: ",
                                       [Function],
                                       ";
 
     ",
-                                      ".sc-gPEVay",
+                                      ".sc-iRbamj",
                                       " {
       display: flex;
     }
@@ -2711,7 +2711,7 @@ exports[`renders correctly with existing approvals 1`] = `
                                   "displayName": "styled.input",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jlyJG",
+                                  "styledComponentId": "sc-gipzik",
                                   "target": "input",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -2727,7 +2727,7 @@ exports[`renders correctly with existing approvals 1`] = `
                             >
                               <input
                                 checked={false}
-                                className="sc-jlyJG fHekbi"
+                                className="sc-gipzik kikrhi"
                                 id="id-segment1-step1"
                                 name="approval-step-choice"
                                 onChange={[Function]}
@@ -2748,9 +2748,9 @@ exports[`renders correctly with existing approvals 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-iRbamj",
+                                    "componentId": "sc-jlyJG",
                                     "isStatic": false,
-                                    "lastClassName": "bymngO",
+                                    "lastClassName": "ceHabY",
                                     "rules": Array [
                                       "
   display: flex;
@@ -2769,7 +2769,7 @@ exports[`renders correctly with existing approvals 1`] = `
     cursor: pointer;
 
     ",
-                                      ".sc-gPEVay",
+                                      ".sc-iRbamj",
                                       " {
       display: flex;
     }
@@ -2780,7 +2780,7 @@ exports[`renders correctly with existing approvals 1`] = `
                                   "displayName": "styled.label",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-iRbamj",
+                                  "styledComponentId": "sc-jlyJG",
                                   "target": "label",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -2792,7 +2792,7 @@ exports[`renders correctly with existing approvals 1`] = `
                               onClick={[Function]}
                             >
                               <label
-                                className="sc-iRbamj bymngO"
+                                className="sc-jlyJG ceHabY"
                                 data-testhook-id="select-list-item-segment1-step1"
                                 htmlFor="id-segment1-step1"
                                 onClick={[Function]}
@@ -2804,9 +2804,9 @@ exports[`renders correctly with existing approvals 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-gPEVay",
+                                          "componentId": "sc-iRbamj",
                                           "isStatic": false,
-                                          "lastClassName": "cqtexx",
+                                          "lastClassName": "eoatna",
                                           "rules": Array [
                                             "
   display: none;
@@ -2821,7 +2821,7 @@ exports[`renders correctly with existing approvals 1`] = `
                                         "displayName": "styled.div",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-gPEVay",
+                                        "styledComponentId": "sc-iRbamj",
                                         "target": "div",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -2831,7 +2831,7 @@ exports[`renders correctly with existing approvals 1`] = `
                                     forwardedRef={null}
                                   >
                                     <div
-                                      className="sc-gPEVay cqtexx"
+                                      className="sc-iRbamj eoatna"
                                     >
                                       <ChevronIcon
                                         color="#8d99ae"
@@ -2884,22 +2884,22 @@ exports[`renders correctly with existing approvals 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jlyJG",
+                                    "componentId": "sc-gipzik",
                                     "isStatic": false,
-                                    "lastClassName": "fHekbi",
+                                    "lastClassName": "kikrhi",
                                     "rules": Array [
                                       "
   display: none;
 
   &:checked + ",
-                                      ".sc-iRbamj",
+                                      ".sc-jlyJG",
                                       " {
     background-color: ",
                                       [Function],
                                       ";
 
     ",
-                                      ".sc-gPEVay",
+                                      ".sc-iRbamj",
                                       " {
       display: flex;
     }
@@ -2910,7 +2910,7 @@ exports[`renders correctly with existing approvals 1`] = `
                                   "displayName": "styled.input",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jlyJG",
+                                  "styledComponentId": "sc-gipzik",
                                   "target": "input",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -2926,7 +2926,7 @@ exports[`renders correctly with existing approvals 1`] = `
                             >
                               <input
                                 checked={false}
-                                className="sc-jlyJG fHekbi"
+                                className="sc-gipzik kikrhi"
                                 id="id-segment2-step1"
                                 name="approval-step-choice"
                                 onChange={[Function]}
@@ -2947,9 +2947,9 @@ exports[`renders correctly with existing approvals 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-iRbamj",
+                                    "componentId": "sc-jlyJG",
                                     "isStatic": false,
-                                    "lastClassName": "bymngO",
+                                    "lastClassName": "ceHabY",
                                     "rules": Array [
                                       "
   display: flex;
@@ -2968,7 +2968,7 @@ exports[`renders correctly with existing approvals 1`] = `
     cursor: pointer;
 
     ",
-                                      ".sc-gPEVay",
+                                      ".sc-iRbamj",
                                       " {
       display: flex;
     }
@@ -2979,7 +2979,7 @@ exports[`renders correctly with existing approvals 1`] = `
                                   "displayName": "styled.label",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-iRbamj",
+                                  "styledComponentId": "sc-jlyJG",
                                   "target": "label",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -2991,7 +2991,7 @@ exports[`renders correctly with existing approvals 1`] = `
                               onClick={[Function]}
                             >
                               <label
-                                className="sc-iRbamj bymngO"
+                                className="sc-jlyJG ceHabY"
                                 data-testhook-id="select-list-item-segment2-step1"
                                 htmlFor="id-segment2-step1"
                                 onClick={[Function]}
@@ -3003,9 +3003,9 @@ exports[`renders correctly with existing approvals 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-gPEVay",
+                                          "componentId": "sc-iRbamj",
                                           "isStatic": false,
-                                          "lastClassName": "cqtexx",
+                                          "lastClassName": "eoatna",
                                           "rules": Array [
                                             "
   display: none;
@@ -3020,7 +3020,7 @@ exports[`renders correctly with existing approvals 1`] = `
                                         "displayName": "styled.div",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-gPEVay",
+                                        "styledComponentId": "sc-iRbamj",
                                         "target": "div",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -3030,7 +3030,7 @@ exports[`renders correctly with existing approvals 1`] = `
                                     forwardedRef={null}
                                   >
                                     <div
-                                      className="sc-gPEVay cqtexx"
+                                      className="sc-iRbamj eoatna"
                                     >
                                       <ChevronIcon
                                         color="#8d99ae"

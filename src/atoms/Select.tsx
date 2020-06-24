@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from "styled-components";
 
-export const Select = styled.select`
+import styled, { css } from "styled-components";
+
+export const SelectCSS = css<{ disabled?: boolean; height?: string }>`
   &::-ms-expand {
     display: none;
   }
@@ -37,4 +38,38 @@ export const Select = styled.select`
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
+  height: ${props => (props.height ? props.height : "2.4375rem")};
+
+  overflow: visible;
+  box-sizing: border-box;
+
+  margin: 0 0 1rem;
+  padding: 0.5rem;
+  border: 1px solid #cacaca;
+  border-radius: 0;
+  background-color: ${props => (props.disabled ? "#e0e0e0" : "#fefefe")};
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #0a0a0a;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
+    -webkit-box-shadow 0.5s;
+
+  &:hover {
+    cursor: ${props => (props.disabled ? "not-allowed" : "initial")};
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid #8a8a8a;
+    box-shadow: 0 0 5px #cacaca;
+  }
 `;
+
+const Select = styled.select`
+  ${SelectCSS}
+`;
+
+export default Select;
