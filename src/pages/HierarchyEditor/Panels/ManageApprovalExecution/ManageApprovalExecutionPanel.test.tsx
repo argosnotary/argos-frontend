@@ -233,13 +233,6 @@ it("approval happy flow", async () => {
       "appversion1"
     );
 
-    root.update();
-    root
-      .find('form[data-testhook-id="xl-deploy-collector-execution-form-0"]')
-      .simulate("blur");
-
-    await new Promise(resolve => setTimeout(resolve, 500));
-
     root
       .find(
         'button[data-testhook-id="xl-deploy-collector-execution-form-0-submit-button"]'

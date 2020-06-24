@@ -160,16 +160,18 @@ const useFormBuilder = (
   };
 
   api.submitForm = () => {
-    if (formik.isValid) {
-      formik.submitForm();
-    } else {
-      const fields: any = {};
-      config.schema.map(
-        (entry: IGenericFormInput) => (fields[entry.name] = true)
-      );
+    formik.validateForm().then(errors => {
+      if (Object.keys(errors).length === 0) {
+        formik.submitForm();
+      } else {
+        const fields: any = {};
+        config.schema.forEach(
+          (entry: IGenericFormInput) => (fields[entry.name] = true)
+        );
 
-      formik.setTouched(fields);
-    }
+        formik.setTouched(fields);
+      }
+    });
   };
 
   api.setInitialFormValues = (fields: { [x: string]: string }) => {

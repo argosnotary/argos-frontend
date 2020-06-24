@@ -444,14 +444,6 @@ it("sign layout happy flow", async () => {
       "password"
     );
 
-    root.update();
-    root
-      .find('input[name="passphrase"]')
-      .first()
-      .simulate("blur");
-
-    await new Promise(resolve => setTimeout(resolve, 500));
-
     root
       .find('form[data-testhook-id="passphrase-form"]')
       .first()

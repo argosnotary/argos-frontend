@@ -88,6 +88,7 @@ const HookForm = () => {
   config.schema = dummyScheme;
   config.permission = "EDIT";
   config.onSubmit = onSubmit;
+  config.buttonHandler = "CLICK";
   config.initialValues = {
     name: "Luke",
     email: ""
