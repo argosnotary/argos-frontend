@@ -42,6 +42,21 @@ import ISearchResult from "../../../../interfaces/ISearchResult";
 import { IPublicKey } from "../../../../interfaces/ILayout";
 import { Warning } from "../../../../atoms/Alerts";
 
+interface IAccountStatusLabelProps {
+  active: boolean;
+}
+
+const AccountStatusLabel = styled.span<IAccountStatusLabelProps>`
+  color: ${props =>
+    props.active ? props.theme.labels.active : props.theme.labels.inactive};
+  padding: 0 0.5rem;
+  border: 2px solid
+    ${props =>
+      props.active ? props.theme.labels.active : props.theme.labels.inactive};
+  margin: 0 0.5rem 0 0;
+  font-size: 0.9rem;
+`;
+
 const ItemContainer = styled(CollectionContainer)`
   min-height: 0;
   flex-direction: column;
@@ -81,7 +96,7 @@ const ItemTitle = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  span {
+  > span {
     margin: 0 0.5rem;
   }
 `;
@@ -200,7 +215,14 @@ const LayoutDetailsEditor: React.FC = () => {
       <ItemContainerSection>
         <ItemTitle>
           <CollectionContainerSpan>
-            {account.name} {account.active ? <>active</> : <>inactive</>}
+            {account.active ? (
+              <AccountStatusLabel active={true}>active key</AccountStatusLabel>
+            ) : (
+              <AccountStatusLabel active={false}>
+                inactive key
+              </AccountStatusLabel>
+            )}
+            {account.name}
           </CollectionContainerSpan>
           <ActionIconsContainer>
             <RemoveItemButton
@@ -273,6 +295,7 @@ const LayoutDetailsEditor: React.FC = () => {
         isLoading={searchAccountApiResponse.isLoading}
         defaultLabel={"Search user"}
         onSelectLabel={"Selected user"}
+        placeHolder={"Name"}
       />
     );
   };

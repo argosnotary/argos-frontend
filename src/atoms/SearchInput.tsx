@@ -80,6 +80,7 @@ interface ISearchInputProps {
   isLoading: boolean;
   onSelectLabel: string;
   defaultLabel: string;
+  placeHolder: string;
 }
 
 const SearchInput: React.FC<ISearchInputProps> = ({
@@ -89,7 +90,8 @@ const SearchInput: React.FC<ISearchInputProps> = ({
   fetchData,
   isLoading,
   onSelectLabel,
-  defaultLabel
+  defaultLabel,
+  placeHolder
 }) => {
   const [displayResults, setDisplayResults] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -113,8 +115,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
               setSelected(false);
               onCancel();
             }}
-            type="button"
-          >
+            type="button">
             Cancel
           </CustomCancelButton>
         </SelectionContainer>
@@ -157,6 +158,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
         <FormInput
           formType={"text"}
           labelValue={defaultLabel}
+          placeHolder={placeHolder}
           name="searchinput"
           onChange={e => {
             onChange(e.target.value);
@@ -188,8 +190,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
                           setInputValue(res.displayLabel);
                           setDisplayResults(false);
                         }}
-                        key={res.id}
-                      >
+                        key={res.id}>
                         {res.displayLabel}
                       </SearchResultEntry>
                     ))}
