@@ -106,8 +106,24 @@ interface IRuleFormValues {
   destinationStepName?: string;
 }
 
-const validateRuleForm = (_values: IRuleFormValues) => {
+const validateRuleForm = (values: IRuleFormValues) => {
   const errors = {} as IRuleFormValues;
+  if (!values.pattern) {
+    errors.pattern = "Please fill in a pattern.";
+  }
+
+  if (!values.destinationType) {
+    errors.destinationType = "Please fill in a destination type.";
+  }
+
+  if (!values.destinationSegmentName) {
+    errors.destinationSegmentName =
+      "Please fill in a destination segment name.";
+  }
+
+  if (!values.destinationStepName) {
+    errors.destinationStepName = "Please fill in a destination step name.";
+  }
 
   return errors;
 };

@@ -186,6 +186,11 @@ const useFormBuilder = (
                     })
                   : null}
               </FormSelect>
+              {!config.isLoading &&
+              formik.touched[entry.name] &&
+              formik.errors[entry.name] ? (
+                <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
+              ) : null}
             </React.Fragment>
           );
       }
