@@ -14,62 +14,44 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect, useState } from "react";
-import styled, { css, ThemeContext } from "styled-components";
-
-import { CancelButton } from "../../../atoms/Button";
-import ContentSeparator from "../../../atoms/ContentSeparator";
-import DataRequest from "../../../types/DataRequest";
-import useDataApi from "../../../hooks/useDataApi";
-import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-import IServiceAccountApiResponse from "../../../interfaces/INpaApiResponse";
-import PasswordView from "../../../atoms/PasswordView";
-import FlexRow from "../../../atoms/FlexRow";
-import { cryptoAvailable, generateKey } from "../../../security";
-import {
-  Modal,
-  ModalBody,
-  ModalButton,
-  ModalFlexColumWrapper,
-  ModalFooter
-} from "../../../atoms/Modal";
-import { IGenericFormSchema } from "../../../interfaces/IGenericFormSchema";
-import KeyContainer from "../../../atoms/KeyContainer";
-import { IPublicKey } from "../../../interfaces/IPublicKey";
-import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
-import { FormPermissions } from "../../../types/FormPermission";
-import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
-import { Panel } from "../../../molecules/Panel";
-import { useUserProfileContext } from "../../../stores/UserProfile";
+import { CancelButton } from "../../../../atoms/Button";
+import ContentSeparator from "../../../../atoms/ContentSeparator";
+import DataRequest from "../../../../types/DataRequest";
+import useDataApi from "../../../../hooks/useDataApi";
+import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
+import IServiceAccountApiResponse from "../../../../interfaces/INpaApiResponse";
+import PasswordView from "../../../../atoms/PasswordView";
+import FlexRow from "../../../../atoms/FlexRow";
+import { cryptoAvailable } from "../../../../security";
+import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
+import KeyContainer from "../../../../atoms/KeyContainer";
+import { IPublicKey } from "../../../../interfaces/IPublicKey";
+import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
+import { FormPermissions } from "../../../../types/FormPermission";
+import { Panel } from "../../../../molecules/Panel";
+import { useUserProfileContext } from "../../../../stores/UserProfile";
 import {
   HierarchyEditorActionTypes,
   HierarchyEditorPanelModes,
   HierarchyEditorPanelTypes,
   HierarchyEditorStateContext
-} from "../../../stores/hierarchyEditorStore";
-import {
-  addObjectToTree,
-  removeObjectFromTree,
-  updateTreeObject
-} from "../utils";
-import ITreeNode from "../../../interfaces/ITreeNode";
-import { LoaderIcon } from "../../../atoms/Icons";
-import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
-import WarningModal from "../../../molecules/WarningModal";
+} from "../../../../stores/hierarchyEditorStore";
+import { addObjectToTree, updateTreeObject } from "../../utils";
+import ITreeNode from "../../../../interfaces/ITreeNode";
+import PanelBreadCrumb from "../../../../molecules/PanelBreadCrumb";
 import useFormBuilder, {
-  IFormBuilderConfig,
-  FormSubmitButtonHandlerTypes
-} from "../../../hooks/useFormBuilder";
+  FormSubmitButtonHandlerTypes,
+  IFormBuilderConfig
+} from "../../../../hooks/useFormBuilder";
+import {
+  ServiceAccountGenerateKeyWizard,
+  WizardModes
+} from "./ServiceAccountGenerateKeyWizard";
+import styled, { css } from "styled-components";
+import ServiceAccountDeleteModal from "./ServiceAccountDeleteModal";
 
 interface IServiceAccountFormValues {
   serviceaccountname: string;
-}
-
-enum WizardStates {
-  KEY_OVERRIDE_WARNING,
-  LOADING,
-  NO_CRYPTO_SUPPORT,
-  CRYPTO_EXCEPTION,
-  DEFAULT
 }
 
 const CloseButton = styled(CancelButton)`
@@ -132,15 +114,14 @@ const ManageServiceAccount = () => {
 
   const [serviceAccountKey, setServiceAccountKey] = useState({} as IPublicKey);
   const [generatedPassword, setGeneratedPassword] = useState("");
-  const [wizardState, setWizardState] = useState(
-    cryptoAvailable()
-      ? WizardStates.KEY_OVERRIDE_WARNING
-      : WizardStates.NO_CRYPTO_SUPPORT
-  );
 
-  const [displayModal, setDisplayModal] = useState(false);
-  const [deleteWarningModal, setDeletewarningModal] = useState(false);
-  const [cryptoException, setCryptoException] = useState(false);
+  const [wizardMode, setWizardMode] = useState(WizardModes.MANUAL);
+  const [displayKeyGenerationWizard, setDisplayKeyGenerationWizard] = useState(
+    false
+  );
+  const [displayDeleteWarningModal, setDisplayDeleteWarningModal] = useState(
+    false
+  );
   const [_treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
     genericDataFetchReducer
   );
@@ -178,6 +159,14 @@ const ManageServiceAccount = () => {
 
   const [formJSX, formApi] = useFormBuilder(formConfig);
 
+  const resetState = () => {
+    setWizardMode(WizardModes.MANUAL);
+    setServiceAccountKey({} as IPublicKey);
+    setDisplayKeyGenerationWizard(false);
+    setGeneratedPassword("");
+    setDisplayDeleteWarningModal(false);
+  };
+
   const generateNode = (serviceaccount: IServiceAccountApiResponse) => {
     const node = {} as ITreeNode;
     node.referenceId = serviceaccount.id;
@@ -186,6 +175,15 @@ const ManageServiceAccount = () => {
     node.type = HierarchyEditorPanelTypes.SERVICE_ACCOUNT;
 
     return node;
+  };
+
+  const cbKeyGenerated = (keypair: IPublicKey, generatedPassword: string) => {
+    setServiceAccountKey({
+      publicKey: keypair.publicKey,
+      keyId: keypair.keyId
+    });
+    setGeneratedPassword(generatedPassword);
+    setDisplayKeyGenerationWizard(false);
   };
 
   const postNewServiceAccount = (values: IServiceAccountFormValues) => {
@@ -203,52 +201,31 @@ const ManageServiceAccount = () => {
       token,
       url: "/api/serviceaccount",
       cbSuccess: async (serviceaccount: IServiceAccountApiResponse) => {
-        try {
-          const generatedKeys = await generateKey(true);
-          const keyDataRequest: DataRequest = {
-            data: generatedKeys.keys,
-            method: "post",
-            token,
-            url: `/api/serviceaccount/${serviceaccount.id}/key`,
-            cbSuccess: () => {
-              setGeneratedPassword(generatedKeys.password);
-              setServiceAccountKey({
-                publicKey: generatedKeys.keys.publicKey,
-                keyId: generatedKeys.keys.keyId
-              });
-              const hierarchyDataRequest: DataRequest = {
-                params: {
-                  HierarchyMode: "NONE"
-                },
-                method: "get",
-                token,
-                url: `/api/hierarchy/${serviceaccount.id}`,
-                cbSuccess: (node: ITreeNode) => {
-                  hierarchyEditorDispatch.editor({
-                    type: HierarchyEditorActionTypes.SET_PANEL,
-                    node: node,
-                    breadcrumb: "",
-                    permission: FormPermissions.EDIT,
-                    panel:
-                      HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
-                    mode: HierarchyEditorPanelModes.UPDATE
-                  });
-                  addObjectToTree(
-                    hierarchyEditorState,
-                    hierarchyEditorDispatch,
-                    node
-                  );
-                }
-              };
-              setTreeChildrenApiRequest(hierarchyDataRequest);
-              setWizardState(WizardStates.DEFAULT);
-            }
-          };
-          setServiceAccountDataRequest(keyDataRequest);
-        } catch (e) {
-          setCryptoException(true);
-          throw e;
-        }
+        setWizardMode(WizardModes.AUTOMATIC);
+        const hierarchyDataRequest: DataRequest = {
+          params: {
+            HierarchyMode: "NONE"
+          },
+          method: "get",
+          token,
+          url: `/api/hierarchy/${serviceaccount.id}`,
+          cbSuccess: (node: ITreeNode) => {
+            hierarchyEditorDispatch.editor({
+              type: HierarchyEditorActionTypes.SET_PANEL,
+              node: node,
+              breadcrumb: "",
+              permission: FormPermissions.EDIT,
+              panel: HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR,
+              mode: HierarchyEditorPanelModes.UPDATE
+            });
+            addObjectToTree(
+              hierarchyEditorState,
+              hierarchyEditorDispatch,
+              node
+            );
+          }
+        };
+        setTreeChildrenApiRequest(hierarchyDataRequest);
       }
     };
     setServiceAccountDataRequest(dataRequest);
@@ -290,30 +267,37 @@ const ManageServiceAccount = () => {
         setServiceAccountKey(n);
       }
     };
-
     setServiceAccountGetRequest(dataRequest);
   };
 
   useEffect(() => {
+    resetState();
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
-      formApi.setInitialFormValues({
-        serviceaccountname: hierarchyEditorState.editor.node.name
-      });
-      getKeyId(hierarchyEditorState.editor.node.referenceId);
-    }
 
+        formApi.setInitialFormValues({
+          serviceaccountname: hierarchyEditorState.editor.node.name
+        });
+
+        if (
+          hierarchyEditorState.editor.panel !==
+          HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR
+        ) {
+          getKeyId(hierarchyEditorState.editor.node.referenceId);
+        }
+
+    }
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       formApi.setInitialFormValues({ serviceaccountname: "" });
     }
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.DELETE) {
-      setDeletewarningModal(true);
+      setDisplayDeleteWarningModal(true);
     }
     if (
       hierarchyEditorState.editor.panel ===
         HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR &&
       hierarchyEditorState.editor.mode
     ) {
-      setDisplayModal(true);
+      setDisplayKeyGenerationWizard(true);
     }
   }, [
     hierarchyEditorState.editor.node,
@@ -321,136 +305,16 @@ const ManageServiceAccount = () => {
     hierarchyEditorState.editor.panel
   ]);
 
-  const getDeleteWarningContent = () => {
-    const cancelHandler = () => {
-      hierarchyEditorDispatch.editor({
-        type: HierarchyEditorActionTypes.RESET
-      });
-    };
-    const continueHandler = () => {
-      const dataRequest: DataRequest = {
-        method: "delete",
-        token,
-        url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
-        cbSuccess: () => {
-          removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);
-          hierarchyEditorDispatch.editor({
-            type: HierarchyEditorActionTypes.RESET
-          });
-        }
-      };
-      setServiceAccountGetRequest(dataRequest);
-    };
-
+  if (displayKeyGenerationWizard) {
     return (
-      <WarningModal
-        message="This service account will be deleted are you sure ?"
-        continueHandler={continueHandler}
-        cancelHandler={cancelHandler}
+      <ServiceAccountGenerateKeyWizard
+        initialWizardMode={wizardMode}
+        cbKeyGenerated={cbKeyGenerated}
       />
     );
-  };
-  const getModalContent = (currentWizardState: number) => {
-    const theme = useContext(ThemeContext);
-
-    const cancelHandler = () => {
-      setDeletewarningModal(false);
-      hierarchyEditorDispatch.editor({
-        type: HierarchyEditorActionTypes.RESET
-      });
-    };
-
-    const continueHandler = async () => {
-      setWizardState(WizardStates.LOADING);
-      try {
-        const generatedKeys = await generateKey(true);
-        const dataRequest: DataRequest = {
-          data: generatedKeys.keys,
-          method: "post",
-          token,
-          url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}/key`,
-          cbSuccess: () => {
-            setGeneratedPassword(generatedKeys.password);
-            setServiceAccountKey({
-              publicKey: generatedKeys.keys.publicKey,
-              keyId: generatedKeys.keys.keyId
-            });
-            setDisplayModal(false);
-            setWizardState(WizardStates.DEFAULT);
-          }
-        };
-
-        setServiceAccountDataRequest(dataRequest);
-      } catch (e) {
-        setWizardState(WizardStates.CRYPTO_EXCEPTION);
-        throw e;
-      }
-    };
-
-    if (wizardState == WizardStates.DEFAULT) {
-      continueHandler();
-    }
-
-    switch (currentWizardState) {
-      case WizardStates.LOADING:
-        return (
-          <>
-            <ModalBody>
-              <LoaderIcon color={theme.loaderIcon.color} size={64} />
-            </ModalBody>
-          </>
-        );
-      case WizardStates.KEY_OVERRIDE_WARNING:
-        return (
-          <WarningModal
-            message="Existing key will be deactivated. Are you sure you want to continue ?"
-            continueHandler={continueHandler}
-            cancelHandler={cancelHandler}
-          />
-        );
-      case WizardStates.NO_CRYPTO_SUPPORT:
-        return (
-          <>
-            <ModalBody>
-              <NoCryptoWarning />
-            </ModalBody>
-            <ModalFooter>
-              <ModalButton onClick={cancelHandler}>Close</ModalButton>
-            </ModalFooter>
-          </>
-        );
-      case WizardStates.CRYPTO_EXCEPTION:
-        return (
-          <>
-            <ModalBody>
-              <CryptoExceptionWarning />
-            </ModalBody>
-            <ModalFooter>
-              <ModalButton onClick={cancelHandler}>Close</ModalButton>
-            </ModalFooter>
-          </>
-        );
-    }
-  };
-
-  if (displayModal) {
-    return (
-      <Modal>
-        <ModalFlexColumWrapper>
-          {getModalContent(wizardState)}
-        </ModalFlexColumWrapper>
-      </Modal>
-    );
   }
-
-  if (deleteWarningModal) {
-    return (
-      <Modal>
-        <ModalFlexColumWrapper>
-          {getDeleteWarningContent()}
-        </ModalFlexColumWrapper>
-      </Modal>
-    );
+  if (displayDeleteWarningModal) {
+    return <ServiceAccountDeleteModal />;
   }
   if (
     generatedPassword.length > 0 &&
@@ -531,12 +395,10 @@ const ManageServiceAccount = () => {
         ) : null}
         {formJSX}
         {!updateMode && !cryptoAvailable() ? <NoCryptoWarning /> : null}
-        {cryptoException ? <CryptoExceptionWarning /> : null}
       </Panel>
     );
   }
 
   return null;
 };
-
 export default ManageServiceAccount;
