@@ -340,13 +340,13 @@ const RuleEditor: React.FC = () => {
         <CollectionContainerList>
           {rules.map((rule, index) => {
             return (
-              <>
+              <React.Fragment key={"rule-row-" + index}>
                 {ruleToEdit === rule ? (
                   <>{formJSX}</>
                 ) : (
-                  <li key={"rule-row-" + index}>{ruleRow(rule, index)}</li>
+                  <li>{ruleRow(rule, index)}</li>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
         </CollectionContainerList>

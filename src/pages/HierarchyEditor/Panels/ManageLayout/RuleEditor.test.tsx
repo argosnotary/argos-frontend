@@ -137,6 +137,8 @@ it("add rule", async () => {
 
     root.find('form[data-testhook-id="rule-edit-form"]').simulate("submit");
 
+    expect(root.find(RuleEditor)).toMatchSnapshot();
+
     updateField(
       root.find('input[data-testhook-id="rule-edit-form-field-0"]'),
       "pattern",
