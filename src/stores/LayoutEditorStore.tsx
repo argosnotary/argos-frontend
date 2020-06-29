@@ -58,7 +58,7 @@ interface ILayoutEditorState {
   approvalConfigs: Array<IApprovalConfig>;
 }
 
-interface ILayoutEditorStoreContext {
+export interface ILayoutEditorStoreContext {
   state: ILayoutEditorState;
   dispatch: Dispatch<ILayoutEditorAction>;
 }

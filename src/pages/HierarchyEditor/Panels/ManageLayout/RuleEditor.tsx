@@ -313,7 +313,7 @@ const RuleEditor: React.FC = () => {
           <CollectionContainerSpan>{getRuleInfo(rule)}</CollectionContainerSpan>
           <ActionIconsContainer>
             <EditItemButton
-              ata-testhook-id={"edit-rule-" + index}
+              data-testhook-id={"edit-rule-" + index}
               onClick={() => editRule(index)}>
               <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
             </EditItemButton>
