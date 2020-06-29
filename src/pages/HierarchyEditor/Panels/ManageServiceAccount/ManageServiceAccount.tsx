@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 import React, { useContext, useEffect, useState } from "react";
-import { CancelButton } from "../../../atoms/Button";
-import ContentSeparator from "../../../atoms/ContentSeparator";
-import DataRequest from "../../../types/DataRequest";
-import useDataApi from "../../../hooks/useDataApi";
-import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-import IServiceAccountApiResponse from "../../../interfaces/INpaApiResponse";
-import PasswordView from "../../../atoms/PasswordView";
-import FlexRow from "../../../atoms/FlexRow";
-import { cryptoAvailable } from "../../../security";
-import { Modal, ModalFlexColumWrapper } from "../../../atoms/Modal";
-import { IGenericFormSchema } from "../../../interfaces/IGenericFormSchema";
-import KeyContainer from "../../../atoms/KeyContainer";
-import { IPublicKey } from "../../../interfaces/IPublicKey";
-import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
-import { FormPermissions } from "../../../types/FormPermission";
-import { Panel } from "../../../molecules/Panel";
-import { useUserProfileContext } from "../../../stores/UserProfile";
+import { CancelButton } from "../../../../atoms/Button";
+import ContentSeparator from "../../../../atoms/ContentSeparator";
+import DataRequest from "../../../../types/DataRequest";
+import useDataApi from "../../../../hooks/useDataApi";
+import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
+import IServiceAccountApiResponse from "../../../../interfaces/INpaApiResponse";
+import PasswordView from "../../../../atoms/PasswordView";
+import FlexRow from "../../../../atoms/FlexRow";
+import { cryptoAvailable } from "../../../../security";
+import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
+import KeyContainer from "../../../../atoms/KeyContainer";
+import { IPublicKey } from "../../../../interfaces/IPublicKey";
+import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
+import { FormPermissions } from "../../../../types/FormPermission";
+import { Panel } from "../../../../molecules/Panel";
+import { useUserProfileContext } from "../../../../stores/UserProfile";
 import {
   HierarchyEditorActionTypes,
   HierarchyEditorPanelModes,
@@ -48,12 +47,13 @@ import WarningModal from "../../../molecules/WarningModal";
 import useFormBuilder, {
   FormSubmitButtonHandlerTypes,
   IFormBuilderConfig
-} from "../../../hooks/useFormBuilder";
+} from "../../../../hooks/useFormBuilder";
 import {
-  ServiceAccountKeyWizard,
+  ServiceAccountGenerateKeyWizard,
   WizardModes
-} from "./ServiceAccountKeyWizard";
+} from "./ServiceAccountGenerateKeyWizard";
 import styled, { css } from "styled-components";
+import ServiceAccountDeleteModal from "./ServiceAccountDeleteModal";
 
 interface IServiceAccountFormValues {
   serviceaccountname: string;
@@ -308,40 +308,9 @@ const ManageServiceAccount = () => {
     hierarchyEditorState.editor.panel
   ]);
 
-  const getDeleteWarningContent = () => {
-    const cancelHandler = () => {
-      hierarchyEditorDispatch.editor({
-        type: HierarchyEditorActionTypes.RESET
-      });
-    };
-
-    const continueHandler = () => {
-      const dataRequest: DataRequest = {
-        method: "delete",
-        token,
-        url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
-        cbSuccess: () => {
-          removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);
-          hierarchyEditorDispatch.editor({
-            type: HierarchyEditorActionTypes.RESET
-          });
-        }
-      };
-      setServiceAccountGetRequest(dataRequest);
-    };
-
-    return (
-      <WarningModal
-        message="This service account will be deleted are you sure ?"
-        continueHandler={continueHandler}
-        cancelHandler={cancelHandler}
-      />
-    );
-  };
-
   if (displayKeyGenerationWizard) {
     return (
-      <ServiceAccountKeyWizard
+      <ServiceAccountGenerateKeyWizard
         initialWizardMode={wizardMode}
         cbKeyGenerated={cbKeyGenerated}
       />

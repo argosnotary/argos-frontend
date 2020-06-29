@@ -18,24 +18,24 @@ import { ThemeContext } from "styled-components";
 import {
   HierarchyEditorActionTypes,
   HierarchyEditorStateContext
-} from "../../../stores/hierarchyEditorStore";
-import { cryptoAvailable, generateKey } from "../../../security";
-import DataRequest from "../../../types/DataRequest";
-import { useUserProfileContext } from "../../../stores/UserProfile";
-import useDataApi from "../../../hooks/useDataApi";
-import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
-import { IPublicKey } from "../../../interfaces/IPublicKey";
+} from "../../../../stores/hierarchyEditorStore";
+import { cryptoAvailable, generateKey } from "../../../../security";
+import DataRequest from "../../../../types/DataRequest";
+import { useUserProfileContext } from "../../../../stores/UserProfile";
+import useDataApi from "../../../../hooks/useDataApi";
+import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
+import { IPublicKey } from "../../../../interfaces/IPublicKey";
 import {
   Modal,
   ModalBody,
   ModalButton,
   ModalFlexColumWrapper,
   ModalFooter
-} from "../../../atoms/Modal";
-import { LoaderIcon } from "../../../atoms/Icons";
-import WarningModal from "../../../molecules/WarningModal";
-import { NoCryptoWarning } from "../../../molecules/NoCryptoWarning";
-import { CryptoExceptionWarning } from "../../../molecules/CryptoExceptionWarning";
+} from "../../../../atoms/Modal";
+import { LoaderIcon } from "../../../../atoms/Icons";
+import WarningModal from "../../../../molecules/WarningModal";
+import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
+import { CryptoExceptionWarning } from "../../../../molecules/CryptoExceptionWarning";
 
 enum WizardModes {
   MANUAL,
@@ -53,7 +53,7 @@ interface IServiceAccountKeyWizardProps {
   cbKeyGenerated: (publicKey: IPublicKey, generatedPassWord: string) => void;
 }
 
-const ServiceAccountKeyWizard: React.FC<IServiceAccountKeyWizardProps> = ({
+const ServiceAccountGenerateKeyWizard: React.FC<IServiceAccountKeyWizardProps> = ({
   initialWizardMode: initialWizardMode,
   cbKeyGenerated: cbKeyGenerated
 }) => {
@@ -175,4 +175,4 @@ const ServiceAccountKeyWizard: React.FC<IServiceAccountKeyWizardProps> = ({
   );
 };
 
-export { ServiceAccountKeyWizard, WizardModes };
+export { ServiceAccountGenerateKeyWizard, WizardModes };
