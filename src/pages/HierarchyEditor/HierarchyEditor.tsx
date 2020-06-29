@@ -65,6 +65,7 @@ const HierarchyEditor = () => {
   const theme = useContext(ThemeContext);
 
   const { token } = useUserProfileContext();
+
   const getTreeDataRequest: DataRequest = {
     method: "get",
     token,

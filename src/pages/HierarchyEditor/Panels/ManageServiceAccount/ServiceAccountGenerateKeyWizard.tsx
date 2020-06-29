@@ -166,6 +166,7 @@ const ServiceAccountGenerateKeyWizard: React.FC<IServiceAccountKeyWizardProps> =
         );
     }
   };
+
   return (
     <Modal>
       <ModalFlexColumWrapper>

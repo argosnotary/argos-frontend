@@ -35,15 +35,10 @@ import {
   HierarchyEditorPanelModes,
   HierarchyEditorPanelTypes,
   HierarchyEditorStateContext
-} from "../../../stores/hierarchyEditorStore";
-import {
-  addObjectToTree,
-  removeObjectFromTree,
-  updateTreeObject
-} from "../utils";
-import ITreeNode from "../../../interfaces/ITreeNode";
-import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
-import WarningModal from "../../../molecules/WarningModal";
+} from "../../../../stores/hierarchyEditorStore";
+import { addObjectToTree, updateTreeObject } from "../../utils";
+import ITreeNode from "../../../../interfaces/ITreeNode";
+import PanelBreadCrumb from "../../../../molecules/PanelBreadCrumb";
 import useFormBuilder, {
   FormSubmitButtonHandlerTypes,
   IFormBuilderConfig
@@ -272,22 +267,24 @@ const ManageServiceAccount = () => {
         setServiceAccountKey(n);
       }
     };
-
     setServiceAccountGetRequest(dataRequest);
   };
 
   useEffect(() => {
     resetState();
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
-      formApi.setInitialFormValues({
-        serviceaccountname: hierarchyEditorState.editor.node.name
-      });
-      if (
-        hierarchyEditorState.editor.panel !==
-        HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR
-      ) {
-        getKeyId(hierarchyEditorState.editor.node.referenceId);
-      }
+
+        formApi.setInitialFormValues({
+          serviceaccountname: hierarchyEditorState.editor.node.name
+        });
+
+        if (
+          hierarchyEditorState.editor.panel !==
+          HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR
+        ) {
+          getKeyId(hierarchyEditorState.editor.node.referenceId);
+        }
+
     }
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       formApi.setInitialFormValues({ serviceaccountname: "" });
@@ -316,15 +313,8 @@ const ManageServiceAccount = () => {
       />
     );
   }
-
   if (displayDeleteWarningModal) {
-    return (
-      <Modal>
-        <ModalFlexColumWrapper>
-          {getDeleteWarningContent()}
-        </ModalFlexColumWrapper>
-      </Modal>
-    );
+    return <ServiceAccountDeleteModal />;
   }
   if (
     generatedPassword.length > 0 &&
