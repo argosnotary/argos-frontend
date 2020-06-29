@@ -36,7 +36,7 @@ import genericDataFetchReducer, {
   customGenericDataFetchReducer
 } from "../../stores/genericDataFetchReducer";
 import ManageSupplyChain from "./Panels/ManageSupplyChain";
-import ManageServiceAccount from "./Panels/ManageServiceAccount";
+import ManageServiceAccount from "./Panels/ManageServiceAccount/ManageServiceAccount";
 import { Panel, PanelsContainer } from "../../molecules/Panel";
 import ManageLabelPermissions from "./Panels/ManageLabelPermissions";
 import ITreeContextMenuEntry from "../../interfaces/ITreeContextMenuEntry";
@@ -65,6 +65,7 @@ const HierarchyEditor = () => {
   const theme = useContext(ThemeContext);
 
   const { token } = useUserProfileContext();
+
   const getTreeDataRequest: DataRequest = {
     method: "get",
     token,
