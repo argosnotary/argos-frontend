@@ -20,7 +20,8 @@ export const SelectCSS = css<{ disabled?: boolean; height?: string }>`
   &::-ms-expand {
     display: none;
   }
-
+  
+  margin: 0 0 1rem;
   display: flex;
   box-sizing: border-box;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -29,34 +30,14 @@ export const SelectCSS = css<{ disabled?: boolean; height?: string }>`
   border-radius: 0;
   font: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
   appearance: none;
   background-repeat: no-repeat;
   background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
-  height: ${props => (props.height ? props.height : "2.4375rem")};
 
-  overflow: visible;
-  box-sizing: border-box;
-
-  margin: 0 0 1rem;
-  padding: 0.5rem;
-  border: 1px solid #cacaca;
-  border-radius: 0;
   background-color: ${props => (props.disabled ? "#e0e0e0" : "#fefefe")};
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1.5;
-  color: #0a0a0a;
-  transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
-    -webkit-box-shadow 0.5s;
-
   &:hover {
     cursor: ${props => (props.disabled ? "not-allowed" : "initial")};
   }

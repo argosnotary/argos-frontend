@@ -222,12 +222,13 @@ exports[`add rule 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "enhIWo",
+                  "lastClassName": "fxProD",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow-y: auto;
 ",
                   ],
                 },
@@ -244,7 +245,7 @@ exports[`add rule 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-bZQynM enhIWo"
+              className="sc-bZQynM fxProD"
             >
               <li>
                 <styled.section>
@@ -1226,7 +1227,7 @@ exports[`add rule 1`] = `
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-kGXeez",
                                         "isStatic": false,
-                                        "lastClassName": "byYsJi",
+                                        "lastClassName": "cgZXuq",
                                         "rules": Array [
                                           "
   ",
@@ -1234,7 +1235,8 @@ exports[`add rule 1`] = `
   &::-ms-expand {
     display: none;
   }
-
+  
+  margin: 0 0 1rem;
   display: flex;
   box-sizing: border-box;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -1243,38 +1245,16 @@ exports[`add rule 1`] = `
   border-radius: 0;
   font: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
   appearance: none;
   background-repeat: no-repeat;
   background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
-  height: ",
-                                          [Function],
-                                          ";
 
-  overflow: visible;
-  box-sizing: border-box;
-
-  margin: 0 0 1rem;
-  padding: 0.5rem;
-  border: 1px solid #cacaca;
-  border-radius: 0;
   background-color: ",
                                           [Function],
                                           ";
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1.5;
-  color: #0a0a0a;
-  transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
-    -webkit-box-shadow 0.5s;
-
   &:hover {
     cursor: ",
                                           [Function],
@@ -1308,7 +1288,7 @@ exports[`add rule 1`] = `
                                   value=""
                                 >
                                   <select
-                                    className="sc-kGXeez byYsJi"
+                                    className="sc-kGXeez cgZXuq"
                                     data-testhook-id="rule-edit-form-field-3"
                                     disabled={false}
                                     name="destinationType"
@@ -1435,7 +1415,7 @@ exports[`add rule 1`] = `
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-kGXeez",
                                         "isStatic": false,
-                                        "lastClassName": "byYsJi",
+                                        "lastClassName": "cgZXuq",
                                         "rules": Array [
                                           "
   ",
@@ -1443,7 +1423,8 @@ exports[`add rule 1`] = `
   &::-ms-expand {
     display: none;
   }
-
+  
+  margin: 0 0 1rem;
   display: flex;
   box-sizing: border-box;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -1452,38 +1433,16 @@ exports[`add rule 1`] = `
   border-radius: 0;
   font: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
   appearance: none;
   background-repeat: no-repeat;
   background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
-  height: ",
-                                          [Function],
-                                          ";
 
-  overflow: visible;
-  box-sizing: border-box;
-
-  margin: 0 0 1rem;
-  padding: 0.5rem;
-  border: 1px solid #cacaca;
-  border-radius: 0;
   background-color: ",
                                           [Function],
                                           ";
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1.5;
-  color: #0a0a0a;
-  transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
-    -webkit-box-shadow 0.5s;
-
   &:hover {
     cursor: ",
                                           [Function],
@@ -1517,7 +1476,7 @@ exports[`add rule 1`] = `
                                   value=""
                                 >
                                   <select
-                                    className="sc-kGXeez byYsJi"
+                                    className="sc-kGXeez cgZXuq"
                                     data-testhook-id="rule-edit-form-field-4"
                                     disabled={false}
                                     name="destinationSegmentName"
@@ -1644,7 +1603,7 @@ exports[`add rule 1`] = `
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-kGXeez",
                                         "isStatic": false,
-                                        "lastClassName": "byYsJi",
+                                        "lastClassName": "cgZXuq",
                                         "rules": Array [
                                           "
   ",
@@ -1652,7 +1611,8 @@ exports[`add rule 1`] = `
   &::-ms-expand {
     display: none;
   }
-
+  
+  margin: 0 0 1rem;
   display: flex;
   box-sizing: border-box;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -1661,38 +1621,16 @@ exports[`add rule 1`] = `
   border-radius: 0;
   font: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
   appearance: none;
   background-repeat: no-repeat;
   background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
-  height: ",
-                                          [Function],
-                                          ";
 
-  overflow: visible;
-  box-sizing: border-box;
-
-  margin: 0 0 1rem;
-  padding: 0.5rem;
-  border: 1px solid #cacaca;
-  border-radius: 0;
   background-color: ",
                                           [Function],
                                           ";
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1.5;
-  color: #0a0a0a;
-  transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
-    -webkit-box-shadow 0.5s;
-
   &:hover {
     cursor: ",
                                           [Function],
@@ -1726,7 +1664,7 @@ exports[`add rule 1`] = `
                                   value=""
                                 >
                                   <select
-                                    className="sc-kGXeez byYsJi"
+                                    className="sc-kGXeez cgZXuq"
                                     data-testhook-id="rule-edit-form-field-5"
                                     disabled={false}
                                     name="destinationStepName"
@@ -2264,12 +2202,13 @@ exports[`renders correctly 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "enhIWo",
+                  "lastClassName": "fxProD",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow-y: auto;
 ",
                   ],
                 },
@@ -2286,7 +2225,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-bZQynM enhIWo"
+              className="sc-bZQynM fxProD"
             >
               <li>
                 <styled.section>

@@ -175,12 +175,12 @@ const useFormBuilder = (
                 {...(index === 0 ? { innerRef: firstSelectInput } : null)}>
                 <option value="" label={`Select ...`} />
                 {entry.options
-                  ? entry.options.map((option, index) => {
+                  ? entry.options.map((selectOption, selectIndex) => {
                       return (
                         <option
-                          key={`${config.dataTesthookId}-field-${index}-option-${index}`}
-                          value={option.value}
-                          label={option.name}
+                          key={`${config.dataTesthookId}-field-${selectIndex}-option-${selectIndex}`}
+                          value={selectOption.value}
+                          label={selectOption.name}
                         />
                       );
                     })
@@ -236,7 +236,8 @@ const useFormBuilder = (
     <FormContainer>
       <form
         data-testhook-id={config.dataTesthookId}
-        onSubmit={() => {
+        onSubmit={(e: React.SyntheticEvent<EventTarget>) => {
+          e.preventDefault();
           api.submitForm();
         }}
         onBlur={() => {
