@@ -25,6 +25,7 @@ import RuleEditor from "./RuleEditor";
 import {
   DetailsPanelType,
   ILayoutEditorStoreContext,
+  LayoutEditorActionType,
   LayoutEditorStoreContext
 } from "../../../../stores/LayoutEditorStore";
 import {
@@ -99,7 +100,13 @@ function createComponent() {
   return mount(
     <ThemeProvider theme={theme}>
       <LayoutEditorStoreContext.Provider value={editorStoreContext}>
-        <RuleEditor />
+        <RuleEditor
+          title={"Expected End Products"}
+          initialRules={editorStoreContext.state.layout.expectedEndProducts}
+          addAction={LayoutEditorActionType.ADD_EXPECTED_END_PRODUCT}
+          editAction={LayoutEditorActionType.EDIT_EXPECTED_END_PRODUCT}
+          removeAction={LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT}
+        />
       </LayoutEditorStoreContext.Provider>
     </ThemeProvider>
   );

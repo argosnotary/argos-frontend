@@ -28,11 +28,16 @@ import {
 } from "../../../../atoms/Collection";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import {
+  ILayoutEditorStoreContext,
   LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import { PlusIcon } from "../../../../atoms/Icons";
-import { IRule, RuleDestinationTypeEnum } from "../../../../interfaces/ILayout";
+import {
+  IRule,
+  RuleDestinationTypeEnum,
+  RuleRuleTypeEnum
+} from "../../../../interfaces/ILayout";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
 import useFormBuilder, {
   FormSubmitButtonHandlerTypes,
@@ -44,6 +49,7 @@ import {
   getSegmentNames,
   getStepNamesForSegment
 } from "../../../../stores/LayoutEditorService";
+import Select from "../../../../atoms/Select";
 
 const ItemContainer = styled(CollectionContainer)`
   min-height: 0;
@@ -94,6 +100,17 @@ const ItemContainerSection = styled.section`
   margin: 0 0 1rem;
 `;
 
+const SelectionContainer = styled.section`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+
+  ${Select} {
+    margin: 0 0 0 1rem;
+  }
+`;
+
 const RemoveItemButton = styled(BaseActionButton)``;
 const EditItemButton = styled(BaseActionButton)``;
 
@@ -106,29 +123,34 @@ interface IRuleFormValues {
   destinationStepName?: string;
 }
 
-const validateRuleForm = (values: IRuleFormValues) => {
-  const errors = {} as IRuleFormValues;
-  if (!values.pattern) {
-    errors.pattern = "Please fill in a pattern.";
-  }
+export interface IRuleEditorProps {
+  title: string;
+  initialRules?: IRule[];
+  addAction: LayoutEditorActionType;
+  editAction: LayoutEditorActionType;
+  removeAction: LayoutEditorActionType;
+}
 
-  if (!values.destinationType) {
-    errors.destinationType = "Please fill in a destination type.";
-  }
-
-  if (!values.destinationSegmentName) {
-    errors.destinationSegmentName =
-      "Please fill in a destination segment name.";
-  }
-
-  if (!values.destinationStepName) {
-    errors.destinationStepName = "Please fill in a destination step name.";
-  }
-
-  return errors;
+const getSelectSegment = (context: ILayoutEditorStoreContext) => {
+  return context.state.selectedLayoutElement
+    ? context.state.selectedLayoutElement.segment
+    : undefined;
 };
 
-const RuleEditor: React.FC = () => {
+const getStepsFromSelectedSegment = (context: ILayoutEditorStoreContext) => {
+  const selectSegment = getSelectSegment(context);
+  return selectSegment ? selectSegment.steps.map(segment => segment.name) : [];
+};
+
+const expectedProduct = "expectedProduct";
+
+const RuleEditor: React.FC<IRuleEditorProps> = ({
+  title,
+  initialRules,
+  addAction,
+  editAction,
+  removeAction
+}) => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
@@ -139,17 +161,40 @@ const RuleEditor: React.FC = () => {
 
   const [addMode, setAddMode] = useState(false);
 
-  const [steps, setSteps] = useState<Array<string>>([]);
+  const [steps, setSteps] = useState<Array<string>>(
+    getStepsFromSelectedSegment(editorStoreContext)
+  );
 
   const [selectedSegment, setSelectedSegment] = useState<string | undefined>(
     undefined
   );
 
+  const [ruleType, setRuleType] = useState<
+    RuleRuleTypeEnum | "select" | "expectedProduct"
+  >(getSelectSegment(editorStoreContext) ? "select" : expectedProduct);
+
+  useEffect(() => {
+    setSteps(getStepsFromSelectedSegment(editorStoreContext));
+    if (getSelectSegment(editorStoreContext)) {
+      setRuleType("select");
+    }
+  }, [editorStoreContext.state.selectedLayoutElement]);
+
   useEffect(() => {
     if (ruleToEdit) {
       setSelectedSegment(ruleToEdit.destinationSegmentName);
+      setRuleType(
+        getSelectSegment(editorStoreContext)
+          ? ruleToEdit.ruleType
+            ? ruleToEdit.ruleType
+            : "select"
+          : expectedProduct
+      );
     } else {
       setSelectedSegment(undefined);
+      setRuleType(
+        getSelectSegment(editorStoreContext) ? "select" : expectedProduct
+      );
     }
   }, [ruleToEdit]);
 
@@ -159,34 +204,33 @@ const RuleEditor: React.FC = () => {
         getStepNamesForSegment(editorStoreContext.state.layout, selectedSegment)
       );
     } else {
-      setSteps([]);
+      setSteps(getStepsFromSelectedSegment(editorStoreContext));
     }
   }, [selectedSegment]);
 
   useEffect(() => {
-    if (
-      editorStoreContext.state.layout.expectedEndProducts &&
-      editorStoreContext.state.layout.expectedEndProducts.length > 0
-    ) {
-      setRules(editorStoreContext.state.layout.expectedEndProducts);
+    if (initialRules && initialRules.length > 0) {
+      setRules(initialRules);
     } else {
       setRules([]);
     }
     setRuleToEdit(undefined);
-  }, [editorStoreContext.state.layout.expectedEndProducts]);
+  }, [initialRules]);
 
   const deleteRule = (index: number) => {
     editorStoreContext.dispatch({
-      type: LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT,
+      type: removeAction,
       rule: rules[index]
     });
   };
 
   const addRule = () => {
-    const ruleToAdd = {} as IRule;
-    setAddMode(true);
-    setRules([...rules, ruleToAdd]);
-    setRuleToEdit(ruleToAdd);
+    if (ruleToEdit === undefined) {
+      const ruleToAdd = {} as IRule;
+      setAddMode(true);
+      setRules([...rules, ruleToAdd]);
+      setRuleToEdit(ruleToAdd);
+    }
   };
 
   const editRule = (index: number) => {
@@ -194,23 +238,30 @@ const RuleEditor: React.FC = () => {
     setRuleToEdit(rules[index]);
   };
 
-  const updateRule = (ruleForm: IRuleFormValues) => {
+  const updateRule = (formValues: IRuleFormValues) => {
     if (ruleToEdit) {
-      ruleToEdit.destinationPathPrefix = ruleForm.destinationPathPrefix;
-      ruleToEdit.destinationType = ruleForm.destinationType as RuleDestinationTypeEnum;
-      ruleToEdit.destinationStepName = ruleForm.destinationStepName;
-      ruleToEdit.sourcePathPrefix = ruleForm.sourcePathPrefix;
-      ruleToEdit.pattern = ruleForm.pattern;
-      ruleToEdit.destinationSegmentName = ruleForm.destinationSegmentName;
+      ruleToEdit.pattern = formValues.pattern;
+
+      if (ruleType === expectedProduct || ruleType === RuleRuleTypeEnum.MATCH) {
+        ruleToEdit.destinationPathPrefix = formValues.destinationPathPrefix;
+        ruleToEdit.destinationType = formValues.destinationType as RuleDestinationTypeEnum;
+        ruleToEdit.destinationStepName = formValues.destinationStepName;
+        ruleToEdit.sourcePathPrefix = formValues.sourcePathPrefix;
+        ruleToEdit.destinationSegmentName = formValues.destinationSegmentName;
+      }
+
+      if (ruleType !== expectedProduct) {
+        ruleToEdit.ruleType = ruleType as RuleRuleTypeEnum;
+      }
 
       if (addMode) {
         editorStoreContext.dispatch({
-          type: LayoutEditorActionType.ADD_EXPECTED_END_PRODUCT,
+          type: addAction,
           rule: ruleToEdit
         });
       } else {
         editorStoreContext.dispatch({
-          type: LayoutEditorActionType.EDIT_EXPECTED_END_PRODUCT,
+          type: editAction,
           rule: ruleToEdit
         });
       }
@@ -218,46 +269,83 @@ const RuleEditor: React.FC = () => {
   };
 
   const getApprovalExecutionFormSchema = (): IGenericFormSchema => {
-    return [
-      {
-        labelValue: "Pattern*",
-        name: "pattern",
-        formType: "text"
-      },
-      {
-        labelValue: "Source Path Prefix",
-        name: "sourcePathPrefix",
-        formType: "text"
-      },
-      {
-        labelValue: "Destination Path Prefix",
-        name: "destinationPathPrefix",
-        formType: "text"
-      },
-      {
-        labelValue: "Destination Type*",
-        name: "destinationType",
-        formType: "select",
-        options: [
-          { name: "products", value: RuleDestinationTypeEnum.PRODUCTS },
-          { name: "materials", value: RuleDestinationTypeEnum.MATERIALS }
-        ]
-      },
-      {
-        labelValue: "Destination Segment Name*",
-        name: "destinationSegmentName",
-        formType: "select",
-        options: getSegmentNames(
-          editorStoreContext.state.layout
-        ).map(segmentName => ({ name: segmentName, value: segmentName }))
-      },
-      {
-        labelValue: "Destination Step Name*",
-        name: "destinationStepName",
-        formType: "select",
-        options: steps.map(stepName => ({ name: stepName, value: stepName }))
+    if (ruleType === expectedProduct || ruleType === RuleRuleTypeEnum.MATCH) {
+      return [
+        {
+          labelValue: "Pattern*",
+          name: "pattern",
+          formType: "text"
+        },
+        {
+          labelValue: "Source Path Prefix",
+          name: "sourcePathPrefix",
+          formType: "text"
+        },
+        {
+          labelValue: "Destination Path Prefix",
+          name: "destinationPathPrefix",
+          formType: "text"
+        },
+        {
+          labelValue: "Destination Type*",
+          name: "destinationType",
+          formType: "select",
+          options: [
+            { name: "products", value: RuleDestinationTypeEnum.PRODUCTS },
+            { name: "materials", value: RuleDestinationTypeEnum.MATERIALS }
+          ]
+        },
+        {
+          labelValue: `Destination Segment Name${
+            ruleType === RuleRuleTypeEnum.MATCH ? "" : "*"
+          }`,
+          name: "destinationSegmentName",
+          formType: "select",
+          options: getSegmentNames(
+            editorStoreContext.state.layout
+          ).map(segmentName => ({ name: segmentName, value: segmentName }))
+        },
+        {
+          labelValue: "Destination Step Name*",
+          name: "destinationStepName",
+          formType: "select",
+          options: steps.map(stepName => ({ name: stepName, value: stepName }))
+        }
+      ];
+    } else {
+      return [
+        {
+          labelValue: "Pattern*",
+          name: "pattern",
+          formType: "text"
+        }
+      ];
+    }
+  };
+
+  const validateRuleForm = (values: IRuleFormValues) => {
+    const errors = {} as IRuleFormValues;
+    if (!values.pattern) {
+      errors.pattern = "Please fill in a pattern.";
+    }
+
+    if (ruleType === RuleRuleTypeEnum.MATCH || ruleType === expectedProduct) {
+      if (!values.destinationType) {
+        errors.destinationType = "Please fill in a destination type.";
       }
-    ];
+
+      if (ruleType === expectedProduct) {
+        if (!values.destinationSegmentName) {
+          errors.destinationSegmentName =
+            "Please fill in a destination segment name.";
+        }
+      }
+
+      if (!values.destinationStepName) {
+        errors.destinationStepName = "Please fill in a destination step name.";
+      }
+    }
+    return errors;
   };
 
   const formConfig: IFormBuilderConfig = {
@@ -303,7 +391,7 @@ const RuleEditor: React.FC = () => {
   const getRuleInfo = (rule: IRule): string => {
     return `${rule.ruleType ? rule.ruleType.toLowerCase() + " - " : ""}${
       rule.pattern
-    } - ${rule.destinationPathPrefix}`;
+    }${rule.destinationPathPrefix ? " - " + rule.destinationPathPrefix : ""}`;
   };
 
   const ruleRow = (rule: IRule, index: number) => {
@@ -328,11 +416,36 @@ const RuleEditor: React.FC = () => {
     );
   };
 
+  const ruleForm = () => {
+    return (
+      <>
+        {ruleType !== expectedProduct ? (
+          <SelectionContainer>
+            <label htmlFor="collectorType">Rule type:</label>
+            <Select
+              onChange={e => setRuleType(e.target.value as RuleRuleTypeEnum)}
+              value={ruleType}
+              name="ruleType"
+              id="ruleType">
+              <option value={"select"}>select...</option>
+              {Object.keys(RuleRuleTypeEnum).map((val, key) => (
+                <option key={"select-type-" + key} value={val}>
+                  {val.toLowerCase()}
+                </option>
+              ))}
+            </Select>
+          </SelectionContainer>
+        ) : null}
+        {ruleType !== "select" ? formJSX : null}
+      </>
+    );
+  };
+
   return (
     <>
       <ItemContainer>
         <CollectionContainerRow>
-          <ItemContainerTitle>Expected End Products</ItemContainerTitle>
+          <ItemContainerTitle>{title}</ItemContainerTitle>
           <AddItemButton data-testhook-id={"add-rule"} onClick={addRule}>
             <PlusIcon size={24} color={theme.layoutBuilder.iconColor} />
           </AddItemButton>
@@ -342,7 +455,7 @@ const RuleEditor: React.FC = () => {
             return (
               <React.Fragment key={"rule-row-" + index}>
                 {ruleToEdit === rule ? (
-                  <>{formJSX}</>
+                  ruleForm()
                 ) : (
                   <li>{ruleRow(rule, index)}</li>
                 )}

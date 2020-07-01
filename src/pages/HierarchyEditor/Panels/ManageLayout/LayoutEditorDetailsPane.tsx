@@ -24,6 +24,7 @@ import { Panel } from "../../../../molecules/Panel";
 import { CollectionContainer } from "../../../../atoms/Collection";
 import {
   DetailsPanelType,
+  LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
@@ -74,12 +75,42 @@ const LayoutEditorDetailsPane: React.FC = () => {
           />
         );
       case DetailsPanelType.STEP_DETAILS:
-        return <ApprovalConfigEditor />;
+        return (
+          <>
+            <ApprovalConfigEditor />
+            <RuleEditor
+              title={"Expected Materials"}
+              initialRules={
+                editorStoreContext.state.selectedLayoutElement?.step
+                  ?.expectedMaterials
+              }
+              addAction={LayoutEditorActionType.ADD_MATERIAL_RULE}
+              editAction={LayoutEditorActionType.EDIT_MATERIAL_RULE}
+              removeAction={LayoutEditorActionType.REMOVE_MATERIAL_RULE}
+            />
+            <RuleEditor
+              title={"Expected Products"}
+              initialRules={
+                editorStoreContext.state.selectedLayoutElement?.step
+                  ?.expectedProducts
+              }
+              addAction={LayoutEditorActionType.ADD_PRODUCT_RULE}
+              editAction={LayoutEditorActionType.EDIT_PRODUCT_RULE}
+              removeAction={LayoutEditorActionType.REMOVE_PRODUCT_RULE}
+            />
+          </>
+        );
       case DetailsPanelType.LAYOUT_DETAILS:
         return (
           <>
             <AuthorizedAccountEditor />
-            <RuleEditor />
+            <RuleEditor
+              title={"Expected End Products"}
+              initialRules={editorStoreContext.state.layout.expectedEndProducts}
+              addAction={LayoutEditorActionType.ADD_EXPECTED_END_PRODUCT}
+              editAction={LayoutEditorActionType.EDIT_EXPECTED_END_PRODUCT}
+              removeAction={LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT}
+            />
           </>
         );
     }

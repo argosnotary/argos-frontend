@@ -1,7 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`add rule 1`] = `
-<RuleEditor>
+<RuleEditor
+  addAction={21}
+  editAction={23}
+  initialRules={
+    Array [
+      Object {
+        "destinationPathPrefix": "destinationPathPrefix",
+        "destinationSegmentName": "seg1",
+        "destinationStepName": "step1",
+        "destinationType": "MATERIALS",
+        "pattern": "pattern",
+        "ruleType": "MATCH",
+        "sourcePathPrefix": "sourcePathPrefix",
+      },
+    ]
+  }
+  removeAction={22}
+  title="Expected End Products"
+>
   <Styled(styled.section)>
     <StyledComponent
       forwardedComponent={
@@ -406,9 +424,9 @@ exports[`add rule 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-hSdWYo",
+                                            "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "epMMcD",
+                                            "lastClassName": "hEHSgo",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -427,7 +445,7 @@ exports[`add rule 1`] = `
                                             "sc-htpNat",
                                           ],
                                           "render": [Function],
-                                          "styledComponentId": "sc-hSdWYo",
+                                          "styledComponentId": "sc-eHgmQL",
                                           "target": "button",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -438,7 +456,7 @@ exports[`add rule 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-hSdWYo epMMcD"
+                                        className="sc-htpNat sc-eHgmQL hEHSgo"
                                         data-testhook-id="edit-rule-0"
                                         onClick={[Function]}
                                       >
@@ -473,9 +491,9 @@ exports[`add rule 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-iAyFgw",
+                                            "componentId": "sc-hSdWYo",
                                             "isStatic": false,
-                                            "lastClassName": "gwNQkp",
+                                            "lastClassName": "epMMcD",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -494,7 +512,7 @@ exports[`add rule 1`] = `
                                             "sc-htpNat",
                                           ],
                                           "render": [Function],
-                                          "styledComponentId": "sc-iAyFgw",
+                                          "styledComponentId": "sc-hSdWYo",
                                           "target": "button",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -505,7 +523,7 @@ exports[`add rule 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-iAyFgw gwNQkp"
+                                        className="sc-htpNat sc-hSdWYo epMMcD"
                                         data-testhook-id="delete-rule-0"
                                         onClick={[Function]}
                                       >
@@ -1981,7 +1999,25 @@ exports[`add rule 1`] = `
 `;
 
 exports[`renders correctly 1`] = `
-<RuleEditor>
+<RuleEditor
+  addAction={21}
+  editAction={23}
+  initialRules={
+    Array [
+      Object {
+        "destinationPathPrefix": "destinationPathPrefix",
+        "destinationSegmentName": "seg1",
+        "destinationStepName": "step1",
+        "destinationType": "MATERIALS",
+        "pattern": "pattern",
+        "ruleType": "MATCH",
+        "sourcePathPrefix": "sourcePathPrefix",
+      },
+    ]
+  }
+  removeAction={22}
+  title="Expected End Products"
+>
   <Styled(styled.section)>
     <StyledComponent
       forwardedComponent={
@@ -2386,9 +2422,9 @@ exports[`renders correctly 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-hSdWYo",
+                                            "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "epMMcD",
+                                            "lastClassName": "hEHSgo",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -2407,7 +2443,7 @@ exports[`renders correctly 1`] = `
                                             "sc-htpNat",
                                           ],
                                           "render": [Function],
-                                          "styledComponentId": "sc-hSdWYo",
+                                          "styledComponentId": "sc-eHgmQL",
                                           "target": "button",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -2418,7 +2454,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-hSdWYo epMMcD"
+                                        className="sc-htpNat sc-eHgmQL hEHSgo"
                                         data-testhook-id="edit-rule-0"
                                         onClick={[Function]}
                                       >
@@ -2453,9 +2489,9 @@ exports[`renders correctly 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-iAyFgw",
+                                            "componentId": "sc-hSdWYo",
                                             "isStatic": false,
-                                            "lastClassName": "gwNQkp",
+                                            "lastClassName": "epMMcD",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -2474,7 +2510,7 @@ exports[`renders correctly 1`] = `
                                             "sc-htpNat",
                                           ],
                                           "render": [Function],
-                                          "styledComponentId": "sc-iAyFgw",
+                                          "styledComponentId": "sc-hSdWYo",
                                           "target": "button",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -2485,7 +2521,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-iAyFgw gwNQkp"
+                                        className="sc-htpNat sc-hSdWYo epMMcD"
                                         data-testhook-id="delete-rule-0"
                                         onClick={[Function]}
                                       >
