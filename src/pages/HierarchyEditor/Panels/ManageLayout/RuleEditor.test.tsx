@@ -17,8 +17,6 @@
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
 
-import MockAdapter from "axios-mock-adapter";
-import Axios from "axios";
 import { act } from "react-dom/test-utils";
 import { waitFor } from "@testing-library/dom";
 import RuleEditor from "./RuleEditor";
@@ -30,13 +28,13 @@ import {
 } from "../../../../stores/LayoutEditorStore";
 import {
   ILayout,
+  IRule,
+  IStep,
   RuleDestinationTypeEnum,
   RuleRuleTypeEnum
 } from "../../../../interfaces/ILayout";
 import theme from "../../../../theme/base.json";
 import { ThemeProvider } from "styled-components";
-
-const mock = new MockAdapter(Axios);
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -47,7 +45,7 @@ jest.mock("react-router-dom", () => ({
 
 const dispatch = jest.fn();
 
-const editorStoreContext: ILayoutEditorStoreContext = {
+const editorStoreContextExpectedEndProduct: ILayoutEditorStoreContext = {
   state: {
     layout: {
       expectedEndProducts: [
@@ -96,13 +94,75 @@ const editorStoreContext: ILayoutEditorStoreContext = {
   dispatch: dispatch
 };
 
-function createComponent() {
+const editorStoreContextStepRule: ILayoutEditorStoreContext = {
+  state: {
+    layout: {
+      layoutSegments: [
+        {
+          name: "seg1",
+          steps: [
+            {
+              name: "step1"
+            },
+            {
+              name: "step2"
+            }
+          ]
+        },
+        {
+          name: "seg2",
+          steps: [
+            {
+              name: "step3"
+            },
+            {
+              name: "step4"
+            }
+          ]
+        }
+      ]
+    } as ILayout,
+    detailPanelMode: DetailsPanelType.LAYOUT_DETAILS,
+    approvalConfigs: [],
+    showSigningDialog: false,
+    loading: false,
+    activeEditLayoutElement: undefined,
+    selectedLayoutElement: {
+      segment: {
+        name: "seg1",
+        steps: [
+          {
+            name: "step1"
+          },
+          {
+            name: "step2"
+          } as IStep
+        ]
+      },
+      step: {
+        name: "step1",
+        expectedMaterials: [
+          {
+            ruleType: RuleRuleTypeEnum.CREATE,
+            pattern: "pattern1"
+          }
+        ]
+      } as IStep
+    }
+  },
+  dispatch: dispatch
+} as ILayoutEditorStoreContext;
+
+function createComponent(
+  editorStoreContext: ILayoutEditorStoreContext,
+  initialRules?: Array<IRule>
+) {
   return mount(
     <ThemeProvider theme={theme}>
       <LayoutEditorStoreContext.Provider value={editorStoreContext}>
         <RuleEditor
           title={"Expected End Products"}
-          initialRules={editorStoreContext.state.layout.expectedEndProducts}
+          initialRules={initialRules}
           addAction={LayoutEditorActionType.ADD_EXPECTED_END_PRODUCT}
           editAction={LayoutEditorActionType.EDIT_EXPECTED_END_PRODUCT}
           removeAction={LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT}
@@ -113,8 +173,10 @@ function createComponent() {
 }
 
 it("renders correctly", async () => {
-  mock.reset();
-  const root = createComponent();
+  const root = createComponent(
+    editorStoreContextExpectedEndProduct,
+    editorStoreContextExpectedEndProduct.state.layout.expectedEndProducts
+  );
 
   await act(async () => {
     await waitFor(() => {
@@ -128,9 +190,12 @@ it("renders correctly", async () => {
   });
 });
 
-it("add rule", async () => {
-  mock.reset();
-  const root = createComponent();
+it("add rule expected end product", async () => {
+  dispatch.mockReset();
+  const root = createComponent(
+    editorStoreContextExpectedEndProduct,
+    editorStoreContextExpectedEndProduct.state.layout.expectedEndProducts
+  );
 
   await act(async () => {
     await waitFor(() => {
@@ -197,6 +262,63 @@ it("add rule", async () => {
         destinationType: "PRODUCTS",
         pattern: "pattern1",
         sourcePathPrefix: "sourcePathPrefix1"
+      },
+      type: 21
+    });
+  });
+});
+
+it("add rule allow", async () => {
+  dispatch.mockReset();
+  const root = createComponent(
+    editorStoreContextStepRule,
+    editorStoreContextStepRule.state.selectedLayoutElement?.step
+      ?.expectedMaterials
+  );
+
+  await act(async () => {
+    await waitFor(() => {
+      root.update();
+      return expect(
+        root.find('button[data-testhook-id="edit-rule-0"]').length
+      ).toBe(1);
+    });
+
+    root.find('button[data-testhook-id="add-rule"]').simulate("click");
+
+    await waitFor(() => {
+      root.find('select[id="ruleType"]').simulate("change", {
+        target: {
+          name: "ruleType",
+          value: "ALLOW"
+        }
+      });
+      root.update();
+
+      expect(root.find('select[id="ruleType"]').props().value).toBe("ALLOW");
+    });
+
+    root.find('form[data-testhook-id="rule-edit-form"]').simulate("submit");
+
+    expect(root.find(RuleEditor)).toMatchSnapshot();
+
+    updateField(
+      root.find('input[data-testhook-id="rule-edit-form-field-0"]'),
+      "pattern",
+      "pattern2"
+    );
+
+    root.find('form[data-testhook-id="rule-edit-form"]').simulate("submit");
+
+    await waitFor(() => {
+      root.update();
+      return expect(dispatch.mock.calls.length).toBe(1);
+    });
+
+    expect(dispatch.mock.calls[0][0]).toEqual({
+      rule: {
+        pattern: "pattern2",
+        ruleType: "ALLOW"
       },
       type: 21
     });
