@@ -75,10 +75,10 @@ const editorStoreContextExpectedEndProduct: ILayoutEditorStoreContext = {
           name: "seg2",
           steps: [
             {
-              name: "step3"
+              name: "stepa"
             },
             {
-              name: "step4"
+              name: "stepb"
             }
           ]
         }
