@@ -52,6 +52,7 @@ interface ILayoutEditorState {
   showSigningDialog: boolean;
   detailPanelMode: DetailsPanelType;
   approvalConfigs: Array<IApprovalConfig>;
+  showJson: boolean;
 }
 
 interface ILayoutEditorStoreContext {
@@ -84,7 +85,8 @@ export enum LayoutEditorActionType {
   DELETE_ARTIFACT_COLLECTOR,
   ADD_LAYOUT_AUTHORIZED_KEY,
   DELETE_LAYOUT_AUTHORIZED_KEY,
-  EDIT_LAYOUT
+  EDIT_LAYOUT,
+  SHOW_JSON
 }
 
 export interface ILayoutEditorAction {
@@ -97,6 +99,7 @@ export interface ILayoutEditorAction {
   approvalConfigs?: Array<IApprovalConfig>;
   artifactCollector?: IArtifactCollector;
   publicKey?: IPublicKey;
+  showJson?: boolean;
 }
 
 const reducer = (
@@ -154,6 +157,11 @@ const reducer = (
         selectedLayoutElement: undefined,
         detailPanelMode: DetailsPanelType.LAYOUT_DETAILS
       };
+    case LayoutEditorActionType.SHOW_JSON:
+      return {
+        ...state,
+        showJson: !state.showJson
+      };
     default:
       throw new Error();
   }
@@ -167,7 +175,8 @@ export const createLayoutEditorStoreContext = (): ILayoutEditorStoreContext => {
     loading: false,
     showSigningDialog: false,
     detailPanelMode: DetailsPanelType.EMPTY,
-    approvalConfigs: []
+    approvalConfigs: [],
+    showJson: false
   });
   return { state: state, dispatch: dispatch };
 };

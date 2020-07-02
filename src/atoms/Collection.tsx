@@ -35,8 +35,10 @@ export const BaseActionButton = styled.button`
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 `;
 
