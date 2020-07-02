@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ILayout, IPublicKey, IRule } from "../interfaces/ILayout";
+import { ILayout, IPublicKey, IRule, IStep } from "../interfaces/ILayout";
 
 export const addLayoutAuthorizedKey = (
   layout: ILayout,
@@ -102,6 +102,15 @@ export const removeExpectedEndProduct = (
     layout.expectedEndProducts.splice(expectedEndProductIndex, 1);
   }
   layout.expectedEndProducts = [...layout.expectedEndProducts];
+  return layout;
+};
+
+export const updateRequiredNumberOfLinks = (
+  layout: ILayout,
+  step: IStep,
+  requiredNumberOfLinks: number
+): ILayout => {
+  step.requiredNumberOfLinks = requiredNumberOfLinks;
   return layout;
 };
 

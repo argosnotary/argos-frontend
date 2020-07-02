@@ -31,7 +31,8 @@ import {
   addLayoutAuthorizedKey,
   deleteLayoutAuthorizedKey,
   editExpectedEndProduct,
-  removeExpectedEndProduct
+  removeExpectedEndProduct,
+  updateRequiredNumberOfLinks
 } from "./LayoutEditorService";
 
 export enum DetailsPanelType {
@@ -91,7 +92,8 @@ export enum LayoutEditorActionType {
   EDIT_LAYOUT,
   ADD_EXPECTED_END_PRODUCT,
   REMOVE_EXPECTED_END_PRODUCT,
-  EDIT_EXPECTED_END_PRODUCT
+  EDIT_EXPECTED_END_PRODUCT,
+  UPDATE_REQUIRED_NUMBER_OF_LINKS
 }
 
 export interface ILayoutEditorAction {
@@ -168,6 +170,8 @@ const reducer = (
       return handleEditExpectedEndProduct(state);
     case LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT:
       return handleRemoveExpectedEndProduct(action, state);
+    case LayoutEditorActionType.UPDATE_REQUIRED_NUMBER_OF_LINKS:
+      return handleUpdateRequiredNumberOfLinks(action, state);
     default:
       throw new Error();
   }
@@ -187,6 +191,29 @@ export const createLayoutEditorStoreContext = (): ILayoutEditorStoreContext => {
 };
 
 export const useLayoutEditorStore = () => useContext(LayoutEditorStoreContext);
+
+const handleUpdateRequiredNumberOfLinks = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.layoutStep &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: updateRequiredNumberOfLinks(
+        state.layout,
+        state.selectedLayoutElement.step,
+        action.layoutStep.requiredNumberOfLinks
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
 
 const createSelectedLayoutElement = (
   state: ILayoutEditorState,

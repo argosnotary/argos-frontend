@@ -30,6 +30,7 @@ import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 import ApprovalConfigEditor from "./ApprovalConfigEditor";
 import AuthorizedAccountEditor from "./AuthorizedAccountEditor";
 import RuleEditor from "./RuleEditor";
+import RequiredNumberOfLinks from "./RequiredNumberOfLinks";
 
 const PanelSpecificStyling = styled.div`
   ${CollectionContainer} {
@@ -74,7 +75,12 @@ const LayoutEditorDetailsPane: React.FC = () => {
           />
         );
       case DetailsPanelType.STEP_DETAILS:
-        return <ApprovalConfigEditor />;
+        return (
+          <>
+            <ApprovalConfigEditor />
+            <RequiredNumberOfLinks />
+          </>
+        );
       case DetailsPanelType.LAYOUT_DETAILS:
         return (
           <>
