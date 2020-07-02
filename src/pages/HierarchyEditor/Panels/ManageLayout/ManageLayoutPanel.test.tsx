@@ -35,7 +35,7 @@ import {
   IApprovalConfig
 } from "../../../../interfaces/IApprovalConfig";
 import HierarchyEditorTestWrapper from "../../../../test/utils";
-import AuthorizedAccountEditor from "./AuthorizedAccountEditor";
+import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
 import { SearchResultEntry } from "../../../../atoms/SearchInput";
 
 const mock = new MockAdapter(Axios);
@@ -175,7 +175,7 @@ it("renders correctly with existing layout", async () => {
       ).toBe(1);
     });
 
-    expect(root.find(AuthorizedAccountEditor)).toMatchSnapshot(
+    expect(root.find(LayoutAuthorizedAccountEditor)).toMatchSnapshot(
       "withLayoutDetailsEditor"
     );
 
