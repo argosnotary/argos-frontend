@@ -14,18 +14,32 @@
  * limitations under the License.
  */
 import React from "react";
+import styled from "styled-components";
+
 import NotificationsList, {
   INotification,
   NotificationTypes
 } from "../../../../molecules/NotificationsList";
 import { Panel } from "../../../../molecules/Panel";
+import { CollectionContainer } from "../../../../atoms/Collection";
 import {
   DetailsPanelType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 import ApprovalConfigEditor from "./ApprovalConfigEditor";
-import LayoutDetailsEditor from "./LayoutDetailsEditor";
+import AuthorizedAccountEditor from "./AuthorizedAccountEditor";
+import RuleEditor from "./RuleEditor";
+
+const PanelSpecificStyling = styled.div`
+  ${CollectionContainer} {
+    &:first-of-type {
+      margin-top: 3rem;
+    }
+
+    margin-top: 2.1rem;
+  }
+`;
 
 const convertValidationMessagesToNotifications = (
   validationErrors?: Array<ILayoutValidationMessage>
@@ -62,7 +76,12 @@ const LayoutEditorDetailsPane: React.FC = () => {
       case DetailsPanelType.STEP_DETAILS:
         return <ApprovalConfigEditor />;
       case DetailsPanelType.LAYOUT_DETAILS:
-        return <LayoutDetailsEditor />;
+        return (
+          <>
+            <AuthorizedAccountEditor />
+            <RuleEditor />
+          </>
+        );
     }
   };
 
@@ -78,11 +97,9 @@ const LayoutEditorDetailsPane: React.FC = () => {
   };
 
   return (
-    <>
-      <Panel width={"37.5vw"} last={true} title={determineTitle()}>
-        {determinePanelContent()}
-      </Panel>
-    </>
+    <Panel width={"37.5vw"} last={true} title={determineTitle()}>
+      <PanelSpecificStyling>{determinePanelContent()}</PanelSpecificStyling>
+    </Panel>
   );
 };
 

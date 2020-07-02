@@ -43,11 +43,11 @@ import {
   LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
-import { Select } from "../../../../atoms/DropDown";
 import useFormBuilder, {
   IFormBuilderConfig,
   FormSubmitButtonHandlerTypes
 } from "../../../../hooks/useFormBuilder";
+import Select from "../../../../atoms/Select";
 
 const SelectionContainer = styled.section`
   display: flex;

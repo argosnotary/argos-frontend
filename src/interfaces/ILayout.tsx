@@ -27,27 +27,13 @@ export interface ISignature {
 export interface ILayout {
   keys: IPublicKey[];
   authorizedKeyIds: string[];
-  expectedEndProducts: IMatchRule[];
+  expectedEndProducts: IRule[];
   layoutSegments: ILayoutSegment[];
 }
 
 export interface IPublicKey {
   id: string;
   key: string;
-}
-
-export interface IMatchRule {
-  pattern: string;
-  sourcePathPrefix?: string;
-  destinationType: MatchRuleDestinationTypeEnum;
-  destinationPathPrefix?: string;
-  destinationSegmentName: string;
-  destinationStepName: string;
-}
-
-export enum MatchRuleDestinationTypeEnum {
-  PRODUCTS = "PRODUCTS",
-  MATERIALS = "MATERIALS"
 }
 
 export interface ILayoutSegment {
@@ -64,7 +50,7 @@ export interface IStep {
 }
 
 export interface IRule {
-  ruleType: RuleRuleTypeEnum;
+  ruleType?: RuleRuleTypeEnum;
   pattern: string;
   sourcePathPrefix?: string;
   destinationPathPrefix?: string;

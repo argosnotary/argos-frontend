@@ -17,7 +17,6 @@
 import React from "react";
 import { serialize } from "./LayoutService";
 import {
-  MatchRuleDestinationTypeEnum,
   RuleDestinationTypeEnum,
   RuleRuleTypeEnum
 } from "../../interfaces/ILayout";
@@ -31,7 +30,7 @@ it("test serialize", () => {
     expectedEndProducts: [
       {
         destinationSegmentName: "destinationSegmentName",
-        destinationType: MatchRuleDestinationTypeEnum.PRODUCTS,
+        destinationType: RuleDestinationTypeEnum.PRODUCTS,
         destinationStepName: "destinationStepName",
         pattern: "MatchFiler",
         destinationPathPrefix: "destinationPathPrefix",
@@ -59,7 +58,7 @@ it("test serialize", () => {
                 pattern: "ModifyRule"
               }
             ],
-            authorizedKeyIds: ["key2", "key1"],
+            authorizedKeyIds: ["key2", "key1"]
           },
           {
             name: "step a",

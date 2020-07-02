@@ -17,6 +17,12 @@ export interface IGenericFormInput {
   labelValue?: string;
   name: string;
   formType: string;
+  options?: Array<IOption>;
+}
+
+export interface IOption {
+  name: string;
+  value: string;
 }
 
 export type IGenericFormSchema = Array<IGenericFormInput>;

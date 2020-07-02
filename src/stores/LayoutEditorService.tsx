@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ILayout, IPublicKey } from "../interfaces/ILayout";
+import { ILayout, IPublicKey, IRule } from "../interfaces/ILayout";
 
 export const addLayoutAuthorizedKey = (
   layout: ILayout,
@@ -32,9 +32,9 @@ export const addLayoutAuthorizedKey = (
   }
 
   if (!isKeyIdDefined(layout, key.id)) {
-    layout.authorizedKeyIds.push(key.id);
+    layout.authorizedKeyIds = [...layout.authorizedKeyIds, key.id];
   }
-  return { ...layout };
+  return layout;
 };
 
 export const deleteLayoutAuthorizedKey = (
@@ -45,6 +45,7 @@ export const deleteLayoutAuthorizedKey = (
 
   if (authorizedKeyIndex >= 0) {
     layout.authorizedKeyIds.splice(authorizedKeyIndex, 1);
+    layout.authorizedKeyIds = [...layout.authorizedKeyIds];
   }
 
   if (!isKeyIdUsedInSteps(layout, keyToRemove.id)) {
@@ -54,7 +55,54 @@ export const deleteLayoutAuthorizedKey = (
     }
   }
 
+  return layout;
+};
+
+export const getStepNamesForSegment = (
+  layout: ILayout,
+  segmentName: string
+) => {
+  return layout && layout.layoutSegments
+    ? layout.layoutSegments
+        .filter(segment => segment.name === segmentName)
+        .flatMap(segment => segment.steps)
+        .map(step => step.name)
+    : [];
+};
+
+export const getSegmentNames = (layout: ILayout) => {
+  return layout && layout.layoutSegments
+    ? layout.layoutSegments.map(segment => segment.name)
+    : [];
+};
+
+export const addExpectedEndProduct = (
+  layout: ILayout,
+  rule: IRule
+): ILayout => {
+  if (layout.expectedEndProducts === undefined) {
+    layout.expectedEndProducts = [];
+  }
+  layout.expectedEndProducts = [...layout.expectedEndProducts, rule];
+  return layout;
+};
+
+export const editExpectedEndProduct = (layout: ILayout): ILayout => {
+  layout.expectedEndProducts = [...layout.expectedEndProducts];
   return { ...layout };
+};
+
+export const removeExpectedEndProduct = (
+  layout: ILayout,
+  rule: IRule
+): ILayout => {
+  const expectedEndProductIndex = layout.expectedEndProducts.indexOf(rule);
+
+  if (expectedEndProductIndex >= 0) {
+    layout.expectedEndProducts.splice(expectedEndProductIndex, 1);
+  }
+  layout.expectedEndProducts = [...layout.expectedEndProducts];
+  return layout;
 };
 
 const isPublicKeyDefined = (layout: ILayout, keyId: string): boolean => {
