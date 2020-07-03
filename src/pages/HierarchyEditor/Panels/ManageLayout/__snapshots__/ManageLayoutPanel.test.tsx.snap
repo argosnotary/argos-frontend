@@ -10887,6 +10887,9 @@ exports[`sign layout happy flow 1`] = `
                                           "name": "jenkins",
                                           "steps": Array [
                                             Object {
+                                              "authorizedKeyIds": Array [],
+                                              "expectedMaterials": Array [],
+                                              "expectedProducts": Array [],
                                               "name": "approve",
                                             },
                                           ],
@@ -11153,6 +11156,9 @@ exports[`sign layout happy flow 1`] = `
                                             "name": "jenkins",
                                             "steps": Array [
                                               Object {
+                                                "authorizedKeyIds": Array [],
+                                                "expectedMaterials": Array [],
+                                                "expectedProducts": Array [],
                                                 "name": "approve",
                                               },
                                             ],
@@ -11380,6 +11386,9 @@ exports[`sign layout happy flow 1`] = `
                                                       "name": "jenkins",
                                                       "steps": Array [
                                                         Object {
+                                                          "authorizedKeyIds": Array [],
+                                                          "expectedMaterials": Array [],
+                                                          "expectedProducts": Array [],
                                                           "name": "approve",
                                                         },
                                                       ],
@@ -11387,6 +11396,9 @@ exports[`sign layout happy flow 1`] = `
                                                   }
                                                   step={
                                                     Object {
+                                                      "authorizedKeyIds": Array [],
+                                                      "expectedMaterials": Array [],
+                                                      "expectedProducts": Array [],
                                                       "name": "approve",
                                                     }
                                                   }
@@ -11839,7 +11851,10 @@ exports[`sign layout happy flow 1`] = `
       "name": "jenkins",
       "steps": [
         {
-          "name": "approve"
+          "name": "approve",
+          "authorizedKeyIds": [],
+          "expectedMaterials": [],
+          "expectedProducts": []
         }
       ]
     }
@@ -11858,7 +11873,10 @@ exports[`sign layout happy flow 1`] = `
       \\"name\\": \\"jenkins\\",
       \\"steps\\": [
         {
-          \\"name\\": \\"approve\\"
+          \\"name\\": \\"approve\\",
+          \\"authorizedKeyIds\\": [],
+          \\"expectedMaterials\\": [],
+          \\"expectedProducts\\": []
         }
       ]
     }
@@ -11948,7 +11966,10 @@ exports[`sign layout happy flow 1`] = `
       \\"name\\": \\"jenkins\\",
       \\"steps\\": [
         {
-          \\"name\\": \\"approve\\"
+          \\"name\\": \\"approve\\",
+          \\"authorizedKeyIds\\": [],
+          \\"expectedMaterials\\": [],
+          \\"expectedProducts\\": []
         }
       ]
     }
@@ -12031,7 +12052,10 @@ exports[`sign layout happy flow 1`] = `
       "name": "jenkins",
       "steps": [
         {
-          "name": "approve"
+          "name": "approve",
+          "authorizedKeyIds": [],
+          "expectedMaterials": [],
+          "expectedProducts": []
         }
       ]
     }
@@ -12050,7 +12074,10 @@ exports[`sign layout happy flow 1`] = `
       \\"name\\": \\"jenkins\\",
       \\"steps\\": [
         {
-          \\"name\\": \\"approve\\"
+          \\"name\\": \\"approve\\",
+          \\"authorizedKeyIds\\": [],
+          \\"expectedMaterials\\": [],
+          \\"expectedProducts\\": []
         }
       ]
     }
@@ -12071,7 +12098,10 @@ exports[`sign layout happy flow 1`] = `
       \\"name\\": \\"jenkins\\",
       \\"steps\\": [
         {
-          \\"name\\": \\"approve\\"
+          \\"name\\": \\"approve\\",
+          \\"authorizedKeyIds\\": [],
+          \\"expectedMaterials\\": [],
+          \\"expectedProducts\\": []
         }
       ]
     }
@@ -14130,6 +14160,7 @@ exports[`sign layout happy flow 1`] = `
                             <RuleEditor
                               addAction={27}
                               editAction={29}
+                              initialRules={Array []}
                               removeAction={28}
                               title="Expected Materials"
                             >
@@ -14387,6 +14418,7 @@ exports[`sign layout happy flow 1`] = `
                             <RuleEditor
                               addAction={24}
                               editAction={26}
+                              initialRules={Array []}
                               removeAction={25}
                               title="Expected Products"
                             >

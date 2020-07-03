@@ -449,7 +449,7 @@ it("sign layout happy flow", async () => {
       .first()
       .simulate("submit");
 
-    await waitFor(() => expect(mock.history.get.length).toBe(2));
+    await waitFor(() => expect(mock.history.get.length).toBe(4));
     await waitFor(() => expect(mock.history.post.length).toBe(3));
 
     const expectedPost = {
@@ -458,6 +458,9 @@ it("sign layout happy flow", async () => {
           name: "jenkins",
           steps: [
             {
+              authorizedKeyIds: [],
+              expectedMaterials: [],
+              expectedProducts: [],
               name: "approve"
             }
           ]

@@ -129,9 +129,20 @@ interface IKeyStatus {
   keyStatus: KeyStatus;
 }
 
+interface IAccountInfo {
+  accountId: string;
+  name: string;
+  path: string;
+  accountType: AccountType;
+}
+
 interface IKeyStatusApiResponse {
   isLoading: boolean;
-  data: Array<any>;
+  data: Array<IAccountInfo>;
+}
+
+interface IAccountSearchResult extends ISearchResult {
+  accountType: AccountType;
 }
 
 const StepAuthorizedAccountEditor: React.FC = () => {
@@ -233,28 +244,40 @@ const StepAuthorizedAccountEditor: React.FC = () => {
     apiResponse: IKeyStatusApiResponse
   ): Array<ISearchResult> => {
     if (apiResponse.data && apiResponse.data.length > 0) {
+      console.log(apiResponse.data);
       return apiResponse.data.map(
         entry =>
           ({
-            id: entry.id,
-            displayLabel: entry.name
-          } as ISearchResult)
+            id: entry.accountId,
+            displayLabel:
+              (entry.accountType === AccountType.SERVICE_ACCOUNT
+                ? entry.path + "/"
+                : "") + entry.name,
+            accountType: entry.accountType
+          } as IAccountSearchResult)
       );
     }
 
     return [];
   };
 
-  const onAddAccount = (searchResult: ISearchResult) => {
+  const onAddAccount = (searchResult: IAccountSearchResult) => {
     setAddAccountMode(false);
     const getUserRequest: DataRequest = {
       method: "get",
       token,
-      url: `/api/personalaccount/${searchResult.id}/key`,
-      cbSuccess: (key: IPublicKey) => {
+      url: `/api/${
+        searchResult.accountType === AccountType.PERSONAL_ACCOUNT
+          ? "personalaccount"
+          : "serviceaccount"
+      }/${searchResult.id}/key`,
+      cbSuccess: (key: any) => {
         editorStoreContext.dispatch({
           type: LayoutEditorActionType.ADD_STEP_AUTHORIZED_KEY,
-          publicKey: key
+          publicKey:
+            searchResult.accountType === AccountType.PERSONAL_ACCOUNT
+              ? key
+              : { id: key.keyId, key: key.publicKey }
         });
       },
       cbFailure: error => {
@@ -272,7 +295,7 @@ const StepAuthorizedAccountEditor: React.FC = () => {
     return (
       <SearchInput
         results={parseSearchInputResults(searchAccountApiResponse)}
-        onSelect={onAddAccount}
+        onSelect={selected => onAddAccount(selected as IAccountSearchResult)}
         onCancel={() => setAddAccountMode(false)}
         fetchData={searchQuery => {
           const searchUserRequest: DataRequest = {
@@ -281,7 +304,7 @@ const StepAuthorizedAccountEditor: React.FC = () => {
               name: searchQuery
             },
             token,
-            url: `/api/personalaccount`
+            url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}/account`
           };
           setSearchAccountApiRequest(searchUserRequest);
         }}

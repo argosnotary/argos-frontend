@@ -221,15 +221,13 @@ const isKeyIdDefined = (layout: ILayout, keyId: string): boolean => {
 };
 
 const isKeyIdUsedInSteps = (layout: ILayout, keyId: string): boolean => {
-  if (layout.layoutSegments) {
-    return (
-      layout.authorizedKeyIds.indexOf(keyId) >= 0 ||
+  return (
+    (layout.authorizedKeyIds && layout.authorizedKeyIds.indexOf(keyId) >= 0) ||
+    (layout.layoutSegments &&
       layout.layoutSegments
         .flatMap(segment => segment.steps)
         .filter(step => step.authorizedKeyIds !== undefined)
         .flatMap(step => step.authorizedKeyIds)
-        .indexOf(keyId) >= 0
-    );
-  }
-  return false;
+        .indexOf(keyId) >= 0)
+  );
 };

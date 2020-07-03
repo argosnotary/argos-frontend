@@ -747,6 +747,18 @@ const handleAddStep = (
   state: ILayoutEditorState
 ) => {
   if (action.layoutSegment && action.layoutStep) {
+    if (action.layoutStep.authorizedKeyIds === undefined) {
+      action.layoutStep.authorizedKeyIds = [];
+    }
+
+    if (action.layoutStep.expectedMaterials === undefined) {
+      action.layoutStep.expectedMaterials = [];
+    }
+
+    if (action.layoutStep.expectedProducts === undefined) {
+      action.layoutStep.expectedProducts = [];
+    }
+
     action.layoutSegment.steps.push(action.layoutStep);
     return {
       ...state,
