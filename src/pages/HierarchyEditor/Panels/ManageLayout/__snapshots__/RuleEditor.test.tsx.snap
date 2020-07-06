@@ -24,7 +24,7 @@ exports[`add rule allow 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-jKJlTe",
             "isStatic": false,
-            "lastClassName": "gtWwp",
+            "lastClassName": "kpFpro",
             "rules": Array [
               "
   margin: 1rem 0 1rem;
@@ -33,6 +33,14 @@ exports[`add rule allow 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
               "
   min-height: 0;
@@ -61,7 +69,7 @@ exports[`add rule allow 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-bdVaJa sc-jKJlTe gtWwp"
+        className="sc-bdVaJa sc-jKJlTe kpFpro"
       >
         <styled.div>
           <StyledComponent
@@ -235,13 +243,12 @@ exports[`add rule allow 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "fxProD",
+                  "lastClassName": "enhIWo",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                   ],
                 },
@@ -258,7 +265,7 @@ exports[`add rule allow 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-bZQynM fxProD"
+              className="sc-bZQynM enhIWo"
             >
               <li>
                 <styled.section>
@@ -270,11 +277,11 @@ exports[`add rule allow 1`] = `
                         "componentStyle": ComponentStyle {
                           "componentId": "sc-kkGfuU",
                           "isStatic": false,
-                          "lastClassName": "cwDmEf",
+                          "lastClassName": "dxiUPW",
                           "rules": Array [
                             "
   width: 100%;
-  margin: 0 0 1rem;
+  margin: 0;
 ",
                           ],
                         },
@@ -291,7 +298,7 @@ exports[`add rule allow 1`] = `
                     forwardedRef={null}
                   >
                     <section
-                      className="sc-kkGfuU cwDmEf"
+                      className="sc-kkGfuU dxiUPW"
                     >
                       <styled.header>
                         <StyledComponent
@@ -302,14 +309,14 @@ exports[`add rule allow 1`] = `
                               "componentStyle": ComponentStyle {
                                 "componentId": "sc-kEYyzF",
                                 "isStatic": false,
-                                "lastClassName": "jPwoGc",
+                                "lastClassName": "ienUoW",
                                 "rules": Array [
                                   "
   border: 1px solid transparent;
   box-sizing: border-box;
   padding: 0.5rem;
   width: 100%;
-  margin: 0.2rem 0 0;
+  margin: 0;
   background-color: ",
                                   [Function],
                                   ";
@@ -337,7 +344,7 @@ exports[`add rule allow 1`] = `
                           forwardedRef={null}
                         >
                           <header
-                            className="sc-kEYyzF jPwoGc"
+                            className="sc-kEYyzF ienUoW"
                           >
                             <styled.span>
                               <StyledComponent
@@ -564,19 +571,22 @@ exports[`add rule allow 1`] = `
                       "componentStyle": ComponentStyle {
                         "componentId": "sc-iAyFgw",
                         "isStatic": false,
-                        "lastClassName": "dwurOT",
+                        "lastClassName": "jdRHtA",
                         "rules": Array [
                           "
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
+  padding: 1rem;
 
   ",
                           ".sc-kGXeez",
                           " {
     margin: 0 0 0 1rem;
   }
+
+  background-color: #e0e0e0;
 ",
                         ],
                       },
@@ -593,7 +603,7 @@ exports[`add rule allow 1`] = `
                   forwardedRef={null}
                 >
                   <section
-                    className="sc-iAyFgw dwurOT"
+                    className="sc-iAyFgw jdRHtA"
                   >
                     <label
                       htmlFor="collectorType"
@@ -734,8 +744,11 @@ exports[`add rule allow 1`] = `
                   </section>
                 </StyledComponent>
               </styled.section>
-              <Styled(styled.div)>
+              <Styled(styled.div)
+                alternateStyling={true}
+              >
                 <StyledComponent
+                  alternateStyling={true}
                   forwardedComponent={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -743,7 +756,7 @@ exports[`add rule allow 1`] = `
                       "componentStyle": ComponentStyle {
                         "componentId": "sc-ckVGcZ",
                         "isStatic": false,
-                        "lastClassName": "dKfOFN",
+                        "lastClassName": "bUfopL",
                         "rules": Array [
                           "
   display: flex;
@@ -753,6 +766,10 @@ exports[`add rule allow 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                          [Function],
+                          "
 ",
                         ],
                       },
@@ -771,7 +788,7 @@ exports[`add rule allow 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-kgoBCf sc-ckVGcZ dKfOFN"
+                    className="sc-kgoBCf sc-ckVGcZ bUfopL"
                   >
                     <form
                       data-testhook-id="rule-edit-form"
@@ -1299,7 +1316,7 @@ exports[`add rule expected end product 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-jKJlTe",
             "isStatic": false,
-            "lastClassName": "gtWwp",
+            "lastClassName": "kpFpro",
             "rules": Array [
               "
   margin: 1rem 0 1rem;
@@ -1308,6 +1325,14 @@ exports[`add rule expected end product 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
               "
   min-height: 0;
@@ -1336,7 +1361,7 @@ exports[`add rule expected end product 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-bdVaJa sc-jKJlTe gtWwp"
+        className="sc-bdVaJa sc-jKJlTe kpFpro"
       >
         <styled.div>
           <StyledComponent
@@ -1510,13 +1535,12 @@ exports[`add rule expected end product 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "fxProD",
+                  "lastClassName": "enhIWo",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                   ],
                 },
@@ -1533,7 +1557,7 @@ exports[`add rule expected end product 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-bZQynM fxProD"
+              className="sc-bZQynM enhIWo"
             >
               <li>
                 <styled.section>
@@ -1545,11 +1569,11 @@ exports[`add rule expected end product 1`] = `
                         "componentStyle": ComponentStyle {
                           "componentId": "sc-kkGfuU",
                           "isStatic": false,
-                          "lastClassName": "cwDmEf",
+                          "lastClassName": "dxiUPW",
                           "rules": Array [
                             "
   width: 100%;
-  margin: 0 0 1rem;
+  margin: 0;
 ",
                           ],
                         },
@@ -1566,7 +1590,7 @@ exports[`add rule expected end product 1`] = `
                     forwardedRef={null}
                   >
                     <section
-                      className="sc-kkGfuU cwDmEf"
+                      className="sc-kkGfuU dxiUPW"
                     >
                       <styled.header>
                         <StyledComponent
@@ -1577,14 +1601,14 @@ exports[`add rule expected end product 1`] = `
                               "componentStyle": ComponentStyle {
                                 "componentId": "sc-kEYyzF",
                                 "isStatic": false,
-                                "lastClassName": "jPwoGc",
+                                "lastClassName": "ienUoW",
                                 "rules": Array [
                                   "
   border: 1px solid transparent;
   box-sizing: border-box;
   padding: 0.5rem;
   width: 100%;
-  margin: 0.2rem 0 0;
+  margin: 0;
   background-color: ",
                                   [Function],
                                   ";
@@ -1612,7 +1636,7 @@ exports[`add rule expected end product 1`] = `
                           forwardedRef={null}
                         >
                           <header
-                            className="sc-kEYyzF jPwoGc"
+                            className="sc-kEYyzF ienUoW"
                           >
                             <styled.span>
                               <StyledComponent
@@ -1830,8 +1854,11 @@ exports[`add rule expected end product 1`] = `
                   </StyledComponent>
                 </styled.section>
               </li>
-              <Styled(styled.div)>
+              <Styled(styled.div)
+                alternateStyling={true}
+              >
                 <StyledComponent
+                  alternateStyling={true}
                   forwardedComponent={
                     Object {
                       "$$typeof": Symbol(react.forward_ref),
@@ -1839,7 +1866,7 @@ exports[`add rule expected end product 1`] = `
                       "componentStyle": ComponentStyle {
                         "componentId": "sc-ckVGcZ",
                         "isStatic": false,
-                        "lastClassName": "dKfOFN",
+                        "lastClassName": "bUfopL",
                         "rules": Array [
                           "
   display: flex;
@@ -1849,6 +1876,10 @@ exports[`add rule expected end product 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                          [Function],
+                          "
 ",
                         ],
                       },
@@ -1867,7 +1898,7 @@ exports[`add rule expected end product 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-kgoBCf sc-ckVGcZ dKfOFN"
+                    className="sc-kgoBCf sc-ckVGcZ bUfopL"
                   >
                     <form
                       data-testhook-id="rule-edit-form"
@@ -3297,7 +3328,7 @@ exports[`renders correctly 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-jKJlTe",
             "isStatic": false,
-            "lastClassName": "gtWwp",
+            "lastClassName": "kpFpro",
             "rules": Array [
               "
   margin: 1rem 0 1rem;
@@ -3306,6 +3337,14 @@ exports[`renders correctly 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
               "
   min-height: 0;
@@ -3334,7 +3373,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-bdVaJa sc-jKJlTe gtWwp"
+        className="sc-bdVaJa sc-jKJlTe kpFpro"
       >
         <styled.div>
           <StyledComponent
@@ -3508,13 +3547,12 @@ exports[`renders correctly 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "fxProD",
+                  "lastClassName": "enhIWo",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                   ],
                 },
@@ -3531,7 +3569,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-bZQynM fxProD"
+              className="sc-bZQynM enhIWo"
             >
               <li>
                 <styled.section>
@@ -3543,11 +3581,11 @@ exports[`renders correctly 1`] = `
                         "componentStyle": ComponentStyle {
                           "componentId": "sc-kkGfuU",
                           "isStatic": false,
-                          "lastClassName": "cwDmEf",
+                          "lastClassName": "dxiUPW",
                           "rules": Array [
                             "
   width: 100%;
-  margin: 0 0 1rem;
+  margin: 0;
 ",
                           ],
                         },
@@ -3564,7 +3602,7 @@ exports[`renders correctly 1`] = `
                     forwardedRef={null}
                   >
                     <section
-                      className="sc-kkGfuU cwDmEf"
+                      className="sc-kkGfuU dxiUPW"
                     >
                       <styled.header>
                         <StyledComponent
@@ -3575,14 +3613,14 @@ exports[`renders correctly 1`] = `
                               "componentStyle": ComponentStyle {
                                 "componentId": "sc-kEYyzF",
                                 "isStatic": false,
-                                "lastClassName": "jPwoGc",
+                                "lastClassName": "ienUoW",
                                 "rules": Array [
                                   "
   border: 1px solid transparent;
   box-sizing: border-box;
   padding: 0.5rem;
   width: 100%;
-  margin: 0.2rem 0 0;
+  margin: 0;
   background-color: ",
                                   [Function],
                                   ";
@@ -3610,7 +3648,7 @@ exports[`renders correctly 1`] = `
                           forwardedRef={null}
                         >
                           <header
-                            className="sc-kEYyzF jPwoGc"
+                            className="sc-kEYyzF ienUoW"
                           >
                             <styled.span>
                               <StyledComponent

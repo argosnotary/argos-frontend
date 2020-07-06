@@ -28,7 +28,7 @@ import {
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
-import ApprovalConfigEditor from "./ApprovalConfigEditor";
+import ApprovalConfigEditor, { FormContainer } from "./ApprovalConfigEditor";
 import AuthorizedAccountEditor from "./AuthorizedAccountEditor";
 import RuleEditor from "./RuleEditor";
 
@@ -39,6 +39,14 @@ const PanelSpecificStyling = styled.div`
     }
 
     margin-top: 2.1rem;
+  }
+
+  ${FormContainer} {
+    &:first-of-type {
+      margin: 0;
+    }
+
+    margin: 0;
   }
 `;
 

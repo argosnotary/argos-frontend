@@ -647,7 +647,7 @@ exports[`add authorized key to layout 1`] = `
                             "componentStyle": ComponentStyle {
                               "componentId": "sc-Rmtcm",
                               "isStatic": false,
-                              "lastClassName": "YiEyn",
+                              "lastClassName": "glGRIZ",
                               "rules": Array [
                                 "
   margin: 1rem 0 1rem;
@@ -656,6 +656,14 @@ exports[`add authorized key to layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                 "
   flex-direction: column;
@@ -683,7 +691,7 @@ exports[`add authorized key to layout 1`] = `
                         forwardedRef={null}
                       >
                         <section
-                          className="sc-gqjmRU sc-Rmtcm YiEyn"
+                          className="sc-gqjmRU sc-Rmtcm glGRIZ"
                         >
                           <styled.div>
                             <StyledComponent
@@ -857,13 +865,12 @@ exports[`add authorized key to layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-kAzzGY",
                                     "isStatic": false,
-                                    "lastClassName": "hfkxXP",
+                                    "lastClassName": "gpXzbO",
                                     "rules": Array [
                                       "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                     ],
                                   },
@@ -880,7 +887,7 @@ exports[`add authorized key to layout 1`] = `
                               forwardedRef={null}
                             >
                               <ul
-                                className="sc-kAzzGY hfkxXP"
+                                className="sc-kAzzGY gpXzbO"
                               />
                             </StyledComponent>
                           </styled.ul>
@@ -943,7 +950,7 @@ exports[`add authorized key to layout 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-cvbbAY",
                             "isStatic": false,
-                            "lastClassName": "emdpGB",
+                            "lastClassName": "jTvfUS",
                             "rules": Array [
                               "
   display: flex;
@@ -953,6 +960,10 @@ exports[`add authorized key to layout 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                              [Function],
+                              "
 ",
                             ],
                           },
@@ -971,7 +982,7 @@ exports[`add authorized key to layout 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-kkGfuU sc-cvbbAY emdpGB"
+                        className="sc-kkGfuU sc-cvbbAY jTvfUS"
                       >
                         <form
                           data-testhook-id="layout-json-form"
@@ -1736,7 +1747,7 @@ exports[`add authorized key to layout 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-gzOgki",
                             "isStatic": false,
-                            "lastClassName": "rPZPH",
+                            "lastClassName": "fPJxtv",
                             "rules": Array [
                               "
   ",
@@ -1747,6 +1758,16 @@ exports[`add authorized key to layout 1`] = `
     }
 
     margin-top: 2.1rem;
+  }
+
+  ",
+                              ".sc-jqCOkK",
+                              " {
+    &:first-of-type {
+      margin: 0;
+    }
+
+    margin: 0;
   }
 ",
                             ],
@@ -1764,7 +1785,7 @@ exports[`add authorized key to layout 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-gzOgki rPZPH"
+                        className="sc-gzOgki fPJxtv"
                       >
                         <AuthorizedAccountEditor>
                           <Styled(styled.section)>
@@ -1776,7 +1797,7 @@ exports[`add authorized key to layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-kafWEX",
                                     "isStatic": false,
-                                    "lastClassName": "imngW",
+                                    "lastClassName": "dlSbpo",
                                     "rules": Array [
                                       "
   margin: 1rem 0 1rem;
@@ -1785,6 +1806,14 @@ exports[`add authorized key to layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                       "
   min-height: 0;
@@ -1813,7 +1842,7 @@ exports[`add authorized key to layout 1`] = `
                               forwardedRef={null}
                             >
                               <section
-                                className="sc-gqjmRU sc-kafWEX imngW"
+                                className="sc-gqjmRU sc-kafWEX dlSbpo"
                               >
                                 <styled.div>
                                   <StyledComponent
@@ -1987,13 +2016,12 @@ exports[`add authorized key to layout 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-kAzzGY",
                                           "isStatic": false,
-                                          "lastClassName": "hfkxXP",
+                                          "lastClassName": "gpXzbO",
                                           "rules": Array [
                                             "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                           ],
                                         },
@@ -2010,7 +2038,7 @@ exports[`add authorized key to layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <ul
-                                      className="sc-kAzzGY hfkxXP"
+                                      className="sc-kAzzGY gpXzbO"
                                     >
                                       <li
                                         key="item-row-0"
@@ -2311,7 +2339,7 @@ exports[`add authorized key to layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-lhVmIH",
                                     "isStatic": false,
-                                    "lastClassName": "kQYbMR",
+                                    "lastClassName": "KSoQI",
                                     "rules": Array [
                                       "
   margin: 1rem 0 1rem;
@@ -2320,6 +2348,14 @@ exports[`add authorized key to layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                       "
   min-height: 0;
@@ -2348,7 +2384,7 @@ exports[`add authorized key to layout 1`] = `
                               forwardedRef={null}
                             >
                               <section
-                                className="sc-gqjmRU sc-lhVmIH kQYbMR"
+                                className="sc-gqjmRU sc-lhVmIH KSoQI"
                               >
                                 <styled.div>
                                   <StyledComponent
@@ -2522,13 +2558,12 @@ exports[`add authorized key to layout 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-kAzzGY",
                                           "isStatic": false,
-                                          "lastClassName": "hfkxXP",
+                                          "lastClassName": "gpXzbO",
                                           "rules": Array [
                                             "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                           ],
                                         },
@@ -2545,7 +2580,7 @@ exports[`add authorized key to layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <ul
-                                      className="sc-kAzzGY hfkxXP"
+                                      className="sc-kAzzGY gpXzbO"
                                     />
                                   </StyledComponent>
                                 </styled.ul>
@@ -3214,7 +3249,7 @@ exports[`renders correctly with existing layout 1`] = `
                             "componentStyle": ComponentStyle {
                               "componentId": "sc-Rmtcm",
                               "isStatic": false,
-                              "lastClassName": "YiEyn",
+                              "lastClassName": "glGRIZ",
                               "rules": Array [
                                 "
   margin: 1rem 0 1rem;
@@ -3223,6 +3258,14 @@ exports[`renders correctly with existing layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                 "
   flex-direction: column;
@@ -3250,7 +3293,7 @@ exports[`renders correctly with existing layout 1`] = `
                         forwardedRef={null}
                       >
                         <section
-                          className="sc-gqjmRU sc-Rmtcm YiEyn"
+                          className="sc-gqjmRU sc-Rmtcm glGRIZ"
                         >
                           <styled.div>
                             <StyledComponent
@@ -3424,13 +3467,12 @@ exports[`renders correctly with existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-kAzzGY",
                                     "isStatic": false,
-                                    "lastClassName": "hfkxXP",
+                                    "lastClassName": "gpXzbO",
                                     "rules": Array [
                                       "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                     ],
                                   },
@@ -3447,7 +3489,7 @@ exports[`renders correctly with existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <ul
-                                className="sc-kAzzGY hfkxXP"
+                                className="sc-kAzzGY gpXzbO"
                               >
                                 <Segment
                                   index={0}
@@ -3739,7 +3781,7 @@ exports[`renders correctly with existing layout 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-jDwBTQ",
                                                 "isStatic": false,
-                                                "lastClassName": "iZURLY",
+                                                "lastClassName": "zfFUj",
                                                 "rules": Array [
                                                   "
   margin: 1rem 0 1rem;
@@ -3748,6 +3790,14 @@ exports[`renders correctly with existing layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                                   "
   flex-direction: column;
@@ -3775,7 +3825,7 @@ exports[`renders correctly with existing layout 1`] = `
                                           forwardedRef={null}
                                         >
                                           <section
-                                            className="sc-gqjmRU sc-jDwBTQ iZURLY"
+                                            className="sc-gqjmRU sc-jDwBTQ zfFUj"
                                           >
                                             <styled.div>
                                               <StyledComponent
@@ -4355,7 +4405,7 @@ exports[`renders correctly with existing layout 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-cvbbAY",
                             "isStatic": false,
-                            "lastClassName": "emdpGB",
+                            "lastClassName": "jTvfUS",
                             "rules": Array [
                               "
   display: flex;
@@ -4365,6 +4415,10 @@ exports[`renders correctly with existing layout 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                              [Function],
+                              "
 ",
                             ],
                           },
@@ -4383,7 +4437,7 @@ exports[`renders correctly with existing layout 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-kkGfuU sc-cvbbAY emdpGB"
+                        className="sc-kkGfuU sc-cvbbAY jTvfUS"
                       >
                         <form
                           data-testhook-id="layout-json-form"
@@ -5192,7 +5246,7 @@ exports[`renders correctly with existing layout 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-gzOgki",
                             "isStatic": false,
-                            "lastClassName": "rPZPH",
+                            "lastClassName": "fPJxtv",
                             "rules": Array [
                               "
   ",
@@ -5203,6 +5257,16 @@ exports[`renders correctly with existing layout 1`] = `
     }
 
     margin-top: 2.1rem;
+  }
+
+  ",
+                              ".sc-jqCOkK",
+                              " {
+    &:first-of-type {
+      margin: 0;
+    }
+
+    margin: 0;
   }
 ",
                             ],
@@ -5220,7 +5284,7 @@ exports[`renders correctly with existing layout 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-gzOgki rPZPH"
+                        className="sc-gzOgki fPJxtv"
                       >
                         <ApprovalConfigEditor>
                           <Styled(styled.section)>
@@ -5232,7 +5296,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-hmzhuo",
                                     "isStatic": false,
-                                    "lastClassName": "jKhAQp",
+                                    "lastClassName": "hTtaFk",
                                     "rules": Array [
                                       "
   margin: 1rem 0 1rem;
@@ -5241,6 +5305,14 @@ exports[`renders correctly with existing layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                       "
   min-height: 0;
@@ -5269,7 +5341,7 @@ exports[`renders correctly with existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <section
-                                className="sc-gqjmRU sc-hmzhuo jKhAQp"
+                                className="sc-gqjmRU sc-hmzhuo hTtaFk"
                               >
                                 <styled.div>
                                   <StyledComponent
@@ -5443,13 +5515,12 @@ exports[`renders correctly with existing layout 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-kAzzGY",
                                           "isStatic": false,
-                                          "lastClassName": "hfkxXP",
+                                          "lastClassName": "gpXzbO",
                                           "rules": Array [
                                             "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                           ],
                                         },
@@ -5466,7 +5537,7 @@ exports[`renders correctly with existing layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <ul
-                                      className="sc-kAzzGY hfkxXP"
+                                      className="sc-kAzzGY gpXzbO"
                                     >
                                       <li
                                         key="collector-row-0"
@@ -5791,7 +5862,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-lhVmIH",
                                     "isStatic": false,
-                                    "lastClassName": "kQYbMR",
+                                    "lastClassName": "KSoQI",
                                     "rules": Array [
                                       "
   margin: 1rem 0 1rem;
@@ -5800,6 +5871,14 @@ exports[`renders correctly with existing layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                       "
   min-height: 0;
@@ -5828,7 +5907,7 @@ exports[`renders correctly with existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <section
-                                className="sc-gqjmRU sc-lhVmIH kQYbMR"
+                                className="sc-gqjmRU sc-lhVmIH KSoQI"
                               >
                                 <styled.div>
                                   <StyledComponent
@@ -6002,13 +6081,12 @@ exports[`renders correctly with existing layout 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-kAzzGY",
                                           "isStatic": false,
-                                          "lastClassName": "hfkxXP",
+                                          "lastClassName": "gpXzbO",
                                           "rules": Array [
                                             "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                           ],
                                         },
@@ -6025,7 +6103,7 @@ exports[`renders correctly with existing layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <ul
-                                      className="sc-kAzzGY hfkxXP"
+                                      className="sc-kAzzGY gpXzbO"
                                     />
                                   </StyledComponent>
                                 </styled.ul>
@@ -6048,7 +6126,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-lhVmIH",
                                     "isStatic": false,
-                                    "lastClassName": "kQYbMR",
+                                    "lastClassName": "KSoQI",
                                     "rules": Array [
                                       "
   margin: 1rem 0 1rem;
@@ -6057,6 +6135,14 @@ exports[`renders correctly with existing layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                       "
   min-height: 0;
@@ -6085,7 +6171,7 @@ exports[`renders correctly with existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <section
-                                className="sc-gqjmRU sc-lhVmIH kQYbMR"
+                                className="sc-gqjmRU sc-lhVmIH KSoQI"
                               >
                                 <styled.div>
                                   <StyledComponent
@@ -6259,13 +6345,12 @@ exports[`renders correctly with existing layout 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-kAzzGY",
                                           "isStatic": false,
-                                          "lastClassName": "hfkxXP",
+                                          "lastClassName": "gpXzbO",
                                           "rules": Array [
                                             "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                           ],
                                         },
@@ -6282,7 +6367,7 @@ exports[`renders correctly with existing layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <ul
-                                      className="sc-kAzzGY hfkxXP"
+                                      className="sc-kAzzGY gpXzbO"
                                     />
                                   </StyledComponent>
                                 </styled.ul>
@@ -6466,7 +6551,7 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-kafWEX",
             "isStatic": false,
-            "lastClassName": "imngW",
+            "lastClassName": "dlSbpo",
             "rules": Array [
               "
   margin: 1rem 0 1rem;
@@ -6475,6 +6560,14 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
               "
   min-height: 0;
@@ -6503,7 +6596,7 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-gqjmRU sc-kafWEX imngW"
+        className="sc-gqjmRU sc-kafWEX dlSbpo"
       >
         <styled.div>
           <StyledComponent
@@ -6677,13 +6770,12 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-kAzzGY",
                   "isStatic": false,
-                  "lastClassName": "hfkxXP",
+                  "lastClassName": "gpXzbO",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                   ],
                 },
@@ -6700,7 +6792,7 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-kAzzGY hfkxXP"
+              className="sc-kAzzGY gpXzbO"
             >
               <li
                 key="item-row-0"
@@ -7912,7 +8004,7 @@ exports[`renders correctly with non existing layout 1`] = `
                             "componentStyle": ComponentStyle {
                               "componentId": "sc-Rmtcm",
                               "isStatic": false,
-                              "lastClassName": "YiEyn",
+                              "lastClassName": "glGRIZ",
                               "rules": Array [
                                 "
   margin: 1rem 0 1rem;
@@ -7921,6 +8013,14 @@ exports[`renders correctly with non existing layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                 "
   flex-direction: column;
@@ -7948,7 +8048,7 @@ exports[`renders correctly with non existing layout 1`] = `
                         forwardedRef={null}
                       >
                         <section
-                          className="sc-gqjmRU sc-Rmtcm YiEyn"
+                          className="sc-gqjmRU sc-Rmtcm glGRIZ"
                         >
                           <styled.div>
                             <StyledComponent
@@ -8122,13 +8222,12 @@ exports[`renders correctly with non existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-kAzzGY",
                                     "isStatic": false,
-                                    "lastClassName": "hfkxXP",
+                                    "lastClassName": "gpXzbO",
                                     "rules": Array [
                                       "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                     ],
                                   },
@@ -8145,7 +8244,7 @@ exports[`renders correctly with non existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <ul
-                                className="sc-kAzzGY hfkxXP"
+                                className="sc-kAzzGY gpXzbO"
                               />
                             </StyledComponent>
                           </styled.ul>
@@ -8208,7 +8307,7 @@ exports[`renders correctly with non existing layout 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-cvbbAY",
                             "isStatic": false,
-                            "lastClassName": "emdpGB",
+                            "lastClassName": "jTvfUS",
                             "rules": Array [
                               "
   display: flex;
@@ -8218,6 +8317,10 @@ exports[`renders correctly with non existing layout 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                              [Function],
+                              "
 ",
                             ],
                           },
@@ -8236,7 +8339,7 @@ exports[`renders correctly with non existing layout 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-kkGfuU sc-cvbbAY emdpGB"
+                        className="sc-kkGfuU sc-cvbbAY jTvfUS"
                       >
                         <form
                           data-testhook-id="layout-json-form"
@@ -8941,7 +9044,7 @@ exports[`renders correctly with non existing layout 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-gzOgki",
                             "isStatic": false,
-                            "lastClassName": "rPZPH",
+                            "lastClassName": "fPJxtv",
                             "rules": Array [
                               "
   ",
@@ -8952,6 +9055,16 @@ exports[`renders correctly with non existing layout 1`] = `
     }
 
     margin-top: 2.1rem;
+  }
+
+  ",
+                              ".sc-jqCOkK",
+                              " {
+    &:first-of-type {
+      margin: 0;
+    }
+
+    margin: 0;
   }
 ",
                             ],
@@ -8969,7 +9082,7 @@ exports[`renders correctly with non existing layout 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-gzOgki rPZPH"
+                        className="sc-gzOgki fPJxtv"
                       >
                         <AuthorizedAccountEditor>
                           <Styled(styled.section)>
@@ -8981,7 +9094,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-kafWEX",
                                     "isStatic": false,
-                                    "lastClassName": "imngW",
+                                    "lastClassName": "dlSbpo",
                                     "rules": Array [
                                       "
   margin: 1rem 0 1rem;
@@ -8990,6 +9103,14 @@ exports[`renders correctly with non existing layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                       "
   min-height: 0;
@@ -9018,7 +9139,7 @@ exports[`renders correctly with non existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <section
-                                className="sc-gqjmRU sc-kafWEX imngW"
+                                className="sc-gqjmRU sc-kafWEX dlSbpo"
                               >
                                 <styled.div>
                                   <StyledComponent
@@ -9192,13 +9313,12 @@ exports[`renders correctly with non existing layout 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-kAzzGY",
                                           "isStatic": false,
-                                          "lastClassName": "hfkxXP",
+                                          "lastClassName": "gpXzbO",
                                           "rules": Array [
                                             "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                           ],
                                         },
@@ -9215,7 +9335,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <ul
-                                      className="sc-kAzzGY hfkxXP"
+                                      className="sc-kAzzGY gpXzbO"
                                     />
                                   </StyledComponent>
                                 </styled.ul>
@@ -9238,7 +9358,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-lhVmIH",
                                     "isStatic": false,
-                                    "lastClassName": "kQYbMR",
+                                    "lastClassName": "KSoQI",
                                     "rules": Array [
                                       "
   margin: 1rem 0 1rem;
@@ -9247,6 +9367,14 @@ exports[`renders correctly with non existing layout 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                       "
   min-height: 0;
@@ -9275,7 +9403,7 @@ exports[`renders correctly with non existing layout 1`] = `
                               forwardedRef={null}
                             >
                               <section
-                                className="sc-gqjmRU sc-lhVmIH kQYbMR"
+                                className="sc-gqjmRU sc-lhVmIH KSoQI"
                               >
                                 <styled.div>
                                   <StyledComponent
@@ -9449,13 +9577,12 @@ exports[`renders correctly with non existing layout 1`] = `
                                         "componentStyle": ComponentStyle {
                                           "componentId": "sc-kAzzGY",
                                           "isStatic": false,
-                                          "lastClassName": "hfkxXP",
+                                          "lastClassName": "gpXzbO",
                                           "rules": Array [
                                             "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                           ],
                                         },
@@ -9472,7 +9599,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                     forwardedRef={null}
                                   >
                                     <ul
-                                      className="sc-kAzzGY hfkxXP"
+                                      className="sc-kAzzGY gpXzbO"
                                     />
                                   </StyledComponent>
                                 </styled.ul>
@@ -10392,7 +10519,7 @@ exports[`sign layout happy flow 1`] = `
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-Rmtcm",
                                   "isStatic": false,
-                                  "lastClassName": "YiEyn",
+                                  "lastClassName": "glGRIZ",
                                   "rules": Array [
                                     "
   margin: 1rem 0 1rem;
@@ -10401,6 +10528,14 @@ exports[`sign layout happy flow 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                     "
   flex-direction: column;
@@ -10428,7 +10563,7 @@ exports[`sign layout happy flow 1`] = `
                             forwardedRef={null}
                           >
                             <section
-                              className="sc-gqjmRU sc-Rmtcm YiEyn"
+                              className="sc-gqjmRU sc-Rmtcm glGRIZ"
                             >
                               <styled.div>
                                 <StyledComponent
@@ -10602,13 +10737,12 @@ exports[`sign layout happy flow 1`] = `
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-kAzzGY",
                                         "isStatic": false,
-                                        "lastClassName": "hfkxXP",
+                                        "lastClassName": "gpXzbO",
                                         "rules": Array [
                                           "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                         ],
                                       },
@@ -10625,7 +10759,7 @@ exports[`sign layout happy flow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <ul
-                                    className="sc-kAzzGY hfkxXP"
+                                    className="sc-kAzzGY gpXzbO"
                                   >
                                     <Segment
                                       index={0}
@@ -10917,7 +11051,7 @@ exports[`sign layout happy flow 1`] = `
                                                   "componentStyle": ComponentStyle {
                                                     "componentId": "sc-jDwBTQ",
                                                     "isStatic": false,
-                                                    "lastClassName": "iZURLY",
+                                                    "lastClassName": "zfFUj",
                                                     "rules": Array [
                                                       "
   margin: 1rem 0 1rem;
@@ -10926,6 +11060,14 @@ exports[`sign layout happy flow 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                                       "
   flex-direction: column;
@@ -10953,7 +11095,7 @@ exports[`sign layout happy flow 1`] = `
                                               forwardedRef={null}
                                             >
                                               <section
-                                                className="sc-gqjmRU sc-jDwBTQ iZURLY"
+                                                className="sc-gqjmRU sc-jDwBTQ zfFUj"
                                               >
                                                 <styled.div>
                                                   <StyledComponent
@@ -11533,7 +11675,7 @@ exports[`sign layout happy flow 1`] = `
                               "componentStyle": ComponentStyle {
                                 "componentId": "sc-cvbbAY",
                                 "isStatic": false,
-                                "lastClassName": "emdpGB",
+                                "lastClassName": "jTvfUS",
                                 "rules": Array [
                                   "
   display: flex;
@@ -11543,6 +11685,10 @@ exports[`sign layout happy flow 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                                  [Function],
+                                  "
 ",
                                 ],
                               },
@@ -11561,7 +11707,7 @@ exports[`sign layout happy flow 1`] = `
                           forwardedRef={null}
                         >
                           <div
-                            className="sc-kkGfuU sc-cvbbAY emdpGB"
+                            className="sc-kkGfuU sc-cvbbAY jTvfUS"
                           >
                             <form
                               data-testhook-id="layout-json-form"
@@ -12334,7 +12480,7 @@ exports[`sign layout happy flow 1`] = `
                               "componentStyle": ComponentStyle {
                                 "componentId": "sc-gzOgki",
                                 "isStatic": false,
-                                "lastClassName": "rPZPH",
+                                "lastClassName": "fPJxtv",
                                 "rules": Array [
                                   "
   ",
@@ -12345,6 +12491,16 @@ exports[`sign layout happy flow 1`] = `
     }
 
     margin-top: 2.1rem;
+  }
+
+  ",
+                                  ".sc-jqCOkK",
+                                  " {
+    &:first-of-type {
+      margin: 0;
+    }
+
+    margin: 0;
   }
 ",
                                 ],
@@ -12362,7 +12518,7 @@ exports[`sign layout happy flow 1`] = `
                           forwardedRef={null}
                         >
                           <div
-                            className="sc-gzOgki rPZPH"
+                            className="sc-gzOgki fPJxtv"
                           >
                             <ApprovalConfigEditor>
                               <Styled(styled.section)>
@@ -12374,7 +12530,7 @@ exports[`sign layout happy flow 1`] = `
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-hmzhuo",
                                         "isStatic": false,
-                                        "lastClassName": "jKhAQp",
+                                        "lastClassName": "hTtaFk",
                                         "rules": Array [
                                           "
   margin: 1rem 0 1rem;
@@ -12383,6 +12539,14 @@ exports[`sign layout happy flow 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                           "
   min-height: 0;
@@ -12411,7 +12575,7 @@ exports[`sign layout happy flow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <section
-                                    className="sc-gqjmRU sc-hmzhuo jKhAQp"
+                                    className="sc-gqjmRU sc-hmzhuo hTtaFk"
                                   >
                                     <styled.div>
                                       <StyledComponent
@@ -12511,13 +12675,12 @@ exports[`sign layout happy flow 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-kAzzGY",
                                               "isStatic": false,
-                                              "lastClassName": "hfkxXP",
+                                              "lastClassName": "gpXzbO",
                                               "rules": Array [
                                                 "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                               ],
                                             },
@@ -12534,7 +12697,7 @@ exports[`sign layout happy flow 1`] = `
                                         forwardedRef={null}
                                       >
                                         <ul
-                                          className="sc-kAzzGY hfkxXP"
+                                          className="sc-kAzzGY gpXzbO"
                                         >
                                           <li
                                             key="collector-row-0"
@@ -12551,7 +12714,7 @@ exports[`sign layout happy flow 1`] = `
                                                       "componentStyle": ComponentStyle {
                                                         "componentId": "sc-jqCOkK",
                                                         "isStatic": false,
-                                                        "lastClassName": "gagnht",
+                                                        "lastClassName": "goibUN",
                                                         "rules": Array [
                                                           "
   margin: 1rem 0 1rem;
@@ -12560,8 +12723,17 @@ exports[`sign layout happy flow 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                                           "
+  border: 0;
   flex-direction: column;
   padding: 1rem;
   margin: 0 0 1rem;
@@ -12587,7 +12759,7 @@ exports[`sign layout happy flow 1`] = `
                                                   forwardedRef={null}
                                                 >
                                                   <section
-                                                    className="sc-gqjmRU sc-jqCOkK gagnht"
+                                                    className="sc-gqjmRU sc-jqCOkK goibUN"
                                                   >
                                                     <styled.section>
                                                       <StyledComponent
@@ -12745,7 +12917,7 @@ exports[`sign layout happy flow 1`] = `
                                                             "componentStyle": ComponentStyle {
                                                               "componentId": "sc-cvbbAY",
                                                               "isStatic": false,
-                                                              "lastClassName": "emdpGB",
+                                                              "lastClassName": "jTvfUS",
                                                               "rules": Array [
                                                                 "
   display: flex;
@@ -12755,6 +12927,10 @@ exports[`sign layout happy flow 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                                                                [Function],
+                                                                "
 ",
                                                               ],
                                                             },
@@ -12773,7 +12949,7 @@ exports[`sign layout happy flow 1`] = `
                                                         forwardedRef={null}
                                                       >
                                                         <div
-                                                          className="sc-kkGfuU sc-cvbbAY emdpGB"
+                                                          className="sc-kkGfuU sc-cvbbAY jTvfUS"
                                                         >
                                                           <form
                                                             data-testhook-id="collector-edit-form"
@@ -13638,7 +13814,7 @@ exports[`sign layout happy flow 1`] = `
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-lhVmIH",
                                         "isStatic": false,
-                                        "lastClassName": "kQYbMR",
+                                        "lastClassName": "KSoQI",
                                         "rules": Array [
                                           "
   margin: 1rem 0 1rem;
@@ -13647,6 +13823,14 @@ exports[`sign layout happy flow 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                           "
   min-height: 0;
@@ -13675,7 +13859,7 @@ exports[`sign layout happy flow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <section
-                                    className="sc-gqjmRU sc-lhVmIH kQYbMR"
+                                    className="sc-gqjmRU sc-lhVmIH KSoQI"
                                   >
                                     <styled.div>
                                       <StyledComponent
@@ -13849,13 +14033,12 @@ exports[`sign layout happy flow 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-kAzzGY",
                                               "isStatic": false,
-                                              "lastClassName": "hfkxXP",
+                                              "lastClassName": "gpXzbO",
                                               "rules": Array [
                                                 "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                               ],
                                             },
@@ -13872,7 +14055,7 @@ exports[`sign layout happy flow 1`] = `
                                         forwardedRef={null}
                                       >
                                         <ul
-                                          className="sc-kAzzGY hfkxXP"
+                                          className="sc-kAzzGY gpXzbO"
                                         />
                                       </StyledComponent>
                                     </styled.ul>
@@ -13895,7 +14078,7 @@ exports[`sign layout happy flow 1`] = `
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-lhVmIH",
                                         "isStatic": false,
-                                        "lastClassName": "kQYbMR",
+                                        "lastClassName": "KSoQI",
                                         "rules": Array [
                                           "
   margin: 1rem 0 1rem;
@@ -13904,6 +14087,14 @@ exports[`sign layout happy flow 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                           "
   min-height: 0;
@@ -13932,7 +14123,7 @@ exports[`sign layout happy flow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <section
-                                    className="sc-gqjmRU sc-lhVmIH kQYbMR"
+                                    className="sc-gqjmRU sc-lhVmIH KSoQI"
                                   >
                                     <styled.div>
                                       <StyledComponent
@@ -14106,13 +14297,12 @@ exports[`sign layout happy flow 1`] = `
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-kAzzGY",
                                               "isStatic": false,
-                                              "lastClassName": "hfkxXP",
+                                              "lastClassName": "gpXzbO",
                                               "rules": Array [
                                                 "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                               ],
                                             },
@@ -14129,7 +14319,7 @@ exports[`sign layout happy flow 1`] = `
                                         forwardedRef={null}
                                       >
                                         <ul
-                                          className="sc-kAzzGY hfkxXP"
+                                          className="sc-kAzzGY gpXzbO"
                                         />
                                       </StyledComponent>
                                     </styled.ul>
@@ -14800,7 +14990,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                             "componentStyle": ComponentStyle {
                               "componentId": "sc-Rmtcm",
                               "isStatic": false,
-                              "lastClassName": "YiEyn",
+                              "lastClassName": "glGRIZ",
                               "rules": Array [
                                 "
   margin: 1rem 0 1rem;
@@ -14809,6 +14999,14 @@ exports[`validates a faulty layout and returns errors 1`] = `
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 ",
                                 "
   flex-direction: column;
@@ -14836,7 +15034,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                         forwardedRef={null}
                       >
                         <section
-                          className="sc-gqjmRU sc-Rmtcm YiEyn"
+                          className="sc-gqjmRU sc-Rmtcm glGRIZ"
                         >
                           <styled.div>
                             <StyledComponent
@@ -15010,13 +15208,12 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-kAzzGY",
                                     "isStatic": false,
-                                    "lastClassName": "hfkxXP",
+                                    "lastClassName": "gpXzbO",
                                     "rules": Array [
                                       "
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 ",
                                     ],
                                   },
@@ -15033,7 +15230,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               forwardedRef={null}
                             >
                               <ul
-                                className="sc-kAzzGY hfkxXP"
+                                className="sc-kAzzGY gpXzbO"
                               />
                             </StyledComponent>
                           </styled.ul>
@@ -15096,7 +15293,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-cvbbAY",
                             "isStatic": false,
-                            "lastClassName": "emdpGB",
+                            "lastClassName": "jTvfUS",
                             "rules": Array [
                               "
   display: flex;
@@ -15106,6 +15303,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                              [Function],
+                              "
 ",
                             ],
                           },
@@ -15124,7 +15325,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-kkGfuU sc-cvbbAY emdpGB"
+                        className="sc-kkGfuU sc-cvbbAY jTvfUS"
                       >
                         <form
                           data-testhook-id="layout-json-form"
@@ -15727,7 +15928,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-gzOgki",
                             "isStatic": false,
-                            "lastClassName": "rPZPH",
+                            "lastClassName": "fPJxtv",
                             "rules": Array [
                               "
   ",
@@ -15738,6 +15939,16 @@ exports[`validates a faulty layout and returns errors 1`] = `
     }
 
     margin-top: 2.1rem;
+  }
+
+  ",
+                              ".sc-jqCOkK",
+                              " {
+    &:first-of-type {
+      margin: 0;
+    }
+
+    margin: 0;
   }
 ",
                             ],
@@ -15755,7 +15966,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-gzOgki rPZPH"
+                        className="sc-gzOgki fPJxtv"
                       >
                         <NotificationsList
                           notifications={
