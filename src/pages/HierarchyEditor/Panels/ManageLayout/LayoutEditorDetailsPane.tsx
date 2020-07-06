@@ -28,10 +28,8 @@ import {
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
-import ApprovalConfigEditor from "./ApprovalConfigEditor";
 import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
 import ApprovalConfigEditor, { FormContainer } from "./ApprovalConfigEditor";
-import AuthorizedAccountEditor from "./AuthorizedAccountEditor";
 import RuleEditor from "./RuleEditor";
 import RequiredNumberOfLinks from "./RequiredNumberOfLinks";
 import StepAuthorizedAccountEditor from "./StepAuthorizedAccountEditor";

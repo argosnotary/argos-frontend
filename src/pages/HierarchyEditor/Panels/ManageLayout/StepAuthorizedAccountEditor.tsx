@@ -47,7 +47,7 @@ interface IAccountStatusLabelProps {
   active: boolean;
 }
 
-const AccountStatusLabel = styled.span<IAccountStatusLabelProps>`
+export const AccountStatusLabel = styled.span<IAccountStatusLabelProps>`
   color: ${props =>
     props.active ? props.theme.labels.active : props.theme.labels.inactive};
   padding: 0 0.5rem;
@@ -244,7 +244,6 @@ const StepAuthorizedAccountEditor: React.FC = () => {
     apiResponse: IKeyStatusApiResponse
   ): Array<ISearchResult> => {
     if (apiResponse.data && apiResponse.data.length > 0) {
-      console.log(apiResponse.data);
       return apiResponse.data.map(
         entry =>
           ({
@@ -309,8 +308,8 @@ const StepAuthorizedAccountEditor: React.FC = () => {
           setSearchAccountApiRequest(searchUserRequest);
         }}
         isLoading={searchAccountApiResponse.isLoading}
-        defaultLabel={"Search user"}
-        onSelectLabel={"Selected user"}
+        defaultLabel={"Search account"}
+        onSelectLabel={"Selected account"}
         placeHolder={"Name"}
       />
     );
