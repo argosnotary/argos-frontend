@@ -22,6 +22,14 @@ export const CollectionContainer = styled.section`
   align-items: center;
   width: 100%;
   min-height: 18.8rem;
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
 `;
 
 export const ActionIconsContainer = styled.div`
@@ -66,7 +74,6 @@ export const CollectionContainerList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 `;
 
 export const CollectionContainerSpan = styled.span`

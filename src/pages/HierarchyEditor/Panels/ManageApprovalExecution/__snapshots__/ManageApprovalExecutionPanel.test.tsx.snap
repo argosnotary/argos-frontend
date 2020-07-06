@@ -1127,7 +1127,7 @@ exports[`approval happy flow 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-cMljjf",
                                                 "isStatic": false,
-                                                "lastClassName": "TSQBP",
+                                                "lastClassName": "gzCtoP",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -1137,6 +1137,10 @@ exports[`approval happy flow 1`] = `
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ",
+                                                  [Function],
+                                                  "
 ",
                                                 ],
                                               },
@@ -1155,7 +1159,7 @@ exports[`approval happy flow 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-bZQynM sc-cMljjf TSQBP"
+                                            className="sc-bZQynM sc-cMljjf gzCtoP"
                                           >
                                             <form
                                               data-testhook-id="xl-deploy-collector-execution-form-0"
