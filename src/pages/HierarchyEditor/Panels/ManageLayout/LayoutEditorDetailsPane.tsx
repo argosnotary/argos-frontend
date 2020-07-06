@@ -30,6 +30,8 @@ import {
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 import ApprovalConfigEditor from "./ApprovalConfigEditor";
 import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
+import ApprovalConfigEditor, { FormContainer } from "./ApprovalConfigEditor";
+import AuthorizedAccountEditor from "./AuthorizedAccountEditor";
 import RuleEditor from "./RuleEditor";
 import StepAuthorizedAccountEditor from "./StepAuthorizedAccountEditor";
 
@@ -40,6 +42,14 @@ const PanelSpecificStyling = styled.div`
     }
 
     margin-top: 2.1rem;
+  }
+
+  ${FormContainer} {
+    &:first-of-type {
+      margin: 0;
+    }
+
+    margin: 0;
   }
 `;
 

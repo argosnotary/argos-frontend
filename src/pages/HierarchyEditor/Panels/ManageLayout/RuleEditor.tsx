@@ -83,7 +83,7 @@ const ItemTitle = styled.header`
   box-sizing: border-box;
   padding: 0.5rem;
   width: 100%;
-  margin: 0.2rem 0 0;
+  margin: 0;
   background-color: ${props => props.theme.layoutBuilder.segmentTitleBgColor};
 
   display: flex;
@@ -97,7 +97,7 @@ const ItemTitle = styled.header`
 
 const ItemContainerSection = styled.section`
   width: 100%;
-  margin: 0 0 1rem;
+  margin: 0;
 `;
 
 const SelectionContainer = styled.section`
@@ -105,10 +105,13 @@ const SelectionContainer = styled.section`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  padding: 1rem;
 
   ${Select} {
     margin: 0 0 0 1rem;
   }
+
+  background-color: #e0e0e0;
 `;
 
 const RemoveItemButton = styled(BaseActionButton)``;
@@ -370,7 +373,8 @@ const RuleEditor: React.FC<IRuleEditorProps> = ({
     confirmationLabel: "Save",
     cancellationLabel: "Cancel",
     autoFocus: true,
-    buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN
+    buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN,
+    alternateStyling: true
   };
 
   const [formJSX, formAPI] = useFormBuilder(formConfig);
