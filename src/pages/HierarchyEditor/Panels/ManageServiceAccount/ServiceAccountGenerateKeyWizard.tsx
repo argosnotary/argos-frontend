@@ -98,8 +98,7 @@ const ServiceAccountGenerateKeyWizard: React.FC<IServiceAccountKeyWizardProps> =
           cbKeyGenerated(
             {
               publicKey: generatedKeys.keys.publicKey,
-              keyId: generatedKeys.keys.keyId,
-              algorithm: generatedKeys.keys.algorithm
+              keyId: generatedKeys.keys.keyId
             },
             generatedKeys.password
           );

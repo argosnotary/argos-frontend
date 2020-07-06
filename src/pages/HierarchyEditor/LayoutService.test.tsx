@@ -26,7 +26,7 @@ const PUBLIC_KEY =
 
 it("test serialize", () => {
   const seralized = serialize({
-    keys: [{ keyId: "keyId", publicKey: PUBLIC_KEY, algorithm: "EC" }],
+    keys: [{ keyId: "keyId", publicKey: PUBLIC_KEY }],
     expectedEndProducts: [
       {
         destinationSegmentName: "destinationSegmentName",

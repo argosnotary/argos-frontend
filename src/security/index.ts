@@ -97,8 +97,8 @@ const decryptPrivateKey = async (
 
     const json = keyBag.parsedValue.parsedKey.toJSON();
     const keyData: JsonWebKey = {...json,
-      "crv": "P-384",
-      "kty": "EC"
+      crv: "P-384",
+      kty: "EC"
     };
   return await crypto.subtle.importKey(
       'jwk',
@@ -123,7 +123,6 @@ interface IKey {
     encryptedPrivateKey: string;
     keyId: string;
     publicKey: string;
-    algorithm: string;
     hashedKeyPassphrase?: string;
   };
   password: string;
@@ -150,8 +149,7 @@ const generateKey = async (hashKeyPassphrase = false): Promise<IKey> => {
     keys: {
       encryptedPrivateKey: encode(encryptedPrivateKey),
       keyId: arrayBufferToHex(digestedPublicKey),
-      publicKey: encode(exportedPublicKey),
-      algorithm: "EC"
+      publicKey: encode(exportedPublicKey)
     },
     password
   };

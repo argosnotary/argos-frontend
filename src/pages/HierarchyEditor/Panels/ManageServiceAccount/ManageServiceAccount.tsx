@@ -180,8 +180,7 @@ const ManageServiceAccount = () => {
   const cbKeyGenerated = (keypair: IPublicKey, generatedPassword: string) => {
     setServiceAccountKey({
       publicKey: keypair.publicKey,
-      keyId: keypair.keyId,
-      algorithm: keypair.algorithm
+      keyId: keypair.keyId
     });
     setGeneratedPassword(generatedPassword);
     setDisplayKeyGenerationWizard(false);

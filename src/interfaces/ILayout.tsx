@@ -36,7 +36,6 @@ export interface ILayout {
 export interface IPublicKey {
   keyId: string;
   publicKey: string;
-  algorithm: string;
 }
 
 export interface ILayoutSegment {

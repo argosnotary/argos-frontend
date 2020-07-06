@@ -24,7 +24,6 @@ export namespace Domain {
   export interface IPublicKey {
     keyId: string;
     publicKey: string;
-    algorithm: string;
   }
 
   export interface IMatchRule extends IRule {

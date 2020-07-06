@@ -53,8 +53,6 @@ const LayoutSigner: React.FC = () => {
           passphrase,
           key.keyId,
           key.encryptedPrivateKey,
-          key.algorithm,
-          "SHA384",
           editorStoreContext.state.layout
         )
           .then(layoutMetaBlock => {

@@ -311,8 +311,7 @@ it("sign layout happy flow", async () => {
   const key: IPersonalAccountKeyPair = {
     encryptedPrivateKey: "encryptedPrivateKey",
     keyId: "keyId",
-    publicKey: "publicKey",
-    algorithm: "EC"
+    publicKey: "publicKey"
   };
 
   mock.onGet("/api/personalaccount/me/key").reply(200, key);
@@ -504,7 +503,7 @@ it("add authorized key to layout", async () => {
 
   mock
     .onGet("/api/personalaccount/accountId/key")
-    .reply(200, { publicKey: "publicKey", keyId: "keyId", algorithm: "EC" });
+    .reply(200, { publicKey: "publicKey", keyId: "keyId" });
 
   mock
     .onGet("/api/personalaccount", {

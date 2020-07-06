@@ -29,8 +29,6 @@ const signLayout = async (
   password: string,
   keyId: string,
   encryptedPrivateKey: string,
-  keyAlgorithm: string,
-  hashAlgorithm: string,
   layout: ILayout
 ): Promise<ILayoutMetaBlock> => {
   const signature = await signString(
@@ -39,7 +37,7 @@ const signLayout = async (
     serialize(layout)
   );
   return {
-    signatures: [{ signature: signature, keyId: keyId, keyAlgorithm: keyAlgorithm, hashAlgorithm: hashAlgorithm }],
+    signatures: [{ signature: signature, keyId: keyId, keyAlgorithm: "EC", hashAlgorithm: "SHA384" }],
     layout: layout
   };
 };
