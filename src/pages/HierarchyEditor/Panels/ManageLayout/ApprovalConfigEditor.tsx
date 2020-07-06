@@ -119,7 +119,8 @@ const CollectorContainerSection = styled.section`
 
 const EditCollectionButton = styled(BaseActionButton)``;
 
-const FormContainer = styled(CollectionContainer)`
+export const FormContainer = styled(CollectionContainer)`
+  border: 0;
   flex-direction: column;
   padding: 1rem;
   margin: 0 0 1rem;

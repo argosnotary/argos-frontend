@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ILayout, IPublicKey, IRule } from "../interfaces/ILayout";
+import { ILayout, IPublicKey, IRule, IStep } from "../interfaces/ILayout";
 
 export const addLayoutAuthorizedKey = (
   layout: ILayout,
@@ -102,6 +102,68 @@ export const removeExpectedEndProduct = (
     layout.expectedEndProducts.splice(expectedEndProductIndex, 1);
   }
   layout.expectedEndProducts = [...layout.expectedEndProducts];
+  return layout;
+};
+
+export const removeMaterialRule = (
+  layout: ILayout,
+  rule: IRule,
+  step: IStep
+): ILayout => {
+  const expectedMaterialsIndex = step.expectedMaterials.indexOf(rule);
+
+  if (expectedMaterialsIndex >= 0) {
+    step.expectedMaterials.splice(expectedMaterialsIndex, 1);
+  }
+  step.expectedMaterials = [...step.expectedMaterials];
+  return layout;
+};
+
+export const removeProductRule = (
+  layout: ILayout,
+  rule: IRule,
+  step: IStep
+): ILayout => {
+  const expectedProductIndex = step.expectedProducts.indexOf(rule);
+
+  if (expectedProductIndex >= 0) {
+    step.expectedProducts.splice(expectedProductIndex, 1);
+  }
+  step.expectedProducts = [...step.expectedProducts];
+  return layout;
+};
+
+export const addMaterialRule = (
+  layout: ILayout,
+  rule: IRule,
+  step: IStep
+): ILayout => {
+  if (step.expectedMaterials === undefined) {
+    step.expectedMaterials = [];
+  }
+  step.expectedMaterials = [...step.expectedMaterials, rule];
+  return layout;
+};
+
+export const addProductRule = (
+  layout: ILayout,
+  rule: IRule,
+  step: IStep
+): ILayout => {
+  if (step.expectedProducts === undefined) {
+    step.expectedProducts = [];
+  }
+  step.expectedProducts = [...step.expectedProducts, rule];
+  return layout;
+};
+
+export const editProductRule = (layout: ILayout, step: IStep): ILayout => {
+  step.expectedProducts = [...step.expectedProducts];
+  return layout;
+};
+
+export const editMaterialRule = (layout: ILayout, step: IStep): ILayout => {
+  step.expectedMaterials = [...step.expectedMaterials];
   return layout;
 };
 

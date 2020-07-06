@@ -29,9 +29,15 @@ import {
 import {
   addExpectedEndProduct,
   addLayoutAuthorizedKey,
+  addMaterialRule,
+  addProductRule,
   deleteLayoutAuthorizedKey,
   editExpectedEndProduct,
-  removeExpectedEndProduct
+  editMaterialRule,
+  editProductRule,
+  removeExpectedEndProduct,
+  removeMaterialRule,
+  removeProductRule
 } from "./LayoutEditorService";
 
 export enum DetailsPanelType {
@@ -91,7 +97,13 @@ export enum LayoutEditorActionType {
   EDIT_LAYOUT,
   ADD_EXPECTED_END_PRODUCT,
   REMOVE_EXPECTED_END_PRODUCT,
-  EDIT_EXPECTED_END_PRODUCT
+  EDIT_EXPECTED_END_PRODUCT,
+  ADD_PRODUCT_RULE,
+  REMOVE_PRODUCT_RULE,
+  EDIT_PRODUCT_RULE,
+  ADD_MATERIAL_RULE,
+  REMOVE_MATERIAL_RULE,
+  EDIT_MATERIAL_RULE
 }
 
 export interface ILayoutEditorAction {
@@ -168,6 +180,18 @@ const reducer = (
       return handleEditExpectedEndProduct(state);
     case LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT:
       return handleRemoveExpectedEndProduct(action, state);
+    case LayoutEditorActionType.ADD_MATERIAL_RULE:
+      return handleAddMaterialRule(action, state);
+    case LayoutEditorActionType.EDIT_MATERIAL_RULE:
+      return handleEditMaterialRule(state);
+    case LayoutEditorActionType.REMOVE_MATERIAL_RULE:
+      return handleRemoveMaterialRule(action, state);
+    case LayoutEditorActionType.ADD_PRODUCT_RULE:
+      return handleAddProductRule(action, state);
+    case LayoutEditorActionType.EDIT_PRODUCT_RULE:
+      return handleEditProductRule(state);
+    case LayoutEditorActionType.REMOVE_PRODUCT_RULE:
+      return handleRemoveProductRule(action, state);
     default:
       throw new Error();
   }
@@ -187,6 +211,126 @@ export const createLayoutEditorStoreContext = (): ILayoutEditorStoreContext => {
 };
 
 export const useLayoutEditorStore = () => useContext(LayoutEditorStoreContext);
+
+const handleAddMaterialRule = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.rule &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: addMaterialRule(
+        state.layout,
+        action.rule,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleEditMaterialRule = (
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (state.selectedLayoutElement && state.selectedLayoutElement.step) {
+    return {
+      ...state,
+      layout: editMaterialRule(state.layout, state.selectedLayoutElement.step)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleRemoveMaterialRule = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.rule &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: removeMaterialRule(
+        state.layout,
+        action.rule,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleAddProductRule = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.rule &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: addProductRule(
+        state.layout,
+        action.rule,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleEditProductRule = (
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (state.selectedLayoutElement && state.selectedLayoutElement.step) {
+    return {
+      ...state,
+      layout: editProductRule(state.layout, state.selectedLayoutElement.step)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleRemoveProductRule = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.rule &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: removeProductRule(
+        state.layout,
+        action.rule,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
 
 const createSelectedLayoutElement = (
   state: ILayoutEditorState,

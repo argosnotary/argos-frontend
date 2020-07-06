@@ -45,16 +45,29 @@ type FormSubmitButtonHandlerType =
   | FormSubmitButtonHandlerTypes.CLICK
   | FormSubmitButtonHandlerTypes.MOUSEDOWN;
 
-export const FormContainer = styled(FlexColumn)`
+interface IFormContainerProps {
+  alternateStyling: boolean | undefined;
+}
+
+export const FormContainer = styled(FlexColumn)<IFormContainerProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  ${props =>
+    props.alternateStyling
+      ? `
+    background: #e0e0e0;
+    padding: 1rem;
+    `
+      : null}
 `;
 
 interface IFormApi {
   setInitialFormValues: (fields: { [x: string]: string }) => void;
   submitForm: () => void;
   isValid: boolean;
+  handleChange: any;
 }
 
 export interface IFormBuilderConfig {
@@ -70,13 +83,14 @@ export interface IFormBuilderConfig {
   onChange?: (valid: boolean, values: any) => void;
   autoFocus?: boolean;
   buttonHandler: FormSubmitButtonHandlerType;
+  alternateStyling?: boolean | undefined;
 }
 
 const useFormBuilder = (
   config: IFormBuilderConfig
 ): [React.ReactNode, IFormApi] => {
   const formik = useFormik({
-    initialValues: {},
+    initialValues: {} as FormikValues,
     onSubmit: (values: any) => {
       formik.resetForm();
       config.onSubmit(values);
@@ -127,7 +141,7 @@ const useFormBuilder = (
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
-                onChange={formik.handleChange}
+                onChange={api.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name] || ""}
                 disabled={disableInput()}
@@ -148,7 +162,7 @@ const useFormBuilder = (
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
-                onChange={formik.handleChange}
+                onChange={api.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name] || ""}
                 disabled={disableInput()}
@@ -168,7 +182,7 @@ const useFormBuilder = (
                 labelValue={entry.labelValue}
                 name={entry.name}
                 formType={entry.formType}
-                onChange={formik.handleChange}
+                onChange={api.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[entry.name] || ""}
                 disabled={disableInput()}
@@ -196,6 +210,8 @@ const useFormBuilder = (
       }
     });
   };
+
+  api.handleChange = formik.handleChange;
 
   api.submitForm = () => {
     formik.validateForm().then(errors => {
@@ -233,7 +249,7 @@ const useFormBuilder = (
   };
 
   const form = (
-    <FormContainer>
+    <FormContainer alternateStyling={config.alternateStyling}>
       <form
         data-testhook-id={config.dataTesthookId}
         onSubmit={(e: React.SyntheticEvent<EventTarget>) => {
