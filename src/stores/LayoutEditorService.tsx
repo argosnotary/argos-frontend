@@ -167,6 +167,15 @@ export const editMaterialRule = (layout: ILayout, step: IStep): ILayout => {
   return layout;
 };
 
+export const updateRequiredNumberOfLinks = (
+  layout: ILayout,
+  step: IStep,
+  requiredNumberOfLinks: number
+): ILayout => {
+  step.requiredNumberOfLinks = requiredNumberOfLinks;
+  return layout;
+};
+
 const isPublicKeyDefined = (layout: ILayout, keyId: string): boolean => {
   return layout.keys.flatMap(key => key.id).indexOf(keyId) >= 0;
 };

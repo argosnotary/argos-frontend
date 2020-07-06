@@ -37,7 +37,8 @@ import {
   editProductRule,
   removeExpectedEndProduct,
   removeMaterialRule,
-  removeProductRule
+  removeProductRule,
+  updateRequiredNumberOfLinks
 } from "./LayoutEditorService";
 
 export enum DetailsPanelType {
@@ -103,7 +104,8 @@ export enum LayoutEditorActionType {
   EDIT_PRODUCT_RULE,
   ADD_MATERIAL_RULE,
   REMOVE_MATERIAL_RULE,
-  EDIT_MATERIAL_RULE
+  EDIT_MATERIAL_RULE,
+  UPDATE_REQUIRED_NUMBER_OF_LINKS
 }
 
 export interface ILayoutEditorAction {
@@ -192,6 +194,8 @@ const reducer = (
       return handleEditProductRule(state);
     case LayoutEditorActionType.REMOVE_PRODUCT_RULE:
       return handleRemoveProductRule(action, state);
+    case LayoutEditorActionType.UPDATE_REQUIRED_NUMBER_OF_LINKS:
+      return handleUpdateRequiredNumberOfLinks(action, state);
     default:
       throw new Error();
   }
@@ -324,6 +328,29 @@ const handleRemoveProductRule = (
         state.layout,
         action.rule,
         state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleUpdateRequiredNumberOfLinks = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.layoutStep &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: updateRequiredNumberOfLinks(
+        state.layout,
+        state.selectedLayoutElement.step,
+        action.layoutStep.requiredNumberOfLinks
       )
     };
   }
