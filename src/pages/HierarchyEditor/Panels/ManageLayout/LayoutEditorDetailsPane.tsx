@@ -70,6 +70,14 @@ const convertValidationMessagesToNotifications = (
   });
 };
 
+const StepDetailsContainer = styled.div`
+  ${CollectionContainer} {
+    &:first-of-type {
+      margin-top: 2.1rem;
+    }
+  }
+`;
+
 const LayoutEditorDetailsPane: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();
 
@@ -85,7 +93,7 @@ const LayoutEditorDetailsPane: React.FC = () => {
         );
       case DetailsPanelType.STEP_DETAILS:
         return (
-          <>
+          <StepDetailsContainer>
             <ApprovalConfigEditor />
             <RequiredNumberOfLinks />
             <RuleEditor
@@ -108,7 +116,7 @@ const LayoutEditorDetailsPane: React.FC = () => {
               editAction={LayoutEditorActionType.EDIT_PRODUCT_RULE}
               removeAction={LayoutEditorActionType.REMOVE_PRODUCT_RULE}
             />
-          </>
+          </StepDetailsContainer>
         );
       case DetailsPanelType.LAYOUT_DETAILS:
         return (

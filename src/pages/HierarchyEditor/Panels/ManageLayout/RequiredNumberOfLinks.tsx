@@ -25,6 +25,21 @@ import useFormBuilder, {
   IFormBuilderConfig
 } from "../../../../hooks/useFormBuilder";
 import { IStep } from "../../../../interfaces/ILayout";
+import styled from "styled-components";
+import Input from "../../../../atoms/Input";
+import InputErrorLabel from "../../../../atoms/InputErrorLabel";
+
+const RequiredNumberOfLinksFormContainer = styled.div`
+  margin: 1rem 0 0;
+
+  ${Input} {
+    margin: 0;
+  }
+
+  ${InputErrorLabel} {
+    margin: 0;
+  }
+`;
 
 const formSchema: IGenericFormSchema = [
   {
@@ -95,9 +110,15 @@ const RequiredNumberOfLinks: React.FC = () => {
         requiredNumberOfLinks: ""
       });
     }
-  }, [editorStoreContext.state.selectedLayoutElement?.step?.requiredNumberOfLinks]);
+  }, [
+    editorStoreContext.state.selectedLayoutElement?.step?.requiredNumberOfLinks
+  ]);
 
-  return <>{formJSX}</>;
+  return (
+    <RequiredNumberOfLinksFormContainer>
+      {formJSX}
+    </RequiredNumberOfLinksFormContainer>
+  );
 };
 
 export default RequiredNumberOfLinks;
