@@ -37,7 +37,7 @@ import {
   editProductRule,
   removeExpectedEndProduct,
   removeMaterialRule,
-  removeProductRule
+  removeProductRule,
   updateRequiredNumberOfLinks
 } from "./LayoutEditorService";
 

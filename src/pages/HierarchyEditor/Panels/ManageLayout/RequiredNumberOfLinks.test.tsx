@@ -118,7 +118,7 @@ it("update required number of links", async () => {
       layoutStep: {
         requiredNumberOfLinks: 4
       },
-      type: 24
+      type: 30
     });
   });
 });

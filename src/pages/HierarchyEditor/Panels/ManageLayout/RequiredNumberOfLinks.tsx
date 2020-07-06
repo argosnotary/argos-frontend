@@ -95,7 +95,7 @@ const RequiredNumberOfLinks: React.FC = () => {
         requiredNumberOfLinks: ""
       });
     }
-  }, [editorStoreContext.state.selectedLayoutElement?.step]);
+  }, [editorStoreContext.state.selectedLayoutElement?.step?.requiredNumberOfLinks]);
 
   return <>{formJSX}</>;
 };
