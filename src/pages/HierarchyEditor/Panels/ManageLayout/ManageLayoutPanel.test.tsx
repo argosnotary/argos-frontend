@@ -56,7 +56,9 @@ function mockLayoutMetaBlock(): ILayoutMetaBlock {
     signatures: [
       {
         keyId: "keyId",
-        signature: "signature"
+        signature: "signature",
+        keyAlgorithm: "EC",
+        hashAlgorithm: "SHA384"
       }
     ],
     layout: {
@@ -309,7 +311,8 @@ it("sign layout happy flow", async () => {
   const key: IPersonalAccountKeyPair = {
     encryptedPrivateKey: "encryptedPrivateKey",
     keyId: "keyId",
-    publicKey: "publicKey"
+    publicKey: "publicKey",
+    algorithm: "EC"
   };
 
   mock.onGet("/api/personalaccount/me/key").reply(200, key);
@@ -501,7 +504,7 @@ it("add authorized key to layout", async () => {
 
   mock
     .onGet("/api/personalaccount/accountId/key")
-    .reply(200, { key: "publicKey", id: "keyId" });
+    .reply(200, { publicKey: "publicKey", keyId: "keyId", algorithm: "EC" });
 
   mock
     .onGet("/api/personalaccount", {

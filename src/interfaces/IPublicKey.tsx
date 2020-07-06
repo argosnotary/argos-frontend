@@ -16,4 +16,5 @@
 export interface IPublicKey {
   keyId: string;
   publicKey: string;
+  algorithm: string;
 }

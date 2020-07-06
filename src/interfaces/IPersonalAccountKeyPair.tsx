@@ -17,6 +17,7 @@ interface IPersonalAccountKeyPair {
   keyId: string;
   publicKey: string;
   encryptedPrivateKey: string;
+  algorithm: string;
 }
 
 export default IPersonalAccountKeyPair;

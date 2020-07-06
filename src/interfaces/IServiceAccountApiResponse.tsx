@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export default interface INpaApiResponse {
+export default interface IServiceAccountApiResponse {
   id: string;
   name: string;
   parentLabelId: string;

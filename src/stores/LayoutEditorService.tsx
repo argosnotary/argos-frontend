@@ -27,12 +27,12 @@ export const addLayoutAuthorizedKey = (
     layout.authorizedKeyIds = [];
   }
 
-  if (!isPublicKeyDefined(layout, key.id)) {
+  if (!isPublicKeyDefined(layout, key.keyId)) {
     layout.keys.push(key);
   }
 
-  if (!isKeyIdDefined(layout, key.id)) {
-    layout.authorizedKeyIds = [...layout.authorizedKeyIds, key.id];
+  if (!isKeyIdDefined(layout, key.keyId)) {
+    layout.authorizedKeyIds = [...layout.authorizedKeyIds, key.keyId];
   }
   return layout;
 };
@@ -41,15 +41,15 @@ export const deleteLayoutAuthorizedKey = (
   layout: ILayout,
   keyToRemove: IPublicKey
 ): ILayout => {
-  const authorizedKeyIndex = layout.authorizedKeyIds.indexOf(keyToRemove.id);
+  const authorizedKeyIndex = layout.authorizedKeyIds.indexOf(keyToRemove.keyId);
 
   if (authorizedKeyIndex >= 0) {
     layout.authorizedKeyIds.splice(authorizedKeyIndex, 1);
     layout.authorizedKeyIds = [...layout.authorizedKeyIds];
   }
 
-  if (!isKeyIdUsedInSteps(layout, keyToRemove.id)) {
-    const keyIndex = layout.keys.findIndex(key => key.id === keyToRemove.id);
+  if (!isKeyIdUsedInSteps(layout, keyToRemove.keyId)) {
+    const keyIndex = layout.keys.findIndex(key => key.keyId === keyToRemove.keyId);
     if (keyIndex >= 0) {
       layout.keys.splice(keyIndex, 1);
     }
@@ -71,12 +71,12 @@ export const addStepAuthorizedKey = (
     step.authorizedKeyIds = [];
   }
 
-  if (!isPublicKeyDefined(layout, key.id)) {
+  if (!isPublicKeyDefined(layout, key.keyId)) {
     layout.keys.push(key);
   }
 
-  if (step.authorizedKeyIds.indexOf(key.id) < 0) {
-    step.authorizedKeyIds = [...step.authorizedKeyIds, key.id];
+  if (step.authorizedKeyIds.indexOf(key.keyId) < 0) {
+    step.authorizedKeyIds = [...step.authorizedKeyIds, key.keyId];
   }
   return layout;
 };
@@ -86,15 +86,15 @@ export const deleteStepAuthorizedKey = (
   keyToRemove: IPublicKey,
   step: IStep
 ): ILayout => {
-  const stepAuthorizedKeyIndex = step.authorizedKeyIds.indexOf(keyToRemove.id);
+  const stepAuthorizedKeyIndex = step.authorizedKeyIds.indexOf(keyToRemove.keyId);
 
   if (stepAuthorizedKeyIndex >= 0) {
     step.authorizedKeyIds.splice(stepAuthorizedKeyIndex, 1);
     step.authorizedKeyIds = [...step.authorizedKeyIds];
   }
 
-  if (!isKeyIdUsedInSteps(layout, keyToRemove.id)) {
-    const keyIndex = layout.keys.findIndex(key => key.id === keyToRemove.id);
+  if (!isKeyIdUsedInSteps(layout, keyToRemove.keyId)) {
+    const keyIndex = layout.keys.findIndex(key => key.keyId === keyToRemove.keyId);
     if (keyIndex >= 0) {
       layout.keys.splice(keyIndex, 1);
     }
@@ -222,7 +222,7 @@ export const updateRequiredNumberOfLinks = (
 };
 
 const isPublicKeyDefined = (layout: ILayout, keyId: string): boolean => {
-  return layout.keys.flatMap(key => key.id).indexOf(keyId) >= 0;
+  return layout.keys.flatMap(key => key.keyId).indexOf(keyId) >= 0;
 };
 
 const isKeyIdDefined = (layout: ILayout, keyId: string): boolean => {

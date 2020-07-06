@@ -22,6 +22,8 @@ export interface ILayoutMetaBlock {
 export interface ISignature {
   keyId: string;
   signature: string;
+  keyAlgorithm: string;
+  hashAlgorithm: string;
 }
 
 export interface ILayout {
@@ -32,8 +34,9 @@ export interface ILayout {
 }
 
 export interface IPublicKey {
-  id: string;
-  key: string;
+  keyId: string;
+  publicKey: string;
+  algorithm: string;
 }
 
 export interface ILayoutSegment {

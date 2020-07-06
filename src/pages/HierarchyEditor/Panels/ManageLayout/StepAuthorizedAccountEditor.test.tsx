@@ -165,7 +165,7 @@ it("remove account", async () => {
 
     expect(dispatch.mock.calls[0][0]).toEqual({
       publicKey: {
-        id: "keyId2"
+        keyId: "keyId2"
       },
       type: 32
     });
@@ -249,7 +249,7 @@ it("add service account", async () => {
 
   mock
     .onGet("/api/serviceaccount/accountId2/key")
-    .reply(200, { publicKey: "publicKey", keyId: "keyId" });
+    .reply(200, { publicKey: "publicKey", keyId: "keyId", algorithm: "EC" });
 
   const root = createComponent(editorStoreContextWithoutIds);
 
@@ -281,8 +281,9 @@ it("add service account", async () => {
 
     expect(dispatch.mock.calls[0][0]).toEqual({
       publicKey: {
-        id: "keyId",
-        key: "publicKey"
+        keyId: "keyId",
+        publicKey: "publicKey",
+        algorithm: "EC"
       },
       type: 31
     });
