@@ -43,11 +43,11 @@ import {
   LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
-import { Select } from "../../../../atoms/DropDown";
 import useFormBuilder, {
   IFormBuilderConfig,
   FormSubmitButtonHandlerTypes
 } from "../../../../hooks/useFormBuilder";
+import Select from "../../../../atoms/Select";
 
 const SelectionContainer = styled.section`
   display: flex;
@@ -119,7 +119,8 @@ const CollectorContainerSection = styled.section`
 
 const EditCollectionButton = styled(BaseActionButton)``;
 
-const FormContainer = styled(CollectionContainer)`
+export const FormContainer = styled(CollectionContainer)`
+  border: 0;
   flex-direction: column;
   padding: 1rem;
   margin: 0 0 1rem;

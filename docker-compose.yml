@@ -19,7 +19,7 @@ version: '3.1'
 services:
 
   argos-service:
-    image: argosnotary/argos-service-snapshot:delete-label
+    image: argosnotary/argos-service-snapshot:account-search-info-endpoint
     environment:
       spring.data.mongodb.uri: mongodb://mongodb/test
       spring.security.oauth2.client.registration.azure.clientId: client-id
@@ -39,7 +39,7 @@ services:
       - 8087:8080
 
   mongodb:
-    image: mongo:4.2.1-bionic
+    image: argosnotary/argos-mongo-test:master
     ports:
       - 27017:27017
 

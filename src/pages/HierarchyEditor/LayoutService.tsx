@@ -101,7 +101,7 @@ const mapRule = (rule: IRule): Domain.IRule | Domain.IMatchRule => {
       ruleType: "MATCH"
     };
   } else {
-    return { ruleType: rule.ruleType, pattern: rule.pattern };
+    return { ruleType: rule.ruleType || "ALLOW", pattern: rule.pattern };
   }
 };
 

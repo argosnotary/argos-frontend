@@ -19,6 +19,7 @@ import {
   ILayoutSegment,
   ILayoutValidationMessage,
   IPublicKey,
+  IRule,
   IStep
 } from "../interfaces/ILayout";
 import {
@@ -26,8 +27,20 @@ import {
   IArtifactCollector
 } from "../interfaces/IApprovalConfig";
 import {
+  addExpectedEndProduct,
   addLayoutAuthorizedKey,
-  deleteLayoutAuthorizedKey
+  addMaterialRule,
+  addProductRule,
+  addStepAuthorizedKey,
+  deleteLayoutAuthorizedKey,
+  deleteStepAuthorizedKey,
+  editExpectedEndProduct,
+  editMaterialRule,
+  editProductRule,
+  removeExpectedEndProduct,
+  removeMaterialRule,
+  removeProductRule,
+  updateRequiredNumberOfLinks
 } from "./LayoutEditorService";
 
 export enum DetailsPanelType {
@@ -55,7 +68,7 @@ interface ILayoutEditorState {
   showJson: boolean;
 }
 
-interface ILayoutEditorStoreContext {
+export interface ILayoutEditorStoreContext {
   state: ILayoutEditorState;
   dispatch: Dispatch<ILayoutEditorAction>;
 }
@@ -86,6 +99,18 @@ export enum LayoutEditorActionType {
   ADD_LAYOUT_AUTHORIZED_KEY,
   DELETE_LAYOUT_AUTHORIZED_KEY,
   EDIT_LAYOUT,
+  ADD_EXPECTED_END_PRODUCT,
+  REMOVE_EXPECTED_END_PRODUCT,
+  EDIT_EXPECTED_END_PRODUCT,
+  ADD_PRODUCT_RULE,
+  REMOVE_PRODUCT_RULE,
+  EDIT_PRODUCT_RULE,
+  ADD_MATERIAL_RULE,
+  REMOVE_MATERIAL_RULE,
+  EDIT_MATERIAL_RULE,
+  UPDATE_REQUIRED_NUMBER_OF_LINKS,
+  ADD_STEP_AUTHORIZED_KEY,
+  DELETE_STEP_AUTHORIZED_KEY,
   SHOW_JSON
 }
 
@@ -99,6 +124,7 @@ export interface ILayoutEditorAction {
   approvalConfigs?: Array<IApprovalConfig>;
   artifactCollector?: IArtifactCollector;
   publicKey?: IPublicKey;
+  rule?: IRule;
   showJson?: boolean;
 }
 
@@ -157,6 +183,30 @@ const reducer = (
         selectedLayoutElement: undefined,
         detailPanelMode: DetailsPanelType.LAYOUT_DETAILS
       };
+    case LayoutEditorActionType.ADD_EXPECTED_END_PRODUCT:
+      return handleAddExpectedEndProduct(action, state);
+    case LayoutEditorActionType.EDIT_EXPECTED_END_PRODUCT:
+      return handleEditExpectedEndProduct(state);
+    case LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT:
+      return handleRemoveExpectedEndProduct(action, state);
+    case LayoutEditorActionType.ADD_MATERIAL_RULE:
+      return handleAddMaterialRule(action, state);
+    case LayoutEditorActionType.EDIT_MATERIAL_RULE:
+      return handleEditMaterialRule(state);
+    case LayoutEditorActionType.REMOVE_MATERIAL_RULE:
+      return handleRemoveMaterialRule(action, state);
+    case LayoutEditorActionType.ADD_PRODUCT_RULE:
+      return handleAddProductRule(action, state);
+    case LayoutEditorActionType.EDIT_PRODUCT_RULE:
+      return handleEditProductRule(state);
+    case LayoutEditorActionType.REMOVE_PRODUCT_RULE:
+      return handleRemoveProductRule(action, state);
+    case LayoutEditorActionType.ADD_STEP_AUTHORIZED_KEY:
+      return handleAddStepAuthorizedKey(action, state);
+    case LayoutEditorActionType.DELETE_STEP_AUTHORIZED_KEY:
+      return handleDeleteStepAuthorizedKey(action, state);
+    case LayoutEditorActionType.UPDATE_REQUIRED_NUMBER_OF_LINKS:
+      return handleUpdateRequiredNumberOfLinks(action, state);
     case LayoutEditorActionType.SHOW_JSON:
       return {
         ...state,
@@ -183,6 +233,149 @@ export const createLayoutEditorStoreContext = (): ILayoutEditorStoreContext => {
 
 export const useLayoutEditorStore = () => useContext(LayoutEditorStoreContext);
 
+const handleAddMaterialRule = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.rule &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: addMaterialRule(
+        state.layout,
+        action.rule,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleEditMaterialRule = (
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (state.selectedLayoutElement && state.selectedLayoutElement.step) {
+    return {
+      ...state,
+      layout: editMaterialRule(state.layout, state.selectedLayoutElement.step)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleRemoveMaterialRule = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.rule &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: removeMaterialRule(
+        state.layout,
+        action.rule,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleAddProductRule = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.rule &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: addProductRule(
+        state.layout,
+        action.rule,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleEditProductRule = (
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (state.selectedLayoutElement && state.selectedLayoutElement.step) {
+    return {
+      ...state,
+      layout: editProductRule(state.layout, state.selectedLayoutElement.step)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleRemoveProductRule = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.rule &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: removeProductRule(
+        state.layout,
+        action.rule,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleUpdateRequiredNumberOfLinks = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.layoutStep &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: updateRequiredNumberOfLinks(
+        state.layout,
+        state.selectedLayoutElement.step,
+        action.layoutStep.requiredNumberOfLinks
+      )
+    };
+  }
+  return {
+    ...state
+  };
+};
+
 const createSelectedLayoutElement = (
   state: ILayoutEditorState,
   action: ILayoutEditorAction
@@ -199,6 +392,92 @@ const createSelectedLayoutElement = (
             );
           })
         : undefined
+  };
+};
+
+const handleAddExpectedEndProduct = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (action.rule) {
+    return {
+      ...state,
+      layout: addExpectedEndProduct(state.layout, action.rule)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleEditExpectedEndProduct = (
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  return {
+    ...state,
+    layout: editExpectedEndProduct(state.layout)
+  };
+};
+
+const handleRemoveExpectedEndProduct = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (action.rule) {
+    return {
+      ...state,
+      layout: removeExpectedEndProduct(state.layout, action.rule)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleDeleteStepAuthorizedKey = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.publicKey &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: deleteStepAuthorizedKey(
+        state.layout,
+        action.publicKey,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+
+  return {
+    ...state
+  };
+};
+
+const handleAddStepAuthorizedKey = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.publicKey &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: addStepAuthorizedKey(
+        state.layout,
+        action.publicKey,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+  return {
+    ...state
   };
 };
 
@@ -504,6 +783,18 @@ const handleAddStep = (
   state: ILayoutEditorState
 ) => {
   if (action.layoutSegment && action.layoutStep) {
+    if (action.layoutStep.authorizedKeyIds === undefined) {
+      action.layoutStep.authorizedKeyIds = [];
+    }
+
+    if (action.layoutStep.expectedMaterials === undefined) {
+      action.layoutStep.expectedMaterials = [];
+    }
+
+    if (action.layoutStep.expectedProducts === undefined) {
+      action.layoutStep.expectedProducts = [];
+    }
+
     action.layoutSegment.steps.push(action.layoutStep);
     return {
       ...state,

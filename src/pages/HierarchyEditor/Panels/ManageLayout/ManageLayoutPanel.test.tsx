@@ -35,7 +35,7 @@ import {
   IApprovalConfig
 } from "../../../../interfaces/IApprovalConfig";
 import HierarchyEditorTestWrapper from "../../../../test/utils";
-import LayoutDetailsEditor from "./LayoutDetailsEditor";
+import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
 import { SearchResultEntry } from "../../../../atoms/SearchInput";
 
 const mock = new MockAdapter(Axios);
@@ -175,7 +175,7 @@ it("renders correctly with existing layout", async () => {
       ).toBe(1);
     });
 
-    expect(root.find(LayoutDetailsEditor)).toMatchSnapshot(
+    expect(root.find(LayoutAuthorizedAccountEditor)).toMatchSnapshot(
       "withLayoutDetailsEditor"
     );
 
@@ -449,7 +449,7 @@ it("sign layout happy flow", async () => {
       .first()
       .simulate("submit");
 
-    await waitFor(() => expect(mock.history.get.length).toBe(2));
+    await waitFor(() => expect(mock.history.get.length).toBe(4));
     await waitFor(() => expect(mock.history.post.length).toBe(3));
 
     const expectedPost = {
@@ -458,6 +458,9 @@ it("sign layout happy flow", async () => {
           name: "jenkins",
           steps: [
             {
+              authorizedKeyIds: [],
+              expectedMaterials: [],
+              expectedProducts: [],
               name: "approve"
             }
           ]

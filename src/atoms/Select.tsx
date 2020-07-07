@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import styled from "styled-components";
 
-export const Select = styled.select`
+import styled, { css } from "styled-components";
+
+export const SelectCSS = css<{ disabled?: boolean; height?: string }>`
   &::-ms-expand {
     display: none;
   }
-
+  
+  margin: 0 0 1rem;
   display: flex;
   box-sizing: border-box;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -28,13 +30,27 @@ export const Select = styled.select`
   border-radius: 0;
   font: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
   appearance: none;
   background-repeat: no-repeat;
   background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
+
+  background-color: ${props => (props.disabled ? "#e0e0e0" : "#fefefe")};
+  &:hover {
+    cursor: ${props => (props.disabled ? "not-allowed" : "initial")};
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid #8a8a8a;
+    box-shadow: 0 0 5px #cacaca;
+  }
 `;
+
+const Select = styled.select`
+  ${SelectCSS}
+`;
+
+export default Select;

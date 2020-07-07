@@ -14,18 +14,43 @@
  * limitations under the License.
  */
 import React from "react";
+import styled from "styled-components";
+
 import NotificationsList, {
   INotification,
   NotificationTypes
 } from "../../../../molecules/NotificationsList";
 import { Panel } from "../../../../molecules/Panel";
+import { CollectionContainer } from "../../../../atoms/Collection";
 import {
   DetailsPanelType,
+  LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
-import ApprovalConfigEditor from "./ApprovalConfigEditor";
-import LayoutDetailsEditor from "./LayoutDetailsEditor";
+import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
+import ApprovalConfigEditor, { FormContainer } from "./ApprovalConfigEditor";
+import RuleEditor from "./RuleEditor";
+import RequiredNumberOfLinks from "./RequiredNumberOfLinks";
+import StepAuthorizedAccountEditor from "./StepAuthorizedAccountEditor";
+
+const PanelSpecificStyling = styled.div`
+  ${CollectionContainer} {
+    &:first-of-type {
+      margin-top: 3rem;
+    }
+
+    margin-top: 2.1rem;
+  }
+
+  ${FormContainer} {
+    &:first-of-type {
+      margin: 0;
+    }
+
+    margin: 0;
+  }
+`;
 
 const convertValidationMessagesToNotifications = (
   validationErrors?: Array<ILayoutValidationMessage>
@@ -46,6 +71,14 @@ const convertValidationMessagesToNotifications = (
   });
 };
 
+const StepDetailsContainer = styled.div`
+  ${CollectionContainer} {
+    &:first-of-type {
+      margin-top: 2.1rem;
+    }
+  }
+`;
+
 const LayoutEditorDetailsPane: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();
 
@@ -60,9 +93,46 @@ const LayoutEditorDetailsPane: React.FC = () => {
           />
         );
       case DetailsPanelType.STEP_DETAILS:
-        return <ApprovalConfigEditor />;
+        return (
+          <StepDetailsContainer>
+            <ApprovalConfigEditor />
+            <RequiredNumberOfLinks />
+            <StepAuthorizedAccountEditor />
+            <RuleEditor
+              title={"Expected Materials"}
+              initialRules={
+                editorStoreContext.state.selectedLayoutElement?.step
+                  ?.expectedMaterials
+              }
+              addAction={LayoutEditorActionType.ADD_MATERIAL_RULE}
+              editAction={LayoutEditorActionType.EDIT_MATERIAL_RULE}
+              removeAction={LayoutEditorActionType.REMOVE_MATERIAL_RULE}
+            />
+            <RuleEditor
+              title={"Expected Products"}
+              initialRules={
+                editorStoreContext.state.selectedLayoutElement?.step
+                  ?.expectedProducts
+              }
+              addAction={LayoutEditorActionType.ADD_PRODUCT_RULE}
+              editAction={LayoutEditorActionType.EDIT_PRODUCT_RULE}
+              removeAction={LayoutEditorActionType.REMOVE_PRODUCT_RULE}
+            />
+          </StepDetailsContainer>
+        );
       case DetailsPanelType.LAYOUT_DETAILS:
-        return <LayoutDetailsEditor />;
+        return (
+          <>
+            <LayoutAuthorizedAccountEditor />
+            <RuleEditor
+              title={"Expected End Products"}
+              initialRules={editorStoreContext.state.layout.expectedEndProducts}
+              addAction={LayoutEditorActionType.ADD_EXPECTED_END_PRODUCT}
+              editAction={LayoutEditorActionType.EDIT_EXPECTED_END_PRODUCT}
+              removeAction={LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT}
+            />
+          </>
+        );
     }
   };
 
@@ -78,11 +148,9 @@ const LayoutEditorDetailsPane: React.FC = () => {
   };
 
   return (
-    <>
-      <Panel width={"37.5vw"} last={true} title={determineTitle()}>
-        {determinePanelContent()}
-      </Panel>
-    </>
+    <Panel width={"37.5vw"} last={true} title={determineTitle()}>
+      <PanelSpecificStyling>{determinePanelContent()}</PanelSpecificStyling>
+    </Panel>
   );
 };
 

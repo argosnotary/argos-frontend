@@ -125,7 +125,7 @@ interface IAccountSearchApiResponse {
   data: Array<ISearchApiUser>;
 }
 
-const LayoutDetailsEditor: React.FC = () => {
+const LayoutAuthorizedAccountEditor: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
@@ -199,7 +199,7 @@ const LayoutDetailsEditor: React.FC = () => {
       setAuthorizedPersonalAccounts([]);
     }
     setAddAccountMode(false);
-  }, [editorStoreContext.state.layout]);
+  }, [editorStoreContext.state.layout.authorizedKeyIds]);
 
   const deleteCollector = (keyId: string) => {
     editorStoreContext.dispatch({
@@ -304,7 +304,7 @@ const LayoutDetailsEditor: React.FC = () => {
     <>
       <ItemContainer>
         <CollectionContainerRow>
-          <ItemContainerTitle>Authorized Personal Accounts</ItemContainerTitle>
+          <ItemContainerTitle>Authorized Accounts</ItemContainerTitle>
           <AddItemButton
             data-testhook-id={"add-item"}
             onClick={() => setAddAccountMode(true)}>
@@ -328,4 +328,4 @@ const LayoutDetailsEditor: React.FC = () => {
   );
 };
 
-export default LayoutDetailsEditor;
+export default LayoutAuthorizedAccountEditor;
