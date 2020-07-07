@@ -119,7 +119,8 @@ const LayoutJsonEditor: React.FC = () => {
     editorStoreContext.state.selectedLayoutElement?.step?.requiredNumberOfLinks,
     editorStoreContext.state.layout.authorizedKeyIds,
     editorStoreContext.state.selectedLayoutElement?.step?.expectedProducts,
-    editorStoreContext.state.selectedLayoutElement?.step?.expectedMaterials
+    editorStoreContext.state.selectedLayoutElement?.step?.expectedMaterials,
+    editorStoreContext.state.selectedLayoutElement?.step?.authorizedKeyIds
   ]);
 
   useEffect(() => {

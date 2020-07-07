@@ -125,7 +125,7 @@ interface IAccountSearchApiResponse {
   data: Array<ISearchApiUser>;
 }
 
-const AuthorizedAccountEditor: React.FC = () => {
+const LayoutAuthorizedAccountEditor: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();
 
   const theme = useContext(ThemeContext);
@@ -304,7 +304,7 @@ const AuthorizedAccountEditor: React.FC = () => {
     <>
       <ItemContainer>
         <CollectionContainerRow>
-          <ItemContainerTitle>Authorized Personal Accounts</ItemContainerTitle>
+          <ItemContainerTitle>Authorized Accounts</ItemContainerTitle>
           <AddItemButton
             data-testhook-id={"add-item"}
             onClick={() => setAddAccountMode(true)}>
@@ -328,4 +328,4 @@ const AuthorizedAccountEditor: React.FC = () => {
   );
 };
 
-export default AuthorizedAccountEditor;
+export default LayoutAuthorizedAccountEditor;

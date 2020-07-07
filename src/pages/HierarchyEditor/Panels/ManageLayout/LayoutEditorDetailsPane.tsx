@@ -28,10 +28,11 @@ import {
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
+import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
 import ApprovalConfigEditor, { FormContainer } from "./ApprovalConfigEditor";
-import AuthorizedAccountEditor from "./AuthorizedAccountEditor";
 import RuleEditor from "./RuleEditor";
 import RequiredNumberOfLinks from "./RequiredNumberOfLinks";
+import StepAuthorizedAccountEditor from "./StepAuthorizedAccountEditor";
 
 const PanelSpecificStyling = styled.div`
   ${CollectionContainer} {
@@ -96,6 +97,7 @@ const LayoutEditorDetailsPane: React.FC = () => {
           <StepDetailsContainer>
             <ApprovalConfigEditor />
             <RequiredNumberOfLinks />
+            <StepAuthorizedAccountEditor />
             <RuleEditor
               title={"Expected Materials"}
               initialRules={
@@ -121,7 +123,7 @@ const LayoutEditorDetailsPane: React.FC = () => {
       case DetailsPanelType.LAYOUT_DETAILS:
         return (
           <>
-            <AuthorizedAccountEditor />
+            <LayoutAuthorizedAccountEditor />
             <RuleEditor
               title={"Expected End Products"}
               initialRules={editorStoreContext.state.layout.expectedEndProducts}

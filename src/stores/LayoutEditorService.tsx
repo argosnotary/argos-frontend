@@ -58,6 +58,51 @@ export const deleteLayoutAuthorizedKey = (
   return layout;
 };
 
+export const addStepAuthorizedKey = (
+  layout: ILayout,
+  key: IPublicKey,
+  step: IStep
+): ILayout => {
+  if (layout.keys === undefined) {
+    layout.keys = [];
+  }
+
+  if (step.authorizedKeyIds === undefined) {
+    step.authorizedKeyIds = [];
+  }
+
+  if (!isPublicKeyDefined(layout, key.id)) {
+    layout.keys.push(key);
+  }
+
+  if (step.authorizedKeyIds.indexOf(key.id) < 0) {
+    step.authorizedKeyIds = [...step.authorizedKeyIds, key.id];
+  }
+  return layout;
+};
+
+export const deleteStepAuthorizedKey = (
+  layout: ILayout,
+  keyToRemove: IPublicKey,
+  step: IStep
+): ILayout => {
+  const stepAuthorizedKeyIndex = step.authorizedKeyIds.indexOf(keyToRemove.id);
+
+  if (stepAuthorizedKeyIndex >= 0) {
+    step.authorizedKeyIds.splice(stepAuthorizedKeyIndex, 1);
+    step.authorizedKeyIds = [...step.authorizedKeyIds];
+  }
+
+  if (!isKeyIdUsedInSteps(layout, keyToRemove.id)) {
+    const keyIndex = layout.keys.findIndex(key => key.id === keyToRemove.id);
+    if (keyIndex >= 0) {
+      layout.keys.splice(keyIndex, 1);
+    }
+  }
+
+  return layout;
+};
+
 export const getStepNamesForSegment = (
   layout: ILayout,
   segmentName: string
@@ -185,14 +230,13 @@ const isKeyIdDefined = (layout: ILayout, keyId: string): boolean => {
 };
 
 const isKeyIdUsedInSteps = (layout: ILayout, keyId: string): boolean => {
-  if (layout.layoutSegments) {
-    return (
+  return (
+    (layout.authorizedKeyIds && layout.authorizedKeyIds.indexOf(keyId) >= 0) ||
+    (layout.layoutSegments &&
       layout.layoutSegments
         .flatMap(segment => segment.steps)
         .filter(step => step.authorizedKeyIds !== undefined)
         .flatMap(step => step.authorizedKeyIds)
-        .indexOf(keyId) >= 0
-    );
-  }
-  return false;
+        .indexOf(keyId) >= 0)
+  );
 };

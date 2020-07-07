@@ -31,7 +31,9 @@ import {
   addLayoutAuthorizedKey,
   addMaterialRule,
   addProductRule,
+  addStepAuthorizedKey,
   deleteLayoutAuthorizedKey,
+  deleteStepAuthorizedKey,
   editExpectedEndProduct,
   editMaterialRule,
   editProductRule,
@@ -105,7 +107,9 @@ export enum LayoutEditorActionType {
   ADD_MATERIAL_RULE,
   REMOVE_MATERIAL_RULE,
   EDIT_MATERIAL_RULE,
-  UPDATE_REQUIRED_NUMBER_OF_LINKS
+  UPDATE_REQUIRED_NUMBER_OF_LINKS,
+  ADD_STEP_AUTHORIZED_KEY,
+  DELETE_STEP_AUTHORIZED_KEY
 }
 
 export interface ILayoutEditorAction {
@@ -194,6 +198,10 @@ const reducer = (
       return handleEditProductRule(state);
     case LayoutEditorActionType.REMOVE_PRODUCT_RULE:
       return handleRemoveProductRule(action, state);
+    case LayoutEditorActionType.ADD_STEP_AUTHORIZED_KEY:
+      return handleAddStepAuthorizedKey(action, state);
+    case LayoutEditorActionType.DELETE_STEP_AUTHORIZED_KEY:
+      return handleDeleteStepAuthorizedKey(action, state);
     case LayoutEditorActionType.UPDATE_REQUIRED_NUMBER_OF_LINKS:
       return handleUpdateRequiredNumberOfLinks(action, state);
     default:
@@ -410,6 +418,53 @@ const handleRemoveExpectedEndProduct = (
     return {
       ...state,
       layout: removeExpectedEndProduct(state.layout, action.rule)
+    };
+  }
+  return {
+    ...state
+  };
+};
+
+const handleDeleteStepAuthorizedKey = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.publicKey &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: deleteStepAuthorizedKey(
+        state.layout,
+        action.publicKey,
+        state.selectedLayoutElement.step
+      )
+    };
+  }
+
+  return {
+    ...state
+  };
+};
+
+const handleAddStepAuthorizedKey = (
+  action: ILayoutEditorAction,
+  state: ILayoutEditorState
+): ILayoutEditorState => {
+  if (
+    action.publicKey &&
+    state.selectedLayoutElement &&
+    state.selectedLayoutElement.step
+  ) {
+    return {
+      ...state,
+      layout: addStepAuthorizedKey(
+        state.layout,
+        action.publicKey,
+        state.selectedLayoutElement.step
+      )
     };
   }
   return {
@@ -719,6 +774,18 @@ const handleAddStep = (
   state: ILayoutEditorState
 ) => {
   if (action.layoutSegment && action.layoutStep) {
+    if (action.layoutStep.authorizedKeyIds === undefined) {
+      action.layoutStep.authorizedKeyIds = [];
+    }
+
+    if (action.layoutStep.expectedMaterials === undefined) {
+      action.layoutStep.expectedMaterials = [];
+    }
+
+    if (action.layoutStep.expectedProducts === undefined) {
+      action.layoutStep.expectedProducts = [];
+    }
+
     action.layoutSegment.steps.push(action.layoutStep);
     return {
       ...state,
