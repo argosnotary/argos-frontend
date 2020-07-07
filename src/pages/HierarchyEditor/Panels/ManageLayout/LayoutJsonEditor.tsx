@@ -34,6 +34,9 @@ import useFormBuilder, {
   IFormBuilderConfig,
   FormSubmitButtonHandlerTypes
 } from "../../../../hooks/useFormBuilder";
+import FlexRow from "../../../../atoms/FlexRow";
+import { LoaderButton } from "../../../../atoms/Button";
+import { CustomCancelButton } from "../../../../atoms/SearchInput";
 
 interface ILayoutValidationErrorResponse {
   messages: Array<ILayoutValidationMessage>;
@@ -77,6 +80,12 @@ const LayoutJsonEditor: React.FC = () => {
     genericDataFetchReducer
   );
 
+  const handleCancel = () => {
+    hierarchyEditorDispatch.editor({
+      type: HierarchyEditorActionTypes.RESET
+    });
+  };
+
   const formConfig: IFormBuilderConfig = {
     dataTesthookId: "layout-json-form",
     schema: formSchema,
@@ -85,11 +94,7 @@ const LayoutJsonEditor: React.FC = () => {
       : FormPermissions.READ,
     isLoading: editorStoreContext.state.loading,
     validate: validateLayout,
-    onCancel: () => {
-      hierarchyEditorDispatch.editor({
-        type: HierarchyEditorActionTypes.RESET
-      });
-    },
+    onCancel: handleCancel,
     onSubmit: values => {
       requestLayoutValidation(values);
     },
@@ -101,8 +106,6 @@ const LayoutJsonEditor: React.FC = () => {
         });
       }
     },
-    confirmationLabel: "Sign and Submit",
-    cancellationLabel: "Cancel",
     buttonHandler: FormSubmitButtonHandlerTypes.CLICK
   };
 
@@ -168,7 +171,30 @@ const LayoutJsonEditor: React.FC = () => {
     setLayoutValidationDataRequest(dataRequest);
   };
 
-  return <>{formJSX}</>;
+  return (
+    <>
+      <FlexRow>
+        <LoaderButton
+          dataTesthookId={"layout-json-form-submit-button"}
+          buttonType="button"
+          loading={editorStoreContext.state.loading}
+          onClick={() =>
+            requestLayoutValidation({
+              layout: JSON.stringify(editorStoreContext.state.layout)
+            })
+          }>
+          Sign and Submit
+        </LoaderButton>
+        <CustomCancelButton
+          data-testhook="cancel-button"
+          type="button"
+          onMouseDown={handleCancel}>
+          Cancel
+        </CustomCancelButton>
+      </FlexRow>
+      {editorStoreContext.state.showJson ? formJSX : null}
+    </>
+  );
 };
 
 export default LayoutJsonEditor;

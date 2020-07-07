@@ -130,7 +130,7 @@ const ManageLayoutPanel: React.FC = () => {
           <Layout />
           <SegmentsContainer />
           <PageSpecificContentSeparator />
-          {editorStoreContext.state.showJson ?<LayoutJsonEditor /> : null}
+          <LayoutJsonEditor />
           <LayoutSigner />
           {!cryptoAvailable() ? <NoCryptoWarning /> : null}
         </Panel>

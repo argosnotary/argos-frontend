@@ -464,7 +464,7 @@ exports[`renders correctly 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-brqgnP",
                                             "isStatic": false,
-                                            "lastClassName": "ceUMqo",
+                                            "lastClassName": "jgdfSN",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -472,8 +472,10 @@ exports[`renders correctly 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -494,7 +496,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-brqgnP ceUMqo"
+                                        className="sc-htpNat sc-brqgnP jgdfSN"
                                         data-testhook-id="delete-key-0"
                                         onClick={[Function]}
                                       >
@@ -742,7 +744,7 @@ exports[`renders correctly 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-brqgnP",
                                             "isStatic": false,
-                                            "lastClassName": "ceUMqo",
+                                            "lastClassName": "jgdfSN",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -750,8 +752,10 @@ exports[`renders correctly 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -772,7 +776,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-brqgnP ceUMqo"
+                                        className="sc-htpNat sc-brqgnP jgdfSN"
                                         data-testhook-id="delete-key-1"
                                         onClick={[Function]}
                                       >
@@ -1018,7 +1022,7 @@ exports[`renders correctly 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-brqgnP",
                                             "isStatic": false,
-                                            "lastClassName": "ceUMqo",
+                                            "lastClassName": "jgdfSN",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -1026,8 +1030,10 @@ exports[`renders correctly 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -1048,7 +1054,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-brqgnP ceUMqo"
+                                        className="sc-htpNat sc-brqgnP jgdfSN"
                                         data-testhook-id="delete-key-2"
                                         onClick={[Function]}
                                       >

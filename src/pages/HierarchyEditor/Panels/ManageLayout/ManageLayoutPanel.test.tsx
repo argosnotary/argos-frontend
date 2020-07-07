@@ -270,6 +270,8 @@ it("validates a faulty layout and returns errors", async () => {
   const root = createComponent();
 
   await act(async () => {
+    root.find('button[data-testhook-id="show-layout-json"]').simulate("click");
+
     await waitFor(() => {
       root.update();
       return expect(
@@ -327,6 +329,8 @@ it("sign layout happy flow", async () => {
         root.find('button[data-testhook-id="add-segment"]').length
       ).toBe(1);
     });
+
+    root.find('button[data-testhook-id="show-layout-json"]').simulate("click");
 
     updateField(
       root.find('textarea[data-testhook-id="layout-json-form-field-0"]'),
