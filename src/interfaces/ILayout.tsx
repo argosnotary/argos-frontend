@@ -65,6 +65,7 @@ export interface IRule {
 export enum RuleRuleTypeEnum {
   ALLOW = "ALLOW",
   CREATE = "CREATE",
+  CREATE_OR_MODIFY = "CREATE_OR_MODIFY",
   DELETE = "DELETE",
   DISALLOW = "DISALLOW",
   MATCH = "MATCH",

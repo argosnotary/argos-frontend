@@ -714,30 +714,36 @@ exports[`add rule allow 1`] = `
                           </option>
                           <option
                             key="select-type-2"
+                            value="CREATE_OR_MODIFY"
+                          >
+                            create or modify
+                          </option>
+                          <option
+                            key="select-type-3"
                             value="DELETE"
                           >
                             delete
                           </option>
                           <option
-                            key="select-type-3"
+                            key="select-type-4"
                             value="DISALLOW"
                           >
                             disallow
                           </option>
                           <option
-                            key="select-type-4"
+                            key="select-type-5"
                             value="MATCH"
                           >
                             match
                           </option>
                           <option
-                            key="select-type-5"
+                            key="select-type-6"
                             value="MODIFY"
                           >
                             modify
                           </option>
                           <option
-                            key="select-type-6"
+                            key="select-type-7"
                             value="REQUIRE"
                           >
                             require

@@ -56,6 +56,7 @@ export namespace Domain {
   export type RuleType =
     | "ALLOW"
     | "CREATE"
+    | "CREATE_OR_MODIFY"
     | "DELETE"
     | "DISALLOW"
     | "MATCH"
