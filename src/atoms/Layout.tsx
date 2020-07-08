@@ -28,6 +28,7 @@ import {
   useLayoutEditorStore
 } from "../stores/LayoutEditorStore";
 import EditIcon from "./Icons/EditIcon";
+import JsonIcon from "./Icons/JsonIcon";
 
 interface ILayoutTitleProps {
   active: boolean;
@@ -86,6 +87,12 @@ const Layout: React.FC = () => {
     });
   };
 
+  const onShowJson = () => {
+    editorStoreContext.dispatch({
+      type: LayoutEditorActionType.SHOW_JSON
+    });
+  }
+
   return (
     <>
       <LayoutSection data-testhook-id={"layout-edit"}>
@@ -97,9 +104,14 @@ const Layout: React.FC = () => {
           <CollectionContainerSpan>Layout</CollectionContainerSpan>
           <ActionIconsContainer>
             <EditLayoutButton
+              data-testhook-id={"show-layout-json"}
+              onClick={onShowJson}>
+              <JsonIcon size={26} color={theme.layoutBuilder.iconColor} />
+            </EditLayoutButton>
+            <EditLayoutButton
               data-testhook-id={"edit-layout"}
               onClick={onSelectLayout}>
-              <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
+              <EditIcon size={31} color={theme.layoutBuilder.iconColor} />
             </EditLayoutButton>
           </ActionIconsContainer>
         </LayoutTitle>

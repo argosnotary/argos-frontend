@@ -428,7 +428,7 @@ exports[`add rule allow 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "hEHSgo",
+                                            "lastClassName": "yHvcD",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -436,8 +436,10 @@ exports[`add rule allow 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -458,7 +460,7 @@ exports[`add rule allow 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-eHgmQL hEHSgo"
+                                        className="sc-htpNat sc-eHgmQL yHvcD"
                                         data-testhook-id="edit-rule-0"
                                         onClick={[Function]}
                                       >
@@ -495,7 +497,7 @@ exports[`add rule allow 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-hSdWYo",
                                             "isStatic": false,
-                                            "lastClassName": "epMMcD",
+                                            "lastClassName": "frDxnk",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -503,8 +505,10 @@ exports[`add rule allow 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -525,7 +529,7 @@ exports[`add rule allow 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-hSdWYo epMMcD"
+                                        className="sc-htpNat sc-hSdWYo frDxnk"
                                         data-testhook-id="delete-rule-0"
                                         onClick={[Function]}
                                       >
@@ -1720,7 +1724,7 @@ exports[`add rule expected end product 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "hEHSgo",
+                                            "lastClassName": "yHvcD",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -1728,8 +1732,10 @@ exports[`add rule expected end product 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -1750,7 +1756,7 @@ exports[`add rule expected end product 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-eHgmQL hEHSgo"
+                                        className="sc-htpNat sc-eHgmQL yHvcD"
                                         data-testhook-id="edit-rule-0"
                                         onClick={[Function]}
                                       >
@@ -1787,7 +1793,7 @@ exports[`add rule expected end product 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-hSdWYo",
                                             "isStatic": false,
-                                            "lastClassName": "epMMcD",
+                                            "lastClassName": "frDxnk",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -1795,8 +1801,10 @@ exports[`add rule expected end product 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -1817,7 +1825,7 @@ exports[`add rule expected end product 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-hSdWYo epMMcD"
+                                        className="sc-htpNat sc-hSdWYo frDxnk"
                                         data-testhook-id="delete-rule-0"
                                         onClick={[Function]}
                                       >
@@ -3732,7 +3740,7 @@ exports[`renders correctly 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-eHgmQL",
                                             "isStatic": false,
-                                            "lastClassName": "hEHSgo",
+                                            "lastClassName": "yHvcD",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -3740,8 +3748,10 @@ exports[`renders correctly 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -3762,7 +3772,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-eHgmQL hEHSgo"
+                                        className="sc-htpNat sc-eHgmQL yHvcD"
                                         data-testhook-id="edit-rule-0"
                                         onClick={[Function]}
                                       >
@@ -3799,7 +3809,7 @@ exports[`renders correctly 1`] = `
                                           "componentStyle": ComponentStyle {
                                             "componentId": "sc-hSdWYo",
                                             "isStatic": false,
-                                            "lastClassName": "epMMcD",
+                                            "lastClassName": "frDxnk",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -3807,8 +3817,10 @@ exports[`renders correctly 1`] = `
   border: 0;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
+    svg {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
   }
 ",
                                             ],
@@ -3829,7 +3841,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-hSdWYo epMMcD"
+                                        className="sc-htpNat sc-hSdWYo frDxnk"
                                         data-testhook-id="delete-rule-0"
                                         onClick={[Function]}
                                       >

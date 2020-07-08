@@ -65,6 +65,7 @@ interface ILayoutEditorState {
   showSigningDialog: boolean;
   detailPanelMode: DetailsPanelType;
   approvalConfigs: Array<IApprovalConfig>;
+  showJson: boolean;
 }
 
 export interface ILayoutEditorStoreContext {
@@ -109,7 +110,8 @@ export enum LayoutEditorActionType {
   EDIT_MATERIAL_RULE,
   UPDATE_REQUIRED_NUMBER_OF_LINKS,
   ADD_STEP_AUTHORIZED_KEY,
-  DELETE_STEP_AUTHORIZED_KEY
+  DELETE_STEP_AUTHORIZED_KEY,
+  SHOW_JSON
 }
 
 export interface ILayoutEditorAction {
@@ -123,6 +125,7 @@ export interface ILayoutEditorAction {
   artifactCollector?: IArtifactCollector;
   publicKey?: IPublicKey;
   rule?: IRule;
+  showJson?: boolean;
 }
 
 const reducer = (
@@ -204,6 +207,11 @@ const reducer = (
       return handleDeleteStepAuthorizedKey(action, state);
     case LayoutEditorActionType.UPDATE_REQUIRED_NUMBER_OF_LINKS:
       return handleUpdateRequiredNumberOfLinks(action, state);
+    case LayoutEditorActionType.SHOW_JSON:
+      return {
+        ...state,
+        showJson: !state.showJson
+      };
     default:
       throw new Error();
   }
@@ -217,7 +225,8 @@ export const createLayoutEditorStoreContext = (): ILayoutEditorStoreContext => {
     loading: false,
     showSigningDialog: false,
     detailPanelMode: DetailsPanelType.EMPTY,
-    approvalConfigs: []
+    approvalConfigs: [],
+    showJson: false
   });
   return { state: state, dispatch: dispatch };
 };
