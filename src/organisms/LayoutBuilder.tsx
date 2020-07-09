@@ -107,29 +107,11 @@ const StepTitle = styled.header`
   justify-content: space-between;
 `;
 
-const StepsContainerTitle = styled(CollectionContainerTitle)`
-  top: -1rem;
-  margin: 0 auto;
-  padding: 0.25rem 1rem;
-  border: 1px solid #1779ba;
-`;
+const StepsContainerTitle = styled(CollectionContainerTitle)``;
 
-const AddSegmentButton = styled(CollectionContainerButton)`
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
-  }
-`;
+const AddSegmentButton = styled(CollectionContainerButton)``;
 
-const AddStepButton = styled(CollectionContainerButton)`
-  border: 1px solid #1779ba;
-  padding: 0 0.65rem;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.9);
-  }
-`;
+const AddStepButton = styled(CollectionContainerButton)``;
 
 const ActionIconsContainer = styled.div`
   display: flex;

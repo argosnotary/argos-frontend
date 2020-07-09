@@ -68,32 +68,11 @@ const ApprovalCheckbox = styled.input`
   margin-right: 1rem;
 `;
 
-const CollectorsContainer = styled(CollectionContainer)`
-  min-height: 0;
-  flex-direction: column;
-  border: 0;
-  padding: 0 1rem 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
-`;
+const CollectorsContainer = styled(CollectionContainer)``;
 
-const CollectorsContainerTitle = styled(CollectionContainerTitle)`
-  font-size: 0.85rem;
-  top: -1rem;
-  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${props =>
-    props.theme.layoutBuilder.segmentContainerTitleBgColor};
-  padding: 0.25rem 2rem 0.4rem;
-`;
+const CollectorsContainerTitle = styled(CollectionContainerTitle)``;
 
-const AddCollectorButton = styled(CollectionContainerButton)`
-  right: 0;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
-  }
-`;
+const AddCollectorButton = styled(CollectionContainerButton)``;
 
 const CollectorTitle = styled.header`
   border: 1px solid transparent;
@@ -119,11 +98,10 @@ const CollectorContainerSection = styled.section`
 
 const EditCollectionButton = styled(BaseActionButton)``;
 
-export const FormContainer = styled(CollectionContainer)`
+export const FormContainer = styled.div`
   border: 0;
   flex-direction: column;
   padding: 1rem;
-  margin: 0 0 1rem;
   min-height: 10rem;
   background-color: ${props => props.theme.layoutBuilder.stepContainerBgColor};
 `;

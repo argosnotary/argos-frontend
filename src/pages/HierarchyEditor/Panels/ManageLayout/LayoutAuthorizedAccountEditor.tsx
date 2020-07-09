@@ -57,32 +57,11 @@ const AccountStatusLabel = styled.span<IAccountStatusLabelProps>`
   font-size: 0.9rem;
 `;
 
-const ItemContainer = styled(CollectionContainer)`
-  min-height: 0;
-  flex-direction: column;
-  border: 0;
-  padding: 0 1rem 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
-`;
+const ItemContainer = styled(CollectionContainer)``;
 
-const ItemContainerTitle = styled(CollectionContainerTitle)`
-  font-size: 0.85rem;
-  top: -1rem;
-  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${props =>
-    props.theme.layoutBuilder.segmentContainerTitleBgColor};
-  padding: 0.25rem 2rem 0.4rem;
-`;
+const ItemContainerTitle = styled(CollectionContainerTitle)``;
 
-const AddItemButton = styled(CollectionContainerButton)`
-  right: 0;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
-  }
-`;
+const AddItemButton = styled(CollectionContainerButton)``;
 
 const ItemTitle = styled.header`
   border: 1px solid transparent;
