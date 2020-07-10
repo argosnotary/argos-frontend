@@ -42,6 +42,7 @@ import PanelBreadCrumb from "../../../../molecules/PanelBreadCrumb";
 import Layout from "../../../../atoms/Layout";
 import JsonSignAndSubmit from "./JsonSignAndSubmit";
 import { WarningContainer } from "../../../../atoms/Alerts";
+import { IReleaseConfig } from "../../../../interfaces/IReleaseConfig";
 
 const PageSpecificContentSeparator = styled(ContentSeparator)`
   margin: 0.7rem 0 1rem;
@@ -68,6 +69,10 @@ const ManageLayoutPanel: React.FC = () => {
     _approvalConfigsApiResponse,
     setApprovalConfigsApiRequest
   ] = useDataApi(genericDataFetchReducer);
+
+  const [_releaseConfigApiResponse, setReleaseConfigApiRequest] = useDataApi(
+    genericDataFetchReducer
+  );
 
   useEffect(() => {
     editorStoreContext.dispatch({
@@ -123,8 +128,33 @@ const ManageLayoutPanel: React.FC = () => {
         return false;
       }
     };
-
     setApprovalConfigsApiRequest(getGetApprovalConfigsRequest);
+
+    const getGetReleaseConfigRequest: DataRequest = {
+      method: "get",
+      token,
+      url:
+        "/api/supplychain/" +
+        hierarchyEditorState.editor.node.referenceId +
+        "/layout/releaseconfig",
+      cbSuccess: (releaseConfig: IReleaseConfig) => {
+        editorStoreContext.dispatch({
+          type: LayoutEditorActionType.UPDATE_RELEASE_CONFIG,
+          releaseConfig
+        });
+      },
+      cbFailure: (error: any): boolean => {
+        if (error.response && error.response.status === 404) {
+          editorStoreContext.dispatch({
+            type: LayoutEditorActionType.UPDATE_RELEASE_CONFIG,
+            releaseConfig: { artifactCollectorSpecifications: [] }
+          });
+          return true;
+        }
+        return false;
+      }
+    };
+    setReleaseConfigApiRequest(getGetReleaseConfigRequest);
   }, [hierarchyEditorState.editor.node.referenceId]);
 
   return (
