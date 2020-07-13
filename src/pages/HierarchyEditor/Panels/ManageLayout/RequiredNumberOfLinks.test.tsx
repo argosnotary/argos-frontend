@@ -46,7 +46,8 @@ const editorStoreContext: ILayoutEditorStoreContext = {
     showSigningDialog: false,
     loading: false,
     activeEditLayoutElement: undefined,
-    selectedLayoutElement: { step: { requiredNumberOfLinks: 12 } as IStep }
+    selectedLayoutElement: { step: { requiredNumberOfLinks: 12 } as IStep },
+    showJson: false
   },
   dispatch: dispatch
 };
