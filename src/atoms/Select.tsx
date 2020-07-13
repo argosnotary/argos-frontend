@@ -20,13 +20,13 @@ export const SelectCSS = css<{ disabled?: boolean; height?: string }>`
   &::-ms-expand {
     display: none;
   }
-  
+
   margin: 0 0 1rem;
   display: flex;
   box-sizing: border-box;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   padding: 0.5rem 2rem 0.5rem 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ${props => props.theme.input.borderColor};
   border-radius: 0;
   font: inherit;
   line-height: inherit;
@@ -37,15 +37,18 @@ export const SelectCSS = css<{ disabled?: boolean; height?: string }>`
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
 
-  background-color: ${props => (props.disabled ? "#e0e0e0" : "#fefefe")};
+  background-color: ${props =>
+    props.disabled
+      ? props.theme.input.disabledBgColor
+      : props.theme.input.bgColor};
   &:hover {
     cursor: ${props => (props.disabled ? "not-allowed" : "initial")};
   }
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ${props => props.theme.input.focusBorderColor};
+    box-shadow: 0 0 5px ${props => props.theme.input.focusBoxShadowColor};
   }
 `;
 

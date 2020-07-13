@@ -40,9 +40,17 @@ import { IApprovalConfig } from "../../../../interfaces/IApprovalConfig";
 import { HierarchyEditorStateContext } from "../../../../stores/hierarchyEditorStore";
 import PanelBreadCrumb from "../../../../molecules/PanelBreadCrumb";
 import Layout from "../../../../atoms/Layout";
+import JsonSignAndSubmit from "./JsonSignAndSubmit";
+import { WarningContainer } from "../../../../atoms/Alerts";
 
 const PageSpecificContentSeparator = styled(ContentSeparator)`
   margin: 0.7rem 0 1rem;
+`;
+
+const NoCryptoWarningContainer = styled.div`
+  ${WarningContainer} {
+    margin-top: 0;
+  }
 `;
 
 const ManageLayoutPanel: React.FC = () => {
@@ -127,12 +135,17 @@ const ManageLayoutPanel: React.FC = () => {
             node={hierarchyEditorState.editor.node}
             breadcrumb={hierarchyEditorState.editor.breadcrumb}
           />
+          {!cryptoAvailable() ? (
+            <NoCryptoWarningContainer>
+              <NoCryptoWarning />
+            </NoCryptoWarningContainer>
+          ) : null}
           <Layout />
+          <LayoutJsonEditor />
           <SegmentsContainer />
           <PageSpecificContentSeparator />
-          <LayoutJsonEditor />
+          {cryptoAvailable() ? <JsonSignAndSubmit /> : null}
           <LayoutSigner />
-          {!cryptoAvailable() ? <NoCryptoWarning /> : null}
         </Panel>
         <LayoutEditorDetailsPane />
       </LayoutEditorStoreContext.Provider>

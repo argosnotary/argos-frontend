@@ -78,6 +78,7 @@ const Segment: React.FC<ISegmentContainerProps> = ({ segment, index }) => {
     <>
       <SegmentContainerLi>
         <SegmentTitle
+          clickable={true}
           data-testhook-id={"segment" + index + "-edit"}
           onClick={onEditSegment}>
           {editorStoreContext.state.activeEditLayoutElement?.step ===

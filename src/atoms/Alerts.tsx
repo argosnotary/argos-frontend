@@ -22,7 +22,7 @@ interface IAlertProps {
   message: string;
 }
 
-const WarningContainer = styled.section`
+export const WarningContainer = styled.section`
   display: flex;
   align-items: center;
   border: 1px solid ${props => props.theme.alerts.warning.color};

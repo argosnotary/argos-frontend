@@ -54,12 +54,13 @@ const Layout: React.FC = () => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.SHOW_JSON
     });
-  }
+  };
 
   return (
     <>
       <LayoutSection data-testhook-id={"layout-edit"}>
         <LayoutTitle
+          clickable={false}
           active={
             editorStoreContext.state.detailPanelMode ===
             DetailsPanelType.LAYOUT_DETAILS

@@ -28,10 +28,10 @@ export const CollectionContainer = styled.section<ICollectionContainerProps>`
   width: 100%;
   flex-direction: column;
   padding: 0 1rem 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
+  border: 1px solid ${props => props.theme.collection.borderColor};
 
-  background: ${props => (props.inverted ? "#e0e0e0" : "transparent")};
+  background: ${props =>
+    props.inverted ? props.theme.collection.invertedBgColor : "transparent"};
 
   li ~ li {
     margin-top: 1rem;
@@ -65,9 +65,8 @@ interface ICollectionContainerButtonProps {
 }
 
 const CollectionContainerButtonInvertedCSS = css`
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.addStepButtonBorderColor};
-  background-color: #f1f1f1;
+  border: 1px solid ${props => props.theme.collection.buttonInvertedBorderColor};
+  background-color: ${props => props.theme.collection.buttonInvertedBgColor};
   padding: 0 0.65rem;
 
   svg {
@@ -112,9 +111,8 @@ export const CollectionContainerTitle = styled.header`
   display: inline-flex;
   font-size: 0.9rem;
   top: -1rem;
-  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${props =>
-    props.theme.layoutBuilder.segmentContainerTitleBgColor};
+  color: ${props => props.theme.collection.titleTextColor};
+  background-color: ${props => props.theme.collection.titleBgColor};
   padding: 0.25rem 2rem 0.4rem;
 `;
 
@@ -122,13 +120,12 @@ export const CollectionContainerTitleSmall = styled.header`
   position: relative;
   font-size: 0.9rem;
   top: -0.75rem;
-  background-color: #f1f1f1;
+  background-color: ${props => props.theme.collection.smallTitleBgColor};
   display: inline-flex;
   top: -1rem;
   margin: 0 auto;
   padding: 0.25rem 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.stepContainerTitleBorderColor};
+  border: 1px solid ${props => props.theme.collection.smallTitleBorderColor};
 `;
 
 export const CollectionContainerList = styled.ul`
@@ -145,6 +142,7 @@ export const CollectionContainerSpan = styled.span`
 
 interface ICollectionContainerCardProps {
   active?: boolean;
+  clickable: boolean;
 }
 
 export const CollectionContainerCard = styled.header<
@@ -153,13 +151,12 @@ export const CollectionContainerCard = styled.header<
   border: 1px solid
     ${props =>
       props.active
-        ? props.theme.layoutBuilder.stepTitleHoverBorderColor
+        ? props.theme.collection.cardActiveBorderColor
         : "transparent"};
   font-size: 1rem;
   padding: 0.5rem;
   width: 100%;
-  margin: 0.5rem 0 0;
-  background-color: ${props => props.theme.layoutBuilder.stepTitleBgColor};
+  background-color: ${props => props.theme.collection.cardBgColor};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -177,8 +174,7 @@ export const CollectionContainerCard = styled.header<
   }
 
   &:hover {
-    cursor: pointer;
-    border: 1px solid
-      ${props => props.theme.layoutBuilder.stepTitleHoverBorderColor};
+    ${props => (props.clickable ? "cursor: pointer" : "")};
+    border: 1px solid ${props => props.theme.collection.cardHoverBorderColor};
   }
 `;

@@ -95,6 +95,7 @@ const Step: React.FC<IStepContainer> = ({ step, index, segment }) => {
         data-testhook-id={segment.name + "-" + index + "-edit-step"}
         onClick={onEditStep}>
         <StepTitle
+          clickable={true}
           active={
             step === editorStoreContext.state.selectedLayoutElement?.step ||
             step === editorStoreContext.state.activeEditLayoutElement?.step

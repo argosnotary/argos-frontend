@@ -24,7 +24,8 @@ import {
   CollectionContainerList,
   CollectionContainerRow,
   CollectionContainerSpan,
-  CollectionContainerTitle
+  CollectionContainerTitle,
+  CollectionContainerCard
 } from "../../../../atoms/Collection";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import {
@@ -63,27 +64,7 @@ const ItemContainerTitle = styled(CollectionContainerTitle)``;
 
 const AddItemButton = styled(CollectionContainerButton)``;
 
-const ItemTitle = styled.header`
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0.2rem 0 0;
-  background-color: ${props => props.theme.layoutBuilder.segmentTitleBgColor};
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  > span {
-    margin: 0 0.5rem;
-  }
-`;
-
-const ItemContainerSection = styled.section`
-  width: 100%;
-  margin: 0 0 1rem;
-`;
+const ItemTitle = styled(CollectionContainerCard)``;
 
 const RemoveItemButton = styled(BaseActionButton)``;
 
@@ -191,27 +172,23 @@ const LayoutAuthorizedAccountEditor: React.FC = () => {
 
   const collectorRow = (account: IAuthorizedAccount, index: number) => {
     return (
-      <ItemContainerSection>
-        <ItemTitle>
-          <CollectionContainerSpan>
-            {account.active ? (
-              <AccountStatusLabel active={true}>active key</AccountStatusLabel>
-            ) : (
-              <AccountStatusLabel active={false}>
-                inactive key
-              </AccountStatusLabel>
-            )}
-            {account.name}
-          </CollectionContainerSpan>
-          <ActionIconsContainer>
-            <RemoveItemButton
-              data-testhook-id={"delete-item-" + index}
-              onClick={() => deleteCollector(account.keyId)}>
-              <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
-            </RemoveItemButton>
-          </ActionIconsContainer>
-        </ItemTitle>
-      </ItemContainerSection>
+      <ItemTitle clickable={false}>
+        <CollectionContainerSpan>
+          {account.active ? (
+            <AccountStatusLabel active={true}>active key</AccountStatusLabel>
+          ) : (
+            <AccountStatusLabel active={false}>inactive key</AccountStatusLabel>
+          )}
+          {account.name}
+        </CollectionContainerSpan>
+        <ActionIconsContainer>
+          <RemoveItemButton
+            data-testhook-id={"delete-item-" + index}
+            onClick={() => deleteCollector(account.keyId)}>
+            <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
+          </RemoveItemButton>
+        </ActionIconsContainer>
+      </ItemTitle>
     );
   };
 

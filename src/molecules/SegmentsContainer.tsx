@@ -32,8 +32,9 @@ import {
 import { ILayoutSegment } from "../interfaces/ILayout";
 
 const SegmentsContainerSection = styled(CollectionContainer)`
-  margin: 1rem 0;
+  margin: 1rem 0 0.5rem;
   min-height: 18.8rem;
+  padding: 0 1rem;
 `;
 
 const SegmentsContainerTitle = styled(CollectionContainerTitle)``;
