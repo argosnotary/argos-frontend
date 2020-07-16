@@ -165,7 +165,7 @@ const LayoutAuthorizedAccountEditor: React.FC = () => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_LAYOUT_AUTHORIZED_KEY,
       publicKey: {
-        id: keyId
+        keyId: keyId
       } as IPublicKey
     });
   };

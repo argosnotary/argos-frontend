@@ -15,7 +15,7 @@
  */
 import * as asn1js from "asn1js";
 import generatePassword from "password-generator";
-import { PKCS8ShroudedKeyBag, PrivateKeyInfo } from "pkijs";
+import { PKCS8ShroudedKeyBag, PrivateKeyInfo, createCMSECDSASignature } from "pkijs";
 import {decode, encode} from "base64-arraybuffer";
 
 const arrayBufferToHex = (buffer: ArrayBuffer): string => {
@@ -51,12 +51,8 @@ const concatArrayBuffers = (buffer1: ArrayBuffer, buffer2: ArrayBuffer): ArrayBu
 const generateKeyPair = async (): Promise<CryptoKeyPair> => {
   return await crypto.subtle.generateKey(
     {
-      hash: {
-        name: "SHA-256"
-      },
-      modulusLength: 2048,
-      name: "RSASSA-PKCS1-v1_5",
-      publicExponent: new Uint8Array([1, 0, 1])
+      name: "ECDSA",
+      namedCurve: "P-384"
     },
     true,
     ["sign"]
@@ -101,13 +97,13 @@ const decryptPrivateKey = async (
 
     const json = keyBag.parsedValue.parsedKey.toJSON();
     const keyData: JsonWebKey = {...json,
-      alg: "RS256",
-      kty: "RSA"
+      crv: "P-384",
+      kty: "EC"
     };
   return await crypto.subtle.importKey(
       'jwk',
       keyData,
-      { name: "RSASSA-PKCS1-v1_5", hash:{name:"SHA-256"}},
+      { name: "ECDSA", namedCurve: "P-384"},
       false,
       ["sign"]);
 };
@@ -117,9 +113,9 @@ const signString = async (
     encryptedPrivateKey: string,
     data: string
 ): Promise<string> => {
-   const privateKey = await decryptPrivateKey(password, encryptedPrivateKey);
-    const signature = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", privateKey,stringToArrayBuffer(data));
-    return arrayBufferToHex(signature);
+    const privateKey = await decryptPrivateKey(password, encryptedPrivateKey);
+    const signature = await crypto.subtle.sign({name: "ECDSA", hash: "SHA-384"}, privateKey, stringToArrayBuffer(data));
+    return arrayBufferToHex(createCMSECDSASignature(signature));
 };
 
 interface IKey {

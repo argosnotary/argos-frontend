@@ -164,7 +164,7 @@ const StepAuthorizedAccountEditor: React.FC = () => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.DELETE_STEP_AUTHORIZED_KEY,
       publicKey: {
-        id: keyId
+        keyId: keyId
       } as IPublicKey
     });
   };
@@ -234,7 +234,7 @@ const StepAuthorizedAccountEditor: React.FC = () => {
           publicKey:
             searchResult.accountType === AccountType.PERSONAL_ACCOUNT
               ? key
-              : { id: key.keyId, key: key.publicKey }
+              : { keyId: key.keyId, publicKey: key.publicKey }
         });
       },
       cbFailure: error => {
