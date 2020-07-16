@@ -23,17 +23,24 @@ exports[`edit collector 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-eNQAEJ",
+            "componentId": "sc-kEYyzF",
             "isStatic": false,
-            "lastClassName": "hUDmvh",
+            "lastClassName": "iojSyD",
             "rules": Array [
               "
-  margin: 1rem 0 1rem;
-  border: 1px solid #1779ba;
+  margin: 2rem 0;
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 18.8rem;
+  flex-direction: column;
+  padding: 0 1rem 1rem;
+  border: 1px solid ",
+              [Function],
+              ";
+
+  background: ",
+              [Function],
+              ";
 
   li ~ li {
     margin-top: 1rem;
@@ -43,24 +50,14 @@ exports[`edit collector 1`] = `
     margin-top: 1rem;
   }
 ",
-              "
-  min-height: 0;
-  flex-direction: column;
-  border: 0;
-  padding: 0 1rem 1rem;
-  border: 1px solid
-    ",
-              [Function],
-              ";
-",
             ],
           },
           "displayName": "Styled(styled.section)",
           "foldedComponentIds": Array [
-            "sc-bdVaJa",
+            "sc-htpNat",
           ],
           "render": [Function],
-          "styledComponentId": "sc-eNQAEJ",
+          "styledComponentId": "sc-kEYyzF",
           "target": "section",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -70,7 +67,7 @@ exports[`edit collector 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-bdVaJa sc-eNQAEJ hUDmvh"
+        className="sc-htpNat sc-kEYyzF iojSyD"
       >
         <styled.div>
           <StyledComponent
@@ -79,9 +76,9 @@ exports[`edit collector 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-ifAKCX",
+                  "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "cBkhpN",
+                  "lastClassName": "kbecSY",
                   "rules": Array [
                     "
   display: flex;
@@ -94,7 +91,7 @@ exports[`edit collector 1`] = `
                 "displayName": "styled.div",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-ifAKCX",
+                "styledComponentId": "sc-bZQynM",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -104,7 +101,7 @@ exports[`edit collector 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-ifAKCX cBkhpN"
+              className="sc-bZQynM kbecSY"
             >
               <Styled(styled.header)>
                 <StyledComponent
@@ -113,19 +110,14 @@ exports[`edit collector 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-hMqMXs",
+                        "componentId": "sc-kkGfuU",
                         "isStatic": false,
-                        "lastClassName": "eYLiIY",
+                        "lastClassName": "gXTgbY",
                         "rules": Array [
                           "
   position: relative;
-  font-size: 0.9rem;
-  top: -0.75rem;
-  background-color: #f1f1f1;
   display: inline-flex;
-",
-                          "
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   top: -1rem;
   color: ",
                           [Function],
@@ -139,10 +131,10 @@ exports[`edit collector 1`] = `
                       },
                       "displayName": "Styled(styled.header)",
                       "foldedComponentIds": Array [
-                        "sc-EHOje",
+                        "sc-gzVnrw",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-hMqMXs",
+                      "styledComponentId": "sc-kkGfuU",
                       "target": "header",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -152,7 +144,7 @@ exports[`edit collector 1`] = `
                   forwardedRef={null}
                 >
                   <header
-                    className="sc-EHOje sc-hMqMXs eYLiIY"
+                    className="sc-gzVnrw sc-kkGfuU gXTgbY"
                   >
                     Artifact Collector Editor Title
                   </header>
@@ -168,9 +160,9 @@ exports[`edit collector 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-bZQynM",
+                  "componentId": "sc-dnqmqq",
                   "isStatic": false,
-                  "lastClassName": "enhIWo",
+                  "lastClassName": "gZXnwY",
                   "rules": Array [
                     "
   display: flex;
@@ -182,7 +174,7 @@ exports[`edit collector 1`] = `
                 "displayName": "styled.ul",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-bZQynM",
+                "styledComponentId": "sc-dnqmqq",
                 "target": "ul",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -192,7 +184,7 @@ exports[`edit collector 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-bZQynM enhIWo"
+              className="sc-dnqmqq gZXnwY"
             >
               <li
                 key="collector-row-0"
@@ -209,51 +201,40 @@ exports[`edit collector 1`] = `
                     }
                   }
                 >
-                  <Styled(styled.section)>
+                  <styled.section>
                     <StyledComponent
                       forwardedComponent={
                         Object {
                           "$$typeof": Symbol(react.forward_ref),
                           "attrs": Array [],
                           "componentStyle": ComponentStyle {
-                            "componentId": "sc-eHgmQL",
+                            "componentId": "sc-ckVGcZ",
                             "isStatic": false,
-                            "lastClassName": "gtLJHn",
+                            "lastClassName": "dGfUaA",
                             "rules": Array [
                               "
-  margin: 1rem 0 1rem;
-  border: 1px solid #1779ba;
   display: flex;
+  flex-direction: row;
   align-items: center;
   width: 100%;
-  min-height: 18.8rem;
-
-  li ~ li {
-    margin-top: 1rem;
-  }
-
-  li ~ section {
-    margin-top: 1rem;
-  }
-",
-                              "
-  border: 0;
-  flex-direction: column;
   padding: 1rem;
-  margin: 0 0 1rem;
-  min-height: 10rem;
+
+  ",
+                              ".sc-dxgOiQ",
+                              " {
+    margin: 0 0 0 1rem;
+  }
+
   background-color: ",
                               [Function],
                               ";
 ",
                             ],
                           },
-                          "displayName": "Styled(styled.section)",
-                          "foldedComponentIds": Array [
-                            "sc-bdVaJa",
-                          ],
+                          "displayName": "styled.section",
+                          "foldedComponentIds": Array [],
                           "render": [Function],
-                          "styledComponentId": "sc-eHgmQL",
+                          "styledComponentId": "sc-ckVGcZ",
                           "target": "section",
                           "toString": [Function],
                           "warnTooManyClasses": [Function],
@@ -263,82 +244,44 @@ exports[`edit collector 1`] = `
                       forwardedRef={null}
                     >
                       <section
-                        className="sc-bdVaJa sc-eHgmQL gtLJHn"
+                        className="sc-ckVGcZ dGfUaA"
                       >
-                        <styled.section>
+                        <label
+                          htmlFor="collectorType"
+                        >
+                          Collector type:
+                        </label>
+                        <styled.select
+                          id="collectorType"
+                          name="collectorType"
+                          onChange={[Function]}
+                          value="XLDEPLOY"
+                        >
                           <StyledComponent
                             forwardedComponent={
                               Object {
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-jKJlTe",
+                                  "componentId": "sc-dxgOiQ",
                                   "isStatic": false,
-                                  "lastClassName": "goqsdW",
+                                  "lastClassName": "kWaBOW",
                                   "rules": Array [
                                     "
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-
   ",
-                                    ".sc-kGXeez",
-                                    " {
-    margin: 0 0 0 1rem;
-  }
-",
-                                  ],
-                                },
-                                "displayName": "styled.section",
-                                "foldedComponentIds": Array [],
-                                "render": [Function],
-                                "styledComponentId": "sc-jKJlTe",
-                                "target": "section",
-                                "toString": [Function],
-                                "warnTooManyClasses": [Function],
-                                "withComponent": [Function],
-                              }
-                            }
-                            forwardedRef={null}
-                          >
-                            <section
-                              className="sc-jKJlTe goqsdW"
-                            >
-                              <label
-                                htmlFor="collectorType"
-                              >
-                                Collector type:
-                              </label>
-                              <styled.select
-                                id="collectorType"
-                                name="collectorType"
-                                onChange={[Function]}
-                                value="XLDEPLOY"
-                              >
-                                <StyledComponent
-                                  forwardedComponent={
-                                    Object {
-                                      "$$typeof": Symbol(react.forward_ref),
-                                      "attrs": Array [],
-                                      "componentStyle": ComponentStyle {
-                                        "componentId": "sc-kGXeez",
-                                        "isStatic": false,
-                                        "lastClassName": "cgZXuq",
-                                        "rules": Array [
-                                          "
-  ",
-                                          "
+                                    "
   &::-ms-expand {
     display: none;
   }
-  
+
   margin: 0 0 1rem;
   display: flex;
   box-sizing: border-box;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   padding: 0.5rem 2rem 0.5rem 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                    [Function],
+                                    ";
   border-radius: 0;
   font: inherit;
   line-height: inherit;
@@ -350,78 +293,148 @@ exports[`edit collector 1`] = `
   background-size: 5px 5px, 5px 5px;
 
   background-color: ",
-                                          [Function],
-                                          ";
+                                    [Function],
+                                    ";
   &:hover {
     cursor: ",
-                                          [Function],
-                                          ";
+                                    [Function],
+                                    ";
   }
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                    [Function],
+                                    ";
+    box-shadow: 0 0 5px ",
+                                    [Function],
+                                    ";
   }
 ",
-                                          "
+                                    "
 ",
-                                        ],
-                                      },
-                                      "displayName": "styled.select",
-                                      "foldedComponentIds": Array [],
-                                      "render": [Function],
-                                      "styledComponentId": "sc-kGXeez",
-                                      "target": "select",
-                                      "toString": [Function],
-                                      "warnTooManyClasses": [Function],
-                                      "withComponent": [Function],
-                                    }
-                                  }
-                                  forwardedRef={null}
-                                  id="collectorType"
-                                  name="collectorType"
-                                  onChange={[Function]}
-                                  value="XLDEPLOY"
-                                >
-                                  <select
-                                    className="sc-kGXeez cgZXuq"
-                                    id="collectorType"
-                                    name="collectorType"
-                                    onChange={[Function]}
-                                    value="XLDEPLOY"
-                                  >
-                                    <option
-                                      value="select"
-                                    >
-                                      select...
-                                    </option>
-                                    <option
-                                      value="XLDEPLOY"
-                                    >
-                                      XL deploy
-                                    </option>
-                                    <option
-                                      value="GIT"
-                                    >
-                                      git
-                                    </option>
-                                  </select>
-                                </StyledComponent>
-                              </styled.select>
-                            </section>
+                                  ],
+                                },
+                                "displayName": "styled.select",
+                                "foldedComponentIds": Array [],
+                                "render": [Function],
+                                "styledComponentId": "sc-dxgOiQ",
+                                "target": "select",
+                                "toString": [Function],
+                                "warnTooManyClasses": [Function],
+                                "withComponent": [Function],
+                              }
+                            }
+                            forwardedRef={null}
+                            id="collectorType"
+                            name="collectorType"
+                            onChange={[Function]}
+                            value="XLDEPLOY"
+                          >
+                            <select
+                              className="sc-dxgOiQ kWaBOW"
+                              id="collectorType"
+                              name="collectorType"
+                              onChange={[Function]}
+                              value="XLDEPLOY"
+                            >
+                              <option
+                                value="select"
+                              >
+                                select...
+                              </option>
+                              <option
+                                value="XLDEPLOY"
+                              >
+                                XL deploy
+                              </option>
+                              <option
+                                value="GIT"
+                              >
+                                git
+                              </option>
+                            </select>
                           </StyledComponent>
-                        </styled.section>
-                        <Styled(styled.div)>
+                        </styled.select>
+                      </section>
+                    </StyledComponent>
+                  </styled.section>
+                  <Styled(styled.section)>
+                    <StyledComponent
+                      forwardedComponent={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "attrs": Array [],
+                          "componentStyle": ComponentStyle {
+                            "componentId": "sc-jWBwVP",
+                            "isStatic": false,
+                            "lastClassName": "jZsZPz",
+                            "rules": Array [
+                              "
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 1rem 1rem;
+  border: 1px solid ",
+                              [Function],
+                              ";
+
+  background: ",
+                              [Function],
+                              ";
+
+  li ~ li {
+    margin-top: 1rem;
+  }
+
+  li ~ section {
+    margin-top: 1rem;
+  }
+",
+                              "
+  margin: 0;
+  padding: 0;
+  border: 0;
+  flex-direction: column;
+  min-height: 10rem;
+  background-color: ",
+                              [Function],
+                              ";
+",
+                            ],
+                          },
+                          "displayName": "Styled(styled.section)",
+                          "foldedComponentIds": Array [
+                            "sc-htpNat",
+                          ],
+                          "render": [Function],
+                          "styledComponentId": "sc-jWBwVP",
+                          "target": "section",
+                          "toString": [Function],
+                          "warnTooManyClasses": [Function],
+                          "withComponent": [Function],
+                        }
+                      }
+                      forwardedRef={null}
+                    >
+                      <section
+                        className="sc-htpNat sc-jWBwVP jZsZPz"
+                      >
+                        <Styled(styled.div)
+                          alternateStyling={true}
+                        >
                           <StyledComponent
+                            alternateStyling={true}
                             forwardedComponent={
                               Object {
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-ckVGcZ",
+                                  "componentId": "sc-hMqMXs",
                                   "isStatic": false,
-                                  "lastClassName": "gKMKgu",
+                                  "lastClassName": "kfLeVg",
                                   "rules": Array [
                                     "
   display: flex;
@@ -440,10 +453,10 @@ exports[`edit collector 1`] = `
                                 },
                                 "displayName": "Styled(styled.div)",
                                 "foldedComponentIds": Array [
-                                  "sc-kgoBCf",
+                                  "sc-kpOJdX",
                                 ],
                                 "render": [Function],
-                                "styledComponentId": "sc-ckVGcZ",
+                                "styledComponentId": "sc-hMqMXs",
                                 "target": "div",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -453,7 +466,7 @@ exports[`edit collector 1`] = `
                             forwardedRef={null}
                           >
                             <div
-                              className="sc-kgoBCf sc-ckVGcZ gKMKgu"
+                              className="sc-kpOJdX sc-hMqMXs kfLeVg"
                             >
                               <form
                                 data-testhook-id="collector-edit-form"
@@ -467,7 +480,7 @@ exports[`edit collector 1`] = `
                                   innerRef={
                                     Object {
                                       "current": <input
-                                        class="sc-htoDjs isVYwE"
+                                        class="sc-bdVaJa iSgtnE"
                                         data-testhook-id="collector-edit-form-field-0"
                                         name="name"
                                         type="text"
@@ -488,9 +501,9 @@ exports[`edit collector 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-iwsKbI",
+                                            "componentId": "sc-VigVT",
                                             "isStatic": false,
-                                            "lastClassName": "dRZuUw",
+                                            "lastClassName": "iIEVIh",
                                             "rules": Array [
                                               "
   display: flex;
@@ -501,7 +514,7 @@ exports[`edit collector 1`] = `
                                           "displayName": "styled.div",
                                           "foldedComponentIds": Array [],
                                           "render": [Function],
-                                          "styledComponentId": "sc-iwsKbI",
+                                          "styledComponentId": "sc-VigVT",
                                           "target": "div",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -511,7 +524,7 @@ exports[`edit collector 1`] = `
                                       forwardedRef={null}
                                     >
                                       <div
-                                        className="sc-iwsKbI dRZuUw"
+                                        className="sc-VigVT iIEVIh"
                                       >
                                         <styled.label>
                                           <StyledComponent
@@ -520,22 +533,24 @@ exports[`edit collector 1`] = `
                                                 "$$typeof": Symbol(react.forward_ref),
                                                 "attrs": Array [],
                                                 "componentStyle": ComponentStyle {
-                                                  "componentId": "sc-dnqmqq",
+                                                  "componentId": "sc-gqjmRU",
                                                   "isStatic": false,
-                                                  "lastClassName": "fmHJyj",
+                                                  "lastClassName": "ghiDHE",
                                                   "rules": Array [
                                                     "
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ",
+                                                    [Function],
+                                                    ";
 ",
                                                   ],
                                                 },
                                                 "displayName": "styled.label",
                                                 "foldedComponentIds": Array [],
                                                 "render": [Function],
-                                                "styledComponentId": "sc-dnqmqq",
+                                                "styledComponentId": "sc-gqjmRU",
                                                 "target": "label",
                                                 "toString": [Function],
                                                 "warnTooManyClasses": [Function],
@@ -545,7 +560,7 @@ exports[`edit collector 1`] = `
                                             forwardedRef={null}
                                           >
                                             <label
-                                              className="sc-dnqmqq fmHJyj"
+                                              className="sc-gqjmRU ghiDHE"
                                             >
                                               Name*
                                             </label>
@@ -568,9 +583,9 @@ exports[`edit collector 1`] = `
                                                 "$$typeof": Symbol(react.forward_ref),
                                                 "attrs": Array [],
                                                 "componentStyle": ComponentStyle {
-                                                  "componentId": "sc-htoDjs",
+                                                  "componentId": "sc-bdVaJa",
                                                   "isStatic": false,
-                                                  "lastClassName": "isVYwE",
+                                                  "lastClassName": "iSgtnE",
                                                   "rules": Array [
                                                     "
   ",
@@ -582,7 +597,9 @@ exports[`edit collector 1`] = `
                                                     ";
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                                    [Function],
+                                                    ";
   border-radius: 0;
   background-color: ",
                                                     [Function],
@@ -592,7 +609,9 @@ exports[`edit collector 1`] = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ",
+                                                    [Function],
+                                                    ";
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -604,8 +623,12 @@ exports[`edit collector 1`] = `
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                                    [Function],
+                                                    ";
+    box-shadow: 0 0 5px ",
+                                                    [Function],
+                                                    ";
   }
 ",
                                                     "
@@ -615,7 +638,7 @@ exports[`edit collector 1`] = `
                                                 "displayName": "styled.input",
                                                 "foldedComponentIds": Array [],
                                                 "render": [Function],
-                                                "styledComponentId": "sc-htoDjs",
+                                                "styledComponentId": "sc-bdVaJa",
                                                 "target": "input",
                                                 "toString": [Function],
                                                 "warnTooManyClasses": [Function],
@@ -625,7 +648,7 @@ exports[`edit collector 1`] = `
                                             forwardedRef={
                                               Object {
                                                 "current": <input
-                                                  class="sc-htoDjs isVYwE"
+                                                  class="sc-bdVaJa iSgtnE"
                                                   data-testhook-id="collector-edit-form-field-0"
                                                   name="name"
                                                   type="text"
@@ -640,7 +663,7 @@ exports[`edit collector 1`] = `
                                             value="xl deploy"
                                           >
                                             <input
-                                              className="sc-htoDjs isVYwE"
+                                              className="sc-bdVaJa iSgtnE"
                                               data-testhook-id="collector-edit-form-field-0"
                                               disabled={false}
                                               name="name"
@@ -672,9 +695,9 @@ exports[`edit collector 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-iwsKbI",
+                                            "componentId": "sc-VigVT",
                                             "isStatic": false,
-                                            "lastClassName": "dRZuUw",
+                                            "lastClassName": "iIEVIh",
                                             "rules": Array [
                                               "
   display: flex;
@@ -685,7 +708,7 @@ exports[`edit collector 1`] = `
                                           "displayName": "styled.div",
                                           "foldedComponentIds": Array [],
                                           "render": [Function],
-                                          "styledComponentId": "sc-iwsKbI",
+                                          "styledComponentId": "sc-VigVT",
                                           "target": "div",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -695,7 +718,7 @@ exports[`edit collector 1`] = `
                                       forwardedRef={null}
                                     >
                                       <div
-                                        className="sc-iwsKbI dRZuUw"
+                                        className="sc-VigVT iIEVIh"
                                       >
                                         <styled.label>
                                           <StyledComponent
@@ -704,22 +727,24 @@ exports[`edit collector 1`] = `
                                                 "$$typeof": Symbol(react.forward_ref),
                                                 "attrs": Array [],
                                                 "componentStyle": ComponentStyle {
-                                                  "componentId": "sc-dnqmqq",
+                                                  "componentId": "sc-gqjmRU",
                                                   "isStatic": false,
-                                                  "lastClassName": "fmHJyj",
+                                                  "lastClassName": "ghiDHE",
                                                   "rules": Array [
                                                     "
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ",
+                                                    [Function],
+                                                    ";
 ",
                                                   ],
                                                 },
                                                 "displayName": "styled.label",
                                                 "foldedComponentIds": Array [],
                                                 "render": [Function],
-                                                "styledComponentId": "sc-dnqmqq",
+                                                "styledComponentId": "sc-gqjmRU",
                                                 "target": "label",
                                                 "toString": [Function],
                                                 "warnTooManyClasses": [Function],
@@ -729,7 +754,7 @@ exports[`edit collector 1`] = `
                                             forwardedRef={null}
                                           >
                                             <label
-                                              className="sc-dnqmqq fmHJyj"
+                                              className="sc-gqjmRU ghiDHE"
                                             >
                                               Service URL*
                                             </label>
@@ -752,9 +777,9 @@ exports[`edit collector 1`] = `
                                                 "$$typeof": Symbol(react.forward_ref),
                                                 "attrs": Array [],
                                                 "componentStyle": ComponentStyle {
-                                                  "componentId": "sc-htoDjs",
+                                                  "componentId": "sc-bdVaJa",
                                                   "isStatic": false,
-                                                  "lastClassName": "isVYwE",
+                                                  "lastClassName": "iSgtnE",
                                                   "rules": Array [
                                                     "
   ",
@@ -766,7 +791,9 @@ exports[`edit collector 1`] = `
                                                     ";
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                                    [Function],
+                                                    ";
   border-radius: 0;
   background-color: ",
                                                     [Function],
@@ -776,7 +803,9 @@ exports[`edit collector 1`] = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ",
+                                                    [Function],
+                                                    ";
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -788,8 +817,12 @@ exports[`edit collector 1`] = `
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                                    [Function],
+                                                    ";
+    box-shadow: 0 0 5px ",
+                                                    [Function],
+                                                    ";
   }
 ",
                                                     "
@@ -799,7 +832,7 @@ exports[`edit collector 1`] = `
                                                 "displayName": "styled.input",
                                                 "foldedComponentIds": Array [],
                                                 "render": [Function],
-                                                "styledComponentId": "sc-htoDjs",
+                                                "styledComponentId": "sc-bdVaJa",
                                                 "target": "input",
                                                 "toString": [Function],
                                                 "warnTooManyClasses": [Function],
@@ -814,7 +847,7 @@ exports[`edit collector 1`] = `
                                             value="https://localhost:8888"
                                           >
                                             <input
-                                              className="sc-htoDjs isVYwE"
+                                              className="sc-bdVaJa iSgtnE"
                                               data-testhook-id="collector-edit-form-field-1"
                                               disabled={false}
                                               name="uri"
@@ -846,9 +879,9 @@ exports[`edit collector 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-iwsKbI",
+                                            "componentId": "sc-VigVT",
                                             "isStatic": false,
-                                            "lastClassName": "dRZuUw",
+                                            "lastClassName": "iIEVIh",
                                             "rules": Array [
                                               "
   display: flex;
@@ -859,7 +892,7 @@ exports[`edit collector 1`] = `
                                           "displayName": "styled.div",
                                           "foldedComponentIds": Array [],
                                           "render": [Function],
-                                          "styledComponentId": "sc-iwsKbI",
+                                          "styledComponentId": "sc-VigVT",
                                           "target": "div",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -869,7 +902,7 @@ exports[`edit collector 1`] = `
                                       forwardedRef={null}
                                     >
                                       <div
-                                        className="sc-iwsKbI dRZuUw"
+                                        className="sc-VigVT iIEVIh"
                                       >
                                         <styled.label>
                                           <StyledComponent
@@ -878,22 +911,24 @@ exports[`edit collector 1`] = `
                                                 "$$typeof": Symbol(react.forward_ref),
                                                 "attrs": Array [],
                                                 "componentStyle": ComponentStyle {
-                                                  "componentId": "sc-dnqmqq",
+                                                  "componentId": "sc-gqjmRU",
                                                   "isStatic": false,
-                                                  "lastClassName": "fmHJyj",
+                                                  "lastClassName": "ghiDHE",
                                                   "rules": Array [
                                                     "
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ",
+                                                    [Function],
+                                                    ";
 ",
                                                   ],
                                                 },
                                                 "displayName": "styled.label",
                                                 "foldedComponentIds": Array [],
                                                 "render": [Function],
-                                                "styledComponentId": "sc-dnqmqq",
+                                                "styledComponentId": "sc-gqjmRU",
                                                 "target": "label",
                                                 "toString": [Function],
                                                 "warnTooManyClasses": [Function],
@@ -903,7 +938,7 @@ exports[`edit collector 1`] = `
                                             forwardedRef={null}
                                           >
                                             <label
-                                              className="sc-dnqmqq fmHJyj"
+                                              className="sc-gqjmRU ghiDHE"
                                             >
                                               Application Name*
                                             </label>
@@ -926,9 +961,9 @@ exports[`edit collector 1`] = `
                                                 "$$typeof": Symbol(react.forward_ref),
                                                 "attrs": Array [],
                                                 "componentStyle": ComponentStyle {
-                                                  "componentId": "sc-htoDjs",
+                                                  "componentId": "sc-bdVaJa",
                                                   "isStatic": false,
-                                                  "lastClassName": "isVYwE",
+                                                  "lastClassName": "iSgtnE",
                                                   "rules": Array [
                                                     "
   ",
@@ -940,7 +975,9 @@ exports[`edit collector 1`] = `
                                                     ";
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                                    [Function],
+                                                    ";
   border-radius: 0;
   background-color: ",
                                                     [Function],
@@ -950,7 +987,9 @@ exports[`edit collector 1`] = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ",
+                                                    [Function],
+                                                    ";
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -962,8 +1001,12 @@ exports[`edit collector 1`] = `
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                                    [Function],
+                                                    ";
+    box-shadow: 0 0 5px ",
+                                                    [Function],
+                                                    ";
   }
 ",
                                                     "
@@ -973,7 +1016,7 @@ exports[`edit collector 1`] = `
                                                 "displayName": "styled.input",
                                                 "foldedComponentIds": Array [],
                                                 "render": [Function],
-                                                "styledComponentId": "sc-htoDjs",
+                                                "styledComponentId": "sc-bdVaJa",
                                                 "target": "input",
                                                 "toString": [Function],
                                                 "warnTooManyClasses": [Function],
@@ -988,7 +1031,7 @@ exports[`edit collector 1`] = `
                                             value="app name"
                                           >
                                             <input
-                                              className="sc-htoDjs isVYwE"
+                                              className="sc-bdVaJa iSgtnE"
                                               data-testhook-id="collector-edit-form-field-2"
                                               disabled={false}
                                               name="applicationName"
@@ -1010,9 +1053,9 @@ exports[`edit collector 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-jTzLTM",
+                                          "componentId": "sc-jzJRlG",
                                           "isStatic": false,
-                                          "lastClassName": "loaqkU",
+                                          "lastClassName": "dzbkdL",
                                           "rules": Array [
                                             "
   padding: 0;
@@ -1028,7 +1071,7 @@ exports[`edit collector 1`] = `
                                         "displayName": "styled.hr",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-jTzLTM",
+                                        "styledComponentId": "sc-jzJRlG",
                                         "target": "hr",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -1038,7 +1081,7 @@ exports[`edit collector 1`] = `
                                     forwardedRef={null}
                                   >
                                     <hr
-                                      className="sc-jTzLTM loaqkU"
+                                      className="sc-jzJRlG dzbkdL"
                                     />
                                   </StyledComponent>
                                 </styled.hr>
@@ -1049,9 +1092,9 @@ exports[`edit collector 1`] = `
                                         "$$typeof": Symbol(react.forward_ref),
                                         "attrs": Array [],
                                         "componentStyle": ComponentStyle {
-                                          "componentId": "sc-fjdhpX",
+                                          "componentId": "sc-cSHVUG",
                                           "isStatic": false,
-                                          "lastClassName": "hcayjb",
+                                          "lastClassName": "ikNjFl",
                                           "rules": Array [
                                             "
   display: flex;
@@ -1065,7 +1108,7 @@ exports[`edit collector 1`] = `
                                         "displayName": "styled.div",
                                         "foldedComponentIds": Array [],
                                         "render": [Function],
-                                        "styledComponentId": "sc-fjdhpX",
+                                        "styledComponentId": "sc-cSHVUG",
                                         "target": "div",
                                         "toString": [Function],
                                         "warnTooManyClasses": [Function],
@@ -1075,7 +1118,7 @@ exports[`edit collector 1`] = `
                                     forwardedRef={null}
                                   >
                                     <div
-                                      className="sc-fjdhpX hcayjb"
+                                      className="sc-cSHVUG ikNjFl"
                                     >
                                       <LoaderButton
                                         buttonType="button"
@@ -1095,9 +1138,9 @@ exports[`edit collector 1`] = `
                                                 "$$typeof": Symbol(react.forward_ref),
                                                 "attrs": Array [],
                                                 "componentStyle": ComponentStyle {
-                                                  "componentId": "sc-jzJRlG",
+                                                  "componentId": "sc-kAzzGY",
                                                   "isStatic": false,
-                                                  "lastClassName": "gfpsYg",
+                                                  "lastClassName": "fTmoqT",
                                                   "rules": Array [
                                                     "
   ",
@@ -1147,7 +1190,7 @@ exports[`edit collector 1`] = `
                                                 "displayName": "styled.button",
                                                 "foldedComponentIds": Array [],
                                                 "render": [Function],
-                                                "styledComponentId": "sc-jzJRlG",
+                                                "styledComponentId": "sc-kAzzGY",
                                                 "target": "button",
                                                 "toString": [Function],
                                                 "warnTooManyClasses": [Function],
@@ -1159,7 +1202,7 @@ exports[`edit collector 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="sc-jzJRlG gfpsYg"
+                                              className="sc-kAzzGY fTmoqT"
                                               data-testhook-id="collector-edit-form-submit-button"
                                               onMouseDown={[Function]}
                                               type="button"
@@ -1181,9 +1224,9 @@ exports[`edit collector 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-dxgOiQ",
+                                                "componentId": "sc-eNQAEJ",
                                                 "isStatic": false,
-                                                "lastClassName": "cRwhKl",
+                                                "lastClassName": "kzbqhM",
                                                 "rules": Array [
                                                   "
   ",
@@ -1259,11 +1302,11 @@ exports[`edit collector 1`] = `
                                               },
                                               "displayName": "Styled(Styled(styled.button))",
                                               "foldedComponentIds": Array [
-                                                "sc-jzJRlG",
-                                                "sc-chPdSV",
+                                                "sc-kAzzGY",
+                                                "sc-kGXeez",
                                               ],
                                               "render": [Function],
-                                              "styledComponentId": "sc-dxgOiQ",
+                                              "styledComponentId": "sc-eNQAEJ",
                                               "target": "button",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -1275,7 +1318,7 @@ exports[`edit collector 1`] = `
                                           type="button"
                                         >
                                           <button
-                                            className="sc-jzJRlG sc-chPdSV sc-dxgOiQ cRwhKl"
+                                            className="sc-kAzzGY sc-kGXeez sc-eNQAEJ kzbqhM"
                                             data-testhook="cancel-button"
                                             onMouseDown={[Function]}
                                             type="button"
@@ -1291,6 +1334,7 @@ exports[`edit collector 1`] = `
                             </div>
                           </StyledComponent>
                         </Styled(styled.div)>
+                         
                       </section>
                     </StyledComponent>
                   </Styled(styled.section)>
@@ -1328,17 +1372,24 @@ exports[`renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-eNQAEJ",
+            "componentId": "sc-kEYyzF",
             "isStatic": false,
-            "lastClassName": "hUDmvh",
+            "lastClassName": "iojSyD",
             "rules": Array [
               "
-  margin: 1rem 0 1rem;
-  border: 1px solid #1779ba;
+  margin: 2rem 0;
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 18.8rem;
+  flex-direction: column;
+  padding: 0 1rem 1rem;
+  border: 1px solid ",
+              [Function],
+              ";
+
+  background: ",
+              [Function],
+              ";
 
   li ~ li {
     margin-top: 1rem;
@@ -1348,24 +1399,14 @@ exports[`renders correctly 1`] = `
     margin-top: 1rem;
   }
 ",
-              "
-  min-height: 0;
-  flex-direction: column;
-  border: 0;
-  padding: 0 1rem 1rem;
-  border: 1px solid
-    ",
-              [Function],
-              ";
-",
             ],
           },
           "displayName": "Styled(styled.section)",
           "foldedComponentIds": Array [
-            "sc-bdVaJa",
+            "sc-htpNat",
           ],
           "render": [Function],
-          "styledComponentId": "sc-eNQAEJ",
+          "styledComponentId": "sc-kEYyzF",
           "target": "section",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -1375,7 +1416,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-bdVaJa sc-eNQAEJ hUDmvh"
+        className="sc-htpNat sc-kEYyzF iojSyD"
       >
         <styled.div>
           <StyledComponent
@@ -1384,9 +1425,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-ifAKCX",
+                  "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "cBkhpN",
+                  "lastClassName": "kbecSY",
                   "rules": Array [
                     "
   display: flex;
@@ -1399,7 +1440,7 @@ exports[`renders correctly 1`] = `
                 "displayName": "styled.div",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-ifAKCX",
+                "styledComponentId": "sc-bZQynM",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -1409,7 +1450,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-ifAKCX cBkhpN"
+              className="sc-bZQynM kbecSY"
             >
               <Styled(styled.header)>
                 <StyledComponent
@@ -1418,19 +1459,14 @@ exports[`renders correctly 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-hMqMXs",
+                        "componentId": "sc-kkGfuU",
                         "isStatic": false,
-                        "lastClassName": "eYLiIY",
+                        "lastClassName": "gXTgbY",
                         "rules": Array [
                           "
   position: relative;
-  font-size: 0.9rem;
-  top: -0.75rem;
-  background-color: #f1f1f1;
   display: inline-flex;
-",
-                          "
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   top: -1rem;
   color: ",
                           [Function],
@@ -1444,10 +1480,10 @@ exports[`renders correctly 1`] = `
                       },
                       "displayName": "Styled(styled.header)",
                       "foldedComponentIds": Array [
-                        "sc-EHOje",
+                        "sc-gzVnrw",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-hMqMXs",
+                      "styledComponentId": "sc-kkGfuU",
                       "target": "header",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -1457,7 +1493,7 @@ exports[`renders correctly 1`] = `
                   forwardedRef={null}
                 >
                   <header
-                    className="sc-EHOje sc-hMqMXs eYLiIY"
+                    className="sc-gzVnrw sc-kkGfuU gXTgbY"
                   >
                     Artifact Collector Editor Title
                   </header>
@@ -1474,32 +1510,33 @@ exports[`renders correctly 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-kEYyzF",
+                        "componentId": "sc-iAyFgw",
                         "isStatic": false,
-                        "lastClassName": "isyeRX",
+                        "lastClassName": "RTKVq",
                         "rules": Array [
                           "
   position: relative;
   top: -1rem;
-  background-color: #f1f1f1;
   border: 0;
-",
-                          "
   right: 0;
 
   &:hover {
     cursor: pointer;
     transform: scale(0.8);
   }
+
+  ",
+                          [Function],
+                          "
 ",
                         ],
                       },
                       "displayName": "Styled(styled.button)",
                       "foldedComponentIds": Array [
-                        "sc-bxivhb",
+                        "sc-EHOje",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-kEYyzF",
+                      "styledComponentId": "sc-iAyFgw",
                       "target": "button",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -1510,7 +1547,7 @@ exports[`renders correctly 1`] = `
                   onClick={[Function]}
                 >
                   <button
-                    className="sc-bxivhb sc-kEYyzF isyeRX"
+                    className="sc-EHOje sc-iAyFgw RTKVq"
                     data-testhook-id="add-collector"
                     onClick={[Function]}
                   >
@@ -1547,9 +1584,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-bZQynM",
+                  "componentId": "sc-dnqmqq",
                   "isStatic": false,
-                  "lastClassName": "enhIWo",
+                  "lastClassName": "gZXnwY",
                   "rules": Array [
                     "
   display: flex;
@@ -1561,7 +1598,7 @@ exports[`renders correctly 1`] = `
                 "displayName": "styled.ul",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-bZQynM",
+                "styledComponentId": "sc-dnqmqq",
                 "target": "ul",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -1571,7 +1608,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-bZQynM enhIWo"
+              className="sc-dnqmqq gZXnwY"
             >
               <li
                 key="collector-row-0"
@@ -1583,20 +1620,19 @@ exports[`renders correctly 1`] = `
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-iAyFgw",
+                          "componentId": "sc-eHgmQL",
                           "isStatic": false,
-                          "lastClassName": "cxJQMS",
+                          "lastClassName": "fsNuxe",
                           "rules": Array [
                             "
   width: 100%;
-  margin: 0 0 1rem;
 ",
                           ],
                         },
                         "displayName": "styled.section",
                         "foldedComponentIds": Array [],
                         "render": [Function],
-                        "styledComponentId": "sc-iAyFgw",
+                        "styledComponentId": "sc-eHgmQL",
                         "target": "section",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
@@ -1606,29 +1642,33 @@ exports[`renders correctly 1`] = `
                     forwardedRef={null}
                   >
                     <section
-                      className="sc-iAyFgw cxJQMS"
+                      className="sc-eHgmQL fsNuxe"
                     >
-                      <styled.header>
+                      <Styled(styled.header)
+                        clickable={false}
+                      >
                         <StyledComponent
+                          clickable={false}
                           forwardedComponent={
                             Object {
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-kkGfuU",
+                                "componentId": "sc-hSdWYo",
                                 "isStatic": false,
-                                "lastClassName": "dYNbTj",
+                                "lastClassName": "kKngBj",
                                 "rules": Array [
                                   "
-  border: 1px solid transparent;
-  box-sizing: border-box;
+  border: 1px solid
+    ",
+                                  [Function],
+                                  ";
+  font-size: 1rem;
   padding: 0.5rem;
   width: 100%;
-  margin: 0.2rem 0 0;
   background-color: ",
                                   [Function],
                                   ";
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1636,13 +1676,36 @@ exports[`renders correctly 1`] = `
   span {
     margin: 0 0.5rem;
   }
+
+  ",
+                                  ".sc-bdVaJa",
+                                  " {
+    margin: 0;
+  }
+
+  ",
+                                  ".sc-bwzfXH",
+                                  " {
+    margin: 0.5rem 0 0;
+  }
+
+  &:hover {
+    ",
+                                  [Function],
+                                  ";
+    border: 1px solid ",
+                                  [Function],
+                                  ";
+  }
 ",
                                 ],
                               },
-                              "displayName": "styled.header",
-                              "foldedComponentIds": Array [],
+                              "displayName": "Styled(styled.header)",
+                              "foldedComponentIds": Array [
+                                "sc-gZMcBi",
+                              ],
                               "render": [Function],
-                              "styledComponentId": "sc-kkGfuU",
+                              "styledComponentId": "sc-hSdWYo",
                               "target": "header",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -1652,7 +1715,7 @@ exports[`renders correctly 1`] = `
                           forwardedRef={null}
                         >
                           <header
-                            className="sc-kkGfuU dYNbTj"
+                            className="sc-gZMcBi sc-hSdWYo kKngBj"
                           >
                             <styled.span>
                               <StyledComponent
@@ -1661,9 +1724,9 @@ exports[`renders correctly 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-gzVnrw",
+                                      "componentId": "sc-iwsKbI",
                                       "isStatic": false,
-                                      "lastClassName": "bCKUNd",
+                                      "lastClassName": "chVlAL",
                                       "rules": Array [
                                         "
   white-space: nowrap;
@@ -1675,7 +1738,7 @@ exports[`renders correctly 1`] = `
                                     "displayName": "styled.span",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-gzVnrw",
+                                    "styledComponentId": "sc-iwsKbI",
                                     "target": "span",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -1685,7 +1748,7 @@ exports[`renders correctly 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-gzVnrw bCKUNd"
+                                  className="sc-iwsKbI chVlAL"
                                 >
                                   xl deploy
                                    - 
@@ -1703,9 +1766,9 @@ exports[`renders correctly 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-bwzfXH",
+                                      "componentId": "sc-bxivhb",
                                       "isStatic": false,
-                                      "lastClassName": "fNOhzS",
+                                      "lastClassName": "gepbvZ",
                                       "rules": Array [
                                         "
   display: flex;
@@ -1716,7 +1779,7 @@ exports[`renders correctly 1`] = `
                                     "displayName": "styled.div",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-bwzfXH",
+                                    "styledComponentId": "sc-bxivhb",
                                     "target": "div",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -1726,7 +1789,7 @@ exports[`renders correctly 1`] = `
                                 forwardedRef={null}
                               >
                                 <div
-                                  className="sc-bwzfXH fNOhzS"
+                                  className="sc-bxivhb gepbvZ"
                                 >
                                   <Styled(styled.button)
                                     data-testhook-id="edit-collector-0"
@@ -1739,9 +1802,9 @@ exports[`renders correctly 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-hSdWYo",
+                                            "componentId": "sc-cvbbAY",
                                             "isStatic": false,
-                                            "lastClassName": "frDxnk",
+                                            "lastClassName": "ExiAf",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -1759,10 +1822,10 @@ exports[`renders correctly 1`] = `
                                           },
                                           "displayName": "Styled(styled.button)",
                                           "foldedComponentIds": Array [
-                                            "sc-htpNat",
+                                            "sc-ifAKCX",
                                           ],
                                           "render": [Function],
-                                          "styledComponentId": "sc-hSdWYo",
+                                          "styledComponentId": "sc-cvbbAY",
                                           "target": "button",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -1773,7 +1836,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-hSdWYo frDxnk"
+                                        className="sc-ifAKCX sc-cvbbAY ExiAf"
                                         data-testhook-id="edit-collector-0"
                                         onClick={[Function]}
                                       >
@@ -1808,9 +1871,9 @@ exports[`renders correctly 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-cvbbAY",
+                                            "componentId": "sc-brqgnP",
                                             "isStatic": false,
-                                            "lastClassName": "ExiAf",
+                                            "lastClassName": "jgdfSN",
                                             "rules": Array [
                                               "
   display: inline-flex;
@@ -1828,10 +1891,10 @@ exports[`renders correctly 1`] = `
                                           },
                                           "displayName": "Styled(styled.button)",
                                           "foldedComponentIds": Array [
-                                            "sc-htpNat",
+                                            "sc-ifAKCX",
                                           ],
                                           "render": [Function],
-                                          "styledComponentId": "sc-cvbbAY",
+                                          "styledComponentId": "sc-brqgnP",
                                           "target": "button",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -1842,7 +1905,7 @@ exports[`renders correctly 1`] = `
                                       onClick={[Function]}
                                     >
                                       <button
-                                        className="sc-htpNat sc-cvbbAY ExiAf"
+                                        className="sc-ifAKCX sc-brqgnP jgdfSN"
                                         data-testhook-id="delete-collector-0"
                                         onClick={[Function]}
                                       >
@@ -1874,7 +1937,7 @@ exports[`renders correctly 1`] = `
                             </styled.div>
                           </header>
                         </StyledComponent>
-                      </styled.header>
+                      </Styled(styled.header)>
                     </section>
                   </StyledComponent>
                 </styled.section>

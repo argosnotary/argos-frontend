@@ -407,6 +407,8 @@ it("sign layout happy flow", async () => {
           }
         });
       }
+
+      console.log(root.find('select[id="collectorType"]').debug());
       root.update();
 
       expect(root.find('select[id="collectorType"]').props().value).toBe(

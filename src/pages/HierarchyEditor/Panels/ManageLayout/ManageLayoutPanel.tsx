@@ -147,7 +147,9 @@ const ManageLayoutPanel: React.FC = () => {
         if (error.response && error.response.status === 404) {
           editorStoreContext.dispatch({
             type: LayoutEditorActionType.UPDATE_RELEASE_CONFIG,
-            releaseConfig: { artifactCollectorSpecifications: [] }
+            releaseConfig: {
+              artifactCollectorSpecifications: []
+            }
           });
           return true;
         }
