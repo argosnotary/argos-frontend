@@ -276,7 +276,7 @@ const StepAuthorizedAccountEditor: React.FC = () => {
           publicKey:
             searchResult.accountType === AccountType.PERSONAL_ACCOUNT
               ? key
-              : { keyId: key.keyId, publicKey: key.publicKey, algorithm: key.algorithm }
+              : { keyId: key.keyId, publicKey: key.publicKey }
         });
       },
       cbFailure: error => {
