@@ -32,30 +32,14 @@ import {
 import { ILayoutSegment } from "../interfaces/ILayout";
 
 const SegmentsContainerSection = styled(CollectionContainer)`
-  flex-direction: column;
-  border: 0;
+  margin: 1rem 0 0.5rem;
+  min-height: 18.8rem;
   padding: 0 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
 `;
 
-const SegmentsContainerTitle = styled(CollectionContainerTitle)`
-  font-size: 1rem;
-  top: -1rem;
-  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${props =>
-    props.theme.layoutBuilder.segmentContainerTitleBgColor};
-  padding: 0.25rem 2rem 0.4rem;
-`;
+const SegmentsContainerTitle = styled(CollectionContainerTitle)``;
 
-const AddSegmentButton = styled(CollectionContainerButton)`
-  right: 0;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
-  }
-`;
+const AddSegmentButton = styled(CollectionContainerButton)``;
 
 const SegmentsContainer: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();

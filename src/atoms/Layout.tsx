@@ -15,12 +15,11 @@
  */
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import Input from "./Input";
-import InputErrorLabel from "./InputErrorLabel";
 import {
   ActionIconsContainer,
   BaseActionButton,
-  CollectionContainerSpan
+  CollectionContainerSpan,
+  CollectionContainerCard
 } from "./Collection";
 import {
   DetailsPanelType,
@@ -30,43 +29,7 @@ import {
 import EditIcon from "./Icons/EditIcon";
 import JsonIcon from "./Icons/JsonIcon";
 
-interface ILayoutTitleProps {
-  active: boolean;
-}
-
-const LayoutTitle = styled.header<ILayoutTitleProps>`
-  border: 1px solid
-    ${props =>
-      props.active
-        ? props.theme.layoutBuilder.stepTitleHoverBorderColor
-        : "transparent"};
-  font-size: 0.9rem;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0.5rem 0 0;
-  background-color: ${props => props.theme.layoutBuilder.stepTitleBgColor};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  span {
-    margin: 0 0.5rem;
-  }
-
-  ${Input} {
-    margin: 0;
-  }
-
-  ${InputErrorLabel} {
-    margin: 0.5rem 0 0;
-  }
-
-  &:hover {
-    cursor: pointer;
-    border: 1px solid
-      ${props => props.theme.layoutBuilder.stepTitleHoverBorderColor};
-  }
-`;
+const LayoutTitle = styled(CollectionContainerCard)``;
 
 const LayoutSection = styled.section`
   width: 100%;
@@ -91,12 +54,13 @@ const Layout: React.FC = () => {
     editorStoreContext.dispatch({
       type: LayoutEditorActionType.SHOW_JSON
     });
-  }
+  };
 
   return (
     <>
       <LayoutSection data-testhook-id={"layout-edit"}>
         <LayoutTitle
+          clickable={false}
           active={
             editorStoreContext.state.detailPanelMode ===
             DetailsPanelType.LAYOUT_DETAILS

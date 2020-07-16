@@ -9,17 +9,24 @@ exports[`renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-iAyFgw",
+            "componentId": "sc-jlyJG",
             "isStatic": false,
-            "lastClassName": "kzoJmB",
+            "lastClassName": "gcsrrM",
             "rules": Array [
               "
-  margin: 1rem 0 1rem;
-  border: 1px solid #1779ba;
+  margin: 2rem 0;
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 18.8rem;
+  flex-direction: column;
+  padding: 0 1rem 1rem;
+  border: 1px solid ",
+              [Function],
+              ";
+
+  background: ",
+              [Function],
+              ";
 
   li ~ li {
     margin-top: 1rem;
@@ -29,24 +36,14 @@ exports[`renders correctly 1`] = `
     margin-top: 1rem;
   }
 ",
-              "
-  min-height: 0;
-  flex-direction: column;
-  border: 0;
-  padding: 0 1rem 1rem;
-  border: 1px solid
-    ",
-              [Function],
-              ";
-",
             ],
           },
           "displayName": "Styled(styled.section)",
           "foldedComponentIds": Array [
-            "sc-bdVaJa",
+            "sc-kAzzGY",
           ],
           "render": [Function],
-          "styledComponentId": "sc-iAyFgw",
+          "styledComponentId": "sc-jlyJG",
           "target": "section",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -56,7 +53,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-bdVaJa sc-iAyFgw kzoJmB"
+        className="sc-kAzzGY sc-jlyJG gcsrrM"
       >
         <styled.div>
           <StyledComponent
@@ -65,9 +62,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-ifAKCX",
+                  "componentId": "sc-kpOJdX",
                   "isStatic": false,
-                  "lastClassName": "cBkhpN",
+                  "lastClassName": "kVlxUP",
                   "rules": Array [
                     "
   display: flex;
@@ -80,7 +77,7 @@ exports[`renders correctly 1`] = `
                 "displayName": "styled.div",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-ifAKCX",
+                "styledComponentId": "sc-kpOJdX",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -90,7 +87,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-ifAKCX cBkhpN"
+              className="sc-kpOJdX kVlxUP"
             >
               <Styled(styled.header)>
                 <StyledComponent
@@ -99,19 +96,14 @@ exports[`renders correctly 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-hSdWYo",
+                        "componentId": "sc-gipzik",
                         "isStatic": false,
-                        "lastClassName": "cQabAu",
+                        "lastClassName": "cDkKVy",
                         "rules": Array [
                           "
   position: relative;
-  font-size: 0.9rem;
-  top: -0.75rem;
-  background-color: #f1f1f1;
   display: inline-flex;
-",
-                          "
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   top: -1rem;
   color: ",
                           [Function],
@@ -125,10 +117,10 @@ exports[`renders correctly 1`] = `
                       },
                       "displayName": "Styled(styled.header)",
                       "foldedComponentIds": Array [
-                        "sc-EHOje",
+                        "sc-dxgOiQ",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-hSdWYo",
+                      "styledComponentId": "sc-gipzik",
                       "target": "header",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -138,7 +130,7 @@ exports[`renders correctly 1`] = `
                   forwardedRef={null}
                 >
                   <header
-                    className="sc-EHOje sc-hSdWYo cQabAu"
+                    className="sc-dxgOiQ sc-gipzik cDkKVy"
                   >
                     Authorized Personal Accounts
                   </header>
@@ -155,32 +147,33 @@ exports[`renders correctly 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-eHgmQL",
+                        "componentId": "sc-csuQGl",
                         "isStatic": false,
-                        "lastClassName": "dWCPMd",
+                        "lastClassName": "eJUazR",
                         "rules": Array [
                           "
   position: relative;
   top: -1rem;
-  background-color: #f1f1f1;
   border: 0;
-",
-                          "
   right: 0;
 
   &:hover {
     cursor: pointer;
     transform: scale(0.8);
   }
+
+  ",
+                          [Function],
+                          "
 ",
                         ],
                       },
                       "displayName": "Styled(styled.button)",
                       "foldedComponentIds": Array [
-                        "sc-bxivhb",
+                        "sc-kGXeez",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-eHgmQL",
+                      "styledComponentId": "sc-csuQGl",
                       "target": "button",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -191,7 +184,7 @@ exports[`renders correctly 1`] = `
                   onClick={[Function]}
                 >
                   <button
-                    className="sc-bxivhb sc-eHgmQL dWCPMd"
+                    className="sc-kGXeez sc-csuQGl eJUazR"
                     data-testhook-id="add-key"
                     onClick={[Function]}
                   >
@@ -228,21 +221,27 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-bZQynM",
+                  "componentId": "sc-jKJlTe",
                   "isStatic": false,
-                  "lastClassName": "enhIWo",
+                  "lastClassName": "dKJUNv",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  li ~ ",
+                    ".sc-cSHVUG",
+                    " {
+    margin-top: 1rem;
+  }
 ",
                   ],
                 },
                 "displayName": "styled.ul",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-bZQynM",
+                "styledComponentId": "sc-jKJlTe",
                 "target": "ul",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -252,33 +251,74 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-bZQynM enhIWo"
+              className="sc-jKJlTe dKJUNv"
             >
               <li
                 key="key-row-0"
               >
-                <styled.section>
+                <Styled(styled.header)
+                  clickable={false}
+                >
                   <StyledComponent
+                    clickable={false}
                     forwardedComponent={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-jWBwVP",
+                          "componentId": "sc-Rmtcm",
                           "isStatic": false,
-                          "lastClassName": "eofhom",
+                          "lastClassName": "jwcVPL",
                           "rules": Array [
                             "
+  border: 1px solid
+    ",
+                            [Function],
+                            ";
+  font-size: 1rem;
+  padding: 0.5rem;
   width: 100%;
-  margin: 0 0 1rem;
+  background-color: ",
+                            [Function],
+                            ";
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    margin: 0 0.5rem;
+  }
+
+  ",
+                            ".sc-bdVaJa",
+                            " {
+    margin: 0;
+  }
+
+  ",
+                            ".sc-bwzfXH",
+                            " {
+    margin: 0.5rem 0 0;
+  }
+
+  &:hover {
+    ",
+                            [Function],
+                            ";
+    border: 1px solid ",
+                            [Function],
+                            ";
+  }
 ",
                           ],
                         },
-                        "displayName": "styled.section",
-                        "foldedComponentIds": Array [],
+                        "displayName": "Styled(styled.header)",
+                        "foldedComponentIds": Array [
+                          "sc-hMqMXs",
+                        ],
                         "render": [Function],
-                        "styledComponentId": "sc-jWBwVP",
-                        "target": "section",
+                        "styledComponentId": "sc-Rmtcm",
+                        "target": "header",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
                         "withComponent": [Function],
@@ -286,45 +326,32 @@ exports[`renders correctly 1`] = `
                     }
                     forwardedRef={null}
                   >
-                    <section
-                      className="sc-jWBwVP eofhom"
+                    <header
+                      className="sc-hMqMXs sc-Rmtcm jwcVPL"
                     >
-                      <styled.header>
+                      <styled.span>
                         <StyledComponent
                           forwardedComponent={
                             Object {
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-cvbbAY",
+                                "componentId": "sc-eNQAEJ",
                                 "isStatic": false,
-                                "lastClassName": "fAnvUV",
+                                "lastClassName": "dhlUIc",
                                 "rules": Array [
                                   "
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0.2rem 0 0;
-  background-color: ",
-                                  [Function],
-                                  ";
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  > span {
-    margin: 0 0.5rem;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 ",
                                 ],
                               },
-                              "displayName": "styled.header",
+                              "displayName": "styled.span",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-cvbbAY",
-                              "target": "header",
+                              "styledComponentId": "sc-eNQAEJ",
+                              "target": "span",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
                               "withComponent": [Function],
@@ -332,31 +359,41 @@ exports[`renders correctly 1`] = `
                           }
                           forwardedRef={null}
                         >
-                          <header
-                            className="sc-cvbbAY fAnvUV"
+                          <span
+                            className="sc-eNQAEJ dhlUIc"
                           >
-                            <styled.span>
+                            <styled.span
+                              active={true}
+                            >
                               <StyledComponent
+                                active={true}
                                 forwardedComponent={
                                   Object {
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-gzVnrw",
+                                      "componentId": "sc-iRbamj",
                                       "isStatic": false,
-                                      "lastClassName": "bCKUNd",
+                                      "lastClassName": "hidaDj",
                                       "rules": Array [
                                         "
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: ",
+                                        [Function],
+                                        ";
+  padding: 0 0.5rem;
+  border: 2px solid
+    ",
+                                        [Function],
+                                        ";
+  margin: 0 0.5rem 0 0;
+  font-size: 0.9rem;
 ",
                                       ],
                                     },
                                     "displayName": "styled.span",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-gzVnrw",
+                                    "styledComponentId": "sc-iRbamj",
                                     "target": "span",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -366,107 +403,64 @@ exports[`renders correctly 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-gzVnrw bCKUNd"
+                                  className="sc-iRbamj cpoEWN"
                                 >
-                                  <styled.span
-                                    active={true}
-                                  >
-                                    <StyledComponent
-                                      active={true}
-                                      forwardedComponent={
-                                        Object {
-                                          "$$typeof": Symbol(react.forward_ref),
-                                          "attrs": Array [],
-                                          "componentStyle": ComponentStyle {
-                                            "componentId": "sc-kkGfuU",
-                                            "isStatic": false,
-                                            "lastClassName": "gpvLrC",
-                                            "rules": Array [
-                                              "
-  color: ",
-                                              [Function],
-                                              ";
-  padding: 0 0.5rem;
-  border: 2px solid
-    ",
-                                              [Function],
-                                              ";
-  margin: 0 0.5rem 0 0;
-  font-size: 0.9rem;
-",
-                                            ],
-                                          },
-                                          "displayName": "styled.span",
-                                          "foldedComponentIds": Array [],
-                                          "render": [Function],
-                                          "styledComponentId": "sc-kkGfuU",
-                                          "target": "span",
-                                          "toString": [Function],
-                                          "warnTooManyClasses": [Function],
-                                          "withComponent": [Function],
-                                        }
-                                      }
-                                      forwardedRef={null}
-                                    >
-                                      <span
-                                        className="sc-kkGfuU kGBmKl"
-                                      >
-                                        active key
-                                      </span>
-                                    </StyledComponent>
-                                  </styled.span>
-                                  account1
+                                  active key
                                 </span>
                               </StyledComponent>
                             </styled.span>
-                            <styled.div>
+                            account1
+                          </span>
+                        </StyledComponent>
+                      </styled.span>
+                      <styled.div>
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-chPdSV",
+                                "isStatic": false,
+                                "lastClassName": "eWUxCg",
+                                "rules": Array [
+                                  "
+  display: flex;
+  align-items: center;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-chPdSV",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                        >
+                          <div
+                            className="sc-chPdSV eWUxCg"
+                          >
+                            <Styled(styled.button)
+                              data-testhook-id="delete-key-0"
+                              onClick={[Function]}
+                            >
                               <StyledComponent
+                                data-testhook-id="delete-key-0"
                                 forwardedComponent={
                                   Object {
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-bwzfXH",
+                                      "componentId": "sc-bRBYWo",
                                       "isStatic": false,
-                                      "lastClassName": "fNOhzS",
+                                      "lastClassName": "iSLhvT",
                                       "rules": Array [
                                         "
-  display: flex;
-  align-items: center;
-",
-                                      ],
-                                    },
-                                    "displayName": "styled.div",
-                                    "foldedComponentIds": Array [],
-                                    "render": [Function],
-                                    "styledComponentId": "sc-bwzfXH",
-                                    "target": "div",
-                                    "toString": [Function],
-                                    "warnTooManyClasses": [Function],
-                                    "withComponent": [Function],
-                                  }
-                                }
-                                forwardedRef={null}
-                              >
-                                <div
-                                  className="sc-bwzfXH fNOhzS"
-                                >
-                                  <Styled(styled.button)
-                                    data-testhook-id="delete-key-0"
-                                    onClick={[Function]}
-                                  >
-                                    <StyledComponent
-                                      data-testhook-id="delete-key-0"
-                                      forwardedComponent={
-                                        Object {
-                                          "$$typeof": Symbol(react.forward_ref),
-                                          "attrs": Array [],
-                                          "componentStyle": ComponentStyle {
-                                            "componentId": "sc-brqgnP",
-                                            "isStatic": false,
-                                            "lastClassName": "jgdfSN",
-                                            "rules": Array [
-                                              "
   display: inline-flex;
   background: none;
   border: 0;
@@ -478,86 +472,124 @@ exports[`renders correctly 1`] = `
     }
   }
 ",
-                                            ],
-                                          },
-                                          "displayName": "Styled(styled.button)",
-                                          "foldedComponentIds": Array [
-                                            "sc-htpNat",
-                                          ],
-                                          "render": [Function],
-                                          "styledComponentId": "sc-brqgnP",
-                                          "target": "button",
-                                          "toString": [Function],
-                                          "warnTooManyClasses": [Function],
-                                          "withComponent": [Function],
-                                        }
-                                      }
-                                      forwardedRef={null}
-                                      onClick={[Function]}
+                                      ],
+                                    },
+                                    "displayName": "Styled(styled.button)",
+                                    "foldedComponentIds": Array [
+                                      "sc-kgoBCf",
+                                    ],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-bRBYWo",
+                                    "target": "button",
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                onClick={[Function]}
+                              >
+                                <button
+                                  className="sc-kgoBCf sc-bRBYWo iSLhvT"
+                                  data-testhook-id="delete-key-0"
+                                  onClick={[Function]}
+                                >
+                                  <RemoveIcon
+                                    color="#1779ba"
+                                    size={24}
+                                  >
+                                    <svg
+                                      height={24}
+                                      version="1.1"
+                                      viewBox="0 0 32 32"
+                                      width={24}
+                                      xmlns="http://www.w3.org/2000/svg"
                                     >
-                                      <button
-                                        className="sc-htpNat sc-brqgnP jgdfSN"
-                                        data-testhook-id="delete-key-0"
-                                        onClick={[Function]}
-                                      >
-                                        <RemoveIcon
-                                          color="#1779ba"
-                                          size={24}
-                                        >
-                                          <svg
-                                            height={24}
-                                            version="1.1"
-                                            viewBox="0 0 32 32"
-                                            width={24}
-                                            xmlns="http://www.w3.org/2000/svg"
-                                          >
-                                            <title>
-                                              trash
-                                            </title>
-                                            <path
-                                              d="M29.98 6.819c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1.002c0-1.657-1.344-3-3-3h-10c-1.657 0-3 1.343-3 3v1.001h-3c-1.595 0-2.885 1.246-2.981 2.816h-0.019v2.183c0 1.104 0.896 2 2 2v0 17c0 2.209 1.791 4 4 4h16c2.209 0 4-1.791 4-4v-17c1.104 0 2-0.896 2-2v-2.182h-0.020zM10 3.002c0-0.553 0.447-1 1-1h10c0.553 0 1 0.447 1 1v1h-12v-1zM26 28.002c0 1.102-0.898 2-2 2h-16c-1.103 0-2-0.898-2-2v-17h20v17zM28 8.001v1h-24v-1.999c0-0.553 0.447-1 1-1h22c0.553 0 1 0.447 1 1v0.999zM9 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM9 14.005h2v13h-2v-13zM15 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM15 14.005h2v13h-2v-13zM21 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM21 14.005h2v13h-2v-13z"
-                                              fill="#1779ba"
-                                            />
-                                          </svg>
-                                        </RemoveIcon>
-                                      </button>
-                                    </StyledComponent>
-                                  </Styled(styled.button)>
-                                </div>
+                                      <title>
+                                        trash
+                                      </title>
+                                      <path
+                                        d="M29.98 6.819c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1.002c0-1.657-1.344-3-3-3h-10c-1.657 0-3 1.343-3 3v1.001h-3c-1.595 0-2.885 1.246-2.981 2.816h-0.019v2.183c0 1.104 0.896 2 2 2v0 17c0 2.209 1.791 4 4 4h16c2.209 0 4-1.791 4-4v-17c1.104 0 2-0.896 2-2v-2.182h-0.020zM10 3.002c0-0.553 0.447-1 1-1h10c0.553 0 1 0.447 1 1v1h-12v-1zM26 28.002c0 1.102-0.898 2-2 2h-16c-1.103 0-2-0.898-2-2v-17h20v17zM28 8.001v1h-24v-1.999c0-0.553 0.447-1 1-1h22c0.553 0 1 0.447 1 1v0.999zM9 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM9 14.005h2v13h-2v-13zM15 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM15 14.005h2v13h-2v-13zM21 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM21 14.005h2v13h-2v-13z"
+                                        fill="#1779ba"
+                                      />
+                                    </svg>
+                                  </RemoveIcon>
+                                </button>
                               </StyledComponent>
-                            </styled.div>
-                          </header>
+                            </Styled(styled.button)>
+                          </div>
                         </StyledComponent>
-                      </styled.header>
-                    </section>
+                      </styled.div>
+                    </header>
                   </StyledComponent>
-                </styled.section>
+                </Styled(styled.header)>
               </li>
               <li
                 key="key-row-1"
               >
-                <styled.section>
+                <Styled(styled.header)
+                  clickable={false}
+                >
                   <StyledComponent
+                    clickable={false}
                     forwardedComponent={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-jWBwVP",
+                          "componentId": "sc-Rmtcm",
                           "isStatic": false,
-                          "lastClassName": "eofhom",
+                          "lastClassName": "jwcVPL",
                           "rules": Array [
                             "
+  border: 1px solid
+    ",
+                            [Function],
+                            ";
+  font-size: 1rem;
+  padding: 0.5rem;
   width: 100%;
-  margin: 0 0 1rem;
+  background-color: ",
+                            [Function],
+                            ";
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    margin: 0 0.5rem;
+  }
+
+  ",
+                            ".sc-bdVaJa",
+                            " {
+    margin: 0;
+  }
+
+  ",
+                            ".sc-bwzfXH",
+                            " {
+    margin: 0.5rem 0 0;
+  }
+
+  &:hover {
+    ",
+                            [Function],
+                            ";
+    border: 1px solid ",
+                            [Function],
+                            ";
+  }
 ",
                           ],
                         },
-                        "displayName": "styled.section",
-                        "foldedComponentIds": Array [],
+                        "displayName": "Styled(styled.header)",
+                        "foldedComponentIds": Array [
+                          "sc-hMqMXs",
+                        ],
                         "render": [Function],
-                        "styledComponentId": "sc-jWBwVP",
-                        "target": "section",
+                        "styledComponentId": "sc-Rmtcm",
+                        "target": "header",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
                         "withComponent": [Function],
@@ -565,45 +597,32 @@ exports[`renders correctly 1`] = `
                     }
                     forwardedRef={null}
                   >
-                    <section
-                      className="sc-jWBwVP eofhom"
+                    <header
+                      className="sc-hMqMXs sc-Rmtcm jwcVPL"
                     >
-                      <styled.header>
+                      <styled.span>
                         <StyledComponent
                           forwardedComponent={
                             Object {
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-cvbbAY",
+                                "componentId": "sc-eNQAEJ",
                                 "isStatic": false,
-                                "lastClassName": "fAnvUV",
+                                "lastClassName": "dhlUIc",
                                 "rules": Array [
                                   "
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0.2rem 0 0;
-  background-color: ",
-                                  [Function],
-                                  ";
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  > span {
-    margin: 0 0.5rem;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 ",
                                 ],
                               },
-                              "displayName": "styled.header",
+                              "displayName": "styled.span",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-cvbbAY",
-                              "target": "header",
+                              "styledComponentId": "sc-eNQAEJ",
+                              "target": "span",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
                               "withComponent": [Function],
@@ -611,31 +630,41 @@ exports[`renders correctly 1`] = `
                           }
                           forwardedRef={null}
                         >
-                          <header
-                            className="sc-cvbbAY fAnvUV"
+                          <span
+                            className="sc-eNQAEJ dhlUIc"
                           >
-                            <styled.span>
+                            <styled.span
+                              active={false}
+                            >
                               <StyledComponent
+                                active={false}
                                 forwardedComponent={
                                   Object {
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-gzVnrw",
+                                      "componentId": "sc-iRbamj",
                                       "isStatic": false,
-                                      "lastClassName": "bCKUNd",
+                                      "lastClassName": "hidaDj",
                                       "rules": Array [
                                         "
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: ",
+                                        [Function],
+                                        ";
+  padding: 0 0.5rem;
+  border: 2px solid
+    ",
+                                        [Function],
+                                        ";
+  margin: 0 0.5rem 0 0;
+  font-size: 0.9rem;
 ",
                                       ],
                                     },
                                     "displayName": "styled.span",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-gzVnrw",
+                                    "styledComponentId": "sc-iRbamj",
                                     "target": "span",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -645,108 +674,65 @@ exports[`renders correctly 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-gzVnrw bCKUNd"
+                                  className="sc-iRbamj hidaDj"
                                 >
-                                  <styled.span
-                                    active={false}
-                                  >
-                                    <StyledComponent
-                                      active={false}
-                                      forwardedComponent={
-                                        Object {
-                                          "$$typeof": Symbol(react.forward_ref),
-                                          "attrs": Array [],
-                                          "componentStyle": ComponentStyle {
-                                            "componentId": "sc-kkGfuU",
-                                            "isStatic": false,
-                                            "lastClassName": "gpvLrC",
-                                            "rules": Array [
-                                              "
-  color: ",
-                                              [Function],
-                                              ";
-  padding: 0 0.5rem;
-  border: 2px solid
-    ",
-                                              [Function],
-                                              ";
-  margin: 0 0.5rem 0 0;
-  font-size: 0.9rem;
-",
-                                            ],
-                                          },
-                                          "displayName": "styled.span",
-                                          "foldedComponentIds": Array [],
-                                          "render": [Function],
-                                          "styledComponentId": "sc-kkGfuU",
-                                          "target": "span",
-                                          "toString": [Function],
-                                          "warnTooManyClasses": [Function],
-                                          "withComponent": [Function],
-                                        }
-                                      }
-                                      forwardedRef={null}
-                                    >
-                                      <span
-                                        className="sc-kkGfuU gpvLrC"
-                                      >
-                                        inactive key
-                                      </span>
-                                    </StyledComponent>
-                                  </styled.span>
-                                  path/path/
-                                  account2
+                                  inactive key
                                 </span>
                               </StyledComponent>
                             </styled.span>
-                            <styled.div>
+                            path/path/
+                            account2
+                          </span>
+                        </StyledComponent>
+                      </styled.span>
+                      <styled.div>
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-chPdSV",
+                                "isStatic": false,
+                                "lastClassName": "eWUxCg",
+                                "rules": Array [
+                                  "
+  display: flex;
+  align-items: center;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-chPdSV",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                        >
+                          <div
+                            className="sc-chPdSV eWUxCg"
+                          >
+                            <Styled(styled.button)
+                              data-testhook-id="delete-key-1"
+                              onClick={[Function]}
+                            >
                               <StyledComponent
+                                data-testhook-id="delete-key-1"
                                 forwardedComponent={
                                   Object {
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-bwzfXH",
+                                      "componentId": "sc-bRBYWo",
                                       "isStatic": false,
-                                      "lastClassName": "fNOhzS",
+                                      "lastClassName": "iSLhvT",
                                       "rules": Array [
                                         "
-  display: flex;
-  align-items: center;
-",
-                                      ],
-                                    },
-                                    "displayName": "styled.div",
-                                    "foldedComponentIds": Array [],
-                                    "render": [Function],
-                                    "styledComponentId": "sc-bwzfXH",
-                                    "target": "div",
-                                    "toString": [Function],
-                                    "warnTooManyClasses": [Function],
-                                    "withComponent": [Function],
-                                  }
-                                }
-                                forwardedRef={null}
-                              >
-                                <div
-                                  className="sc-bwzfXH fNOhzS"
-                                >
-                                  <Styled(styled.button)
-                                    data-testhook-id="delete-key-1"
-                                    onClick={[Function]}
-                                  >
-                                    <StyledComponent
-                                      data-testhook-id="delete-key-1"
-                                      forwardedComponent={
-                                        Object {
-                                          "$$typeof": Symbol(react.forward_ref),
-                                          "attrs": Array [],
-                                          "componentStyle": ComponentStyle {
-                                            "componentId": "sc-brqgnP",
-                                            "isStatic": false,
-                                            "lastClassName": "jgdfSN",
-                                            "rules": Array [
-                                              "
   display: inline-flex;
   background: none;
   border: 0;
@@ -758,86 +744,124 @@ exports[`renders correctly 1`] = `
     }
   }
 ",
-                                            ],
-                                          },
-                                          "displayName": "Styled(styled.button)",
-                                          "foldedComponentIds": Array [
-                                            "sc-htpNat",
-                                          ],
-                                          "render": [Function],
-                                          "styledComponentId": "sc-brqgnP",
-                                          "target": "button",
-                                          "toString": [Function],
-                                          "warnTooManyClasses": [Function],
-                                          "withComponent": [Function],
-                                        }
-                                      }
-                                      forwardedRef={null}
-                                      onClick={[Function]}
+                                      ],
+                                    },
+                                    "displayName": "Styled(styled.button)",
+                                    "foldedComponentIds": Array [
+                                      "sc-kgoBCf",
+                                    ],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-bRBYWo",
+                                    "target": "button",
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                onClick={[Function]}
+                              >
+                                <button
+                                  className="sc-kgoBCf sc-bRBYWo iSLhvT"
+                                  data-testhook-id="delete-key-1"
+                                  onClick={[Function]}
+                                >
+                                  <RemoveIcon
+                                    color="#1779ba"
+                                    size={24}
+                                  >
+                                    <svg
+                                      height={24}
+                                      version="1.1"
+                                      viewBox="0 0 32 32"
+                                      width={24}
+                                      xmlns="http://www.w3.org/2000/svg"
                                     >
-                                      <button
-                                        className="sc-htpNat sc-brqgnP jgdfSN"
-                                        data-testhook-id="delete-key-1"
-                                        onClick={[Function]}
-                                      >
-                                        <RemoveIcon
-                                          color="#1779ba"
-                                          size={24}
-                                        >
-                                          <svg
-                                            height={24}
-                                            version="1.1"
-                                            viewBox="0 0 32 32"
-                                            width={24}
-                                            xmlns="http://www.w3.org/2000/svg"
-                                          >
-                                            <title>
-                                              trash
-                                            </title>
-                                            <path
-                                              d="M29.98 6.819c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1.002c0-1.657-1.344-3-3-3h-10c-1.657 0-3 1.343-3 3v1.001h-3c-1.595 0-2.885 1.246-2.981 2.816h-0.019v2.183c0 1.104 0.896 2 2 2v0 17c0 2.209 1.791 4 4 4h16c2.209 0 4-1.791 4-4v-17c1.104 0 2-0.896 2-2v-2.182h-0.020zM10 3.002c0-0.553 0.447-1 1-1h10c0.553 0 1 0.447 1 1v1h-12v-1zM26 28.002c0 1.102-0.898 2-2 2h-16c-1.103 0-2-0.898-2-2v-17h20v17zM28 8.001v1h-24v-1.999c0-0.553 0.447-1 1-1h22c0.553 0 1 0.447 1 1v0.999zM9 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM9 14.005h2v13h-2v-13zM15 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM15 14.005h2v13h-2v-13zM21 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM21 14.005h2v13h-2v-13z"
-                                              fill="#1779ba"
-                                            />
-                                          </svg>
-                                        </RemoveIcon>
-                                      </button>
-                                    </StyledComponent>
-                                  </Styled(styled.button)>
-                                </div>
+                                      <title>
+                                        trash
+                                      </title>
+                                      <path
+                                        d="M29.98 6.819c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1.002c0-1.657-1.344-3-3-3h-10c-1.657 0-3 1.343-3 3v1.001h-3c-1.595 0-2.885 1.246-2.981 2.816h-0.019v2.183c0 1.104 0.896 2 2 2v0 17c0 2.209 1.791 4 4 4h16c2.209 0 4-1.791 4-4v-17c1.104 0 2-0.896 2-2v-2.182h-0.020zM10 3.002c0-0.553 0.447-1 1-1h10c0.553 0 1 0.447 1 1v1h-12v-1zM26 28.002c0 1.102-0.898 2-2 2h-16c-1.103 0-2-0.898-2-2v-17h20v17zM28 8.001v1h-24v-1.999c0-0.553 0.447-1 1-1h22c0.553 0 1 0.447 1 1v0.999zM9 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM9 14.005h2v13h-2v-13zM15 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM15 14.005h2v13h-2v-13zM21 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM21 14.005h2v13h-2v-13z"
+                                        fill="#1779ba"
+                                      />
+                                    </svg>
+                                  </RemoveIcon>
+                                </button>
                               </StyledComponent>
-                            </styled.div>
-                          </header>
+                            </Styled(styled.button)>
+                          </div>
                         </StyledComponent>
-                      </styled.header>
-                    </section>
+                      </styled.div>
+                    </header>
                   </StyledComponent>
-                </styled.section>
+                </Styled(styled.header)>
               </li>
               <li
                 key="key-row-2"
               >
-                <styled.section>
+                <Styled(styled.header)
+                  clickable={false}
+                >
                   <StyledComponent
+                    clickable={false}
                     forwardedComponent={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
                         "attrs": Array [],
                         "componentStyle": ComponentStyle {
-                          "componentId": "sc-jWBwVP",
+                          "componentId": "sc-Rmtcm",
                           "isStatic": false,
-                          "lastClassName": "eofhom",
+                          "lastClassName": "jwcVPL",
                           "rules": Array [
                             "
+  border: 1px solid
+    ",
+                            [Function],
+                            ";
+  font-size: 1rem;
+  padding: 0.5rem;
   width: 100%;
-  margin: 0 0 1rem;
+  background-color: ",
+                            [Function],
+                            ";
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    margin: 0 0.5rem;
+  }
+
+  ",
+                            ".sc-bdVaJa",
+                            " {
+    margin: 0;
+  }
+
+  ",
+                            ".sc-bwzfXH",
+                            " {
+    margin: 0.5rem 0 0;
+  }
+
+  &:hover {
+    ",
+                            [Function],
+                            ";
+    border: 1px solid ",
+                            [Function],
+                            ";
+  }
 ",
                           ],
                         },
-                        "displayName": "styled.section",
-                        "foldedComponentIds": Array [],
+                        "displayName": "Styled(styled.header)",
+                        "foldedComponentIds": Array [
+                          "sc-hMqMXs",
+                        ],
                         "render": [Function],
-                        "styledComponentId": "sc-jWBwVP",
-                        "target": "section",
+                        "styledComponentId": "sc-Rmtcm",
+                        "target": "header",
                         "toString": [Function],
                         "warnTooManyClasses": [Function],
                         "withComponent": [Function],
@@ -845,45 +869,32 @@ exports[`renders correctly 1`] = `
                     }
                     forwardedRef={null}
                   >
-                    <section
-                      className="sc-jWBwVP eofhom"
+                    <header
+                      className="sc-hMqMXs sc-Rmtcm jwcVPL"
                     >
-                      <styled.header>
+                      <styled.span>
                         <StyledComponent
                           forwardedComponent={
                             Object {
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-cvbbAY",
+                                "componentId": "sc-eNQAEJ",
                                 "isStatic": false,
-                                "lastClassName": "fAnvUV",
+                                "lastClassName": "dhlUIc",
                                 "rules": Array [
                                   "
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0.2rem 0 0;
-  background-color: ",
-                                  [Function],
-                                  ";
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  > span {
-    margin: 0 0.5rem;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 ",
                                 ],
                               },
-                              "displayName": "styled.header",
+                              "displayName": "styled.span",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-cvbbAY",
-                              "target": "header",
+                              "styledComponentId": "sc-eNQAEJ",
+                              "target": "span",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
                               "withComponent": [Function],
@@ -891,31 +902,41 @@ exports[`renders correctly 1`] = `
                           }
                           forwardedRef={null}
                         >
-                          <header
-                            className="sc-cvbbAY fAnvUV"
+                          <span
+                            className="sc-eNQAEJ dhlUIc"
                           >
-                            <styled.span>
+                            <styled.span
+                              active={false}
+                            >
                               <StyledComponent
+                                active={false}
                                 forwardedComponent={
                                   Object {
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-gzVnrw",
+                                      "componentId": "sc-iRbamj",
                                       "isStatic": false,
-                                      "lastClassName": "bCKUNd",
+                                      "lastClassName": "hidaDj",
                                       "rules": Array [
                                         "
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: ",
+                                        [Function],
+                                        ";
+  padding: 0 0.5rem;
+  border: 2px solid
+    ",
+                                        [Function],
+                                        ";
+  margin: 0 0.5rem 0 0;
+  font-size: 0.9rem;
 ",
                                       ],
                                     },
                                     "displayName": "styled.span",
                                     "foldedComponentIds": Array [],
                                     "render": [Function],
-                                    "styledComponentId": "sc-gzVnrw",
+                                    "styledComponentId": "sc-iRbamj",
                                     "target": "span",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -925,106 +946,63 @@ exports[`renders correctly 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-gzVnrw bCKUNd"
+                                  className="sc-iRbamj hidaDj"
                                 >
-                                  <styled.span
-                                    active={false}
-                                  >
-                                    <StyledComponent
-                                      active={false}
-                                      forwardedComponent={
-                                        Object {
-                                          "$$typeof": Symbol(react.forward_ref),
-                                          "attrs": Array [],
-                                          "componentStyle": ComponentStyle {
-                                            "componentId": "sc-kkGfuU",
-                                            "isStatic": false,
-                                            "lastClassName": "gpvLrC",
-                                            "rules": Array [
-                                              "
-  color: ",
-                                              [Function],
-                                              ";
-  padding: 0 0.5rem;
-  border: 2px solid
-    ",
-                                              [Function],
-                                              ";
-  margin: 0 0.5rem 0 0;
-  font-size: 0.9rem;
-",
-                                            ],
-                                          },
-                                          "displayName": "styled.span",
-                                          "foldedComponentIds": Array [],
-                                          "render": [Function],
-                                          "styledComponentId": "sc-kkGfuU",
-                                          "target": "span",
-                                          "toString": [Function],
-                                          "warnTooManyClasses": [Function],
-                                          "withComponent": [Function],
-                                        }
-                                      }
-                                      forwardedRef={null}
-                                    >
-                                      <span
-                                        className="sc-kkGfuU gpvLrC"
-                                      >
-                                        deleted
-                                      </span>
-                                    </StyledComponent>
-                                  </styled.span>
+                                  deleted
                                 </span>
                               </StyledComponent>
                             </styled.span>
-                            <styled.div>
+                          </span>
+                        </StyledComponent>
+                      </styled.span>
+                      <styled.div>
+                        <StyledComponent
+                          forwardedComponent={
+                            Object {
+                              "$$typeof": Symbol(react.forward_ref),
+                              "attrs": Array [],
+                              "componentStyle": ComponentStyle {
+                                "componentId": "sc-chPdSV",
+                                "isStatic": false,
+                                "lastClassName": "eWUxCg",
+                                "rules": Array [
+                                  "
+  display: flex;
+  align-items: center;
+",
+                                ],
+                              },
+                              "displayName": "styled.div",
+                              "foldedComponentIds": Array [],
+                              "render": [Function],
+                              "styledComponentId": "sc-chPdSV",
+                              "target": "div",
+                              "toString": [Function],
+                              "warnTooManyClasses": [Function],
+                              "withComponent": [Function],
+                            }
+                          }
+                          forwardedRef={null}
+                        >
+                          <div
+                            className="sc-chPdSV eWUxCg"
+                          >
+                            <Styled(styled.button)
+                              data-testhook-id="delete-key-2"
+                              onClick={[Function]}
+                            >
                               <StyledComponent
+                                data-testhook-id="delete-key-2"
                                 forwardedComponent={
                                   Object {
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-bwzfXH",
+                                      "componentId": "sc-bRBYWo",
                                       "isStatic": false,
-                                      "lastClassName": "fNOhzS",
+                                      "lastClassName": "iSLhvT",
                                       "rules": Array [
                                         "
-  display: flex;
-  align-items: center;
-",
-                                      ],
-                                    },
-                                    "displayName": "styled.div",
-                                    "foldedComponentIds": Array [],
-                                    "render": [Function],
-                                    "styledComponentId": "sc-bwzfXH",
-                                    "target": "div",
-                                    "toString": [Function],
-                                    "warnTooManyClasses": [Function],
-                                    "withComponent": [Function],
-                                  }
-                                }
-                                forwardedRef={null}
-                              >
-                                <div
-                                  className="sc-bwzfXH fNOhzS"
-                                >
-                                  <Styled(styled.button)
-                                    data-testhook-id="delete-key-2"
-                                    onClick={[Function]}
-                                  >
-                                    <StyledComponent
-                                      data-testhook-id="delete-key-2"
-                                      forwardedComponent={
-                                        Object {
-                                          "$$typeof": Symbol(react.forward_ref),
-                                          "attrs": Array [],
-                                          "componentStyle": ComponentStyle {
-                                            "componentId": "sc-brqgnP",
-                                            "isStatic": false,
-                                            "lastClassName": "jgdfSN",
-                                            "rules": Array [
-                                              "
   display: inline-flex;
   background: none;
   border: 0;
@@ -1036,60 +1014,57 @@ exports[`renders correctly 1`] = `
     }
   }
 ",
-                                            ],
-                                          },
-                                          "displayName": "Styled(styled.button)",
-                                          "foldedComponentIds": Array [
-                                            "sc-htpNat",
-                                          ],
-                                          "render": [Function],
-                                          "styledComponentId": "sc-brqgnP",
-                                          "target": "button",
-                                          "toString": [Function],
-                                          "warnTooManyClasses": [Function],
-                                          "withComponent": [Function],
-                                        }
-                                      }
-                                      forwardedRef={null}
-                                      onClick={[Function]}
+                                      ],
+                                    },
+                                    "displayName": "Styled(styled.button)",
+                                    "foldedComponentIds": Array [
+                                      "sc-kgoBCf",
+                                    ],
+                                    "render": [Function],
+                                    "styledComponentId": "sc-bRBYWo",
+                                    "target": "button",
+                                    "toString": [Function],
+                                    "warnTooManyClasses": [Function],
+                                    "withComponent": [Function],
+                                  }
+                                }
+                                forwardedRef={null}
+                                onClick={[Function]}
+                              >
+                                <button
+                                  className="sc-kgoBCf sc-bRBYWo iSLhvT"
+                                  data-testhook-id="delete-key-2"
+                                  onClick={[Function]}
+                                >
+                                  <RemoveIcon
+                                    color="#1779ba"
+                                    size={24}
+                                  >
+                                    <svg
+                                      height={24}
+                                      version="1.1"
+                                      viewBox="0 0 32 32"
+                                      width={24}
+                                      xmlns="http://www.w3.org/2000/svg"
                                     >
-                                      <button
-                                        className="sc-htpNat sc-brqgnP jgdfSN"
-                                        data-testhook-id="delete-key-2"
-                                        onClick={[Function]}
-                                      >
-                                        <RemoveIcon
-                                          color="#1779ba"
-                                          size={24}
-                                        >
-                                          <svg
-                                            height={24}
-                                            version="1.1"
-                                            viewBox="0 0 32 32"
-                                            width={24}
-                                            xmlns="http://www.w3.org/2000/svg"
-                                          >
-                                            <title>
-                                              trash
-                                            </title>
-                                            <path
-                                              d="M29.98 6.819c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1.002c0-1.657-1.344-3-3-3h-10c-1.657 0-3 1.343-3 3v1.001h-3c-1.595 0-2.885 1.246-2.981 2.816h-0.019v2.183c0 1.104 0.896 2 2 2v0 17c0 2.209 1.791 4 4 4h16c2.209 0 4-1.791 4-4v-17c1.104 0 2-0.896 2-2v-2.182h-0.020zM10 3.002c0-0.553 0.447-1 1-1h10c0.553 0 1 0.447 1 1v1h-12v-1zM26 28.002c0 1.102-0.898 2-2 2h-16c-1.103 0-2-0.898-2-2v-17h20v17zM28 8.001v1h-24v-1.999c0-0.553 0.447-1 1-1h22c0.553 0 1 0.447 1 1v0.999zM9 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM9 14.005h2v13h-2v-13zM15 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM15 14.005h2v13h-2v-13zM21 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM21 14.005h2v13h-2v-13z"
-                                              fill="#1779ba"
-                                            />
-                                          </svg>
-                                        </RemoveIcon>
-                                      </button>
-                                    </StyledComponent>
-                                  </Styled(styled.button)>
-                                </div>
+                                      <title>
+                                        trash
+                                      </title>
+                                      <path
+                                        d="M29.98 6.819c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1.002c0-1.657-1.344-3-3-3h-10c-1.657 0-3 1.343-3 3v1.001h-3c-1.595 0-2.885 1.246-2.981 2.816h-0.019v2.183c0 1.104 0.896 2 2 2v0 17c0 2.209 1.791 4 4 4h16c2.209 0 4-1.791 4-4v-17c1.104 0 2-0.896 2-2v-2.182h-0.020zM10 3.002c0-0.553 0.447-1 1-1h10c0.553 0 1 0.447 1 1v1h-12v-1zM26 28.002c0 1.102-0.898 2-2 2h-16c-1.103 0-2-0.898-2-2v-17h20v17zM28 8.001v1h-24v-1.999c0-0.553 0.447-1 1-1h22c0.553 0 1 0.447 1 1v0.999zM9 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM9 14.005h2v13h-2v-13zM15 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM15 14.005h2v13h-2v-13zM21 28.006h2c0.553 0 1-0.447 1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553 0-1 0.447-1 1v13c0 0.553 0.447 1 1 1zM21 14.005h2v13h-2v-13z"
+                                        fill="#1779ba"
+                                      />
+                                    </svg>
+                                  </RemoveIcon>
+                                </button>
                               </StyledComponent>
-                            </styled.div>
-                          </header>
+                            </Styled(styled.button)>
+                          </div>
                         </StyledComponent>
-                      </styled.header>
-                    </section>
+                      </styled.div>
+                    </header>
                   </StyledComponent>
-                </styled.section>
+                </Styled(styled.header)>
               </li>
             </ul>
           </StyledComponent>

@@ -30,7 +30,7 @@ import Input from "../../../../atoms/Input";
 import InputErrorLabel from "../../../../atoms/InputErrorLabel";
 
 const RequiredNumberOfLinksFormContainer = styled.div`
-  margin: 1rem 0 0;
+  margin: 0 0 1rem;
 
   ${Input} {
     margin: 0;

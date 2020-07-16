@@ -14,7 +14,9 @@ exports[`renders correctly 1`] = `
             "lastClassName": "KEePz",
             "rules": Array [
               "
-  background-color: #e0e0e0;
+  background-color: ",
+              [Function],
+              ";
 ",
             ],
           },

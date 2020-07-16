@@ -809,7 +809,9 @@ exports[`when Close is clicked on modal window it should close modal window 1`] 
               ";
 
     > svg > path {
-      fill: #fff;
+      fill: ",
+              [Function],
+              ";
     }
   }
 
@@ -1760,7 +1762,9 @@ exports[`when Continue is clicked on modal window it should show password view m
                                   "lastClassName": "fajOkX",
                                   "rules": Array [
                                     "
-  background: #fff;
+  background: ",
+                                    [Function],
+                                    ";
   display: flex;
   align-items: center;
   border: 1px solid ",
@@ -4518,7 +4522,9 @@ exports[`when create key is clicked and no key is present it should display pass
                                   "lastClassName": "fajOkX",
                                   "rules": Array [
                                     "
-  background: #fff;
+  background: ",
+                                    [Function],
+                                    ";
   display: flex;
   align-items: center;
   border: 1px solid ",
@@ -6003,7 +6009,9 @@ exports[`when key is present it should display keycontainer 1`] = `
               ";
 
     > svg > path {
-      fill: #fff;
+      fill: ",
+              [Function],
+              ";
     }
   }
 
@@ -6152,7 +6160,8 @@ exports[`when no cryto available there should be a warning 1`] = `
   </styled.p>
   <NoCryptoWarning>
     <Warning
-      message="The web crypto api is not present in the browser your using. Argos Notary is only supported by a recent version of Chrome, Firefox, Safari or Edge"
+      message="The web crypto api is not present in the browser your using.
+        Argos Notary layout signing and key management is only supported by a recent version of Chrome, Firefox, Safari or Edge."
     >
       <styled.section>
         <StyledComponent
@@ -6289,7 +6298,8 @@ exports[`when no cryto available there should be a warning 1`] = `
                 <p
                   className="sc-bwzfXH bukUYK"
                 >
-                  The web crypto api is not present in the browser your using. Argos Notary is only supported by a recent version of Chrome, Firefox, Safari or Edge
+                  The web crypto api is not present in the browser your using.
+        Argos Notary layout signing and key management is only supported by a recent version of Chrome, Firefox, Safari or Edge.
                 </p>
               </StyledComponent>
             </styled.p>
@@ -6433,7 +6443,9 @@ exports[`when no key is present it should display warning message 1`] = `
               ";
 
     > svg > path {
-      fill: #fff;
+      fill: ",
+              [Function],
+              ";
     }
   }
 

@@ -15,12 +15,11 @@
  */
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import InputErrorLabel from "./InputErrorLabel";
-import Input from "./Input";
 import {
   BaseActionButton,
   CollectionContainerSpan,
-  ActionIconsContainer
+  ActionIconsContainer,
+  CollectionContainerCard
 } from "./Collection";
 import { ILayoutSegment } from "../interfaces/ILayout";
 import {
@@ -31,36 +30,7 @@ import LayoutElementNameEditor from "../pages/HierarchyEditor/Panels/ManageLayou
 import RemoveIcon from "./Icons/RemoveIcon";
 import StepsContainer from "../molecules/StepsContainer";
 
-const SegmentTitle = styled.header`
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0.2rem 0 0;
-  background-color: ${props => props.theme.layoutBuilder.segmentTitleBgColor};
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  span {
-    margin: 0 0.5rem;
-  }
-
-  ${Input} {
-    margin: 0;
-  }
-
-  ${InputErrorLabel} {
-    margin: 0.5rem 0 0;
-  }
-
-  &:hover {
-    cursor: pointer;
-    border: 1px solid
-      ${props => props.theme.layoutBuilder.segmentTitleHoverBorderColor};
-  }
-`;
+const SegmentTitle = styled(CollectionContainerCard)``;
 
 const RemoveSegmentButton = styled(BaseActionButton)``;
 
@@ -108,6 +78,7 @@ const Segment: React.FC<ISegmentContainerProps> = ({ segment, index }) => {
     <>
       <SegmentContainerLi>
         <SegmentTitle
+          clickable={true}
           data-testhook-id={"segment" + index + "-edit"}
           onClick={onEditSegment}>
           {editorStoreContext.state.activeEditLayoutElement?.step ===

@@ -9,12 +9,12 @@ exports[`renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-cSHVUG",
+            "componentId": "sc-kAzzGY",
             "isStatic": false,
-            "lastClassName": "iywaXB",
+            "lastClassName": "bPSSDY",
             "rules": Array [
               "
-  margin: 1rem 0 0;
+  margin: 0 0 1rem;
 
   ",
               ".sc-bdVaJa",
@@ -33,7 +33,7 @@ exports[`renders correctly 1`] = `
           "displayName": "styled.div",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-cSHVUG",
+          "styledComponentId": "sc-kAzzGY",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -43,7 +43,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-cSHVUG iywaXB"
+        className="sc-kAzzGY bPSSDY"
       >
         <Styled(styled.div)>
           <StyledComponent
@@ -52,9 +52,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-jzJRlG",
+                  "componentId": "sc-cSHVUG",
                   "isStatic": false,
-                  "lastClassName": "hBrikL",
+                  "lastClassName": "zFMLk",
                   "rules": Array [
                     "
   display: flex;
@@ -76,7 +76,7 @@ exports[`renders correctly 1`] = `
                   "sc-gqjmRU",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-jzJRlG",
+                "styledComponentId": "sc-cSHVUG",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -86,7 +86,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-gqjmRU sc-jzJRlG hBrikL"
+              className="sc-gqjmRU sc-cSHVUG zFMLk"
             >
               <form
                 data-testhook-id="required-number-of-links-form"
@@ -161,7 +161,9 @@ exports[`renders correctly 1`] = `
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ",
+                                    [Function],
+                                    ";
 ",
                                   ],
                                 },
@@ -215,7 +217,9 @@ exports[`renders correctly 1`] = `
                                     ";
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                    [Function],
+                                    ";
   border-radius: 0;
   background-color: ",
                                     [Function],
@@ -225,7 +229,9 @@ exports[`renders correctly 1`] = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ",
+                                    [Function],
+                                    ";
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -237,8 +243,12 @@ exports[`renders correctly 1`] = `
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                    [Function],
+                                    ";
+    box-shadow: 0 0 5px ",
+                                    [Function],
+                                    ";
   }
 ",
                                     "
@@ -307,12 +317,12 @@ exports[`update required number of links 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-cSHVUG",
+            "componentId": "sc-kAzzGY",
             "isStatic": false,
-            "lastClassName": "iywaXB",
+            "lastClassName": "bPSSDY",
             "rules": Array [
               "
-  margin: 1rem 0 0;
+  margin: 0 0 1rem;
 
   ",
               ".sc-bdVaJa",
@@ -331,7 +341,7 @@ exports[`update required number of links 1`] = `
           "displayName": "styled.div",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-cSHVUG",
+          "styledComponentId": "sc-kAzzGY",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -341,7 +351,7 @@ exports[`update required number of links 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-cSHVUG iywaXB"
+        className="sc-kAzzGY bPSSDY"
       >
         <Styled(styled.div)>
           <StyledComponent
@@ -350,9 +360,9 @@ exports[`update required number of links 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-jzJRlG",
+                  "componentId": "sc-cSHVUG",
                   "isStatic": false,
-                  "lastClassName": "hBrikL",
+                  "lastClassName": "zFMLk",
                   "rules": Array [
                     "
   display: flex;
@@ -374,7 +384,7 @@ exports[`update required number of links 1`] = `
                   "sc-gqjmRU",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-jzJRlG",
+                "styledComponentId": "sc-cSHVUG",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -384,7 +394,7 @@ exports[`update required number of links 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-gqjmRU sc-jzJRlG hBrikL"
+              className="sc-gqjmRU sc-cSHVUG zFMLk"
             >
               <form
                 data-testhook-id="required-number-of-links-form"
@@ -459,7 +469,9 @@ exports[`update required number of links 1`] = `
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ",
+                                    [Function],
+                                    ";
 ",
                                   ],
                                 },
@@ -513,7 +525,9 @@ exports[`update required number of links 1`] = `
                                     ";
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                    [Function],
+                                    ";
   border-radius: 0;
   background-color: ",
                                     [Function],
@@ -523,7 +537,9 @@ exports[`update required number of links 1`] = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ",
+                                    [Function],
+                                    ";
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -535,8 +551,12 @@ exports[`update required number of links 1`] = `
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                    [Function],
+                                    ";
+    box-shadow: 0 0 5px ",
+                                    [Function],
+                                    ";
   }
 ",
                                     "

@@ -15,12 +15,11 @@
  */
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import Input from "./Input";
-import InputErrorLabel from "./InputErrorLabel";
 import {
   BaseActionButton,
   CollectionContainerSpan,
-  ActionIconsContainer
+  ActionIconsContainer,
+  CollectionContainerCard
 } from "./Collection";
 import { ILayoutSegment, IStep } from "../interfaces/ILayout";
 import {
@@ -31,43 +30,7 @@ import LayoutElementNameEditor from "../pages/HierarchyEditor/Panels/ManageLayou
 import EditIcon from "./Icons/EditIcon";
 import RemoveIcon from "./Icons/RemoveIcon";
 
-interface IStepTitleProps {
-  active: boolean;
-}
-
-const StepTitle = styled.header<IStepTitleProps>`
-  border: 1px solid
-    ${props =>
-      props.active
-        ? props.theme.layoutBuilder.stepTitleHoverBorderColor
-        : "transparent"};
-  font-size: 0.9rem;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0.5rem 0 0;
-  background-color: ${props => props.theme.layoutBuilder.stepTitleBgColor};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  span {
-    margin: 0 0.5rem;
-  }
-
-  ${Input} {
-    margin: 0;
-  }
-
-  ${InputErrorLabel} {
-    margin: 0.5rem 0 0;
-  }
-
-  &:hover {
-    cursor: pointer;
-    border: 1px solid
-      ${props => props.theme.layoutBuilder.stepTitleHoverBorderColor};
-  }
-`;
+const StepTitle = styled(CollectionContainerCard)``;
 
 const StepSection = styled.section`
   width: 100%;
@@ -132,6 +95,7 @@ const Step: React.FC<IStepContainer> = ({ step, index, segment }) => {
         data-testhook-id={segment.name + "-" + index + "-edit-step"}
         onClick={onEditStep}>
         <StepTitle
+          clickable={true}
           active={
             step === editorStoreContext.state.selectedLayoutElement?.step ||
             step === editorStoreContext.state.activeEditLayoutElement?.step

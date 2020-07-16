@@ -22,15 +22,18 @@ export const InputCSS = css<{ disabled?: boolean; height?: string }>`
   height: ${props => (props.height ? props.height : "2.4375rem")};
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ${props => props.theme.input.borderColor};
   border-radius: 0;
-  background-color: ${props => (props.disabled ? "#e0e0e0" : "#fefefe")};
+  background-color: ${props =>
+    props.disabled
+      ? props.theme.input.disabledBgColor
+      : props.theme.input.bgColor};
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ${props => props.theme.input.textColor};
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -40,8 +43,8 @@ export const InputCSS = css<{ disabled?: boolean; height?: string }>`
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ${props => props.theme.input.focusBorderColor};
+    box-shadow: 0 0 5px ${props => props.theme.input.focusBoxShadowColor};
   }
 `;
 

@@ -71,7 +71,9 @@ exports[`approval happy flow 1`] = `
                       [Function],
                       ";
   padding: 0.5rem 1rem;
-  background-color: #fff;
+  background-color: ",
+                      [Function],
+                      ";
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -765,7 +767,9 @@ exports[`approval happy flow 1`] = `
                         [Function],
                         ";
   padding: 0.5rem 1rem;
-  background-color: #fff;
+  background-color: ",
+                        [Function],
+                        ";
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1125,9 +1129,9 @@ exports[`approval happy flow 1`] = `
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-cMljjf",
+                                                "componentId": "sc-jAaTju",
                                                 "isStatic": false,
-                                                "lastClassName": "gzCtoP",
+                                                "lastClassName": "dGbMpd",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -1149,7 +1153,7 @@ exports[`approval happy flow 1`] = `
                                                 "sc-bZQynM",
                                               ],
                                               "render": [Function],
-                                              "styledComponentId": "sc-cMljjf",
+                                              "styledComponentId": "sc-jAaTju",
                                               "target": "div",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -1159,7 +1163,7 @@ exports[`approval happy flow 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-bZQynM sc-cMljjf gzCtoP"
+                                            className="sc-bZQynM sc-jAaTju dGbMpd"
                                           >
                                             <form
                                               data-testhook-id="xl-deploy-collector-execution-form-0"
@@ -1234,7 +1238,9 @@ exports[`approval happy flow 1`] = `
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ",
+                                                                  [Function],
+                                                                  ";
 ",
                                                                 ],
                                                               },
@@ -1288,7 +1294,9 @@ exports[`approval happy flow 1`] = `
                                                                   ";
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                                                  [Function],
+                                                                  ";
   border-radius: 0;
   background-color: ",
                                                                   [Function],
@@ -1298,7 +1306,9 @@ exports[`approval happy flow 1`] = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ",
+                                                                  [Function],
+                                                                  ";
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -1310,8 +1320,12 @@ exports[`approval happy flow 1`] = `
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                                                  [Function],
+                                                                  ";
+    box-shadow: 0 0 5px ",
+                                                                  [Function],
+                                                                  ";
   }
 ",
                                                                   "
@@ -1418,7 +1432,9 @@ exports[`approval happy flow 1`] = `
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ",
+                                                                  [Function],
+                                                                  ";
 ",
                                                                 ],
                                                               },
@@ -1472,7 +1488,9 @@ exports[`approval happy flow 1`] = `
                                                                   ";
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                                                  [Function],
+                                                                  ";
   border-radius: 0;
   background-color: ",
                                                                   [Function],
@@ -1482,7 +1500,9 @@ exports[`approval happy flow 1`] = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ",
+                                                                  [Function],
+                                                                  ";
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -1494,8 +1514,12 @@ exports[`approval happy flow 1`] = `
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                                                  [Function],
+                                                                  ";
+    box-shadow: 0 0 5px ",
+                                                                  [Function],
+                                                                  ";
   }
 ",
                                                                   "
@@ -1592,7 +1616,9 @@ exports[`approval happy flow 1`] = `
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ",
+                                                                  [Function],
+                                                                  ";
 ",
                                                                 ],
                                                               },
@@ -1646,7 +1672,9 @@ exports[`approval happy flow 1`] = `
                                                                   ";
   margin: 0 0 1rem;
   padding: 0.5rem;
-  border: 1px solid #cacaca;
+  border: 1px solid ",
+                                                                  [Function],
+                                                                  ";
   border-radius: 0;
   background-color: ",
                                                                   [Function],
@@ -1656,7 +1684,9 @@ exports[`approval happy flow 1`] = `
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #0a0a0a;
+  color: ",
+                                                                  [Function],
+                                                                  ";
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out,
     -webkit-box-shadow 0.5s;
 
@@ -1668,8 +1698,12 @@ exports[`approval happy flow 1`] = `
 
   &:focus {
     outline: none;
-    border: 1px solid #8a8a8a;
-    box-shadow: 0 0 5px #cacaca;
+    border: 1px solid ",
+                                                                  [Function],
+                                                                  ";
+    box-shadow: 0 0 5px ",
+                                                                  [Function],
+                                                                  ";
   }
 ",
                                                                   "
@@ -2454,7 +2488,9 @@ exports[`renders correctly with existing approvals 1`] = `
                       [Function],
                       ";
   padding: 0.5rem 1rem;
-  background-color: #fff;
+  background-color: ",
+                      [Function],
+                      ";
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3148,7 +3184,9 @@ exports[`renders correctly with existing approvals 1`] = `
                         [Function],
                         ";
   padding: 0.5rem 1rem;
-  background-color: #fff;
+  background-color: ",
+                        [Function],
+                        ";
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3344,7 +3382,9 @@ exports[`renders correctly with no existing approvals 1`] = `
                       [Function],
                       ";
   padding: 0.5rem 1rem;
-  background-color: #fff;
+  background-color: ",
+                      [Function],
+                      ";
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3748,7 +3788,9 @@ exports[`renders correctly with no existing approvals 1`] = `
                         [Function],
                         ";
   padding: 0.5rem 1rem;
-  background-color: #fff;
+  background-color: ",
+                        [Function],
+                        ";
   display: flex;
   justify-content: space-between;
   align-items: center;

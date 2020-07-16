@@ -32,7 +32,8 @@ import {
   CollectionContainerList,
   CollectionContainerRow,
   CollectionContainerSpan,
-  CollectionContainerTitle
+  CollectionContainerTitle,
+  CollectionContainerCard
 } from "../../../../atoms/Collection";
 import { PlusIcon } from "../../../../atoms/Icons";
 import EditIcon from "../../../../atoms/Icons/EditIcon";
@@ -47,18 +48,7 @@ import useFormBuilder, {
   IFormBuilderConfig,
   FormSubmitButtonHandlerTypes
 } from "../../../../hooks/useFormBuilder";
-import Select from "../../../../atoms/Select";
-
-const SelectionContainer = styled.section`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-
-  ${Select} {
-    margin: 0 0 0 1rem;
-  }
-`;
+import Select, { SelectionContainer } from "../../../../atoms/Select";
 
 const CustomFlexRow = styled(FlexRow)`
   align-items: center;
@@ -68,62 +58,23 @@ const ApprovalCheckbox = styled.input`
   margin-right: 1rem;
 `;
 
-const CollectorsContainer = styled(CollectionContainer)`
-  min-height: 0;
-  flex-direction: column;
-  border: 0;
-  padding: 0 1rem 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
-`;
+const CollectorsContainer = styled(CollectionContainer)``;
 
-const CollectorsContainerTitle = styled(CollectionContainerTitle)`
-  font-size: 0.85rem;
-  top: -1rem;
-  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${props =>
-    props.theme.layoutBuilder.segmentContainerTitleBgColor};
-  padding: 0.25rem 2rem 0.4rem;
-`;
+const CollectorsContainerTitle = styled(CollectionContainerTitle)``;
 
-const AddCollectorButton = styled(CollectionContainerButton)`
-  right: 0;
+const AddCollectorButton = styled(CollectionContainerButton)``;
 
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
-  }
-`;
-
-const CollectorTitle = styled.header`
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0.2rem 0 0;
-  background-color: ${props => props.theme.layoutBuilder.segmentTitleBgColor};
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  span {
-    margin: 0 0.5rem;
-  }
-`;
+const CollectorTitle = styled(CollectionContainerCard)``;
 
 const CollectorContainerSection = styled.section`
   width: 100%;
-  margin: 0 0 1rem;
 `;
 
 const EditCollectionButton = styled(BaseActionButton)``;
 
-export const FormContainer = styled(CollectionContainer)`
+export const FormContainer = styled.div`
   border: 0;
   flex-direction: column;
-  padding: 1rem;
-  margin: 0 0 1rem;
   min-height: 10rem;
   background-color: ${props => props.theme.layoutBuilder.stepContainerBgColor};
 `;
@@ -340,7 +291,8 @@ const ApprovalConfigEditor: React.FC = () => {
       cancellationLabel: "Cancel",
       confirmationLabel: "Save",
       autoFocus: true,
-      buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN
+      buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN,
+      alternateStyling: true
     };
 
     const [formJSX, formAPI] = useFormBuilder(formConfig);
@@ -351,7 +303,7 @@ const ApprovalConfigEditor: React.FC = () => {
     }, [collector]);
 
     return (
-      <FormContainer>
+      <>
         <SelectionContainer>
           <label htmlFor="collectorType">Collector type:</label>
           <Select
@@ -364,8 +316,10 @@ const ApprovalConfigEditor: React.FC = () => {
             <option value={ArtifactCollectorType.GIT}>git</option>
           </Select>
         </SelectionContainer>
-        {selectedCollectorType !== "select" ? <>{formJSX}</> : null}
-      </FormContainer>
+        {selectedCollectorType !== "select" ? (
+          <FormContainer>{formJSX}</FormContainer>
+        ) : null}
+      </>
     );
   };
 
@@ -379,7 +333,7 @@ const ApprovalConfigEditor: React.FC = () => {
   const collectorRow = (collector: IArtifactCollector, index: number) => {
     return (
       <CollectorContainerSection>
-        <CollectorTitle>
+        <CollectorTitle clickable={false}>
           <CollectionContainerSpan>
             {collector.name} - {collector.type.toLowerCase()} - {collector.uri}
           </CollectionContainerSpan>

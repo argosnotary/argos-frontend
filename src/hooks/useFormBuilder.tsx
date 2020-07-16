@@ -57,7 +57,7 @@ export const FormContainer = styled(FlexColumn)<IFormContainerProps>`
   ${props =>
     props.alternateStyling
       ? `
-    background: #e0e0e0;
+    background: ${props.theme.forms.alternateBgColor};
     padding: 1rem;
     `
       : null}
