@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 
 import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
 import { FormPermissions } from "../../../../types/FormPermission";
@@ -22,19 +21,7 @@ import useFormBuilder, {
   IFormBuilderConfig,
   FormSubmitButtonHandlerTypes
 } from "../../../../hooks/useFormBuilder";
-import Select from "../../../../atoms/Select";
-
-const SelectionContainer = styled.section`
-  display: flex;
-  flex-direction: row;
-  margin: 0 0 1rem;
-  align-items: center;
-
-  ${Select} {
-    display: inline-flex;
-    margin: 0 0 0 1rem;
-  }
-`;
+import Select, { SelectionContainer } from "../../../../atoms/Select";
 
 export interface IGitFormValues {
   username?: string;

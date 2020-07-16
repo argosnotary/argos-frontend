@@ -50,7 +50,7 @@ import {
   getSegmentNames,
   getStepNamesForSegment
 } from "../../../../stores/LayoutEditorService";
-import Select from "../../../../atoms/Select";
+import Select, { SelectionContainer } from "../../../../atoms/Select";
 
 const ItemContainer = styled(CollectionContainer)``;
 
@@ -59,21 +59,6 @@ const ItemContainerTitle = styled(CollectionContainerTitle)``;
 const AddItemButton = styled(CollectionContainerButton)``;
 
 const ItemTitle = styled(CollectionContainerCard)``;
-
-const SelectionContainer = styled.section`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  padding: 1rem;
-
-  ${Select} {
-    margin: 0 0 0 1rem;
-  }
-
-  background-color: ${props =>
-    props.theme.ruleEditor.selectionContainer.bgColor};
-`;
 
 const RemoveItemButton = styled(BaseActionButton)``;
 const EditItemButton = styled(BaseActionButton)``;

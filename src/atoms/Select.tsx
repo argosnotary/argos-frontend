@@ -56,4 +56,19 @@ const Select = styled.select`
   ${SelectCSS}
 `;
 
+export const SelectionContainer = styled.section`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+
+  ${Select} {
+    margin: 0 0 0 1rem;
+  }
+
+  background-color: ${props =>
+    props.theme.ruleEditor.selectionContainer.bgColor};
+`;
+
 export default Select;

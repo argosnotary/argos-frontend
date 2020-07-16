@@ -109,8 +109,4 @@ const JsonSignAndSubmit = () => {
   );
 };
 
-//    permission: cryptoAvailable()
-// ? hierarchyEditorState.editor.permission
-// : FormPermissions.READ,
-
 export default JsonSignAndSubmit;
