@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-import React, { Dispatch, SyntheticEvent } from "react";
+import React, { Dispatch, SyntheticEvent, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { useUserProfileContext } from "../stores/UserProfile";
+import useDataApi from "../hooks/useDataApi";
+import genericDataFetchReducer from "../stores/genericDataFetchReducer";
+import DataRequest from "../types/DataRequest";
+import { LoaderIcon } from "../atoms/Icons";
 
 interface IContextMenu {
   displayContextMenu: boolean;
@@ -69,11 +73,24 @@ const NavbarContextMenu: React.FC<IContextMenu> = props => {
 
   const useUserProfile = useUserProfileContext();
 
+  const [logoutResponse, setLogoutApiRequest] = useDataApi(
+    genericDataFetchReducer
+  );
+
   const logoutUser = (e: SyntheticEvent) => {
     e.preventDefault();
-    props.setDisplayContextMenu(false);
-    useUserProfile.setToken("");
-    history.push("/login");
+    const dataRequest: DataRequest = {
+      method: "put",
+      data: {},
+      token: useUserProfile.token,
+      url: "/api/serviceaccount/me/logout",
+      cbSuccess: () => {
+        props.setDisplayContextMenu(false);
+        useUserProfile.setToken("");
+        history.push("/login");
+      }
+    };
+    setLogoutApiRequest(dataRequest);
   };
 
   const toSettings = (e: SyntheticEvent) => {
@@ -81,6 +98,8 @@ const NavbarContextMenu: React.FC<IContextMenu> = props => {
     props.setDisplayContextMenu(false);
     history.push("/settings");
   };
+
+  const theme = useContext(ThemeContext);
 
   return (
     <Nav displayContextMenu={props.displayContextMenu}>
@@ -90,6 +109,12 @@ const NavbarContextMenu: React.FC<IContextMenu> = props => {
         </A>
         <MenuDivider />
         <A href="/logout">
+          {logoutResponse.isLoading ? (
+            <LoaderIcon
+              size={12}
+              color={theme.treeEditor.loaders.onFetchChildren.color}
+            />
+          ) : null}
           <MenuItem onClick={logoutUser}>Log out</MenuItem>
         </A>
       </ul>
