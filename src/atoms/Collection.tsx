@@ -16,7 +16,6 @@
 import styled, { css } from "styled-components";
 import Input from "./Input";
 import InputErrorLabel from "./InputErrorLabel";
-import { FormContainer } from "../hooks/useFormBuilder";
 
 interface ICollectionContainerProps {
   inverted?: boolean;
@@ -133,10 +132,6 @@ export const CollectionContainerList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  li ~ ${FormContainer} {
-    margin-top: 1rem;
-  }
 `;
 
 export const CollectionContainerSpan = styled.span`

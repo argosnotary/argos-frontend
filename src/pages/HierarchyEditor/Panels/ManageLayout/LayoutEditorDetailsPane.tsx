@@ -28,10 +28,11 @@ import {
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
-import ApprovalConfigEditor from "./ApprovalConfigEditor";
+import ArtifactCollectorEditor from "./ArtifactCollectorEditor";
 import RuleEditor from "./RuleEditor";
 import RequiredNumberOfLinks from "./RequiredNumberOfLinks";
 import StepAuthorizedAccountEditor from "./StepAuthorizedAccountEditor";
+import ApprovalConfigEditor from "./ApprovalConfigEditor";
 
 const PanelSpecificStyling = styled.div``;
 
@@ -107,6 +108,15 @@ const LayoutEditorDetailsPane: React.FC = () => {
               addAction={LayoutEditorActionType.ADD_EXPECTED_END_PRODUCT}
               editAction={LayoutEditorActionType.EDIT_EXPECTED_END_PRODUCT}
               removeAction={LayoutEditorActionType.REMOVE_EXPECTED_END_PRODUCT}
+            />
+            <ArtifactCollectorEditor
+              title={"Release collectors"}
+              artifactCollectorSpecifications={
+                editorStoreContext.state.releaseConfig
+                  ? editorStoreContext.state.releaseConfig
+                      .artifactCollectorSpecifications
+                  : []
+              }
             />
           </>
         );

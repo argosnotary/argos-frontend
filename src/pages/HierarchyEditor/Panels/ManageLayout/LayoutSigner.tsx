@@ -74,8 +74,21 @@ const LayoutSigner: React.FC = () => {
                   method: "post",
                   token,
                   cbSuccess: () => {
-                    hierarchyEditorDispatch.editor({
-                      type: HierarchyEditorActionTypes.RESET
+                    setRequest({
+                      data: editorStoreContext.state.releaseConfig
+                        ? editorStoreContext.state.releaseConfig
+                        : { artifactCollectorSpecifications: [] },
+                      url:
+                        "/api/supplychain/" +
+                        hierarchyEditorState.editor.node.referenceId +
+                        "/layout/releaseconfig",
+                      method: "post",
+                      token,
+                      cbSuccess: () => {
+                        hierarchyEditorDispatch.editor({
+                          type: HierarchyEditorActionTypes.RESET
+                        });
+                      }
                     });
                   }
                 });

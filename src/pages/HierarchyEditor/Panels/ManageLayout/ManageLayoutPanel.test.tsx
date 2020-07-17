@@ -37,6 +37,7 @@ import {
 import HierarchyEditorTestWrapper from "../../../../test/utils";
 import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
 import { SearchResultEntry } from "../../../../atoms/SearchInput";
+import ApprovalConfigEditor from "./ApprovalConfigEditor";
 
 const mock = new MockAdapter(Axios);
 
@@ -322,6 +323,7 @@ it("sign layout happy flow", async () => {
   mock
     .onPost("/api/supplychain/supplyChainId/layout/approvalconfig")
     .reply(200);
+  mock.onPost("/api/supplychain/supplyChainId/layout/releaseconfig").reply(200);
   mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(200);
 
   const root = createComponent();
@@ -396,16 +398,19 @@ it("sign layout happy flow", async () => {
     root
       .find('input[data-testhook-id="make-approval-step"]')
       .simulate("change", { target: { checked: true } });
-
-    // //
+    root.find('button[data-testhook-id="add-collector"]').simulate("click");
+    root.find('button[data-testhook-id="add-collector"]').simulate("click");
 
     await waitFor(() => {
-      root.find('select[id="collectorType"]').simulate("change", {
-        target: {
-          name: "collectorType",
-          value: ArtifactCollectorType.XLDEPLOY
-        }
-      });
+      if (root.find('select[id="collectorType"]').length > 0) {
+        root.find('select[id="collectorType"]').simulate("change", {
+          target: {
+            name: "collectorType",
+            value: ArtifactCollectorType.XLDEPLOY
+          }
+        });
+      }
+
       root.update();
 
       expect(root.find('select[id="collectorType"]').props().value).toBe(
@@ -465,7 +470,7 @@ it("sign layout happy flow", async () => {
       .simulate("submit");
 
     await waitFor(() => expect(mock.history.get.length).toBe(4));
-    await waitFor(() => expect(mock.history.post.length).toBe(3));
+    await waitFor(() => expect(mock.history.post.length).toBe(4));
 
     const expectedPost = {
       layoutSegments: [
@@ -487,6 +492,10 @@ it("sign layout happy flow", async () => {
 
     expect(mock.history.post[2].data).toEqual(
       '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"uri":"https://collect.org","name":"xlCollect","type":"XLDEPLOY","context":{"applicationName":"appName"}}]}]'
+    );
+
+    expect(mock.history.post[3].data).toEqual(
+      '{"artifactCollectorSpecifications":[]}'
     );
 
     expect(addItem.mock.calls[0][0]).toEqual({ type: "RESET" });

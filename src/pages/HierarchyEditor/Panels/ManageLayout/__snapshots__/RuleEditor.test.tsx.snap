@@ -24,7 +24,7 @@ exports[`add rule allow 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-kEYyzF",
             "isStatic": false,
-            "lastClassName": "iojSyD",
+            "lastClassName": "cwqUsU",
             "rules": Array [
               "
   margin: 2rem 0;
@@ -49,11 +49,24 @@ exports[`add rule allow 1`] = `
     margin-top: 1rem;
   }
 ",
+              "
+  li ~ ",
+              ".sc-hMqMXs",
+              " {
+    margin-top: 1rem;
+  }
+
+  li ~ section ~ ",
+              ".sc-hMqMXs",
+              " {
+    margin-top: 0;
+  }
+",
             ],
           },
           "displayName": "Styled(styled.section)",
           "foldedComponentIds": Array [
-            "sc-kAzzGY",
+            "sc-htpNat",
           ],
           "render": [Function],
           "styledComponentId": "sc-kEYyzF",
@@ -66,7 +79,7 @@ exports[`add rule allow 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-kAzzGY sc-kEYyzF iojSyD"
+        className="sc-htpNat sc-kEYyzF cwqUsU"
       >
         <styled.div>
           <StyledComponent
@@ -75,9 +88,9 @@ exports[`add rule allow 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-kpOJdX",
+                  "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "kVlxUP",
+                  "lastClassName": "kbecSY",
                   "rules": Array [
                     "
   display: flex;
@@ -90,7 +103,7 @@ exports[`add rule allow 1`] = `
                 "displayName": "styled.div",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-kpOJdX",
+                "styledComponentId": "sc-bZQynM",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -100,7 +113,7 @@ exports[`add rule allow 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-kpOJdX kVlxUP"
+              className="sc-bZQynM kbecSY"
             >
               <Styled(styled.header)>
                 <StyledComponent
@@ -130,7 +143,7 @@ exports[`add rule allow 1`] = `
                       },
                       "displayName": "Styled(styled.header)",
                       "foldedComponentIds": Array [
-                        "sc-dxgOiQ",
+                        "sc-gzVnrw",
                       ],
                       "render": [Function],
                       "styledComponentId": "sc-kkGfuU",
@@ -143,7 +156,7 @@ exports[`add rule allow 1`] = `
                   forwardedRef={null}
                 >
                   <header
-                    className="sc-dxgOiQ sc-kkGfuU gXTgbY"
+                    className="sc-gzVnrw sc-kkGfuU gXTgbY"
                   >
                     Expected End Products
                   </header>
@@ -183,7 +196,7 @@ exports[`add rule allow 1`] = `
                       },
                       "displayName": "Styled(styled.button)",
                       "foldedComponentIds": Array [
-                        "sc-kGXeez",
+                        "sc-EHOje",
                       ],
                       "render": [Function],
                       "styledComponentId": "sc-iAyFgw",
@@ -197,7 +210,7 @@ exports[`add rule allow 1`] = `
                   onClick={[Function]}
                 >
                   <button
-                    className="sc-kGXeez sc-iAyFgw RTKVq"
+                    className="sc-EHOje sc-iAyFgw RTKVq"
                     data-testhook-id="add-rule"
                     onClick={[Function]}
                   >
@@ -234,27 +247,21 @@ exports[`add rule allow 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-jKJlTe",
+                  "componentId": "sc-dnqmqq",
                   "isStatic": false,
-                  "lastClassName": "dKJUNv",
+                  "lastClassName": "gZXnwY",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  li ~ ",
-                    ".sc-cSHVUG",
-                    " {
-    margin-top: 1rem;
-  }
 ",
                   ],
                 },
                 "displayName": "styled.ul",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-jKJlTe",
+                "styledComponentId": "sc-dnqmqq",
                 "target": "ul",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -264,7 +271,7 @@ exports[`add rule allow 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-jKJlTe dKJUNv"
+              className="sc-dnqmqq gZXnwY"
             >
               <li>
                 <Styled(styled.header)
@@ -325,7 +332,7 @@ exports[`add rule allow 1`] = `
                         },
                         "displayName": "Styled(styled.header)",
                         "foldedComponentIds": Array [
-                          "sc-hMqMXs",
+                          "sc-gZMcBi",
                         ],
                         "render": [Function],
                         "styledComponentId": "sc-hSdWYo",
@@ -338,7 +345,7 @@ exports[`add rule allow 1`] = `
                     forwardedRef={null}
                   >
                     <header
-                      className="sc-hMqMXs sc-hSdWYo kKngBj"
+                      className="sc-gZMcBi sc-hSdWYo kKngBj"
                     >
                       <styled.span>
                         <StyledComponent
@@ -347,9 +354,9 @@ exports[`add rule allow 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-eNQAEJ",
+                                "componentId": "sc-iwsKbI",
                                 "isStatic": false,
-                                "lastClassName": "dhlUIc",
+                                "lastClassName": "chVlAL",
                                 "rules": Array [
                                   "
   white-space: nowrap;
@@ -361,7 +368,7 @@ exports[`add rule allow 1`] = `
                               "displayName": "styled.span",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-eNQAEJ",
+                              "styledComponentId": "sc-iwsKbI",
                               "target": "span",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -371,7 +378,7 @@ exports[`add rule allow 1`] = `
                           forwardedRef={null}
                         >
                           <span
-                            className="sc-eNQAEJ dhlUIc"
+                            className="sc-iwsKbI chVlAL"
                           >
                             create - pattern1
                           </span>
@@ -384,9 +391,9 @@ exports[`add rule allow 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-chPdSV",
+                                "componentId": "sc-bxivhb",
                                 "isStatic": false,
-                                "lastClassName": "eWUxCg",
+                                "lastClassName": "gepbvZ",
                                 "rules": Array [
                                   "
   display: flex;
@@ -397,7 +404,7 @@ exports[`add rule allow 1`] = `
                               "displayName": "styled.div",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-chPdSV",
+                              "styledComponentId": "sc-bxivhb",
                               "target": "div",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -407,7 +414,7 @@ exports[`add rule allow 1`] = `
                           forwardedRef={null}
                         >
                           <div
-                            className="sc-chPdSV eWUxCg"
+                            className="sc-bxivhb gepbvZ"
                           >
                             <Styled(styled.button)
                               data-testhook-id="edit-rule-0"
@@ -440,7 +447,7 @@ exports[`add rule allow 1`] = `
                                     },
                                     "displayName": "Styled(styled.button)",
                                     "foldedComponentIds": Array [
-                                      "sc-kgoBCf",
+                                      "sc-ifAKCX",
                                     ],
                                     "render": [Function],
                                     "styledComponentId": "sc-cvbbAY",
@@ -454,7 +461,7 @@ exports[`add rule allow 1`] = `
                                 onClick={[Function]}
                               >
                                 <button
-                                  className="sc-kgoBCf sc-cvbbAY ExiAf"
+                                  className="sc-ifAKCX sc-cvbbAY ExiAf"
                                   data-testhook-id="edit-rule-0"
                                   onClick={[Function]}
                                 >
@@ -509,7 +516,7 @@ exports[`add rule allow 1`] = `
                                     },
                                     "displayName": "Styled(styled.button)",
                                     "foldedComponentIds": Array [
-                                      "sc-kgoBCf",
+                                      "sc-ifAKCX",
                                     ],
                                     "render": [Function],
                                     "styledComponentId": "sc-eHgmQL",
@@ -523,7 +530,7 @@ exports[`add rule allow 1`] = `
                                 onClick={[Function]}
                               >
                                 <button
-                                  className="sc-kgoBCf sc-eHgmQL yHvcD"
+                                  className="sc-ifAKCX sc-eHgmQL yHvcD"
                                   data-testhook-id="delete-rule-0"
                                   onClick={[Function]}
                                 >
@@ -564,9 +571,9 @@ exports[`add rule allow 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-jTzLTM",
+                        "componentId": "sc-ckVGcZ",
                         "isStatic": false,
-                        "lastClassName": "eOdEYu",
+                        "lastClassName": "dGfUaA",
                         "rules": Array [
                           "
   display: flex;
@@ -576,7 +583,7 @@ exports[`add rule allow 1`] = `
   padding: 1rem;
 
   ",
-                          ".sc-VigVT",
+                          ".sc-dxgOiQ",
                           " {
     margin: 0 0 0 1rem;
   }
@@ -590,7 +597,7 @@ exports[`add rule allow 1`] = `
                       "displayName": "styled.section",
                       "foldedComponentIds": Array [],
                       "render": [Function],
-                      "styledComponentId": "sc-jTzLTM",
+                      "styledComponentId": "sc-ckVGcZ",
                       "target": "section",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -600,7 +607,7 @@ exports[`add rule allow 1`] = `
                   forwardedRef={null}
                 >
                   <section
-                    className="sc-jTzLTM eOdEYu"
+                    className="sc-ckVGcZ dGfUaA"
                   >
                     <label
                       htmlFor="collectorType"
@@ -619,9 +626,9 @@ exports[`add rule allow 1`] = `
                             "$$typeof": Symbol(react.forward_ref),
                             "attrs": Array [],
                             "componentStyle": ComponentStyle {
-                              "componentId": "sc-VigVT",
+                              "componentId": "sc-dxgOiQ",
                               "isStatic": false,
-                              "lastClassName": "gGEJMW",
+                              "lastClassName": "kWaBOW",
                               "rules": Array [
                                 "
   ",
@@ -674,7 +681,7 @@ exports[`add rule allow 1`] = `
                             "displayName": "styled.select",
                             "foldedComponentIds": Array [],
                             "render": [Function],
-                            "styledComponentId": "sc-VigVT",
+                            "styledComponentId": "sc-dxgOiQ",
                             "target": "select",
                             "toString": [Function],
                             "warnTooManyClasses": [Function],
@@ -688,7 +695,7 @@ exports[`add rule allow 1`] = `
                         value="ALLOW"
                       >
                         <select
-                          className="sc-VigVT gGEJMW"
+                          className="sc-dxgOiQ kWaBOW"
                           id="ruleType"
                           name="ruleType"
                           onChange={[Function]}
@@ -763,9 +770,9 @@ exports[`add rule allow 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-cSHVUG",
+                        "componentId": "sc-hMqMXs",
                         "isStatic": false,
-                        "lastClassName": "bCTSvX",
+                        "lastClassName": "kfLeVg",
                         "rules": Array [
                           "
   display: flex;
@@ -784,10 +791,10 @@ exports[`add rule allow 1`] = `
                       },
                       "displayName": "Styled(styled.div)",
                       "foldedComponentIds": Array [
-                        "sc-gqjmRU",
+                        "sc-kpOJdX",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-cSHVUG",
+                      "styledComponentId": "sc-hMqMXs",
                       "target": "div",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -797,7 +804,7 @@ exports[`add rule allow 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-gqjmRU sc-cSHVUG bCTSvX"
+                    className="sc-kpOJdX sc-hMqMXs kfLeVg"
                   >
                     <form
                       data-testhook-id="rule-edit-form"
@@ -832,9 +839,9 @@ exports[`add rule allow 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-bxivhb",
+                                  "componentId": "sc-VigVT",
                                   "isStatic": false,
-                                  "lastClassName": "glCqXO",
+                                  "lastClassName": "iIEVIh",
                                   "rules": Array [
                                     "
   display: flex;
@@ -845,7 +852,7 @@ exports[`add rule allow 1`] = `
                                 "displayName": "styled.div",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-bxivhb",
+                                "styledComponentId": "sc-VigVT",
                                 "target": "div",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -855,7 +862,7 @@ exports[`add rule allow 1`] = `
                             forwardedRef={null}
                           >
                             <div
-                              className="sc-bxivhb glCqXO"
+                              className="sc-VigVT iIEVIh"
                             >
                               <styled.label>
                                 <StyledComponent
@@ -864,9 +871,9 @@ exports[`add rule allow 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htpNat",
+                                        "componentId": "sc-gqjmRU",
                                         "isStatic": false,
-                                        "lastClassName": "hiNtKU",
+                                        "lastClassName": "ghiDHE",
                                         "rules": Array [
                                           "
   font-size: 0.875rem;
@@ -881,7 +888,7 @@ exports[`add rule allow 1`] = `
                                       "displayName": "styled.label",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htpNat",
+                                      "styledComponentId": "sc-gqjmRU",
                                       "target": "label",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -891,7 +898,7 @@ exports[`add rule allow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <label
-                                    className="sc-htpNat hiNtKU"
+                                    className="sc-gqjmRU ghiDHE"
                                   >
                                     Pattern*
                                   </label>
@@ -1016,9 +1023,9 @@ exports[`add rule allow 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-bZQynM",
+                                "componentId": "sc-jzJRlG",
                                 "isStatic": false,
-                                "lastClassName": "dMNJFD",
+                                "lastClassName": "dzbkdL",
                                 "rules": Array [
                                   "
   padding: 0;
@@ -1034,7 +1041,7 @@ exports[`add rule allow 1`] = `
                               "displayName": "styled.hr",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-bZQynM",
+                              "styledComponentId": "sc-jzJRlG",
                               "target": "hr",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -1044,7 +1051,7 @@ exports[`add rule allow 1`] = `
                           forwardedRef={null}
                         >
                           <hr
-                            className="sc-bZQynM dMNJFD"
+                            className="sc-jzJRlG dzbkdL"
                           />
                         </StyledComponent>
                       </styled.hr>
@@ -1055,9 +1062,9 @@ exports[`add rule allow 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-gzVnrw",
+                                "componentId": "sc-cSHVUG",
                                 "isStatic": false,
-                                "lastClassName": "lbqsSV",
+                                "lastClassName": "ikNjFl",
                                 "rules": Array [
                                   "
   display: flex;
@@ -1071,7 +1078,7 @@ exports[`add rule allow 1`] = `
                               "displayName": "styled.div",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-gzVnrw",
+                              "styledComponentId": "sc-cSHVUG",
                               "target": "div",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -1081,7 +1088,7 @@ exports[`add rule allow 1`] = `
                           forwardedRef={null}
                         >
                           <div
-                            className="sc-gzVnrw lbqsSV"
+                            className="sc-cSHVUG ikNjFl"
                           >
                             <LoaderButton
                               buttonType="button"
@@ -1101,9 +1108,9 @@ exports[`add rule allow 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htoDjs",
+                                        "componentId": "sc-kAzzGY",
                                         "isStatic": false,
-                                        "lastClassName": "cCVfJH",
+                                        "lastClassName": "fTmoqT",
                                         "rules": Array [
                                           "
   ",
@@ -1153,7 +1160,7 @@ exports[`add rule allow 1`] = `
                                       "displayName": "styled.button",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htoDjs",
+                                      "styledComponentId": "sc-kAzzGY",
                                       "target": "button",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -1165,7 +1172,7 @@ exports[`add rule allow 1`] = `
                                   type="button"
                                 >
                                   <button
-                                    className="sc-htoDjs cCVfJH"
+                                    className="sc-kAzzGY fTmoqT"
                                     data-testhook-id="rule-edit-form-submit-button"
                                     onMouseDown={[Function]}
                                     type="button"
@@ -1187,9 +1194,9 @@ exports[`add rule allow 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-jzJRlG",
+                                      "componentId": "sc-eNQAEJ",
                                       "isStatic": false,
-                                      "lastClassName": "OVMAH",
+                                      "lastClassName": "kzbqhM",
                                       "rules": Array [
                                         "
   ",
@@ -1265,11 +1272,11 @@ exports[`add rule allow 1`] = `
                                     },
                                     "displayName": "Styled(Styled(styled.button))",
                                     "foldedComponentIds": Array [
-                                      "sc-htoDjs",
-                                      "sc-gZMcBi",
+                                      "sc-kAzzGY",
+                                      "sc-kGXeez",
                                     ],
                                     "render": [Function],
-                                    "styledComponentId": "sc-jzJRlG",
+                                    "styledComponentId": "sc-eNQAEJ",
                                     "target": "button",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -1281,7 +1288,7 @@ exports[`add rule allow 1`] = `
                                 type="button"
                               >
                                 <button
-                                  className="sc-htoDjs sc-gZMcBi sc-jzJRlG OVMAH"
+                                  className="sc-kAzzGY sc-kGXeez sc-eNQAEJ kzbqhM"
                                   data-testhook="cancel-button"
                                   onMouseDown={[Function]}
                                   type="button"
@@ -1335,7 +1342,7 @@ exports[`add rule expected end product 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-kEYyzF",
             "isStatic": false,
-            "lastClassName": "iojSyD",
+            "lastClassName": "cwqUsU",
             "rules": Array [
               "
   margin: 2rem 0;
@@ -1360,11 +1367,24 @@ exports[`add rule expected end product 1`] = `
     margin-top: 1rem;
   }
 ",
+              "
+  li ~ ",
+              ".sc-hMqMXs",
+              " {
+    margin-top: 1rem;
+  }
+
+  li ~ section ~ ",
+              ".sc-hMqMXs",
+              " {
+    margin-top: 0;
+  }
+",
             ],
           },
           "displayName": "Styled(styled.section)",
           "foldedComponentIds": Array [
-            "sc-kAzzGY",
+            "sc-htpNat",
           ],
           "render": [Function],
           "styledComponentId": "sc-kEYyzF",
@@ -1377,7 +1397,7 @@ exports[`add rule expected end product 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-kAzzGY sc-kEYyzF iojSyD"
+        className="sc-htpNat sc-kEYyzF cwqUsU"
       >
         <styled.div>
           <StyledComponent
@@ -1386,9 +1406,9 @@ exports[`add rule expected end product 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-kpOJdX",
+                  "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "kVlxUP",
+                  "lastClassName": "kbecSY",
                   "rules": Array [
                     "
   display: flex;
@@ -1401,7 +1421,7 @@ exports[`add rule expected end product 1`] = `
                 "displayName": "styled.div",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-kpOJdX",
+                "styledComponentId": "sc-bZQynM",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -1411,7 +1431,7 @@ exports[`add rule expected end product 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-kpOJdX kVlxUP"
+              className="sc-bZQynM kbecSY"
             >
               <Styled(styled.header)>
                 <StyledComponent
@@ -1441,7 +1461,7 @@ exports[`add rule expected end product 1`] = `
                       },
                       "displayName": "Styled(styled.header)",
                       "foldedComponentIds": Array [
-                        "sc-dxgOiQ",
+                        "sc-gzVnrw",
                       ],
                       "render": [Function],
                       "styledComponentId": "sc-kkGfuU",
@@ -1454,7 +1474,7 @@ exports[`add rule expected end product 1`] = `
                   forwardedRef={null}
                 >
                   <header
-                    className="sc-dxgOiQ sc-kkGfuU gXTgbY"
+                    className="sc-gzVnrw sc-kkGfuU gXTgbY"
                   >
                     Expected End Products
                   </header>
@@ -1494,7 +1514,7 @@ exports[`add rule expected end product 1`] = `
                       },
                       "displayName": "Styled(styled.button)",
                       "foldedComponentIds": Array [
-                        "sc-kGXeez",
+                        "sc-EHOje",
                       ],
                       "render": [Function],
                       "styledComponentId": "sc-iAyFgw",
@@ -1508,7 +1528,7 @@ exports[`add rule expected end product 1`] = `
                   onClick={[Function]}
                 >
                   <button
-                    className="sc-kGXeez sc-iAyFgw RTKVq"
+                    className="sc-EHOje sc-iAyFgw RTKVq"
                     data-testhook-id="add-rule"
                     onClick={[Function]}
                   >
@@ -1545,27 +1565,21 @@ exports[`add rule expected end product 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-jKJlTe",
+                  "componentId": "sc-dnqmqq",
                   "isStatic": false,
-                  "lastClassName": "dKJUNv",
+                  "lastClassName": "gZXnwY",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  li ~ ",
-                    ".sc-cSHVUG",
-                    " {
-    margin-top: 1rem;
-  }
 ",
                   ],
                 },
                 "displayName": "styled.ul",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-jKJlTe",
+                "styledComponentId": "sc-dnqmqq",
                 "target": "ul",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -1575,7 +1589,7 @@ exports[`add rule expected end product 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-jKJlTe dKJUNv"
+              className="sc-dnqmqq gZXnwY"
             >
               <li>
                 <Styled(styled.header)
@@ -1636,7 +1650,7 @@ exports[`add rule expected end product 1`] = `
                         },
                         "displayName": "Styled(styled.header)",
                         "foldedComponentIds": Array [
-                          "sc-hMqMXs",
+                          "sc-gZMcBi",
                         ],
                         "render": [Function],
                         "styledComponentId": "sc-hSdWYo",
@@ -1649,7 +1663,7 @@ exports[`add rule expected end product 1`] = `
                     forwardedRef={null}
                   >
                     <header
-                      className="sc-hMqMXs sc-hSdWYo kKngBj"
+                      className="sc-gZMcBi sc-hSdWYo kKngBj"
                     >
                       <styled.span>
                         <StyledComponent
@@ -1658,9 +1672,9 @@ exports[`add rule expected end product 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-eNQAEJ",
+                                "componentId": "sc-iwsKbI",
                                 "isStatic": false,
-                                "lastClassName": "dhlUIc",
+                                "lastClassName": "chVlAL",
                                 "rules": Array [
                                   "
   white-space: nowrap;
@@ -1672,7 +1686,7 @@ exports[`add rule expected end product 1`] = `
                               "displayName": "styled.span",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-eNQAEJ",
+                              "styledComponentId": "sc-iwsKbI",
                               "target": "span",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -1682,7 +1696,7 @@ exports[`add rule expected end product 1`] = `
                           forwardedRef={null}
                         >
                           <span
-                            className="sc-eNQAEJ dhlUIc"
+                            className="sc-iwsKbI chVlAL"
                           >
                             match - pattern - destinationPathPrefix
                           </span>
@@ -1695,9 +1709,9 @@ exports[`add rule expected end product 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-chPdSV",
+                                "componentId": "sc-bxivhb",
                                 "isStatic": false,
-                                "lastClassName": "eWUxCg",
+                                "lastClassName": "gepbvZ",
                                 "rules": Array [
                                   "
   display: flex;
@@ -1708,7 +1722,7 @@ exports[`add rule expected end product 1`] = `
                               "displayName": "styled.div",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-chPdSV",
+                              "styledComponentId": "sc-bxivhb",
                               "target": "div",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -1718,7 +1732,7 @@ exports[`add rule expected end product 1`] = `
                           forwardedRef={null}
                         >
                           <div
-                            className="sc-chPdSV eWUxCg"
+                            className="sc-bxivhb gepbvZ"
                           >
                             <Styled(styled.button)
                               data-testhook-id="edit-rule-0"
@@ -1751,7 +1765,7 @@ exports[`add rule expected end product 1`] = `
                                     },
                                     "displayName": "Styled(styled.button)",
                                     "foldedComponentIds": Array [
-                                      "sc-kgoBCf",
+                                      "sc-ifAKCX",
                                     ],
                                     "render": [Function],
                                     "styledComponentId": "sc-cvbbAY",
@@ -1765,7 +1779,7 @@ exports[`add rule expected end product 1`] = `
                                 onClick={[Function]}
                               >
                                 <button
-                                  className="sc-kgoBCf sc-cvbbAY ExiAf"
+                                  className="sc-ifAKCX sc-cvbbAY ExiAf"
                                   data-testhook-id="edit-rule-0"
                                   onClick={[Function]}
                                 >
@@ -1820,7 +1834,7 @@ exports[`add rule expected end product 1`] = `
                                     },
                                     "displayName": "Styled(styled.button)",
                                     "foldedComponentIds": Array [
-                                      "sc-kgoBCf",
+                                      "sc-ifAKCX",
                                     ],
                                     "render": [Function],
                                     "styledComponentId": "sc-eHgmQL",
@@ -1834,7 +1848,7 @@ exports[`add rule expected end product 1`] = `
                                 onClick={[Function]}
                               >
                                 <button
-                                  className="sc-kgoBCf sc-eHgmQL yHvcD"
+                                  className="sc-ifAKCX sc-eHgmQL yHvcD"
                                   data-testhook-id="delete-rule-0"
                                   onClick={[Function]}
                                 >
@@ -1878,9 +1892,9 @@ exports[`add rule expected end product 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-cSHVUG",
+                        "componentId": "sc-hMqMXs",
                         "isStatic": false,
-                        "lastClassName": "bCTSvX",
+                        "lastClassName": "kfLeVg",
                         "rules": Array [
                           "
   display: flex;
@@ -1899,10 +1913,10 @@ exports[`add rule expected end product 1`] = `
                       },
                       "displayName": "Styled(styled.div)",
                       "foldedComponentIds": Array [
-                        "sc-gqjmRU",
+                        "sc-kpOJdX",
                       ],
                       "render": [Function],
-                      "styledComponentId": "sc-cSHVUG",
+                      "styledComponentId": "sc-hMqMXs",
                       "target": "div",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -1912,7 +1926,7 @@ exports[`add rule expected end product 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-gqjmRU sc-cSHVUG bCTSvX"
+                    className="sc-kpOJdX sc-hMqMXs kfLeVg"
                   >
                     <form
                       data-testhook-id="rule-edit-form"
@@ -1947,9 +1961,9 @@ exports[`add rule expected end product 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-bxivhb",
+                                  "componentId": "sc-VigVT",
                                   "isStatic": false,
-                                  "lastClassName": "glCqXO",
+                                  "lastClassName": "iIEVIh",
                                   "rules": Array [
                                     "
   display: flex;
@@ -1960,7 +1974,7 @@ exports[`add rule expected end product 1`] = `
                                 "displayName": "styled.div",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-bxivhb",
+                                "styledComponentId": "sc-VigVT",
                                 "target": "div",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -1970,7 +1984,7 @@ exports[`add rule expected end product 1`] = `
                             forwardedRef={null}
                           >
                             <div
-                              className="sc-bxivhb glCqXO"
+                              className="sc-VigVT iIEVIh"
                             >
                               <styled.label>
                                 <StyledComponent
@@ -1979,9 +1993,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htpNat",
+                                        "componentId": "sc-gqjmRU",
                                         "isStatic": false,
-                                        "lastClassName": "hiNtKU",
+                                        "lastClassName": "ghiDHE",
                                         "rules": Array [
                                           "
   font-size: 0.875rem;
@@ -1996,7 +2010,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.label",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htpNat",
+                                      "styledComponentId": "sc-gqjmRU",
                                       "target": "label",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2006,7 +2020,7 @@ exports[`add rule expected end product 1`] = `
                                   forwardedRef={null}
                                 >
                                   <label
-                                    className="sc-htpNat hiNtKU"
+                                    className="sc-gqjmRU ghiDHE"
                                   >
                                     Pattern*
                                   </label>
@@ -2141,9 +2155,9 @@ exports[`add rule expected end product 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-bxivhb",
+                                  "componentId": "sc-VigVT",
                                   "isStatic": false,
-                                  "lastClassName": "glCqXO",
+                                  "lastClassName": "iIEVIh",
                                   "rules": Array [
                                     "
   display: flex;
@@ -2154,7 +2168,7 @@ exports[`add rule expected end product 1`] = `
                                 "displayName": "styled.div",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-bxivhb",
+                                "styledComponentId": "sc-VigVT",
                                 "target": "div",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -2164,7 +2178,7 @@ exports[`add rule expected end product 1`] = `
                             forwardedRef={null}
                           >
                             <div
-                              className="sc-bxivhb glCqXO"
+                              className="sc-VigVT iIEVIh"
                             >
                               <styled.label>
                                 <StyledComponent
@@ -2173,9 +2187,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htpNat",
+                                        "componentId": "sc-gqjmRU",
                                         "isStatic": false,
-                                        "lastClassName": "hiNtKU",
+                                        "lastClassName": "ghiDHE",
                                         "rules": Array [
                                           "
   font-size: 0.875rem;
@@ -2190,7 +2204,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.label",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htpNat",
+                                      "styledComponentId": "sc-gqjmRU",
                                       "target": "label",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2200,7 +2214,7 @@ exports[`add rule expected end product 1`] = `
                                   forwardedRef={null}
                                 >
                                   <label
-                                    className="sc-htpNat hiNtKU"
+                                    className="sc-gqjmRU ghiDHE"
                                   >
                                     Source Path Prefix
                                   </label>
@@ -2325,9 +2339,9 @@ exports[`add rule expected end product 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-bxivhb",
+                                  "componentId": "sc-VigVT",
                                   "isStatic": false,
-                                  "lastClassName": "glCqXO",
+                                  "lastClassName": "iIEVIh",
                                   "rules": Array [
                                     "
   display: flex;
@@ -2338,7 +2352,7 @@ exports[`add rule expected end product 1`] = `
                                 "displayName": "styled.div",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-bxivhb",
+                                "styledComponentId": "sc-VigVT",
                                 "target": "div",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -2348,7 +2362,7 @@ exports[`add rule expected end product 1`] = `
                             forwardedRef={null}
                           >
                             <div
-                              className="sc-bxivhb glCqXO"
+                              className="sc-VigVT iIEVIh"
                             >
                               <styled.label>
                                 <StyledComponent
@@ -2357,9 +2371,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htpNat",
+                                        "componentId": "sc-gqjmRU",
                                         "isStatic": false,
-                                        "lastClassName": "hiNtKU",
+                                        "lastClassName": "ghiDHE",
                                         "rules": Array [
                                           "
   font-size: 0.875rem;
@@ -2374,7 +2388,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.label",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htpNat",
+                                      "styledComponentId": "sc-gqjmRU",
                                       "target": "label",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2384,7 +2398,7 @@ exports[`add rule expected end product 1`] = `
                                   forwardedRef={null}
                                 >
                                   <label
-                                    className="sc-htpNat hiNtKU"
+                                    className="sc-gqjmRU ghiDHE"
                                   >
                                     Destination Path Prefix
                                   </label>
@@ -2509,9 +2523,9 @@ exports[`add rule expected end product 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-fjdhpX",
+                                  "componentId": "sc-jKJlTe",
                                   "isStatic": false,
-                                  "lastClassName": "kEvzkS",
+                                  "lastClassName": "cJqkLF",
                                   "rules": Array [
                                     "
   display: flex;
@@ -2522,7 +2536,7 @@ exports[`add rule expected end product 1`] = `
                                 "displayName": "styled.div",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-fjdhpX",
+                                "styledComponentId": "sc-jKJlTe",
                                 "target": "div",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -2532,7 +2546,7 @@ exports[`add rule expected end product 1`] = `
                             forwardedRef={null}
                           >
                             <div
-                              className="sc-fjdhpX kEvzkS"
+                              className="sc-jKJlTe cJqkLF"
                             >
                               <styled.label>
                                 <StyledComponent
@@ -2541,9 +2555,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htpNat",
+                                        "componentId": "sc-gqjmRU",
                                         "isStatic": false,
-                                        "lastClassName": "hiNtKU",
+                                        "lastClassName": "ghiDHE",
                                         "rules": Array [
                                           "
   font-size: 0.875rem;
@@ -2558,7 +2572,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.label",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htpNat",
+                                      "styledComponentId": "sc-gqjmRU",
                                       "target": "label",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2568,7 +2582,7 @@ exports[`add rule expected end product 1`] = `
                                   forwardedRef={null}
                                 >
                                   <label
-                                    className="sc-htpNat hiNtKU"
+                                    className="sc-gqjmRU ghiDHE"
                                   >
                                     Destination Type*
                                   </label>
@@ -2590,9 +2604,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-VigVT",
+                                        "componentId": "sc-dxgOiQ",
                                         "isStatic": false,
-                                        "lastClassName": "gGEJMW",
+                                        "lastClassName": "kWaBOW",
                                         "rules": Array [
                                           "
   ",
@@ -2645,7 +2659,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.select",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-VigVT",
+                                      "styledComponentId": "sc-dxgOiQ",
                                       "target": "select",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2659,7 +2673,7 @@ exports[`add rule expected end product 1`] = `
                                   value=""
                                 >
                                   <select
-                                    className="sc-VigVT gGEJMW"
+                                    className="sc-dxgOiQ kWaBOW"
                                     data-testhook-id="rule-edit-form-field-3"
                                     disabled={false}
                                     name="destinationType"
@@ -2705,9 +2719,9 @@ exports[`add rule expected end product 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-fjdhpX",
+                                  "componentId": "sc-jKJlTe",
                                   "isStatic": false,
-                                  "lastClassName": "kEvzkS",
+                                  "lastClassName": "cJqkLF",
                                   "rules": Array [
                                     "
   display: flex;
@@ -2718,7 +2732,7 @@ exports[`add rule expected end product 1`] = `
                                 "displayName": "styled.div",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-fjdhpX",
+                                "styledComponentId": "sc-jKJlTe",
                                 "target": "div",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -2728,7 +2742,7 @@ exports[`add rule expected end product 1`] = `
                             forwardedRef={null}
                           >
                             <div
-                              className="sc-fjdhpX kEvzkS"
+                              className="sc-jKJlTe cJqkLF"
                             >
                               <styled.label>
                                 <StyledComponent
@@ -2737,9 +2751,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htpNat",
+                                        "componentId": "sc-gqjmRU",
                                         "isStatic": false,
-                                        "lastClassName": "hiNtKU",
+                                        "lastClassName": "ghiDHE",
                                         "rules": Array [
                                           "
   font-size: 0.875rem;
@@ -2754,7 +2768,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.label",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htpNat",
+                                      "styledComponentId": "sc-gqjmRU",
                                       "target": "label",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2764,7 +2778,7 @@ exports[`add rule expected end product 1`] = `
                                   forwardedRef={null}
                                 >
                                   <label
-                                    className="sc-htpNat hiNtKU"
+                                    className="sc-gqjmRU ghiDHE"
                                   >
                                     Destination Segment Name*
                                   </label>
@@ -2786,9 +2800,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-VigVT",
+                                        "componentId": "sc-dxgOiQ",
                                         "isStatic": false,
-                                        "lastClassName": "gGEJMW",
+                                        "lastClassName": "kWaBOW",
                                         "rules": Array [
                                           "
   ",
@@ -2841,7 +2855,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.select",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-VigVT",
+                                      "styledComponentId": "sc-dxgOiQ",
                                       "target": "select",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2855,7 +2869,7 @@ exports[`add rule expected end product 1`] = `
                                   value=""
                                 >
                                   <select
-                                    className="sc-VigVT gGEJMW"
+                                    className="sc-dxgOiQ kWaBOW"
                                     data-testhook-id="rule-edit-form-field-4"
                                     disabled={false}
                                     name="destinationSegmentName"
@@ -2901,9 +2915,9 @@ exports[`add rule expected end product 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-fjdhpX",
+                                  "componentId": "sc-jKJlTe",
                                   "isStatic": false,
-                                  "lastClassName": "kEvzkS",
+                                  "lastClassName": "cJqkLF",
                                   "rules": Array [
                                     "
   display: flex;
@@ -2914,7 +2928,7 @@ exports[`add rule expected end product 1`] = `
                                 "displayName": "styled.div",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-fjdhpX",
+                                "styledComponentId": "sc-jKJlTe",
                                 "target": "div",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -2924,7 +2938,7 @@ exports[`add rule expected end product 1`] = `
                             forwardedRef={null}
                           >
                             <div
-                              className="sc-fjdhpX kEvzkS"
+                              className="sc-jKJlTe cJqkLF"
                             >
                               <styled.label>
                                 <StyledComponent
@@ -2933,9 +2947,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htpNat",
+                                        "componentId": "sc-gqjmRU",
                                         "isStatic": false,
-                                        "lastClassName": "hiNtKU",
+                                        "lastClassName": "ghiDHE",
                                         "rules": Array [
                                           "
   font-size: 0.875rem;
@@ -2950,7 +2964,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.label",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htpNat",
+                                      "styledComponentId": "sc-gqjmRU",
                                       "target": "label",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2960,7 +2974,7 @@ exports[`add rule expected end product 1`] = `
                                   forwardedRef={null}
                                 >
                                   <label
-                                    className="sc-htpNat hiNtKU"
+                                    className="sc-gqjmRU ghiDHE"
                                   >
                                     Destination Step Name*
                                   </label>
@@ -2982,9 +2996,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-VigVT",
+                                        "componentId": "sc-dxgOiQ",
                                         "isStatic": false,
-                                        "lastClassName": "gGEJMW",
+                                        "lastClassName": "kWaBOW",
                                         "rules": Array [
                                           "
   ",
@@ -3037,7 +3051,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.select",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-VigVT",
+                                      "styledComponentId": "sc-dxgOiQ",
                                       "target": "select",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -3051,7 +3065,7 @@ exports[`add rule expected end product 1`] = `
                                   value=""
                                 >
                                   <select
-                                    className="sc-VigVT gGEJMW"
+                                    className="sc-dxgOiQ kWaBOW"
                                     data-testhook-id="rule-edit-form-field-5"
                                     disabled={false}
                                     name="destinationStepName"
@@ -3077,9 +3091,9 @@ exports[`add rule expected end product 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-bZQynM",
+                                "componentId": "sc-jzJRlG",
                                 "isStatic": false,
-                                "lastClassName": "dMNJFD",
+                                "lastClassName": "dzbkdL",
                                 "rules": Array [
                                   "
   padding: 0;
@@ -3095,7 +3109,7 @@ exports[`add rule expected end product 1`] = `
                               "displayName": "styled.hr",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-bZQynM",
+                              "styledComponentId": "sc-jzJRlG",
                               "target": "hr",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -3105,7 +3119,7 @@ exports[`add rule expected end product 1`] = `
                           forwardedRef={null}
                         >
                           <hr
-                            className="sc-bZQynM dMNJFD"
+                            className="sc-jzJRlG dzbkdL"
                           />
                         </StyledComponent>
                       </styled.hr>
@@ -3116,9 +3130,9 @@ exports[`add rule expected end product 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-gzVnrw",
+                                "componentId": "sc-cSHVUG",
                                 "isStatic": false,
-                                "lastClassName": "lbqsSV",
+                                "lastClassName": "ikNjFl",
                                 "rules": Array [
                                   "
   display: flex;
@@ -3132,7 +3146,7 @@ exports[`add rule expected end product 1`] = `
                               "displayName": "styled.div",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-gzVnrw",
+                              "styledComponentId": "sc-cSHVUG",
                               "target": "div",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -3142,7 +3156,7 @@ exports[`add rule expected end product 1`] = `
                           forwardedRef={null}
                         >
                           <div
-                            className="sc-gzVnrw lbqsSV"
+                            className="sc-cSHVUG ikNjFl"
                           >
                             <LoaderButton
                               buttonType="button"
@@ -3162,9 +3176,9 @@ exports[`add rule expected end product 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-htoDjs",
+                                        "componentId": "sc-kAzzGY",
                                         "isStatic": false,
-                                        "lastClassName": "cCVfJH",
+                                        "lastClassName": "fTmoqT",
                                         "rules": Array [
                                           "
   ",
@@ -3214,7 +3228,7 @@ exports[`add rule expected end product 1`] = `
                                       "displayName": "styled.button",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-htoDjs",
+                                      "styledComponentId": "sc-kAzzGY",
                                       "target": "button",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -3226,7 +3240,7 @@ exports[`add rule expected end product 1`] = `
                                   type="button"
                                 >
                                   <button
-                                    className="sc-htoDjs cCVfJH"
+                                    className="sc-kAzzGY fTmoqT"
                                     data-testhook-id="rule-edit-form-submit-button"
                                     onMouseDown={[Function]}
                                     type="button"
@@ -3248,9 +3262,9 @@ exports[`add rule expected end product 1`] = `
                                     "$$typeof": Symbol(react.forward_ref),
                                     "attrs": Array [],
                                     "componentStyle": ComponentStyle {
-                                      "componentId": "sc-jzJRlG",
+                                      "componentId": "sc-eNQAEJ",
                                       "isStatic": false,
-                                      "lastClassName": "OVMAH",
+                                      "lastClassName": "kzbqhM",
                                       "rules": Array [
                                         "
   ",
@@ -3326,11 +3340,11 @@ exports[`add rule expected end product 1`] = `
                                     },
                                     "displayName": "Styled(Styled(styled.button))",
                                     "foldedComponentIds": Array [
-                                      "sc-htoDjs",
-                                      "sc-gZMcBi",
+                                      "sc-kAzzGY",
+                                      "sc-kGXeez",
                                     ],
                                     "render": [Function],
-                                    "styledComponentId": "sc-jzJRlG",
+                                    "styledComponentId": "sc-eNQAEJ",
                                     "target": "button",
                                     "toString": [Function],
                                     "warnTooManyClasses": [Function],
@@ -3342,7 +3356,7 @@ exports[`add rule expected end product 1`] = `
                                 type="button"
                               >
                                 <button
-                                  className="sc-htoDjs sc-gZMcBi sc-jzJRlG OVMAH"
+                                  className="sc-kAzzGY sc-kGXeez sc-eNQAEJ kzbqhM"
                                   data-testhook="cancel-button"
                                   onMouseDown={[Function]}
                                   type="button"
@@ -3396,7 +3410,7 @@ exports[`renders correctly 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-kEYyzF",
             "isStatic": false,
-            "lastClassName": "iojSyD",
+            "lastClassName": "cwqUsU",
             "rules": Array [
               "
   margin: 2rem 0;
@@ -3421,11 +3435,24 @@ exports[`renders correctly 1`] = `
     margin-top: 1rem;
   }
 ",
+              "
+  li ~ ",
+              ".sc-hMqMXs",
+              " {
+    margin-top: 1rem;
+  }
+
+  li ~ section ~ ",
+              ".sc-hMqMXs",
+              " {
+    margin-top: 0;
+  }
+",
             ],
           },
           "displayName": "Styled(styled.section)",
           "foldedComponentIds": Array [
-            "sc-kAzzGY",
+            "sc-htpNat",
           ],
           "render": [Function],
           "styledComponentId": "sc-kEYyzF",
@@ -3438,7 +3465,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <section
-        className="sc-kAzzGY sc-kEYyzF iojSyD"
+        className="sc-htpNat sc-kEYyzF cwqUsU"
       >
         <styled.div>
           <StyledComponent
@@ -3447,9 +3474,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-kpOJdX",
+                  "componentId": "sc-bZQynM",
                   "isStatic": false,
-                  "lastClassName": "kVlxUP",
+                  "lastClassName": "kbecSY",
                   "rules": Array [
                     "
   display: flex;
@@ -3462,7 +3489,7 @@ exports[`renders correctly 1`] = `
                 "displayName": "styled.div",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-kpOJdX",
+                "styledComponentId": "sc-bZQynM",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -3472,7 +3499,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-kpOJdX kVlxUP"
+              className="sc-bZQynM kbecSY"
             >
               <Styled(styled.header)>
                 <StyledComponent
@@ -3502,7 +3529,7 @@ exports[`renders correctly 1`] = `
                       },
                       "displayName": "Styled(styled.header)",
                       "foldedComponentIds": Array [
-                        "sc-dxgOiQ",
+                        "sc-gzVnrw",
                       ],
                       "render": [Function],
                       "styledComponentId": "sc-kkGfuU",
@@ -3515,7 +3542,7 @@ exports[`renders correctly 1`] = `
                   forwardedRef={null}
                 >
                   <header
-                    className="sc-dxgOiQ sc-kkGfuU gXTgbY"
+                    className="sc-gzVnrw sc-kkGfuU gXTgbY"
                   >
                     Expected End Products
                   </header>
@@ -3555,7 +3582,7 @@ exports[`renders correctly 1`] = `
                       },
                       "displayName": "Styled(styled.button)",
                       "foldedComponentIds": Array [
-                        "sc-kGXeez",
+                        "sc-EHOje",
                       ],
                       "render": [Function],
                       "styledComponentId": "sc-iAyFgw",
@@ -3569,7 +3596,7 @@ exports[`renders correctly 1`] = `
                   onClick={[Function]}
                 >
                   <button
-                    className="sc-kGXeez sc-iAyFgw RTKVq"
+                    className="sc-EHOje sc-iAyFgw RTKVq"
                     data-testhook-id="add-rule"
                     onClick={[Function]}
                   >
@@ -3606,27 +3633,21 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-jKJlTe",
+                  "componentId": "sc-dnqmqq",
                   "isStatic": false,
-                  "lastClassName": "dKJUNv",
+                  "lastClassName": "gZXnwY",
                   "rules": Array [
                     "
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  li ~ ",
-                    ".sc-cSHVUG",
-                    " {
-    margin-top: 1rem;
-  }
 ",
                   ],
                 },
                 "displayName": "styled.ul",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-jKJlTe",
+                "styledComponentId": "sc-dnqmqq",
                 "target": "ul",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -3636,7 +3657,7 @@ exports[`renders correctly 1`] = `
             forwardedRef={null}
           >
             <ul
-              className="sc-jKJlTe dKJUNv"
+              className="sc-dnqmqq gZXnwY"
             >
               <li>
                 <Styled(styled.header)
@@ -3697,7 +3718,7 @@ exports[`renders correctly 1`] = `
                         },
                         "displayName": "Styled(styled.header)",
                         "foldedComponentIds": Array [
-                          "sc-hMqMXs",
+                          "sc-gZMcBi",
                         ],
                         "render": [Function],
                         "styledComponentId": "sc-hSdWYo",
@@ -3710,7 +3731,7 @@ exports[`renders correctly 1`] = `
                     forwardedRef={null}
                   >
                     <header
-                      className="sc-hMqMXs sc-hSdWYo kKngBj"
+                      className="sc-gZMcBi sc-hSdWYo kKngBj"
                     >
                       <styled.span>
                         <StyledComponent
@@ -3719,9 +3740,9 @@ exports[`renders correctly 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-eNQAEJ",
+                                "componentId": "sc-iwsKbI",
                                 "isStatic": false,
-                                "lastClassName": "dhlUIc",
+                                "lastClassName": "chVlAL",
                                 "rules": Array [
                                   "
   white-space: nowrap;
@@ -3733,7 +3754,7 @@ exports[`renders correctly 1`] = `
                               "displayName": "styled.span",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-eNQAEJ",
+                              "styledComponentId": "sc-iwsKbI",
                               "target": "span",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -3743,7 +3764,7 @@ exports[`renders correctly 1`] = `
                           forwardedRef={null}
                         >
                           <span
-                            className="sc-eNQAEJ dhlUIc"
+                            className="sc-iwsKbI chVlAL"
                           >
                             match - pattern - destinationPathPrefix
                           </span>
@@ -3756,9 +3777,9 @@ exports[`renders correctly 1`] = `
                               "$$typeof": Symbol(react.forward_ref),
                               "attrs": Array [],
                               "componentStyle": ComponentStyle {
-                                "componentId": "sc-chPdSV",
+                                "componentId": "sc-bxivhb",
                                 "isStatic": false,
-                                "lastClassName": "eWUxCg",
+                                "lastClassName": "gepbvZ",
                                 "rules": Array [
                                   "
   display: flex;
@@ -3769,7 +3790,7 @@ exports[`renders correctly 1`] = `
                               "displayName": "styled.div",
                               "foldedComponentIds": Array [],
                               "render": [Function],
-                              "styledComponentId": "sc-chPdSV",
+                              "styledComponentId": "sc-bxivhb",
                               "target": "div",
                               "toString": [Function],
                               "warnTooManyClasses": [Function],
@@ -3779,7 +3800,7 @@ exports[`renders correctly 1`] = `
                           forwardedRef={null}
                         >
                           <div
-                            className="sc-chPdSV eWUxCg"
+                            className="sc-bxivhb gepbvZ"
                           >
                             <Styled(styled.button)
                               data-testhook-id="edit-rule-0"
@@ -3812,7 +3833,7 @@ exports[`renders correctly 1`] = `
                                     },
                                     "displayName": "Styled(styled.button)",
                                     "foldedComponentIds": Array [
-                                      "sc-kgoBCf",
+                                      "sc-ifAKCX",
                                     ],
                                     "render": [Function],
                                     "styledComponentId": "sc-cvbbAY",
@@ -3826,7 +3847,7 @@ exports[`renders correctly 1`] = `
                                 onClick={[Function]}
                               >
                                 <button
-                                  className="sc-kgoBCf sc-cvbbAY ExiAf"
+                                  className="sc-ifAKCX sc-cvbbAY ExiAf"
                                   data-testhook-id="edit-rule-0"
                                   onClick={[Function]}
                                 >
@@ -3881,7 +3902,7 @@ exports[`renders correctly 1`] = `
                                     },
                                     "displayName": "Styled(styled.button)",
                                     "foldedComponentIds": Array [
-                                      "sc-kgoBCf",
+                                      "sc-ifAKCX",
                                     ],
                                     "render": [Function],
                                     "styledComponentId": "sc-eHgmQL",
@@ -3895,7 +3916,7 @@ exports[`renders correctly 1`] = `
                                 onClick={[Function]}
                               >
                                 <button
-                                  className="sc-kgoBCf sc-eHgmQL yHvcD"
+                                  className="sc-ifAKCX sc-eHgmQL yHvcD"
                                   data-testhook-id="delete-rule-0"
                                   onClick={[Function]}
                                 >

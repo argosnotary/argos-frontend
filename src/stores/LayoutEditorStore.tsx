@@ -42,6 +42,7 @@ import {
   removeProductRule,
   updateRequiredNumberOfLinks
 } from "./LayoutEditorService";
+import { IReleaseConfig } from "../interfaces/IReleaseConfig";
 
 export enum DetailsPanelType {
   EMPTY,
@@ -66,6 +67,7 @@ interface ILayoutEditorState {
   detailPanelMode: DetailsPanelType;
   approvalConfigs: Array<IApprovalConfig>;
   showJson: boolean;
+  releaseConfig?: IReleaseConfig;
 }
 
 export interface ILayoutEditorStoreContext {
@@ -111,7 +113,8 @@ export enum LayoutEditorActionType {
   UPDATE_REQUIRED_NUMBER_OF_LINKS,
   ADD_STEP_AUTHORIZED_KEY,
   DELETE_STEP_AUTHORIZED_KEY,
-  SHOW_JSON
+  SHOW_JSON,
+  UPDATE_RELEASE_CONFIG
 }
 
 export interface ILayoutEditorAction {
@@ -126,6 +129,7 @@ export interface ILayoutEditorAction {
   publicKey?: IPublicKey;
   rule?: IRule;
   showJson?: boolean;
+  releaseConfig?: IReleaseConfig;
 }
 
 const reducer = (
@@ -211,6 +215,11 @@ const reducer = (
       return {
         ...state,
         showJson: !state.showJson
+      };
+    case LayoutEditorActionType.UPDATE_RELEASE_CONFIG:
+      return {
+        ...state,
+        releaseConfig: action.releaseConfig
       };
     default:
       throw new Error();
@@ -690,9 +699,10 @@ const handleAddArtifactCollector = (
   if (action.artifactCollector && state.selectedLayoutElement) {
     const selected = state.selectedLayoutElement;
     if (selected.approvalConfig) {
-      selected.approvalConfig.artifactCollectorSpecifications.push(
+      selected.approvalConfig.artifactCollectorSpecifications = [
+        ...selected.approvalConfig.artifactCollectorSpecifications,
         action.artifactCollector
-      );
+      ];
     } else {
       selected.approvalConfig = {
         segmentName: selected.segment?.name || "",
@@ -705,6 +715,18 @@ const handleAddArtifactCollector = (
       ...state,
       selectedLayoutElement: { ...state.selectedLayoutElement }
     };
+  } else if (action.artifactCollector) {
+    if (state.releaseConfig === undefined) {
+      state.releaseConfig = {
+        artifactCollectorSpecifications: [action.artifactCollector]
+      };
+    } else {
+      state.releaseConfig.artifactCollectorSpecifications = [
+        ...state.releaseConfig.artifactCollectorSpecifications,
+        action.artifactCollector
+      ];
+    }
+    return { ...state };
   } else return { ...state };
 };
 
@@ -726,6 +748,13 @@ const handleDeleteArtifactCollector = (
       ...state,
       selectedLayoutElement: { ...state.selectedLayoutElement }
     };
+  } else if (action.artifactCollector && state.releaseConfig) {
+    const index = state.releaseConfig.artifactCollectorSpecifications.indexOf(
+      action.artifactCollector
+    );
+    if (index >= 0) {
+      state.releaseConfig.artifactCollectorSpecifications.splice(index, 1);
+    }
   }
   return { ...state };
 };
@@ -759,7 +788,14 @@ const handleUpdateArtifactCollector = (
   if (action.artifactCollector) {
     return {
       ...state,
-      selectedLayoutElement: { ...state.selectedLayoutElement }
+      selectedLayoutElement: { ...state.selectedLayoutElement },
+      releaseConfig: state.releaseConfig
+        ? {
+            artifactCollectorSpecifications: [
+              ...state.releaseConfig.artifactCollectorSpecifications
+            ]
+          }
+        : undefined
     };
   } else return { ...state };
 };

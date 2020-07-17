@@ -42,7 +42,8 @@ import {
 import EditIcon from "../../../../atoms/Icons/EditIcon";
 import useFormBuilder, {
   FormSubmitButtonHandlerTypes,
-  IFormBuilderConfig
+  IFormBuilderConfig,
+  FormContainer
 } from "../../../../hooks/useFormBuilder";
 import { FormPermissions } from "../../../../types/FormPermission";
 import { IGenericFormSchema } from "../../../../interfaces/IGenericFormSchema";
@@ -52,7 +53,15 @@ import {
 } from "../../../../stores/LayoutEditorService";
 import Select, { SelectionContainer } from "../../../../atoms/Select";
 
-const ItemContainer = styled(CollectionContainer)``;
+const ItemContainer = styled(CollectionContainer)`
+  li ~ ${FormContainer} {
+    margin-top: 1rem;
+  }
+
+  li ~ section ~ ${FormContainer} {
+    margin-top: 0;
+  }
+`;
 
 const ItemContainerTitle = styled(CollectionContainerTitle)``;
 
