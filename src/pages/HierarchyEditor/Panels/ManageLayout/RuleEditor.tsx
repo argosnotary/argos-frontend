@@ -387,7 +387,7 @@ const RuleEditor: React.FC<IRuleEditorProps> = ({
               <option value={"select"}>select...</option>
               {Object.keys(RuleRuleTypeEnum).map((val, key) => (
                 <option key={"select-type-" + key} value={val}>
-                  {val.toLowerCase()}
+                  {val.toLowerCase().replace(/_/g, " ")}
                 </option>
               ))}
             </Select>

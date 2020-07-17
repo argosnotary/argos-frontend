@@ -22,8 +22,8 @@ export namespace Domain {
   }
 
   export interface IPublicKey {
-    id: string;
-    key: string;
+    keyId: string;
+    publicKey: string;
   }
 
   export interface IMatchRule extends IRule {
@@ -55,6 +55,7 @@ export namespace Domain {
   export type RuleType =
     | "ALLOW"
     | "CREATE"
+    | "CREATE_OR_MODIFY"
     | "DELETE"
     | "DISALLOW"
     | "MATCH"

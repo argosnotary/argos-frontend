@@ -56,7 +56,9 @@ function mockLayoutMetaBlock(): ILayoutMetaBlock {
     signatures: [
       {
         keyId: "keyId",
-        signature: "signature"
+        signature: "signature",
+        keyAlgorithm: "EC",
+        hashAlgorithm: "SHA384"
       }
     ],
     layout: {
@@ -519,7 +521,7 @@ it("add authorized key to layout", async () => {
 
   mock
     .onGet("/api/personalaccount/accountId/key")
-    .reply(200, { key: "publicKey", id: "keyId" });
+    .reply(200, { publicKey: "publicKey", keyId: "keyId" });
 
   mock
     .onGet("/api/personalaccount", {

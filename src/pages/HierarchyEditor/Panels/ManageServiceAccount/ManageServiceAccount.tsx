@@ -19,7 +19,7 @@ import ContentSeparator from "../../../../atoms/ContentSeparator";
 import DataRequest from "../../../../types/DataRequest";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
-import IServiceAccountApiResponse from "../../../../interfaces/INpaApiResponse";
+import IServiceAccountApiResponse from "../../../../interfaces/IServiceAccountApiResponse";
 import PasswordView from "../../../../atoms/PasswordView";
 import FlexRow from "../../../../atoms/FlexRow";
 import { cryptoAvailable } from "../../../../security";
