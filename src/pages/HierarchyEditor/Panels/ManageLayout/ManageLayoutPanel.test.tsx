@@ -37,6 +37,7 @@ import {
 import HierarchyEditorTestWrapper from "../../../../test/utils";
 import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
 import { SearchResultEntry } from "../../../../atoms/SearchInput";
+import ApprovalConfigEditor from "./ApprovalConfigEditor";
 
 const mock = new MockAdapter(Axios);
 
@@ -397,8 +398,8 @@ it("sign layout happy flow", async () => {
     root
       .find('input[data-testhook-id="make-approval-step"]')
       .simulate("change", { target: { checked: true } });
-
-    // //
+    root.find('button[data-testhook-id="add-collector"]').simulate("click");
+    root.find('button[data-testhook-id="add-collector"]').simulate("click");
 
     await waitFor(() => {
       if (root.find('select[id="collectorType"]').length > 0) {
@@ -410,7 +411,6 @@ it("sign layout happy flow", async () => {
         });
       }
 
-      console.log(root.find('select[id="collectorType"]').debug());
       root.update();
 
       expect(root.find('select[id="collectorType"]').props().value).toBe(
