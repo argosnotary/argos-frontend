@@ -20,7 +20,7 @@ const InputLabel = styled.label`
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.8;
-  color: #0a0a0a;
+  color: ${props => props.theme.inputLabel.textColor};
 `;
 
 export default InputLabel;

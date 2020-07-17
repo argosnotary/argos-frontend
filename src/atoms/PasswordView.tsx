@@ -40,7 +40,7 @@ interface IPasswordBody {
 }
 
 const PasswordBody = styled.section<IPasswordBody>`
-  background: #fff;
+  background: ${props => props.theme.keyManagementPage.passwordBgColor};
   display: flex;
   align-items: center;
   border: 1px solid ${props => props.theme.keyManagementPage.passwordColor};

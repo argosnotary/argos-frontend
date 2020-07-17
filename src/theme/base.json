@@ -17,6 +17,7 @@
     }
   },
   "transparentButton": {
+    "iconColor": "#fff",
     "default": {
       "transparentButtonBgColor": "#fff",
       "transparentButtonTextColor": "#1779ba",
@@ -43,6 +44,20 @@
   "labels": {
     "inactive": "red",
     "active": "green"
+  },
+  "forms": {
+    "alternateBgColor": "#e0e0e0"
+  },
+  "input": {
+    "borderColor": "#cacaca",
+    "bgColor": "#fefefe",
+    "disabledBgColor": "#e0e0e0",
+    "textColor": "#0a0a0a",
+    "focusBorderColor": "#8a8a8a",
+    "focusBoxShadowColor": "#cacaca"
+  },
+  "inputLabel": {
+    "textColor": "#0a0a0a"
   },
   "searchInput": {
     "searchResultsBgColor": "#fff",
@@ -101,18 +116,21 @@
       "SUCCESS": "green"
     }
   },
+  "collection": {
+    "borderColor": "#1779ba",
+    "invertedBgColor": "#e0e0e0",
+    "buttonInvertedBgColor": "#f1f1f1",
+    "buttonInvertedBorderColor": "#1779ba",
+    "titleBgColor": "#1779ba",
+    "titleTextColor": "#fff",
+    "smallTitleBorderColor": "#1779ba",
+    "smallTitleBgColor": "#f1f1f1",
+    "cardHoverBorderColor": "#1779ba",
+    "cardActiveBorderColor": "#1779ba",
+    "cardBgColor": "#fff"
+  },
   "layoutBuilder": {
-    "segmentContainerBorderColor": "#1779ba",
-    "segmentContainerTitleBgColor": "#1779ba",
-    "iconColor": "#1779ba",
-    "stepContainerBgColor": "#e0e0e0",
-    "stepContainerTitleBorderColor": "#1779ba",
-    "addStepButtonBorderColor": "#1779ba",
-    "segmentTitleBgColor": "#fff",
-    "segmentTitleHoverBorderColor": "#1779ba",
-    "stepTitleBgColor": "#fff",
-    "stepTitleHoverBorderColor": "#1779ba",
-    "segmentsContainerTitleColor": "#fff"
+    "iconColor": "#1779ba"
   },
   "treeEditor": {
     "textColor": "#2e2e2e",
@@ -229,6 +247,7 @@
   "keyManagementPage": {
     "iconColor": "#1779ba",
     "passwordColor": "orange",
+    "passwordBgColor": "#fff",
     "noActiveKeyWarning": {
       "textColor": "orange",
       "borderColor": "orange"
@@ -237,8 +256,20 @@
   "layoutPage": {
     "panel": {
       "bgColor": "#f1f1f1",
+      "headerBgColor": "#fff",
       "borderColor": "#e0e0e0",
       "contentSeparator": "#ccc"
+    }
+  },
+  "dashboardLayout": {
+    "bgColor": "#e0e0e0"
+  },
+  "loginForm": {
+    "bgColor": "#fff"
+  },
+  "ruleEditor": {
+    "selectionContainer": {
+      "bgColor": "#e0e0e0"
     }
   }
 }

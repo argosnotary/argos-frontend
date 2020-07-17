@@ -24,7 +24,8 @@ import {
   CollectionContainerList,
   CollectionContainerRow,
   CollectionContainerSpan,
-  CollectionContainerTitle
+  CollectionContainerTitle,
+  CollectionContainerCard
 } from "../../../../atoms/Collection";
 import RemoveIcon from "../../../../atoms/Icons/RemoveIcon";
 import {
@@ -49,70 +50,15 @@ import {
   getSegmentNames,
   getStepNamesForSegment
 } from "../../../../stores/LayoutEditorService";
-import Select from "../../../../atoms/Select";
+import Select, { SelectionContainer } from "../../../../atoms/Select";
 
-const ItemContainer = styled(CollectionContainer)`
-  min-height: 0;
-  flex-direction: column;
-  border: 0;
-  padding: 0 1rem 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.segmentContainerBorderColor};
-`;
+const ItemContainer = styled(CollectionContainer)``;
 
-const ItemContainerTitle = styled(CollectionContainerTitle)`
-  font-size: 0.85rem;
-  top: -1rem;
-  color: ${props => props.theme.layoutBuilder.segmentsContainerTitleColor};
-  background-color: ${props =>
-    props.theme.layoutBuilder.segmentContainerTitleBgColor};
-  padding: 0.25rem 2rem 0.4rem;
-`;
+const ItemContainerTitle = styled(CollectionContainerTitle)``;
 
-const AddItemButton = styled(CollectionContainerButton)`
-  right: 0;
+const AddItemButton = styled(CollectionContainerButton)``;
 
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.8);
-  }
-`;
-
-const ItemTitle = styled.header`
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0;
-  background-color: ${props => props.theme.layoutBuilder.segmentTitleBgColor};
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  span {
-    margin: 0 0.5rem;
-  }
-`;
-
-const ItemContainerSection = styled.section`
-  width: 100%;
-  margin: 0;
-`;
-
-const SelectionContainer = styled.section`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  padding: 1rem;
-
-  ${Select} {
-    margin: 0 0 0 1rem;
-  }
-
-  background-color: #e0e0e0;
-`;
+const ItemTitle = styled(CollectionContainerCard)``;
 
 const RemoveItemButton = styled(BaseActionButton)``;
 const EditItemButton = styled(BaseActionButton)``;
@@ -400,23 +346,21 @@ const RuleEditor: React.FC<IRuleEditorProps> = ({
 
   const ruleRow = (rule: IRule, index: number) => {
     return (
-      <ItemContainerSection>
-        <ItemTitle>
-          <CollectionContainerSpan>{getRuleInfo(rule)}</CollectionContainerSpan>
-          <ActionIconsContainer>
-            <EditItemButton
-              data-testhook-id={"edit-rule-" + index}
-              onClick={() => editRule(index)}>
-              <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
-            </EditItemButton>
-            <RemoveItemButton
-              data-testhook-id={"delete-rule-" + index}
-              onClick={() => deleteRule(index)}>
-              <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
-            </RemoveItemButton>
-          </ActionIconsContainer>
-        </ItemTitle>
-      </ItemContainerSection>
+      <ItemTitle clickable={false}>
+        <CollectionContainerSpan>{getRuleInfo(rule)}</CollectionContainerSpan>
+        <ActionIconsContainer>
+          <EditItemButton
+            data-testhook-id={"edit-rule-" + index}
+            onClick={() => editRule(index)}>
+            <EditIcon size={26} color={theme.layoutBuilder.iconColor} />
+          </EditItemButton>
+          <RemoveItemButton
+            data-testhook-id={"delete-rule-" + index}
+            onClick={() => deleteRule(index)}>
+            <RemoveIcon size={24} color={theme.layoutBuilder.iconColor} />
+          </RemoveItemButton>
+        </ActionIconsContainer>
+      </ItemTitle>
     );
   };
 
@@ -434,7 +378,7 @@ const RuleEditor: React.FC<IRuleEditorProps> = ({
               <option value={"select"}>select...</option>
               {Object.keys(RuleRuleTypeEnum).map((val, key) => (
                 <option key={"select-type-" + key} value={val}>
-                  {val.toLowerCase()}
+                  {val.toLowerCase().replace(/_/g, " ")}
                 </option>
               ))}
             </Select>

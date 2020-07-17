@@ -37,7 +37,7 @@ const signLayout = async (
     serialize(layout)
   );
   return {
-    signatures: [{ signature: signature, keyId: keyId }],
+    signatures: [{ signature: signature, keyId: keyId, keyAlgorithm: "EC", hashAlgorithm: "SHA384" }],
     layout: layout
   };
 };

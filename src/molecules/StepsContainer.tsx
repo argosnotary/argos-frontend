@@ -25,37 +25,19 @@ import {
   CollectionContainer,
   CollectionContainerButton,
   CollectionContainerRow,
-  CollectionContainerTitle
+  CollectionContainerTitleSmall
 } from "../atoms/Collection";
 import { ILayoutSegment, IStep } from "../interfaces/ILayout";
 import Step from "../atoms/Step";
 
 const StepsContainerSection = styled(CollectionContainer)`
-  flex-direction: column;
-  padding: 0 1rem 1rem;
   margin: 1rem 0;
-  min-height: 10rem;
-  background-color: ${props => props.theme.layoutBuilder.stepContainerBgColor};
+  min-height: 18.8rem;
 `;
 
-const StepsContainerTitle = styled(CollectionContainerTitle)`
-  top: -1rem;
-  margin: 0 auto;
-  padding: 0.25rem 1rem;
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.stepContainerTitleBorderColor};
-`;
+const StepsContainerTitle = styled(CollectionContainerTitleSmall)``;
 
-const AddStepButton = styled(CollectionContainerButton)`
-  border: 1px solid
-    ${props => props.theme.layoutBuilder.addStepButtonBorderColor};
-  padding: 0 0.65rem;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(0.9);
-  }
-`;
+const AddStepButton = styled(CollectionContainerButton)``;
 
 interface IStepsContainerProps {
   segment: ILayoutSegment;
@@ -78,10 +60,11 @@ const StepsContainer: React.FC<IStepsContainerProps> = ({ segment, index }) => {
 
   return (
     <ul>
-      <StepsContainerSection>
+      <StepsContainerSection inverted={true}>
         <CollectionContainerRow>
           <StepsContainerTitle>Steps</StepsContainerTitle>
           <AddStepButton
+            inverted={true}
             data-testhook-id={"segment" + index + "-add-step"}
             onClick={onAddStep}>
             <PlusIcon size={20} color={theme.layoutBuilder.iconColor} />

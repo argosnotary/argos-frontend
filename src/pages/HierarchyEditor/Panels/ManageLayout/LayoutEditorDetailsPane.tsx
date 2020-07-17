@@ -21,7 +21,6 @@ import NotificationsList, {
   NotificationTypes
 } from "../../../../molecules/NotificationsList";
 import { Panel } from "../../../../molecules/Panel";
-import { CollectionContainer } from "../../../../atoms/Collection";
 import {
   DetailsPanelType,
   LayoutEditorActionType,
@@ -29,28 +28,12 @@ import {
 } from "../../../../stores/LayoutEditorStore";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 import LayoutAuthorizedAccountEditor from "./LayoutAuthorizedAccountEditor";
-import ApprovalConfigEditor, { FormContainer } from "./ApprovalConfigEditor";
+import ApprovalConfigEditor from "./ApprovalConfigEditor";
 import RuleEditor from "./RuleEditor";
 import RequiredNumberOfLinks from "./RequiredNumberOfLinks";
 import StepAuthorizedAccountEditor from "./StepAuthorizedAccountEditor";
 
-const PanelSpecificStyling = styled.div`
-  ${CollectionContainer} {
-    &:first-of-type {
-      margin-top: 3rem;
-    }
-
-    margin-top: 2.1rem;
-  }
-
-  ${FormContainer} {
-    &:first-of-type {
-      margin: 0;
-    }
-
-    margin: 0;
-  }
-`;
+const PanelSpecificStyling = styled.div``;
 
 const convertValidationMessagesToNotifications = (
   validationErrors?: Array<ILayoutValidationMessage>
@@ -71,13 +54,7 @@ const convertValidationMessagesToNotifications = (
   });
 };
 
-const StepDetailsContainer = styled.div`
-  ${CollectionContainer} {
-    &:first-of-type {
-      margin-top: 2.1rem;
-    }
-  }
-`;
+const StepDetailsContainer = styled.div``;
 
 const LayoutEditorDetailsPane: React.FC = () => {
   const editorStoreContext = useLayoutEditorStore();
@@ -95,8 +72,8 @@ const LayoutEditorDetailsPane: React.FC = () => {
       case DetailsPanelType.STEP_DETAILS:
         return (
           <StepDetailsContainer>
-            <ApprovalConfigEditor />
             <RequiredNumberOfLinks />
+            <ApprovalConfigEditor />
             <StepAuthorizedAccountEditor />
             <RuleEditor
               title={"Expected Materials"}

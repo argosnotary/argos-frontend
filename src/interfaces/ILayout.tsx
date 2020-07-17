@@ -22,6 +22,8 @@ export interface ILayoutMetaBlock {
 export interface ISignature {
   keyId: string;
   signature: string;
+  keyAlgorithm: string;
+  hashAlgorithm: string;
 }
 
 export interface ILayout {
@@ -32,8 +34,8 @@ export interface ILayout {
 }
 
 export interface IPublicKey {
-  id: string;
-  key: string;
+  keyId: string;
+  publicKey: string;
 }
 
 export interface ILayoutSegment {
@@ -62,6 +64,7 @@ export interface IRule {
 export enum RuleRuleTypeEnum {
   ALLOW = "ALLOW",
   CREATE = "CREATE",
+  CREATE_OR_MODIFY = "CREATE_OR_MODIFY",
   DELETE = "DELETE",
   DISALLOW = "DISALLOW",
   MATCH = "MATCH",

@@ -26,7 +26,7 @@ interface IDashboardLayoutProps {
 }
 
 const DashboardLayoutContainer = styled.div`
-  background-color: #e0e0e0;
+  background-color: ${props => props.theme.dashboardLayout.bgColor};
 `;
 
 const DashboardLayout: React.FC = ({ children }) => {

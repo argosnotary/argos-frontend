@@ -56,7 +56,9 @@ function mockLayoutMetaBlock(): ILayoutMetaBlock {
     signatures: [
       {
         keyId: "keyId",
-        signature: "signature"
+        signature: "signature",
+        keyAlgorithm: "EC",
+        hashAlgorithm: "SHA384"
       }
     ],
     layout: {
@@ -240,7 +242,7 @@ const updateField = (wrapper: ReactWrapper<any>, name: string, value: any) => {
 
 it("validates a faulty layout and returns errors", async () => {
   mock.reset();
-
+  (cryptoAvailable as jest.Mock).mockReturnValue(true);
   mock.onGet("/api/supplychain/supplyChainId/layout").reply(404);
   mock.onPost("/api/supplychain/supplyChainId/layout/validate").reply(400, {
     messages: [
@@ -290,7 +292,9 @@ it("validates a faulty layout and returns errors", async () => {
       })
     );
 
-    root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
+    root
+      .find('button[data-testhook-id="layout-json-form-submit-button"]')
+      .simulate("click");
 
     await waitFor(() => {
       root.update();
@@ -393,7 +397,7 @@ it("sign layout happy flow", async () => {
       .find('input[data-testhook-id="make-approval-step"]')
       .simulate("change", { target: { checked: true } });
 
-    //
+    // //
 
     await waitFor(() => {
       root.find('select[id="collectorType"]').simulate("change", {
@@ -435,7 +439,14 @@ it("sign layout happy flow", async () => {
 
     expect(root).toMatchSnapshot();
 
-    root.find('form[data-testhook-id="layout-json-form"]').simulate("submit");
+    await waitFor(() => {
+      root.update();
+      return expect(root.find("EditorForm").length).toBe(0);
+    });
+
+    root
+      .find('button[data-testhook-id="layout-json-form-submit-button"]')
+      .simulate("click");
 
     await waitFor(() => {
       root.update();
@@ -501,7 +512,7 @@ it("add authorized key to layout", async () => {
 
   mock
     .onGet("/api/personalaccount/accountId/key")
-    .reply(200, { key: "publicKey", id: "keyId" });
+    .reply(200, { publicKey: "publicKey", keyId: "keyId" });
 
   mock
     .onGet("/api/personalaccount", {

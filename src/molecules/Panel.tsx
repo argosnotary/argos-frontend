@@ -70,7 +70,7 @@ interface IPanelHeaderProps {
 const PanelHeader = styled.header<IPanelHeaderProps>`
   margin: ${props => (!props.last ? "1rem 0 0 1rem" : "1rem 1rem 0 1rem")};
   padding: 0.5rem 1rem;
-  background-color: #fff;
+  background-color: ${props => props.theme.layoutPage.panel.headerBgColor};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -120,8 +120,7 @@ export const Panel: React.FC<IPanelProps> = ({
       width={width}
       maxWidth={maxWidth}
       shrink={shrink}
-      disableFlexGrow={disableFlexGrow}
-    >
+      disableFlexGrow={disableFlexGrow}>
       <PanelHeader last={last}>
         {resizable ? (
           <>
@@ -130,8 +129,7 @@ export const Panel: React.FC<IPanelProps> = ({
                 <PanelTitle>{title}</PanelTitle>
                 <PanelIconContainer
                   onClick={() => setShrinkState(!shrink)}
-                  shrink={shrink}
-                >
+                  shrink={shrink}>
                   <ShrinkIcon
                     size={16}
                     color={theme.panel.icons.shrinkIcon.color}
@@ -141,8 +139,7 @@ export const Panel: React.FC<IPanelProps> = ({
             ) : (
               <PanelIconContainer
                 onClick={() => setShrinkState(!shrink)}
-                shrink={shrink}
-              >
+                shrink={shrink}>
                 <EnlargeIcon
                   size={16}
                   color={theme.panel.icons.enlargeIcon.color}

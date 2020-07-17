@@ -31,7 +31,7 @@ const signLink = async (
   );
   return {
     supplyChainId: supplyChainId,
-    signature: { signature: signature, keyId: keyId },
+    signature: { signature: signature, keyId: keyId, keyAlgorithm: 'EC', hashAlgorithm: 'SHA384' },
     link: link
   };
 };

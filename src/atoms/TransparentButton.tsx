@@ -42,7 +42,7 @@ const TransparentButton = styled.button`
       props.theme.transparentButton.hover.transparentButtonTextColor};
 
     > svg > path {
-      fill: #fff;
+      fill: ${props => props.theme.transparentButton.iconColor};
     }
   }
 

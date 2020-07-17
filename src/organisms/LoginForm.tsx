@@ -21,7 +21,7 @@ import styled from "styled-components";
 const LoginFormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: ${props => props.theme.loginForm.bgColor};
   margin: 10% auto;
   width: 20rem;
   box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
@@ -55,8 +55,7 @@ const LoginForm: React.FC = () => {
     <LoginFormContainer>
       <LoginFormHeader src="images/logo.svg" />
       <LoginButton
-        href={"/api/oauth2/authorize/azure?redirect_uri=/authenticated"}
-      >
+        href={"/api/oauth2/authorize/azure?redirect_uri=/authenticated"}>
         Login with Azure
       </LoginButton>
     </LoginFormContainer>

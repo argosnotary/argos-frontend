@@ -21,11 +21,6 @@ import {
   LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
-import DataRequest from "../../../../types/DataRequest";
-import useDataApi from "../../../../hooks/useDataApi";
-import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
-import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import {
   HierarchyEditorStateContext,
   HierarchyEditorActionTypes
@@ -34,13 +29,6 @@ import useFormBuilder, {
   IFormBuilderConfig,
   FormSubmitButtonHandlerTypes
 } from "../../../../hooks/useFormBuilder";
-import FlexRow from "../../../../atoms/FlexRow";
-import { LoaderButton } from "../../../../atoms/Button";
-import { CustomCancelButton } from "../../../../atoms/SearchInput";
-
-interface ILayoutValidationErrorResponse {
-  messages: Array<ILayoutValidationMessage>;
-}
 
 const formSchema: IGenericFormSchema = [
   {
@@ -76,10 +64,6 @@ const LayoutJsonEditor: React.FC = () => {
 
   const editorStoreContext = useLayoutEditorStore();
 
-  const [responseLayoutValidation, setLayoutValidationDataRequest] = useDataApi(
-    genericDataFetchReducer
-  );
-
   const handleCancel = () => {
     hierarchyEditorDispatch.editor({
       type: HierarchyEditorActionTypes.RESET
@@ -95,8 +79,8 @@ const LayoutJsonEditor: React.FC = () => {
     isLoading: editorStoreContext.state.loading,
     validate: validateLayout,
     onCancel: handleCancel,
-    onSubmit: values => {
-      requestLayoutValidation(values);
+    onSubmit: () => {
+      return;
     },
     onChange: (valid, values) => {
       if (valid) {
@@ -126,75 +110,7 @@ const LayoutJsonEditor: React.FC = () => {
     editorStoreContext.state.selectedLayoutElement?.step?.authorizedKeyIds
   ]);
 
-  useEffect(() => {
-    editorStoreContext.dispatch({
-      type: responseLayoutValidation.isLoading
-        ? LayoutEditorActionType.START_LOADING
-        : LayoutEditorActionType.END_LOADING
-    });
-  }, [responseLayoutValidation.isLoading]);
-
-  const { token } = useUserProfileContext();
-
-  const requestLayoutValidation = (values: ILayoutFormValues) => {
-    const dataRequest: DataRequest = {
-      data: values.layout,
-      method: "post",
-      token: token,
-      url:
-        "/api/supplychain/" +
-        hierarchyEditorState.editor.node.referenceId +
-        "/layout/validate",
-      cbSuccess: () => {
-        editorStoreContext.dispatch({
-          type: LayoutEditorActionType.START_SIGNING
-        });
-      },
-      cbFailure: (error: any): boolean => {
-        const response: ILayoutValidationErrorResponse = error.response.data;
-
-        if (formApi.isValid) {
-          editorStoreContext.dispatch({
-            type: LayoutEditorActionType.UPDATE_LAYOUT,
-            layout: JSON.parse(values.layout)
-          });
-        }
-
-        editorStoreContext.dispatch({
-          type: LayoutEditorActionType.LAYOUT_HAS_VALIDATION_ERRORS,
-          validationErrors: response.messages
-        });
-        return true;
-      }
-    };
-
-    setLayoutValidationDataRequest(dataRequest);
-  };
-
-  return (
-    <>
-      <FlexRow>
-        <LoaderButton
-          dataTesthookId={"layout-json-form-submit-button"}
-          buttonType="button"
-          loading={editorStoreContext.state.loading}
-          onClick={() =>
-            requestLayoutValidation({
-              layout: JSON.stringify(editorStoreContext.state.layout)
-            })
-          }>
-          Sign and Submit
-        </LoaderButton>
-        <CustomCancelButton
-          data-testhook="cancel-button"
-          type="button"
-          onMouseDown={handleCancel}>
-          Cancel
-        </CustomCancelButton>
-      </FlexRow>
-      {editorStoreContext.state.showJson ? formJSX : null}
-    </>
-  );
+  return <>{editorStoreContext.state.showJson ? formJSX : null}</>;
 };
 
 export default LayoutJsonEditor;
