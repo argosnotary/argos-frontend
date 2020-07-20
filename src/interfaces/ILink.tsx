@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {ISignature} from "./ILayout";
+import { ISignature } from "./ILayout";
 
 export interface ILink {
-    runId: string;
-    layoutSegmentName: string;
-    stepName: string;
-    materials: IArtifact[];
-    products: IArtifact[];
+  runId: string;
+  layoutSegmentName: string;
+  stepName: string;
+  materials: IArtifact[];
+  products: IArtifact[];
 }
 
 export interface IArtifact {
-    uri: string;
-    hash: string;
+  uri: string;
+  hash: string;
 }
 
 export interface ILinkMetaBlock {
-    supplyChainId: string;
-    signature: ISignature;
-    link: ILink;
+  signature: ISignature;
+  link: ILink;
 }

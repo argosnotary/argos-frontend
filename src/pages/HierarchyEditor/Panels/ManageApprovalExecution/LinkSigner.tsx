@@ -54,19 +54,13 @@ const LinkSigner: React.FC = () => {
       cbSuccess: (key: IPersonalAccountKeyPair) => {
         const signingContext = approvalContext.state
           .approvalSigningContext as IApprovalSigningContext;
-        signLink(
-          passphrase,
-          key.keyId,
-          key.encryptedPrivateKey,
-          {
-            layoutSegmentName: signingContext.segmentName,
-            stepName: signingContext.stepName,
-            runId: signingContext.runId,
-            products: signingContext.artifactsToSign,
-            materials: []
-          },
-          hierarchyEditorState.editor.node.referenceId
-        )
+        signLink(passphrase, key.keyId, key.encryptedPrivateKey, {
+          layoutSegmentName: signingContext.segmentName,
+          stepName: signingContext.stepName,
+          runId: signingContext.runId,
+          products: signingContext.artifactsToSign,
+          materials: []
+        })
           .then((linkMetaBlock: ILinkMetaBlock) => {
             setRequest({
               data: linkMetaBlock,

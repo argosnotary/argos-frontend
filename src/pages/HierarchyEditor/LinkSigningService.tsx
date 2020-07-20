@@ -21,8 +21,7 @@ const signLink = async (
   password: string,
   keyId: string,
   encryptedPrivateKey: string,
-  link: ILink,
-  supplyChainId: string
+  link: ILink
 ): Promise<ILinkMetaBlock> => {
   const signature = await signString(
     password,
@@ -30,8 +29,12 @@ const signLink = async (
     serialize(link)
   );
   return {
-    supplyChainId: supplyChainId,
-    signature: { signature: signature, keyId: keyId, keyAlgorithm: 'EC', hashAlgorithm: 'SHA384' },
+    signature: {
+      signature: signature,
+      keyId: keyId,
+      keyAlgorithm: "EC",
+      hashAlgorithm: "SHA384"
+    },
     link: link
   };
 };
