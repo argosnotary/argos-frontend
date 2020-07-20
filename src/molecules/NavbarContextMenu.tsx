@@ -83,7 +83,7 @@ const NavbarContextMenu: React.FC<IContextMenu> = props => {
       method: "put",
       data: {},
       token: useUserProfile.token,
-      url: "/api/serviceaccount/me/logout",
+      url: "/api/personalaccount/me/logout",
       cbSuccess: () => {
         props.setDisplayContextMenu(false);
         useUserProfile.setToken("");
