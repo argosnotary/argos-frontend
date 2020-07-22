@@ -17,7 +17,7 @@
 import React, { Dispatch, SyntheticEvent, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled, { ThemeContext } from "styled-components";
-import { useUserProfileContext } from "../stores/UserProfile";
+import { TokenActionType, useUserProfileContext } from "../stores/UserProfile";
 import useDataApi from "../hooks/useDataApi";
 import genericDataFetchReducer from "../stores/genericDataFetchReducer";
 import DataRequest from "../types/DataRequest";
@@ -82,12 +82,21 @@ const NavbarContextMenu: React.FC<IContextMenu> = props => {
     const dataRequest: DataRequest = {
       method: "put",
       data: {},
-      token: useUserProfile.token,
       url: "/api/personalaccount/me/logout",
       cbSuccess: () => {
         props.setDisplayContextMenu(false);
-        useUserProfile.setToken("");
-        history.push("/login");
+        useUserProfile.doTokenAction({
+          type: TokenActionType.LOGOUT,
+          token: null
+        });
+      },
+      cbFailure: () => {
+        props.setDisplayContextMenu(false);
+        useUserProfile.doTokenAction({
+          type: TokenActionType.LOGOUT,
+          token: null
+        });
+        return true;
       }
     };
     setLogoutApiRequest(dataRequest);

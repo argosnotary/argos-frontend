@@ -24,7 +24,6 @@ import {
   LayoutEditorActionType,
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import PassphraseDialogBox from "../../../../organisms/PassphraseDialogBox";
 import {
   HierarchyEditorStateContext,
@@ -38,7 +37,6 @@ const LayoutSigner: React.FC = () => {
   );
   const [showWarning, setShowWarning] = useState(false);
   const [passphrase, setPassphrase] = useState("");
-  const { token } = useUserProfileContext();
   const [cryptoException, setCryptoException] = useState(false);
 
   const [response, setRequest] = useDataApi(genericDataFetchReducer);
@@ -46,7 +44,6 @@ const LayoutSigner: React.FC = () => {
   const postNewLayout = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: token,
       url: "/api/personalaccount/me/key",
       cbSuccess: (key: IPersonalAccountKeyPair) => {
         signLayout(
@@ -59,7 +56,6 @@ const LayoutSigner: React.FC = () => {
             setRequest({
               data: layoutMetaBlock,
               method: "post",
-              token,
               url:
                 "/api/supplychain/" +
                 hierarchyEditorState.editor.node.referenceId +
@@ -72,7 +68,6 @@ const LayoutSigner: React.FC = () => {
                     hierarchyEditorState.editor.node.referenceId +
                     "/layout/approvalconfig",
                   method: "post",
-                  token,
                   cbSuccess: () => {
                     setRequest({
                       data: editorStoreContext.state.releaseConfig
@@ -83,7 +78,6 @@ const LayoutSigner: React.FC = () => {
                         hierarchyEditorState.editor.node.referenceId +
                         "/layout/releaseconfig",
                       method: "post",
-                      token,
                       cbSuccess: () => {
                         hierarchyEditorDispatch.editor({
                           type: HierarchyEditorActionTypes.RESET

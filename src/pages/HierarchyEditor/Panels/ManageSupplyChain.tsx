@@ -21,7 +21,6 @@ import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import ISupplyChainApiResponse from "../../../interfaces/ISupplyChainApiResponse";
 import { IGenericFormSchema } from "../../../interfaces/IGenericFormSchema";
 import { Panel } from "../../../molecules/Panel";
-import { useUserProfileContext } from "../../../stores/UserProfile";
 import {
   HierarchyEditorStateContext,
   HierarchyEditorActionTypes,
@@ -67,7 +66,6 @@ const validate = (values: ISupplyChainNameFormValues) => {
 };
 
 const ManageSupplyChain = () => {
-  const { token } = useUserProfileContext();
   const [supplyChainApiResponseState, setSupplyChainApiRequest] = useDataApi(
     genericDataFetchReducer
   );
@@ -123,7 +121,6 @@ const ManageSupplyChain = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token,
       url: "/api/supplychain",
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         const hierarchyDataRequest: DataRequest = {
@@ -131,7 +128,6 @@ const ManageSupplyChain = () => {
             HierarchyMode: "NONE"
           },
           method: "get",
-          token,
           url: `/api/hierarchy/${supplyChain.id}`,
           cbSuccess: (node: ITreeNode) => {
             addObjectToTree(
@@ -164,7 +160,6 @@ const ManageSupplyChain = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token,
       url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}`,
       cbSuccess: (supplyChain: ISupplyChainApiResponse) => {
         const hierarchyDataRequest: DataRequest = {
@@ -172,7 +167,6 @@ const ManageSupplyChain = () => {
             HierarchyMode: "ALL"
           },
           method: "get",
-          token,
           url: `/api/hierarchy/${supplyChain.id}`,
           cbSuccess: (node: ITreeNode) => {
             updateTreeObject(
@@ -210,7 +204,6 @@ const ManageSupplyChain = () => {
     const continueHandler = () => {
       const dataRequest: DataRequest = {
         method: "delete",
-        token,
         url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}`,
         cbSuccess: () => {
           removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);

@@ -15,7 +15,6 @@
  */
 import { Panel } from "../../../../molecules/Panel";
 import React, { useContext, useEffect } from "react";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import DataRequest from "../../../../types/DataRequest";
 import useDataApi from "../../../../hooks/useDataApi";
 import { customGenericDataFetchReducer } from "../../../../stores/genericDataFetchReducer";
@@ -42,7 +41,6 @@ interface IApprovalStepsResponse {
 
 const ManageApprovalExecutionPanel: React.FC = () => {
   const theme = useContext(ThemeContext);
-  const { token } = useUserProfileContext();
   const [hierarchyEditorState] = useContext(HierarchyEditorStateContext);
   const [approvalStepsResponse, setApprovalSteps] = useDataApi<
     IApprovalStepsResponse,
@@ -53,7 +51,6 @@ const ManageApprovalExecutionPanel: React.FC = () => {
   useEffect(() => {
     const dataRequest: DataRequest = {
       method: "get",
-      token,
       url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}/layout/approvalconfig/me`,
       cbSuccess: (approvalConfigs: Array<IApprovalConfig>) => {
         approvalExecutionStoreContext.dispatch({

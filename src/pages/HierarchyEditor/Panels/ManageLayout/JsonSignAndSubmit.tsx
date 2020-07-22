@@ -28,7 +28,6 @@ import {
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
 import DataRequest from "../../../../types/DataRequest";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import { ILayoutValidationMessage } from "../../../../interfaces/ILayout";
 
 interface ILayoutValidationErrorResponse {
@@ -50,8 +49,6 @@ const JsonSignAndSubmit = () => {
     genericDataFetchReducer
   );
 
-  const { token } = useUserProfileContext();
-
   const handleCancel = () => {
     hierarchyEditorDispatch.editor({
       type: HierarchyEditorActionTypes.RESET
@@ -62,7 +59,6 @@ const JsonSignAndSubmit = () => {
     const dataRequest: DataRequest = {
       data: values.layout,
       method: "post",
-      token,
       url:
         "/api/supplychain/" +
         hierarchyEditorState.editor.node.referenceId +

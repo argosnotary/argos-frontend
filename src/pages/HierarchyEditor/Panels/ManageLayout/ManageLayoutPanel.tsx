@@ -34,7 +34,6 @@ import {
 import LayoutJsonEditor from "./LayoutJsonEditor";
 import LayoutSigner from "./LayoutSigner";
 import LayoutEditorDetailsPane from "./LayoutEditorDetailsPane";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import styled from "styled-components";
 import { IApprovalConfig } from "../../../../interfaces/IApprovalConfig";
 import { HierarchyEditorStateContext } from "../../../../stores/hierarchyEditorStore";
@@ -56,8 +55,6 @@ const NoCryptoWarningContainer = styled.div`
 
 const ManageLayoutPanel: React.FC = () => {
   const editorStoreContext = createLayoutEditorStoreContext();
-
-  const { token } = useUserProfileContext();
 
   const [layoutApiResponse, setLayoutApiRequest] = useDataApi(
     genericDataFetchReducer
@@ -93,7 +90,6 @@ const ManageLayoutPanel: React.FC = () => {
     setLayout({} as ILayout);
     const getLayoutRequest: DataRequest = {
       method: "get",
-      token,
       url:
         "/api/supplychain/" +
         hierarchyEditorState.editor.node.referenceId +
@@ -109,7 +105,6 @@ const ManageLayoutPanel: React.FC = () => {
 
     const getGetApprovalConfigsRequest: DataRequest = {
       method: "get",
-      token,
       url:
         "/api/supplychain/" +
         hierarchyEditorState.editor.node.referenceId +
@@ -132,7 +127,6 @@ const ManageLayoutPanel: React.FC = () => {
 
     const getGetReleaseConfigRequest: DataRequest = {
       method: "get",
-      token,
       url:
         "/api/supplychain/" +
         hierarchyEditorState.editor.node.referenceId +

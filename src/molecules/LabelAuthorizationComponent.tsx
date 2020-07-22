@@ -24,7 +24,6 @@ import CollapsibleContainerComponent from "../atoms/CollapsibleContainer";
 import DataRequest from "../types/DataRequest";
 import AlternateLoader from "../atoms/Icons/AlternateLoader";
 import DataCheckbox from "../atoms/DataCheckbox";
-import { useUserProfileContext } from "../stores/UserProfile";
 
 const AuthorizationContainer = styled.div`
   display: flex;
@@ -87,8 +86,6 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
     IUserPermissions
   >(customGenericDataFetchReducer);
 
-  const { token } = useUserProfileContext();
-
   const theme = useContext(ThemeContext);
 
   const preCheckPermission = (permission: IPermission): boolean => {
@@ -106,7 +103,6 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
   const getLocalPermissions = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token,
       url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
     };
 
@@ -117,7 +113,6 @@ const LabelAuthorizationComponent: React.FC<ILabelAuthorizationComponentProps> =
     const dataRequest: DataRequest = {
       method: "put",
       data,
-      token,
       url: `/api/personalaccount/${accountId}/localpermission/${labelId}`
     };
 

@@ -78,8 +78,6 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
     Array<IRole>
   >(customGenericDataFetchReducer);
 
-  const { token } = useUserProfileContext();
-
   const theme = useContext(ThemeContext);
 
   const userProfile = useUserProfileContext();
@@ -107,7 +105,6 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
   const getGlobalRoles = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token,
       url: `/api/personalaccount/${accountId}`
     };
 
@@ -118,7 +115,6 @@ const RoleAuthorizationComponent: React.FC<IRoleAuthorizationComponentProps> = (
     const dataRequest: DataRequest = {
       method: "put",
       data,
-      token,
       url: `/api/personalaccount/${accountId}/role`
     };
 

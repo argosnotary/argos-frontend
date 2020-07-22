@@ -21,7 +21,6 @@ import {
 } from "../../../../stores/hierarchyEditorStore";
 import { cryptoAvailable, generateKey } from "../../../../security";
 import DataRequest from "../../../../types/DataRequest";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
 import { IPublicKey } from "../../../../interfaces/IPublicKey";
@@ -72,7 +71,6 @@ const ServiceAccountGenerateKeyWizard: React.FC<IServiceAccountKeyWizardProps> =
   const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
     HierarchyEditorStateContext
   );
-  const { token } = useUserProfileContext();
   const [
     _serviceAccountDataRequestState,
     setServiceAccountDataRequest
@@ -92,7 +90,6 @@ const ServiceAccountGenerateKeyWizard: React.FC<IServiceAccountKeyWizardProps> =
       const dataRequest: DataRequest = {
         data: generatedKeys.keys,
         method: "post",
-        token,
         url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}/key`,
         cbSuccess: () => {
           cbKeyGenerated(

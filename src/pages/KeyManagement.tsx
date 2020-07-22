@@ -39,7 +39,6 @@ import KeyContainer from "../atoms/KeyContainer";
 import FlexColumn from "../atoms/FlexColumn";
 import { NoCryptoWarning } from "../molecules/NoCryptoWarning";
 import { CryptoExceptionWarning } from "../molecules/CryptoExceptionWarning";
-import { useUserProfileContext } from "../stores/UserProfile";
 
 export const CreateKeyButton = styled(TransparentButton)`
   margin: 1.3rem 0;
@@ -99,7 +98,6 @@ export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
     WizardStates.KeyOverrideWarning
   );
   const theme = useContext(ThemeContext);
-  const { token } = useUserProfileContext();
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [createKeyResponse, setCreateKeyDataRequest] = useDataApi(
     genericDataFetchReducer
@@ -133,7 +131,6 @@ export const KeyManagementModal: React.FC<IKeyManagementModalProps> = ({
       const dataRequest: DataRequest = {
         data: generatedKeys.keys,
         method: "post",
-        token,
         url: "/api/personalaccount/me/key",
         cbSuccess: () => {
           cbKeyCreated(generatedKeys.keys);
@@ -229,7 +226,6 @@ const KeyManagement = () => {
   const [keyAvailable, setKeyAvailable] = useState(true);
   const theme = useContext(ThemeContext);
   const [publicKey, setPublicKey] = useState({} as IPublicKey);
-  const { token } = useUserProfileContext();
   const createNewKey = () => {
     setDisplayModal(true);
   };
@@ -240,7 +236,6 @@ const KeyManagement = () => {
   };
   const getActivekeyDataRequest: DataRequest = {
     method: "get",
-    token,
     url: "/api/personalaccount/me/key",
     cbSuccess: (key: IPublicKey) => {
       setPublicKey(key);

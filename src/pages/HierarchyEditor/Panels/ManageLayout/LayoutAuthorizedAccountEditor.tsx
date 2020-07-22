@@ -33,7 +33,6 @@ import {
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import DataRequest from "../../../../types/DataRequest";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import useDataApi from "../../../../hooks/useDataApi";
 import { customGenericDataFetchReducer } from "../../../../stores/genericDataFetchReducer";
 import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
@@ -109,8 +108,6 @@ const LayoutAuthorizedAccountEditor: React.FC = () => {
     Array<ISearchApiUser>
   >(customGenericDataFetchReducer);
 
-  const { token } = useUserProfileContext();
-
   const getAccountWithKeyId = (
     accounts: Array<IAuthorizedAccount>,
     index: number
@@ -134,13 +131,11 @@ const LayoutAuthorizedAccountEditor: React.FC = () => {
                   getAccountWithKeyId(accounts, index + 1);
                 }
               },
-              token,
               url: `/api/personalaccount`
             };
             setSearchAccountApiRequest(inactiveKeyIdsRequest);
           }
         },
-        token,
         url: `/api/personalaccount`
       };
       setSearchAccountApiRequest(activeKeyIdsRequest);
@@ -212,7 +207,6 @@ const LayoutAuthorizedAccountEditor: React.FC = () => {
     setAddAccountMode(false);
     const getUserRequest: DataRequest = {
       method: "get",
-      token,
       url: `/api/personalaccount/${searchResult.id}/key`,
       cbSuccess: (key: IPublicKey) => {
         editorStoreContext.dispatch({
@@ -243,7 +237,6 @@ const LayoutAuthorizedAccountEditor: React.FC = () => {
             params: {
               name: searchQuery
             },
-            token,
             url: `/api/personalaccount`
           };
           setSearchAccountApiRequest(searchUserRequest);

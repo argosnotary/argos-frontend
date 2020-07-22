@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React, { ReactNode } from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { PROFILE_STATE, useUserProfileContext } from "../stores/UserProfile";
 
 interface IPrivateRouteProps {
@@ -27,16 +27,10 @@ const PrivateRoute: React.FC<IPrivateRouteProps> = ({
   path
 }: IPrivateRouteProps) => {
   const userProfile = useUserProfileContext();
-  if (userProfile.state === PROFILE_STATE.LOGGED_OUT) {
-    return (
-      <Redirect
-        to={{
-          pathname: "/login"
-        }}
-      />
-    );
-  } else {
+  if (userProfile.state === PROFILE_STATE.READY) {
     return <Route path={path}>{children}</Route>;
+  } else {
+    return null;
   }
 };
 

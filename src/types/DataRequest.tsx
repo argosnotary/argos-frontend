@@ -16,7 +16,6 @@
 
 type DataRequest =
   | {
-      token: string;
       url: string;
       method: "get" | "delete";
       params?: {};
@@ -24,7 +23,6 @@ type DataRequest =
       cbFailure?: (arg: any) => boolean;
     }
   | {
-      token: string;
       url: string;
       method: "post" | "put";
       data: {};

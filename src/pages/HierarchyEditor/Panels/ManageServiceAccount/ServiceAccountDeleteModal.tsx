@@ -24,7 +24,6 @@ import React, { useContext } from "react";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
 import { Modal, ModalFlexColumWrapper } from "../../../../atoms/Modal";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 
 const ServiceAccountDeleteModal = () => {
   const [
@@ -34,7 +33,6 @@ const ServiceAccountDeleteModal = () => {
   const [hierarchyEditorState, hierarchyEditorDispatch] = useContext(
     HierarchyEditorStateContext
   );
-  const { token } = useUserProfileContext();
   const getDeleteWarningContent = () => {
     const cancelHandler = () => {
       hierarchyEditorDispatch.editor({
@@ -45,7 +43,6 @@ const ServiceAccountDeleteModal = () => {
     const continueHandler = () => {
       const dataRequest: DataRequest = {
         method: "delete",
-        token,
         url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
         cbSuccess: () => {
           removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);
