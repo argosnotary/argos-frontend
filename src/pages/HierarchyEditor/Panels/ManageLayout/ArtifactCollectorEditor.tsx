@@ -238,6 +238,7 @@ const ArtifactCollectorEditor: React.FC<IArtifactCollectorEditorProps> = ({
         artifactCollector
       });
     } else {
+      setEditIndex(undefined);
       editorStoreContext.dispatch({
         type: LayoutEditorActionType.UPDATE_ARTIFACT_COLLECTOR,
         artifactCollector

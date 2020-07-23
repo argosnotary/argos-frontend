@@ -305,6 +305,23 @@ const HierarchyEditor = () => {
             );
           }
         },
+
+        {
+          label: "Release",
+          callback: (node: ITreeNode) => {
+            treeContextMenuCallback(
+              HierarchyEditorPanelTypes.EXECUTE_RELEASE,
+              HierarchyEditorPanelModes.DEFAULT,
+              node
+            );
+          },
+          visible: (node: ITreeNode) => {
+            return (
+              node.permissions !== undefined &&
+              node.permissions.indexOf(PermissionTypes.RELEASE) >= 0
+            );
+          }
+        },
         {
           label: "Remove supply chain",
           callback: (node: ITreeNode) => {
@@ -406,6 +423,8 @@ const HierarchyEditor = () => {
         return <ManageLayoutPanel />;
       case HierarchyEditorPanelTypes.EXECUTE_APPROVAL:
         return <ManageApprovalExecutionPanel />;
+      case HierarchyEditorPanelTypes.EXECUTE_RELEASE:
+        return null;
       default:
         return null;
     }
