@@ -24,7 +24,6 @@ import { ThemeContext } from "styled-components";
 import AlternateLoader from "../../../atoms/Icons/AlternateLoader";
 import LabelAuthorizationComponent from "../../../molecules/LabelAuthorizationComponent";
 import { Panel } from "../../../molecules/Panel";
-import { useUserProfileContext } from "../../../stores/UserProfile";
 import { HierarchyEditorStateContext } from "../../../stores/hierarchyEditorStore";
 import PanelBreadCrumb from "../../../molecules/PanelBreadCrumb";
 
@@ -62,7 +61,6 @@ interface ISearchUserApiResponse {
 const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
   selectedLabelId
 }) => {
-  const { token } = useUserProfileContext();
   const [user, setUser] = useState({} as IUser);
 
   const [searchUserApiResponse, setSearchUserApiRequest] = useDataApi<
@@ -85,7 +83,6 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
       params: {
         localPermissionsLabelId: selectedLabelId
       },
-      token,
       url: `/api/personalaccount`
     };
 
@@ -155,7 +152,6 @@ const UserPermissions: React.FC<IEditSearchedUserPermissionsProps> = ({
             params: {
               name: searchQuery
             },
-            token,
             url: `/api/personalaccount`
           };
 

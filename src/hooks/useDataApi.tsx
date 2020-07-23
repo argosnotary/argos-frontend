@@ -14,13 +14,29 @@
  * limitations under the License.
  */
 
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, CancelTokenSource } from "axios";
 import { Reducer, useEffect, useReducer, useState } from "react";
 
 import Action from "../types/Action";
 import DataRequest from "../types/DataRequest";
 import { useRequestErrorStore } from "../stores/requestErrorStore";
-import { useHistory } from "react-router-dom";
+import { TokenActionType, useUserProfileContext } from "../stores/UserProfile";
+
+export const createRequestConfig = (
+  token: string,
+  source: CancelTokenSource
+) => {
+  const authorizationHeader = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json"
+  };
+
+  const requestConfig: AxiosRequestConfig = {
+    headers: authorizationHeader,
+    cancelToken: source.token
+  };
+  return requestConfig;
+};
 
 function useDataApi<S, T>(
   reducer: Reducer<S, Action<T>>,
@@ -30,8 +46,9 @@ function useDataApi<S, T>(
     initialDataRequest
   );
   const [state, dispatch] = useReducer(reducer, {} as S);
-  const history = useHistory();
   const [_error, setError] = useRequestErrorStore();
+
+  const userProfileContext = useUserProfileContext();
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -39,77 +56,23 @@ function useDataApi<S, T>(
     if (dataRequest) {
       const fetchData = async () => {
         dispatch({ type: "FETCH_INIT", isLoading: true });
-        const authorizationHeader = {
-          Authorization: `Bearer ${dataRequest.token}`,
-          "Content-Type": "application/json"
-        };
-
-        const requestConfig: AxiosRequestConfig = {
-          headers: authorizationHeader,
-          cancelToken: source.token
-        };
+        const requestConfig = createRequestConfig(
+          userProfileContext.token,
+          source
+        );
 
         if (dataRequest.params) {
           requestConfig["params"] = dataRequest.params;
         }
-
+        requestConfig.method = dataRequest.method;
         switch (dataRequest.method) {
-          case "delete": {
-            const methodKey = "method";
-            requestConfig[methodKey] = "delete";
-            break;
-          }
-
-          case "get": {
-            const methodKey = "method";
-            requestConfig[methodKey] = "get";
-            break;
-          }
-
-          case "post": {
-            const methodKey = "method";
-            const dataKey = "data";
-            requestConfig[methodKey] = "post";
-            requestConfig[dataKey] = dataRequest.data;
-            break;
-          }
-
+          case "post":
           case "put": {
-            const methodKey = "method";
-            const dataKey = "data";
-            requestConfig[methodKey] = "put";
-            requestConfig[dataKey] = dataRequest.data;
+            requestConfig.data = dataRequest.data;
             break;
           }
         }
-
-        try {
-          const result = await axios(dataRequest.url, requestConfig);
-
-          dispatch({
-            isLoading: false,
-            results: result.data,
-            type: "FETCH_SUCCESS"
-          });
-
-          if (dataRequest.cbSuccess) {
-            dataRequest.cbSuccess(result.data);
-          }
-        } catch (error) {
-          if (!axios.isCancel(error)) {
-            if (error.response && error.response.status === 401) {
-              history.push("/login");
-            }
-            dispatch({ type: "FETCH_FAILURE", isLoading: false, error });
-            if (dataRequest.cbFailure) {
-              if (!dataRequest.cbFailure(error)) {
-                setError(error);
-              }
-            } else {
-              setError(error);
-            }
-          }
-        }
+        await doCall(dataRequest, requestConfig, source, true);
       };
 
       fetchData();
@@ -119,6 +82,89 @@ function useDataApi<S, T>(
       source.cancel();
     };
   }, [dataRequest]);
+
+  const doCall = async (
+    request: DataRequest,
+    requestConfig: AxiosRequestConfig,
+    source: CancelTokenSource,
+    refreshTokenIfNeeded: boolean
+  ) => {
+    try {
+      const result = await axios(request.url, requestConfig);
+
+      dispatch({
+        isLoading: false,
+        results: result.data,
+        type: "FETCH_SUCCESS"
+      });
+
+      if (request.cbSuccess) {
+        request.cbSuccess(result.data);
+      }
+    } catch (error) {
+      if (!axios.isCancel(error)) {
+        if (error.response && error.response.status === 401) {
+          if (
+            refreshTokenIfNeeded &&
+            error.response.data &&
+            error.response.data.message &&
+            error.response.data.message === "refresh token"
+          ) {
+            refreshToken(request, source, requestConfig);
+          } else {
+            userProfileContext.doTokenAction({
+              type: TokenActionType.LOGOUT,
+              token: null
+            });
+          }
+        } else {
+          dispatch({ type: "FETCH_FAILURE", isLoading: false, error });
+          if (request.cbFailure) {
+            if (!request.cbFailure(error)) {
+              setError(error);
+            }
+          } else {
+            setError(error);
+          }
+        }
+      }
+    }
+  };
+
+  const refreshToken = async (
+    request: DataRequest,
+    source: CancelTokenSource,
+    requestConfig: AxiosRequestConfig
+  ) => {
+    try {
+      const refreshRequestConfig = createRequestConfig(
+        userProfileContext.token,
+        source
+      );
+      refreshRequestConfig.method = "get";
+      const newTokenResponse = await axios(
+        "/api/personalaccount/me/refresh",
+        refreshRequestConfig
+      );
+      userProfileContext.doTokenAction({
+        type: TokenActionType.REFRESH,
+        token: newTokenResponse.data.token
+      });
+      const originalDataRequest = createRequestConfig(
+        newTokenResponse.data.token,
+        source
+      );
+      originalDataRequest.method = requestConfig.method;
+      originalDataRequest.data = requestConfig.data;
+      originalDataRequest.params = requestConfig.params;
+      doCall(request, originalDataRequest, source, false);
+    } catch (e) {
+      userProfileContext.doTokenAction({
+        type: TokenActionType.LOGOUT,
+        token: null
+      });
+    }
+  };
 
   return [state, setDataRequest, dataRequest];
 }

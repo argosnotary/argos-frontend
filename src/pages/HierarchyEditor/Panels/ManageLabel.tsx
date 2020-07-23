@@ -21,7 +21,6 @@ import useDataApi from "../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../stores/genericDataFetchReducer";
 import { IGenericFormSchema } from "../../../interfaces/IGenericFormSchema";
 import { Panel } from "../../../molecules/Panel";
-import { useUserProfileContext } from "../../../stores/UserProfile";
 import {
   HierarchyEditorStateContext,
   HierarchyEditorPanelModes,
@@ -67,8 +66,6 @@ const validate = (values: ILabelNameFormValues) => {
 };
 
 const ManageLabel = () => {
-  const { token } = useUserProfileContext();
-
   const [treeChildrenApiResponse, setTreeChildrenApiRequest] = useDataApi(
     genericDataFetchReducer
   );
@@ -123,7 +120,6 @@ const ManageLabel = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token,
       url: "/api/label",
       cbSuccess: (label: ILabelPostResponse) => {
         const hierarchyDataRequest: DataRequest = {
@@ -131,7 +127,6 @@ const ManageLabel = () => {
             HierarchyMode: "NONE"
           },
           method: "get",
-          token,
           url: `/api/hierarchy/${label.id}`,
           cbSuccess: (node: ITreeNode) => {
             addObjectToTree(
@@ -164,7 +159,6 @@ const ManageLabel = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token,
       url: `/api/label/${hierarchyEditorState.editor.node.referenceId}`,
       cbSuccess: (label: ILabelPostResponse) => {
         const hierarchyDataRequest: DataRequest = {
@@ -172,7 +166,6 @@ const ManageLabel = () => {
             HierarchyMode: "ALL"
           },
           method: "get",
-          token,
           url: `/api/hierarchy/${label.id}`,
           cbSuccess: (node: ITreeNode) => {
             updateTreeObject(
@@ -230,7 +223,6 @@ const ManageLabel = () => {
     const continueHandler = () => {
       const dataRequest: DataRequest = {
         method: "delete",
-        token,
         url: `/api/label/${hierarchyEditorState.editor.node.referenceId}`,
         cbSuccess: () => {
           removeObjectFromTree(hierarchyEditorState, hierarchyEditorDispatch);

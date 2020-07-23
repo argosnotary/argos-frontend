@@ -19,7 +19,6 @@ import IPersonalAccountKeyPair from "../../../../interfaces/IPersonalAccountKeyP
 import { WRONG_PASSWORD } from "../../../../security";
 import useDataApi from "../../../../hooks/useDataApi";
 import genericDataFetchReducer from "../../../../stores/genericDataFetchReducer";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import PassphraseDialogBox from "../../../../organisms/PassphraseDialogBox";
 import {
   ApprovalExecutionActionType,
@@ -41,7 +40,6 @@ const LinkSigner: React.FC = () => {
   );
   const [showWarning, setShowWarning] = useState(false);
   const [passphrase, setPassphrase] = useState("");
-  const { token } = useUserProfileContext();
   const [cryptoException, setCryptoException] = useState(false);
 
   const [response, setRequest] = useDataApi(genericDataFetchReducer);
@@ -49,7 +47,6 @@ const LinkSigner: React.FC = () => {
   const postNewLayout = () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: token,
       url: "/api/personalaccount/me/key",
       cbSuccess: (key: IPersonalAccountKeyPair) => {
         const signingContext = approvalContext.state
@@ -65,7 +62,6 @@ const LinkSigner: React.FC = () => {
             setRequest({
               data: linkMetaBlock,
               method: "post",
-              token,
               url:
                 "/api/supplychain/" +
                 hierarchyEditorState.editor.node.referenceId +

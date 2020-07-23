@@ -33,7 +33,6 @@ import {
   useLayoutEditorStore
 } from "../../../../stores/LayoutEditorStore";
 import DataRequest from "../../../../types/DataRequest";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import useDataApi from "../../../../hooks/useDataApi";
 import { customGenericDataFetchReducer } from "../../../../stores/genericDataFetchReducer";
 import AlternateLoader from "../../../../atoms/Icons/AlternateLoader";
@@ -130,8 +129,6 @@ const StepAuthorizedAccountEditor: React.FC = () => {
     Array<IKeyStatus>
   >(customGenericDataFetchReducer);
 
-  const { token } = useUserProfileContext();
-
   const getAccountWithKeyId = (keyIds: Array<string>) => {
     const activeKeyIdsRequest: DataRequest = {
       method: "get",
@@ -139,7 +136,6 @@ const StepAuthorizedAccountEditor: React.FC = () => {
       cbSuccess: (activeUsers: Array<IKeyStatus>) => {
         setAuthorizedPersonalAccounts(activeUsers);
       },
-      token,
       url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}/account/key`
     };
     setSearchAccountApiRequest(activeKeyIdsRequest);
@@ -222,7 +218,6 @@ const StepAuthorizedAccountEditor: React.FC = () => {
     setAddAccountMode(false);
     const getUserRequest: DataRequest = {
       method: "get",
-      token,
       url: `/api/${
         searchResult.accountType === AccountType.PERSONAL_ACCOUNT
           ? "personalaccount"
@@ -260,7 +255,6 @@ const StepAuthorizedAccountEditor: React.FC = () => {
             params: {
               name: searchQuery
             },
-            token,
             url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}/account`
           };
           setSearchAccountApiRequest(searchUserRequest);

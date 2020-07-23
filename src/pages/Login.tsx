@@ -18,6 +18,7 @@ import React from "react";
 import styled from "styled-components";
 
 import LoginForm from "../organisms/LoginForm";
+import { PROFILE_STATE, useUserProfileContext } from "../stores/UserProfile";
 
 const LoginPageContainer = styled.section`
   position: fixed;
@@ -26,10 +27,17 @@ const LoginPageContainer = styled.section`
   background-color: ${props => props.theme.loginPage.bgColor};
 `;
 
-const LoginPage: React.FC = () => (
-  <LoginPageContainer>
-    <LoginForm />
-  </LoginPageContainer>
-);
+const LoginPage: React.FC = () => {
+  const userProfileContext = useUserProfileContext();
+  if (userProfileContext.state === PROFILE_STATE.LOGGED_OUT) {
+    return (
+      <LoginPageContainer>
+        <LoginForm />
+      </LoginPageContainer>
+    );
+  } else {
+    return null;
+  }
+};
 
 export default LoginPage;

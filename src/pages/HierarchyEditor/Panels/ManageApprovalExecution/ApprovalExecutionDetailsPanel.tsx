@@ -166,7 +166,6 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
         ...context.config.context,
         ...context.executionValues
       },
-      token: "",
       url: context.config.uri + "/api/collector/artifacts",
       cbSuccess: handleReceivedArtifacts,
       cbFailure: (error: any) => {

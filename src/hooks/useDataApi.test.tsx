@@ -46,7 +46,6 @@ describe("useDataApi hook", () => {
   it("fetches data on mount when url is specified at hook initialization", async () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: "my_token",
       url: mockUrl
     };
 
@@ -79,7 +78,6 @@ describe("useDataApi hook", () => {
   it("fetches data when new url is set", async () => {
     const dataRequest: DataRequest = {
       method: "get",
-      token: "my_token",
       url: mockUrl
     };
 
@@ -108,7 +106,6 @@ describe("useDataApi hook", () => {
     const dataRequest: DataRequest = {
       data: { id: 1 },
       method: "post",
-      token: "my_token",
       url: mockUrl
     };
 

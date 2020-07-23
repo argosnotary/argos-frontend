@@ -18,7 +18,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useHistory,
   useLocation
 } from "react-router-dom";
 
@@ -31,26 +30,28 @@ import UserSettingsPage from "../pages/UserSettings";
 import { RequestErrorStoreProvider } from "../stores/requestErrorStore";
 import HierarchyEditor from "../pages/HierarchyEditor/HierarchyEditor";
 import {
+  TokenActionType,
   UserProfileStoreProvider,
   useUserProfileContext
 } from "../stores/UserProfile";
 
 const AuthenticationForwarder: React.FC = () => {
   const location = useLocation();
-  const history = useHistory();
   const userProfile = useUserProfileContext();
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
     const queryToken = query.get("token");
     if (queryToken) {
-      userProfile.setToken(queryToken);
-      history.push("/dashboard");
+      userProfile.doTokenAction({
+        type: TokenActionType.LOGIN,
+        token: queryToken
+      });
     } else if (query.get("error")) {
       userProfile.setError(query.get("error"));
-      history.push("/login");
+      userProfile.doTokenAction({ type: TokenActionType.LOGOUT, token: null });
     } else {
-      history.push("/login");
+      userProfile.doTokenAction({ type: TokenActionType.LOGOUT, token: null });
     }
   });
   return null;

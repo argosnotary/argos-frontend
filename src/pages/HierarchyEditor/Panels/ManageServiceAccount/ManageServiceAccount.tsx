@@ -29,7 +29,6 @@ import { IPublicKey } from "../../../../interfaces/IPublicKey";
 import { NoCryptoWarning } from "../../../../molecules/NoCryptoWarning";
 import { FormPermissions } from "../../../../types/FormPermission";
 import { Panel } from "../../../../molecules/Panel";
-import { useUserProfileContext } from "../../../../stores/UserProfile";
 import {
   HierarchyEditorActionTypes,
   HierarchyEditorPanelModes,
@@ -95,7 +94,6 @@ const clipboardWrapperCss = css`
 `;
 
 const ManageServiceAccount = () => {
-  const { token } = useUserProfileContext();
   const [
     serviceAccountDataRequestState,
     setServiceAccountDataRequest
@@ -198,7 +196,6 @@ const ManageServiceAccount = () => {
     const dataRequest: DataRequest = {
       data,
       method: "post",
-      token,
       url: "/api/serviceaccount",
       cbSuccess: async (serviceaccount: IServiceAccountApiResponse) => {
         setWizardMode(WizardModes.AUTOMATIC);
@@ -207,7 +204,6 @@ const ManageServiceAccount = () => {
             HierarchyMode: "NONE"
           },
           method: "get",
-          token,
           url: `/api/hierarchy/${serviceaccount.id}`,
           cbSuccess: (node: ITreeNode) => {
             hierarchyEditorDispatch.editor({
@@ -247,7 +243,6 @@ const ManageServiceAccount = () => {
     const dataRequest: DataRequest = {
       data,
       method: "put",
-      token,
       url: `/api/serviceaccount/${hierarchyEditorState.editor.node.referenceId}`,
       cbSuccess: (serviceaccount: IServiceAccountApiResponse) => {
         const node = generateNode(serviceaccount);
@@ -261,7 +256,6 @@ const ManageServiceAccount = () => {
   const getKeyId = (id: string) => {
     const dataRequest: DataRequest = {
       method: "get",
-      token,
       url: `/api/serviceaccount/${id}/key`,
       cbSuccess: (n: IPublicKey) => {
         setServiceAccountKey(n);
@@ -273,18 +267,16 @@ const ManageServiceAccount = () => {
   useEffect(() => {
     resetState();
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.UPDATE) {
+      formApi.setInitialFormValues({
+        serviceaccountname: hierarchyEditorState.editor.node.name
+      });
 
-        formApi.setInitialFormValues({
-          serviceaccountname: hierarchyEditorState.editor.node.name
-        });
-
-        if (
-          hierarchyEditorState.editor.panel !==
-          HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR
-        ) {
-          getKeyId(hierarchyEditorState.editor.node.referenceId);
-        }
-
+      if (
+        hierarchyEditorState.editor.panel !==
+        HierarchyEditorPanelTypes.SERVICE_ACCOUNT_KEY_GENERATOR
+      ) {
+        getKeyId(hierarchyEditorState.editor.node.referenceId);
+      }
     }
     if (hierarchyEditorState.editor.mode === HierarchyEditorPanelModes.CREATE) {
       formApi.setInitialFormValues({ serviceaccountname: "" });
