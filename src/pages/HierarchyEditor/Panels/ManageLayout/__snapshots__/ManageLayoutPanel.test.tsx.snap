@@ -1091,7 +1091,7 @@ exports[`add authorized key to layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-iAyFgw",
                                     "isStatic": false,
-                                    "lastClassName": "cxKzXg",
+                                    "lastClassName": "kuBZXY",
                                     "rules": Array [
                                       "
   ",
@@ -1153,7 +1153,7 @@ exports[`add authorized key to layout 1`] = `
                               type="button"
                             >
                               <button
-                                className="sc-iAyFgw cxKzXg"
+                                className="sc-iAyFgw kuBZXY"
                                 data-testhook-id="layout-json-form-submit-button"
                                 onClick={[Function]}
                                 type="button"
@@ -1177,7 +1177,7 @@ exports[`add authorized key to layout 1`] = `
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-jqCOkK",
                                   "isStatic": false,
-                                  "lastClassName": "hnIXLO",
+                                  "lastClassName": "jrhpuB",
                                   "rules": Array [
                                     "
   ",
@@ -1269,7 +1269,7 @@ exports[`add authorized key to layout 1`] = `
                             type="button"
                           >
                             <button
-                              className="sc-iAyFgw sc-cvbbAY sc-jqCOkK hnIXLO"
+                              className="sc-iAyFgw sc-cvbbAY sc-jqCOkK jrhpuB"
                               data-testhook="cancel-button"
                               onMouseDown={[Function]}
                               type="button"
@@ -4539,7 +4539,7 @@ exports[`renders correctly with existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-iAyFgw",
                                     "isStatic": false,
-                                    "lastClassName": "cxKzXg",
+                                    "lastClassName": "kuBZXY",
                                     "rules": Array [
                                       "
   ",
@@ -4601,7 +4601,7 @@ exports[`renders correctly with existing layout 1`] = `
                               type="button"
                             >
                               <button
-                                className="sc-iAyFgw cxKzXg"
+                                className="sc-iAyFgw kuBZXY"
                                 data-testhook-id="layout-json-form-submit-button"
                                 onClick={[Function]}
                                 type="button"
@@ -4625,7 +4625,7 @@ exports[`renders correctly with existing layout 1`] = `
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-jqCOkK",
                                   "isStatic": false,
-                                  "lastClassName": "hnIXLO",
+                                  "lastClassName": "jrhpuB",
                                   "rules": Array [
                                     "
   ",
@@ -4717,7 +4717,7 @@ exports[`renders correctly with existing layout 1`] = `
                             type="button"
                           >
                             <button
-                              className="sc-iAyFgw sc-cvbbAY sc-jqCOkK hnIXLO"
+                              className="sc-iAyFgw sc-cvbbAY sc-jqCOkK jrhpuB"
                               data-testhook="cancel-button"
                               onMouseDown={[Function]}
                               type="button"
@@ -8747,7 +8747,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-iAyFgw",
                                     "isStatic": false,
-                                    "lastClassName": "cxKzXg",
+                                    "lastClassName": "kuBZXY",
                                     "rules": Array [
                                       "
   ",
@@ -8809,7 +8809,7 @@ exports[`renders correctly with non existing layout 1`] = `
                               type="button"
                             >
                               <button
-                                className="sc-iAyFgw cxKzXg"
+                                className="sc-iAyFgw kuBZXY"
                                 data-testhook-id="layout-json-form-submit-button"
                                 onClick={[Function]}
                                 type="button"
@@ -8833,7 +8833,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-jqCOkK",
                                   "isStatic": false,
-                                  "lastClassName": "hnIXLO",
+                                  "lastClassName": "jrhpuB",
                                   "rules": Array [
                                     "
   ",
@@ -8925,7 +8925,7 @@ exports[`renders correctly with non existing layout 1`] = `
                             type="button"
                           >
                             <button
-                              className="sc-iAyFgw sc-cvbbAY sc-jqCOkK hnIXLO"
+                              className="sc-iAyFgw sc-cvbbAY sc-jqCOkK jrhpuB"
                               data-testhook="cancel-button"
                               onMouseDown={[Function]}
                               type="button"
@@ -12562,7 +12562,7 @@ exports[`sign layout happy flow 1`] = `
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-iAyFgw",
                                         "isStatic": false,
-                                        "lastClassName": "cxKzXg",
+                                        "lastClassName": "kuBZXY",
                                         "rules": Array [
                                           "
   ",
@@ -12624,7 +12624,7 @@ exports[`sign layout happy flow 1`] = `
                                   type="button"
                                 >
                                   <button
-                                    className="sc-iAyFgw cxKzXg"
+                                    className="sc-iAyFgw kuBZXY"
                                     data-testhook-id="layout-json-form-submit-button"
                                     onClick={[Function]}
                                     type="button"
@@ -12648,7 +12648,7 @@ exports[`sign layout happy flow 1`] = `
                                     "componentStyle": ComponentStyle {
                                       "componentId": "sc-jqCOkK",
                                       "isStatic": false,
-                                      "lastClassName": "hnIXLO",
+                                      "lastClassName": "jrhpuB",
                                       "rules": Array [
                                         "
   ",
@@ -12740,7 +12740,7 @@ exports[`sign layout happy flow 1`] = `
                                 type="button"
                               >
                                 <button
-                                  className="sc-iAyFgw sc-cvbbAY sc-jqCOkK hnIXLO"
+                                  className="sc-iAyFgw sc-cvbbAY sc-jqCOkK jrhpuB"
                                   data-testhook="cancel-button"
                                   onMouseDown={[Function]}
                                   type="button"
@@ -14438,7 +14438,7 @@ exports[`sign layout happy flow 1`] = `
                                                                                     "componentStyle": ComponentStyle {
                                                                                       "componentId": "sc-iAyFgw",
                                                                                       "isStatic": false,
-                                                                                      "lastClassName": "cxKzXg",
+                                                                                      "lastClassName": "kuBZXY",
                                                                                       "rules": Array [
                                                                                         "
   ",
@@ -14500,7 +14500,7 @@ exports[`sign layout happy flow 1`] = `
                                                                                 type="button"
                                                                               >
                                                                                 <button
-                                                                                  className="sc-iAyFgw cxKzXg"
+                                                                                  className="sc-iAyFgw kuBZXY"
                                                                                   data-testhook-id="collector-edit-form-submit-button"
                                                                                   onMouseDown={[Function]}
                                                                                   type="button"
@@ -14524,7 +14524,7 @@ exports[`sign layout happy flow 1`] = `
                                                                                   "componentStyle": ComponentStyle {
                                                                                     "componentId": "sc-jAaTju",
                                                                                     "isStatic": false,
-                                                                                    "lastClassName": "eHxOSY",
+                                                                                    "lastClassName": "hVyGKy",
                                                                                     "rules": Array [
                                                                                       "
   ",
@@ -14616,7 +14616,7 @@ exports[`sign layout happy flow 1`] = `
                                                                               type="button"
                                                                             >
                                                                               <button
-                                                                                className="sc-iAyFgw sc-cvbbAY sc-jAaTju eHxOSY"
+                                                                                className="sc-iAyFgw sc-cvbbAY sc-jAaTju hVyGKy"
                                                                                 data-testhook="cancel-button"
                                                                                 onMouseDown={[Function]}
                                                                                 type="button"
@@ -16812,7 +16812,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                   "componentStyle": ComponentStyle {
                                     "componentId": "sc-iAyFgw",
                                     "isStatic": false,
-                                    "lastClassName": "cxKzXg",
+                                    "lastClassName": "kuBZXY",
                                     "rules": Array [
                                       "
   ",
@@ -16874,7 +16874,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               type="button"
                             >
                               <button
-                                className="sc-iAyFgw cxKzXg"
+                                className="sc-iAyFgw kuBZXY"
                                 data-testhook-id="layout-json-form-submit-button"
                                 onClick={[Function]}
                                 type="button"
@@ -16898,7 +16898,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-jqCOkK",
                                   "isStatic": false,
-                                  "lastClassName": "hnIXLO",
+                                  "lastClassName": "jrhpuB",
                                   "rules": Array [
                                     "
   ",
@@ -16990,7 +16990,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                             type="button"
                           >
                             <button
-                              className="sc-iAyFgw sc-cvbbAY sc-jqCOkK hnIXLO"
+                              className="sc-iAyFgw sc-cvbbAY sc-jqCOkK jrhpuB"
                               data-testhook="cancel-button"
                               onMouseDown={[Function]}
                               type="button"

@@ -1140,7 +1140,7 @@ exports[`edit collector 1`] = `
                                                 "componentStyle": ComponentStyle {
                                                   "componentId": "sc-kAzzGY",
                                                   "isStatic": false,
-                                                  "lastClassName": "fTmoqT",
+                                                  "lastClassName": "fnJcPD",
                                                   "rules": Array [
                                                     "
   ",
@@ -1202,7 +1202,7 @@ exports[`edit collector 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="sc-kAzzGY fTmoqT"
+                                              className="sc-kAzzGY fnJcPD"
                                               data-testhook-id="collector-edit-form-submit-button"
                                               onMouseDown={[Function]}
                                               type="button"
@@ -1226,7 +1226,7 @@ exports[`edit collector 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-eNQAEJ",
                                                 "isStatic": false,
-                                                "lastClassName": "kzbqhM",
+                                                "lastClassName": "cXBxta",
                                                 "rules": Array [
                                                   "
   ",
@@ -1318,7 +1318,7 @@ exports[`edit collector 1`] = `
                                           type="button"
                                         >
                                           <button
-                                            className="sc-kAzzGY sc-kGXeez sc-eNQAEJ kzbqhM"
+                                            className="sc-kAzzGY sc-kGXeez sc-eNQAEJ cXBxta"
                                             data-testhook="cancel-button"
                                             onMouseDown={[Function]}
                                             type="button"
