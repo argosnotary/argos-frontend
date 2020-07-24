@@ -1,0 +1,395 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<LoginForm>
+  <styled.div>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-EHOje",
+            "isStatic": false,
+            "lastClassName": "kZGGxV",
+            "rules": Array [
+              "
+  display: flex;
+  flex-direction: column;
+  background-color: ",
+              [Function],
+              ";
+  margin: 10% auto;
+  width: 20rem;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  padding: 1.75rem 2rem 2rem;
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-EHOje",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <div
+        className="sc-EHOje kZGGxV"
+      >
+        <styled.img
+          src="images/logo.svg"
+        >
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-bZQynM",
+                  "isStatic": false,
+                  "lastClassName": "XXprT",
+                  "rules": Array [
+                    "
+  height: 4.25rem;
+  margin: 2rem auto 4rem;
+  display: flex;
+  max-width: 100%;
+",
+                  ],
+                },
+                "displayName": "styled.img",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-bZQynM",
+                "target": "img",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+            src="images/logo.svg"
+          >
+            <img
+              className="sc-bZQynM XXprT"
+              src="images/logo.svg"
+            />
+          </StyledComponent>
+        </styled.img>
+        <Styled(styled.a)
+          href="/api/oauth2/authorize/provider1?redirect_uri=/authenticated"
+          key="provider0"
+        >
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-gzVnrw",
+                  "isStatic": false,
+                  "lastClassName": "gODbxc",
+                  "rules": Array [
+                    "
+  ",
+                    "
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 1rem 0;
+  line-height: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  text-align: center;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background-color: ",
+                    [Function],
+                    ";
+  color: ",
+                    [Function],
+                    ";
+  outline: 0;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+  &:hover {
+    background-color: ",
+                    [Function],
+                    ";
+    cursor: pointer;
+  }
+",
+                    "
+",
+                    "
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1rem;
+  text-decoration: none;
+",
+                  ],
+                },
+                "displayName": "Styled(styled.a)",
+                "foldedComponentIds": Array [
+                  "sc-bwzfXH",
+                ],
+                "render": [Function],
+                "styledComponentId": "sc-gzVnrw",
+                "target": "a",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+            href="/api/oauth2/authorize/provider1?redirect_uri=/authenticated"
+          >
+            <a
+              className="sc-bwzfXH sc-gzVnrw gODbxc"
+              href="/api/oauth2/authorize/provider1?redirect_uri=/authenticated"
+            >
+              Login with 
+              name1
+               
+            </a>
+          </StyledComponent>
+        </Styled(styled.a)>
+        <Styled(styled.a)
+          href="/api/oauth2/authorize/provider2?redirect_uri=/authenticated"
+          key="provider1"
+        >
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-gzVnrw",
+                  "isStatic": false,
+                  "lastClassName": "gODbxc",
+                  "rules": Array [
+                    "
+  ",
+                    "
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 1rem 0;
+  line-height: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  text-align: center;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background-color: ",
+                    [Function],
+                    ";
+  color: ",
+                    [Function],
+                    ";
+  outline: 0;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+  &:hover {
+    background-color: ",
+                    [Function],
+                    ";
+    cursor: pointer;
+  }
+",
+                    "
+",
+                    "
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1rem;
+  text-decoration: none;
+",
+                  ],
+                },
+                "displayName": "Styled(styled.a)",
+                "foldedComponentIds": Array [
+                  "sc-bwzfXH",
+                ],
+                "render": [Function],
+                "styledComponentId": "sc-gzVnrw",
+                "target": "a",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+            href="/api/oauth2/authorize/provider2?redirect_uri=/authenticated"
+          >
+            <a
+              className="sc-bwzfXH sc-gzVnrw gODbxc"
+              href="/api/oauth2/authorize/provider2?redirect_uri=/authenticated"
+            >
+              Login with 
+              name2
+               
+              <img
+                src="http://localhost/icon.svg"
+              />
+            </a>
+          </StyledComponent>
+        </Styled(styled.a)>
+      </div>
+    </StyledComponent>
+  </styled.div>
+</LoginForm>
+`;
+
+exports[`renders correctly error 1`] = `
+<LoginForm>
+  <styled.div>
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-EHOje",
+            "isStatic": false,
+            "lastClassName": "kZGGxV",
+            "rules": Array [
+              "
+  display: flex;
+  flex-direction: column;
+  background-color: ",
+              [Function],
+              ";
+  margin: 10% auto;
+  width: 20rem;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  padding: 1.75rem 2rem 2rem;
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-EHOje",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <div
+        className="sc-EHOje kZGGxV"
+      >
+        <styled.img
+          src="images/logo.svg"
+        >
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-bZQynM",
+                  "isStatic": false,
+                  "lastClassName": "XXprT",
+                  "rules": Array [
+                    "
+  height: 4.25rem;
+  margin: 2rem auto 4rem;
+  display: flex;
+  max-width: 100%;
+",
+                  ],
+                },
+                "displayName": "styled.img",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-bZQynM",
+                "target": "img",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+            src="images/logo.svg"
+          >
+            <img
+              className="sc-bZQynM XXprT"
+              src="images/logo.svg"
+            />
+          </StyledComponent>
+        </styled.img>
+        <styled.p>
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-ifAKCX",
+                  "isStatic": false,
+                  "lastClassName": "fcaiKu",
+                  "rules": Array [
+                    "
+  text-align: center;
+  background-color: ",
+                    [Function],
+                    ";
+  color: ",
+                    [Function],
+                    ";
+  padding: 0.25rem 1rem;
+
+  animation: ",
+                    "8",
+                    "s ",
+                    Keyframes {
+                      "id": "sc-keyframes-eXqJEs",
+                      "inject": [Function],
+                      "name": "eXqJEs",
+                      "rules": Array [
+                        "@-webkit-keyframes eXqJEs{0%{opacity:0;}10%{opacity:100;}90%{opacity:100;}100%{opacity:0;}}",
+                        "@keyframes eXqJEs{0%{opacity:0;}10%{opacity:100;}90%{opacity:100;}100%{opacity:0;}}",
+                      ],
+                      "toString": [Function],
+                    },
+                    " ease-in-out forwards;
+",
+                  ],
+                },
+                "displayName": "styled.p",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-ifAKCX",
+                "target": "p",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              }
+            }
+            forwardedRef={null}
+          >
+            <p
+              className="sc-ifAKCX fcaiKu"
+            >
+              Connection error try again later
+            </p>
+          </StyledComponent>
+        </styled.p>
+      </div>
+    </StyledComponent>
+  </styled.div>
+</LoginForm>
+`;

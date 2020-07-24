@@ -47,7 +47,7 @@ const LoginButton = styled(AnchorButton)`
   text-decoration: none;
 `;
 
-interface IProvider {
+export interface IProvider {
   providerName: string;
   displayName: string;
   iconUrl?: string;
