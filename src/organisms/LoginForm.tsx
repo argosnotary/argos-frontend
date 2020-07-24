@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { AnchorButton } from "../atoms/Button";
 import styled from "styled-components";
+import axios, { AxiosRequestConfig } from "axios";
+import { ConnectionErrorMessage } from "../atoms/ConnectionError";
 
 const LoginFormContainer = styled.div`
   display: flex;
@@ -45,19 +47,56 @@ const LoginButton = styled(AnchorButton)`
   text-decoration: none;
 `;
 
-interface ILoginFormValues {
-  email: string;
-  password: string;
+interface IProvider {
+  providerName: string;
+  displayName: string;
+  iconUrl?: string;
 }
 
 const LoginForm: React.FC = () => {
+  const [providers, setProviders] = useState<Array<IProvider>>([]);
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    const requestConfig: AxiosRequestConfig = {
+      method: "get",
+      cancelToken: source.token
+    };
+
+    axios("/api/oauthprovider", requestConfig)
+      .then((response: any) => {
+        setProviders(response.data);
+      })
+      .catch(error => {
+        if (!axios.isCancel(error)) {
+          setShowError(true);
+        }
+      });
+
+    return () => {
+      source.cancel();
+    };
+  }, []);
+
   return (
     <LoginFormContainer>
       <LoginFormHeader src="images/logo.svg" />
-      <LoginButton
-        href={"/api/oauth2/authorize/azure?redirect_uri=/authenticated"}>
-        Login with Azure
-      </LoginButton>
+      {showError ? (
+        <ConnectionErrorMessage>
+          Connection error try again later
+        </ConnectionErrorMessage>
+      ) : null}
+      {providers.map((provider, index) => {
+        return (
+          <LoginButton
+            key={`provider${index}`}
+            href={`/api/oauth2/authorize/${provider.providerName}?redirect_uri=/authenticated`}>
+            Login with {provider.displayName}{" "}
+            {provider.iconUrl ? <img src={provider.iconUrl} /> : null}
+          </LoginButton>
+        );
+      })}
     </LoginFormContainer>
   );
 };

@@ -20,7 +20,8 @@ module.exports = function(app) {
     "/api",
     proxy({
       target: "http://localhost:8080",
-      changeOrigin: true
+      changeOrigin: true,
+      xfwd: true
     })
   );
 };

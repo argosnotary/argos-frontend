@@ -88,7 +88,7 @@ export const UserProfileContext = React.createContext<IUserProfileContext>({
   setError: () => {
     return;
   },
-  state: PROFILE_STATE.LOGGED_OUT,
+  state: PROFILE_STATE.LOADING,
   token: ""
 });
 
@@ -132,8 +132,10 @@ export const UserProfileStoreProvider: React.FC<IUserProfileStoreProviderProps> 
           setState(PROFILE_STATE.READY);
           history.push("/dashboard");
         })
-        .catch(() => {
-          setTokenAction({ token: null, type: TokenActionType.LOGOUT });
+        .catch(error => {
+          if (!axios.isCancel(error)) {
+            setTokenAction({ token: null, type: TokenActionType.LOGOUT });
+          }
         });
     }
   };
