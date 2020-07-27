@@ -39,8 +39,8 @@ import { Button, CancelButton, LoaderButton } from "../../../../atoms/Button";
 import { Warning } from "../../../../atoms/Alerts";
 import XLDeployApprovalForm, {
   IXLDeployFormValues
-} from "./XLDeployApprovalForm";
-import GitApprovalForm, { IGitFormValues } from "./GitApprovalForm";
+} from "../Common/XLDeployExecutionForm";
+import GitExecutionForm, { IGitFormValues } from "../Common/GitExecutionForm";
 
 const ApproveButtonContainer = styled(FlexRow)`
   margin: 1rem 0;
@@ -214,7 +214,7 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
       case ArtifactCollectorType.GIT:
         return (
           <>
-            <GitApprovalForm
+            <GitExecutionForm
               index={index}
               validateNow={validateNow}
               initialValues={

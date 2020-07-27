@@ -27,7 +27,7 @@ export interface IXLDeployFormValues {
   applicationVersion: string;
 }
 
-const validateApprovalExecutionForm = (values: IXLDeployFormValues) => {
+const validateExecutionForm = (values: IXLDeployFormValues) => {
   const errors = {} as IXLDeployFormValues;
 
   if (!values.username) {
@@ -50,7 +50,7 @@ const validateApprovalExecutionForm = (values: IXLDeployFormValues) => {
   return errors;
 };
 
-const getApprovalExecutionFormSchema = (): IGenericFormSchema => {
+const getExecutionFormSchema = (): IGenericFormSchema => {
   return [
     {
       labelValue: "Username*",
@@ -70,7 +70,7 @@ const getApprovalExecutionFormSchema = (): IGenericFormSchema => {
   ];
 };
 
-interface IXLDeployApprovalFormProps {
+interface IXLDeployExecutionFormProps {
   index: number;
   validateNow: boolean;
   initialValues: IXLDeployFormValues;
@@ -81,7 +81,7 @@ interface IXLDeployApprovalFormProps {
   onSubmit: () => void;
 }
 
-const XLDeployApprovalForm: React.FC<IXLDeployApprovalFormProps> = ({
+const XLDeployExecutionForm: React.FC<IXLDeployExecutionFormProps> = ({
   index,
   initialValues,
   validateNow,
@@ -90,10 +90,10 @@ const XLDeployApprovalForm: React.FC<IXLDeployApprovalFormProps> = ({
 }) => {
   const formConfig: IFormBuilderConfig = {
     dataTesthookId: "xl-deploy-collector-execution-form-" + index,
-    schema: getApprovalExecutionFormSchema(),
+    schema: getExecutionFormSchema(),
     permission: FormPermissions.EDIT,
     isLoading: false,
-    validate: values => validateApprovalExecutionForm(values),
+    validate: values => validateExecutionForm(values),
     onChange: (valid, form) => onUpdateExecutionValues(form, valid),
     onSubmit: form => {
       onUpdateExecutionValues(form, true);
@@ -101,7 +101,8 @@ const XLDeployApprovalForm: React.FC<IXLDeployApprovalFormProps> = ({
     },
     confirmationLabel: "Next",
     autoFocus: true,
-    buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN
+    buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN,
+    alternateStyling: true
   };
 
   const [formJSX, formAPI] = useFormBuilder(formConfig);
@@ -120,4 +121,4 @@ const XLDeployApprovalForm: React.FC<IXLDeployApprovalFormProps> = ({
   return <>{formJSX}</>;
 };
 
-export default XLDeployApprovalForm;
+export default XLDeployExecutionForm;

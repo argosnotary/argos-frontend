@@ -1115,15 +1115,18 @@ exports[`approval happy flow 1`] = `
                                   <main
                                     className="sc-gZMcBi NCdQO"
                                   >
-                                    <XLDeployApprovalForm
+                                    <XLDeployExecutionForm
                                       index={0}
                                       initialValues={Object {}}
                                       onSubmit={[Function]}
                                       onUpdateExecutionValues={[Function]}
                                       validateNow={false}
                                     >
-                                      <Styled(styled.div)>
+                                      <Styled(styled.div)
+                                        alternateStyling={true}
+                                      >
                                         <StyledComponent
+                                          alternateStyling={true}
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -1131,7 +1134,7 @@ exports[`approval happy flow 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-jAaTju",
                                                 "isStatic": false,
-                                                "lastClassName": "dGbMpd",
+                                                "lastClassName": "bdCmPz",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -1163,7 +1166,7 @@ exports[`approval happy flow 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-bZQynM sc-jAaTju dGbMpd"
+                                            className="sc-bZQynM sc-jAaTju bdCmPz"
                                           >
                                             <form
                                               data-testhook-id="xl-deploy-collector-execution-form-0"
@@ -1916,7 +1919,7 @@ exports[`approval happy flow 1`] = `
                                           </div>
                                         </StyledComponent>
                                       </Styled(styled.div)>
-                                    </XLDeployApprovalForm>
+                                    </XLDeployExecutionForm>
                                   </main>
                                 </StyledComponent>
                               </styled.main>

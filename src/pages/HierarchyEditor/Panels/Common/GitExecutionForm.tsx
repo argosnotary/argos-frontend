@@ -31,7 +31,7 @@ export interface IGitFormValues {
   commitHash?: string;
 }
 
-const getBaseApprovalExecutionFormSchema = (): IGenericFormSchema => {
+const getBaseExecutionFormSchema = (): IGenericFormSchema => {
   return [
     {
       labelValue: "Username",
@@ -46,7 +46,7 @@ const getBaseApprovalExecutionFormSchema = (): IGenericFormSchema => {
   ];
 };
 
-interface IGitApprovalFormProps {
+interface IGitExecutionFormProps {
   index: number;
   validateNow: boolean;
   initialValues: IGitFormValues;
@@ -72,7 +72,7 @@ const determineInitialSearchOption = (
     : "select";
 };
 
-const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
+const GitExecutionForm: React.FC<IGitExecutionFormProps> = ({
   index,
   initialValues,
   validateNow,
@@ -83,15 +83,11 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
     SearchOptionType | "select"
   >(determineInitialSearchOption(initialValues));
 
-  useEffect(() => {
-    onUpdateExecutionValues({}, false);
-  }, [selectedSearchOption]);
-
-  const getApprovalExecutionFormSchema = (): IGenericFormSchema => {
+  const getExecutionFormSchema = (): IGenericFormSchema => {
     switch (selectedSearchOption) {
       case SearchOptionType.BRANCH:
         return [
-          ...getBaseApprovalExecutionFormSchema(),
+          ...getBaseExecutionFormSchema(),
           {
             labelValue: "Branch*",
             name: "branch",
@@ -100,7 +96,7 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
         ];
       case SearchOptionType.TAG:
         return [
-          ...getBaseApprovalExecutionFormSchema(),
+          ...getBaseExecutionFormSchema(),
           {
             labelValue: "Tag*",
             name: "tag",
@@ -109,7 +105,7 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
         ];
       case SearchOptionType.COMMIT_HASH:
         return [
-          ...getBaseApprovalExecutionFormSchema(),
+          ...getBaseExecutionFormSchema(),
           {
             labelValue: "Commit hash*",
             name: "commitHash",
@@ -121,7 +117,7 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
     return [];
   };
 
-  const validateApprovalExecutionForm = (values: IGitFormValues) => {
+  const validateExecutionForm = (values: IGitFormValues) => {
     const errors = {} as IGitFormValues;
     switch (selectedSearchOption) {
       case SearchOptionType.BRANCH:
@@ -154,14 +150,15 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
 
   const selectSearchOptionType = (e: any) => {
     setSelectedSearchOption(e.target.value);
+    onUpdateExecutionValues({}, false);
   };
 
   const formConfig: IFormBuilderConfig = {
     dataTesthookId: "git-collector-execution-form-" + index,
-    schema: getApprovalExecutionFormSchema(),
+    schema: getExecutionFormSchema(),
     permission: FormPermissions.EDIT,
     isLoading: false,
-    validate: values => validateApprovalExecutionForm(values),
+    validate: values => validateExecutionForm(values),
     onChange: (valid, form) => onUpdateExecutionValues(form, valid),
     onSubmit: form => {
       if (selectedSearchOption !== "select") {
@@ -171,7 +168,8 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
     },
     confirmationLabel: "Next",
     autoFocus: true,
-    buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN
+    buttonHandler: FormSubmitButtonHandlerTypes.MOUSEDOWN,
+    alternateStyling: true
   };
 
   const [formJSX, formAPI] = useFormBuilder(formConfig);
@@ -211,4 +209,4 @@ const GitApprovalForm: React.FC<IGitApprovalFormProps> = ({
   );
 };
 
-export default GitApprovalForm;
+export default GitExecutionForm;
