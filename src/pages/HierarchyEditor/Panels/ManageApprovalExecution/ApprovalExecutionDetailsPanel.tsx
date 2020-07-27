@@ -27,7 +27,6 @@ import {
   IGitContext,
   IXLDeployContext
 } from "../../../../interfaces/IApprovalConfig";
-import CollapsibleContainerComponent from "../../../../atoms/CollapsibleContainer";
 import FlexRow from "../../../../atoms/FlexRow";
 import styled from "styled-components";
 import useDataApi from "../../../../hooks/useDataApi";
@@ -37,10 +36,9 @@ import { IArtifact } from "../../../../interfaces/ILink";
 import LinkSigner from "./LinkSigner";
 import { Button, CancelButton, LoaderButton } from "../../../../atoms/Button";
 import { Warning } from "../../../../atoms/Alerts";
-import XLDeployApprovalForm, {
-  IXLDeployFormValues
-} from "../Common/XLDeployExecutionForm";
-import GitExecutionForm, { IGitFormValues } from "../Common/GitExecutionForm";
+import { IXLDeployFormValues } from "../Common/XLDeployExecutionForm";
+import { IGitFormValues } from "../Common/GitExecutionForm";
+import { renderCollectorRow } from "../Common/collectorUtils";
 
 const ApproveButtonContainer = styled(FlexRow)`
   margin: 1rem 0;
@@ -193,82 +191,6 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
     setActiveCollector(index + 1);
   };
 
-  const renderForm = (index: number, collector: IArtifactCollector) => {
-    switch (collector.type) {
-      case ArtifactCollectorType.XLDEPLOY:
-        return (
-          <>
-            <XLDeployApprovalForm
-              index={index}
-              validateNow={validateNow}
-              initialValues={
-                executionContexts[index].executionValues as IXLDeployFormValues
-              }
-              onUpdateExecutionValues={(form, valid) =>
-                onUpdateExecutionValues(form, index, valid)
-              }
-              onSubmit={() => onSubmit(index)}
-            />
-          </>
-        );
-      case ArtifactCollectorType.GIT:
-        return (
-          <>
-            <GitExecutionForm
-              index={index}
-              validateNow={validateNow}
-              initialValues={
-                executionContexts[index].executionValues as IGitFormValues
-              }
-              onUpdateExecutionValues={(form, valid) =>
-                onUpdateExecutionValues(form, index, valid)
-              }
-              onSubmit={() => onSubmit(index)}
-            />
-          </>
-        );
-    }
-  };
-
-  const renderCollectorRow = (
-    executionContext: ICollectorExecutionContext,
-    index: number
-  ) => {
-    return (
-      <li key={"executionContext" + index}>
-        <CollapsibleContainerComponent
-          collapsedByDefault={activeCollector !== index}
-          title={executionContext.config.name}
-          onExpand={() => {
-            if (executionContexts[activeCollector]) {
-              if (executionContexts[activeCollector].valid) {
-                setValidateNow(false);
-                setActiveCollector(index);
-                return true;
-              } else {
-                return false;
-              }
-            } else {
-              setValidateNow(false);
-              setActiveCollector(index);
-              return true;
-            }
-          }}
-          onCollapse={() => {
-            setValidateNow(true);
-            return (
-              executionContexts[activeCollector] &&
-              executionContexts[activeCollector].valid
-            );
-          }}>
-          {activeCollector === index
-            ? renderForm(index, executionContext.config)
-            : null}
-        </CollapsibleContainerComponent>
-      </li>
-    );
-  };
-
   if (executionContexts.length > 0) {
     return (
       <Panel
@@ -283,7 +205,17 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
         <LinkSigner />
         <ul>
           {executionContexts.map((executionContext, index) =>
-            renderCollectorRow(executionContext, index)
+            renderCollectorRow(
+              index,
+              activeCollector,
+              executionContext,
+              executionContexts,
+              setValidateNow,
+              setActiveCollector,
+              validateNow,
+              onUpdateExecutionValues,
+              onSubmit
+            )
           )}
         </ul>
         {collectError ? <Warning message={collectError} /> : null}
