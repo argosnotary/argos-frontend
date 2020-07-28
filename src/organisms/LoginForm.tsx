@@ -20,6 +20,19 @@ import styled from "styled-components";
 import axios, { AxiosRequestConfig } from "axios";
 import { ConnectionErrorMessage } from "../atoms/ConnectionError";
 
+const AuthProviderImage = styled.img`
+  width: 1.5rem;
+`;
+
+const AuthProviderLabel = styled.span``;
+
+const AuthLabelAndImageSeparator = styled.span`
+  border-right: 1px solid ${props => props.theme.loginForm.separatorColor};
+  width: 1px;
+  height: 1rem;
+  margin: 0 1rem;
+`;
+
 const LoginFormContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,12 +52,22 @@ const LoginFormHeader = styled.img`
 
 const LoginButton = styled(AnchorButton)`
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  align-items: center;
   box-sizing: border-box;
   width: 100%;
-  margin: 1rem 0;
   font-size: 1rem;
   text-decoration: none;
+  border: 1px solid ${props => props.theme.loginForm.buttonBorderColor};
+  background: transparent;
+  color: ${props => props.theme.loginForm.buttonTextColor};
+  min-height: 3.25rem;
+
+  &:hover {
+    background: transparent;
+    border-left: 4px solid
+      ${props => props.theme.loginForm.buttonHoverHighlightColor};
+  }
 `;
 
 export interface IProvider {
@@ -92,8 +115,15 @@ const LoginForm: React.FC = () => {
           <LoginButton
             key={`provider${index}`}
             href={`/api/oauth2/authorize/${provider.providerName}?redirect_uri=/authenticated`}>
-            Login with {provider.displayName}{" "}
-            {provider.iconUrl ? <img src={provider.iconUrl} /> : null}
+            {provider.iconUrl ? (
+              <>
+                <AuthProviderImage src={provider.iconUrl} />
+                <AuthLabelAndImageSeparator />
+              </>
+            ) : null}
+            <AuthProviderLabel>
+              Login with {provider.displayName}
+            </AuthProviderLabel>
           </LoginButton>
         );
       })}

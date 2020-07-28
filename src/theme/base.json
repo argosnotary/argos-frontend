@@ -42,8 +42,8 @@
     "loaderColor": "#1779ba"
   },
   "labels": {
-    "inactive": "red",
-    "active": "green"
+    "inactive": "#ff0000",
+    "active": "#008000"
   },
   "forms": {
     "alternateBgColor": "#e0e0e0"
@@ -111,9 +111,9 @@
     "iconSize": 22,
     "iconColor": "#fff",
     "colors": {
-      "WARNING": "orange",
-      "ERROR": "red",
-      "SUCCESS": "green"
+      "WARNING": "#ffa500",
+      "ERROR": "#ff0000",
+      "SUCCESS": "#008000"
     }
   },
   "collection": {
@@ -188,11 +188,11 @@
   },
   "connectionError": {
     "textColor": "#fff",
-    "bgColor": "red"
+    "bgColor": "#ff0000"
   },
   "alerts": {
     "warning": {
-      "color": "red"
+      "color": "#ff0000"
     }
   },
   "PageHeader": {
@@ -246,11 +246,11 @@
   },
   "keyManagementPage": {
     "iconColor": "#1779ba",
-    "passwordColor": "orange",
+    "passwordColor": "#ffa500",
     "passwordBgColor": "#fff",
     "noActiveKeyWarning": {
-      "textColor": "orange",
-      "borderColor": "orange"
+      "textColor": "#ffa500",
+      "borderColor": "#ffa500"
     }
   },
   "layoutPage": {
@@ -265,7 +265,11 @@
     "bgColor": "#e0e0e0"
   },
   "loginForm": {
-    "bgColor": "#fff"
+    "bgColor": "#fff",
+    "separatorColor": "#1779ba",
+    "buttonTextColor": "#1779ba",
+    "buttonBorderColor": "#1779ba",
+    "buttonHoverHighlightColor": "#008000"
   },
   "ruleEditor": {
     "selectionContainer": {
