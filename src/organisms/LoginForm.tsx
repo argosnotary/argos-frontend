@@ -13,10 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { AnchorButton } from "../atoms/Button";
 import styled from "styled-components";
+import axios, { AxiosRequestConfig } from "axios";
+import { ConnectionErrorMessage } from "../atoms/ConnectionError";
+
+const AuthProviderImage = styled.img`
+  width: 1.5rem;
+`;
+
+const AuthProviderLabel = styled.span``;
+
+const AuthLabelAndImageSeparator = styled.span`
+  border-right: 1px solid ${props => props.theme.loginForm.separatorColor};
+  width: 1px;
+  height: 1rem;
+  margin: 0 1rem;
+`;
 
 const LoginFormContainer = styled.div`
   display: flex;
@@ -37,27 +52,81 @@ const LoginFormHeader = styled.img`
 
 const LoginButton = styled(AnchorButton)`
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  align-items: center;
   box-sizing: border-box;
   width: 100%;
-  margin: 1rem 0;
   font-size: 1rem;
   text-decoration: none;
+  border: 1px solid ${props => props.theme.loginForm.buttonBorderColor};
+  background: transparent;
+  color: ${props => props.theme.loginForm.buttonTextColor};
+  min-height: 3.25rem;
+
+  &:hover {
+    background: transparent;
+    border-left: 4px solid
+      ${props => props.theme.loginForm.buttonHoverHighlightColor};
+  }
 `;
 
-interface ILoginFormValues {
-  email: string;
-  password: string;
+export interface IProvider {
+  providerName: string;
+  displayName: string;
+  iconUrl?: string;
 }
 
 const LoginForm: React.FC = () => {
+  const [providers, setProviders] = useState<Array<IProvider>>([]);
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    const requestConfig: AxiosRequestConfig = {
+      method: "get",
+      cancelToken: source.token
+    };
+
+    axios("/api/oauthprovider", requestConfig)
+      .then((response: any) => {
+        setProviders(response.data);
+      })
+      .catch(error => {
+        if (!axios.isCancel(error)) {
+          setShowError(true);
+        }
+      });
+
+    return () => {
+      source.cancel();
+    };
+  }, []);
+
   return (
     <LoginFormContainer>
       <LoginFormHeader src="images/logo.svg" />
-      <LoginButton
-        href={"/api/oauth2/authorize/azure?redirect_uri=/authenticated"}>
-        Login with Azure
-      </LoginButton>
+      {showError ? (
+        <ConnectionErrorMessage>
+          Connection error try again later
+        </ConnectionErrorMessage>
+      ) : null}
+      {providers.map((provider, index) => {
+        return (
+          <LoginButton
+            key={`provider${index}`}
+            href={`/api/oauth2/authorize/${provider.providerName}?redirect_uri=/authenticated`}>
+            {provider.iconUrl ? (
+              <>
+                <AuthProviderImage src={provider.iconUrl} />
+                <AuthLabelAndImageSeparator />
+              </>
+            ) : null}
+            <AuthProviderLabel>
+              Login with {provider.displayName}
+            </AuthProviderLabel>
+          </LoginButton>
+        );
+      })}
     </LoginFormContainer>
   );
 };

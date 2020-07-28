@@ -1162,7 +1162,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-fjdhpX",
                             "isStatic": false,
-                            "lastClassName": "duFPmb",
+                            "lastClassName": "gBFOGz",
                             "rules": Array [
                               "
   white-space: nowrap;
@@ -1476,7 +1476,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-fjdhpX",
                             "isStatic": false,
-                            "lastClassName": "duFPmb",
+                            "lastClassName": "gBFOGz",
                             "rules": Array [
                               "
   white-space: nowrap;
@@ -1759,7 +1759,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-kAzzGY",
                                   "isStatic": false,
-                                  "lastClassName": "ftXsXU",
+                                  "lastClassName": "cHiJWs",
                                   "rules": Array [
                                     "
   background: ",
@@ -1791,7 +1791,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                             forwardedRef={null}
                           >
                             <section
-                              className="sc-kAzzGY ftXsXU"
+                              className="sc-kAzzGY cHiJWs"
                             >
                               <styled.div>
                                 <StyledComponent
@@ -1834,7 +1834,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-chPdSV",
                                               "isStatic": false,
-                                              "lastClassName": "cKwYCh",
+                                              "lastClassName": "NwEHH",
                                               "rules": Array [
                                                 "
   color: ",
@@ -1856,7 +1856,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                         forwardedRef={null}
                                       >
                                         <p
-                                          className="sc-chPdSV cKwYCh"
+                                          className="sc-chPdSV NwEHH"
                                         >
                                           Key has been generated with the following passphrase:
                                         </p>
@@ -1977,7 +1977,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                                       className="sc-kGXeez cRrYYO"
                                                     >
                                                       <KeyIcon
-                                                        color="orange"
+                                                        color="#ffa500"
                                                         size={32}
                                                       >
                                                         <svg
@@ -1992,7 +1992,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                                           </title>
                                                           <path
                                                             d="M22 0c-5.523 0-10 4.477-10 10 0 0.626 0.058 1.238 0.168 1.832l-12.168 12.168v6c0 1.105 0.895 2 2 2h2v-2h4v-4h4v-4h4l2.595-2.595c1.063 0.385 2.209 0.595 3.405 0.595 5.523 0 10-4.477 10-10s-4.477-10-10-10zM24.996 10.004c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"
-                                                            fill="orange"
+                                                            fill="#ffa500"
                                                           />
                                                         </svg>
                                                       </KeyIcon>
@@ -2142,7 +2142,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                                                 "componentStyle": ComponentStyle {
                                                                   "componentId": "sc-fjdhpX",
                                                                   "isStatic": false,
-                                                                  "lastClassName": "duFPmb",
+                                                                  "lastClassName": "gBFOGz",
                                                                   "rules": Array [
                                                                     "
   white-space: nowrap;
@@ -2188,7 +2188,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                                             }
                                                           >
                                                             <p
-                                                              className="sc-fjdhpX duFPmb"
+                                                              className="sc-fjdhpX gBFOGz"
                                                             />
                                                           </StyledComponent>
                                                         </styled.p>
@@ -2303,7 +2303,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-chPdSV",
                                               "isStatic": false,
-                                              "lastClassName": "cKwYCh",
+                                              "lastClassName": "NwEHH",
                                               "rules": Array [
                                                 "
   color: ",
@@ -2325,7 +2325,7 @@ exports[`when Continue is clicked on modal window it should show password view m
                                         forwardedRef={null}
                                       >
                                         <p
-                                          className="sc-chPdSV cKwYCh"
+                                          className="sc-chPdSV NwEHH"
                                         >
                                           Do not forget to copy the passphrase before closing this message.
                                         </p>
@@ -3341,7 +3341,7 @@ exports[`when create key is clicked and key is present it should display create 
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-bdVaJa",
                                   "isStatic": false,
-                                  "lastClassName": "itGnUS",
+                                  "lastClassName": "eQjOrG",
                                   "rules": Array [
                                     "
   display: flex;
@@ -3368,7 +3368,7 @@ exports[`when create key is clicked and key is present it should display create 
                             forwardedRef={null}
                           >
                             <section
-                              className="sc-bdVaJa itGnUS"
+                              className="sc-bdVaJa eQjOrG"
                             >
                               <styled.div>
                                 <StyledComponent
@@ -3402,7 +3402,7 @@ exports[`when create key is clicked and key is present it should display create 
                                     className="sc-htpNat fTbmGC"
                                   >
                                     <WarningIcon
-                                      color="red"
+                                      color="#ff0000"
                                       size={48}
                                     >
                                       <svg
@@ -3417,17 +3417,17 @@ exports[`when create key is clicked and key is present it should display create 
                                         </title>
                                         <path
                                           d="M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"
-                                          fill="red"
+                                          fill="#ff0000"
                                         />
                                          
                                         <path
                                           d="M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
-                                          fill="red"
+                                          fill="#ff0000"
                                         />
                                          
                                         <path
                                           d="M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"
-                                          fill="red"
+                                          fill="#ff0000"
                                         />
                                       </svg>
                                     </WarningIcon>
@@ -3443,7 +3443,7 @@ exports[`when create key is clicked and key is present it should display create 
                                       "componentStyle": ComponentStyle {
                                         "componentId": "sc-bwzfXH",
                                         "isStatic": false,
-                                        "lastClassName": "bukUYK",
+                                        "lastClassName": "hcDcIU",
                                         "rules": Array [
                                           "
   color: ",
@@ -3465,7 +3465,7 @@ exports[`when create key is clicked and key is present it should display create 
                                   forwardedRef={null}
                                 >
                                   <p
-                                    className="sc-bwzfXH bukUYK"
+                                    className="sc-bwzfXH hcDcIU"
                                   >
                                     Existing key will be deactivated. Are you sure you want to continue?
                                   </p>
@@ -3922,7 +3922,7 @@ exports[`when create key is clicked and no key is present it should display pass
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-fjdhpX",
                             "isStatic": false,
-                            "lastClassName": "duFPmb",
+                            "lastClassName": "gBFOGz",
                             "rules": Array [
                               "
   white-space: nowrap;
@@ -4236,7 +4236,7 @@ exports[`when create key is clicked and no key is present it should display pass
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-fjdhpX",
                             "isStatic": false,
-                            "lastClassName": "duFPmb",
+                            "lastClassName": "gBFOGz",
                             "rules": Array [
                               "
   white-space: nowrap;
@@ -4519,7 +4519,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                 "componentStyle": ComponentStyle {
                                   "componentId": "sc-kAzzGY",
                                   "isStatic": false,
-                                  "lastClassName": "ftXsXU",
+                                  "lastClassName": "cHiJWs",
                                   "rules": Array [
                                     "
   background: ",
@@ -4551,7 +4551,7 @@ exports[`when create key is clicked and no key is present it should display pass
                             forwardedRef={null}
                           >
                             <section
-                              className="sc-kAzzGY ftXsXU"
+                              className="sc-kAzzGY cHiJWs"
                             >
                               <styled.div>
                                 <StyledComponent
@@ -4594,7 +4594,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-chPdSV",
                                               "isStatic": false,
-                                              "lastClassName": "cKwYCh",
+                                              "lastClassName": "NwEHH",
                                               "rules": Array [
                                                 "
   color: ",
@@ -4616,7 +4616,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                         forwardedRef={null}
                                       >
                                         <p
-                                          className="sc-chPdSV cKwYCh"
+                                          className="sc-chPdSV NwEHH"
                                         >
                                           Key has been generated with the following passphrase:
                                         </p>
@@ -4737,7 +4737,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                                       className="sc-kGXeez cRrYYO"
                                                     >
                                                       <KeyIcon
-                                                        color="orange"
+                                                        color="#ffa500"
                                                         size={32}
                                                       >
                                                         <svg
@@ -4752,7 +4752,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                                           </title>
                                                           <path
                                                             d="M22 0c-5.523 0-10 4.477-10 10 0 0.626 0.058 1.238 0.168 1.832l-12.168 12.168v6c0 1.105 0.895 2 2 2h2v-2h4v-4h4v-4h4l2.595-2.595c1.063 0.385 2.209 0.595 3.405 0.595 5.523 0 10-4.477 10-10s-4.477-10-10-10zM24.996 10.004c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"
-                                                            fill="orange"
+                                                            fill="#ffa500"
                                                           />
                                                         </svg>
                                                       </KeyIcon>
@@ -4902,7 +4902,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                                                 "componentStyle": ComponentStyle {
                                                                   "componentId": "sc-fjdhpX",
                                                                   "isStatic": false,
-                                                                  "lastClassName": "duFPmb",
+                                                                  "lastClassName": "gBFOGz",
                                                                   "rules": Array [
                                                                     "
   white-space: nowrap;
@@ -4948,7 +4948,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                                             }
                                                           >
                                                             <p
-                                                              className="sc-fjdhpX duFPmb"
+                                                              className="sc-fjdhpX gBFOGz"
                                                             />
                                                           </StyledComponent>
                                                         </styled.p>
@@ -5063,7 +5063,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                             "componentStyle": ComponentStyle {
                                               "componentId": "sc-chPdSV",
                                               "isStatic": false,
-                                              "lastClassName": "cKwYCh",
+                                              "lastClassName": "NwEHH",
                                               "rules": Array [
                                                 "
   color: ",
@@ -5085,7 +5085,7 @@ exports[`when create key is clicked and no key is present it should display pass
                                         forwardedRef={null}
                                       >
                                         <p
-                                          className="sc-chPdSV cKwYCh"
+                                          className="sc-chPdSV NwEHH"
                                         >
                                           Do not forget to copy the passphrase before closing this message.
                                         </p>
@@ -6122,7 +6122,7 @@ exports[`when no cryto available there should be a warning 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-eNQAEJ",
             "isStatic": false,
-            "lastClassName": "feletz",
+            "lastClassName": "kynMvS",
             "rules": Array [
               "
   margin: 0.25rem 0 0;
@@ -6152,7 +6152,7 @@ exports[`when no cryto available there should be a warning 1`] = `
       forwardedRef={null}
     >
       <p
-        className="sc-eNQAEJ feletz"
+        className="sc-eNQAEJ kynMvS"
       >
         There is no key currently active. Please create a new key.
       </p>
@@ -6172,7 +6172,7 @@ exports[`when no cryto available there should be a warning 1`] = `
               "componentStyle": ComponentStyle {
                 "componentId": "sc-bdVaJa",
                 "isStatic": false,
-                "lastClassName": "itGnUS",
+                "lastClassName": "eQjOrG",
                 "rules": Array [
                   "
   display: flex;
@@ -6199,7 +6199,7 @@ exports[`when no cryto available there should be a warning 1`] = `
           forwardedRef={null}
         >
           <section
-            className="sc-bdVaJa itGnUS"
+            className="sc-bdVaJa eQjOrG"
           >
             <styled.div>
               <StyledComponent
@@ -6233,7 +6233,7 @@ exports[`when no cryto available there should be a warning 1`] = `
                   className="sc-htpNat fTbmGC"
                 >
                   <WarningIcon
-                    color="red"
+                    color="#ff0000"
                     size={48}
                   >
                     <svg
@@ -6248,17 +6248,17 @@ exports[`when no cryto available there should be a warning 1`] = `
                       </title>
                       <path
                         d="M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"
-                        fill="red"
+                        fill="#ff0000"
                       />
                        
                       <path
                         d="M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
-                        fill="red"
+                        fill="#ff0000"
                       />
                        
                       <path
                         d="M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"
-                        fill="red"
+                        fill="#ff0000"
                       />
                     </svg>
                   </WarningIcon>
@@ -6274,7 +6274,7 @@ exports[`when no cryto available there should be a warning 1`] = `
                     "componentStyle": ComponentStyle {
                       "componentId": "sc-bwzfXH",
                       "isStatic": false,
-                      "lastClassName": "bukUYK",
+                      "lastClassName": "hcDcIU",
                       "rules": Array [
                         "
   color: ",
@@ -6296,7 +6296,7 @@ exports[`when no cryto available there should be a warning 1`] = `
                 forwardedRef={null}
               >
                 <p
-                  className="sc-bwzfXH bukUYK"
+                  className="sc-bwzfXH hcDcIU"
                 >
                   The web crypto api is not present in the browser your using.
         Argos Notary layout signing and key management is only supported by a recent version of Chrome, Firefox, Safari or Edge.
@@ -6362,7 +6362,7 @@ exports[`when no key is present it should display warning message 1`] = `
           "componentStyle": ComponentStyle {
             "componentId": "sc-eNQAEJ",
             "isStatic": false,
-            "lastClassName": "feletz",
+            "lastClassName": "kynMvS",
             "rules": Array [
               "
   margin: 0.25rem 0 0;
@@ -6392,7 +6392,7 @@ exports[`when no key is present it should display warning message 1`] = `
       forwardedRef={null}
     >
       <p
-        className="sc-eNQAEJ feletz"
+        className="sc-eNQAEJ kynMvS"
       >
         There is no key currently active. Please create a new key.
       </p>
