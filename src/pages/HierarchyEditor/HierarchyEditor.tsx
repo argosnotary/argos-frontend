@@ -55,6 +55,7 @@ import {
   HierarchyEditorStateContext,
   IHierarchyEditorState
 } from "../../stores/hierarchyEditorStore";
+import ReleaseExecutionDetailsPanel from "./Panels/ManageReleaseExecution/ReleaseExecutionDetailsPanel";
 
 const HierarchyEditor = () => {
   const [hierarchyEditorState, hierarchyEditorDispatch] = useReducer(
@@ -420,7 +421,7 @@ const HierarchyEditor = () => {
       case HierarchyEditorPanelTypes.EXECUTE_APPROVAL:
         return <ManageApprovalExecutionPanel />;
       case HierarchyEditorPanelTypes.EXECUTE_RELEASE:
-        return null;
+        return <ReleaseExecutionDetailsPanel />;
       default:
         return null;
     }

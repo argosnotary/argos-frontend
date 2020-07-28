@@ -915,9 +915,9 @@ exports[`approval happy flow 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-dnqmqq",
+                                  "componentId": "sc-jWBwVP",
                                   "isStatic": false,
-                                  "lastClassName": "eYVeIO",
+                                  "lastClassName": "diPJXp",
                                   "rules": Array [
                                     "
   &.shake {
@@ -953,7 +953,7 @@ exports[`approval happy flow 1`] = `
                                 "displayName": "styled.section",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-dnqmqq",
+                                "styledComponentId": "sc-jWBwVP",
                                 "target": "section",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -964,7 +964,7 @@ exports[`approval happy flow 1`] = `
                             onAnimationEnd={[Function]}
                           >
                             <section
-                              className="sc-dnqmqq eYVeIO"
+                              className="sc-jWBwVP diPJXp"
                               onAnimationEnd={[Function]}
                             >
                               <styled.header>
@@ -974,9 +974,9 @@ exports[`approval happy flow 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-iwsKbI",
+                                        "componentId": "sc-brqgnP",
                                         "isStatic": false,
-                                        "lastClassName": "cFUedi",
+                                        "lastClassName": "keXmep",
                                         "rules": Array [
                                           "
   display: flex;
@@ -992,7 +992,7 @@ exports[`approval happy flow 1`] = `
                                       "displayName": "styled.header",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-iwsKbI",
+                                      "styledComponentId": "sc-brqgnP",
                                       "target": "header",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -1002,7 +1002,7 @@ exports[`approval happy flow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <header
-                                    className="sc-iwsKbI cFUedi"
+                                    className="sc-brqgnP keXmep"
                                   >
                                     collector1
                                     <styled.button
@@ -1014,9 +1014,9 @@ exports[`approval happy flow 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-gqjmRU",
+                                              "componentId": "sc-jAaTju",
                                               "isStatic": false,
-                                              "lastClassName": "RQpBe",
+                                              "lastClassName": "byjwEn",
                                               "rules": Array [
                                                 "
   background: none;
@@ -1032,7 +1032,7 @@ exports[`approval happy flow 1`] = `
                                             "displayName": "styled.button",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-gqjmRU",
+                                            "styledComponentId": "sc-jAaTju",
                                             "target": "button",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -1043,7 +1043,7 @@ exports[`approval happy flow 1`] = `
                                         onClick={[Function]}
                                       >
                                         <button
-                                          className="sc-gqjmRU RQpBe"
+                                          className="sc-jAaTju byjwEn"
                                           onClick={[Function]}
                                         >
                                           <ChevronIcon
@@ -1081,9 +1081,9 @@ exports[`approval happy flow 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-gZMcBi",
+                                        "componentId": "sc-cMljjf",
                                         "isStatic": false,
-                                        "lastClassName": "jEqPfK",
+                                        "lastClassName": "gTsBBO",
                                         "rules": Array [
                                           "
   border: ",
@@ -1103,7 +1103,7 @@ exports[`approval happy flow 1`] = `
                                       "displayName": "styled.main",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-gZMcBi",
+                                      "styledComponentId": "sc-cMljjf",
                                       "target": "main",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -1113,25 +1113,28 @@ exports[`approval happy flow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <main
-                                    className="sc-gZMcBi NCdQO"
+                                    className="sc-cMljjf bioxJW"
                                   >
-                                    <XLDeployApprovalForm
+                                    <XLDeployExecutionForm
                                       index={0}
                                       initialValues={Object {}}
                                       onSubmit={[Function]}
                                       onUpdateExecutionValues={[Function]}
                                       validateNow={false}
                                     >
-                                      <Styled(styled.div)>
+                                      <Styled(styled.div)
+                                        alternateStyling={true}
+                                      >
                                         <StyledComponent
+                                          alternateStyling={true}
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
                                               "attrs": Array [],
                                               "componentStyle": ComponentStyle {
-                                                "componentId": "sc-jAaTju",
+                                                "componentId": "sc-cvbbAY",
                                                 "isStatic": false,
-                                                "lastClassName": "dGbMpd",
+                                                "lastClassName": "dCPQsh",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -1153,7 +1156,7 @@ exports[`approval happy flow 1`] = `
                                                 "sc-bZQynM",
                                               ],
                                               "render": [Function],
-                                              "styledComponentId": "sc-jAaTju",
+                                              "styledComponentId": "sc-cvbbAY",
                                               "target": "div",
                                               "toString": [Function],
                                               "warnTooManyClasses": [Function],
@@ -1163,7 +1166,7 @@ exports[`approval happy flow 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-bZQynM sc-jAaTju dGbMpd"
+                                            className="sc-bZQynM sc-cvbbAY dCPQsh"
                                           >
                                             <form
                                               data-testhook-id="xl-deploy-collector-execution-form-0"
@@ -1177,7 +1180,7 @@ exports[`approval happy flow 1`] = `
                                                 innerRef={
                                                   Object {
                                                     "current": <input
-                                                      class="sc-kpOJdX naqzc"
+                                                      class="sc-kAzzGY SbtkR"
                                                       data-testhook-id="xl-deploy-collector-execution-form-0-field-0"
                                                       name="username"
                                                       type="text"
@@ -1198,9 +1201,9 @@ exports[`approval happy flow 1`] = `
                                                         "$$typeof": Symbol(react.forward_ref),
                                                         "attrs": Array [],
                                                         "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-ckVGcZ",
+                                                          "componentId": "sc-kgoBCf",
                                                           "isStatic": false,
-                                                          "lastClassName": "bxAWbg",
+                                                          "lastClassName": "gognBf",
                                                           "rules": Array [
                                                             "
   display: flex;
@@ -1211,7 +1214,7 @@ exports[`approval happy flow 1`] = `
                                                         "displayName": "styled.div",
                                                         "foldedComponentIds": Array [],
                                                         "render": [Function],
-                                                        "styledComponentId": "sc-ckVGcZ",
+                                                        "styledComponentId": "sc-kgoBCf",
                                                         "target": "div",
                                                         "toString": [Function],
                                                         "warnTooManyClasses": [Function],
@@ -1221,7 +1224,7 @@ exports[`approval happy flow 1`] = `
                                                     forwardedRef={null}
                                                   >
                                                     <div
-                                                      className="sc-ckVGcZ bxAWbg"
+                                                      className="sc-kgoBCf gognBf"
                                                     >
                                                       <styled.label>
                                                         <StyledComponent
@@ -1230,9 +1233,9 @@ exports[`approval happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-dxgOiQ",
+                                                                "componentId": "sc-chPdSV",
                                                                 "isStatic": false,
-                                                                "lastClassName": "TStFD",
+                                                                "lastClassName": "koiIrA",
                                                                 "rules": Array [
                                                                   "
   font-size: 0.875rem;
@@ -1247,7 +1250,7 @@ exports[`approval happy flow 1`] = `
                                                               "displayName": "styled.label",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-dxgOiQ",
+                                                              "styledComponentId": "sc-chPdSV",
                                                               "target": "label",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -1257,7 +1260,7 @@ exports[`approval happy flow 1`] = `
                                                           forwardedRef={null}
                                                         >
                                                           <label
-                                                            className="sc-dxgOiQ TStFD"
+                                                            className="sc-chPdSV koiIrA"
                                                           >
                                                             Username*
                                                           </label>
@@ -1280,9 +1283,9 @@ exports[`approval happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kpOJdX",
+                                                                "componentId": "sc-kAzzGY",
                                                                 "isStatic": false,
-                                                                "lastClassName": "naqzc",
+                                                                "lastClassName": "SbtkR",
                                                                 "rules": Array [
                                                                   "
   ",
@@ -1335,7 +1338,7 @@ exports[`approval happy flow 1`] = `
                                                               "displayName": "styled.input",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-kpOJdX",
+                                                              "styledComponentId": "sc-kAzzGY",
                                                               "target": "input",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -1345,7 +1348,7 @@ exports[`approval happy flow 1`] = `
                                                           forwardedRef={
                                                             Object {
                                                               "current": <input
-                                                                class="sc-kpOJdX naqzc"
+                                                                class="sc-kAzzGY SbtkR"
                                                                 data-testhook-id="xl-deploy-collector-execution-form-0-field-0"
                                                                 name="username"
                                                                 type="text"
@@ -1360,7 +1363,7 @@ exports[`approval happy flow 1`] = `
                                                           value=""
                                                         >
                                                           <input
-                                                            className="sc-kpOJdX naqzc"
+                                                            className="sc-kAzzGY SbtkR"
                                                             data-testhook-id="xl-deploy-collector-execution-form-0-field-0"
                                                             disabled={false}
                                                             name="username"
@@ -1392,9 +1395,9 @@ exports[`approval happy flow 1`] = `
                                                         "$$typeof": Symbol(react.forward_ref),
                                                         "attrs": Array [],
                                                         "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-ckVGcZ",
+                                                          "componentId": "sc-kgoBCf",
                                                           "isStatic": false,
-                                                          "lastClassName": "bxAWbg",
+                                                          "lastClassName": "gognBf",
                                                           "rules": Array [
                                                             "
   display: flex;
@@ -1405,7 +1408,7 @@ exports[`approval happy flow 1`] = `
                                                         "displayName": "styled.div",
                                                         "foldedComponentIds": Array [],
                                                         "render": [Function],
-                                                        "styledComponentId": "sc-ckVGcZ",
+                                                        "styledComponentId": "sc-kgoBCf",
                                                         "target": "div",
                                                         "toString": [Function],
                                                         "warnTooManyClasses": [Function],
@@ -1415,7 +1418,7 @@ exports[`approval happy flow 1`] = `
                                                     forwardedRef={null}
                                                   >
                                                     <div
-                                                      className="sc-ckVGcZ bxAWbg"
+                                                      className="sc-kgoBCf gognBf"
                                                     >
                                                       <styled.label>
                                                         <StyledComponent
@@ -1424,9 +1427,9 @@ exports[`approval happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-dxgOiQ",
+                                                                "componentId": "sc-chPdSV",
                                                                 "isStatic": false,
-                                                                "lastClassName": "TStFD",
+                                                                "lastClassName": "koiIrA",
                                                                 "rules": Array [
                                                                   "
   font-size: 0.875rem;
@@ -1441,7 +1444,7 @@ exports[`approval happy flow 1`] = `
                                                               "displayName": "styled.label",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-dxgOiQ",
+                                                              "styledComponentId": "sc-chPdSV",
                                                               "target": "label",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -1451,7 +1454,7 @@ exports[`approval happy flow 1`] = `
                                                           forwardedRef={null}
                                                         >
                                                           <label
-                                                            className="sc-dxgOiQ TStFD"
+                                                            className="sc-chPdSV koiIrA"
                                                           >
                                                             Password*
                                                           </label>
@@ -1474,9 +1477,9 @@ exports[`approval happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kpOJdX",
+                                                                "componentId": "sc-kAzzGY",
                                                                 "isStatic": false,
-                                                                "lastClassName": "naqzc",
+                                                                "lastClassName": "SbtkR",
                                                                 "rules": Array [
                                                                   "
   ",
@@ -1529,7 +1532,7 @@ exports[`approval happy flow 1`] = `
                                                               "displayName": "styled.input",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-kpOJdX",
+                                                              "styledComponentId": "sc-kAzzGY",
                                                               "target": "input",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -1544,7 +1547,7 @@ exports[`approval happy flow 1`] = `
                                                           value=""
                                                         >
                                                           <input
-                                                            className="sc-kpOJdX naqzc"
+                                                            className="sc-kAzzGY SbtkR"
                                                             data-testhook-id="xl-deploy-collector-execution-form-0-field-1"
                                                             disabled={false}
                                                             name="password"
@@ -1576,9 +1579,9 @@ exports[`approval happy flow 1`] = `
                                                         "$$typeof": Symbol(react.forward_ref),
                                                         "attrs": Array [],
                                                         "componentStyle": ComponentStyle {
-                                                          "componentId": "sc-ckVGcZ",
+                                                          "componentId": "sc-kgoBCf",
                                                           "isStatic": false,
-                                                          "lastClassName": "bxAWbg",
+                                                          "lastClassName": "gognBf",
                                                           "rules": Array [
                                                             "
   display: flex;
@@ -1589,7 +1592,7 @@ exports[`approval happy flow 1`] = `
                                                         "displayName": "styled.div",
                                                         "foldedComponentIds": Array [],
                                                         "render": [Function],
-                                                        "styledComponentId": "sc-ckVGcZ",
+                                                        "styledComponentId": "sc-kgoBCf",
                                                         "target": "div",
                                                         "toString": [Function],
                                                         "warnTooManyClasses": [Function],
@@ -1599,7 +1602,7 @@ exports[`approval happy flow 1`] = `
                                                     forwardedRef={null}
                                                   >
                                                     <div
-                                                      className="sc-ckVGcZ bxAWbg"
+                                                      className="sc-kgoBCf gognBf"
                                                     >
                                                       <styled.label>
                                                         <StyledComponent
@@ -1608,9 +1611,9 @@ exports[`approval happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-dxgOiQ",
+                                                                "componentId": "sc-chPdSV",
                                                                 "isStatic": false,
-                                                                "lastClassName": "TStFD",
+                                                                "lastClassName": "koiIrA",
                                                                 "rules": Array [
                                                                   "
   font-size: 0.875rem;
@@ -1625,7 +1628,7 @@ exports[`approval happy flow 1`] = `
                                                               "displayName": "styled.label",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-dxgOiQ",
+                                                              "styledComponentId": "sc-chPdSV",
                                                               "target": "label",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -1635,7 +1638,7 @@ exports[`approval happy flow 1`] = `
                                                           forwardedRef={null}
                                                         >
                                                           <label
-                                                            className="sc-dxgOiQ TStFD"
+                                                            className="sc-chPdSV koiIrA"
                                                           >
                                                             Application Version*
                                                           </label>
@@ -1658,9 +1661,9 @@ exports[`approval happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kpOJdX",
+                                                                "componentId": "sc-kAzzGY",
                                                                 "isStatic": false,
-                                                                "lastClassName": "naqzc",
+                                                                "lastClassName": "SbtkR",
                                                                 "rules": Array [
                                                                   "
   ",
@@ -1713,7 +1716,7 @@ exports[`approval happy flow 1`] = `
                                                               "displayName": "styled.input",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-kpOJdX",
+                                                              "styledComponentId": "sc-kAzzGY",
                                                               "target": "input",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -1728,7 +1731,7 @@ exports[`approval happy flow 1`] = `
                                                           value=""
                                                         >
                                                           <input
-                                                            className="sc-kpOJdX naqzc"
+                                                            className="sc-kAzzGY SbtkR"
                                                             data-testhook-id="xl-deploy-collector-execution-form-0-field-2"
                                                             disabled={false}
                                                             name="applicationVersion"
@@ -1750,9 +1753,9 @@ exports[`approval happy flow 1`] = `
                                                       "$$typeof": Symbol(react.forward_ref),
                                                       "attrs": Array [],
                                                       "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-kEYyzF",
+                                                        "componentId": "sc-ckVGcZ",
                                                         "isStatic": false,
-                                                        "lastClassName": "kEMPDQ",
+                                                        "lastClassName": "iUykGB",
                                                         "rules": Array [
                                                           "
   padding: 0;
@@ -1768,7 +1771,7 @@ exports[`approval happy flow 1`] = `
                                                       "displayName": "styled.hr",
                                                       "foldedComponentIds": Array [],
                                                       "render": [Function],
-                                                      "styledComponentId": "sc-kEYyzF",
+                                                      "styledComponentId": "sc-ckVGcZ",
                                                       "target": "hr",
                                                       "toString": [Function],
                                                       "warnTooManyClasses": [Function],
@@ -1778,7 +1781,7 @@ exports[`approval happy flow 1`] = `
                                                   forwardedRef={null}
                                                 >
                                                   <hr
-                                                    className="sc-kEYyzF kEMPDQ"
+                                                    className="sc-ckVGcZ iUykGB"
                                                   />
                                                 </StyledComponent>
                                               </styled.hr>
@@ -1789,9 +1792,9 @@ exports[`approval happy flow 1`] = `
                                                       "$$typeof": Symbol(react.forward_ref),
                                                       "attrs": Array [],
                                                       "componentStyle": ComponentStyle {
-                                                        "componentId": "sc-VigVT",
+                                                        "componentId": "sc-dnqmqq",
                                                         "isStatic": false,
-                                                        "lastClassName": "kMnURC",
+                                                        "lastClassName": "bhDsqA",
                                                         "rules": Array [
                                                           "
   display: flex;
@@ -1805,7 +1808,7 @@ exports[`approval happy flow 1`] = `
                                                       "displayName": "styled.div",
                                                       "foldedComponentIds": Array [],
                                                       "render": [Function],
-                                                      "styledComponentId": "sc-VigVT",
+                                                      "styledComponentId": "sc-dnqmqq",
                                                       "target": "div",
                                                       "toString": [Function],
                                                       "warnTooManyClasses": [Function],
@@ -1815,7 +1818,7 @@ exports[`approval happy flow 1`] = `
                                                   forwardedRef={null}
                                                 >
                                                   <div
-                                                    className="sc-VigVT kMnURC"
+                                                    className="sc-dnqmqq bhDsqA"
                                                   >
                                                     <LoaderButton
                                                       buttonType="button"
@@ -1835,9 +1838,9 @@ exports[`approval happy flow 1`] = `
                                                               "$$typeof": Symbol(react.forward_ref),
                                                               "attrs": Array [],
                                                               "componentStyle": ComponentStyle {
-                                                                "componentId": "sc-kkGfuU",
+                                                                "componentId": "sc-jKJlTe",
                                                                 "isStatic": false,
-                                                                "lastClassName": "hwbWye",
+                                                                "lastClassName": "llARih",
                                                                 "rules": Array [
                                                                   "
   ",
@@ -1887,7 +1890,7 @@ exports[`approval happy flow 1`] = `
                                                               "displayName": "styled.button",
                                                               "foldedComponentIds": Array [],
                                                               "render": [Function],
-                                                              "styledComponentId": "sc-kkGfuU",
+                                                              "styledComponentId": "sc-jKJlTe",
                                                               "target": "button",
                                                               "toString": [Function],
                                                               "warnTooManyClasses": [Function],
@@ -1899,7 +1902,7 @@ exports[`approval happy flow 1`] = `
                                                           type="button"
                                                         >
                                                           <button
-                                                            className="sc-kkGfuU hwbWye"
+                                                            className="sc-jKJlTe llARih"
                                                             data-testhook-id="xl-deploy-collector-execution-form-0-submit-button"
                                                             onMouseDown={[Function]}
                                                             type="button"
@@ -1916,7 +1919,7 @@ exports[`approval happy flow 1`] = `
                                           </div>
                                         </StyledComponent>
                                       </Styled(styled.div)>
-                                    </XLDeployApprovalForm>
+                                    </XLDeployExecutionForm>
                                   </main>
                                 </StyledComponent>
                               </styled.main>
@@ -1945,9 +1948,9 @@ exports[`approval happy flow 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-dnqmqq",
+                                  "componentId": "sc-jWBwVP",
                                   "isStatic": false,
-                                  "lastClassName": "eYVeIO",
+                                  "lastClassName": "diPJXp",
                                   "rules": Array [
                                     "
   &.shake {
@@ -1983,7 +1986,7 @@ exports[`approval happy flow 1`] = `
                                 "displayName": "styled.section",
                                 "foldedComponentIds": Array [],
                                 "render": [Function],
-                                "styledComponentId": "sc-dnqmqq",
+                                "styledComponentId": "sc-jWBwVP",
                                 "target": "section",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -1994,7 +1997,7 @@ exports[`approval happy flow 1`] = `
                             onAnimationEnd={[Function]}
                           >
                             <section
-                              className="sc-dnqmqq eYVeIO"
+                              className="sc-jWBwVP diPJXp"
                               onAnimationEnd={[Function]}
                             >
                               <styled.header>
@@ -2004,9 +2007,9 @@ exports[`approval happy flow 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-iwsKbI",
+                                        "componentId": "sc-brqgnP",
                                         "isStatic": false,
-                                        "lastClassName": "cFUedi",
+                                        "lastClassName": "keXmep",
                                         "rules": Array [
                                           "
   display: flex;
@@ -2022,7 +2025,7 @@ exports[`approval happy flow 1`] = `
                                       "displayName": "styled.header",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-iwsKbI",
+                                      "styledComponentId": "sc-brqgnP",
                                       "target": "header",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2032,7 +2035,7 @@ exports[`approval happy flow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <header
-                                    className="sc-iwsKbI cFUedi"
+                                    className="sc-brqgnP keXmep"
                                   >
                                     collector2
                                     <styled.button
@@ -2044,9 +2047,9 @@ exports[`approval happy flow 1`] = `
                                             "$$typeof": Symbol(react.forward_ref),
                                             "attrs": Array [],
                                             "componentStyle": ComponentStyle {
-                                              "componentId": "sc-gqjmRU",
+                                              "componentId": "sc-jAaTju",
                                               "isStatic": false,
-                                              "lastClassName": "RQpBe",
+                                              "lastClassName": "byjwEn",
                                               "rules": Array [
                                                 "
   background: none;
@@ -2062,7 +2065,7 @@ exports[`approval happy flow 1`] = `
                                             "displayName": "styled.button",
                                             "foldedComponentIds": Array [],
                                             "render": [Function],
-                                            "styledComponentId": "sc-gqjmRU",
+                                            "styledComponentId": "sc-jAaTju",
                                             "target": "button",
                                             "toString": [Function],
                                             "warnTooManyClasses": [Function],
@@ -2073,7 +2076,7 @@ exports[`approval happy flow 1`] = `
                                         onClick={[Function]}
                                       >
                                         <button
-                                          className="sc-gqjmRU RQpBe"
+                                          className="sc-jAaTju byjwEn"
                                           onClick={[Function]}
                                         >
                                           <ChevronIcon
@@ -2111,9 +2114,9 @@ exports[`approval happy flow 1`] = `
                                       "$$typeof": Symbol(react.forward_ref),
                                       "attrs": Array [],
                                       "componentStyle": ComponentStyle {
-                                        "componentId": "sc-gZMcBi",
+                                        "componentId": "sc-cMljjf",
                                         "isStatic": false,
-                                        "lastClassName": "jEqPfK",
+                                        "lastClassName": "gTsBBO",
                                         "rules": Array [
                                           "
   border: ",
@@ -2133,7 +2136,7 @@ exports[`approval happy flow 1`] = `
                                       "displayName": "styled.main",
                                       "foldedComponentIds": Array [],
                                       "render": [Function],
-                                      "styledComponentId": "sc-gZMcBi",
+                                      "styledComponentId": "sc-cMljjf",
                                       "target": "main",
                                       "toString": [Function],
                                       "warnTooManyClasses": [Function],
@@ -2143,7 +2146,7 @@ exports[`approval happy flow 1`] = `
                                   forwardedRef={null}
                                 >
                                   <main
-                                    className="sc-gZMcBi jEqPfK"
+                                    className="sc-cMljjf gTsBBO"
                                   />
                                 </StyledComponent>
                               </styled.main>
@@ -2162,7 +2165,7 @@ exports[`approval happy flow 1`] = `
                           "componentStyle": ComponentStyle {
                             "componentId": "sc-jDwBTQ",
                             "isStatic": false,
-                            "lastClassName": "djgwiI",
+                            "lastClassName": "JwQyK",
                             "rules": Array [
                               "
   display: flex;
@@ -2175,7 +2178,7 @@ exports[`approval happy flow 1`] = `
   margin: 1rem 0;
 
   ",
-                              ".sc-kkGfuU",
+                              ".sc-jKJlTe",
                               " {
     margin: 0 1rem;
 
@@ -2188,7 +2191,7 @@ exports[`approval happy flow 1`] = `
                           },
                           "displayName": "Styled(styled.div)",
                           "foldedComponentIds": Array [
-                            "sc-VigVT",
+                            "sc-dnqmqq",
                           ],
                           "render": [Function],
                           "styledComponentId": "sc-jDwBTQ",
@@ -2201,7 +2204,7 @@ exports[`approval happy flow 1`] = `
                       forwardedRef={null}
                     >
                       <div
-                        className="sc-VigVT sc-jDwBTQ djgwiI"
+                        className="sc-dnqmqq sc-jDwBTQ JwQyK"
                       >
                         <LoaderButton
                           buttonType="button"
@@ -2223,9 +2226,9 @@ exports[`approval happy flow 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-kkGfuU",
+                                    "componentId": "sc-jKJlTe",
                                     "isStatic": false,
-                                    "lastClassName": "hwbWye",
+                                    "lastClassName": "llARih",
                                     "rules": Array [
                                       "
   ",
@@ -2275,7 +2278,7 @@ exports[`approval happy flow 1`] = `
                                   "displayName": "styled.button",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-kkGfuU",
+                                  "styledComponentId": "sc-jKJlTe",
                                   "target": "button",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -2287,7 +2290,7 @@ exports[`approval happy flow 1`] = `
                               type="button"
                             >
                               <button
-                                className="sc-kkGfuU kvUPcq"
+                                className="sc-jKJlTe dwMTZZ"
                                 data-testhook-id="approve-button"
                                 disabled={true}
                                 onClick={[Function]}
@@ -2307,9 +2310,9 @@ exports[`approval happy flow 1`] = `
                                 "$$typeof": Symbol(react.forward_ref),
                                 "attrs": Array [],
                                 "componentStyle": ComponentStyle {
-                                  "componentId": "sc-eHgmQL",
+                                  "componentId": "sc-kEYyzF",
                                   "isStatic": false,
-                                  "lastClassName": "faboZb",
+                                  "lastClassName": "ksBzxz",
                                   "rules": Array [
                                     "
   ",
@@ -2382,10 +2385,10 @@ exports[`approval happy flow 1`] = `
                                 },
                                 "displayName": "Styled(styled.button)",
                                 "foldedComponentIds": Array [
-                                  "sc-kkGfuU",
+                                  "sc-jKJlTe",
                                 ],
                                 "render": [Function],
-                                "styledComponentId": "sc-eHgmQL",
+                                "styledComponentId": "sc-kEYyzF",
                                 "target": "button",
                                 "toString": [Function],
                                 "warnTooManyClasses": [Function],
@@ -2396,7 +2399,7 @@ exports[`approval happy flow 1`] = `
                             onMouseDown={[Function]}
                           >
                             <button
-                              className="sc-kkGfuU sc-eHgmQL faboZb"
+                              className="sc-jKJlTe sc-kEYyzF ksBzxz"
                               onMouseDown={[Function]}
                             >
                               Cancel
