@@ -204,11 +204,10 @@ const ApprovalExecutionDetailsPanel: React.FC = () => {
         }>
         <LinkSigner />
         <ul>
-          {executionContexts.map((executionContext, index) =>
+          {executionContexts.map((_executionContext, index) =>
             renderCollectorRow(
               index,
               activeCollector,
-              executionContext,
               executionContexts,
               setValidateNow,
               setActiveCollector,

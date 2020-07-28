@@ -81,7 +81,6 @@ export function renderCollectorForm(
 export function renderCollectorRow(
   index: number,
   activeCollector: number,
-  executionContext: ICollectorExecutionContext,
   executionContexts: ICollectorExecutionContext[],
   setValidateNow: React.Dispatch<React.SetStateAction<boolean>>,
   setActiveCollector: React.Dispatch<React.SetStateAction<number>>,
@@ -97,7 +96,7 @@ export function renderCollectorRow(
     <li key={"executionContext" + index}>
       <CollapsibleContainerComponent
         collapsedByDefault={activeCollector !== index}
-        title={executionContext.config.name}
+        title={executionContexts[index].config.name}
         onExpand={() => {
           if (executionContexts[activeCollector]) {
             if (executionContexts[activeCollector].valid) {
@@ -122,7 +121,7 @@ export function renderCollectorRow(
         }}>
         {activeCollector === index
           ? renderCollectorForm(
-              executionContext.config,
+              executionContexts[index].config,
               index,
               validateNow,
               executionContexts,

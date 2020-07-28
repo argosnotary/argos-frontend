@@ -226,11 +226,10 @@ const ReleaseExecutionDetailsPanel = () => {
         {showReleaseError ? <Warning message={"Release has failed."} /> : null}
       </ErrorsContainer>
       <ul>
-        {executionContexts.map((executionContext, index) =>
+        {executionContexts.map((_executionContext, index) =>
           renderCollectorRow(
             index,
             activeCollector,
-            executionContext,
             executionContexts,
             setValidateNow,
             setActiveCollector,
