@@ -167,7 +167,7 @@ const ReleaseExecutionDetailsPanel = () => {
   useEffect(() => {
     const dataRequest: DataRequest = {
       method: "get",
-      url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}/layout/releaseconfig `
+      url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}/layout/releaseconfig`
     };
     setReleaseConfigurationsRequest(dataRequest);
   }, [setReleaseConfigurationsRequest]);
