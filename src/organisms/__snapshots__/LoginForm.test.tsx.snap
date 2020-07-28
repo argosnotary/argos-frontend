@@ -9,9 +9,9 @@ exports[`renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-EHOje",
+            "componentId": "sc-htoDjs",
             "isStatic": false,
-            "lastClassName": "kZGGxV",
+            "lastClassName": "eQCiFQ",
             "rules": Array [
               "
   display: flex;
@@ -29,7 +29,7 @@ exports[`renders correctly 1`] = `
           "displayName": "styled.div",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-EHOje",
+          "styledComponentId": "sc-htoDjs",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -39,7 +39,7 @@ exports[`renders correctly 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-EHOje kZGGxV"
+        className="sc-htoDjs eQCiFQ"
       >
         <styled.img
           src="images/logo.svg"
@@ -50,9 +50,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-bZQynM",
+                  "componentId": "sc-dnqmqq",
                   "isStatic": false,
-                  "lastClassName": "XXprT",
+                  "lastClassName": "cVHLyK",
                   "rules": Array [
                     "
   height: 4.25rem;
@@ -65,7 +65,7 @@ exports[`renders correctly 1`] = `
                 "displayName": "styled.img",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-bZQynM",
+                "styledComponentId": "sc-dnqmqq",
                 "target": "img",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -76,7 +76,7 @@ exports[`renders correctly 1`] = `
             src="images/logo.svg"
           >
             <img
-              className="sc-bZQynM XXprT"
+              className="sc-dnqmqq cVHLyK"
               src="images/logo.svg"
             />
           </StyledComponent>
@@ -91,9 +91,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-gzVnrw",
+                  "componentId": "sc-iwsKbI",
                   "isStatic": false,
-                  "lastClassName": "gODbxc",
+                  "lastClassName": "bMaXRj",
                   "rules": Array [
                     "
   ",
@@ -127,12 +127,28 @@ exports[`renders correctly 1`] = `
 ",
                     "
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  align-items: center;
   box-sizing: border-box;
   width: 100%;
-  margin: 1rem 0;
   font-size: 1rem;
   text-decoration: none;
+  border: 1px solid ",
+                    [Function],
+                    ";
+  background: transparent;
+  color: ",
+                    [Function],
+                    ";
+  min-height: 3.25rem;
+
+  &:hover {
+    background: transparent;
+    border-left: 4px solid
+      ",
+                    [Function],
+                    ";
+  }
 ",
                   ],
                 },
@@ -141,7 +157,7 @@ exports[`renders correctly 1`] = `
                   "sc-bwzfXH",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-gzVnrw",
+                "styledComponentId": "sc-iwsKbI",
                 "target": "a",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -152,12 +168,41 @@ exports[`renders correctly 1`] = `
             href="/api/oauth2/authorize/provider1?redirect_uri=/authenticated"
           >
             <a
-              className="sc-bwzfXH sc-gzVnrw gODbxc"
+              className="sc-bwzfXH sc-iwsKbI bMaXRj"
               href="/api/oauth2/authorize/provider1?redirect_uri=/authenticated"
             >
-              Login with 
-              name1
-               
+              <styled.span>
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-bZQynM",
+                        "isStatic": false,
+                        "lastClassName": "bOrPFB",
+                        "rules": Array [],
+                      },
+                      "displayName": "styled.span",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-bZQynM",
+                      "target": "span",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                >
+                  <span
+                    className="sc-bZQynM bOrPFB"
+                  >
+                    Login with 
+                    name1
+                  </span>
+                </StyledComponent>
+              </styled.span>
             </a>
           </StyledComponent>
         </Styled(styled.a)>
@@ -171,9 +216,9 @@ exports[`renders correctly 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-gzVnrw",
+                  "componentId": "sc-iwsKbI",
                   "isStatic": false,
-                  "lastClassName": "gODbxc",
+                  "lastClassName": "bMaXRj",
                   "rules": Array [
                     "
   ",
@@ -207,12 +252,28 @@ exports[`renders correctly 1`] = `
 ",
                     "
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  align-items: center;
   box-sizing: border-box;
   width: 100%;
-  margin: 1rem 0;
   font-size: 1rem;
   text-decoration: none;
+  border: 1px solid ",
+                    [Function],
+                    ";
+  background: transparent;
+  color: ",
+                    [Function],
+                    ";
+  min-height: 3.25rem;
+
+  &:hover {
+    background: transparent;
+    border-left: 4px solid
+      ",
+                    [Function],
+                    ";
+  }
 ",
                   ],
                 },
@@ -221,7 +282,7 @@ exports[`renders correctly 1`] = `
                   "sc-bwzfXH",
                 ],
                 "render": [Function],
-                "styledComponentId": "sc-gzVnrw",
+                "styledComponentId": "sc-iwsKbI",
                 "target": "a",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -232,15 +293,116 @@ exports[`renders correctly 1`] = `
             href="/api/oauth2/authorize/provider2?redirect_uri=/authenticated"
           >
             <a
-              className="sc-bwzfXH sc-gzVnrw gODbxc"
+              className="sc-bwzfXH sc-iwsKbI bMaXRj"
               href="/api/oauth2/authorize/provider2?redirect_uri=/authenticated"
             >
-              Login with 
-              name2
-               
-              <img
+              <styled.img
                 src="http://localhost/icon.svg"
-              />
+              >
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-EHOje",
+                        "isStatic": false,
+                        "lastClassName": "ipfkto",
+                        "rules": Array [
+                          "
+  width: 1.5rem;
+",
+                        ],
+                      },
+                      "displayName": "styled.img",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-EHOje",
+                      "target": "img",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                  src="http://localhost/icon.svg"
+                >
+                  <img
+                    className="sc-EHOje ipfkto"
+                    src="http://localhost/icon.svg"
+                  />
+                </StyledComponent>
+              </styled.img>
+              <styled.span>
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-gzVnrw",
+                        "isStatic": false,
+                        "lastClassName": "hBgfiF",
+                        "rules": Array [
+                          "
+  border-right: 1px solid ",
+                          [Function],
+                          ";
+  width: 1px;
+  height: 1rem;
+  margin: 0 1rem;
+",
+                        ],
+                      },
+                      "displayName": "styled.span",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-gzVnrw",
+                      "target": "span",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                >
+                  <span
+                    className="sc-gzVnrw hBgfiF"
+                  />
+                </StyledComponent>
+              </styled.span>
+              <styled.span>
+                <StyledComponent
+                  forwardedComponent={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "attrs": Array [],
+                      "componentStyle": ComponentStyle {
+                        "componentId": "sc-bZQynM",
+                        "isStatic": false,
+                        "lastClassName": "bOrPFB",
+                        "rules": Array [],
+                      },
+                      "displayName": "styled.span",
+                      "foldedComponentIds": Array [],
+                      "render": [Function],
+                      "styledComponentId": "sc-bZQynM",
+                      "target": "span",
+                      "toString": [Function],
+                      "warnTooManyClasses": [Function],
+                      "withComponent": [Function],
+                    }
+                  }
+                  forwardedRef={null}
+                >
+                  <span
+                    className="sc-bZQynM bOrPFB"
+                  >
+                    Login with 
+                    name2
+                  </span>
+                </StyledComponent>
+              </styled.span>
             </a>
           </StyledComponent>
         </Styled(styled.a)>
@@ -259,9 +421,9 @@ exports[`renders correctly error 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": ComponentStyle {
-            "componentId": "sc-EHOje",
+            "componentId": "sc-htoDjs",
             "isStatic": false,
-            "lastClassName": "kZGGxV",
+            "lastClassName": "eQCiFQ",
             "rules": Array [
               "
   display: flex;
@@ -279,7 +441,7 @@ exports[`renders correctly error 1`] = `
           "displayName": "styled.div",
           "foldedComponentIds": Array [],
           "render": [Function],
-          "styledComponentId": "sc-EHOje",
+          "styledComponentId": "sc-htoDjs",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -289,7 +451,7 @@ exports[`renders correctly error 1`] = `
       forwardedRef={null}
     >
       <div
-        className="sc-EHOje kZGGxV"
+        className="sc-htoDjs eQCiFQ"
       >
         <styled.img
           src="images/logo.svg"
@@ -300,9 +462,9 @@ exports[`renders correctly error 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-bZQynM",
+                  "componentId": "sc-dnqmqq",
                   "isStatic": false,
-                  "lastClassName": "XXprT",
+                  "lastClassName": "cVHLyK",
                   "rules": Array [
                     "
   height: 4.25rem;
@@ -315,7 +477,7 @@ exports[`renders correctly error 1`] = `
                 "displayName": "styled.img",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-bZQynM",
+                "styledComponentId": "sc-dnqmqq",
                 "target": "img",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -326,7 +488,7 @@ exports[`renders correctly error 1`] = `
             src="images/logo.svg"
           >
             <img
-              className="sc-bZQynM XXprT"
+              className="sc-dnqmqq cVHLyK"
               src="images/logo.svg"
             />
           </StyledComponent>
@@ -340,7 +502,7 @@ exports[`renders correctly error 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-ifAKCX",
                   "isStatic": false,
-                  "lastClassName": "fcaiKu",
+                  "lastClassName": "ckgOdz",
                   "rules": Array [
                     "
   text-align: center;
@@ -382,7 +544,7 @@ exports[`renders correctly error 1`] = `
             forwardedRef={null}
           >
             <p
-              className="sc-ifAKCX fcaiKu"
+              className="sc-ifAKCX ckgOdz"
             >
               Connection error try again later
             </p>

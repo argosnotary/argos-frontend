@@ -368,7 +368,7 @@ exports[`renders correctly 1`] = `
                                     "componentStyle": ComponentStyle {
                                       "componentId": "sc-eHgmQL",
                                       "isStatic": false,
-                                      "lastClassName": "bNYfQg",
+                                      "lastClassName": "cKOCSb",
                                       "rules": Array [
                                         "
   color: ",
@@ -397,7 +397,7 @@ exports[`renders correctly 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-eHgmQL juakzc"
+                                  className="sc-eHgmQL gDbLxG"
                                 >
                                   active key
                                 </span>
@@ -639,7 +639,7 @@ exports[`renders correctly 1`] = `
                                     "componentStyle": ComponentStyle {
                                       "componentId": "sc-eHgmQL",
                                       "isStatic": false,
-                                      "lastClassName": "bNYfQg",
+                                      "lastClassName": "cKOCSb",
                                       "rules": Array [
                                         "
   color: ",
@@ -668,7 +668,7 @@ exports[`renders correctly 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-eHgmQL bNYfQg"
+                                  className="sc-eHgmQL cKOCSb"
                                 >
                                   inactive key
                                 </span>
@@ -911,7 +911,7 @@ exports[`renders correctly 1`] = `
                                     "componentStyle": ComponentStyle {
                                       "componentId": "sc-eHgmQL",
                                       "isStatic": false,
-                                      "lastClassName": "bNYfQg",
+                                      "lastClassName": "cKOCSb",
                                       "rules": Array [
                                         "
   color: ",
@@ -940,7 +940,7 @@ exports[`renders correctly 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-eHgmQL bNYfQg"
+                                  className="sc-eHgmQL cKOCSb"
                                 >
                                   deleted
                                 </span>

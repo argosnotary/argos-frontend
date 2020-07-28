@@ -1880,7 +1880,7 @@ exports[`add authorized key to layout 1`] = `
                                                             "componentStyle": ComponentStyle {
                                                               "componentId": "sc-uJMKN",
                                                               "isStatic": false,
-                                                              "lastClassName": "fsYqXw",
+                                                              "lastClassName": "dGMiKe",
                                                               "rules": Array [
                                                                 "
   color: ",
@@ -1909,7 +1909,7 @@ exports[`add authorized key to layout 1`] = `
                                                         forwardedRef={null}
                                                       >
                                                         <span
-                                                          className="sc-uJMKN fsYqXw"
+                                                          className="sc-uJMKN dGMiKe"
                                                         >
                                                           active key
                                                         </span>
@@ -6720,7 +6720,7 @@ exports[`renders correctly with existing layout without crypto support 1`] = `
             "componentStyle": ComponentStyle {
               "componentId": "sc-ifAKCX",
               "isStatic": false,
-              "lastClassName": "frPGAT",
+              "lastClassName": "Qnoid",
               "rules": Array [
                 "
   display: flex;
@@ -6747,7 +6747,7 @@ exports[`renders correctly with existing layout without crypto support 1`] = `
         forwardedRef={null}
       >
         <section
-          className="sc-ifAKCX frPGAT"
+          className="sc-ifAKCX Qnoid"
         >
           <styled.div>
             <StyledComponent
@@ -6781,7 +6781,7 @@ exports[`renders correctly with existing layout without crypto support 1`] = `
                 className="sc-bZQynM hKJZMA"
               >
                 <WarningIcon
-                  color="red"
+                  color="#ff0000"
                   size={48}
                 >
                   <svg
@@ -6796,17 +6796,17 @@ exports[`renders correctly with existing layout without crypto support 1`] = `
                     </title>
                     <path
                       d="M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"
-                      fill="red"
+                      fill="#ff0000"
                     />
                      
                     <path
                       d="M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
-                      fill="red"
+                      fill="#ff0000"
                     />
                      
                     <path
                       d="M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"
-                      fill="red"
+                      fill="#ff0000"
                     />
                   </svg>
                 </WarningIcon>
@@ -6822,7 +6822,7 @@ exports[`renders correctly with existing layout without crypto support 1`] = `
                   "componentStyle": ComponentStyle {
                     "componentId": "sc-EHOje",
                     "isStatic": false,
-                    "lastClassName": "jqcrHf",
+                    "lastClassName": "hDCzQl",
                     "rules": Array [
                       "
   color: ",
@@ -6844,7 +6844,7 @@ exports[`renders correctly with existing layout without crypto support 1`] = `
               forwardedRef={null}
             >
               <p
-                className="sc-EHOje jqcrHf"
+                className="sc-EHOje hDCzQl"
               >
                 The web crypto api is not present in the browser your using.
         Argos Notary layout signing and key management is only supported by a recent version of Chrome, Firefox, Safari or Edge.
@@ -7226,7 +7226,7 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
                                     "componentStyle": ComponentStyle {
                                       "componentId": "sc-uJMKN",
                                       "isStatic": false,
-                                      "lastClassName": "fqkCgf",
+                                      "lastClassName": "fXJcRR",
                                       "rules": Array [
                                         "
   color: ",
@@ -7255,7 +7255,7 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-uJMKN fsYqXw"
+                                  className="sc-uJMKN dGMiKe"
                                 >
                                   active key
                                 </span>
@@ -7497,7 +7497,7 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
                                     "componentStyle": ComponentStyle {
                                       "componentId": "sc-uJMKN",
                                       "isStatic": false,
-                                      "lastClassName": "fqkCgf",
+                                      "lastClassName": "fXJcRR",
                                       "rules": Array [
                                         "
   color: ",
@@ -7526,7 +7526,7 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
                                 forwardedRef={null}
                               >
                                 <span
-                                  className="sc-uJMKN fqkCgf"
+                                  className="sc-uJMKN fXJcRR"
                                 >
                                   inactive key
                                 </span>
@@ -9972,7 +9972,7 @@ exports[`sign layout happy flow 1`] = `
         },
         "alerts": Object {
           "warning": Object {
-            "color": "red",
+            "color": "#ff0000",
           },
         },
         "alternateLoader": Object {
@@ -10012,7 +10012,7 @@ exports[`sign layout happy flow 1`] = `
           "titleTextColor": "#fff",
         },
         "connectionError": Object {
-          "bgColor": "red",
+          "bgColor": "#ff0000",
           "textColor": "#fff",
         },
         "copyInput": Object {
@@ -10082,15 +10082,15 @@ exports[`sign layout happy flow 1`] = `
         "keyManagementPage": Object {
           "iconColor": "#1779ba",
           "noActiveKeyWarning": Object {
-            "borderColor": "orange",
-            "textColor": "orange",
+            "borderColor": "#ffa500",
+            "textColor": "#ffa500",
           },
           "passwordBgColor": "#fff",
-          "passwordColor": "orange",
+          "passwordColor": "#ffa500",
         },
         "labels": Object {
-          "active": "green",
-          "inactive": "red",
+          "active": "#008000",
+          "inactive": "#ff0000",
         },
         "layoutBuilder": Object {
           "iconColor": "#1779ba",
@@ -10111,6 +10111,10 @@ exports[`sign layout happy flow 1`] = `
         },
         "loginForm": Object {
           "bgColor": "#fff",
+          "buttonBorderColor": "#1779ba",
+          "buttonHoverHighlightColor": "#008000",
+          "buttonTextColor": "#1779ba",
+          "separatorColor": "#1779ba",
         },
         "loginPage": Object {
           "bgColor": "#eee",
@@ -10128,9 +10132,9 @@ exports[`sign layout happy flow 1`] = `
         },
         "notificationsList": Object {
           "colors": Object {
-            "ERROR": "red",
-            "SUCCESS": "green",
-            "WARNING": "orange",
+            "ERROR": "#ff0000",
+            "SUCCESS": "#008000",
+            "WARNING": "#ffa500",
           },
           "iconColor": "#fff",
           "iconSize": 22,
@@ -17303,10 +17307,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       className="sc-TOsTZ hxTqzy"
                                     >
                                       <styled.div
-                                        color="red"
+                                        color="#ff0000"
                                       >
                                         <StyledComponent
-                                          color="red"
+                                          color="#ff0000"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -17314,7 +17318,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-cJSrbW",
                                                 "isStatic": false,
-                                                "lastClassName": "kXsecz",
+                                                "lastClassName": "ddpJeF",
                                                 "rules": Array [
                                                   "
   padding: 0.75rem 1rem;
@@ -17340,8 +17344,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-cJSrbW kXsecz"
-                                            color="red"
+                                            className="sc-cJSrbW ddpJeF"
+                                            color="#ff0000"
                                           >
                                             <WarningIcon
                                               color="#fff"
@@ -17377,10 +17381,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         </StyledComponent>
                                       </styled.div>
                                       <styled.p
-                                        color="red"
+                                        color="#ff0000"
                                       >
                                         <StyledComponent
-                                          color="red"
+                                          color="#ff0000"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -17388,7 +17392,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-kgAjT",
                                                 "isStatic": false,
-                                                "lastClassName": "fAuMaC",
+                                                "lastClassName": "bqmPGn",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -17420,14 +17424,14 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           forwardedRef={null}
                                         >
                                           <p
-                                            className="sc-kgAjT fAuMaC"
-                                            color="red"
+                                            className="sc-kgAjT bqmPGn"
+                                            color="#ff0000"
                                           >
                                             <styled.span
-                                              color="red"
+                                              color="#ff0000"
                                             >
                                               <StyledComponent
-                                                color="red"
+                                                color="#ff0000"
                                                 forwardedComponent={
                                                   Object {
                                                     "$$typeof": Symbol(react.forward_ref),
@@ -17435,7 +17439,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                     "componentStyle": ComponentStyle {
                                                       "componentId": "sc-ksYbfQ",
                                                       "isStatic": false,
-                                                      "lastClassName": "gmMwvd",
+                                                      "lastClassName": "jaSEzl",
                                                       "rules": Array [
                                                         "
   position: relative;
@@ -17465,8 +17469,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                 forwardedRef={null}
                                               >
                                                 <span
-                                                  className="sc-ksYbfQ gmMwvd"
-                                                  color="red"
+                                                  className="sc-ksYbfQ jaSEzl"
+                                                  color="#ff0000"
                                                 />
                                               </StyledComponent>
                                             </styled.span>
@@ -17523,10 +17527,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       className="sc-TOsTZ hxTqzy"
                                     >
                                       <styled.div
-                                        color="red"
+                                        color="#ff0000"
                                       >
                                         <StyledComponent
-                                          color="red"
+                                          color="#ff0000"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -17534,7 +17538,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-cJSrbW",
                                                 "isStatic": false,
-                                                "lastClassName": "kXsecz",
+                                                "lastClassName": "ddpJeF",
                                                 "rules": Array [
                                                   "
   padding: 0.75rem 1rem;
@@ -17560,8 +17564,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-cJSrbW kXsecz"
-                                            color="red"
+                                            className="sc-cJSrbW ddpJeF"
+                                            color="#ff0000"
                                           >
                                             <WarningIcon
                                               color="#fff"
@@ -17597,10 +17601,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         </StyledComponent>
                                       </styled.div>
                                       <styled.p
-                                        color="red"
+                                        color="#ff0000"
                                       >
                                         <StyledComponent
-                                          color="red"
+                                          color="#ff0000"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -17608,7 +17612,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-kgAjT",
                                                 "isStatic": false,
-                                                "lastClassName": "fAuMaC",
+                                                "lastClassName": "bqmPGn",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -17640,14 +17644,14 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           forwardedRef={null}
                                         >
                                           <p
-                                            className="sc-kgAjT fAuMaC"
-                                            color="red"
+                                            className="sc-kgAjT bqmPGn"
+                                            color="#ff0000"
                                           >
                                             <styled.span
-                                              color="red"
+                                              color="#ff0000"
                                             >
                                               <StyledComponent
-                                                color="red"
+                                                color="#ff0000"
                                                 forwardedComponent={
                                                   Object {
                                                     "$$typeof": Symbol(react.forward_ref),
@@ -17655,7 +17659,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                     "componentStyle": ComponentStyle {
                                                       "componentId": "sc-ksYbfQ",
                                                       "isStatic": false,
-                                                      "lastClassName": "gmMwvd",
+                                                      "lastClassName": "jaSEzl",
                                                       "rules": Array [
                                                         "
   position: relative;
@@ -17685,8 +17689,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                 forwardedRef={null}
                                               >
                                                 <span
-                                                  className="sc-ksYbfQ gmMwvd"
-                                                  color="red"
+                                                  className="sc-ksYbfQ jaSEzl"
+                                                  color="#ff0000"
                                                 />
                                               </StyledComponent>
                                             </styled.span>
@@ -17743,10 +17747,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       className="sc-TOsTZ hxTqzy"
                                     >
                                       <styled.div
-                                        color="red"
+                                        color="#ff0000"
                                       >
                                         <StyledComponent
-                                          color="red"
+                                          color="#ff0000"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -17754,7 +17758,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-cJSrbW",
                                                 "isStatic": false,
-                                                "lastClassName": "kXsecz",
+                                                "lastClassName": "ddpJeF",
                                                 "rules": Array [
                                                   "
   padding: 0.75rem 1rem;
@@ -17780,8 +17784,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-cJSrbW kXsecz"
-                                            color="red"
+                                            className="sc-cJSrbW ddpJeF"
+                                            color="#ff0000"
                                           >
                                             <WarningIcon
                                               color="#fff"
@@ -17817,10 +17821,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         </StyledComponent>
                                       </styled.div>
                                       <styled.p
-                                        color="red"
+                                        color="#ff0000"
                                       >
                                         <StyledComponent
-                                          color="red"
+                                          color="#ff0000"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -17828,7 +17832,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-kgAjT",
                                                 "isStatic": false,
-                                                "lastClassName": "fAuMaC",
+                                                "lastClassName": "bqmPGn",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -17860,14 +17864,14 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           forwardedRef={null}
                                         >
                                           <p
-                                            className="sc-kgAjT fAuMaC"
-                                            color="red"
+                                            className="sc-kgAjT bqmPGn"
+                                            color="#ff0000"
                                           >
                                             <styled.span
-                                              color="red"
+                                              color="#ff0000"
                                             >
                                               <StyledComponent
-                                                color="red"
+                                                color="#ff0000"
                                                 forwardedComponent={
                                                   Object {
                                                     "$$typeof": Symbol(react.forward_ref),
@@ -17875,7 +17879,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                     "componentStyle": ComponentStyle {
                                                       "componentId": "sc-ksYbfQ",
                                                       "isStatic": false,
-                                                      "lastClassName": "gmMwvd",
+                                                      "lastClassName": "jaSEzl",
                                                       "rules": Array [
                                                         "
   position: relative;
@@ -17905,8 +17909,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                 forwardedRef={null}
                                               >
                                                 <span
-                                                  className="sc-ksYbfQ gmMwvd"
-                                                  color="red"
+                                                  className="sc-ksYbfQ jaSEzl"
+                                                  color="#ff0000"
                                                 />
                                               </StyledComponent>
                                             </styled.span>
@@ -17963,10 +17967,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                       className="sc-TOsTZ hxTqzy"
                                     >
                                       <styled.div
-                                        color="red"
+                                        color="#ff0000"
                                       >
                                         <StyledComponent
-                                          color="red"
+                                          color="#ff0000"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -17974,7 +17978,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-cJSrbW",
                                                 "isStatic": false,
-                                                "lastClassName": "kXsecz",
+                                                "lastClassName": "ddpJeF",
                                                 "rules": Array [
                                                   "
   padding: 0.75rem 1rem;
@@ -18000,8 +18004,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           forwardedRef={null}
                                         >
                                           <div
-                                            className="sc-cJSrbW kXsecz"
-                                            color="red"
+                                            className="sc-cJSrbW ddpJeF"
+                                            color="#ff0000"
                                           >
                                             <WarningIcon
                                               color="#fff"
@@ -18037,10 +18041,10 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                         </StyledComponent>
                                       </styled.div>
                                       <styled.p
-                                        color="red"
+                                        color="#ff0000"
                                       >
                                         <StyledComponent
-                                          color="red"
+                                          color="#ff0000"
                                           forwardedComponent={
                                             Object {
                                               "$$typeof": Symbol(react.forward_ref),
@@ -18048,7 +18052,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                               "componentStyle": ComponentStyle {
                                                 "componentId": "sc-kgAjT",
                                                 "isStatic": false,
-                                                "lastClassName": "fAuMaC",
+                                                "lastClassName": "bqmPGn",
                                                 "rules": Array [
                                                   "
   display: flex;
@@ -18080,14 +18084,14 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                           forwardedRef={null}
                                         >
                                           <p
-                                            className="sc-kgAjT fAuMaC"
-                                            color="red"
+                                            className="sc-kgAjT bqmPGn"
+                                            color="#ff0000"
                                           >
                                             <styled.span
-                                              color="red"
+                                              color="#ff0000"
                                             >
                                               <StyledComponent
-                                                color="red"
+                                                color="#ff0000"
                                                 forwardedComponent={
                                                   Object {
                                                     "$$typeof": Symbol(react.forward_ref),
@@ -18095,7 +18099,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                     "componentStyle": ComponentStyle {
                                                       "componentId": "sc-ksYbfQ",
                                                       "isStatic": false,
-                                                      "lastClassName": "gmMwvd",
+                                                      "lastClassName": "jaSEzl",
                                                       "rules": Array [
                                                         "
   position: relative;
@@ -18125,8 +18129,8 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                 forwardedRef={null}
                                               >
                                                 <span
-                                                  className="sc-ksYbfQ gmMwvd"
-                                                  color="red"
+                                                  className="sc-ksYbfQ jaSEzl"
+                                                  color="#ff0000"
                                                 />
                                               </StyledComponent>
                                             </styled.span>
