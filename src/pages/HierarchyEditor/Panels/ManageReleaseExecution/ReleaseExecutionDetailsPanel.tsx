@@ -117,8 +117,12 @@ const ReleaseExecutionDetailsPanel = () => {
         },
         url: `/api/supplychain/${hierarchyEditorState.editor.node.referenceId}/release`,
         cbSuccess: (res: IReleaseRequestResponse) => {
-          if (res.releaseIsValid === false) {
+          if (!res.releaseIsValid) {
             setShowReleaseError(true);
+          } else {
+            hierarchyEditorDispatch.editor({
+              type: HierarchyEditorActionTypes.RESET
+            });
           }
 
           setReleaseArtifacts([]);
