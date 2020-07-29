@@ -24,7 +24,7 @@
     "formik": "^2.1.2",
     "immer": "^5.3.5",
     "lodash": "^4.17.19",
-    "password-generator": "^2.2.3",
+    "password-generator": "^2.3.2",
     "pkijs": "^2.1.83",
     "polished": "^3.4.2",
     "prismjs": "^1.20.0",
@@ -36,7 +36,8 @@
     "react-treebeard": "^3.2.4",
     "styled-components": "^4.4.1",
     "typescript": "3.8.3",
-    "valid-url": "^1.0.9"
+    "valid-url": "^1.0.9",
+    "webcrypto-liner": "^1.2.3"
   },
   "license": "Apache-2.0",
   "scripts": {
