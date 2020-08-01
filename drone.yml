@@ -23,6 +23,7 @@ steps:
       repo: argosnotary/argos-frontend
       tags:
         - ${DRONE_TAG}
+        - ${DRONE_TAG:0:3}
         - latest
       build_args:
         - VERSION=${DRONE_TAG}
