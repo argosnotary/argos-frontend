@@ -21,7 +21,9 @@ steps:
     image: plugins/docker
     settings:
       repo: argosnotary/argos-frontend
-      auto_tag: true
+      tags:
+        - ${DRONE_TAG}
+        - latest
       build_args:
         - VERSION=${DRONE_TAG}
       username:
