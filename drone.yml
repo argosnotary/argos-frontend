@@ -4,18 +4,12 @@ name: argos-frontend-build
 type: docker
 
 steps:
-  - name: build front-end image
-    image: plugins/docker
-    settings:
-      repo: argosnotary/argos-frontend-snapshot
-      tags: ${DRONE_TAG:-${DRONE_BRANCH//\//_}}
-      username:
-        from_secret: docker_login_user
-      password:
-        from_secret: docker_login_token
-    when:
-      event:
-        - push
+  - name: test front-end image
+    image: node:12.18
+    commands:
+    - npm install
+    - npm test
+    - npm run build
         
   - name: build and release front-end image
     image: plugins/docker
@@ -31,10 +25,12 @@ steps:
     when:
       event:
         - tag
-     
+    depends_on:
+    - test front-end image
       
 trigger:
   event:
     - push
     - tag
+    - pull_request
 
