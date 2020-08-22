@@ -20,7 +20,7 @@ services:
   argos-service:
     image: argosnotary/argos-service-snapshot:master
     environment:
-      spring.data.mongodb.uri: mongodb://mongodb/test
+      spring.data.mongodb.uri: mongodb://mongodb/argos
       spring.security.oauth2.client.registration.azure.clientId: client-id
       spring.security.oauth2.client.registration.azure.clientSecret: client-secret
       spring.security.oauth2.client.provider.azure.authorizationUri: http://localhost:8087/oauth2/v2.0/authorize-manual
@@ -41,7 +41,7 @@ services:
       - 8087:8080
 
   mongodb:
-    image: argosnotary/argos-mongo-test:master
+    image: argosnotary/mongo:4.2.8
     ports:
       - 27017:27017
 
