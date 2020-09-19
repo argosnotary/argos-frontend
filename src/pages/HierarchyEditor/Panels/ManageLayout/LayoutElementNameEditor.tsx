@@ -53,9 +53,9 @@ const LayoutElementNameEditor: React.FC<ILayoutElementNameEditorProps> = ({
     const errors = {} as IFormFormValues;
     if (!values.name) {
       errors.name = "Please fill in a name.";
-    } else if (!/^([A-Za-z0-9_-]*)?$/.test(values.name)) {
+    } else if (!/^([a-z]|[a-z][a-z0-9-]*[a-z0-9])?$/.test(values.name)) {
       errors.name =
-        "Invalid name (only alphanumeric characters, hyphen and underscore allowed).";
+        "Invalid name (only lowercase alphanumeric characters and hyphen allowed).";
     } else if (currentName !== values.name && nameExists(values.name)) {
       errors.name = "Name should be unique.";
     }

@@ -34,7 +34,7 @@ describe("TreeEditor utils", () => {
             );
 
             const expectedNode = {
-                name: "label_e",
+                name: "label-e",
                 type: "LABEL",
                 referenceId: "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
                 hasChildren: false,
@@ -183,7 +183,7 @@ describe("TreeEditor utils", () => {
     describe("updateSingleNode", () => {
         it("finds, updates a node in provided tree state, and returns immutable copy of tree state", () => {
             const newNodeData = {
-                name: "label_eee",
+                name: "label-eee",
                 type: "LABEL",
                 referenceId: "975f93be-3c7b-4b11-a2c1-2fd48e27c7df",
                 hasChildren: false,
@@ -207,7 +207,7 @@ describe("TreeEditor utils", () => {
                 "975f93be-3c7b-4b11-a2c1-2fd48e27c7df"
             );
 
-            expect(res.name).toBe("label_eee");
+            expect(res.name).toBe("label-eee");
         });
     });
     describe("appendNodeChildrenToParent", () => {
@@ -275,7 +275,7 @@ describe("TreeEditor utils", () => {
                 t => t.name
             ).join(" / ");
 
-            expect(trail).toEqual("label_a / label_c / label_d");
+            expect(trail).toEqual("label-a / label-c / label-d");
         });
     });
 });

@@ -57,7 +57,7 @@ const validate = (values: ISupplyChainNameFormValues) => {
 
   if (!values.supplychainname) {
     errors.supplychainname = "Please fill in a supply chain name.";
-  } else if (!/^([a-z]{1}[a-z0-9-]*)?$/.test(values.supplychainname)) {
+  } else if (!/^([a-z]|[a-z][a-z0-9-]*[a-z0-9])?$/.test(values.supplychainname)) {
     errors.supplychainname =
       "Invalid supply chain name (only lowercase alphanumeric characters and hyphen is allowed).";
   }

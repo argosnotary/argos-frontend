@@ -13786,7 +13786,7 @@ exports[`sign layout happy flow 1`] = `
                                                                             data-testhook-id="collector-edit-form-field-0"
                                                                             name="name"
                                                                             type="text"
-                                                                            value="xlCollect"
+                                                                            value="xlcollect"
                                                                           />,
                                                                         }
                                                                       }
@@ -13794,7 +13794,7 @@ exports[`sign layout happy flow 1`] = `
                                                                       name="name"
                                                                       onBlur={[Function]}
                                                                       onChange={[Function]}
-                                                                      value="xlCollect"
+                                                                      value="xlcollect"
                                                                     >
                                                                       <styled.div>
                                                                         <StyledComponent
@@ -13875,7 +13875,7 @@ exports[`sign layout happy flow 1`] = `
                                                                               onBlur={[Function]}
                                                                               onChange={[Function]}
                                                                               type="text"
-                                                                              value="xlCollect"
+                                                                              value="xlcollect"
                                                                             >
                                                                               <StyledComponent
                                                                                 data-testhook-id="collector-edit-form-field-0"
@@ -13954,7 +13954,7 @@ exports[`sign layout happy flow 1`] = `
                                                                                       data-testhook-id="collector-edit-form-field-0"
                                                                                       name="name"
                                                                                       type="text"
-                                                                                      value="xlCollect"
+                                                                                      value="xlcollect"
                                                                                     />,
                                                                                   }
                                                                                 }
@@ -13962,7 +13962,7 @@ exports[`sign layout happy flow 1`] = `
                                                                                 onBlur={[Function]}
                                                                                 onChange={[Function]}
                                                                                 type="text"
-                                                                                value="xlCollect"
+                                                                                value="xlcollect"
                                                                               >
                                                                                 <input
                                                                                   className="sc-VigVT cBJosH"
@@ -13972,7 +13972,7 @@ exports[`sign layout happy flow 1`] = `
                                                                                   onBlur={[Function]}
                                                                                   onChange={[Function]}
                                                                                   type="text"
-                                                                                  value="xlCollect"
+                                                                                  value="xlcollect"
                                                                                 />
                                                                               </StyledComponent>
                                                                             </styled.input>
@@ -17244,19 +17244,19 @@ exports[`validates a faulty layout and returns errors 1`] = `
                           notifications={
                             Array [
                               Object {
-                                "body": "authorizedKeyIds size must be between 1 and 2147483647",
+                                "body": "authorizedKeyIds size must be between 1 and 256",
                                 "type": "ERROR",
                               },
                               Object {
-                                "body": "expectedEndProducts size must be between 1 and 2147483647",
+                                "body": "expectedEndProducts size must be between 1 and 2048",
                                 "type": "ERROR",
                               },
                               Object {
-                                "body": "keys size must be between 1 and 2147483647",
+                                "body": "keys size must be between 1 and 256",
                                 "type": "ERROR",
                               },
                               Object {
-                                "body": "layoutSegments size must be between 1 and 2147483647",
+                                "body": "layoutSegments size must be between 1 and 256",
                                 "type": "ERROR",
                               },
                             ]
@@ -17267,7 +17267,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               key="0"
                             >
                               <Notification
-                                notification="authorizedKeyIds size must be between 1 and 2147483647"
+                                notification="authorizedKeyIds size must be between 1 and 256"
                                 type="ERROR"
                               >
                                 <styled.div>
@@ -17474,7 +17474,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                 />
                                               </StyledComponent>
                                             </styled.span>
-                                            authorizedKeyIds size must be between 1 and 2147483647
+                                            authorizedKeyIds size must be between 1 and 256
                                           </p>
                                         </StyledComponent>
                                       </styled.p>
@@ -17487,7 +17487,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               key="1"
                             >
                               <Notification
-                                notification="expectedEndProducts size must be between 1 and 2147483647"
+                                notification="expectedEndProducts size must be between 1 and 2048"
                                 type="ERROR"
                               >
                                 <styled.div>
@@ -17694,7 +17694,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                 />
                                               </StyledComponent>
                                             </styled.span>
-                                            expectedEndProducts size must be between 1 and 2147483647
+                                            expectedEndProducts size must be between 1 and 2048
                                           </p>
                                         </StyledComponent>
                                       </styled.p>
@@ -17707,7 +17707,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               key="2"
                             >
                               <Notification
-                                notification="keys size must be between 1 and 2147483647"
+                                notification="keys size must be between 1 and 256"
                                 type="ERROR"
                               >
                                 <styled.div>
@@ -17914,7 +17914,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                 />
                                               </StyledComponent>
                                             </styled.span>
-                                            keys size must be between 1 and 2147483647
+                                            keys size must be between 1 and 256
                                           </p>
                                         </StyledComponent>
                                       </styled.p>
@@ -17927,7 +17927,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                               key="3"
                             >
                               <Notification
-                                notification="layoutSegments size must be between 1 and 2147483647"
+                                notification="layoutSegments size must be between 1 and 256"
                                 type="ERROR"
                               >
                                 <styled.div>
@@ -18134,7 +18134,7 @@ exports[`validates a faulty layout and returns errors 1`] = `
                                                 />
                                               </StyledComponent>
                                             </styled.span>
-                                            layoutSegments size must be between 1 and 2147483647
+                                            layoutSegments size must be between 1 and 256
                                           </p>
                                         </StyledComponent>
                                       </styled.p>
