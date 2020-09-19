@@ -250,22 +250,22 @@ it("validates a faulty layout and returns errors", async () => {
       {
         field: "authorizedKeyIds",
         type: "DATA_INPUT",
-        message: "size must be between 1 and 2147483647"
+        message: "size must be between 1 and 256"
       },
       {
         field: "expectedEndProducts",
         type: "DATA_INPUT",
-        message: "size must be between 1 and 2147483647"
+        message: "size must be between 1 and 2048"
       },
       {
         field: "keys",
         type: "DATA_INPUT",
-        message: "size must be between 1 and 2147483647"
+        message: "size must be between 1 and 256"
       },
       {
         field: "layoutSegments",
         type: "DATA_INPUT",
-        message: "size must be between 1 and 2147483647"
+        message: "size must be between 1 and 256"
       }
     ]
   });
@@ -424,7 +424,7 @@ it("sign layout happy flow", async () => {
     updateField(
       root.find('input[data-testhook-id="collector-edit-form-field-0"]'),
       "name",
-      "xlCollect"
+      "xlcollect"
     );
 
     updateField(
@@ -491,7 +491,7 @@ it("sign layout happy flow", async () => {
     expect(JSON.parse(mock.history.post[0].data)).toEqual(expectedPost);
 
     expect(mock.history.post[2].data).toEqual(
-      '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"uri":"https://collect.org","name":"xlCollect","type":"XLDEPLOY","context":{"applicationName":"appName"}}]}]'
+      '[{"segmentName":"jenkins","stepName":"approve","artifactCollectorSpecifications":[{"uri":"https://collect.org","name":"xlcollect","type":"XLDEPLOY","context":{"applicationName":"appName"}}]}]'
     );
 
     expect(mock.history.post[3].data).toEqual(

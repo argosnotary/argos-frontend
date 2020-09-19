@@ -70,9 +70,9 @@ const validate = (values: IServiceAccountFormValues) => {
 
   if (!values.serviceaccountname) {
     errors.serviceaccountname = "Please fill in a service account name.";
-  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.serviceaccountname)) {
+  } else if (!/^([a-z]|[a-z][a-z0-9-]*[a-z0-9])?$/.test(values.serviceaccountname)) {
     errors.serviceaccountname =
-      "Invalid serviceaccount name (only lowercase alphanumeric characters and underscore allowed).";
+      "Invalid serviceaccount name (only lowercase alphanumeric characters and hyphen allowed).";
   }
 
   return errors;

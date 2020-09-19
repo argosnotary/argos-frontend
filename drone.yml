@@ -3,6 +3,9 @@ kind: pipeline
 name: argos-frontend-build
 type: docker
 
+environment:
+  
+
 steps:
   - name: test front-end image
     image: node:12.18
@@ -15,7 +18,7 @@ steps:
     image: plugins/docker
     settings:
       repo: argosnotary/argos-frontend
-      auto_tag: true
+      tags: ${DRONE_TAG:-${DRONE_BRANCH}}
       build_args:
         - VERSION=${DRONE_TAG}
       username:
@@ -23,8 +26,13 @@ steps:
       password:
         from_secret: docker_login_token
     when:
-      event:
-        - tag
+      ref:
+        include:
+        - "refs/heads/master"
+        - "refs/heads/release/*"
+    event:
+    - push
+    - tag
     depends_on:
     - test front-end image
       

@@ -57,9 +57,9 @@ const validate = (values: ILabelNameFormValues) => {
 
   if (!values.labelname) {
     errors.labelname = "Please fill in a label name.";
-  } else if (!/^([a-z]{1}[a-z0-9_]*)?$/.test(values.labelname)) {
+  } else if (!/^([a-z]|[a-z][a-z0-9-]*[a-z0-9])?$/.test(values.labelname)) {
     errors.labelname =
-      "Invalid label name (only lowercase alphanumeric characters and underscore allowed).";
+      "Invalid label name (only lowercase alphanumeric characters and hyphen allowed).";
   }
 
   return errors;
