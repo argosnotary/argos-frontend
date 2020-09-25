@@ -14,13 +14,13 @@ steps:
     - npm test
     - npm run build
         
-  - name: build and release front-end image
+  - name: build and release front-end beta image
     image: plugins/docker
     settings:
       repo: argosnotary/argos-frontend
-      tags: ${DRONE_TAG:-${DRONE_BRANCH}}
+      tags: ${DRONE_BRANCH}-beta
       build_args:
-        - VERSION=${DRONE_TAG}
+        - VERSION=${DRONE_BRANCH}
       username:
         from_secret: docker_login_user
       password:
@@ -32,6 +32,23 @@ steps:
         - "refs/heads/release/*"
       event:
       - push
+    depends_on:
+    - test front-end image
+    
+  - name: build and release front-end image
+    image: plugins/docker
+    settings:
+      repo: argosnotary/argos-frontend
+      tags:
+      - ${DRONE_TAG}
+      build_args:
+        - VERSION=${DRONE_TAG}
+      username:
+        from_secret: docker_login_user
+      password:
+        from_secret: docker_login_token
+    when:
+      event:
       - tag
     depends_on:
     - test front-end image
