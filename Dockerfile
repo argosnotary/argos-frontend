@@ -1,4 +1,4 @@
-# Copyright 2020 Rabobank Nederland
+# Copyright 2020 Argos Notary Coöperatie UA
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
