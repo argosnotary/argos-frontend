@@ -30,9 +30,9 @@ steps:
         include:
         - "refs/heads/master"
         - "refs/heads/release/*"
-    event:
-    - push
-    - tag
+      event:
+      - push
+      - tag
     depends_on:
     - test front-end image
       
