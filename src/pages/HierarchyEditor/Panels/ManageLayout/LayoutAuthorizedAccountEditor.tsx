@@ -252,7 +252,7 @@ const LayoutAuthorizedAccountEditor: React.FC = () => {
     <>
       <ItemContainer>
         <CollectionContainerRow>
-          <ItemContainerTitle>Authorized Accounts</ItemContainerTitle>
+          <ItemContainerTitle>Authorized Personal Accounts</ItemContainerTitle>
           <AddItemButton
             data-testhook-id={"add-item"}
             onClick={() => setAddAccountMode(true)}>

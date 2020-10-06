@@ -270,7 +270,7 @@ const StepAuthorizedAccountEditor: React.FC = () => {
     <>
       <ItemContainer>
         <CollectionContainerRow>
-          <ItemContainerTitle>Authorized Personal Accounts</ItemContainerTitle>
+          <ItemContainerTitle>Authorized Accounts</ItemContainerTitle>
           <AddItemButton
             data-testhook-id={"add-key"}
             onClick={() => setAddAccountMode(true)}>

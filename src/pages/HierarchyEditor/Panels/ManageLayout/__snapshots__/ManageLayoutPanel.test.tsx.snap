@@ -1644,7 +1644,7 @@ exports[`add authorized key to layout 1`] = `
                                           <header
                                             className="sc-kgoBCf sc-gGBfsJ iWHpie"
                                           >
-                                            Authorized Accounts
+                                            Authorized Personal Accounts
                                           </header>
                                         </StyledComponent>
                                       </Styled(styled.header)>
@@ -6027,7 +6027,7 @@ exports[`renders correctly with existing layout 1`] = `
                                                 <header
                                                   className="sc-kgoBCf sc-gzOgki gdmeaY"
                                                 >
-                                                  Authorized Personal Accounts
+                                                  Authorized Accounts
                                                 </header>
                                               </StyledComponent>
                                             </Styled(styled.header)>
@@ -6990,7 +6990,7 @@ exports[`renders correctly with existing layout: withLayoutDetailsEditor 1`] = `
                   <header
                     className="sc-kgoBCf sc-gGBfsJ iWHpie"
                   >
-                    Authorized Accounts
+                    Authorized Personal Accounts
                   </header>
                 </StyledComponent>
               </Styled(styled.header)>
@@ -9300,7 +9300,7 @@ exports[`renders correctly with non existing layout 1`] = `
                                           <header
                                             className="sc-kgoBCf sc-gGBfsJ iWHpie"
                                           >
-                                            Authorized Accounts
+                                            Authorized Personal Accounts
                                           </header>
                                         </StyledComponent>
                                       </Styled(styled.header)>
@@ -14781,7 +14781,7 @@ exports[`sign layout happy flow 1`] = `
                                                     <header
                                                       className="sc-kgoBCf sc-gzOgki gdmeaY"
                                                     >
-                                                      Authorized Personal Accounts
+                                                      Authorized Accounts
                                                     </header>
                                                   </StyledComponent>
                                                 </Styled(styled.header)>
