@@ -18,9 +18,9 @@ steps:
     image: plugins/docker
     settings:
       repo: argosnotary/argos-frontend
-      tags: ${DRONE_BRANCH}-beta
+      tags: ${DRONE_BRANCH//\//_}-beta
       build_args:
-        - VERSION=${DRONE_BRANCH}
+        - VERSION=${DRONE_BRANCH//\//_}
       username:
         from_secret: docker_login_user
       password:
