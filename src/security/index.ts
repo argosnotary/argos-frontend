@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import * as asn1js from "asn1js";
-import generatePassword from "password-generator";
 import { PKCS8ShroudedKeyBag, PrivateKeyInfo, createCMSECDSASignature } from "pkijs";
 import {decode, encode} from "base64-arraybuffer";
 
@@ -128,6 +127,10 @@ interface IKey {
   password: string;
 }
 
+const generatePassword = () => {
+  return encode(crypto.getRandomValues(new Uint8Array(32)))
+}
+
 const generateKey = async (hashKeyPassphrase = false): Promise<IKey> => {
   const keyPair = await generateKeyPair();
   const exportedPublicKey = await crypto.subtle.exportKey(
@@ -135,7 +138,7 @@ const generateKey = async (hashKeyPassphrase = false): Promise<IKey> => {
     keyPair.publicKey
   );
 
-  const password = generatePassword(14, false);
+  const password = generatePassword();
   const encryptedPrivateKey = await generateEncryptedPrivateKey(
     password,
     keyPair.privateKey

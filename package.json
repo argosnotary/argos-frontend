@@ -24,7 +24,6 @@
     "formik": "^2.1.2",
     "immer": "^5.3.5",
     "lodash": "^4.17.19",
-    "password-generator": "^2.3.2",
     "pkijs": "^2.1.83",
     "polished": "^3.4.2",
     "prismjs": "^1.21.0",
