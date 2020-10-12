@@ -150,7 +150,7 @@ const ManageSupplyChain = () => {
     data.name = values.supplychainname;
 
     if (hierarchyEditorState.editor.node.referenceId !== "") {
-      data.labelId = hierarchyEditorState.editor.node.referenceId;
+      data.id = hierarchyEditorState.editor.node.referenceId;
     }
 
     if (hierarchyEditorState.editor.node.parentId !== "") {
