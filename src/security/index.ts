@@ -128,7 +128,7 @@ interface IKey {
 }
 
 const generatePassword = () => {
-  return encode(crypto.getRandomValues(new Uint8Array(32)))
+  return encode(crypto.getRandomValues(new Uint8Array(30)))
 }
 
 const generateKey = async (hashKeyPassphrase = false): Promise<IKey> => {
