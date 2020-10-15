@@ -87,7 +87,7 @@ const defaultApprovalConfigFormSchema: IGenericFormSchema = [
     formType: "text"
   },
   {
-    labelValue: "Service URL*",
+    labelValue: "Collector Service URL*",
     name: "uri",
     formType: "text"
   }

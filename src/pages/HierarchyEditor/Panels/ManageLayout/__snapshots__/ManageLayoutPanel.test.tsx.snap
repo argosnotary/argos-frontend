@@ -13984,7 +13984,7 @@ exports[`sign layout happy flow 1`] = `
                                                                       dataTesthookId="collector-edit-form-field-1"
                                                                       disabled={false}
                                                                       formType="text"
-                                                                      labelValue="Service URL*"
+                                                                      labelValue="Collector Service URL*"
                                                                       name="uri"
                                                                       onBlur={[Function]}
                                                                       onChange={[Function]}
@@ -14058,7 +14058,7 @@ exports[`sign layout happy flow 1`] = `
                                                                                 <label
                                                                                   className="sc-jKJlTe jKKzGO"
                                                                                 >
-                                                                                  Service URL*
+                                                                                  Collector Service URL*
                                                                                 </label>
                                                                               </StyledComponent>
                                                                             </styled.label>

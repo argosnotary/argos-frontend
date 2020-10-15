@@ -682,7 +682,7 @@ exports[`edit collector 1`] = `
                                   dataTesthookId="collector-edit-form-field-1"
                                   disabled={false}
                                   formType="text"
-                                  labelValue="Service URL*"
+                                  labelValue="Collector Service URL*"
                                   name="uri"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -756,7 +756,7 @@ exports[`edit collector 1`] = `
                                             <label
                                               className="sc-gqjmRU ghiDHE"
                                             >
-                                              Service URL*
+                                              Collector Service URL*
                                             </label>
                                           </StyledComponent>
                                         </styled.label>
