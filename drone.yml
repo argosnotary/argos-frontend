@@ -1,61 +1,100 @@
 ---
 kind: pipeline
-name: argos-frontend-build
 type: docker
+name: argos-frontend-build
 
-environment:
-  
+platform:
+  os: linux
+  arch: amd64
 
 steps:
-  - name: test front-end image
-    image: node:12.18
-    commands:
-    - npm install
-    - npm test
-    - npm run build
-        
-  - name: build and release front-end beta image
-    image: plugins/docker
-    settings:
-      repo: argosnotary/argos-frontend
-      tags: ${DRONE_BRANCH}-beta
-      build_args:
-        - VERSION=${DRONE_BRANCH}
-      username:
-        from_secret: docker_login_user
-      password:
-        from_secret: docker_login_token
-    when:
-      ref:
-        include:
-        - "refs/heads/master"
-        - "refs/heads/release/*"
-      event:
-      - push
-    depends_on:
-    - test front-end image
-    
-  - name: build and release front-end image
-    image: plugins/docker
-    settings:
-      repo: argosnotary/argos-frontend
-      tags:
-      - ${DRONE_TAG}
-      build_args:
-        - VERSION=${DRONE_TAG}
-      username:
-        from_secret: docker_login_user
-      password:
-        from_secret: docker_login_token
-    when:
-      event:
-      - tag
-    depends_on:
-    - test front-end image
-      
-trigger:
-  event:
+- name: license-check
+  image: maven:3.6.3
+  commands:
+  - mvn license:check
+  volumes:
+  - name: mvn_cache
+    path: /root/.m2/repository
+
+- name: test and install
+  image: node:15.0.1
+  commands:
+  - npm install
+  - npm test
+  - npm run build
+  depends_on:
+  - license-check
+
+- name: build and release front-end image
+  image: plugins/docker
+  settings:
+    build_args:
+    - VERSION=${DRONE_TAG:-${DRONE_BRANCH//\//_}}
+    password:
+      from_secret: docker_login_token
+    repo: argosnotary/argos-frontend
+    tags: ${DRONE_TAG:-${DRONE_BRANCH//\//_}}
+    username:
+      from_secret: docker_login_user
+  when:
+    event:
     - push
     - tag
-    - pull_request
+    ref:
+    - refs/heads/master
+    - refs/heads/release/*
+  depends_on:
+  - test and install
+  
+- name: slack on success
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_webhook
+  depends_on:
+  - test and install
+  - build and release front-end image
 
+volumes:
+- name: mvn_cache
+  host:
+    path: /datadisk/mvn
+
+trigger:
+  event:
+  - push
+  - tag
+  - pull_request
+
+---
+kind: pipeline
+type: docker
+name: report result
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: slack on failure
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_webhook
+
+trigger:
+  status:
+  - failure
+  event:
+  - push
+  - tag
+  - pull_request
+
+depends_on:
+- argos-frontend-build
+
+---
+kind: signature
+hmac: b0ef1110c37515d1c9f0ac20dca8d7626c86fa3b2edebf080412de3e0585c221
+
+...

@@ -12,35 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM maven:3.6.3 as license-check-stage
+FROM nginx:1.19.3-alpine
 
-WORKDIR /app
-
-COPY ./  /app/
-
-RUN mvn -q license:check
-
-FROM node:12.13.1-alpine as build-stage
-
-WORKDIR /app
-
-COPY ./  /app/
-
-RUN npm install 
-
-RUN npm test 
-
-RUN npm run build
-
-FROM nginx:1.17.6 as run-server-stage
-
-COPY --from=build-stage /app/build/ /usr/share/nginx/html
+COPY build/ /usr/share/nginx/html
 
 RUN mkdir /image_config
 
-COPY --from=build-stage /app/docker/config/nginx.conf.template /image_config/nginx.conf.template
+COPY docker/config/nginx.conf.template /image_config/nginx.conf.template
 
-COPY --from=build-stage /app/docker/run.sh /run.sh
+COPY docker/run.sh /run.sh
 RUN chmod +x /run.sh
 
 ARG VERSION
