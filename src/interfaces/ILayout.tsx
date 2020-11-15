@@ -53,10 +53,13 @@ export interface IStep {
 export interface IRule {
   ruleType?: RuleRuleTypeEnum;
   pattern: string;
+}
+
+export interface IMatchRule extends IRule {
   sourcePathPrefix?: string;
+  destinationType?: RuleDestinationTypeEnum;
   destinationPathPrefix?: string;
   destinationSegmentName?: string;
-  destinationType?: RuleDestinationTypeEnum;
   destinationStepName?: string;
 }
 

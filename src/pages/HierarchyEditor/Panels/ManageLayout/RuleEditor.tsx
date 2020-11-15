@@ -34,6 +34,7 @@ import {
 } from "../../../../stores/LayoutEditorStore";
 import { PlusIcon } from "../../../../atoms/Icons";
 import {
+  IMatchRule,
   IRule,
   RuleDestinationTypeEnum,
   RuleRuleTypeEnum
@@ -139,7 +140,7 @@ const RuleEditor: React.FC<IRuleEditorProps> = ({
 
   useEffect(() => {
     if (ruleToEdit) {
-      setSelectedSegment(ruleToEdit.destinationSegmentName);
+      setSelectedSegment((ruleToEdit as IMatchRule).destinationSegmentName);
       setRuleType(
         getSelectSegment(editorStoreContext)
           ? ruleToEdit.ruleType
@@ -200,11 +201,11 @@ const RuleEditor: React.FC<IRuleEditorProps> = ({
       ruleToEdit.pattern = formValues.pattern;
 
       if (ruleType === expectedProduct || ruleType === RuleRuleTypeEnum.MATCH) {
-        ruleToEdit.destinationPathPrefix = formValues.destinationPathPrefix;
-        ruleToEdit.destinationType = formValues.destinationType as RuleDestinationTypeEnum;
-        ruleToEdit.destinationStepName = formValues.destinationStepName;
-        ruleToEdit.sourcePathPrefix = formValues.sourcePathPrefix;
-        ruleToEdit.destinationSegmentName = formValues.destinationSegmentName;
+        (ruleToEdit as IMatchRule).destinationPathPrefix = formValues.destinationPathPrefix;
+        (ruleToEdit as IMatchRule).destinationType = formValues.destinationType as RuleDestinationTypeEnum;
+        (ruleToEdit as IMatchRule).destinationStepName = formValues.destinationStepName;
+        (ruleToEdit as IMatchRule).sourcePathPrefix = formValues.sourcePathPrefix;
+        (ruleToEdit as IMatchRule).destinationSegmentName = formValues.destinationSegmentName;
       }
 
       if (ruleType !== expectedProduct) {
@@ -337,11 +338,11 @@ const RuleEditor: React.FC<IRuleEditorProps> = ({
     if (ruleToEdit) {
       formAPI.setInitialFormValues({
         pattern: ruleToEdit.pattern,
-        sourcePathPrefix: ruleToEdit.sourcePathPrefix || "",
-        destinationPathPrefix: ruleToEdit.destinationPathPrefix || "",
-        destinationSegmentName: ruleToEdit.destinationSegmentName || "",
-        destinationType: ruleToEdit.destinationType || "",
-        destinationStepName: ruleToEdit.destinationStepName || ""
+        sourcePathPrefix: (ruleToEdit as IMatchRule).sourcePathPrefix || "",
+        destinationPathPrefix: (ruleToEdit as IMatchRule).destinationPathPrefix || "",
+        destinationSegmentName: (ruleToEdit as IMatchRule).destinationSegmentName || "",
+        destinationType: (ruleToEdit as IMatchRule).destinationType || "",
+        destinationStepName: (ruleToEdit as IMatchRule).destinationStepName || ""
       });
     }
   }, [ruleToEdit]);
@@ -349,7 +350,7 @@ const RuleEditor: React.FC<IRuleEditorProps> = ({
   const getRuleInfo = (rule: IRule): string => {
     return `${rule.ruleType ? rule.ruleType.toLowerCase() + " - " : ""}${
       rule.pattern
-    }${rule.destinationPathPrefix ? " - " + rule.destinationPathPrefix : ""}`;
+    }${(rule as IMatchRule).destinationPathPrefix ? " - " + (rule as IMatchRule).destinationPathPrefix : ""}`;
   };
 
   const ruleRow = (rule: IRule, index: number) => {

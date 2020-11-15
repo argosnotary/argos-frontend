@@ -18,10 +18,10 @@ import {
   ILayoutMetaBlock,
   ILayoutSegment,
   IRule,
+  IMatchRule,
   RuleRuleTypeEnum,
   IStep
 } from "../../interfaces/ILayout";
-import { Domain } from "./argos-domain.layout";
 import stringify from "json-stable-stringify";
 import { signString } from "../../security";
 
@@ -46,14 +46,14 @@ const serialize = (layout: ILayout): string => {
   return stringify(mapLayout(layout));
 };
 
-const mapLayout = (layout: ILayout): Domain.ILayout => {
+const mapLayout = (layout: ILayout): ILayout => {
   return {
     keys: layout.keys.map(key => {
       return { ...key };
     }),
     authorizedKeyIds: layout.authorizedKeyIds,
     expectedEndProducts: layout.expectedEndProducts.map(rule => {
-      return { ...rule, ruleType: "MATCH" };
+      return { ...rule, ruleType: RuleRuleTypeEnum.MATCH };
     }),
     layoutSegments: layout.layoutSegments.map(mapSegment).sort((n1, n2) => {
       if (n1.name > n2.name) {
@@ -69,7 +69,7 @@ const mapLayout = (layout: ILayout): Domain.ILayout => {
   };
 };
 
-const mapSegment = (segment: ILayoutSegment): Domain.ILayoutSegment => {
+const mapSegment = (segment: ILayoutSegment): ILayoutSegment => {
   return {
     name: segment.name,
     steps: segment.steps.map(mapStep).sort((n1, n2) => {
@@ -86,7 +86,7 @@ const mapSegment = (segment: ILayoutSegment): Domain.ILayoutSegment => {
   };
 };
 
-const mapStep = (step: IStep): Domain.IStep => {
+const mapStep = (step: IStep): IStep => {
   return {
     ...step,
     expectedMaterials: step.expectedMaterials.map(mapRule),
@@ -94,14 +94,14 @@ const mapStep = (step: IStep): Domain.IStep => {
   };
 };
 
-const mapRule = (rule: IRule): Domain.IRule | Domain.IMatchRule => {
+const mapRule = (rule: IRule): IRule | IMatchRule => {
   if (rule.ruleType === RuleRuleTypeEnum.MATCH) {
     return {
       ...rule,
-      ruleType: "MATCH"
+      ruleType: RuleRuleTypeEnum.MATCH
     };
   } else {
-    return { ruleType: rule.ruleType || "ALLOW", pattern: rule.pattern };
+    return { ruleType: rule.ruleType || RuleRuleTypeEnum.ALLOW, pattern: rule.pattern };
   }
 };
 
