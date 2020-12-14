@@ -1,17 +1,21 @@
 /*
- * Copyright (C) 2020 Argos Notary
+ * Argos Notary - A new way to secure the Software Supply Chain
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ * Copyright (C) 2019 - 2021 Gerard Borst <gerard.borst@argosnotary.com>
  *
- *         http://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import React, { ReactNode, useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
@@ -63,7 +67,7 @@ const Input = styled.input`
   }
 `;
 
-interface ISelectListItemProps {
+interface SelectListItemProps {
   fieldName: string;
   fieldValue: string;
   children: ReactNode;
@@ -71,7 +75,7 @@ interface ISelectListItemProps {
   checked?: boolean;
 }
 
-export const SelectListItem: React.FC<ISelectListItemProps> = props => {
+export const SelectListItem: React.FC<SelectListItemProps> = props => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -99,11 +103,11 @@ export const SelectListItem: React.FC<ISelectListItemProps> = props => {
   );
 };
 
-interface ISelectListProps {
+interface SelectListProps {
   children: ReactNode;
 }
 
-export const SelectList: React.FC<ISelectListProps> = props => {
+export const SelectList: React.FC<SelectListProps> = props => {
   return <Container>{props.children}</Container>;
 };
 

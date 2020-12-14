@@ -1,22 +1,26 @@
 /*
- * Copyright (C) 2020 Argos Notary
+ * Argos Notary - A new way to secure the Software Supply Chain
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ * Copyright (C) 2019 - 2021 Gerard Borst <gerard.borst@argosnotary.com>
  *
- *         http://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { useRequestErrorStore } from "../stores/requestErrorStore";
+//import { useRequestErrorStore } from "../stores/requestErrorStore";
 
 const slideDown = keyframes`
   0% {
@@ -39,50 +43,48 @@ const slideDown = keyframes`
 const animationSeconds = 8;
 
 export const ConnectionErrorMessage = styled.p`
-  text-align: center;
-  background-color: ${props => props.theme.connectionError.bgColor};
-  color: ${props => props.theme.connectionError.textColor};
-  padding: 0.25rem 1rem;
+    text-align: center;
+    background-color: ${props => props.theme.connectionError.bgColor};
+    color: ${props => props.theme.connectionError.textColor};
+    padding: 0.25rem 1rem;
 
-  animation: ${animationSeconds}s ${slideDown} ease-in-out forwards;
+    animation: ${animationSeconds}s ${slideDown} ease-in-out forwards;
 `;
 
-interface IConnectionErrorProps {
-  error: AxiosError | undefined;
+interface ConnectionErrorProps {
+    error: AxiosError | undefined;
 }
 
-const ConnectionError: React.FC<IConnectionErrorProps> = ({ error }) => {
-  const [displayError, setDisplayError] = useState(false);
-  const [_requestError, setRequestError] = useRequestErrorStore();
+const ConnectionError: React.FC<ConnectionErrorProps> = (props: ConnectionErrorProps) => {
+    const [displayError, setDisplayError] = useState(false);
+    //const [_requestError, setRequestError] = useRequestErrorStore();
 
-  useEffect(() => {
-    if (error && !error.response) {
-      setDisplayError(true);
-    }
+    useEffect(() => {
+        if (props.error && !props.error.response) {
+            setDisplayError(true);
+        }
 
-    if (error && error.response) {
-      if (error.response.status >= 400) {
-        setDisplayError(true);
-      }
-    }
+        if (props.error && props.error.response) {
+            if (props.error.response.status >= 400) {
+                setDisplayError(true);
+            }
+        }
 
-    const timeOutHandle = setTimeout(() => {
-      setRequestError(undefined);
-      setDisplayError(false);
-    }, animationSeconds * 1000);
+        const timeOutHandle = setTimeout(() => {
+            //setRequestError(undefined);
+            setDisplayError(false);
+        }, animationSeconds * 1000);
 
-    return () => {
-      clearTimeout(timeOutHandle);
-    };
-  });
+        return () => {
+            clearTimeout(timeOutHandle);
+        };
+    });
 
-  return displayError ? (
-    <>
-      <ConnectionErrorMessage>
-        Could not connect to server. Try again later.
-      </ConnectionErrorMessage>
-    </>
-  ) : null;
+    return displayError ? (
+        <>
+            <ConnectionErrorMessage>Could not connect to server. Try again later.</ConnectionErrorMessage>
+        </>
+    ) : null;
 };
 
 export default ConnectionError;

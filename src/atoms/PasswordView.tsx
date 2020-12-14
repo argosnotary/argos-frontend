@@ -1,23 +1,26 @@
 /*
- * Copyright (C) 2020 Argos Notary
+ * Argos Notary - A new way to secure the Software Supply Chain
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ * Copyright (C) 2019 - 2021 Gerard Borst <gerard.borst@argosnotary.com>
  *
- *         http://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import React, { useContext } from "react";
 import styled, { ThemeContext, css } from "styled-components";
 
-import FlexColumn from "../atoms/FlexColumn";
-import FlexRow from "../atoms/FlexRow";
+import { FlexColumn, FlexRow } from "../atoms/Flex";
 import { KeyIcon } from "../atoms/Icons";
 import CopyInput from "./CopyInput";
 
@@ -35,11 +38,11 @@ const clipboardWrapperCss = css`
   padding: 0.4rem 0.5rem 0.3rem;
 `;
 
-interface IPasswordBody {
+interface PasswordBody {
   margin?: string;
 }
 
-const PasswordBody = styled.section<IPasswordBody>`
+const PasswordBody = styled.section<PasswordBody>`
   background: ${props => props.theme.keyManagementPage.passwordBgColor};
   display: flex;
   align-items: center;
@@ -68,27 +71,23 @@ const FlexRowCenteredContent = styled(FlexRow)`
   justify-content: center;
 `;
 
-interface IPasswordViewProps {
+interface PasswordViewProps {
   password: string;
   margin?: string;
 }
 
-const PasswordView: React.FC<IPasswordViewProps> = ({ password, margin }) => {
+export default function PasswordView(props: PasswordViewProps): React.ReactElement {
+  const { password, margin } = props;
   const theme = useContext(ThemeContext);
 
   return (
     <PasswordBody margin={margin}>
       <FlexColumn>
-        <PasswordCopy>
-          Key has been generated with the following passphrase:
-        </PasswordCopy>
+        <PasswordCopy>Key has been generated with the following passphrase:</PasswordCopy>
         <FlexRowCenteredContent>
           <PasswordContainer>
             <PasswordIconWrapper>
-              <KeyIcon
-                color={theme.keyManagementPage.passwordColor}
-                size={32}
-              />
+              <KeyIcon color={theme.keyManagementPage.passwordColor} size={32} />
             </PasswordIconWrapper>
             <CopyInput
               value={password}
@@ -98,12 +97,8 @@ const PasswordView: React.FC<IPasswordViewProps> = ({ password, margin }) => {
             />
           </PasswordContainer>
         </FlexRowCenteredContent>
-        <PasswordCopy>
-          Do not forget to copy the passphrase before closing this message.
-        </PasswordCopy>
+        <PasswordCopy>Do not forget to copy the passphrase before closing this message.</PasswordCopy>
       </FlexColumn>
     </PasswordBody>
   );
-};
-
-export default PasswordView;
+}

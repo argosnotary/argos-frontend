@@ -1,43 +1,7 @@
 {
   "name": "argos-frontend",
-  "version": "0.1.0",
+  "version": "1.1.1",
   "private": true,
-  "dependencies": {
-    "@craco/craco": "^5.6.2",
-    "@types/asn1js": "0.0.1",
-    "@types/enzyme": "^3.10.5",
-    "@types/jest": "24.0.23",
-    "@types/json-stable-stringify": "^1.0.32",
-    "@types/lodash": "^4.14.149",
-    "@types/node": "12.12.14",
-    "@types/prismjs": "^1.16.0",
-    "@types/react": "16.9.14",
-    "@types/react-dom": "16.9.4",
-    "@types/react-router-dom": "^5.1.3",
-    "@types/styled-components": "^4.4.0",
-    "@types/valid-url": "^1.0.3",
-    "asn1js": "^2.0.26",
-    "axios": "^0.19.1",
-    "base64-arraybuffer": "^0.2.0",
-    "custom-event-polyfill": "^1.0.7",
-    "element-closest-polyfill": "^1.0.0",
-    "formik": "^2.1.2",
-    "immer": "^5.3.5",
-    "lodash": "^4.17.19",
-    "pkijs": "^2.1.83",
-    "polished": "^3.4.2",
-    "prismjs": "^1.21.0",
-    "react": "16.12.0",
-    "react-app-polyfill": "^1.0.6",
-    "react-dom": "16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.3",
-    "react-treebeard": "^3.2.4",
-    "styled-components": "^4.4.1",
-    "typescript": "3.8.3",
-    "valid-url": "^1.0.9",
-    "webcrypto-liner": "^1.2.3"
-  },
   "license": "Apache-2.0",
   "scripts": {
     "start": "craco start",
@@ -47,6 +11,73 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.5.0",
+    "@types/asn1js": "^2.0.0",
+    "@types/json-stable-stringify": "^1.0.32",
+    "@types/lodash": "^4.14.165",
+    "@types/node": "^14.14.10",
+    "@types/prismjs": "^1.16.2",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.11",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/styled-components": "^5.1.4",
+    "@types/valid-url": "^1.0.3",
+    "asn1js": "^2.0.26",
+    "axios": "^0.21.0",
+    "base64-arraybuffer": "^0.2.0",
+    "bootstrap": "^4.5.3",
+    "custom-event-polyfill": "^1.0.7",
+    "element-closest-polyfill": "^1.0.2",
+    "formik": "^2.2.5",
+    "immer": "^8.0.0",
+    "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.20",
+    "pkijs": "^2.1.91",
+    "polished": "^4.0.5",
+    "react": "^17.0.1",
+    "react-app-polyfill": "^1.0.6",
+    "react-bootstrap": "^1.4.0",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.1",
+    "react-treebeard": "^3.2.4",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.1",
+    "typescript": "^4.1.2",
+    "valid-url": "^1.0.9",
+    "webcrypto-liner": "^1.2.3"
+  },
+  "devDependencies": {
+    "@craco/craco": "^5.8.0",
+    "@sheerun/mutationobserver-shim": "*",
+    "@testing-library/dom": "*",
+    "@testing-library/react-hooks": "*",
+    "@types/enzyme": "^3.10.8",
+    "@types/jest": "^26.0.15",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "@types/redux-immutable-state-invariant": "^2.1.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.3.2",
+    "axios-mock-adapter": "*",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "*",
+    "eslint": "^7.15.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-webpack-plugin": "^2.4.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "http-proxy-middleware": "*",
+    "json-stable-stringify": "*",
+    "prettier": "2.2.1",
+    "react-scripts": "*",
+    "react-test-renderer": "*",
+    "redux-immutable-state-invariant": "^2.1.0",
+    "redux-mock-store": "^1.5.4"
   },
   "browserslist": {
     "production": [
@@ -65,27 +96,57 @@
       "enzyme-to-json/serializer"
     ]
   },
-  "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^1.0.13-4.3.1",
-    "@sheerun/mutationobserver-shim": "^0.3.3",
-    "@storybook/addon-actions": "^5.3.9",
-    "@storybook/addon-links": "^5.3.9",
-    "@storybook/addons": "^5.3.9",
-    "@storybook/preset-create-react-app": "^1.5.2",
-    "@storybook/react": "^5.3.9",
-    "@testing-library/dom": "^7.1.1",
-    "@testing-library/react-hooks": "^3.2.1",
-    "@typescript-eslint/eslint-plugin": "^2.18.0",
-    "@typescript-eslint/parser": "^2.18.0",
-    "axios-mock-adapter": "^1.17.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "enzyme-to-json": "^3.4.4",
-    "eslint": "^6.8.0",
-    "eslint-loader": "^3.0.3",
-    "eslint-plugin-react": "^7.18.3",
-    "http-proxy-middleware": "^0.20.0",
-    "prettier": "1.19.1",
-    "react-test-renderer": "16.12.0"
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": true,
+    "jsxSingleQuote": false,
+    "quoteProps": "as-needed",
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "ignorePatterns": [
+      "node_modules/**"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2019,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true,
+      "jest": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "react/prop-types": "warn",
+      "@typescript-eslint/explicit-module-boundary-types": "warn",
+      "@typescript-eslint/no-empty-function": "warn",
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "no-unused-vars": "warn",
+      "no-case-declarations": "warn"
+    }
   }
 }

@@ -1,23 +1,27 @@
 /*
- * Copyright (C) 2020 Argos Notary
+ * Argos Notary - A new way to secure the Software Supply Chain
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ * Copyright (C) 2019 - 2021 Gerard Borst <gerard.borst@argosnotary.com>
  *
- *         http://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import { darken } from "polished";
 import React, { useContext } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 
-import { LoaderIcon } from "../atoms/Icons";
+import { LoaderIcon } from "./Icons";
 
 const BaseButtonStyle = css`
   display: inline-block;
@@ -43,29 +47,37 @@ const BaseButtonStyle = css`
 const Button = styled.button`
   ${BaseButtonStyle}
 
-  background-color: ${props =>
-    props.disabled
-      ? props.theme.button.disabledBgColor
-      : props.theme.button.bgColor};
+  background-color: ${props => (props.disabled ? props.theme.button.disabledBgColor : props.theme.button.bgColor)};
 
   &:hover {
     background-color: ${props =>
-      props.disabled
-        ? darken(0.1, props.theme.button.disabledBgColor)
-        : darken(0.1, props.theme.button.bgColor)};
-    cursor: ${props => (props.disabled ? "not-allowed" : "pointer")}
+      props.disabled ? darken(0.1, props.theme.button.disabledBgColor) : darken(0.1, props.theme.button.bgColor)};
+    cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
   }
 `;
 
 const AnchorButton = styled.a`
   ${BaseButtonStyle}
+
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1rem;
+  text-decoration: none;
+  background: transparent;
+  min-height: 3.25rem;
+  &:hover {
+    background: transparent;
+  }
 `;
 
-interface ILoaderButtonProps {
+interface LoaderButtonProps {
   children: string;
   loading: boolean;
   buttonType: "button" | "submit" | "reset";
-  onClick?: (e: React.FormEvent<HTMLButtonElement>) => void;
+  onClick?: () => void;
   disabled?: boolean;
   onMouseDown?: () => void;
   dataTesthookId?: string;
@@ -75,47 +87,36 @@ const LoaderIconButton = styled(Button)`
   padding: 0.58rem 1rem;
 `;
 
-const LoaderButton: React.FC<ILoaderButtonProps> = ({
-  children,
-  loading,
-  buttonType,
-  onClick,
-  disabled,
-  onMouseDown,
-  dataTesthookId
-}) => {
+const LoaderButton: React.FC<LoaderButtonProps> = (props: LoaderButtonProps) => {
   const theme = useContext(ThemeContext);
 
-  if (loading) {
+  if (props.loading) {
     return (
-      <LoaderIconButton type={buttonType}>
-        <LoaderIcon size={18} color={theme.loaderButton.loadingColor} />
+      <LoaderIconButton type={props.buttonType}>
+        <LoaderIcon size={18} color={theme.loaderButton.loadingColor} />{" "}
       </LoaderIconButton>
     );
   }
   return (
     <Button
-      data-testhook-id={dataTesthookId}
-      disabled={disabled}
-      onClick={onClick}
-      onMouseDown={onMouseDown}
-      type={buttonType}>
-      {children}
+      data-testhook-id={props.dataTesthookId}
+      disabled={props.disabled}
+      onClick={props.onClick}
+      onMouseDown={props.onMouseDown}
+      type={props.buttonType}>
+      {props.children}
     </Button>
   );
 };
 
-interface ICancelButtonProps {
+interface CancelButtonProps {
   noBorder?: boolean;
 }
 
-const CancelButton = styled(Button)<ICancelButtonProps>`
+const CancelButton = styled(Button)<CancelButtonProps>`
   background-color: ${props => props.theme.cancelButton.bgColor};
   color: ${props => props.theme.cancelButton.textColor};
-  border: ${props =>
-    props.noBorder
-      ? "none"
-      : `1px solid ${props.theme.cancelButton.borderColor}`};
+  border: ${props => (props.noBorder ? "none" : `1px solid ${props.theme.cancelButton.borderColor}`)};
 
   &:hover {
     background-color: ${props => props.theme.cancelButton.hover.bgColor};

@@ -22,6 +22,8 @@ steps:
   - npm install
   - npm test
   - npm run build
+  environment:
+    CI: false
   depends_on:
   - license-check
 
@@ -95,6 +97,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: b0ef1110c37515d1c9f0ac20dca8d7626c86fa3b2edebf080412de3e0585c221
+hmac: 2ee3908fe919cce4a45f0398f39e0a57bdc6bbc592095c6b53712165d445965b
 
 ...

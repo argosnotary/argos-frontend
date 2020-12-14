@@ -1,35 +1,35 @@
 /*
- * Copyright (C) 2020 Argos Notary
+ * Argos Notary - A new way to secure the Software Supply Chain
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ * Copyright (C) 2019 - 2021 Gerard Borst <gerard.borst@argosnotary.com>
  *
- *         http://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import React, { useEffect } from "react";
 import { useFormik, FormikValues } from "formik";
 import { useRef } from "react";
-import IFormik from "../interfaces/IFormik";
-import {
-  IGenericFormSchema,
-  IGenericFormInput
-} from "../interfaces/IGenericFormSchema";
+import Formik from "../model/Formik";
+import { GenericFormSchema, GenericFormInput } from "../model/GenericFormSchema";
 import FormInput from "../molecules/FormInput";
 import FormTextArea from "../molecules/FormTextArea";
-import { FormPermissions, FormPermission } from "../types/FormPermission";
+import { FormPermission } from "./FormPermission";
 import InputErrorLabel from "../atoms/InputErrorLabel";
 import ContentSeparator from "../atoms/ContentSeparator";
-import FlexRow from "../atoms/FlexRow";
+import { FlexRow, FlexColumn } from "../atoms/Flex";
 import { LoaderButton, CancelButton } from "../atoms/Button";
 import styled from "styled-components";
-import FlexColumn from "../atoms/FlexColumn";
 import FormSelect from "../molecules/FormSelect";
 
 const CustomCancelButton = styled(CancelButton)`
@@ -41,9 +41,7 @@ export enum FormSubmitButtonHandlerTypes {
   MOUSEDOWN = "MOUSEDOWN"
 }
 
-type FormSubmitButtonHandlerType =
-  | FormSubmitButtonHandlerTypes.CLICK
-  | FormSubmitButtonHandlerTypes.MOUSEDOWN;
+type FormSubmitButtonHandlerType = FormSubmitButtonHandlerTypes.CLICK | FormSubmitButtonHandlerTypes.MOUSEDOWN;
 
 interface IFormContainerProps {
   alternateStyling: boolean | undefined;
@@ -63,16 +61,16 @@ export const FormContainer = styled(FlexColumn)<IFormContainerProps>`
       : null}
 `;
 
-interface IFormApi {
+interface FormApi {
   setInitialFormValues: (fields: { [x: string]: string }) => void;
   submitForm: () => void;
   isValid: boolean;
   handleChange: any;
 }
 
-export interface IFormBuilderConfig {
+export interface FormBuilderConfig {
   dataTesthookId?: string;
-  schema: IGenericFormSchema;
+  schema: GenericFormSchema;
   permission: FormPermission;
   validate: (values: any) => void;
   onSubmit: (values: any) => void;
@@ -86,9 +84,7 @@ export interface IFormBuilderConfig {
   alternateStyling?: boolean | undefined;
 }
 
-const useFormBuilder = (
-  config: IFormBuilderConfig
-): [React.ReactNode, IFormApi] => {
+const useFormBuilder = (config: FormBuilderConfig): [React.ReactNode, FormApi] => {
   const formik = useFormik({
     initialValues: {} as FormikValues,
     onSubmit: (values: any) => {
@@ -102,7 +98,7 @@ const useFormBuilder = (
   const firstTextAreaInput: React.RefObject<HTMLTextAreaElement> = useRef(null);
   const firstSelectInput: React.RefObject<HTMLSelectElement> = useRef(null);
 
-  const api: IFormApi = {} as IFormApi;
+  const api: FormApi = {} as FormApi;
 
   useEffect(() => {
     if (config.autoFocus) {
@@ -123,14 +119,11 @@ const useFormBuilder = (
       return true;
     }
 
-    return config.permission === FormPermissions.READ;
+    return config.permission === FormPermission.READ;
   };
 
-  const renderFormElements = (
-    formik: IFormik<FormikValues>,
-    schema: IGenericFormSchema
-  ) => {
-    return schema.map((entry: IGenericFormInput, index) => {
+  const renderFormElements = (formik: Formik<FormikValues>, schema: GenericFormSchema) => {
+    return schema.map((entry: GenericFormInput, index) => {
       switch (entry.formType) {
         case "text":
         case "password":
@@ -147,9 +140,7 @@ const useFormBuilder = (
                 disabled={disableInput()}
                 {...(index === 0 ? { innerRef: firstTextInput } : null)}
               />
-              {!config.isLoading &&
-              formik.touched[entry.name] &&
-              formik.errors[entry.name] ? (
+              {!config.isLoading && formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
@@ -200,13 +191,13 @@ const useFormBuilder = (
                     })
                   : null}
               </FormSelect>
-              {!config.isLoading &&
-              formik.touched[entry.name] &&
-              formik.errors[entry.name] ? (
+              {!config.isLoading && formik.touched[entry.name] && formik.errors[entry.name] ? (
                 <InputErrorLabel>{formik.errors[entry.name]}</InputErrorLabel>
               ) : null}
             </React.Fragment>
           );
+        default:
+          return <div />;
       }
     });
   };
@@ -219,9 +210,7 @@ const useFormBuilder = (
         formik.submitForm();
       } else {
         const fields: any = {};
-        config.schema.forEach(
-          (entry: IGenericFormInput) => (fields[entry.name] = true)
-        );
+        config.schema.forEach((entry: GenericFormInput) => (fields[entry.name] = true));
 
         formik.setTouched(fields);
       }
@@ -246,6 +235,7 @@ const useFormBuilder = (
         onMouseDown: () => api.submitForm()
       };
     }
+    return {};
   };
 
   const form = (
@@ -262,8 +252,7 @@ const useFormBuilder = (
           }
         }}>
         {renderFormElements(formik, config.schema)}
-        {config.permission === FormPermissions.EDIT &&
-        (config.confirmationLabel || config.cancellationLabel) ? (
+        {config.permission === FormPermission.EDIT && (config.confirmationLabel || config.cancellationLabel) ? (
           <>
             <ContentSeparator />
             <FlexRow>

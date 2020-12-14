@@ -60,10 +60,10 @@
     "textColor": "#0a0a0a"
   },
   "searchInput": {
-    "searchResultsBgColor": "#fff",
+    "searchEntriesBgColor": "#fff",
     "searchResultEntryHoverBg": "#e8feff",
     "selectedEntryBorderColor": "#e0e0e0",
-    "searchResultsBorderColor": "#e0e0e0",
+    "searchEntriesBorderColor": "#e0e0e0",
     "loaderIconColor": "#1779ba"
   },
   "collapsibleContainer": {
@@ -83,7 +83,11 @@
       },
       "enlargeIcon": {
         "color": "#1779ba"
-      }
+      },
+      "bgColor": "#f1f1f1",
+      "headerBgColor": "#fff",
+      "borderColor": "#e0e0e0",
+      "contentSeparator": "#ccc"
     }
   },
   "modal": {
@@ -134,7 +138,7 @@
   },
   "treeEditor": {
     "textColor": "#2e2e2e",
-    "bgColor": "#f1f1f1",
+    "bgColor": "#fff",
     "borderColor": "#e0e0e0",
     "loaders": {
       "onPageLoad": {
@@ -198,10 +202,9 @@
   "PageHeader": {
     "bottomBorderColor": "#bbb"
   },
-  "homePage": {
-    "bgColor": "#eee",
+  "header": {
+    "bgColor": "#fff",
     "navigation": {
-      "bgColor": "#fff",
       "loginButton": {
         "default": {
           "loginButtonBgColor": "#fff",
@@ -215,6 +218,9 @@
         }
       }
     }
+  },
+  "appContainer": {
+    "bgColor": "#eee"
   },
   "dashboardPage": {
     "avatar": {
@@ -232,11 +238,11 @@
   "loginPage": {
     "bgColor": "#eee"
   },
-  "userSettingsPage": {
+  "withSideColumnPanel": {
     "bgColor": "#f1f1f1",
-    "sidePanel": {
+    "sideColumn": {
       "bgColor": "#e0e0e0",
-      "sidePanelItem": {
+      "sideColumnItem": {
         "bgColor": "#c7c7c7",
         "activeBgColor": "#f1f1f1",
         "highlightColor": "#1779ba",
@@ -252,17 +258,6 @@
       "textColor": "#ffa500",
       "borderColor": "#ffa500"
     }
-  },
-  "layoutPage": {
-    "panel": {
-      "bgColor": "#f1f1f1",
-      "headerBgColor": "#fff",
-      "borderColor": "#e0e0e0",
-      "contentSeparator": "#ccc"
-    }
-  },
-  "dashboardLayout": {
-    "bgColor": "#e0e0e0"
   },
   "loginForm": {
     "bgColor": "#fff",

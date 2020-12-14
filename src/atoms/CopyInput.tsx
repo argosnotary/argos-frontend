@@ -1,17 +1,21 @@
 /*
- * Copyright (C) 2020 Argos Notary
+ * Argos Notary - A new way to secure the Software Supply Chain
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Copyright (C) 2019 - 2020 Rabobank Nederland
+ * Copyright (C) 2019 - 2021 Gerard Borst <gerard.borst@argosnotary.com>
  *
- *         http://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import React, { useRef, useContext, useState } from "react";
 import styled, {
@@ -21,9 +25,9 @@ import styled, {
 } from "styled-components";
 import ClipboardIcon from "./Icons/ClipboardIcon";
 import { darken } from "polished";
-import FlexRow from "./FlexRow";
+import {FlexRow} from "./Flex";
 
-interface IInputDisplayProps {
+interface InputDisplayProps {
   inputCss: FlattenInterpolation<ThemeProps<any>>;
 }
 const Input = styled.input`
@@ -31,7 +35,7 @@ const Input = styled.input`
   left: -1000%;
 `;
 
-const InputDisplay = styled.p<IInputDisplayProps>`
+const InputDisplay = styled.p<InputDisplayProps>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -42,11 +46,11 @@ const InputDisplay = styled.p<IInputDisplayProps>`
   ${props => props.inputCss}
 `;
 
-interface IClipboardWrapperProps {
+interface ClipboardWrapperProps {
   clipboardWrapperCss: FlattenInterpolation<ThemeProps<any>>;
 }
 
-const ClipboardWrapper = styled.button<IClipboardWrapperProps>`
+const ClipboardWrapper = styled.button<ClipboardWrapperProps>`
   display: flex;
   background: transparent;
   border: 0;
@@ -71,14 +75,14 @@ const ModifiedFlexRow = styled(FlexRow)`
   justify-content: flex-start;
 `;
 
-interface ICopyInputProps {
+interface CopyInputProps {
   value: string;
   inputCss: FlattenInterpolation<ThemeProps<any>>;
   clipboardWrapperCss: FlattenInterpolation<ThemeProps<any>>;
   clipboardIconSize: number;
 }
 
-const CopyInput: React.FC<ICopyInputProps> = ({
+const CopyInput: React.FC<CopyInputProps> = ({
   value,
   inputCss,
   clipboardWrapperCss,
