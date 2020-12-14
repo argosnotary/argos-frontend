@@ -19,7 +19,7 @@ import styled from "styled-components";
 import InputLabel from "../atoms/InputLabel";
 import TextArea from "../atoms/TextArea";
 
-interface IFormTextAreaProps {
+interface FormTextAreaProps {
   dataTesthookId?: string;
   labelValue?: string;
   placeHolder?: string;
@@ -39,7 +39,7 @@ const FormTextAreaContainer = styled.div`
   flex-direction: column;
 `;
 
-const FormInput: React.FC<IFormTextAreaProps> = ({
+const FormInput: React.FC<FormTextAreaProps> = ({
   dataTesthookId,
   labelValue,
   placeHolder,

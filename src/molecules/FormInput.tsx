@@ -19,7 +19,7 @@ import styled from "styled-components";
 import Input from "../atoms/Input";
 import InputLabel from "../atoms/InputLabel";
 
-interface IFormInputProps {
+interface FormInputProps {
   dataTesthookId?: string;
   labelValue?: string;
   placeHolder?: string;
@@ -38,7 +38,7 @@ const FormInputContainer = styled.div`
   flex-direction: column;
 `;
 
-const FormInput: React.FC<IFormInputProps> = ({
+const FormInput: React.FC<FormInputProps> = ({
   dataTesthookId,
   labelValue,
   placeHolder,

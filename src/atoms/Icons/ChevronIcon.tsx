@@ -15,9 +15,9 @@
  */
 import React from "react";
 
-import IIconProps from "../../interfaces/IIconProps";
+import IconProps from "../../model/IconProps";
 
-const ChevronIcon: React.FC<IIconProps> = ({ color, size, transform }) => (
+const ChevronIcon: React.FC<IconProps> = ({ color, size, transform }) => (
   <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"

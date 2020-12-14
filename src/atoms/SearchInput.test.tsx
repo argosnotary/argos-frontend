@@ -24,11 +24,11 @@ import SearchInput, {
   CustomCancelButton
 } from "./SearchInput";
 import { ThemeProvider } from "styled-components";
-import ISearchResult from "../interfaces/ISearchResult";
+import SearchResult from "../model/SearchResult";
 
 jest.mock("lodash/debounce", () => jest.fn(fn => fn));
 
-const dummyBackendResults: Array<ISearchResult> = [
+const dummyBackendResults: Array<SearchResult> = [
   {
     id: "1",
     displayLabel: "Skywalker, L (Luke)"
@@ -39,12 +39,13 @@ const dummyBackendResults: Array<ISearchResult> = [
   }
 ];
 
-const onSelect = jest.fn((selection: ISearchResult) =>
+const onSelect = jest.fn((selection: SearchResult) =>
   expect(selection).toEqual(dummyBackendResults[1])
 );
 
 const onCancel = jest.fn();
 const fetchData = jest.fn();
+const onChange = jest.fn();
 
 describe("SearchInput", () => {
   const root = mount(
@@ -57,6 +58,7 @@ describe("SearchInput", () => {
         isLoading={false}
         defaultLabel={"Search user"}
         onSelectLabel={"Selected user"}
+        placeHolder={"placeholder"}
       />
     </ThemeProvider>
   );
@@ -72,7 +74,7 @@ describe("SearchInput", () => {
     root.find("input").simulate("change", { target: { value: "Darth" } });
     root.update();
 
-    expect(root.find(NoResultsFound).length).toBe(1);
+    expect(root.find(NoResultsFound).length).toBe(0);
   });
 
   it("calls onSelect callback and passes selection when search entry is clicked", () => {

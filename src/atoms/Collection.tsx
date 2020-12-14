@@ -17,11 +17,11 @@ import styled, { css } from "styled-components";
 import Input from "./Input";
 import InputErrorLabel from "./InputErrorLabel";
 
-interface ICollectionContainerProps {
+interface CollectionContainerProps {
   inverted?: boolean;
 }
 
-export const CollectionContainer = styled.section<ICollectionContainerProps>`
+export const CollectionContainer = styled.section<CollectionContainerProps>`
   margin: 2rem 0;
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@ export const BaseActionButton = styled.button`
   }
 `;
 
-interface ICollectionContainerButtonProps {
+interface CollectionContainerButtonProps {
   inverted?: boolean;
 }
 
@@ -84,7 +84,7 @@ const CollectionContainerButtonInvertedCSS = css`
 `;
 
 export const CollectionContainerButton = styled.button<
-  ICollectionContainerButtonProps
+  CollectionContainerButtonProps
 >`
   position: relative;
   top: -1rem;
@@ -140,13 +140,13 @@ export const CollectionContainerSpan = styled.span`
   text-overflow: ellipsis;
 `;
 
-interface ICollectionContainerCardProps {
+interface CollectionContainerCardProps {
   active?: boolean;
   clickable: boolean;
 }
 
 export const CollectionContainerCard = styled.header<
-  ICollectionContainerCardProps
+  CollectionContainerCardProps
 >`
   border: 1px solid
     ${props =>

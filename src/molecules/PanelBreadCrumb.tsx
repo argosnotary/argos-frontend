@@ -16,14 +16,14 @@
 import React from "react";
 import { NodesBreadCrumb, LastBreadCrumb } from "../atoms/Breadcrumbs";
 import ContentSeparator from "../atoms/ContentSeparator";
-import ITreeNode from "../interfaces/ITreeNode";
+import TreeNode from "../model/TreeNode";
 
-interface IPanelBreadCrumb {
+interface PanelBreadCrumb {
   breadcrumb: string;
-  node: ITreeNode;
+  node: TreeNode;
 }
 
-const PanelBreadCrumb: React.FC<IPanelBreadCrumb> = ({ breadcrumb, node }) => {
+const PanelBreadCrumb: React.FC<PanelBreadCrumb> = ({ breadcrumb, node }) => {
   if (breadcrumb.length === 0) {
     return null;
   }

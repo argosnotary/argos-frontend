@@ -16,7 +16,7 @@
 import { darken } from "polished";
 import styled from "styled-components";
 
-import FlexColumn from "../atoms/FlexColumn";
+import { FlexColumn } from "./Flex";
 
 const Modal = styled.section`
   background: ${props => props.theme.modal.bgColor};

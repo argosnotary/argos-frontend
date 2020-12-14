@@ -26,11 +26,11 @@ const NotificationContainer = styled.div`
     props.theme.notificationsList.notificationBgColor};
 `;
 
-interface INotificationBodyProps {
+interface NotificationBodyProps {
   color: string;
 }
 
-const NotificationBody = styled.p<INotificationBodyProps>`
+const NotificationBody = styled.p<NotificationBodyProps>`
   display: flex;
   flex: 1 1 auto;
   align-items: center;
@@ -42,11 +42,11 @@ const NotificationBody = styled.p<INotificationBodyProps>`
   word-break: break-word;
 `;
 
-interface INotificationIconContainerProps {
+interface NotificationIconContainerProps {
   color: string;
 }
 
-const NotificationIconContainer = styled.div<INotificationIconContainerProps>`
+const NotificationIconContainer = styled.div<NotificationIconContainerProps>`
   padding: 0.75rem 1rem;
   display: flex;
   justify-content: center;
@@ -54,11 +54,11 @@ const NotificationIconContainer = styled.div<INotificationIconContainerProps>`
   background-color: ${props => props.color};
 `;
 
-interface INotificationIndentProps {
+interface NotificationIndentProps {
   color: string;
 }
 
-const NotificationIdent = styled.span<INotificationIndentProps>`
+const NotificationIdent = styled.span<NotificationIndentProps>`
   position: relative;
   left: -1px;
   display: flex;
@@ -76,38 +76,38 @@ export enum NotificationTypes {
   SUCCESS = "SUCCESS"
 }
 
-interface ITypeColors {
+interface TypeColors {
   [NotificationTypes.ERROR]: string;
   [NotificationTypes.WARNING]: string;
   [NotificationTypes.SUCCESS]: string;
 }
 
-const TypeColors = (colors: ITypeColors) => ({
+const TypeColors = (colors: TypeColors) => ({
   [NotificationTypes.ERROR]: colors[NotificationTypes.ERROR],
   [NotificationTypes.WARNING]: colors[NotificationTypes.WARNING],
   [NotificationTypes.SUCCESS]: colors[NotificationTypes.SUCCESS]
 });
 
-interface INotificationProps {
+interface NotificationProps {
   notification: string;
   type: NotificationTypes;
 }
 
-export interface INotificationListTheme {
+export interface NotificationListTheme {
   iconColor: string;
   iconSize: number;
-  colors: ITypeColors;
+  colors: TypeColors;
 }
 
 export const getTypeColor = (
-  theme: INotificationListTheme,
+  theme: NotificationListTheme,
   type: NotificationTypes
 ) => {
   return TypeColors(theme.colors)[type];
 };
 
 export const getTypeIcon = (
-  theme: INotificationListTheme,
+  theme: NotificationListTheme,
   type: NotificationTypes
 ) => {
   switch (type) {
@@ -127,7 +127,7 @@ export const getTypeIcon = (
   }
 };
 
-export const Notification: React.FC<INotificationProps> = props => {
+export const Notification: React.FC<NotificationProps> = props => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -145,16 +145,16 @@ export const Notification: React.FC<INotificationProps> = props => {
   );
 };
 
-export interface INotification {
+export interface Notification {
   body: string;
   type: NotificationTypes;
 }
 
-export interface INotificationListProps {
-  notifications: Array<INotification>;
+export interface NotificationListProps {
+  notifications: Array<Notification>;
 }
 
-const NotificationsList: React.FC<INotificationListProps> = props => {
+const NotificationsList: React.FC<NotificationListProps> = props => {
   return (
     <ul>
       {props.notifications.map((notification, key) => (

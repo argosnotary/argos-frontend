@@ -63,7 +63,7 @@ const Input = styled.input`
   }
 `;
 
-interface ISelectListItemProps {
+interface SelectListItemProps {
   fieldName: string;
   fieldValue: string;
   children: ReactNode;
@@ -71,7 +71,7 @@ interface ISelectListItemProps {
   checked?: boolean;
 }
 
-export const SelectListItem: React.FC<ISelectListItemProps> = props => {
+export const SelectListItem: React.FC<SelectListItemProps> = props => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -99,11 +99,11 @@ export const SelectListItem: React.FC<ISelectListItemProps> = props => {
   );
 };
 
-interface ISelectListProps {
+interface SelectListProps {
   children: ReactNode;
 }
 
-export const SelectList: React.FC<ISelectListProps> = props => {
+export const SelectList: React.FC<SelectListProps> = props => {
   return <Container>{props.children}</Container>;
 };
 

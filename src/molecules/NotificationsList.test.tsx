@@ -16,7 +16,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import NotificationsList, {
-  INotificationListTheme,
+  NotificationListTheme,
   getTypeColor,
   getTypeIcon,
   Notification,
@@ -26,7 +26,7 @@ import { WarningIcon } from "../atoms/Icons";
 import SuccessIcon from "../atoms/Icons/SuccessIcon";
 import { ThemeProvider } from "styled-components";
 
-const dummyTheme: INotificationListTheme = {
+const dummyTheme: NotificationListTheme = {
   iconSize: 22,
   iconColor: "#fff",
   colors: {

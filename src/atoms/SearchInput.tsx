@@ -16,11 +16,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 
-import ISearchResult from "../interfaces/ISearchResult";
+import SearchResult from "../model/SearchResult";
 import FormInput from "../molecules/FormInput";
-import FlexColumn from "./FlexColumn";
+import { FlexColumn, FlexRow } from "./Flex";
 import InputLabel from "./InputLabel";
-import FlexRow from "./FlexRow";
 import { CancelButton } from "../atoms/Button";
 import { LoaderIcon } from "./Icons";
 
@@ -35,8 +34,7 @@ const SearchResults = styled.ul`
   position: absolute;
   width: 100%;
   background: ${props => props.theme.searchInput.searchResultsBgColor};
-  box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.1),
-    inset 0px 2px 3px 0px rgba(10, 10, 10, 0.1);
+  box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.1), inset 0px 2px 3px 0px rgba(10, 10, 10, 0.1);
   z-index: 4;
 `;
 
@@ -72,9 +70,9 @@ export const CustomCancelButton = styled(CancelButton)`
   margin-left: 1rem;
 `;
 
-interface ISearchInputProps {
-  results: Array<ISearchResult>;
-  onSelect: (res: ISearchResult) => void;
+interface SearchInputProps {
+  results: Array<SearchResult>;
+  onSelect: (res: SearchResult) => void;
   onCancel: () => void;
   fetchData: (searchQuery: string) => void;
   isLoading: boolean;
@@ -83,7 +81,7 @@ interface ISearchInputProps {
   placeHolder: string;
 }
 
-const SearchInput: React.FC<ISearchInputProps> = ({
+const SearchInput: React.FC<SearchInputProps> = ({
   results,
   onSelect,
   onCancel,
@@ -124,9 +122,10 @@ const SearchInput: React.FC<ISearchInputProps> = ({
   };
 
   const renderSearchInput = () => {
-    const onChange = debounce((value: string) => {
+    const onChange = debounce(event => {
+      let value = event.target.value;
       setDisplayResults(true);
-      setInputValue(value);
+      setInputValue(event.target.value);
       setSelected(false);
 
       if (value.length < queryFetched.length && value.length > 0) {
@@ -146,9 +145,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
     }, 250);
 
     const resultsFilter = (entry: any) => {
-      if (
-        entry.displayLabel.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
-      ) {
+      if (entry.displayLabel.toLowerCase().indexOf(inputValue.toLowerCase()) > -1) {
         return entry;
       }
     };
@@ -159,24 +156,18 @@ const SearchInput: React.FC<ISearchInputProps> = ({
           formType={"text"}
           labelValue={defaultLabel}
           placeHolder={placeHolder}
-          name="searchinput"
-          onChange={e => {
-            onChange(e.target.value);
-          }}
+          name="searchInput"
+          onChange={onChange}
         />
         {displayResults ? (
           <SearchResults>
             {isLoading ? (
               <SearchResultEntry>
-                <LoaderIcon
-                  size={32}
-                  color={theme.searchInput.loaderIconColor}
-                />
+                <LoaderIcon size={32} color={theme.searchInput.loaderIconColor} />
               </SearchResultEntry>
             ) : (
               <>
-                {results &&
-                results.filter(entry => resultsFilter(entry)).length === 0 ? (
+                {results && results.filter(entry => resultsFilter(entry)).length === 0 ? (
                   <NoResultsFound>No results found</NoResultsFound>
                 ) : null}
                 {results &&

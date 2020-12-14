@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<LoginFormContainer>
+  <LoginFormContainer
+    providers={
+      Array [
+        Object {
+          "displayName": "name1",
+          "providerName": "provider1",
+        },
+        Object {
+          "displayName": "name2",
+          "iconUrl": "http://localhost/icon.svg",
+          "providerName": "provider2",
+        },
+      ]
+    }
+    showError={false}
+  >
+    <styled.div>
+      <div
+        className="sc-jrAGrp hhLMWH"
+      >
+        <styled.img
+          src="images/logo.svg"
+        >
+          <img
+            className="sc-pFZIQ kfQfzL"
+            src="images/logo.svg"
+          />
+        </styled.img>
+        <Styled(styled.a)
+          href="/api/oauth2/authorize/provider1?redirect_uri=/authenticated"
+          key="provider0"
+        >
+          <a
+            className="sc-dlfnbm sc-fubCfw fUfJKR jJDjXe"
+            href="/api/oauth2/authorize/provider1?redirect_uri=/authenticated"
+          >
+            <styled.span>
+              <span
+                className="sc-gKsewC"
+              >
+                Login with 
+                name1
+              </span>
+            </styled.span>
+          </a>
+        </Styled(styled.a)>
+        <Styled(styled.a)
+          href="/api/oauth2/authorize/provider2?redirect_uri=/authenticated"
+          key="provider1"
+        >
+          <a
+            className="sc-dlfnbm sc-fubCfw fUfJKR jJDjXe"
+            href="/api/oauth2/authorize/provider2?redirect_uri=/authenticated"
+          >
+            <styled.img
+              src="http://localhost/icon.svg"
+            >
+              <img
+                className="sc-jSgupP iXgOms"
+                src="http://localhost/icon.svg"
+              />
+            </styled.img>
+            <styled.span>
+              <span
+                className="sc-iBPRYJ gbApWE"
+              />
+            </styled.span>
+            <styled.span>
+              <span
+                className="sc-gKsewC"
+              >
+                Login with 
+                name2
+              </span>
+            </styled.span>
+          </a>
+        </Styled(styled.a)>
+      </div>
+    </styled.div>
+  </LoginFormContainer>
+</LoginFormContainer>
+`;
+
+exports[`renders correctly error 1`] = `
+<LoginFormContainer>
+  <LoginFormContainer
+    providers={Array []}
+    showError={true}
+  >
+    <styled.div>
+      <div
+        className="sc-jrAGrp hhLMWH"
+      >
+        <styled.img
+          src="images/logo.svg"
+        >
+          <img
+            className="sc-pFZIQ kfQfzL"
+            src="images/logo.svg"
+          />
+        </styled.img>
+        <styled.p>
+          <p
+            className="sc-bdfBwQ cQaTwN"
+          >
+            Connection error try again later
+          </p>
+        </styled.p>
+      </div>
+    </styled.div>
+  </LoginFormContainer>
+</LoginFormContainer>
+`;

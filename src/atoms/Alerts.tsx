@@ -18,7 +18,7 @@ import styled, { ThemeContext } from "styled-components";
 
 import { WarningIcon } from "./Icons";
 
-interface IAlertProps {
+interface AlertProps {
   message: string;
 }
 
@@ -39,7 +39,7 @@ const IconWrapper = styled.div`
   margin: 0 2rem 0 0;
 `;
 
-const Warning: React.FC<IAlertProps> = ({ message }) => {
+const Warning: React.FC<AlertProps> = ({ message }) => {
   const theme = useContext(ThemeContext);
 
   return (

@@ -15,9 +15,9 @@
  */
 import React from "react";
 
-import IIconProps from "../../interfaces/IIconProps";
+import IconProps from "../../model/IconProps";
 
-const LoaderIcon: React.FC<IIconProps> = ({ color, size }) => (
+const LoaderIcon: React.FC<IconProps> = ({ color, size }) => (
   <svg
     width={size}
     height={size}

@@ -15,18 +15,20 @@
  */
 import styled, { FlattenInterpolation, ThemeProps } from "styled-components";
 import React from "react";
+import { connect } from "react-redux";
 import CopyInput from "./CopyInput";
-import { IPublicKey } from "../interfaces/IPublicKey";
+import { PublicKey } from "../api";
+import { Key } from "../util/security";
 
-interface IKeyDisplay {
-  publicKey: IPublicKey;
+interface KeyDisplay {
+  publicKey: any;
   clipboardIconSize: number;
   inputCss: FlattenInterpolation<ThemeProps<any>>;
   clipboardWrapperCss: FlattenInterpolation<ThemeProps<any>>;
   copyInputWrapperCss: FlattenInterpolation<ThemeProps<any>>;
 }
 
-interface ICopyInputProps {
+interface CopyInputProps {
   copyInputWrapperCss: FlattenInterpolation<ThemeProps<any>>;
 }
 
@@ -35,35 +37,38 @@ const KeyContainerLabel = styled.p`
   font-size: 0.875rem;
 `;
 
-const CopyInputWrapper = styled.div<ICopyInputProps>`
+const CopyInputWrapper = styled.div<CopyInputProps>`
   ${props => props.copyInputWrapperCss}
 `;
 
-const KeyContainer: React.FC<IKeyDisplay> = ({
-  publicKey,
-  inputCss,
-  clipboardIconSize,
-  clipboardWrapperCss,
-  copyInputWrapperCss
-}) => (
-  <>
-    <KeyContainerLabel>Key id</KeyContainerLabel>
-    <CopyInputWrapper copyInputWrapperCss={copyInputWrapperCss}>
-      <CopyInput
-        value={publicKey ? publicKey.keyId : ""}
-        clipboardIconSize={clipboardIconSize}
-        inputCss={inputCss}
-        clipboardWrapperCss={clipboardWrapperCss}
-      />
-      <KeyContainerLabel>Public key</KeyContainerLabel>
-      <CopyInput
-        value={publicKey ? publicKey.publicKey : ""}
-        clipboardIconSize={clipboardIconSize}
-        inputCss={inputCss}
-        clipboardWrapperCss={clipboardWrapperCss}
-      />
-    </CopyInputWrapper>
-  </>
-);
+function KeyContainer(props: any) {
+  const { publicKey, clipboardIconSize, inputCss, clipboardWrapperCss, copyInputWrapperCss } = props;
+  return (
+    <>
+      <KeyContainerLabel>Key id</KeyContainerLabel>
+      <CopyInputWrapper copyInputWrapperCss={copyInputWrapperCss}>
+        <CopyInput
+          value={publicKey && publicKey.keyId ? publicKey.keyId : ""}
+          clipboardIconSize={clipboardIconSize}
+          inputCss={inputCss}
+          clipboardWrapperCss={clipboardWrapperCss}
+        />
+        <KeyContainerLabel>Public key</KeyContainerLabel>
+        <CopyInput
+          value={publicKey && publicKey.publicKey ? publicKey.publicKey : ""}
+          clipboardIconSize={clipboardIconSize}
+          inputCss={inputCss}
+          clipboardWrapperCss={clipboardWrapperCss}
+        />
+      </CopyInputWrapper>
+    </>
+  );
+}
 
-export default KeyContainer;
+function mapStateToProps(state: any) {
+  return {
+    publicKey: state.key.key
+  };
+}
+
+export default connect(mapStateToProps)(KeyContainer);

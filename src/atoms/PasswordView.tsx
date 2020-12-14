@@ -16,8 +16,7 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext, css } from "styled-components";
 
-import FlexColumn from "../atoms/FlexColumn";
-import FlexRow from "../atoms/FlexRow";
+import { FlexColumn, FlexRow } from "../atoms/Flex";
 import { KeyIcon } from "../atoms/Icons";
 import CopyInput from "./CopyInput";
 
@@ -35,11 +34,11 @@ const clipboardWrapperCss = css`
   padding: 0.4rem 0.5rem 0.3rem;
 `;
 
-interface IPasswordBody {
+interface PasswordBody {
   margin?: string;
 }
 
-const PasswordBody = styled.section<IPasswordBody>`
+const PasswordBody = styled.section<PasswordBody>`
   background: ${props => props.theme.keyManagementPage.passwordBgColor};
   display: flex;
   align-items: center;
@@ -68,27 +67,22 @@ const FlexRowCenteredContent = styled(FlexRow)`
   justify-content: center;
 `;
 
-interface IPasswordViewProps {
+interface PasswordViewProps {
   password: string;
   margin?: string;
 }
 
-const PasswordView: React.FC<IPasswordViewProps> = ({ password, margin }) => {
+const PasswordView: React.FC<PasswordViewProps> = ({ password, margin }) => {
   const theme = useContext(ThemeContext);
 
   return (
     <PasswordBody margin={margin}>
       <FlexColumn>
-        <PasswordCopy>
-          Key has been generated with the following passphrase:
-        </PasswordCopy>
+        <PasswordCopy>Key has been generated with the following passphrase:</PasswordCopy>
         <FlexRowCenteredContent>
           <PasswordContainer>
             <PasswordIconWrapper>
-              <KeyIcon
-                color={theme.keyManagementPage.passwordColor}
-                size={32}
-              />
+              <KeyIcon color={theme.keyManagementPage.passwordColor} size={32} />
             </PasswordIconWrapper>
             <CopyInput
               value={password}
@@ -98,9 +92,7 @@ const PasswordView: React.FC<IPasswordViewProps> = ({ password, margin }) => {
             />
           </PasswordContainer>
         </FlexRowCenteredContent>
-        <PasswordCopy>
-          Do not forget to copy the passphrase before closing this message.
-        </PasswordCopy>
+        <PasswordCopy>Do not forget to copy the passphrase before closing this message.</PasswordCopy>
       </FlexColumn>
     </PasswordBody>
   );

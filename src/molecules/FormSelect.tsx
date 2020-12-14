@@ -19,7 +19,7 @@ import styled from "styled-components";
 import InputLabel from "../atoms/InputLabel";
 import Select from "../atoms/Select";
 
-interface IFormSelectProps {
+interface FormSelectProps {
   dataTesthookId?: string;
   labelValue?: string;
   placeHolder?: string;
@@ -39,7 +39,7 @@ const FormSelectContainer = styled.div`
   flex-direction: column;
 `;
 
-const FormSelect: React.FC<IFormSelectProps> = ({
+const FormSelect: React.FC<FormSelectProps> = ({
   dataTesthookId,
   labelValue,
   placeHolder,

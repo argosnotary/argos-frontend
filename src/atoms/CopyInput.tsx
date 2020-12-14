@@ -21,9 +21,9 @@ import styled, {
 } from "styled-components";
 import ClipboardIcon from "./Icons/ClipboardIcon";
 import { darken } from "polished";
-import FlexRow from "./FlexRow";
+import {FlexRow} from "./Flex";
 
-interface IInputDisplayProps {
+interface InputDisplayProps {
   inputCss: FlattenInterpolation<ThemeProps<any>>;
 }
 const Input = styled.input`
@@ -31,7 +31,7 @@ const Input = styled.input`
   left: -1000%;
 `;
 
-const InputDisplay = styled.p<IInputDisplayProps>`
+const InputDisplay = styled.p<InputDisplayProps>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -42,11 +42,11 @@ const InputDisplay = styled.p<IInputDisplayProps>`
   ${props => props.inputCss}
 `;
 
-interface IClipboardWrapperProps {
+interface ClipboardWrapperProps {
   clipboardWrapperCss: FlattenInterpolation<ThemeProps<any>>;
 }
 
-const ClipboardWrapper = styled.button<IClipboardWrapperProps>`
+const ClipboardWrapper = styled.button<ClipboardWrapperProps>`
   display: flex;
   background: transparent;
   border: 0;
@@ -71,14 +71,14 @@ const ModifiedFlexRow = styled(FlexRow)`
   justify-content: flex-start;
 `;
 
-interface ICopyInputProps {
+interface CopyInputProps {
   value: string;
   inputCss: FlattenInterpolation<ThemeProps<any>>;
   clipboardWrapperCss: FlattenInterpolation<ThemeProps<any>>;
   clipboardIconSize: number;
 }
 
-const CopyInput: React.FC<ICopyInputProps> = ({
+const CopyInput: React.FC<CopyInputProps> = ({
   value,
   inputCss,
   clipboardWrapperCss,

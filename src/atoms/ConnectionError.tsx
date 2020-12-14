@@ -16,7 +16,7 @@
 import { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { useRequestErrorStore } from "../stores/requestErrorStore";
+//import { useRequestErrorStore } from "../stores/requestErrorStore";
 
 const slideDown = keyframes`
   0% {
@@ -39,50 +39,48 @@ const slideDown = keyframes`
 const animationSeconds = 8;
 
 export const ConnectionErrorMessage = styled.p`
-  text-align: center;
-  background-color: ${props => props.theme.connectionError.bgColor};
-  color: ${props => props.theme.connectionError.textColor};
-  padding: 0.25rem 1rem;
+    text-align: center;
+    background-color: ${props => props.theme.connectionError.bgColor};
+    color: ${props => props.theme.connectionError.textColor};
+    padding: 0.25rem 1rem;
 
-  animation: ${animationSeconds}s ${slideDown} ease-in-out forwards;
+    animation: ${animationSeconds}s ${slideDown} ease-in-out forwards;
 `;
 
-interface IConnectionErrorProps {
-  error: AxiosError | undefined;
+interface ConnectionErrorProps {
+    error: AxiosError | undefined;
 }
 
-const ConnectionError: React.FC<IConnectionErrorProps> = ({ error }) => {
-  const [displayError, setDisplayError] = useState(false);
-  const [_requestError, setRequestError] = useRequestErrorStore();
+const ConnectionError: React.FC<ConnectionErrorProps> = (props: ConnectionErrorProps) => {
+    const [displayError, setDisplayError] = useState(false);
+    //const [_requestError, setRequestError] = useRequestErrorStore();
 
-  useEffect(() => {
-    if (error && !error.response) {
-      setDisplayError(true);
-    }
+    useEffect(() => {
+        if (props.error && !props.error.response) {
+            setDisplayError(true);
+        }
 
-    if (error && error.response) {
-      if (error.response.status >= 400) {
-        setDisplayError(true);
-      }
-    }
+        if (props.error && props.error.response) {
+            if (props.error.response.status >= 400) {
+                setDisplayError(true);
+            }
+        }
 
-    const timeOutHandle = setTimeout(() => {
-      setRequestError(undefined);
-      setDisplayError(false);
-    }, animationSeconds * 1000);
+        const timeOutHandle = setTimeout(() => {
+            //setRequestError(undefined);
+            setDisplayError(false);
+        }, animationSeconds * 1000);
 
-    return () => {
-      clearTimeout(timeOutHandle);
-    };
-  });
+        return () => {
+            clearTimeout(timeOutHandle);
+        };
+    });
 
-  return displayError ? (
-    <>
-      <ConnectionErrorMessage>
-        Could not connect to server. Try again later.
-      </ConnectionErrorMessage>
-    </>
-  ) : null;
+    return displayError ? (
+        <>
+            <ConnectionErrorMessage>Could not connect to server. Try again later.</ConnectionErrorMessage>
+        </>
+    ) : null;
 };
 
 export default ConnectionError;

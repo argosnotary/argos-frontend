@@ -16,7 +16,7 @@
 import React from "react";
 import CollapsibleContainerComponent from "./CollapsibleContainer";
 import styled from "styled-components";
-import FlexColumn from "./FlexColumn";
+import FlexColumn from "./Flex";
 
 export default {
   title: "Collapsible Container"

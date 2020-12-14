@@ -15,11 +15,11 @@
  */
 import styled from "styled-components";
 
-interface IInputErrorLabelProps {
+interface InputErrorLabelProps {
   disableMargin?: boolean;
 }
 
-const InputErrorLabel = styled.p<IInputErrorLabelProps>`
+const InputErrorLabel = styled.p<InputErrorLabelProps>`
   color: red;
   font-weight: bold;
   font-size: 0.875rem;

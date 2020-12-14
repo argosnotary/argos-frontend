@@ -20,7 +20,7 @@ import CopyInput from "./CopyInput";
 import FlexRow from "./FlexRow";
 import FormInput from "../molecules/FormInput";
 import InputErrorLabel from "./InputErrorLabel";
-import FlexColumn from "./FlexColumn";
+import FlexColumn from "./Flex";
 import SearchInput from "./SearchInput";
 import TextArea from "./TextArea";
 

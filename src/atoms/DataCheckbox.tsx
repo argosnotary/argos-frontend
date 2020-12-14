@@ -17,11 +17,11 @@ import React, { useContext, useEffect, useState } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { LoaderIcon } from "./Icons";
 
-interface ICheckboxProps {
+interface CheckboxProps {
   disabledCheckbox?: boolean;
 }
 
-const Checkbox = styled.input<ICheckboxProps>`
+const Checkbox = styled.input<CheckboxProps>`
   position: relative;
   top: 1px;
   margin: 0 1rem 0 0;
@@ -35,7 +35,7 @@ const CheckboxLoaderContainer = styled.div`
   margin: 0 0.75rem 0 0;
 `;
 
-interface IDataCheckboxComponentProps {
+interface DataCheckboxComponentProps {
   initialCheckedValue: boolean;
   type: string;
   name: string;
@@ -47,7 +47,7 @@ interface IDataCheckboxComponentProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DataCheckbox: React.FC<IDataCheckboxComponentProps> = ({
+const DataCheckbox: React.FC<DataCheckboxComponentProps> = ({
   initialCheckedValue,
   type,
   name,

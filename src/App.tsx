@@ -13,24 +13,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from "react";
-import styled, { ThemeProvider } from "styled-components";
+import React, { useContext } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import styled, { ThemeContext } from "styled-components";
 
-import theme from "./theme/base.json";
-import GlobalStyle from "./globalStyle";
-import Routes from "./routes";
+import Header from "./pages/header/Header";
+import HomePage from "./pages/home/HomePage";
+import LoginPage from "./pages/user/LoginPage";
+import { handleAuthenticationToken } from "./pages/user/Authenticated";
+import PageNotFoundPage from "./pages/PageNotFoundPage";
+import UserSettings from "./pages/user/UserSettings";
+import Settings from "./pages/admin/Settings";
+import { LoaderIcon } from "./atoms/Icons";
 
-const AppContainer = styled.main``;
+const AppContainer = styled.section`
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: ${props => props.theme.appContainer.bgColor};
+`;
 
-const App: React.FC = () => {
+function App(props: any) {
+  const theme = useContext(ThemeContext);
+  const { token } = props;
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
+    <>
+      <Header />
       <AppContainer>
-        <Routes />
+        <Switch>
+          <Route exact={true} path="/" component={HomePage} />
+          <Route path="/login">{token && token.token ? <Redirect to="/" /> : <LoginPage />}</Route>
+          <Route path="/authenticated">
+            {handleAuthenticationToken()}
+            <Redirect to="/" />
+          </Route>
+          <Route path="/settings" component={Settings} />
+          <Route path="/me" component={UserSettings} />
+          <Route component={PageNotFoundPage} />
+        </Switch>
       </AppContainer>
-    </ThemeProvider>
+    </>
   );
-};
+}
 
-export default App;
+function mapStateToProps(state: any) {
+  return {
+    token: state.token
+  };
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,5 +1,4 @@
-Argos Frontend [![Build Status](https://cloud.drone.io/api/badges/argosnotary/argos-frontend/status.svg)](https://cloud.drone.io/argosnotary/argos-frontend) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=argosnotary_argos-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=argosnotary_argos-frontend)
-============
+# Argos Frontend [![Build Status](https://cloud.drone.io/api/badges/argosnotary/argos-frontend/status.svg)](https://cloud.drone.io/argosnotary/argos-frontend) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=argosnotary_argos-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=argosnotary_argos-frontend)
 
 ## Available Scripts
 
@@ -35,3 +34,30 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### Create api source code
+
+The npm openapi generator doesn't work correctly.
+
+So download and install at https://openapi-generator.tech/docs/installation/
+
+Set the version to 5.0.0-beta3
+
+`openapi-generator-cli version-manager set 5.0.0-beta3`
+
+Generate api based on tag 1.0.3
+
+`openapi-generator-cli generate -i https://raw.githubusercontent.com/argosnotary/argos-parent/1.0.3/argos-service-api/api.yml -g typescript-axios -o src/api --additional-properties=enumPropertyNaming=original`
+
+### persistent backend
+
+```shell
+   docker volume create data_db
+   docker volume create data_configdb
+```
+
+start backend
+
+```shell
+   docker-compose up
+```

@@ -22,13 +22,30 @@ import "webcrypto-liner";
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { Provider as ReduxProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+
+import theme from "./theme/base.json";
+import GlobalStyle from "./globalStyle";
 
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import configureStore from "./redux/configureStore";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const { store, persistor } = configureStore();
+
+ReactDOM.render(
+    <ReduxProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <Router>
+                <ThemeProvider theme={theme}>
+                    <GlobalStyle />
+                    <App />
+                </ThemeProvider>
+            </Router>
+        </PersistGate>
+    </ReduxProvider>,
+    document.getElementById("root")
+);

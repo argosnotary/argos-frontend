@@ -55,11 +55,11 @@ const CollapsibleContainerHeader = styled.header`
   background: ${props => props.theme.collapsibleContainer.headerBgColor};
 `;
 
-interface ICollapsibleContainerBodyProps {
+interface CollapsibleContainerBodyProps {
   collapsed: boolean;
 }
 
-const CollapsibleContainerBody = styled.main<ICollapsibleContainerBodyProps>`
+const CollapsibleContainerBody = styled.main<CollapsibleContainerBodyProps>`
   border: ${props =>
     props.collapsed
       ? "none"
@@ -80,7 +80,7 @@ export const CollapseButton = styled.button`
   }
 `;
 
-interface ICollapseContainerComponentProps {
+interface CollapseContainerComponentProps {
   children: React.ReactNode;
   collapsedByDefault: boolean;
   title: string;
@@ -88,7 +88,7 @@ interface ICollapseContainerComponentProps {
   onExpand?: () => boolean;
 }
 
-const CollapsibleContainerComponent: React.FC<ICollapseContainerComponentProps> = ({
+const CollapsibleContainerComponent: React.FC<CollapseContainerComponentProps> = ({
   children,
   collapsedByDefault,
   onCollapse,

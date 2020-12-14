@@ -34,6 +34,8 @@ services:
       JAVA_OPTS: "-Xmx1g"
     ports:
       - 8080:8080
+    depends_on:
+      - mongodb
 
   oauth-stub:
     image: argosnotary/argos-integration-test-stub:master

@@ -198,23 +198,25 @@
   "PageHeader": {
     "bottomBorderColor": "#bbb"
   },
-  "homePage": {
-    "bgColor": "#eee",
-    "navigation": {
+  "header": {
       "bgColor": "#fff",
-      "loginButton": {
-        "default": {
-          "loginButtonBgColor": "#fff",
-          "loginButtonTextColor": "#1779ba",
-          "loginButtonBorderColor": "#1779ba"
-        },
-        "hover": {
-          "loginButtonBgColor": "#1779ba",
-          "loginButtonTextColor": "#fff",
-          "loginButtonBorderColor": "#1779ba"
+      "navigation": {
+        "loginButton": {
+          "default": {
+            "loginButtonBgColor": "#fff",
+            "loginButtonTextColor": "#1779ba",
+            "loginButtonBorderColor": "#1779ba"
+          },
+          "hover": {
+            "loginButtonBgColor": "#1779ba",
+            "loginButtonTextColor": "#fff",
+            "loginButtonBorderColor": "#1779ba"
+          }
         }
       }
-    }
+  },
+  "appContainer": {
+    "bgColor": "#eee"
   },
   "dashboardPage": {
     "avatar": {

@@ -17,13 +17,13 @@ import React from "react";
 import { ModalBody, ModalButton, ModalFooter } from "../atoms/Modal";
 import { Warning } from "../atoms/Alerts";
 
-interface IWarningModalProps {
+interface WarningModalProps {
   message: string;
   continueHandler: () => void;
   cancelHandler: () => void;
 }
 
-const WarningModal: React.FC<IWarningModalProps> = ({
+const WarningModal: React.FC<WarningModalProps> = ({
   message,
   continueHandler,
   cancelHandler
