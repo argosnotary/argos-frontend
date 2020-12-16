@@ -25,15 +25,15 @@ import { LoaderIcon } from "./Icons";
 
 import debounce from "lodash/debounce";
 
-const SearchResults = styled.ul`
-  border: 1px solid ${props => props.theme.searchInput.searchResultsBorderColor};
+const SearchEntries = styled.ul`
+  border: 1px solid ${props => props.theme.searchInput.searchentriesBorderColor};
   border-radius: 3px;
   margin: -1rem 0 0;
   max-height: 16rem;
   overflow-y: auto;
   position: absolute;
   width: 100%;
-  background: ${props => props.theme.searchInput.searchResultsBgColor};
+  background: ${props => props.theme.searchInput.searchentriesBgColor};
   box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.1), inset 0px 2px 3px 0px rgba(10, 10, 10, 0.1);
   z-index: 4;
 `;
@@ -47,7 +47,7 @@ export const SearchResultEntry = styled.li`
   }
 `;
 
-export const NoResultsFound = styled.li`
+export const NoentriesFound = styled.li`
   padding: 1rem;
 `;
 
@@ -71,7 +71,7 @@ export const CustomCancelButton = styled(CancelButton)`
 `;
 
 interface SearchInputProps {
-  results: Array<SearchResult>;
+  entries: Array<SearchResult>;
   onSelect: (res: SearchResult) => void;
   onCancel: () => void;
   fetchData: (searchQuery: string) => void;
@@ -82,7 +82,7 @@ interface SearchInputProps {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
-  results,
+  entries,
   onSelect,
   onCancel,
   fetchData,
@@ -91,7 +91,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   defaultLabel,
   placeHolder
 }) => {
-  const [displayResults, setDisplayResults] = useState(false);
+  const [displayentries, setDisplayentries] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selected, setSelected] = useState(false);
   const [queryFetched, setQueryFetched] = useState("");
@@ -100,7 +100,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
   useEffect(() => {
     setQueryFetched(inputValue);
-  }, [results]);
+  }, [entries]);
 
   const renderSelection = () => {
     return (
@@ -124,7 +124,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const renderSearchInput = () => {
     const onChange = debounce(event => {
       let value = event.target.value;
-      setDisplayResults(true);
+      setDisplayentries(true);
       setInputValue(event.target.value);
       setSelected(false);
 
@@ -134,7 +134,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       }
 
       if (value === "") {
-        setDisplayResults(false);
+        setDisplayentries(false);
         setQueryFetched("");
       }
 
@@ -144,7 +144,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       }
     }, 250);
 
-    const resultsFilter = (entry: any) => {
+    const entriesFilter = (entry: any) => {
       if (entry.displayLabel.toLowerCase().indexOf(inputValue.toLowerCase()) > -1) {
         return entry;
       }
@@ -159,27 +159,27 @@ const SearchInput: React.FC<SearchInputProps> = ({
           name="searchInput"
           onChange={onChange}
         />
-        {displayResults ? (
-          <SearchResults>
+        {displayentries ? (
+          <SearchEntries>
             {isLoading ? (
               <SearchResultEntry>
                 <LoaderIcon size={32} color={theme.searchInput.loaderIconColor} />
               </SearchResultEntry>
             ) : (
               <>
-                {results && results.filter(entry => resultsFilter(entry)).length === 0 ? (
-                  <NoResultsFound>No results found</NoResultsFound>
+                {entries && entries.filter(entry => entriesFilter(entry)).length === 0 ? (
+                  <NoentriesFound>No entries found</NoentriesFound>
                 ) : null}
-                {results &&
-                  results
-                    .filter(entry => resultsFilter(entry))
+                {entries &&
+                  entries
+                    .filter(entry => entriesFilter(entry))
                     .map(res => (
                       <SearchResultEntry
                         onClick={() => {
                           onSelect(res);
                           setSelected(true);
                           setInputValue(res.displayLabel);
-                          setDisplayResults(false);
+                          setDisplayentries(false);
                         }}
                         key={res.id}>
                         {res.displayLabel}
@@ -187,7 +187,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
                     ))}
               </>
             )}
-          </SearchResults>
+          </SearchEntries>
         ) : null}
       </form>
     );

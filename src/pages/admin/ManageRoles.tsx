@@ -13,30 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
 
 import PageHeader from "../../atoms/PageHeader";
 import SearchInput from "../../atoms/SearchInput";
-import ISearchResult from "../interfaces/ISearchResult";
-import FlexRow from "../../atoms/Flex";
+//import ISearchResult from "../interfaces/ISearchResult";
+import { FlexRow, FlexRowContainer, FlexColumnContainer } from "../../atoms/Flex";
 import styled from "styled-components";
 //import useDataApi from "../hooks/useDataApi";
 //import { customGenericDataFetchReducer } from "../stores/genericDataFetchReducer";
 //import DataRequest from "../types/DataRequest";
 //import IPersonalAccount from "../interfaces/IPersonalAccount";
 //import IRole from "../interfaces/IRole";
-import RoleAuthorizationComponent from "../../molecules/RoleAuthorizationComponent";
-import { PersonalAccount } from "../../api";
-
-interface IExistingUserApiResponse {
-  isLoading: boolean;
-  data: Array<IPersonalAccount>;
-}
-
-interface IRolesApiResponse {
-  isLoading: boolean;
-  data: Array<IRole>;
-}
+import RoleAuthorizationComponent from "./RoleAuthorizationComponent";
+import { PermissionsApi, PersonalAccount, PersonalAccountApi, Role } from "../../api";
+import { getApiConfig } from "../../api/apiConfig";
+import ManagerRolesContainer from "./ManagerRolesContainer";
+import SearchResult from "../../model/SearchResult";
 
 export enum ManageRolesActionTypes {
   SETUSER = "setuser",
@@ -66,7 +61,13 @@ const manageRolesReducer = (state: ManageRolesState, action: ManageRolesAction) 
   }
 };
 
-const ManageRoles = () => {
+function ManageRoles(props: any) {
+  const { token, profile } = props;
+  const [roles, setRoles] = useState([] as Array<Role>);
+  const [administrators, setAdministrators] = useState([] as Array<PersonalAccount>);
+  const [users, setUsers] = useState([] as Array<PersonalAccount>);
+  const [userName, setUserName] = useState("");
+  const [user, setUser] = useState({} as PersonalAccount);
   const [state, dispatch] = useReducer(manageRolesReducer, {
     user: {} as PersonalAccount
   });
@@ -84,42 +85,72 @@ const ManageRoles = () => {
     IExistingUserApiResponse,
     Array<IPersonalAccount>
   >(customGenericDataFetchReducer);
-
   useEffect(() => {
-    const getRolesDataRequest: DataRequest = {
-      method: "get",
-      url: `/api/permissions/global/role`,
-      cbSuccess: roles => {
-        roles.map((role: IRole) => {
-          const getExistingUsersDataRequest: DataRequest = {
-            method: "get",
-            params: {
-              roleName: role.name
-            },
-            url: `/api/personalaccount`
-          };
+    const source = axios.CancelToken.source();
+    const api = new PermissionsApi(getApiConfig(token));
+    api
+      .getRoles()
+      .then(response => {
+        setRoles(response.data);
+      })
+      .catch(error => {
+        if (!axios.isCancel(error)) {
+          throw error;
+        }
+      });
 
-          setExistingUsersApiRequest(getExistingUsersDataRequest);
-        });
-      }
+    return () => {
+      source.cancel();
     };
-
-    setRolesApiRequest(getRolesDataRequest);
   }, []);
 
-  const parseSearchInputResults = (apiResponse: IExistingUserApiResponse): Array<ISearchResult> => {
-    if (apiResponse.data && apiResponse.data.length > 0) {
-      const searchInputResults: Array<ISearchResult> = apiResponse.data.map(
-        entry =>
-          ({
-            id: entry.id,
-            displayLabel: entry.name
-          } as ISearchResult)
-      );
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    const api = new PersonalAccountApi(getApiConfig(token));
+    api
+      .searchPersonalAccounts("administrator")
+      .then(response => {
+        setAdministrators(response.data);
+      })
+      .catch(error => {
+        if (!axios.isCancel(error)) {
+          throw error;
+        }
+      });
 
-      return searchInputResults;
+    return () => {
+      source.cancel();
+    };
+  }, []);
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    const api = new PersonalAccountApi(getApiConfig(token));
+    api
+      .searchPersonalAccounts(undefined, undefined, userName)
+      .then(response => {
+        setUsers(response.data);
+      })
+      .catch(error => {
+        if (!axios.isCancel(error)) {
+          throw error;
+        }
+      });
+
+    return () => {
+      source.cancel();
+    };
+  }, [userName]);
+
+  const parseAdmins = (admins: Array<PersonalAccount>): Array<SearchResult> => {
+    if (admins && admins.length > 0) {
+      return admins.map(entry => {
+        return {
+          id: entry.id || "",
+          displayLabel: entry.name || ""
+        };
+      });
     }
-
     return [];
   };
 
@@ -129,32 +160,15 @@ const ManageRoles = () => {
       <FlexRowContainer>
         <FlexColumnContainer>
           <SearchInput
-            results={parseSearchInputResults(searchUserApiResponse)}
+            entries={parseAdmins(administrators)}
             onSelect={selectedSearchResult => {
-              dispatch({
-                type: ManageRolesActionTypes.SETUSER,
-                user: {
-                  id: selectedSearchResult.id,
-                  name: selectedSearchResult.displayLabel
-                } as IPersonalAccount
-              });
+              setUser({
+                id: selectedSearchResult.id,
+                name: selectedSearchResult.displayLabel
+              } as PersonalAccount);
             }}
-            onCancel={() =>
-              dispatch({
-                type: ManageRolesActionTypes.UNSETUSER
-              })
-            }
-            fetchData={searchQuery => {
-              const searchUserRequest: DataRequest = {
-                method: "get",
-                params: {
-                  name: searchQuery
-                },
-                url: `/api/personalaccount`
-              };
-
-              setSearchUserApiResponse(searchUserRequest);
-            }}
+            onCancel={() => setUser({})}
+            fetchData={searchQuery => setUserName(searchQuery)}
             isLoading={false}
             defaultLabel={"Search user"}
             onSelectLabel={"Selected user"}
@@ -163,22 +177,24 @@ const ManageRoles = () => {
           {Object.keys(state.user).length > 0 ? (
             <RoleAuthorizationComponent
               key={state.user.id}
-              accountId={state.user.id}
-              accountName={state.user.name}
+              accountId={state.user.id || ""}
+              accountName={state.user.name || ""}
               collapsedByDefault={false}
-              roles={rolesApiResponse.data}
+              roles={roles}
+              administrators={administrators}
             />
           ) : null}
           {existingUsersApiResponse.data
             ? existingUsersApiResponse.data
-                .filter(user => user.id !== state.user.id)
-                .map(user => (
+                .filter((user: any) => user.id !== state.user.id)
+                .map((user: any) => (
                   <RoleAuthorizationComponent
                     key={user.id}
                     accountId={user.id}
                     accountName={user.name}
                     collapsedByDefault={true}
-                    roles={rolesApiResponse.data}
+                    roles={roles}
+                    administrators={administrators}
                   />
                 ))
             : null}
@@ -186,6 +202,14 @@ const ManageRoles = () => {
       </FlexRowContainer>
     </>
   );
-};
+}
 
-export default ManageRoles;
+function mapStateToProps(state: any) {
+  return {
+    profile: state.profile,
+    token: state.token,
+    loading: state.apiCallsInProgress > 0
+  };
+}
+
+export default connect(mapStateToProps)(ManageRoles);
