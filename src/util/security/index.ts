@@ -102,7 +102,7 @@ const signString = async (password: string, encryptedPrivateKey: string, data: s
 
 export interface Key {
   key: ServiceAccountKeyPair;
-  password: string;
+  password?: string;
 }
 
 const generatePassword = () => {

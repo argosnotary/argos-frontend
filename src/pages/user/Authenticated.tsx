@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { login, loadProfile } from "../../redux/actions/userActions";
+import { loadProfile } from "../../redux/actions/profileActions";
+import { login } from "../../redux/actions/tokenActions";
 import { Token } from "../../api";
 
 import { useLocation } from "react-router-dom";

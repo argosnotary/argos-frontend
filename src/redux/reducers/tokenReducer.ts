@@ -1,6 +1,6 @@
-import { ActionTypes, LOGIN, LOGOUT, REFRESH_TOKEN_SUCCESS, LOAD_PROFILE_SUCCESS } from "../actions/actionTypes";
+import { TokenActionTypes, LOGIN, LOGOUT, REFRESH_TOKEN_SUCCESS } from "../actions/tokenActions";
 
-export default function userReducer(state = {}, action: ActionTypes) {
+export default function userReducer(state = {}, action: TokenActionTypes) {
   switch (action.type) {
     case LOGIN:
       return { ...state, ...action.token };

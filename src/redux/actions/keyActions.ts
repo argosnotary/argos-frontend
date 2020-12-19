@@ -1,20 +1,38 @@
+import { ServiceAccountKeyPair } from "./../../api/api";
 import { Key } from "./../../util/security/index";
-import {
-  GetActiveKeySuccessAction,
-  GET_ACTIVE_KEY_SUCCESS,
-  KeyGeneratedAction,
-  PostKeySuccessAction,
-  KEY_GENERATED,
-  CREATE_KEY_SUCCESS,
-  RemovePasswordFromKeyAction,
-  REMOVE_PASSWORD_FROM_KEY
-} from "./actionTypes";
-
-import { beginApiCall, endApiCall } from "./apiStatusActions";
 import { generateKey } from "../../util/security";
-import { refreshToken } from "./userActions";
+import { beginApiCall, endApiCall } from "./apiStatusActions";
 
-export function getActiveKeySuccess(key: Key): GetActiveKeySuccessAction {
+export const GET_ACTIVE_KEY_SUCCESS = "GET_ACTIVE_KEY_SUCCESS";
+export const KEY_GENERATED = "KEY_GENERATED";
+export const CREATE_KEY_SUCCESS = "CREATE_KEY_SUCCESS";
+export const REMOVE_PASSWORD_FROM_KEY = "REMOVE_PASSWORD_FROM_KEY";
+
+export interface GetActiveKeySuccessAction {
+  type: typeof GET_ACTIVE_KEY_SUCCESS;
+  key: KeyState;
+}
+
+export interface PostKeySuccessAction {
+  type: typeof CREATE_KEY_SUCCESS;
+}
+
+export interface KeyGeneratedAction {
+  type: typeof KEY_GENERATED;
+  key: KeyState;
+}
+
+export interface RemovePasswordFromKeyAction {
+  type: typeof REMOVE_PASSWORD_FROM_KEY;
+}
+
+export type KeyActionTypes =
+  | GetActiveKeySuccessAction
+  | PostKeySuccessAction
+  | KeyGeneratedAction
+  | RemovePasswordFromKeyAction;
+
+export function getActiveKeySuccess(key: KeyState): GetActiveKeySuccessAction {
   return { type: GET_ACTIVE_KEY_SUCCESS, key };
 }
 
@@ -22,12 +40,17 @@ export function postKeySuccess(): PostKeySuccessAction {
   return { type: CREATE_KEY_SUCCESS };
 }
 
-export function keyGenerated(key: Key): KeyGeneratedAction {
+export function keyGenerated(key: KeyState): KeyGeneratedAction {
   return { type: KEY_GENERATED, key };
 }
 
 export function removePassword(): RemovePasswordFromKeyAction {
   return { type: REMOVE_PASSWORD_FROM_KEY };
+}
+
+export interface KeyState {
+  key?: ServiceAccountKeyPair;
+  password?: string;
 }
 
 export function getActiveKey(axiosApiCallActiveKey: any) {
@@ -36,15 +59,11 @@ export function getActiveKey(axiosApiCallActiveKey: any) {
     return axiosApiCallActiveKey(getState().token)
       .then((response: any) => {
         dispatch(endApiCall());
-        dispatch(getActiveKeySuccess({ key: { ...response.data } } as Key));
+        dispatch(getActiveKeySuccess({ key: { ...response.data } } as KeyState));
       })
       .catch((error: any) => {
         dispatch(endApiCall());
-        if (error.response && error.response.status === 401) {
-          dispatch(refreshToken(getActiveKey(axiosApiCallActiveKey)));
-        } else {
-          throw error;
-        }
+        throw error;
       });
   };
 }
@@ -56,11 +75,7 @@ export function postKey(axiosApiCallCreateKey: any, key: Key) {
         dispatch(postKeySuccess());
       })
       .catch((error: any) => {
-        if (error.response && error.response.status === 401) {
-          dispatch(refreshToken(postKey(axiosApiCallCreateKey, key)));
-        } else {
-          throw error;
-        }
+        throw error;
       });
   };
 }
@@ -70,7 +85,7 @@ export function createKey(axiosApiCallActiveKey: any) {
     dispatch(beginApiCall());
     return generateKey(true)
       .then((key: Key) => {
-        dispatch(keyGenerated(key));
+        dispatch(keyGenerated({ ...key } as KeyState));
         dispatch(postKey(axiosApiCallActiveKey, key));
         dispatch(endApiCall());
       })

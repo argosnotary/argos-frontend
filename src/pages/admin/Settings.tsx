@@ -48,7 +48,7 @@ const UserSettingsPage = () => {
           </ul>
         </SidePanel>
         <ContentColumn>
-          <Route path="/settings/manage-roles" component={ManageRoles} />;
+          <Route path="/settings/manage-roles" component={ManageRoles} />
         </ContentColumn>
       </SplitLayout>
     </SettingsPageContainer>

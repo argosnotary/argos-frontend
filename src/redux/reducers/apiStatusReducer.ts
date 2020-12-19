@@ -1,11 +1,15 @@
-import { BEGIN_API_CALL, END_API_CALL, API_CALL_ERROR } from "./../actions/actionTypes";
+import { BEGIN_API_CALL, END_API_CALL, API_CALL_ERROR, ApiCallActionTypes } from "../actions/apiStatusActions";
+import { TokenActionTypes, LOGOUT } from "../actions/tokenActions";
 
-export default function apiCallStatusReducer(state = 0, action: any) {
-  if (action.type == BEGIN_API_CALL) {
-    return state++;
-  } else if (action.type === API_CALL_ERROR || action.type === END_API_CALL) {
-    return state--;
+export default function apiCallStatusReducer(state = 0, action: ApiCallActionTypes | TokenActionTypes) {
+  switch (action.type) {
+    case BEGIN_API_CALL:
+      return state++;
+    case API_CALL_ERROR || END_API_CALL:
+      return state--;
+    case LOGOUT:
+      return {};
+    default:
+      return state;
   }
-
-  return state;
 }

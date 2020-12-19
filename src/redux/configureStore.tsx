@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+import tokenRefreshMiddleware from "./actions/tokenRefreshActions";
 import thunk from "redux-thunk";
 
 import rootReducer from "./reducers";
@@ -21,7 +22,7 @@ const composeEnhancers =
     : compose;
 
 export default () => {
-  const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk)));
+  const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(tokenRefreshMiddleware, thunk)));
   const persistor = persistStore(store);
   return { store, persistor };
 };

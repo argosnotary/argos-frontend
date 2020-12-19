@@ -13,14 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import styled, { ThemeContext } from "styled-components";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 import CollapsibleContainerComponent from "../../atoms/CollapsibleContainer";
 import AlternateLoader from "../../atoms/Icons/AlternateLoader";
 import DataCheckbox from "../../atoms/DataCheckbox";
-import { Role } from "../../api";
+import { Permission, PermissionsApi, PersonalAccount, PersonalAccountApi, Role } from "../../api";
+import { getApiConfig } from "../../api/apiConfig";
+import { beginApiCall, endApiCall } from "../../redux/actions/apiStatusActions";
+import { getAllRoles, getPersonalAccountById, updateUserRoles } from "../../redux/actions/roleActions";
 
 const AuthorizationContainer = styled.div`
   display: flex;
@@ -60,84 +64,37 @@ interface IRolesApiState {
 }
 
 function RoleAuthorizationComponent(props: any) {
-  const { labelId, accountId, accountName, collapsedByDefault, roles, administrators, profile } = props;
-  const [updateRolesApiResponse, setUpdateRolesApiRequest] = useDataApi(genericDataFetchReducer);
-
-  const [rolesApiResponse, setRolesApiRequest] = useDataApi<IRolesApiState, Array<IRole>>(
-    customGenericDataFetchReducer
-  );
+  const {
+    accountName,
+    accountId,
+    collapsedByDefault,
+    updateUserRoles,
+    getAllRoles,
+    getPersonalAccountById,
+    profile,
+    loading,
+    role
+  } = props;
 
   const theme = useContext(ThemeContext);
 
-  const preCheckEnabledRole = (role: Role): boolean => {
-    return role.name === "administrator" && profile && accountId === profile.id;
+  const preCheckEnabledRole = (theRole: Role): boolean => {
+    return theRole.name === "administrator" && profile && accountId === profile.id;
   };
 
-  const preCheckRole = (role: Role): boolean => {
-    if (!roles || roles.length === 0) {
-      return false;
-    }
-
-    return roles.findIndex((entry: Role) => entry.name === role.name) > -1;
-  };
-
-  const getGlobalRoles = () => {
-    const dataRequest: DataRequest = {
-      method: "get",
-      url: `/api/personalaccount/${accountId}`
-    };
-
-    setRolesApiRequest(dataRequest);
-  };
-
-  const putGlobalRoles = (data: Array<string>) => {
-    const dataRequest: DataRequest = {
-      method: "put",
-      data,
-      url: `/api/personalaccount/${accountId}/role`
-    };
-
-    setUpdateRolesApiRequest(dataRequest);
-  };
-
-  useEffect(() => {
-    if (!collapsedByDefault) {
-      getGlobalRoles();
-    }
-  }, [accountId]);
-
-  const renderGlobalRoles = (rolesApiResponse: IRolesApiState) => {
-    if (!rolesApiResponse.data) {
-      return null;
-    }
-
-    return roles.map((role: Role) => (
-      <Label htmlFor={accountId + role.id} key={role.id}>
-        <DataCheckbox
-          initialCheckedValue={preCheckRole(role)}
-          disabled={preCheckEnabledRole(role)}
-          type="checkbox"
-          name={role.name}
-          value={role.name}
-          id={accountId + role.id}
-          parentIsLoading={updateRolesApiResponse.isLoading}
-          parentPutError={updateRolesApiResponse.error ? true : false}
-          onChange={e => e.currentTarget.closest("form")?.dispatchEvent(new Event("submit", { cancelable: true }))}
-        />
-        {role.name}
-      </Label>
-    ));
+  const preCheckRole = (theRole: Role): boolean => {
+    return role.selectedUser.roles.findIndex((entry: Role) => entry.name === theRole.name) > -1;
   };
 
   return (
     <CollapsibleContainerComponent
       collapsedByDefault={collapsedByDefault}
-      title={`${accountName}`}
+      title={accountName}
       onExpand={() => {
-        if (rolesApiResponse && rolesApiResponse.data) {
-          return true;
+        if (!role.roles) {
+          getAllRoles();
         }
-        getGlobalRoles();
+        getPersonalAccountById(accountId);
         return true;
       }}>
       <AuthorizationContainer>
@@ -149,11 +106,27 @@ function RoleAuthorizationComponent(props: any) {
             for (const value of formData.values()) {
               permissions.push(value as string);
             }
-
-            putGlobalRoles([...permissions]);
+            updateUserRoles(accountId, permissions);
           }}>
-          {rolesApiResponse.isLoading ? <AlternateLoader size={32} color={theme.alternateLoader.color} /> : null}
-          {renderGlobalRoles(rolesApiResponse)}
+          {loading ? <AlternateLoader size={32} color={theme.alternateLoader.color} /> : null}
+          {role.roles.map((theRole: Role) => {
+            <Label htmlFor={accountId + theRole.id} key={theRole.id}>
+              <DataCheckbox
+                initialCheckedValue={preCheckRole(theRole)}
+                disabled={preCheckEnabledRole(theRole)}
+                type="checkbox"
+                name={theRole.name}
+                value={theRole.name}
+                id={accountId + theRole.id}
+                parentIsLoading={false}
+                parentPutError={false}
+                onChange={e =>
+                  e.currentTarget.closest("form")?.dispatchEvent(new Event("submit", { cancelable: true }))
+                }
+              />
+              {theRole.name}
+            </Label>;
+          })}
         </form>
       </AuthorizationContainer>
     </CollapsibleContainerComponent>
@@ -164,8 +137,17 @@ function mapStateToProps(state: any) {
   return {
     profile: state.profile,
     token: state.token,
-    loading: state.apiCallsInProgress > 0
+    loading: state.apiCallsInProgress > 0,
+    role: state.role
   };
 }
 
-export default connect(mapStateToProps)(RoleAuthorizationComponent);
+const mapDispatchToProps = {
+  beginApiCall,
+  endApiCall,
+  getAllRoles,
+  getPersonalAccountById,
+  updateUserRoles
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoleAuthorizationComponent);

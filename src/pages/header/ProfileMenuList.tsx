@@ -15,7 +15,7 @@
  */
 import React, { Dispatch, SyntheticEvent } from "react";
 import { connect } from "react-redux";
-import { logoutOnServer } from "../../redux/actions/userActions";
+import { logoutOnServer } from "../../redux/actions/tokenActions";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 

@@ -15,10 +15,10 @@
  */
 import React, { useEffect, useReducer, useState } from "react";
 import axios from "axios";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 import PageHeader from "../../atoms/PageHeader";
-import SearchInput from "../../atoms/SearchInput";
+import SearchInput from "./SearchInput";
 //import ISearchResult from "../interfaces/ISearchResult";
 import { FlexRow, FlexRowContainer, FlexColumnContainer } from "../../atoms/Flex";
 import styled from "styled-components";
@@ -30,8 +30,18 @@ import styled from "styled-components";
 import RoleAuthorizationComponent from "./RoleAuthorizationComponent";
 import { PermissionsApi, PersonalAccount, PersonalAccountApi, Role } from "../../api";
 import { getApiConfig } from "../../api/apiConfig";
-import ManagerRolesContainer from "./ManagerRolesContainer";
 import SearchResult from "../../model/SearchResult";
+import { Profile } from "../../api";
+//import { refreshToken } from "../../redux/actions/tokenActions";
+import { beginApiCall, endApiCall } from "../../redux/actions/apiStatusActions";
+import {
+  getAllRoles,
+  searchAdministrators,
+  searchAccounts,
+  getPersonalAccountById,
+  updateUserRoles,
+  cancelSelectingUser
+} from "../../redux/actions/roleActions";
 
 export enum ManageRolesActionTypes {
   SETUSER = "setuser",
@@ -62,89 +72,32 @@ const manageRolesReducer = (state: ManageRolesState, action: ManageRolesAction) 
 };
 
 function ManageRoles(props: any) {
-  const { token, profile } = props;
+  const {
+    token,
+    profile,
+    refreshToken,
+    beginApiCall,
+    endApiCall,
+    getAllRoles,
+    searchAdministrators,
+    searchAccounts,
+    getPersonalAccountById,
+    updateUserRoles,
+    cancelSelectingUser,
+    loading,
+    role
+  } = props;
   const [roles, setRoles] = useState([] as Array<Role>);
-  const [administrators, setAdministrators] = useState([] as Array<PersonalAccount>);
-  const [users, setUsers] = useState([] as Array<PersonalAccount>);
-  const [userName, setUserName] = useState("");
-  const [user, setUser] = useState({} as PersonalAccount);
-  const [state, dispatch] = useReducer(manageRolesReducer, {
-    user: {} as PersonalAccount
-  });
+  const [userName, setUserName] = useState<string>();
 
-  const [existingUsersApiResponse, setExistingUsersApiRequest] = useDataApi<
-    IExistingUserApiResponse,
-    Array<IPersonalAccount>
-  >(customGenericDataFetchReducer);
-
-  const [rolesApiResponse, setRolesApiRequest] = useDataApi<IRolesApiResponse, Array<IRole>>(
-    customGenericDataFetchReducer
-  );
-
-  const [searchUserApiResponse, setSearchUserApiResponse] = useDataApi<
-    IExistingUserApiResponse,
-    Array<IPersonalAccount>
-  >(customGenericDataFetchReducer);
   useEffect(() => {
-    const source = axios.CancelToken.source();
-    const api = new PermissionsApi(getApiConfig(token));
-    api
-      .getRoles()
-      .then(response => {
-        setRoles(response.data);
-      })
-      .catch(error => {
-        if (!axios.isCancel(error)) {
-          throw error;
-        }
-      });
-
-    return () => {
-      source.cancel();
-    };
+    getAllRoles();
+    searchAdministrators();
   }, []);
 
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    const api = new PersonalAccountApi(getApiConfig(token));
-    api
-      .searchPersonalAccounts("administrator")
-      .then(response => {
-        setAdministrators(response.data);
-      })
-      .catch(error => {
-        if (!axios.isCancel(error)) {
-          throw error;
-        }
-      });
-
-    return () => {
-      source.cancel();
-    };
-  }, []);
-
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    const api = new PersonalAccountApi(getApiConfig(token));
-    api
-      .searchPersonalAccounts(undefined, undefined, userName)
-      .then(response => {
-        setUsers(response.data);
-      })
-      .catch(error => {
-        if (!axios.isCancel(error)) {
-          throw error;
-        }
-      });
-
-    return () => {
-      source.cancel();
-    };
-  }, [userName]);
-
-  const parseAdmins = (admins: Array<PersonalAccount>): Array<SearchResult> => {
-    if (admins && admins.length > 0) {
-      return admins.map(entry => {
+  const parseUsers = (users: Array<PersonalAccount> | undefined): Array<SearchResult> => {
+    if (users && users.length > 0) {
+      return users.map(entry => {
         return {
           id: entry.id || "",
           displayLabel: entry.name || ""
@@ -160,43 +113,34 @@ function ManageRoles(props: any) {
       <FlexRowContainer>
         <FlexColumnContainer>
           <SearchInput
-            entries={parseAdmins(administrators)}
-            onSelect={selectedSearchResult => {
-              setUser({
-                id: selectedSearchResult.id,
-                name: selectedSearchResult.displayLabel
-              } as PersonalAccount);
-            }}
-            onCancel={() => setUser({})}
-            fetchData={searchQuery => setUserName(searchQuery)}
-            isLoading={false}
+            entries={parseUsers(role.users)}
+            onSelect={selectedSearchResult =>
+              selectedSearchResult ? getPersonalAccountById(selectedSearchResult.id) : null
+            }
+            onCancel={() => cancelSelectingUser()}
+            fetchData={searchQuery => searchAccounts(searchQuery)}
+            isLoading={loading}
             defaultLabel={"Search user"}
             onSelectLabel={"Selected user"}
             placeHolder={"Name"}
           />
-          {Object.keys(state.user).length > 0 ? (
+          {role.selectedUser ? (
             <RoleAuthorizationComponent
-              key={state.user.id}
-              accountId={state.user.id || ""}
-              accountName={state.user.name || ""}
+              key={role.selectedUser.id}
+              accountId={role.selectedUser.id}
+              accountName={role.selectedUser.name}
               collapsedByDefault={false}
-              roles={roles}
-              administrators={administrators}
             />
           ) : null}
-          {existingUsersApiResponse.data
-            ? existingUsersApiResponse.data
-                .filter((user: any) => user.id !== state.user.id)
-                .map((user: any) => (
-                  <RoleAuthorizationComponent
-                    key={user.id}
-                    accountId={user.id}
-                    accountName={user.name}
-                    collapsedByDefault={true}
-                    roles={roles}
-                    administrators={administrators}
-                  />
-                ))
+          {role.administrators
+            ? role.administrators.map((user: PersonalAccount) => (
+                <RoleAuthorizationComponent
+                  key={user.id}
+                  accountId={user.id}
+                  accountName={user.name}
+                  collapsedByDefault={true}
+                />
+              ))
             : null}
         </FlexColumnContainer>
       </FlexRowContainer>
@@ -208,8 +152,20 @@ function mapStateToProps(state: any) {
   return {
     profile: state.profile,
     token: state.token,
-    loading: state.apiCallsInProgress > 0
+    loading: state.apiCallsInProgress > 0,
+    role: state.role
   };
 }
 
-export default connect(mapStateToProps)(ManageRoles);
+const mapDispatchToProps = {
+  beginApiCall,
+  endApiCall,
+  getAllRoles,
+  searchAdministrators,
+  searchAccounts,
+  getPersonalAccountById,
+  updateUserRoles,
+  cancelSelectingUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageRoles);
