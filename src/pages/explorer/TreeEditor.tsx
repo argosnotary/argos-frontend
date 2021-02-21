@@ -157,10 +157,8 @@ function TreeEditor(props: any): React.ReactElement {
   const theme = useContext(ThemeContext);
 
   useEffect(() => {
-    if (!(nodes.length > 0)) {
-      getRootNodes();
-    }
-  }, [nodes]);
+    getRootNodes();
+  }, []);
 
   function canCreateRootNode(): boolean {
     return profile.roles && profile.roles.includes(Role.ADMINISTRATOR);

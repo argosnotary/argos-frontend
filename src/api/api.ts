@@ -281,7 +281,7 @@ export interface KeyPair {
  */
 export interface Label {
     /**
-     * 
+     * an Argos Service identifier
      * @type {string}
      * @memberof Label
      */
@@ -978,7 +978,7 @@ export interface TreeNode {
      * @type {boolean}
      * @memberof TreeNode
      */
-    hasChildren?: boolean;
+    hasChildren: boolean;
     /**
      * 
      * @type {Array<TreeNode>}

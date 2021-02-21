@@ -1,3 +1,4 @@
+import { Label } from "./../../api/api";
 /*
  * Argos Notary - A new way to secure the Software Supply Chain
  *
@@ -21,11 +22,12 @@ import { isLogoutAction } from "./../user/tokenSlice";
 import { HierarchyApi, TreeNode, HierarchyMode, TreeNodeTypeEnum } from "./../../api/api";
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getApiConfig } from "../../api/apiConfig";
+import { isDeleteLabelAction } from "../label/labelSlice";
 
 export interface TreeState {
   toggledNodes: TreeNode[];
   nodes: TreeNode[];
-  currentNode: TreeNode | undefined;
+  currentNode: TreeNode;
 }
 
 export const getRootNodes: any = createAsyncThunk("tree/getRootNodes", async (_, thunkAPI: any) => {
@@ -118,9 +120,12 @@ const treeSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getRootNodes.fulfilled, (state, action) => {
-        const nodes = treeNodeSort(action.payload);
-        const toggledNodes = cleanupToggledNodes(state.toggledNodes, action.payload);
-        return { ...state, nodes, toggledNodes };
+        state.nodes = treeNodeSort(action.payload);
+        state.toggledNodes = cleanupToggledNodes(state.toggledNodes, action.payload);
+        if (!(state.currentNode.referenceId && isNodeInArray(state.nodes, state.currentNode))) {
+          state.currentNode = {} as TreeNode;
+        }
+        return state;
       })
       .addCase(getNodeChildren.fulfilled, (state, action) => {
         state.nodes = applyNodeToArray(state.nodes, action.payload);
@@ -137,11 +142,23 @@ const treeSlice = createSlice({
         const toggledNodes = cleanupToggledNodes(state.toggledNodes, nodes);
         const currentNode =
           state.currentNode &&
-          (!state.currentNode.referenceId || state.currentNode.referenceId === action.payload.referenceId) &&
-          isNodeInArray(state.nodes, action.payload)
+          state.currentNode.referenceId &&
+          state.currentNode.referenceId === action.payload.referenceId
             ? action.payload
             : state.currentNode;
         return { ...state, nodes, currentNode, toggledNodes };
+      })
+      .addMatcher(isDeleteLabelAction, (state, action) => {
+        const theLabel: Label = action.payload;
+        const node = findNodeInArray(state.nodes, { referenceId: action.payload.id } as TreeNode);
+        if (theLabel.id && node) {
+          if (state.currentNode && theLabel.id === state.currentNode.referenceId) {
+            state.currentNode = {} as TreeNode;
+          }
+          state.nodes = removeNodeFromArray([...state.nodes], node);
+        }
+        state.toggledNodes = cleanupToggledNodes([...state.toggledNodes], state.nodes);
+        return state;
       })
       .addMatcher(isLogoutAction, () => {
         return initialState;
@@ -152,6 +169,30 @@ const treeSlice = createSlice({
 export const { setCurrentNode, updateToggledNodes } = treeSlice.actions;
 
 export default treeSlice.reducer;
+
+export function removeNodeFromArray(nodes: TreeNode[], node: TreeNode): TreeNode[] {
+  if (!node.parentLabelId) {
+    if (!isNodeInArray(nodes, node)) {
+      return nodes;
+    } else {
+      return nodes.filter(n => n.referenceId !== node.referenceId);
+    }
+  }
+  const parentNode = findNodeInArray(nodes, { referenceId: node.parentLabelId } as TreeNode);
+  if (parentNode) {
+    parentNode.children = parentNode.children.filter(n => n.referenceId !== node.referenceId);
+    if (!(parentNode.children.length > 0)) {
+      parentNode.hasChildren = false;
+    }
+    for (const rootNode of nodes) {
+      if (isNodeInNode(rootNode, parentNode)) {
+        const newNode = updateNode(rootNode, parentNode);
+        return nodes.map(n => (n.referenceId !== newNode.referenceId ? n : newNode));
+      }
+    }
+  }
+  return nodes;
+}
 
 export function applyNodeToArray(nodes: TreeNode[], node: TreeNode): TreeNode[] {
   if (!node.parentLabelId) {
@@ -206,7 +247,13 @@ export function updateNode(rootNode: TreeNode, node: TreeNode): TreeNode {
 }
 
 export function cleanupToggledNodes(toggledNodes: TreeNode[], nodes: TreeNode[]): TreeNode[] {
-  const currentToggledNodes: TreeNode[] = toggledNodes.filter(node => isNodeInArray(nodes, node));
+  const currentToggledNodes: TreeNode[] = toggledNodes.filter(n => {
+    const node = findNodeInArray(nodes, n);
+    if (node && node.hasChildren) {
+      return true;
+    }
+    return false;
+  });
   return currentToggledNodes ? currentToggledNodes : ([] as TreeNode[]);
 }
 

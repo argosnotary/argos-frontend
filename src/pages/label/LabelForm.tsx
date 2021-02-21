@@ -89,12 +89,13 @@ export interface LabelFormProps {
   onSave: (e: any) => void;
   onChange: (e: any) => void;
   onCancel: (e: any) => void;
+  onDelete: (e: any) => void;
   disableSave: boolean;
   disabled: boolean;
 }
 
 export default function LabelForm(props: LabelFormProps): React.ReactElement {
-  const { onSave, onChange, onCancel, disableSave, disabled, label } = props;
+  const { onSave, onChange, onCancel, onDelete, disableSave, disabled, label } = props;
 
   return (
     <Form onSubmit={onSave}>
@@ -120,6 +121,13 @@ export default function LabelForm(props: LabelFormProps): React.ReactElement {
             onCancel(e);
           }}>
           Cancel
+        </CustomCancelButton>
+        <CustomCancelButton
+          type="button"
+          onClick={(e: any) => {
+            onDelete(e);
+          }}>
+          Delete
         </CustomCancelButton>
       </FlexRow>
     </Form>

@@ -145,18 +145,6 @@ function LabelNodeContextMenu(props: LabelNodeContextMenuProps) {
           } as TreeNode)
         );
       }
-    },
-    {
-      linkPath: "/label",
-      labelText: "Delete branch",
-      handleOnClick: () => {
-        dispatch(
-          setCurrentNode({
-            type: TreeNodeTypeEnum.LABEL,
-            parentLabelId: node.referenceId
-          } as TreeNode)
-        );
-      }
     }
   ];
   return (

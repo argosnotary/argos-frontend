@@ -1,3 +1,4 @@
+import { AnyAction } from "@reduxjs/toolkit";
 /*
  * Argos Notary - A new way to secure the Software Supply Chain
  *
@@ -47,6 +48,20 @@ export const updateLabel: any = createAsyncThunk("label/updateLabel", async (lab
   }
 });
 
+export const deleteLabel: any = createAsyncThunk("label/deleteLabel", async (label: Label, thunkAPI: any) => {
+  const api = new HierarchyApi(getApiConfig(thunkAPI.getState().token.token));
+  try {
+    await api.deleteLabelById(label.id || "", label);
+    return label;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.message);
+  }
+});
+
+export function isDeleteLabelAction(action: AnyAction): boolean {
+  return action.type === "label/deleteLabel/fulfilled";
+}
+
 const initialState = {} as Label;
 
 const labelSlice = createSlice({
@@ -67,6 +82,9 @@ const labelSlice = createSlice({
       })
       .addCase(updateLabel.fulfilled, (state, action) => {
         return action.payload;
+      })
+      .addCase(deleteLabel.fulfilled, (state, action) => {
+        return initialState;
       })
       .addMatcher(isSetCurrentNodeAction, (state, action) => {
         if (action.payload.type == TreeNodeTypeEnum.LABEL) {

@@ -29,15 +29,28 @@ import treeReducer, {
   updateNode,
   applyNodeToArray,
   updateToggledNodes,
+  removeNodeFromArray,
   initialState
 } from "./treeSlice";
-import { TreeNode, TreeNodeTypeEnum } from "../../api";
+import { Label, TreeNode, TreeNodeTypeEnum } from "../../api";
 
 describe("treeReducer setCurrentNode", () => {
   const reducer = treeReducer;
 
-  const node1: TreeNode = { referenceId: "referenceId1", name: "node1", type: TreeNodeTypeEnum.LABEL, children: [] };
-  const node2: TreeNode = { referenceId: "referenceId2", name: "node2", type: TreeNodeTypeEnum.LABEL, children: [] };
+  const node1: TreeNode = {
+    referenceId: "referenceId1",
+    name: "node1",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+  const node2: TreeNode = {
+    referenceId: "referenceId2",
+    name: "node2",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
 
   const emptyState = { currentNode: {} as TreeNode } as TreeState;
 
@@ -73,10 +86,34 @@ describe("treeReducer setCurrentNode", () => {
 describe("treeReducer getRootNodesSuccess", () => {
   const reducer = treeReducer;
 
-  const node1: TreeNode = { referenceId: "referenceId1", name: "node1", type: TreeNodeTypeEnum.LABEL, children: [] };
-  const node2: TreeNode = { referenceId: "referenceId2", name: "node2", type: TreeNodeTypeEnum.LABEL, children: [] };
-  const node3: TreeNode = { referenceId: "referenceId3", name: "node3", type: TreeNodeTypeEnum.LABEL, children: [] };
-  const node4: TreeNode = { referenceId: "referenceId4", name: "node4", type: TreeNodeTypeEnum.LABEL, children: [] };
+  const node1: TreeNode = {
+    referenceId: "referenceId1",
+    name: "node1",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+  const node2: TreeNode = {
+    referenceId: "referenceId2",
+    name: "node2",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+  const node3: TreeNode = {
+    referenceId: "referenceId3",
+    name: "node3",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+  const node4: TreeNode = {
+    referenceId: "referenceId4",
+    name: "node4",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
 
   it("with [] and empty nodes", () => {
     const newState = reducer(initialState, { type: "tree/getRootNodes/fulfilled", payload: [] as TreeNode[] });
@@ -118,29 +155,41 @@ describe("treeReducer getRootNodesSuccess", () => {
   it("with nodes and other nodes and shared toggledNodes", () => {
     const firstState = { ...initialState };
     firstState.nodes = [node1, node2];
-    firstState.toggledNodes = [node1, node2];
+    firstState.toggledNodes = [];
     const expectedState = { ...initialState };
     expectedState.nodes = [node2, node3];
-    expectedState.toggledNodes = [node2];
+    expectedState.toggledNodes = [];
     const newState = reducer(firstState, {
       type: "tree/getRootNodes/fulfilled",
       payload: [node2, node3] as TreeNode[]
     });
     expect(newState).toEqual(expectedState);
-    expect(newState.toggledNodes).toEqual(expectedState.toggledNodes);
   });
 });
 
-describe("treeReducer getNodeSuccess", () => {
+describe("treeReducer getNode fulfilled", () => {
   const reducer = treeReducer;
 
-  const node1: TreeNode = { referenceId: "referenceId1", name: "node1", type: TreeNodeTypeEnum.LABEL, children: [] };
-  const node2: TreeNode = { referenceId: "referenceId2", name: "node2", type: TreeNodeTypeEnum.LABEL, children: [] };
+  const node1: TreeNode = {
+    referenceId: "referenceId1",
+    name: "node1",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+  const node2: TreeNode = {
+    referenceId: "referenceId2",
+    name: "node2",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
   const node21: TreeNode = {
     referenceId: "referenceId21",
     name: "node21",
     parentLabelId: "referenceId2",
     type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
     children: []
   };
   const node5: TreeNode = {
@@ -148,14 +197,9 @@ describe("treeReducer getNodeSuccess", () => {
     name: "node5",
     parentLabelId: "parentLabelId",
     type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
     children: []
   };
-
-  const initialState = {
-    toggledNodes: [] as TreeNode[],
-    nodes: [] as TreeNode[],
-    currentNode: undefined
-  } as TreeState;
 
   it("with root node and nodes", () => {
     const firstState = { ...initialState };
@@ -172,6 +216,7 @@ describe("treeReducer getNodeSuccess", () => {
       referenceId: "referenceId1",
       name: "node1b",
       type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
       children: []
     };
     const firstState = { ...initialState };
@@ -231,6 +276,7 @@ describe("treeReducer getNodeSuccess", () => {
       referenceId: "referenceId21",
       parentLabelId: "referenceId2",
       type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
       children: []
     };
     const firstState = { ...initialState };
@@ -251,16 +297,190 @@ describe("treeReducer getNodeSuccess", () => {
   });
 
   it("with nodes and other nodes and toggledNodes", () => {
-    const node2b = node2;
+    const node2b = { ...node2 };
     node2b.children = [node21];
     node2b.hasChildren = true;
     const firstState = { ...initialState };
     firstState.nodes = [node1, node2];
-    firstState.toggledNodes = [node1, node2];
+    firstState.toggledNodes = [];
     const expectedState = { ...initialState };
     expectedState.nodes = [node1, node2b];
-    expectedState.toggledNodes = [node1, node2];
+    expectedState.toggledNodes = [];
     const newState = reducer(firstState, { type: "tree/getNode/fulfilled", payload: node2b });
+    expect(newState).toEqual(expectedState);
+    expect(newState.nodes).toEqual(expectedState.nodes);
+  });
+});
+
+describe("treeReducer deleteLabel", () => {
+  const reducer = treeReducer;
+
+  const label1: Label = { id: "referenceId1", name: "node1" };
+  const label2: Label = { id: "referenceId2", name: "node2" };
+  const label21: Label = {
+    id: "referenceId21",
+    name: "node21"
+  };
+  const label5: Label = {
+    id: "referenceId5",
+    name: "node5"
+  };
+
+  const node1: TreeNode = {
+    referenceId: "referenceId1",
+    name: "node1",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+  const node2: TreeNode = {
+    referenceId: "referenceId2",
+    name: "node2",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+  const node21: TreeNode = {
+    referenceId: "referenceId21",
+    name: "node21",
+    parentLabelId: "referenceId2",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+  const node5: TreeNode = {
+    referenceId: "referenceId5",
+    name: "node5",
+    parentLabelId: "parentLabelId",
+    type: TreeNodeTypeEnum.LABEL,
+    hasChildren: false,
+    children: []
+  };
+
+  it("with root node and nodes", () => {
+    const firstState = { ...initialState };
+    firstState.currentNode = node1;
+    firstState.nodes = [node1];
+    firstState.toggledNodes = [node1];
+    const expectedState = initialState;
+    const newState = reducer(firstState, { type: "label/deleteLabel/fulfilled", payload: label1 });
+    expect(newState).toEqual(expectedState);
+  });
+
+  it("with root node and nodes and not current node", () => {
+    const firstState = { ...initialState };
+    firstState.currentNode = node2;
+    firstState.nodes = [node1, node2];
+    const expectedState = { nodes: [node2], currentNode: node2, toggledNodes: [] };
+    const newState = reducer(firstState, { type: "label/deleteLabel/fulfilled", payload: label1 });
+    expect(newState).toEqual(expectedState);
+  });
+
+  it("with root node removing", () => {
+    const firstState = { ...initialState };
+    firstState.currentNode = node1;
+    firstState.nodes = [node1];
+    const expectedState = initialState;
+    const newState = reducer(firstState, { type: "label/deleteLabel/fulfilled", payload: label1 });
+    expect(newState).toEqual(expectedState);
+  });
+
+  it("with node with parent not in roots", () => {
+    const expectedState = { ...initialState };
+    expectedState.nodes = [node1];
+    const newState = reducer(expectedState, { type: "label/deleteLabel/fulfilled", payload: node5 });
+    expect(newState).toEqual(expectedState);
+  });
+
+  it("with node in 2nd node", () => {
+    const node2initial: TreeNode = {
+      referenceId: "referenceId2",
+      name: "node2",
+      hasChildren: true,
+      children: [node21],
+      type: TreeNodeTypeEnum.LABEL
+    };
+    const firstState = { ...initialState, nodes: [node1, node2initial] };
+    const expectedState = { ...firstState, nodes: [node1, node2] };
+    const newState = reducer(firstState, { type: "label/deleteLabel/fulfilled", payload: label21 });
+    expect(newState).toEqual(expectedState);
+  });
+
+  it("with node in 2nd node and current node with ref id", () => {
+    const node2initial: TreeNode = {
+      referenceId: "referenceId2",
+      name: "node2",
+      hasChildren: true,
+      children: [node21],
+      type: TreeNodeTypeEnum.LABEL
+    };
+    const firstState = { ...initialState };
+    firstState.nodes = [node1, node2initial];
+    firstState.currentNode = node21;
+    const expectedState = { ...initialState };
+    expectedState.nodes = [node1, node2];
+    expectedState.currentNode = {} as TreeNode;
+    const newState = reducer(firstState, { type: "label/deleteLabel/fulfilled", payload: label21 });
+    expect(newState).toEqual(expectedState);
+  });
+
+  it("with delete node with children in toggledNodes", () => {
+    const node1: TreeNode = {
+      referenceId: "referenceId1",
+      name: "node1",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node211: TreeNode = {
+      referenceId: "referenceId211",
+      name: "node211",
+      parentLabelId: "referenceId21",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node212: TreeNode = {
+      referenceId: "referenceId212",
+      name: "node212",
+      parentLabelId: "referenceId21",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node21: TreeNode = {
+      referenceId: "referenceId21",
+      name: "node21",
+      parentLabelId: "referenceId2",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: true,
+      children: [node211, node212]
+    };
+    const node22: TreeNode = {
+      referenceId: "referenceId22",
+      name: "node22",
+      parentLabelId: "referenceId2",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node2: TreeNode = {
+      referenceId: "referenceId2",
+      name: "node2",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: true,
+      children: [node21, node22]
+    };
+    const node2b: TreeNode = {
+      referenceId: "referenceId2",
+      name: "node2",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: true,
+      children: [node22]
+    };
+    const firstState = { nodes: [node1, node2], toggledNodes: [node2, node21], currentNode: node21 };
+    const expectedState = { nodes: [node1, node2b], toggledNodes: [node2], currentNode: {} };
+    const newState = reducer(firstState, { type: "label/deleteLabel/fulfilled", payload: label21 });
     expect(newState).toEqual(expectedState);
     expect(newState.nodes).toEqual(expectedState.nodes);
   });
@@ -425,6 +645,88 @@ describe("test applyNodeToArray", () => {
   });
 });
 
+describe("test removeNodeFromArray", () => {
+  const node11: TreeNode = {
+    referenceId: "referenceId11",
+    parentLabelId: "referenceId1",
+    name: "node11",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
+  const node12: TreeNode = {
+    referenceId: "referenceId12",
+    parentLabelId: "referenceId1",
+    name: "node12",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
+  const node21: TreeNode = {
+    referenceId: "referenceId21",
+    parentLabelId: "referenceId2",
+    name: "node21",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
+
+  const node1: TreeNode = {
+    referenceId: "referenceId1",
+    name: "node1",
+    hasChildren: true,
+    children: [node11, node12],
+    type: TreeNodeTypeEnum.LABEL
+  };
+  const node2: TreeNode = {
+    referenceId: "referenceId2",
+    name: "node2",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
+  const node4: TreeNode = {
+    referenceId: "referenceId4",
+    name: "node4",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
+  const node6: TreeNode = {
+    name: "node6",
+    referenceId: "referenceId6",
+    parentLabelId: "parentLabelId",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
+
+  it("with empty nodes", () => {
+    expect(removeNodeFromArray([], node1)).toEqual([]);
+  });
+  it("with empty nodes and a parentLabelId", () => {
+    expect(removeNodeFromArray([], node6)).toEqual([]);
+  });
+  it("with nodes and a parentLabelId and node not in nodes", () => {
+    expect(removeNodeFromArray([node1, node2], node6)).toEqual([node1, node2]);
+  });
+  it("with root node", () => {
+    expect(removeNodeFromArray([node1, node2], node2)).toEqual([node1]);
+  });
+  it("with node in 2nd root node", () => {
+    const node2b = {
+      referenceId: "referenceId2",
+      name: "node2",
+      hasChildren: true,
+      children: [node21],
+      type: TreeNodeTypeEnum.LABEL
+    } as TreeNode;
+    const array = removeNodeFromArray([node1, node2b], node21);
+    expect(array).toEqual([node1, node2]);
+    expect(array[1].hasChildren).toEqual(false);
+  });
+});
+
 describe("test updateNode", () => {
   const node11: TreeNode = {
     referenceId: "referenceId11",
@@ -529,7 +831,7 @@ describe("test updateNode", () => {
     const node1b = { ...node1, children: [node11, node12b] };
     const node1c = updateNode(node1, node121);
     const node12c = findNodeInNode(node1b, node12);
-    expect(node12c.hasChildren).toBe(true);
+    expect(node12c && node12c.hasChildren).toBe(true);
     expect(node12c).toEqual(node12b);
   });
   it("with node new child of node on level 2", () => {
@@ -576,7 +878,7 @@ describe("test updateNode", () => {
     const node1b = { ...node1, children: [node11, node12b] };
     const node1actual = updateNode(node1b, node1211);
     const node121actual = findNodeInNode(node1actual, node121);
-    expect(node121actual.hasChildren).toBe(true);
+    expect(node121actual && node121actual.hasChildren).toBe(true);
     expect(node121actual).toEqual(node121expected);
   });
 });
@@ -597,6 +899,21 @@ describe("test cleanupToggledNodes", () => {
     type: TreeNodeTypeEnum.LABEL
   };
 
+  const node21: TreeNode = {
+    referenceId: "referenceId21",
+    name: "node21",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
+  const node22: TreeNode = {
+    referenceId: "referenceId22",
+    name: "node22",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
+
   const node1: TreeNode = {
     referenceId: "referenceId1",
     name: "node1",
@@ -607,8 +924,8 @@ describe("test cleanupToggledNodes", () => {
   const node2: TreeNode = {
     referenceId: "referenceId2",
     name: "node2",
-    hasChildren: false,
-    children: [],
+    hasChildren: true,
+    children: [node21, node22],
     type: TreeNodeTypeEnum.LABEL
   };
   const node4: TreeNode = {
@@ -633,19 +950,87 @@ describe("test cleanupToggledNodes", () => {
 
   it("with current in tree part of togglednodes", () => {
     const toggledNodes = cleanupToggledNodes([node1, node2, node12, node4, node5], [node1, node2]);
-    expect(toggledNodes).toEqual([node1, node2, node12]);
+    expect(toggledNodes).toEqual([node1, node2]);
   });
   it("with empty tree", () => {
     expect(cleanupToggledNodes([] as TreeNode[], toggleNodes1)).toEqual([]);
   });
   it("with all in tree", () => {
-    expect(cleanupToggledNodes(toggleNodes2, tree1)).toEqual(toggleNodes2);
+    expect(cleanupToggledNodes(toggleNodes2, tree1)).toEqual([node1, node2]);
   });
   it("with nothing in tree", () => {
     expect(cleanupToggledNodes(toggleNodes3, tree1)).toEqual([]);
   });
   it("with empty toggled", () => {
     expect(cleanupToggledNodes([], tree1)).toEqual([]);
+  });
+
+  it("also remove children in toggledNodes", () => {
+    const node1: TreeNode = {
+      referenceId: "referenceId1",
+      name: "node1",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node211: TreeNode = {
+      referenceId: "referenceId211",
+      name: "node211",
+      parentLabelId: "referenceId21",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node212: TreeNode = {
+      referenceId: "referenceId212",
+      name: "node212",
+      parentLabelId: "referenceId21",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node21: TreeNode = {
+      referenceId: "referenceId21",
+      name: "node21",
+      parentLabelId: "referenceId2",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: true,
+      children: [node211, node212]
+    };
+    const node22: TreeNode = {
+      referenceId: "referenceId22",
+      name: "node22",
+      parentLabelId: "referenceId2",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node2: TreeNode = {
+      referenceId: "referenceId2",
+      name: "node2",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: true,
+      children: [node22]
+    };
+    expect(cleanupToggledNodes([node2, node21], [node1, node2])).toEqual([node2]);
+  });
+
+  it("also remove nodes with hasChildren false nodes", () => {
+    const node1: TreeNode = {
+      referenceId: "referenceId1",
+      name: "node1",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    const node2: TreeNode = {
+      referenceId: "referenceId2",
+      name: "node2",
+      type: TreeNodeTypeEnum.LABEL,
+      hasChildren: false,
+      children: []
+    };
+    expect(cleanupToggledNodes([node1, node2], [node1, node2])).toEqual([]);
   });
 });
 
@@ -753,7 +1138,13 @@ describe("test isNodeInNode and findNodeInNode", () => {
     children: [],
     type: TreeNodeTypeEnum.LABEL
   };
-  const node3: TreeNode = { name: "node2", hasChildren: false, children: [], type: TreeNodeTypeEnum.LABEL };
+  const node3: TreeNode = {
+    referenceId: "referenceId3",
+    name: "node2",
+    hasChildren: false,
+    children: [],
+    type: TreeNodeTypeEnum.LABEL
+  };
 
   it("with is not in node node not empty tree", () => {
     expect(isNodeInNode(node1, node2)).toEqual(false);

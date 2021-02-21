@@ -23,16 +23,19 @@ import { connect } from "react-redux";
 import { Panel } from "../../organisms/Panel";
 //import PanelBreadCrumb from "../../molecules/PanelBreadCrumb";
 import { getRootNodes, getNode } from "../explorer/treeSlice";
-import { createLabel, updateLabel, setLabel, clearLabel } from "./labelSlice";
+import { createLabel, updateLabel, setLabel, clearLabel, deleteLabel } from "./labelSlice";
 import LabelForm from "./LabelForm";
+import NodeDeleteWarningModal from "../../organisms/NodeDeleteWarningModal";
 import { FeaturePermissionEnum } from "../../util/authorization";
 import { Redirect } from "react-router";
 
 function LabelOverview(props: any) {
-  const { setLabel, createLabel, updateLabel, clearLabel, label, featurePermission } = props;
+  const { setLabel, createLabel, updateLabel, deleteLabel, clearLabel, label, featurePermission } = props;
   const [disableSave, setDisableSave] = useState(true);
+  const [displayDeleteModal, setDisplayDeleteModal] = useState(false);
   const [redirect, setRedirect] = useState<boolean>(false);
   const initialValue = { ...label };
+  const warningMessage = `The label [${label.name}] and all its children will be deleted. Are you sure you want to continue?`;
 
   const handleChange = (e: any) => {
     setLabel({ ...label, name: e.currentTarget.value });
@@ -53,14 +56,36 @@ function LabelOverview(props: any) {
     setDisableSave(true);
   };
 
+  const handleDelete = (e: any) => {
+    e.preventDefault();
+    setDisplayDeleteModal(true);
+  };
+
   const handleCancel = (e: any) => {
     e.preventDefault();
     clearLabel();
     setRedirect(true);
   };
 
+  const handleNoDelete = () => {
+    setDisplayDeleteModal(false);
+  };
+
+  const handleContinueDelete = () => {
+    deleteLabel(label);
+    setDisplayDeleteModal(false);
+    setRedirect(true);
+  };
+
   return (
     <>
+      {displayDeleteModal ? (
+        <NodeDeleteWarningModal
+          handleNoDelete={handleNoDelete}
+          handleContinueDelete={handleContinueDelete}
+          warningMessage={warningMessage}
+        />
+      ) : null}
       {redirect ? (
         <Redirect to="/explorer" />
       ) : (
@@ -81,6 +106,7 @@ function LabelOverview(props: any) {
             onSave={handleSave}
             onChange={handleChange}
             onCancel={handleCancel}
+            onDelete={handleDelete}
             disableSave={disableSave}
           />
         </Panel>
@@ -102,7 +128,8 @@ const mapDispatchToProps = {
   setLabel,
   clearLabel,
   updateLabel,
-  createLabel
+  createLabel,
+  deleteLabel
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LabelOverview);

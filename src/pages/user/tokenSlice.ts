@@ -1,3 +1,4 @@
+import { Label } from "./../../api/api";
 /*
  * Argos Notary - A new way to secure the Software Supply Chain
  *
@@ -20,6 +21,7 @@
 import { Token, PersonalAccountApi } from "../../api";
 import { getApiConfig } from "../../api/apiConfig";
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { isDeleteLabelAction } from "../label/labelSlice";
 
 export function isLogoutAction(action: AnyAction): boolean {
   return action.type === "token/logout/fulfilled" || action.type === "token/logout/rejected";
