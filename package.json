@@ -23,7 +23,7 @@
     "element-closest-polyfill": "^1.0.0",
     "formik": "^2.1.2",
     "immer": "^5.3.5",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "pkijs": "^2.1.83",
     "polished": "^3.4.2",
     "prismjs": "^1.21.0",
