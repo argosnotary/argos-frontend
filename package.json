@@ -22,7 +22,7 @@
     "custom-event-polyfill": "^1.0.7",
     "element-closest-polyfill": "^1.0.0",
     "formik": "^2.1.2",
-    "immer": "^5.3.5",
+    "immer": "^9.0.6",
     "lodash": "^4.17.19",
     "pkijs": "^2.1.83",
     "polished": "^3.4.2",
